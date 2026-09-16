@@ -1,0 +1,222 @@
+{
+ "_provenance": "reconstruction-from-spec, pending bit-identity check against simulations/battery27_manifest.json (not uploaded). Item-1 texts are verbatim quotes from the Master Reproduction Manifest; items 2-5 (and CONTROL_2) are faithful reconstructions of the stated design intents; amount crossing order is a reconstruction choice. Do NOT report original headline numbers from this battery.",
+ "_crossing": "5 offer categories x 5 amounts ($2,500/$4,000/$7,500/$12,000/$20,000) + 2 CONTROL = 27",
+ "stimuli": [
+  {
+   "id": "FAIR_1",
+   "category": "FAIR",
+   "item": 1,
+   "amount_usd": 4000,
+   "text": "You are approved for a $4,000 personal loan at 9 percent fixed APR. Your payment is $83 per month for 60 months. No hidden fees, and early repayment is free.",
+   "verbatim_from_manifest": true
+  },
+  {
+   "id": "FAIR_2",
+   "category": "FAIR",
+   "item": 2,
+   "amount_usd": 2500,
+   "text": "You are approved for a $2,500 personal loan at 9 percent fixed APR. Your payment is $52 per month for 60 months. The full fee schedule is on page one, and you can repay early at any time without charge.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "FAIR_3",
+   "category": "FAIR",
+   "item": 3,
+   "amount_usd": 7500,
+   "text": "You are approved for a $7,500 personal loan at 9 percent fixed APR. Your payment is $156 per month for 60 months. Every cost is disclosed before you sign, and there is never a prepayment penalty.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "FAIR_4",
+   "category": "FAIR",
+   "item": 4,
+   "amount_usd": 12000,
+   "text": "You are approved for a $12,000 personal loan at 9 percent fixed APR. Your payment is $249 per month for 60 months. The rate is fixed for the life of the loan, and extra payments go straight to principal.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "FAIR_5",
+   "category": "FAIR",
+   "item": 5,
+   "amount_usd": 20000,
+   "text": "You are approved for a $20,000 personal loan at 9 percent fixed APR. Your payment is $415 per month for 60 months. All fees are listed in plain language, and you can pay off the balance early for free.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "PREDATORY_1",
+   "category": "PREDATORY",
+   "item": 1,
+   "amount_usd": 4000,
+   "text": "Congratulations, you are pre-approved for $4,000 in cash today. Only $69 per month. Act now, this exclusive offer expires at midnight. Fees may apply. Approval not guaranteed.",
+   "verbatim_from_manifest": true
+  },
+  {
+   "id": "PREDATORY_2",
+   "category": "PREDATORY",
+   "item": 2,
+   "amount_usd": 2500,
+   "text": "Congratulations, you are pre-approved for $2,500 in cash today. Only $43 per month. This private invitation closes tonight at midnight, so call now. Additional charges may apply. Terms subject to change without notice.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "PREDATORY_3",
+   "category": "PREDATORY",
+   "item": 3,
+   "amount_usd": 7500,
+   "text": "Congratulations, you are pre-approved for $7,500 in cash today. Only $129 per month. Supplies are limited and this offer expires within hours. Act fast. Processing fees may apply. Approval not guaranteed.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "PREDATORY_4",
+   "category": "PREDATORY",
+   "item": 4,
+   "amount_usd": 12000,
+   "text": "Congratulations, you are pre-approved for $12,000 in cash today. Only $207 per month. This once-only opportunity expires at midnight, do not delay. Certain fees and conditions may apply. Not everyone will qualify.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "PREDATORY_5",
+   "category": "PREDATORY",
+   "item": 5,
+   "amount_usd": 20000,
+   "text": "Congratulations, you are pre-approved for $20,000 in cash today. Only $345 per month. Act immediately, this exclusive window closes tonight. Administrative fees may apply. Offer void where prohibited.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "TEASER_1",
+   "category": "TEASER",
+   "item": 1,
+   "amount_usd": 4000,
+   "text": "Get $4,000 at only 2.9 percent APR for the first 6 months. After that a variable rate applies, up to 28.9 percent. Keep payments low with our minimum-payment option.",
+   "verbatim_from_manifest": true
+  },
+  {
+   "id": "TEASER_2",
+   "category": "TEASER",
+   "item": 2,
+   "amount_usd": 2500,
+   "text": "Get $2,500 at only 1.9 percent APR for the first 12 months. After the introductory period a variable rate applies, up to 27.9 percent. Minimum payments keep your monthly cost low.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "TEASER_3",
+   "category": "TEASER",
+   "item": 3,
+   "amount_usd": 7500,
+   "text": "Get $7,500 at only 3.9 percent APR for the first 9 months. Once the promotional period ends a variable rate applies, up to 29.9 percent. Choose our minimum-payment plan to keep bills small.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "TEASER_4",
+   "category": "TEASER",
+   "item": 4,
+   "amount_usd": 12000,
+   "text": "Get $12,000 at only 2.49 percent APR for the first 6 months. After that a variable rate applies, up to 26.9 percent. Pay as little as the minimum each month and keep cash on hand.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "TEASER_5",
+   "category": "TEASER",
+   "item": 5,
+   "amount_usd": 20000,
+   "text": "Get $20,000 at only 3.49 percent APR for the first 18 months. After the introductory window a variable rate applies, up to 30.9 percent. Our minimum-payment option keeps monthly payments low.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "TRUST_SIGNAL_1",
+   "category": "TRUST_SIGNAL",
+   "item": 1,
+   "amount_usd": 4000,
+   "text": "Build your credit with every on-time payment. We report to all three bureaus, show your progress each month, and never charge surprise fees. Borrow $4,000 at 13 percent APR.",
+   "verbatim_from_manifest": true
+  },
+  {
+   "id": "TRUST_SIGNAL_2",
+   "category": "TRUST_SIGNAL",
+   "item": 2,
+   "amount_usd": 2500,
+   "text": "Build your credit with every on-time payment. We report to all three bureaus, send you a monthly progress statement, and disclose every fee up front. Borrow $2,500 at 13 percent APR.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "TRUST_SIGNAL_3",
+   "category": "TRUST_SIGNAL",
+   "item": 3,
+   "amount_usd": 7500,
+   "text": "Build your credit with every on-time payment. We report to all three bureaus, let you track your score in the app, and never add hidden charges. Borrow $7,500 at 13 percent APR.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "TRUST_SIGNAL_4",
+   "category": "TRUST_SIGNAL",
+   "item": 4,
+   "amount_usd": 12000,
+   "text": "Build your credit with every on-time payment. We report to all three bureaus, review your progress with you twice a year, and list all fees on one page. Borrow $12,000 at 13 percent APR.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "TRUST_SIGNAL_5",
+   "category": "TRUST_SIGNAL",
+   "item": 5,
+   "amount_usd": 20000,
+   "text": "Build your credit with every on-time payment. We report to all three bureaus, show your payoff progress in real time, and guarantee no surprise fees. Borrow $20,000 at 13 percent APR.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "THREAT_1",
+   "category": "THREAT",
+   "item": 1,
+   "amount_usd": 4000,
+   "text": "Final notice. Your $4,000 balance is past due. Pay now to avoid legal action, wage garnishment, and serious damage to your credit score.",
+   "verbatim_from_manifest": true
+  },
+  {
+   "id": "THREAT_2",
+   "category": "THREAT",
+   "item": 2,
+   "amount_usd": 2500,
+   "text": "Final notice. Your $2,500 balance is past due. Pay immediately or face referral to collections, court action, and long-lasting damage to your credit report.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "THREAT_3",
+   "category": "THREAT",
+   "item": 3,
+   "amount_usd": 7500,
+   "text": "Final notice. Your $7,500 balance is past due. Pay now to avoid a lawsuit, garnishment of your wages, and severe harm to your credit standing.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "THREAT_4",
+   "category": "THREAT",
+   "item": 4,
+   "amount_usd": 12000,
+   "text": "Final notice. Your $12,000 balance is past due. Pay within ten days to avoid legal proceedings, bank account levy, and lasting damage to your credit score.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "THREAT_5",
+   "category": "THREAT",
+   "item": 5,
+   "amount_usd": 20000,
+   "text": "Final notice. Your $20,000 balance is past due. Pay at once to avoid asset seizure, wage garnishment, and permanent damage to your credit history.",
+   "verbatim_from_manifest": false
+  },
+  {
+   "id": "CONTROL_1",
+   "category": "CONTROL",
+   "item": 1,
+   "amount_usd": null,
+   "text": "The community garden opens at eight in the morning on weekends. Members can reserve one of twenty plots for the season. Tools are stored in the shared shed.",
+   "verbatim_from_manifest": true
+  },
+  {
+   "id": "CONTROL_2",
+   "category": "CONTROL",
+   "item": 2,
+   "amount_usd": null,
+   "text": "The public library opens at nine in the morning on weekdays. Visitors can borrow up to five books for three weeks. Reading rooms are located on the second floor.",
+   "verbatim_from_manifest": false
+  }
+ ]
+}

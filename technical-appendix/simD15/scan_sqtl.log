@@ -1,0 +1,79 @@
+MATCH GTEx_Analysis_v8_sQTL/Brain_Amygdala.v8.sgenes.txt.gz size=1454152 off=94353408
+MATCH GTEx_Analysis_v8_sQTL/Brain_Amygdala.v8.sqtl_signifpairs.txt.gz size=1863110 off=95808512
+MATCH GTEx_Analysis_v8_sQTL/Brain_Anterior_cingulate_cortex_BA24.v8.sgenes.txt.gz size=1503000 off=97672192
+MATCH GTEx_Analysis_v8_sQTL/Brain_Anterior_cingulate_cortex_BA24.v8.sqtl_signifpairs.txt.gz size=2799747 off=99175936
+MATCH GTEx_Analysis_v8_sQTL/Brain_Caudate_basal_ganglia.v8.sgenes.txt.gz size=1518521 off=101976576
+MATCH GTEx_Analysis_v8_sQTL/Brain_Caudate_basal_ganglia.v8.sqtl_signifpairs.txt.gz size=4674566 off=103495680
+MATCH GTEx_Analysis_v8_sQTL/Brain_Cerebellar_Hemisphere.v8.sgenes.txt.gz size=1467098 off=108171264
+MATCH GTEx_Analysis_v8_sQTL/Brain_Cerebellar_Hemisphere.v8.sqtl_signifpairs.txt.gz size=6038666 off=109639168
+MATCH GTEx_Analysis_v8_sQTL/Brain_Cerebellum.v8.sgenes.txt.gz size=1463863 off=115678720
+MATCH GTEx_Analysis_v8_sQTL/Brain_Cerebellum.v8.sqtl_signifpairs.txt.gz size=7439287 off=117143552
+MATCH GTEx_Analysis_v8_sQTL/Brain_Cortex.v8.sgenes.txt.gz size=1511990 off=124583424
+MATCH GTEx_Analysis_v8_sQTL/Brain_Cortex.v8.sqtl_signifpairs.txt.gz size=5279224 off=126096384
+MATCH GTEx_Analysis_v8_sQTL/Brain_Frontal_Cortex_BA9.v8.sgenes.txt.gz size=1514508 off=131376128
+MATCH GTEx_Analysis_v8_sQTL/Brain_Frontal_Cortex_BA9.v8.sqtl_signifpairs.txt.gz size=3966279 off=132891648
+MATCH GTEx_Analysis_v8_sQTL/Brain_Hippocampus.v8.sgenes.txt.gz size=1466805 off=136858624
+MATCH GTEx_Analysis_v8_sQTL/Brain_Hippocampus.v8.sqtl_signifpairs.txt.gz size=2976946 off=138326016
+MATCH GTEx_Analysis_v8_sQTL/Brain_Hypothalamus.v8.sgenes.txt.gz size=1538270 off=141303808
+MATCH GTEx_Analysis_v8_sQTL/Brain_Hypothalamus.v8.sqtl_signifpairs.txt.gz size=3485835 off=142842880
+MATCH GTEx_Analysis_v8_sQTL/Brain_Nucleus_accumbens_basal_ganglia.v8.sgenes.txt.gz size=1532931 off=146329600
+MATCH GTEx_Analysis_v8_sQTL/Brain_Nucleus_accumbens_basal_ganglia.v8.sqtl_signifpairs.txt.gz size=4912786 off=147863552
+MATCH GTEx_Analysis_v8_sQTL/Brain_Putamen_basal_ganglia.v8.sgenes.txt.gz size=1439390 off=152777216
+MATCH GTEx_Analysis_v8_sQTL/Brain_Putamen_basal_ganglia.v8.sqtl_signifpairs.txt.gz size=3235699 off=154217472
+MATCH GTEx_Analysis_v8_sQTL/Brain_Spinal_cord_cervical_c-1.v8.sgenes.txt.gz size=1477113 off=157453824
+MATCH GTEx_Analysis_v8_sQTL/Brain_Spinal_cord_cervical_c-1.v8.sqtl_signifpairs.txt.gz size=2393325 off=158931456
+MATCH GTEx_Analysis_v8_sQTL/Brain_Substantia_nigra.v8.sgenes.txt.gz size=1438485 off=161325568
+MATCH GTEx_Analysis_v8_sQTL/Brain_Substantia_nigra.v8.sqtl_signifpairs.txt.gz size=1682554 off=162764800
+downloading GTEx_Analysis_v8_sQTL/Brain_Amygdala.v8.sgenes.txt.gz (1.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Amygdala.v8.sgenes.txt.gz 1454152 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Amygdala.v8.sqtl_signifpairs.txt.gz (1.9 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Amygdala.v8.sqtl_signifpairs.txt.gz 1863110 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Anterior_cingulate_cortex_BA24.v8.sgenes.txt.gz (1.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Anterior_cingulate_cortex_BA24.v8.sgenes.txt.gz 1503000 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Anterior_cingulate_cortex_BA24.v8.sqtl_signifpairs.txt.gz (2.8 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Anterior_cingulate_cortex_BA24.v8.sqtl_signifpairs.txt.gz 2799747 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Caudate_basal_ganglia.v8.sgenes.txt.gz (1.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Caudate_basal_ganglia.v8.sgenes.txt.gz 1518521 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Caudate_basal_ganglia.v8.sqtl_signifpairs.txt.gz (4.7 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Caudate_basal_ganglia.v8.sqtl_signifpairs.txt.gz 4674566 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Cerebellar_Hemisphere.v8.sgenes.txt.gz (1.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Cerebellar_Hemisphere.v8.sgenes.txt.gz 1467098 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Cerebellar_Hemisphere.v8.sqtl_signifpairs.txt.gz (6.0 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Cerebellar_Hemisphere.v8.sqtl_signifpairs.txt.gz 6038666 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Cerebellum.v8.sgenes.txt.gz (1.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Cerebellum.v8.sgenes.txt.gz 1463863 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Cerebellum.v8.sqtl_signifpairs.txt.gz (7.4 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Cerebellum.v8.sqtl_signifpairs.txt.gz 7439287 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Cortex.v8.sgenes.txt.gz (1.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Cortex.v8.sgenes.txt.gz 1511990 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Cortex.v8.sqtl_signifpairs.txt.gz (5.3 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Cortex.v8.sqtl_signifpairs.txt.gz 5279224 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Frontal_Cortex_BA9.v8.sgenes.txt.gz (1.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Frontal_Cortex_BA9.v8.sgenes.txt.gz 1514508 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Frontal_Cortex_BA9.v8.sqtl_signifpairs.txt.gz (4.0 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Frontal_Cortex_BA9.v8.sqtl_signifpairs.txt.gz 3966279 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Hippocampus.v8.sgenes.txt.gz (1.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Hippocampus.v8.sgenes.txt.gz 1466805 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Hippocampus.v8.sqtl_signifpairs.txt.gz (3.0 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Hippocampus.v8.sqtl_signifpairs.txt.gz 2976946 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Hypothalamus.v8.sgenes.txt.gz (1.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Hypothalamus.v8.sgenes.txt.gz 1538270 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Hypothalamus.v8.sqtl_signifpairs.txt.gz (3.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Hypothalamus.v8.sqtl_signifpairs.txt.gz 3485835 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Nucleus_accumbens_basal_ganglia.v8.sgenes.txt.gz (1.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Nucleus_accumbens_basal_ganglia.v8.sgenes.txt.gz 1532931 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Nucleus_accumbens_basal_ganglia.v8.sqtl_signifpairs.txt.gz (4.9 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Nucleus_accumbens_basal_ganglia.v8.sqtl_signifpairs.txt.gz 4912786 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Putamen_basal_ganglia.v8.sgenes.txt.gz (1.4 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Putamen_basal_ganglia.v8.sgenes.txt.gz 1439390 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Putamen_basal_ganglia.v8.sqtl_signifpairs.txt.gz (3.2 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Putamen_basal_ganglia.v8.sqtl_signifpairs.txt.gz 3235699 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Spinal_cord_cervical_c-1.v8.sgenes.txt.gz (1.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Spinal_cord_cervical_c-1.v8.sgenes.txt.gz 1477113 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Spinal_cord_cervical_c-1.v8.sqtl_signifpairs.txt.gz (2.4 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Spinal_cord_cervical_c-1.v8.sqtl_signifpairs.txt.gz 2393325 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Substantia_nigra.v8.sgenes.txt.gz (1.4 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Substantia_nigra.v8.sgenes.txt.gz 1438485 bytes
+downloading GTEx_Analysis_v8_sQTL/Brain_Substantia_nigra.v8.sqtl_signifpairs.txt.gz (1.7 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_sQTL__Brain_Substantia_nigra.v8.sqtl_signifpairs.txt.gz 1682554 bytes
+DONE

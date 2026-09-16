@@ -1,0 +1,13 @@
+sugar present 20/21; MN9 idx 138332
+graph loaded 15091983 edges
+[drive] build 5s
+[drive] run 0: MN9=86 total=13099 (80.1s)
+[drive] run 1: MN9=73 total=13080 (8.6s)
+[drive] run 2: MN9=82 total=12935 (8.5s)
+[drive] run 3: MN9=86 total=13279 (8.5s)
+[shuffle] build 1s
+[shuffle] run 0: MN9=0 total=3658 (79.8s)
+[shuffle] run 1: MN9=0 total=3691 (8.8s)
+[shuffle] run 2: MN9=0 total=3448 (8.9s)
+[shuffle] run 3: MN9=0 total=3933 (8.8s)
+GATE DONE

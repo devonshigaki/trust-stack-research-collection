@@ -1,0 +1,53 @@
+MATCH GTEx_Analysis_v8_eQTL/Brain_Amygdala.v8.egenes.txt.gz size=2608064 off=256238592
+MATCH GTEx_Analysis_v8_eQTL/Brain_Amygdala.v8.signif_variant_gene_pairs.txt.gz size=5581658 off=258847232
+MATCH GTEx_Analysis_v8_eQTL/Brain_Anterior_cingulate_cortex_BA24.v8.egenes.txt.gz size=2647297 off=264429568
+MATCH GTEx_Analysis_v8_eQTL/Brain_Anterior_cingulate_cortex_BA24.v8.signif_variant_gene_pairs.txt.gz size=8930672 off=267077632
+MATCH GTEx_Analysis_v8_eQTL/Brain_Caudate_basal_ganglia.v8.egenes.txt.gz size=2713431 off=276008960
+MATCH GTEx_Analysis_v8_eQTL/Brain_Caudate_basal_ganglia.v8.signif_variant_gene_pairs.txt.gz size=16275212 off=278723072
+MATCH GTEx_Analysis_v8_eQTL/Brain_Cerebellar_Hemisphere.v8.egenes.txt.gz size=2742057 off=294999040
+MATCH GTEx_Analysis_v8_eQTL/Brain_Cerebellar_Hemisphere.v8.signif_variant_gene_pairs.txt.gz size=20535845 off=297741824
+MATCH GTEx_Analysis_v8_eQTL/Brain_Cerebellum.v8.egenes.txt.gz size=2803597 off=318278656
+MATCH GTEx_Analysis_v8_eQTL/Brain_Cerebellum.v8.signif_variant_gene_pairs.txt.gz size=27253251 off=321082880
+MATCH GTEx_Analysis_v8_eQTL/Brain_Cortex.v8.egenes.txt.gz size=2728234 off=348337152
+MATCH GTEx_Analysis_v8_eQTL/Brain_Cortex.v8.signif_variant_gene_pairs.txt.gz size=19146328 off=351066112
+MATCH GTEx_Analysis_v8_eQTL/Brain_Frontal_Cortex_BA9.v8.egenes.txt.gz size=2692261 off=370213376
+MATCH GTEx_Analysis_v8_eQTL/Brain_Frontal_Cortex_BA9.v8.signif_variant_gene_pairs.txt.gz size=13389500 off=372906496
+MATCH GTEx_Analysis_v8_eQTL/Brain_Hippocampus.v8.egenes.txt.gz size=2658105 off=386296832
+MATCH GTEx_Analysis_v8_eQTL/Brain_Hippocampus.v8.signif_variant_gene_pairs.txt.gz size=9239266 off=388955648
+MATCH GTEx_Analysis_v8_eQTL/Brain_Hypothalamus.v8.egenes.txt.gz size=2728497 off=398195712
+MATCH GTEx_Analysis_v8_eQTL/Brain_Hypothalamus.v8.signif_variant_gene_pairs.txt.gz size=9650231 off=400925184
+MATCH GTEx_Analysis_v8_eQTL/Brain_Nucleus_accumbens_basal_ganglia.v8.egenes.txt.gz size=2733393 off=410576384
+MATCH GTEx_Analysis_v8_eQTL/Brain_Nucleus_accumbens_basal_ganglia.v8.signif_variant_gene_pairs.txt.gz size=16318628 off=413310464
+MATCH GTEx_Analysis_v8_eQTL/Brain_Putamen_basal_ganglia.v8.egenes.txt.gz size=2600676 off=429629952
+MATCH GTEx_Analysis_v8_eQTL/Brain_Putamen_basal_ganglia.v8.signif_variant_gene_pairs.txt.gz size=12055695 off=432231424
+MATCH GTEx_Analysis_v8_eQTL/Brain_Spinal_cord_cervical_c-1.v8.egenes.txt.gz size=2671977 off=444288000
+MATCH GTEx_Analysis_v8_eQTL/Brain_Spinal_cord_cervical_c-1.v8.signif_variant_gene_pairs.txt.gz size=6864694 off=446960640
+MATCH GTEx_Analysis_v8_eQTL/Brain_Substantia_nigra.v8.egenes.txt.gz size=2596581 off=453826048
+MATCH GTEx_Analysis_v8_eQTL/Brain_Substantia_nigra.v8.signif_variant_gene_pairs.txt.gz size=4518655 off=456423424
+downloading GTEx_Analysis_v8_eQTL/Brain_Amygdala.v8.signif_variant_gene_pairs.txt.gz (5.6 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_eQTL__Brain_Amygdala.v8.signif_variant_gene_pairs.txt.gz 5581658 bytes
+downloading GTEx_Analysis_v8_eQTL/Brain_Anterior_cingulate_cortex_BA24.v8.signif_variant_gene_pairs.txt.gz (8.9 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_eQTL__Brain_Anterior_cingulate_cortex_BA24.v8.signif_variant_gene_pairs.txt.gz 8930672 bytes
+downloading GTEx_Analysis_v8_eQTL/Brain_Caudate_basal_ganglia.v8.signif_variant_gene_pairs.txt.gz (16.3 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_eQTL__Brain_Caudate_basal_ganglia.v8.signif_variant_gene_pairs.txt.gz 16275212 bytes
+downloading GTEx_Analysis_v8_eQTL/Brain_Cerebellar_Hemisphere.v8.signif_variant_gene_pairs.txt.gz (20.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_eQTL__Brain_Cerebellar_Hemisphere.v8.signif_variant_gene_pairs.txt.gz 20535845 bytes
+downloading GTEx_Analysis_v8_eQTL/Brain_Cerebellum.v8.signif_variant_gene_pairs.txt.gz (27.3 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_eQTL__Brain_Cerebellum.v8.signif_variant_gene_pairs.txt.gz 27253251 bytes
+downloading GTEx_Analysis_v8_eQTL/Brain_Cortex.v8.signif_variant_gene_pairs.txt.gz (19.1 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_eQTL__Brain_Cortex.v8.signif_variant_gene_pairs.txt.gz 19146328 bytes
+downloading GTEx_Analysis_v8_eQTL/Brain_Frontal_Cortex_BA9.v8.signif_variant_gene_pairs.txt.gz (13.4 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_eQTL__Brain_Frontal_Cortex_BA9.v8.signif_variant_gene_pairs.txt.gz 13389500 bytes
+downloading GTEx_Analysis_v8_eQTL/Brain_Hippocampus.v8.signif_variant_gene_pairs.txt.gz (9.2 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_eQTL__Brain_Hippocampus.v8.signif_variant_gene_pairs.txt.gz 9239266 bytes
+downloading GTEx_Analysis_v8_eQTL/Brain_Hypothalamus.v8.signif_variant_gene_pairs.txt.gz (9.7 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_eQTL__Brain_Hypothalamus.v8.signif_variant_gene_pairs.txt.gz 9650231 bytes
+downloading GTEx_Analysis_v8_eQTL/Brain_Nucleus_accumbens_basal_ganglia.v8.signif_variant_gene_pairs.txt.gz (16.3 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_eQTL__Brain_Nucleus_accumbens_basal_ganglia.v8.signif_variant_gene_pairs.txt.gz 16318628 bytes
+downloading GTEx_Analysis_v8_eQTL/Brain_Putamen_basal_ganglia.v8.signif_variant_gene_pairs.txt.gz (12.1 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_eQTL__Brain_Putamen_basal_ganglia.v8.signif_variant_gene_pairs.txt.gz 12055695 bytes
+downloading GTEx_Analysis_v8_eQTL/Brain_Spinal_cord_cervical_c-1.v8.signif_variant_gene_pairs.txt.gz (6.9 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_eQTL__Brain_Spinal_cord_cervical_c-1.v8.signif_variant_gene_pairs.txt.gz 6864694 bytes
+downloading GTEx_Analysis_v8_eQTL/Brain_Substantia_nigra.v8.signif_variant_gene_pairs.txt.gz (4.5 MB)
+  wrote /tmp/gtex_v8/GTEx_Analysis_v8_eQTL__Brain_Substantia_nigra.v8.signif_variant_gene_pairs.txt.gz 4518655 bytes
+DONE

@@ -1,0 +1,13 @@
+partnershuf_av run0: B0_cond=136.61 B0_noncond=141.06 R_cond_final=0.685 (166s)
+partnershuf_av run1: B0_cond=136.24 B0_noncond=140.71 R_cond_final=0.684 (162s)
+partnershuf_av run2: B0_cond=136.69 B0_noncond=140.68 R_cond_final=0.688 (163s)
+partnershuf_av run3: B0_cond=136.24 B0_noncond=140.35 R_cond_final=0.668 (164s)
+intact_app run0: B0_cond=172.86 B0_noncond=65.45 R_cond_final=0.000 (125s)
+intact_app run1: B0_cond=172.26 B0_noncond=65.39 R_cond_final=0.000 (124s)
+intact_app run2: B0_cond=174.52 B0_noncond=65.95 R_cond_final=0.000 (127s)
+intact_app run3: B0_cond=175.36 B0_noncond=66.12 R_cond_final=0.000 (125s)
+gateshuf_app run0: B0_cond=175.60 B0_noncond=66.90 R_cond_final=0.972 (126s)
+gateshuf_app run1: B0_cond=174.88 B0_noncond=66.63 R_cond_final=1.021 (126s)
+gateshuf_app run2: B0_cond=171.19 B0_noncond=65.00 R_cond_final=1.012 (116s)
+gateshuf_app run3: B0_cond=177.86 B0_noncond=66.56 R_cond_final=0.980 (58s)
+F1B DONE

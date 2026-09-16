@@ -1,0 +1,54 @@
+raw rows: 55210, tissues: 13
+frozen variants present in panel (union across tissues): 24/24 positions
+missing positions: []
+
+rows for frozen variants x PDE4B: 312 across 13 tissues
+
+Per variant-tissue minimum p for PDE4B (sorted, top 40):
+                  tissue       rsid  position    min_p      beta      maf
+Brain_Frontal_Cortex_BA9 rs11208779  65951462 0.001766  0.180119 0.494286
+Brain_Frontal_Cortex_BA9  rs6421482  65954222 0.001945  0.183526 0.428571
+Brain_Frontal_Cortex_BA9  rs7519259  65969060 0.001947  0.179345 0.491429
+Brain_Frontal_Cortex_BA9  rs6690398  65981711 0.001997  0.183022 0.442857
+Brain_Frontal_Cortex_BA9  rs1937455  65951256 0.002110 -0.181689 0.428571
+Brain_Frontal_Cortex_BA9  rs7547416  65953404 0.002201  0.181865 0.431429
+Brain_Frontal_Cortex_BA9  rs2186120  65987480 0.002380  0.178066 0.480000
+Brain_Frontal_Cortex_BA9  rs2310819  65974413 0.002572  0.174540 0.491429
+Brain_Frontal_Cortex_BA9  rs1937433  65978500 0.002572  0.174540 0.491429
+Brain_Frontal_Cortex_BA9  rs2503185  65995718 0.003838 -0.168762 0.494286
+Brain_Frontal_Cortex_BA9  rs2186122  66004523 0.006225  0.157942 0.442857
+Brain_Frontal_Cortex_BA9  rs1937443  66003960 0.006293  0.157399 0.428571
+Brain_Frontal_Cortex_BA9  rs1937450  66013157 0.006947  0.154802 0.482857
+Brain_Frontal_Cortex_BA9  rs7534143  66004696 0.007627  0.153700 0.485714
+Brain_Frontal_Cortex_BA9  rs6690101  65948356 0.008808  0.149487 0.497143
+Brain_Frontal_Cortex_BA9 rs11208776  65946050 0.008808  0.149487 0.497143
+Brain_Frontal_Cortex_BA9  rs2310754  65937409 0.009746  0.147976 0.500000
+Brain_Frontal_Cortex_BA9 rs11208775  65944858 0.009746  0.147976 0.500000
+Brain_Frontal_Cortex_BA9 rs11208774  65944426 0.009746  0.147976 0.500000
+Brain_Frontal_Cortex_BA9  rs4255357  65934212 0.009746  0.147976 0.500000
+Brain_Frontal_Cortex_BA9  rs2997084  65928049 0.020913 -0.131550 0.414286
+Brain_Frontal_Cortex_BA9  rs3009872  65945717 0.024608 -0.129648 0.411429
+Brain_Frontal_Cortex_BA9  rs7528604  65941669 0.024608 -0.129648 0.411429
+            Brain_Cortex  rs1937443  66003960 0.041746  0.104545 0.402439
+            Brain_Cortex  rs6690398  65981711 0.045089  0.104120 0.412195
+Brain_Frontal_Cortex_BA9  rs2310752  65926722 0.048173 -0.113179 0.408046
+            Brain_Cortex  rs3009872  65945717 0.048627 -0.104164 0.397561
+            Brain_Cortex  rs2997084  65928049 0.048627 -0.104164 0.397561
+            Brain_Cortex  rs7528604  65941669 0.048627 -0.104164 0.397561
+            Brain_Cortex  rs7547416  65953404 0.049142  0.103279 0.402439
+            Brain_Cortex  rs6421482  65954222 0.049789  0.102675 0.400000
+            Brain_Cortex  rs2186122  66004523 0.050783  0.099712 0.414634
+            Brain_Cortex  rs2310752  65926722 0.062994 -0.099372 0.387805
+            Brain_Cortex  rs1937455  65951256 0.063169 -0.097086 0.400000
+            Brain_Cortex  rs2310754  65937409 0.084176  0.092764 0.480488
+            Brain_Cortex  rs4255357  65934212 0.084176  0.092764 0.480488
+            Brain_Cortex rs11208775  65944858 0.084176  0.092764 0.480488
+            Brain_Cortex rs11208774  65944426 0.084176  0.092764 0.480488
+            Brain_Cortex  rs6690101  65948356 0.085076  0.092207 0.478049
+            Brain_Cortex rs11208776  65946050 0.085076  0.092207 0.478049
+
+BEST: tissue=Brain_Frontal_Cortex_BA9 rsid=rs11208779 pos=65951462 p=1.766e-03 beta=0.180119 maf=0.494286
+
+frozen nominal threshold p<1e-4: 0 variant-tissue combos pass
+
+VERDICT on nominal branch: FAIL (min p across all brain tissues >= 1e-4)

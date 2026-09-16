@@ -1,0 +1,17 @@
+WARNING    The name "tau" refers to different objects in different namespaces used for resolving names in the context of group "neurongroup". Will use the object from the group-specific namespace with the value 5. * msecond, but the name also refers to a variable in the run namespace with value '12'. [brian2.groups.group.Group.resolve.resolution_conflict]
+intact_av run0: B0=76.90Hz R_acq_final=0.402 (51s)
+WARNING    The name "tau" refers to different objects in different namespaces used for resolving names in the context of group "neurongroup_1". Will use the object from the group-specific namespace with the value 5. * msecond, but the name also refers to a variable in the run namespace with value '12'. [brian2.groups.group.Group.resolve.resolution_conflict]
+intact_av run1: B0=77.33Hz R_acq_final=0.401 (90s)
+intact_av run2: B0=76.51Hz R_acq_final=0.407 (56s)
+intact_av run3: B0=76.80Hz R_acq_final=0.393 (96s)
+D_abl run0: B0=76.49Hz R_acq_final=1.037 (120s)
+D_abl run1: B0=75.41Hz R_acq_final=1.010 (123s)
+D_abl run2: B0=77.64Hz R_acq_final=0.998 (119s)
+D_abl run3: B0=77.11Hz R_acq_final=1.013 (121s)
+WARNING    The name "tau" refers to different objects in different namespaces used for resolving names in the context of group "neurongroup". Will use the object from the group-specific namespace with the value 5. * msecond, but the name also refers to a variable in the run namespace with value '3'. [brian2.groups.group.Group.resolve.resolution_conflict]
+S_abl run0: B0=76.84Hz R_acq_final=0.400 (123s)
+WARNING    The name "tau" refers to different objects in different namespaces used for resolving names in the context of group "neurongroup_1". Will use the object from the group-specific namespace with the value 5. * msecond, but the name also refers to a variable in the run namespace with value '3'. [brian2.groups.group.Group.resolve.resolution_conflict]
+S_abl run1: B0=77.97Hz R_acq_final=0.387 (119s)
+S_abl run2: B0=76.64Hz R_acq_final=0.405 (119s)
+S_abl run3: B0=76.28Hz R_acq_final=0.401 (122s)
+F1A DONE

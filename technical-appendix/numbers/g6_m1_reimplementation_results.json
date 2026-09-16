@@ -1,0 +1,24 @@
+{
+  "spec": "GTT \u00a73.6 Sim G6-M1 (seed 20260908, lambda=0.35 planted, 60 Dirichlet(1) ICs, 12 steps)",
+  "status": "re-implementation; pending bit-identity vs original simulations battery",
+  "published": {
+    "mean_initial": 0.295,
+    "mean_final": 0.016,
+    "dispersion_ratio": 0.053,
+    "BCa95": [
+      0.0475,
+      0.0594
+    ]
+  },
+  "this_run": {
+    "mean_initial_hellinger": 0.2883,
+    "mean_step7_hellinger": 0.0135,
+    "dispersion_ratio_step7": 0.0468,
+    "dispersion_ratio_step7_pct95": [
+      0.0447,
+      0.0473
+    ],
+    "mean_initial_fr_arc": 0.8225,
+    "worst_case_step7_hellinger": 0.0211
+  }
+}

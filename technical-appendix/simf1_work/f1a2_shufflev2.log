@@ -1,0 +1,8 @@
+shuffle-v2 plastic edges (KC->MBON of permuted graph): 53467
+WARNING    The name "tau" refers to different objects in different namespaces used for resolving names in the context of group "neurongroup". Will use the object from the group-specific namespace with the value 5. * msecond, but the name also refers to a variable in the run namespace with value '12'. [brian2.groups.group.Group.resolve.resolution_conflict]
+shuffle_v2 run0: B0=140.80 R_acq_final=0.680 (69s)
+WARNING    The name "tau" refers to different objects in different namespaces used for resolving names in the context of group "neurongroup_1". Will use the object from the group-specific namespace with the value 5. * msecond, but the name also refers to a variable in the run namespace with value '12'. [brian2.groups.group.Group.resolve.resolution_conflict]
+shuffle_v2 run1: B0=141.04 R_acq_final=0.678 (72s)
+shuffle_v2 run2: B0=140.72 R_acq_final=0.685 (68s)
+shuffle_v2 run3: B0=140.97 R_acq_final=0.677 (71s)
+SHUFFLEV2 DONE

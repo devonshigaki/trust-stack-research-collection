@@ -1,0 +1,50 @@
+rows=790012, quantile_score NaN rows=2
+brain-relevant rows=44580, variants=24
+  rs2310754 (A): 0.9967  <-- IN BAND
+  rs1937443 (G): 0.9937  <-- IN BAND
+  rs2310754 (T): 0.9935  <-- IN BAND
+  rs11208776 (T): 0.9930  <-- IN BAND
+  rs6421482 (G): 0.9928  <-- IN BAND
+  rs6690101 (C): 0.9915  <-- IN BAND
+  rs2310752 (T): 0.9914  <-- IN BAND
+  rs2503185 (G): 0.9911  <-- IN BAND
+  rs2310752 (A): 0.9908  <-- IN BAND
+  rs2503185 (T): 0.9908  <-- IN BAND
+  rs1937450 (G): 0.9901  <-- IN BAND
+  rs7547416 (C): 0.9892  <-- IN BAND
+  rs7534143 (C): 0.9879  <-- IN BAND
+  rs7534143 (G): 0.9879  <-- IN BAND
+  rs11208779 (T): 0.9872  <-- IN BAND
+  rs4255357 (A): 0.9868  <-- IN BAND
+  rs1937433 (T): 0.9859  <-- IN BAND
+  rs7528604 (C): 0.9857  <-- IN BAND
+  rs7528604 (A): 0.9852  <-- IN BAND
+  rs1937433 (G): 0.9842  <-- IN BAND
+  rs11208779 (C): 0.9839  <-- IN BAND
+  rs2310819 (T): 0.9833  <-- IN BAND
+  rs2186122 (T): 0.9831  <-- IN BAND
+  rs4255357 (T): 0.9820  <-- IN BAND
+  rs2186120 (A): 0.9820  <-- IN BAND
+  rs11208775 (G): 0.9814  <-- IN BAND
+  rs11208775 (A): 0.9814  <-- IN BAND
+  rs11208775 (T): 0.9814  <-- IN BAND
+  rs7547416 (A): 0.9809  <-- IN BAND
+  rs11208774 (T): 0.9794  <-- IN BAND
+  rs2997084 (G): 0.9794  <-- IN BAND
+  rs7519259 (A): 0.9787  <-- IN BAND
+  rs2310819 (A): 0.9780  <-- IN BAND
+  rs3009872 (G): 0.9774  <-- IN BAND
+  rs6690398 (A): 0.9750  <-- IN BAND
+  rs3009872 (C): 0.9723  <-- IN BAND
+  rs1937455 (G): 0.9705  <-- IN BAND
+  rs6690398 (T): 0.9704  <-- IN BAND
+  rs6421482 (T): 0.9694  <-- IN BAND
+
+min=0.9694  IN-BAND 39/39
+FROZEN VERDICT: PASS (regulatory-plausible)
+
+lead variant rows:
+alt
+C    0.985728
+A    0.985244
+Name: quantile_score, dtype: float64

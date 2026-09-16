@@ -1,0 +1,72 @@
+G_N: 42744 neurons, 722253 edges | {'drive_nodes': 9310, 'drive_with_outedges': 9308, 'readout_nodes': 28457, 'readout_with_inedges': 5626}
+intact run0: readout_spikes=7488 (53s)
+intact run1: readout_spikes=7498 (45s)
+intact run2: readout_spikes=7489 (14s)
+intact run3: readout_spikes=7571 (14s)
+perm run0: readout_spikes=10089 (13s)
+perm run1: readout_spikes=9985 (14s)
+perm run2: readout_spikes=10141 (14s)
+perm run3: readout_spikes=10054 (14s)
+{
+ "substrate": "minnie65_public v1822, sampled-posts graph (Amendments 2-4)",
+ "graph": {
+  "drive_nodes": 9310,
+  "drive_with_outedges": 9308,
+  "readout_nodes": 28457,
+  "readout_with_inedges": 5626
+ },
+ "edges": 722253,
+ "nodes": 42744,
+ "rows": [
+  {
+   "arm": "intact",
+   "run": 0,
+   "readout_spikes": 7488
+  },
+  {
+   "arm": "intact",
+   "run": 1,
+   "readout_spikes": 7498
+  },
+  {
+   "arm": "intact",
+   "run": 2,
+   "readout_spikes": 7489
+  },
+  {
+   "arm": "intact",
+   "run": 3,
+   "readout_spikes": 7571
+  },
+  {
+   "arm": "perm",
+   "run": 0,
+   "readout_spikes": 10089
+  },
+  {
+   "arm": "perm",
+   "run": 1,
+   "readout_spikes": 9985
+  },
+  {
+   "arm": "perm",
+   "run": 2,
+   "readout_spikes": 10141
+  },
+  {
+   "arm": "perm",
+   "run": 3,
+   "readout_spikes": 10054
+  }
+ ],
+ "intact_mean": 7511.5,
+ "perm_mean": 10067.25,
+ "B1_gate": true,
+ "R_perm": 1.3402449577314783,
+ "B2_rule": ">=0.50",
+ "B2_MET": true,
+ "verdict_note": "scored"
+}
+
+--- STDERR ---
+WARNING    'w' is an internal variable of group 'synapses', but also exists in the run namespace with the value array([5, 3, 1, ..., 1, 1, 1], shape=(722253,)). The internal variable will be used. [brian2.groups.group.Group.resolve.resolution_conflict]

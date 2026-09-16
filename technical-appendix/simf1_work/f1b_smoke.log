@@ -1,0 +1,4 @@
+SMOKE intact_av: plastic=23492 cond=81.32Hz noncond=66.86Hz wall=1s
+SMOKE gateshuf_av: plastic=28620 cond=81.29Hz noncond=67.56Hz wall=54s
+SMOKE intact_app: plastic=3719 cond=172.50Hz noncond=66.39Hz wall=1s
+SMOKE gateshuf_app: plastic=3930 cond=174.29Hz noncond=66.86Hz wall=1s

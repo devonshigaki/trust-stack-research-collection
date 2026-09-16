@@ -1,0 +1,15 @@
+WARNING    The name "tau" refers to different objects in different namespaces used for resolving names in the context of group "neurongroup". Will use the object from the group-specific namespace with the value 5. * msecond, but the name also refers to a variable in the run namespace with value '12'. [brian2.groups.group.Group.resolve.resolution_conflict]
+appetitive run0: B0=77.14Hz R_acq_final=0.404 (122s)
+WARNING    The name "tau" refers to different objects in different namespaces used for resolving names in the context of group "neurongroup_1". Will use the object from the group-specific namespace with the value 5. * msecond, but the name also refers to a variable in the run namespace with value '12'. [brian2.groups.group.Group.resolve.resolution_conflict]
+appetitive run1: B0=75.79Hz R_acq_final=0.394 (117s)
+appetitive run2: B0=76.20Hz R_acq_final=0.408 (121s)
+appetitive run3: B0=76.67Hz R_acq_final=0.392 (118s)
+OA_abl run0: B0=76.43Hz R_acq_final=0.395 (116s)
+OA_abl run1: B0=77.27Hz R_acq_final=0.399 (120s)
+OA_abl run2: B0=75.68Hz R_acq_final=0.404 (117s)
+OA_abl run3: B0=76.25Hz R_acq_final=0.399 (115s)
+shuffle run0: B0=141.14Hz R_acq_final=0.873 (119s)
+shuffle run1: B0=140.98Hz R_acq_final=0.878 (62s)
+shuffle run2: B0=140.70Hz R_acq_final=0.878 (67s)
+shuffle run3: B0=141.42Hz R_acq_final=0.864 (67s)
+F1A DONE
