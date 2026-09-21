@@ -99,3 +99,19 @@ hypothesis-grade where the batteries have not confirmed transport, and which
 the papers label accordingly. The failure record (G22, F1a2, H1, B4, the
 24-test family) is not a weakness of the package; it is the mechanism by
 which the surviving claims earn their labels.
+
+
+## Pattern 7 — The law/structure asymmetry is statistically significant (added 2026-09-21)
+
+Pattern 1 quantified: dynamical-law verdicts pass 11/13, structural-transport verdicts pass 4/13;
+Fisher exact OR = 12.4, p = 0.0154 (counting rule fixed before computing; see
+cross_paper_analysis.md §2). The papers' hypothesis-grade labels on structural claims are statistically
+warranted.
+
+## Pattern 8 — Cross-paper parameter coherence: SIM-OBS δ below the P1b band (added 2026-09-21)
+
+SIM-OBS ran at leak δ = 0.01, strictly below P1b's fragility band ℓ* ∈ [0.02, 0.10]: the whitepaper's
+SIM-OBS FAIL is an SNR/instrument finding (its C4 note says so), not a leak finding, and TFP's band is
+not contradicted. Also verified: 131 shared numeric tokens across the four papers, zero conflicting
+quantities; the 0.709/0.710 vs 0.739 operating-point figures are protocol-different and all three papers
+print the protocol note.

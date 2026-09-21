@@ -1,0 +1,10 @@
+{
+  "sim": "SIM-PBND",
+  "run": "firstrun_bug",
+  "seed": 20260920,
+  "bug": "instrument: model produced no fingerprints (within-subject FC Spearman \u2248 -0.05); prior coupling too weak relative to common OU drive + independent noise; Higuchi FD sign error (negated slope)",
+  "criteria": "UNTOUCHED \u2014 harness mechanics amended only",
+  "C1_within_base": -0.04611209685836552,
+  "C1_within_pert": -0.038096232126082874,
+  "note": "FD values invalid (sign bug); run discarded as instrument failure"
+}

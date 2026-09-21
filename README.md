@@ -2,7 +2,27 @@
 
 **Author:** Devon Shigaki · ORCID [0009-0003-8977-8010](https://orcid.org/0009-0003-8977-8010) · The FreshCredit Lab — Independent Research
 **Deposit:** all artifacts are mirrored at OSF (DOI: [insert on publication])
-**Date of this package:** 2026-09-13
+**Date of this package:** 2026-09-21 (papers at **Version 3.0 — September 2026**)
+
+> **v3.0 additions (2026-09-21):** papers at v3.0 (`papers/`); DOCAS §5.8
+> (P-BND perturbation signature scored post-hoc against published
+> neuroimaging, labeled as such) plus SIM-PBND
+> (pre-registration + results + first-run-bug artifact in
+> `technical-appendix/`, figure in `figures/docas/`) — compound PASS 4/4 —
+> and **SIM-PBND-2** (same locations; registration + Amendment A1 + appended
+> RESULTS) — **compound FAIL 3/4 reported**: specificity C3 fails against the
+> subject-specific-sensory control (at full prior collapse any single dominant
+> stream homogenizes the correlation FC — an instrument-level finding that
+> moves the identifying weight to fingerprint decoherence);
+> SIM-OBS (same locations, `figures/tfp/`) — compound FAIL reported, direction
+> PASS 50/50; the **`lean/` TrustStack formal-verification project** (Lean 4 +
+> Mathlib, pinned toolchain + pinned `lake-manifest.json`, no `sorry`,
+> **VERIFIED 2026-09-21: green `lake build`; axiom audit
+> `lean/VERIFICATION_AXIOMS.txt` shows only `[propext, Classical.choice,
+> Quot.sound]` for all ten theorems** — see `lean/README.md`);
+> `docs/harm_reduction_estimate.md` (Monte Carlo population estimate);
+> `VERSIONS.md` (iteration register). See VERSIONS.md for the full changelog,
+> verified-citation list, and rejected package items.
 
 This repository contains the complete, reproducible research base of the
 five-work trust-measurement collection: every simulation script, every
@@ -34,6 +54,9 @@ preregistrations/     OSF registration documents
 technical-appendix/   simulation code, pre-computed results, logs,
                       pre-registrations/amendments/closures per simulation,
                       verification reports, and the numbers ledger
+lean/                 TrustStack Lean 4 formal-verification project
+                      (VERIFIED — green build; audit in lean/VERIFICATION_AXIOMS.txt;
+                      build instructions in lean/README.md)
 docs/                 RUNBOOK.md (reproduce everything), PATTERNS.md
                       (cross-simulation meta-analysis), deposit README/guide
 ```

@@ -24,7 +24,7 @@
 \author{Devon Shigaki~(ORCID: 0009-0003-8977-8010)\\
 \small The FreshCredit Lab --- Independent Research\\
 \small Correspondence: freshcredit.xyz}
-\date{}
+\date{\small Version 3.0 --- September 2026}
 
 % --- Float-page layout tuning: reduce white bands on float-dense pages ---
 \renewcommand{\topfraction}{0.85}
@@ -154,6 +154,18 @@ GTT adopts the cross-disciplinary consensus definition of Rousseau, Sitkin, Burt
 \end{gttdef}
 
 \textbf{Embeddedness cuts both ways.} Granovetter (1985) showed that trust is produced within concrete network structures --- and exploited within them: validation history can be strategically manufactured. GTT therefore treats priors and validation signals as network-endogenous and flags manufactured validation as a known failure mode of any adaptive trust dynamics (\S{}7, scope limits).
+
+\subsection*{1.2c Differentiation from the dynamic-programming lineage}
+
+A reviewer will not compare GTT to the classical Bellman recursion \citep{bellman1957}; they will compare it to the modern deformations of that recursion, and the comparison is engaged explicitly here. GTT is a delta-rule measurement theory --- the master law $\Delta S = \lambda\varepsilon$ propagates a measurable relation, not a value function --- so the lineage connection runs through GTT's decision layer, the exponential tilt of \S{}2 (eq.~\ref{eq:tilt}), not through value iteration. Against each neighbor:
+
+\textbf{Risk-sensitive and entropic control} \citep{howardmatheson1972,whittle1990,hansensargent1995,marcus1997}. The exponential-tilt family $Q = r + (1/\beta)\log E[e^{\beta V}]$ deforms the Bellman recursion with an exogenous risk dial $\beta$. GTT's tilt is the standard Esscher form with $\gamma\iota(T)$ playing the role of a \emph{signed, state-dependent} risk-sensitivity parameter (\S{}3): the amplitude is endogenous to the trust state rather than a fixed preference parameter. The deformation's parameterization, not its existence, is the departure.
+
+\textbf{Belief-state and partially observed models (POMDP).} The expectation-over-transitions structure resembles belief-conditioned dynamics; GTT's expectation is conditioned on the agent's validation history through the master law rather than on a Bayesian belief state over hidden world states.
+
+\textbf{Soft and entropy-regularized reinforcement learning} \citep{ziebart2008,haarnoja2017}. Those schemes replace $\max$ with an expectation for exploration convenience; GTT's expectation is not an exploration device --- it reflects genuinely belief-conditioned evaluation under distorted outcome probabilities.
+
+The defensible novelty is the integration: an endogenous, physiologically grounded parameterization of horizon and risk posture (mapped to carriers in the companion model paper), belief-conditioned evaluation, and trust semantics, in one measurable object. No single component is novel; the conjunction is. This subsection claims exactly that and no more.
 
 \subsection*{1.3 Motivation and intellectual context (informal)}
 
@@ -292,6 +304,56 @@ Power-law evidence cannot adjudicate dimensionality. Scalar observables --- aval
 The same discipline applies to the neuroimaging analogies this paper uses. Resting BOLD activity is scale-free, and the default-mode network (DMN; Raichle et al., 2001; Fox \& Raichle, 2007) exhibits long-range temporal dependence that is state-dependent --- breaking down in deep sleep (He, 2011; Tagliazucchi et al., 2013; Ciuciu, Abry \& He, 2014). But a voxel time series is already a massive spatiotemporal projection of the neural state; its fractal exponent licenses claims about the \emph{scaling of fluctuations}, not about the dimensionality of the underlying dynamics --- and the exponents in fact \emph{differentiate} brain networks, correlating with signal variance and metabolism (He, 2011, 2014). Scale-invariance of a measured scalar is thus consistent with, and silent about, a high-dimensional generator --- the standard physiological background being that fractal scaling is widespread and labile with state (Goldberger et al., 2002).
 
 Hence the resolution used throughout this paper: scalar and vector descriptions of trust \emph{are} connected --- as projection and generator. The precise claim is that \textbf{no single scalar is a sufficient statistic of trust dynamics}; the vector $T$ is identified by what all scalar projections discard --- component identity, cross-channel state, and path dependence. The trust index $\iota(T)$ remains a useful observable (as $R$ is in synchronization theory), but it is a shadow of the state, not the state. (The \S{}4 evidence legs that follow should be read accordingly: they are consistency evidence, each equally compatible with a scalar Rescorla--Wagner-style model; the discriminative test of this claim is the registered H0a lumpability test of \S{}6, which has not yet been run.)
+
+\subsection*{2.3b Machine-checked verification: the Lean formalization [VERIFIED --- green build]}
+
+The load-bearing algebraic claims of \S{}2.2--2.3 have been formalized in Lean~4
+\citep{demoura2021} with Mathlib \citep{mathlib2020} as the \texttt{TrustStack}
+library, deposited with the Supporting Document (\texttt{lean/} directory,
+pinned toolchain \texttt{leanprover/lean4:v4.12.0}). The library proves, with
+no \texttt{sorry} placeholders: (i) the four printed Properties of the tilt
+--- \texttt{tiltP\_pos} and \texttt{tiltP\_sum} (Property 1),
+\texttt{tiltP\_neutral} (Property 2), \texttt{EU\_mono} (Property 3, proved in
+integrated form $s \geq t \Rightarrow EU(s) \geq EU(t)$ by double-sum
+symmetrization, without differentiation machinery), and
+\texttt{tilt\_log\_bound} (Property 4, the sharp form
+$|\log(\tilde{P}/P)| \leq |\gamma\iota|\cdot(\max U - \min U)$ of the printed
+looser bound); and (ii) the master-law stability results ---
+\texttt{masterStep\_physics} (the physics-layer preset is exactly the
+Rescorla--Wagner axiom \eqref{eq:stability}), \texttt{contraction}
+(geometric decay to baseline under leak), and \texttt{bibo} with
+\texttt{input\_bound} (bounded-input bounded-state stability,
+$|S_t - S_{\mathrm{base}}| \leq (1-\delta)^t|S_0 - S_{\mathrm{base}}| +
+(\lambda^{+}+\lambda^{-})E/\delta$). These proofs are the consistency
+guarantee that the three layer presets of the stack cannot contradict one
+another at the level of the printed equations.
+
+\textbf{Verification status: green build.} The library compiles against the
+pinned toolchain --- Lean \texttt{4.12.0} with Mathlib at tag \texttt{v4.12.0}
+(rev \texttt{809c3fb3}), all dependency revisions pinned in
+\texttt{lake-manifest.json} --- \texttt{lake build} completes successfully,
+and the axiom audit (\texttt{lean/Check.lean}, output deposited as
+\texttt{lean/VERIFICATION\_AXIOMS.txt}) reports that each of the ten theorems
+depends only on the standard classical axioms \texttt{[propext,
+Classical.choice, Quot.sound]}; no \texttt{sorryAx} appears anywhere. The Lean
+kernel has therefore checked each printed claim above end-to-end: the algebra
+of the tilt and of the master law is no longer load-bearing on the numerical
+batteries of \S{}3.6; those batteries now verify what proofs cannot --- the
+model's contact with data.
+
+\begin{figure}[!tbp]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_lean_map.png}
+\caption{\textbf{Lean formalization map.} The \texttt{TrustStack} library:
+\texttt{Tilt.lean} proves Properties 1--4 of the exponential tilt
+(\S{}2.3); \texttt{MasterLaw.lean} proves the physics-layer reduction (M1)
+and the stability bounds (M2, M3 and corollary) of the master law
+(\S{}2.2). Every node is a complete proof with no \texttt{sorry}
+placeholders; status VERIFIED --- green build under the pinned toolchain,
+axiom audit in \texttt{lean/VERIFICATION\_AXIOMS.txt} of the Supporting
+Document.}
+\label{fig:leanmap}
+\end{figure}
 
 \subsection*{2.4 Observer-dependence of parameters: the frame-invariance claim (a controlled metaphor)}
 

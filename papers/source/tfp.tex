@@ -16,7 +16,7 @@
 \author{Devon Shigaki~(ORCID: 0009-0003-8977-8010)\\
 \small The FreshCredit Lab --- Independent Research\\
 \small Correspondence: freshcredit.xyz}
-\date{}
+\date{\small Version 3.0 --- September 2026}
 
 % --- Float-page layout tuning: reduce white bands on float-dense pages ---
 \renewcommand{\topfraction}{0.85}
@@ -1793,6 +1793,63 @@ into application decision layers. The system thereby attempts what
 centralized custodians structurally cannot: measurement whose
 observation term \(\psi\) is driven to its quantified floor rather than
 amplified --- with the floor, per the battery, nonzero.
+
+\textbf{The surveillance-amplification test {[}SIMULATION ---
+pre-registered, compound FAIL{]}.} Sim-OBS subjects
+the section's core claim --- that high-salience surveillance regimes
+measurably distort the trust signal relative to consent-bearing regimes
+--- to a direct in-silico test, pre-registered with frozen pass/fail
+criteria before any data contact (registration and full results in the
+Supporting Document). Fifty independent cohorts of 120 agents each
+evolve under the master-law trust dynamics; each cohort is observed
+twice --- under a consent-bearing regime (measurement noise only) and
+under a surveillance regime (a leak term \(\delta = 0.01\) coupling the
+observation channel back into agents' mismatch streams) --- and a
+Kalman/EM estimator recovers the trust-learning rate \(\lambda\) from
+each stream. The frozen criteria: C1, a central estimate of the
+surveillance-induced bias in \(\hat{\lambda}\) of at least \(+0.03\);
+C2, a zero-knowledge-observation control with \(|\mathrm{bias}| \leq
+0.01\); C3, the bias positive in a supermajority of cohorts; C4, an
+instrument-calibration bound on estimator dispersion. \textbf{Result:
+compound FAIL.} The direction of the claim is confirmed --- the
+surveillance-regime estimate exceeded the consent-regime estimate in
+50 of 50 cohorts (C3 PASS) --- but the central magnitude, \(+0.014\),
+fell below the frozen \(+0.03\) threshold (C1 FAIL), the control showed
+a residual bias of \(0.0135\) against the frozen \(0.01\) bound (C2
+FAIL), and estimator dispersion at leak \(\delta = 0.01\) exceeded the
+calibration bound (C4 FAIL). An instrument-recalibration pass
+(regression-initialized EM) did not move any criterion across its frozen
+threshold, and no threshold was adjusted post hoc. The verdict is
+reported as FAIL: the simulation supports the \emph{sign} of the
+surveillance-distortion effect with perfect cohort consistency, and
+does not support its \emph{magnitude} at the pre-registered level under
+this instrument. The engineering responses (i)--(iv) above therefore
+stand on the theory and the chilling-effects literature, not on this
+run; a higher-powered design with a validated estimator is registered
+as future work. The first-run estimator defect (an ad-hoc estimator
+producing symmetric garbage) was caught by the frozen criteria,
+archived, and disclosed with the run record.
+
+\begin{figure}[!tbp]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_sim_obs.png}
+\caption{\textbf{Sim-OBS: surveillance-regime distortion of the
+recovered trust-learning rate (compound FAIL).}
+Fifty cohorts of 120 agents under master-law dynamics, observed under
+consent-bearing vs.~surveillance regimes (leak \(\delta = 0.01\));
+\(\lambda\) recovered by Kalman/EM per stream. \emph{Top left:}
+per-cohort bias \(\hat{\lambda}_{\mathrm{surv}} -
+\hat{\lambda}_{\mathrm{consent}}\); positive in 50/50 cohorts (criterion
+C3, PASS) with central estimate \(+0.014\), below the frozen \(+0.03\)
+threshold (criterion C1, FAIL). \emph{Top right:} distribution of the
+surveillance-regime bias against the frozen threshold. \emph{Bottom
+left:} zero-knowledge control bias, \(0.0135\) against the frozen
+\(0.01\) bound (criterion C2, FAIL). \emph{Bottom right:} estimator
+dispersion against the calibration bound (criterion C4, FAIL). Criteria
+frozen pre-run; thresholds never adjusted; first-run estimator defect
+archived and disclosed.}
+\label{fig:simobs}
+\end{figure}
 
 
 \FloatBarrier
