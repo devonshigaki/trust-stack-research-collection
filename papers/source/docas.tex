@@ -602,6 +602,13 @@ An expanded 82-stimulus follow-on battery (\textbf{Sim D8}; Supporting Document 
 
 \begin{figure*}[!tp]
 \centering
+\includegraphics[width=0.98\textwidth]{figures/pipeline_architecture_diagram.png}
+\caption{The closed-loop in-silico neuromorphic research pipeline (\S{}5.2; DOCAS / Brain-IT / Sim D16). Stage 1: Standardized visual credit agreements and offers (27 conditions across 6 categories). Stage 2: Biological brain encoding via Meta TRIBE v2 (whole-brain fsaverage5 surface mesh, 20,484 vertices; functional dissociation of sensory V1--V4 and affective DMN/Control networks). Stage 3: Topological bridging and dual-branch decoding via Brain-IT (128 GMM cluster space; Branch A VGG structural layout and Branch B CLIP-guided latent diffusion, elevating top-1 retrieval to 51.9\%). Stage 4: Cognitive decision gating and behavioral exploitation under Sim D16, revealing a $38.9\times$ vulnerability gradient concentration in low-bandwidth consumers driven by visual design.}
+\label{fig:pipeline-architecture}
+\end{figure*}
+
+\begin{figure*}[!tp]
+\centering
 \includegraphics[width=0.98\textwidth]{figures/visual_comparison_grid.png}
 \caption{In-silico neural reconstruction comparison across experimental offer categories (\S{}5.2; seed 42, 27-stimulus battery). Column 1: Original visual experimental stimulus (Ground Truth). Column 2: Legacy Gallant Lab linear ridge + candidate averaging reconstruction (historical baseline; reproducing the spatial blur and retrieval bottleneck of Sim N.3). Column 3: Brain-IT Structural Branch output (VGG contrastive module, recovering layout boundaries and margin geometry). Column 4: Brain-IT Dual-Branch final reconstruction (CLIP-guided latent diffusion, recovering sharp typographic contours and semantic clarity). Brain-IT eliminates the legacy retrieval null ($top\text{-}1 = 51.9\%$ vs.\ chance $3.7\%$, $p = 0.0005$) and achieves mean $\text{SSIM} = 0.7723$ ($\Delta = +0.4112$ over Gallant).}
 \label{fig:viz-brainit}
