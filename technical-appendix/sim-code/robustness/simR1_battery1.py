@@ -248,7 +248,7 @@ if __name__ == "__main__":
                                closedform_vs_OLS_maxdiff=ols_max)
 
     # dump per-user rows for figures
-    np.savez("/mnt/agents/output/figures/robustness/simR1_battery1_rows.npz",
+    np.savez("../../../../output/figures/robustness/simR1_battery1_rows.npz",
              A_err=np.array([r["lam_kf"] - r["lam_bar"] for r in A]),
              B_err_bar=np.array([r["lam_kf"] - r["lam_bar"] for r in B]),
              B_err_w=np.array([r["lam_kf"] - r["lam_bar_w"] for r in B]),
@@ -290,6 +290,6 @@ if __name__ == "__main__":
         out[tag] = dict(mean_realized_over_lam0=float(np.mean(ratios)),
                         frac_events_clipped=float(at_floor / sum(r["n"] for r in B)))
 
-    with open("/mnt/agents/output/figures/robustness/simR1_battery1_stats.json", "w") as f:
+    with open("../../../../output/figures/robustness/simR1_battery1_stats.json", "w") as f:
         json.dump(out, f, indent=2)
     print(json.dumps(out, indent=2))

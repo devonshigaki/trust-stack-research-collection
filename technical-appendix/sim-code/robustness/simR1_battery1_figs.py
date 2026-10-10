@@ -6,7 +6,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-D = "/mnt/agents/output/figures/robustness/"
+D = "../../../../output/figures/robustness/"
 z = np.load(D + "simR1_battery1_rows.npz")
 s = json.load(open(D + "simR1_battery1_stats.json"))
 

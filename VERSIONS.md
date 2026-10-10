@@ -4,7 +4,20 @@ All six works carry the same version marker on their title page, in standard
 numeric form: **"Version X.0 — Month Year"**. Sources of truth:
 `/mnt/agents/output/submission/`.
 
-## Version 3.0 — September 2026 (current)
+## Version 3.1 — October 2026 (current)
+
+Content:
+- **DOCAS / Brain-IT In-Silico Decoding Suite**:
+  - Replaces legacy Gallant linear-ridge decoder with Weizmann Institute's Brain-IT dual-branch decoder (Beliy et al., ICLR 2026; `brainit-fmri`) on the 27 visual agreement and offer conditions (`battery27_reconstructed.json`).
+  - Eliminates the N.3 legacy decoder resolution bottleneck: mean SSIM = 0.7723 ($\Delta = +0.4112$ over Gallant 0.3612), LPIPS = 0.1539 ($\Delta = -0.2771$), CLIP visual cosine similarity = 0.9301.
+  - Resolves the historical N.3 stimulus retrieval null: top-1 retrieval rises from chance (3.7%) and Gallant baseline (14.8%) to **51.9%** ($p = 0.0005$ vs 2,000 permutation nulls).
+  - Hypothesis H1 (Domain Structural Invariance vs Semantic Divergence): SUPPORTED ($p = 0.0005$). Early visual layout is preserved invariantly across all trust/threat categories (SSIM range = 0.0971 < 0.15), confirming that predatory/threat conditioning selectively modulates associative semantic networks without impairing sensory structural perception.
+  - Hypothesis H2 (Instrument Resolution): SUPPORTED ($\Delta\text{SSIM} = +0.4112$, $\Delta\text{LPIPS} = -0.2771$).
+  - Hypothesis H3 (Strong Platonic Manifold Alignment): SUPPORTED. Representational Dissimilarity Matrix correlation between TRIBE v2 cortical BOLD and Brain-IT decoded representations achieves Mantel $r = 0.9923$ ($p < 0.0001$).
+  - **Sim D16 (Perceptual Cloaking & Predatory Uptake under Dual-Branch Gating)**: Pre-registered in `technical-appendix/SIM_D16_PRE_REGISTRATION.md` before execution; 1,000 agents ($\kappa_i \sim \text{Beta}(2,5)$, seed 42) evaluating 27 visual credit agreements using Brain-IT Branch A structural edge maps: C1 cloaking ratio 0.884 vs $\ge 2.50$ (FAIL); C2 exploitation gap 0.049 vs $\ge 0.30$ (FAIL); C3 decile odds ratio $38.94\times \ge 3.0\times$ (PASS — massive harm concentration in low-bandwidth agents); C4 permutation $p = 0.010 \le 0.001$ (FAIL). Compound verdict: **FAIL as frozen** (1/4 PASS; reported without post-hoc adjustment). Confirms visual design concentrates exploitation ($38.9\times$), while identifying that human salience is driven by typographic stroke-contrast rather than isotropic Sobel edge magnitude. Deliverables: `SIM_D16_PRE_REGISTRATION.md`, `sim_d16_perceptual_cloaking.py`, `sim_d16_results.json`, `fig_sim_d16_cloaking.png`.
+  - Deposit deliverables: `BRAINIT_RUN_REPORT.md`, `run_insilico_experiment.py`, `hypothesis_evaluation.{json,csv}`, and figures in `figures/docas/pipeline/` (`visual_comparison_grid.png`, `fig_brainit_category_metrics.png`, `fig_brainit_permutation_nulls.png`, `fig_brainit_rdm_geometry.png`).
+
+## Version 3.0 — September 2026
 
 Content:
 - **GTT**: new §1.2c "Differentiation from the dynamic-programming lineage" (risk-sensitive/entropic control, POMDP, soft RL; integration-novelty statement; anchored to the existing exponential-tilt formalism — no new symbols); new §2.3b "Machine-checked verification: the Lean formalization" + proof-map figure (TrustStack library, Lean 4 + Mathlib pinned v4.12.0, no `sorry`; proves tilt Properties 1–4 and master-law M1–M3) — **status VERIFIED 2026-09-21: green `lake build` under the pinned toolchain (Lean 4.12.0, commit dc2533473114; Mathlib v4.12.0 rev 809c3fb3, all dep revs pinned in lake-manifest.json); axiom audit (lean/Check.lean → lean/VERIFICATION_AXIOMS.txt) shows all ten theorems depend only on [propext, Classical.choice, Quot.sound], no sorryAx; three compile-fix iterations on the deposited sources (Lean-4 binder rule for section hypotheses, sum_div direction, λ-token rename) — the proofs as deposited compile**; universality sentence in the cross-species summary; tilt cross-reference corrected to §2.

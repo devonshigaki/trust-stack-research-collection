@@ -115,5 +115,5 @@ fig.suptitle("SIM-R2 Battery 3 - sensitivity of the GTT 3.1 stage-mix simplex to
  "Absolute FR distances shift up to 1.83x (metric IS scale-sensitive); relational geometry stable (min pairwise rho = 0.940 grid / 0.952 lognormal);\n"
  "dispersion ordering and NN clustering robust in 100%/100% of settings. Papers never print registered ahat values; nominal = mid-range (disclosed).",fontsize=9)
 fig.tight_layout(rect=[0,0,1,0.915])
-fig.savefig("/mnt/agents/output/figures/robustness/figR2_B3_fr_ahat_heatmap.png",dpi=150)
+fig.savefig("../../../../output/figures/robustness/figR2_B3_fr_ahat_heatmap.png",dpi=150)
 print("figure saved")

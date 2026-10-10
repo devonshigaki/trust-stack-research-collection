@@ -87,5 +87,5 @@ for gseed in seeds:
         print(f"{name} g{gseed} meandeg={meandeg:.1f} R(K=4.5)={r45} ({time.time()-t0:.0f}s)", flush=True)
 
 json.dump({'Ks': Ks.tolist(), 'results': results},
-          open('/mnt/agents/output/figures/robustness/b4_results.json', 'w'))
+          open('../../../../output/figures/robustness/b4_results.json', 'w'))
 print("ALL DONE", time.time()-t0)

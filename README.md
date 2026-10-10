@@ -23,6 +23,14 @@
 > `docs/harm_reduction_estimate.md` (Monte Carlo population estimate);
 > `VERSIONS.md` (iteration register). See VERSIONS.md for the full changelog,
 > verified-citation list, and rejected package items.
+>
+> **October 2026 addition:** Brain-IT dual-branch in-silico neural decoding
+> suite (`brainit-fmri`; ICLR 2026; Beliy et al.): resolves the legacy Gallant
+> decoding bottleneck ($\Delta\text{SSIM} = +0.4112$, $\Delta\text{LPIPS} = -0.2771$),
+> elevating top-1 stimulus identification to 51.9% ($p = 0.0005$ vs 2,000 nulls);
+> confirms Hypotheses H1 (structural invariance across conditions), H2 (decoder
+> resolution), and H3 (Strong Platonic manifold transfer, Mantel $r = 0.9923$).
+> Code and reports in `technical-appendix/neural-pipeline/`.
 
 This repository contains the complete, reproducible research base of the
 five-work trust-measurement collection: every simulation script, every

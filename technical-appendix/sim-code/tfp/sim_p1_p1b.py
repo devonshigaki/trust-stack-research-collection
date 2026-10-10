@@ -50,5 +50,5 @@ if __name__ == "__main__":
     print("atan K=0   : %.4f ± %.4f" % (np.mean(R_old), np.std(R_old, ddof=1)))
     print("stereo K=0 : %.4f ± %.4f" % (np.mean(R_new), np.std(R_new, ddof=1)))
     print("uniform K=0: %.4f ± %.4f" % (np.mean(R_uni), np.std(R_uni, ddof=1)))
-    np.savez("/mnt/agents/output/figures/tfp/p1_results.npz",
+    np.savez("../../../../output/figures/tfp/p1_results.npz",
              R_c=R_c, R_i=R_i, R_old=R_old, R_new=R_new, R_uni=R_uni)

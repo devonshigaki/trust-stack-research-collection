@@ -158,7 +158,7 @@ for alpha in [1.0, 0.8, 0.6, 0.4]:
     curves[str(alpha)] = pp
 res["period_vs_lambda"] = {"lam_grid": list(lam_grid), "curves": curves}
 
-with open("/mnt/agents/output/figures/robustness/simR1_battery2_stats.json", "w") as f:
+with open("../../../../output/figures/robustness/simR1_battery2_stats.json", "w") as f:
     json.dump(res, f, indent=2)
 
 # ---------------- figure ----------------
@@ -213,5 +213,5 @@ fig.suptitle("SIM-R1 Battery 2 — closure sensitivity of the ≈7.2-step ringin
              f"dynamics S(t+1) = S(t) + λ(V − E(t)), x = E − V, λ = {LAM}, unit-displacement impulse, deterministic; "
              "reference closure E(t+1) = S(t) gives period 7.17 (Sim G8 in-silico: 7.15)", fontsize=10)
 fig.tight_layout(rect=[0, 0, 1, 0.94])
-fig.savefig("/mnt/agents/output/figures/robustness/figR2_closure_sensitivity.png", dpi=150)
+fig.savefig("../../../../output/figures/robustness/figR2_closure_sensitivity.png", dpi=150)
 print("figure written")
