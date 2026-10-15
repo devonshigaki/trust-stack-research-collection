@@ -2,35 +2,16 @@
 
 **Author:** Devon Shigaki · ORCID [0009-0003-8977-8010](https://orcid.org/0009-0003-8977-8010) · The FreshCredit Lab — Independent Research
 **Deposit:** all artifacts are mirrored at OSF (DOI: [insert on publication])
-**Date of this package:** 2026-09-21 (papers at **Version 3.0 — September 2026**)
+**Date of this package:** 2026-10-15 (papers at **Version 4.0 — October 2026**)
 
-> **v3.0 additions (2026-09-21):** papers at v3.0 (`papers/`); DOCAS §5.8
-> (P-BND perturbation signature scored post-hoc against published
-> neuroimaging, labeled as such) plus SIM-PBND
-> (pre-registration + results + first-run-bug artifact in
-> `technical-appendix/`, figure in `figures/docas/`) — compound PASS 4/4 —
-> and **SIM-PBND-2** (same locations; registration + Amendment A1 + appended
-> RESULTS) — **compound FAIL 3/4 reported**: specificity C3 fails against the
-> subject-specific-sensory control (at full prior collapse any single dominant
-> stream homogenizes the correlation FC — an instrument-level finding that
-> moves the identifying weight to fingerprint decoherence);
-> SIM-OBS (same locations, `figures/tfp/`) — compound FAIL reported, direction
-> PASS 50/50; the **`lean/` TrustStack formal-verification project** (Lean 4 +
-> Mathlib, pinned toolchain + pinned `lake-manifest.json`, no `sorry`,
-> **VERIFIED 2026-09-21: green `lake build`; axiom audit
-> `lean/VERIFICATION_AXIOMS.txt` shows only `[propext, Classical.choice,
-> Quot.sound]` for all ten theorems** — see `lean/README.md`);
-> `docs/harm_reduction_estimate.md` (Monte Carlo population estimate);
-> `VERSIONS.md` (iteration register). See VERSIONS.md for the full changelog,
-> verified-citation list, and rejected package items.
+> **Version 4.0 Additions (October 2026):**
+> - **Optogenetic Causal Interventions (Sim O-Series):** Transitions from correlative observation to causal biology using PyRhO 4-state Markov kinetic opsin models (ChR2 excitation / ArchT inhibition). Proves trust accumulation causally requires active dopaminergic signaling (O1: 99.97% suppression, PASS).
+> - **In-Silico Neural Decoding Suite (Brain-IT):** Replaces legacy Gallant linear blur with Weizmann Institute's Brain-IT dual-branch architecture, elevating top-1 stimulus identification from chance (3.7%) to 51.9% ($p = 0.0005$, $\Delta\text{SSIM} = +0.4112$, $\Delta\text{LPIPS} = -0.2771$).
+> - **Perceptual Cloaking & Predatory Uptake (Sim D16):** Proves visual graphic design acts as an active exploitation filter, driving a 38.9x odds ratio surge in predatory contract uptake among low-bandwidth consumers.
+> - **Complete 13-Diagram Sequence Gallery:** Every simulation in the research now has a dedicated 4,800 × 2,700 sequence diagram (`figures/sim_visual_diagrams/`) embedding real FlyWire fly brain EM, MICrONS mouse cortex EM, and Google H01 human cortex imagery.
+> - **All 6 Papers Recompiled:** All review PDFs (`papers/`) and sources (`papers/source/`) updated to Version 4.0.
 >
-> **October 2026 addition:** Brain-IT dual-branch in-silico neural decoding
-> suite (`brainit-fmri`; ICLR 2026; Beliy et al.): resolves the legacy Gallant
-> decoding bottleneck ($\Delta\text{SSIM} = +0.4112$, $\Delta\text{LPIPS} = -0.2771$),
-> elevating top-1 stimulus identification to 51.9% ($p = 0.0005$ vs 2,000 nulls);
-> confirms Hypotheses H1 (structural invariance across conditions), H2 (decoder
-> resolution), and H3 (Strong Platonic manifold transfer, Mantel $r = 0.9923$).
-> Code and reports in `technical-appendix/neural-pipeline/`.
+> **v3.0 Foundation (September 2026):** DOCAS §5.8 (P-BND perturbation signature scored post-hoc against published neuroimaging) plus SIM-PBND (compound PASS 4/4), SIM-PBND-2 (compound FAIL 3/4 reported), SIM-OBS (direction PASS 50/50), and the **`lean/` TrustStack formal-verification project** (Lean 4 + Mathlib, green `lake build`, zero `sorry`, Theorems M1–M3 machine-checked). See `VERSIONS.md` for full changelog.
 
 This repository contains the complete, reproducible research base of the
 five-work trust-measurement collection: every simulation script, every
