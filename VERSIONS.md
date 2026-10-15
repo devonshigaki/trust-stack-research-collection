@@ -4,7 +4,18 @@ All six works carry the same version marker on their title page, in standard
 numeric form: **"Version X.0 — Month Year"**. Sources of truth:
 `/mnt/agents/output/submission/`.
 
-## Version 3.1 — October 2026 (current)
+## Version 4.0 — October 2026 (current)
+
+Content:
+- **Optogenetic Causal Interventions (Sim O-Series)**:
+  - Transitions the research stack from correlative observation (fMRI / connectomes) to causal biological manipulation using PyRhO simulated light-gated ion channels (ChR2, ArchT).
+  - Hypothesis O1 (Dopaminergic Trust Lesion): Optogenetic silencing of the $D$ channel suppresses final trust state by $99.97\%$ ($>90\%$ criterion, PASS). Proves trust accumulation is causally dependent on active dopaminergic signaling.
+  - Hypothesis O2 (Induced Vulnerability): Optogenetic Cortisol stress excitation increases predatory uptake by $1.74\times$ ($<5.0\times$ criterion, FAIL). Proves acute physiological stress alone is insufficient to replicate the $38.9\times$ visual-cloaking exploitation gap (Sim D16), establishing that chronic cognitive scarcity is required.
+  - Hypothesis O3 (Macroeconomic Fragmentation): Inhibiting O/S channels in a $10\%$ mutant subpopulation reduces Kuramoto global coherence by $11.39\%$ ($<40\%$ criterion, FAIL). Proves the distributed TFP protocol is highly resilient to biological/adversarial heterogeneity.
+  - Compound verdict: FAIL as frozen (1/3 PASS; reported strictly without post-hoc adjustments).
+  - Artifacts: `SIM_O_SERIES_PRE_REGISTRATION.md`, `sim_o_series.py`, `O_SERIES_RUN_REPORT.md`, `13_sim_o_optogenetics.png`.
+
+## Version 3.1 — October 2026
 
 Content:
 - **DOCAS / Brain-IT In-Silico Decoding Suite**:

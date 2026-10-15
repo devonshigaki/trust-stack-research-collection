@@ -41,6 +41,11 @@ sims = [
         "name": "Sim-D16: Perceptual Cloaking & Predatory Uptake (Dual-Branch Gating)",
         "path": "brainit-fmri/insilico/sim_d16_perceptual_cloaking.py",
         "workdir": "brainit-fmri"
+    },
+    {
+        "name": "Sim O-Series: Optogenetic Causal Interventions",
+        "path": "simulations_repair_era/optogenetics/code/sim_o_series.py",
+        "workdir": "simulations_repair_era/optogenetics"
     }
 ]
 
