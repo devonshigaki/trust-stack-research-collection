@@ -46,6 +46,11 @@ sims = [
         "name": "Sim O-Series: Optogenetic Causal Interventions",
         "path": "simulations_repair_era/optogenetics/code/sim_o_series.py",
         "workdir": "simulations_repair_era/optogenetics"
+    },
+    {
+        "name": "Sim-D17: Atmospheric & Photic-Thermal Gating",
+        "path": "brainit-fmri/insilico/sim_d17_weather_gating.py",
+        "workdir": "brainit-fmri"
     }
 ]
 

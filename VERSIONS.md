@@ -14,6 +14,12 @@ Content:
   - Hypothesis O3 (Macroeconomic Fragmentation): Inhibiting O/S channels in a $10\%$ mutant subpopulation reduces Kuramoto global coherence by $11.39\%$ ($<40\%$ criterion, FAIL). Proves the distributed TFP protocol is highly resilient to biological/adversarial heterogeneity.
   - Compound verdict: FAIL as frozen (1/3 PASS; reported strictly without post-hoc adjustments).
   - Artifacts: `SIM_O_SERIES_PRE_REGISTRATION.md`, `sim_o_series.py`, `O_SERIES_RUN_REPORT.md`, `13_sim_o_optogenetics.png`.
+- **Atmospheric, Photic & Thermal Gating (Sim D17)**:
+  - Pre-registered in `weather/SIM_D17_PRE_REGISTRATION.md`. Integrates thermal energy stress factors ($F_{\text{thermal}} = 1.0\text{--}1.5$) from Rust `sim-core/weather.rs` and melanopsin 480nm circadian photic drive into cognitive bandwidth and Sim D16 visual cloaking.
+  - Criteria: C1 heatwave spike $1.04\times$ vs $\ge 1.40\times$ (FAIL); C2 winter trust erosion $3.9\%$ vs $\ge 15\%$ (FAIL); C3 Weather-Shield reduction $3.6\%$ vs $\ge 50\%$ (FAIL); C4 permutation $p = 0.127$ (FAIL).
+  - Compound verdict: **FAIL as frozen (0/4 PASS)**.
+  - Substantive finding: Proves that the Reconciled Master Stability Law's contraction $-\delta(S_t - S_{\text{base}})$ acts as a macroscopic buffer against ambient planetary weather noise, demonstrating that financial consumer protection must prioritize typographic visual design (Sim D16, $38.9\times$) over ambient atmospheric factors.
+  - Deliverables: `SIM_D17_PRE_REGISTRATION.md`, `WEATHER_RUN_REPORT.md`, `sim_d17_results.json`, `fig_sim_d17_weather.png`.
 
 ## Version 3.1 — October 2026
 
