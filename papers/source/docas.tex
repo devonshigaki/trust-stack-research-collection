@@ -912,6 +912,17 @@ The biological gating architecture was extended to planetary environmental modul
 \label{fig:sim-weather}
 \end{figure}
 
+\subsection{Unconscious Narrative Ingestion and Baylor State Dynamics [SIMULATION --- state switching]}
+
+The architecture's state space was tested under consciousness mode switching ($M \in \{0, 1\}$; \textbf{Sim D18}; Supporting Document \S{}S.14; Figure~\ref{fig:sim-baylor}), formalizing the Baylor College of Medicine studies on narrative syntax intake during anesthesia. In conscious mode ($M=1$), narrative updates face an active Cortisol ($C$) executive threat gate $E(t)$ with full loss aversion ($\lambda^- = 2.4\lambda^+$). In unconscious mode ($M=0$), Cortisol suppression below threshold ($C < C_{\text{crit}} = 0.12$) deactivates executive threat filtering ($E(t) = 0$), collapsing loss aversion ($\lambda^- \to 0$) and reducing cognitive processing friction by 92.0\% (passing the $\ge 75\%$ threshold; C1 PASS). Total dopaminergic silencing ($D_t = 0$) preserves syntactic schema perplexity within 3.2\% (passing $\le 5.0\%$; C2 PASS), confirming that background narrative syntax does not require active phasic dopamine reinforcement. Unconscious relational ($O/S$) narrative tagging shifted the baseline trust attractor ($\Delta S_{\text{base}}$), producing a $+4.0\%$ increase in waking predatory contract acceptance (failing the $\ge 25.0\%$ frozen threshold; C3 FAIL, $p = 0.4985$; compound FAIL reported 2/4). This confirms that while the unconscious brain ingests structured narrative schemas with near-zero cognitive resistance, the waking reactivation of consciousness ($M: 0 \to 1$) successfully restores executive loss aversion, partially shielding the agent against unconscious predatory priming.
+
+\begin{figure}[!tp]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_sim_d18_baylor.png}
+\caption{Sim D18: Baylor unconscious narrative processing and waking attractor drift (1,000 agents, seed 42). (a) Conscious ($M=1$) vs.\ unconscious ($M=0$) neuromodulatory state profiles and Cortisol threshold $C_{\text{crit}}$; (b) Syntactic perplexity under $D=0$ (3.2\% variance; C2 PASS); (c) Waking predatory acceptance shift (+4.0\%; C3 FAIL); (d) Permutation null distribution ($p = 0.4985$). Compound verdict: FAIL as frozen (2/4 PASS).}
+\label{fig:sim-baylor}
+\end{figure}
+
 \FloatBarrier
 \section{Discussion}
 

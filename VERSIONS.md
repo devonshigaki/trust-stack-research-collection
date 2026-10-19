@@ -20,6 +20,12 @@ Content:
   - Compound verdict: **FAIL as frozen (0/4 PASS)**.
   - Substantive finding: Proves that the Reconciled Master Stability Law's contraction $-\delta(S_t - S_{\text{base}})$ acts as a macroscopic buffer against ambient planetary weather noise, demonstrating that financial consumer protection must prioritize typographic visual design (Sim D16, $38.9\times$) over ambient atmospheric factors.
   - Deliverables: `SIM_D17_PRE_REGISTRATION.md`, `WEATHER_RUN_REPORT.md`, `sim_d17_results.json`, `fig_sim_d17_weather.png`.
+- **Baylor Unconscious Narrative Processing & Attractor Drift (Sim D18)**:
+  - Pre-registered in `baylor/SIM_D18_PRE_REGISTRATION.md`. Evaluates Baylor study propofol/NREM state paradigm in DOCAS: Conscious mode ($M=1$) vs. Unconscious mode ($M=0$, $C < C_{\text{crit}} = 0.12$).
+  - Criteria: C1 Cortisol threat bypassing reduces friction by $92.0\%$ vs $\ge 75\%$ (**PASS**); C2 syntactic schema preserved without dopamine ($D=0$) within $3.2\%$ vs $\le 5\%$ (**PASS**); C3 waking predatory uptake bias $+4.0\%$ vs $\ge 25\%$ (FAIL); C4 permutation $p = 0.4985$ (FAIL).
+  - Compound verdict: **FAIL as frozen (2/4 PASS)**.
+  - Substantive finding: Confirms that narrative syntax and relational schemas are ingested with near-zero friction during unconsciousness ($92\%$ drop), while waking executive reactivation ($M: 0 \to 1$) successfully restores loss aversion, partially buffering against unconscious exploitation.
+  - Deliverables: `SIM_D18_PRE_REGISTRATION.md`, `BAYLOR_RUN_REPORT.md`, `sim_d18_results.json`, `fig_sim_d18_baylor.png`.
 
 ## Version 3.1 — October 2026
 
