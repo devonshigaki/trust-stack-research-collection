@@ -34,28 +34,28 @@ sims = [
     },
     {
         "name": "In-Silico Neural Decoding Suite (TRIBE v2 -> Brain-IT Dual-Branch)",
-        "path": "brainit-fmri/run_insilico_experiment.py",
-        "workdir": "brainit-fmri"
+        "path": "experiments/brainit-fmri/run_insilico_experiment.py",
+        "workdir": "experiments/brainit-fmri"
     },
     {
         "name": "Sim-D16: Perceptual Cloaking & Predatory Uptake (Dual-Branch Gating)",
-        "path": "brainit-fmri/insilico/sim_d16_perceptual_cloaking.py",
-        "workdir": "brainit-fmri"
+        "path": "experiments/brainit-fmri/insilico/sim_d16_perceptual_cloaking.py",
+        "workdir": "experiments/brainit-fmri"
     },
     {
         "name": "Sim O-Series: Optogenetic Causal Interventions",
-        "path": "simulations_repair_era/optogenetics/code/sim_o_series.py",
-        "workdir": "simulations_repair_era/optogenetics"
+        "path": "experiments/simulations_repair_era/optogenetics/code/sim_o_series.py",
+        "workdir": "experiments/simulations_repair_era/optogenetics"
     },
     {
         "name": "Sim-D17: Atmospheric & Photic-Thermal Gating",
-        "path": "brainit-fmri/insilico/sim_d17_weather_gating.py",
-        "workdir": "brainit-fmri"
+        "path": "experiments/brainit-fmri/insilico/sim_d17_weather_gating.py",
+        "workdir": "experiments/brainit-fmri"
     },
     {
         "name": "Sim-D18: Baylor Unconscious Narrative Gating & Attractor Drift",
-        "path": "brainit-fmri/insilico/sim_d18_baylor_unconscious_gating.py",
-        "workdir": "brainit-fmri"
+        "path": "experiments/brainit-fmri/insilico/sim_d18_baylor_unconscious_gating.py",
+        "workdir": "experiments/brainit-fmri"
     }
 ]
 
@@ -69,7 +69,7 @@ for i, sim in enumerate(sims):
     os.chdir(sim_workdir)
     
     script_rel = os.path.relpath(os.path.join(base_dir, sim['path']), sim_workdir)
-    sim_python = os.path.join(base_dir, "brainit-fmri/.venv/bin/python3") if "brainit" in sim['path'] else venv_python
+    sim_python = os.path.join(base_dir, "experiments/brainit-fmri/.venv/bin/python3") if "brainit" in sim['path'] else venv_python
     try:
         # Run with appropriate venv python
         result = subprocess.run([sim_python, script_rel], capture_output=True, text=True, check=True)
