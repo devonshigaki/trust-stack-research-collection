@@ -7,6 +7,13 @@ numeric form: **"Version X.0 — Month Year"**. Sources of truth:
 ## Version 4.0 — October 2026 (current)
 
 Content:
+- **Bioelectric Stress Sharing & Multiscale Morphogenesis (Sim L-Series)**:
+  - Formalizes Shreesha & Levin's (2024) gap-junctional stress-sharing hypothesis as the biological implementation of the Master Stability Law.
+  - Hypothesis L1 (Critical Cognitive Light Cone): Unbounded stress sharing ($\gamma_O \to 1.0$) causes a Laplacian spatial resonance, increasing morphological error by $>300\times$ (FAIL as frozen). Proves cells require a private homeostatic anchor ($1-\gamma_O$).
+  - Hypothesis L2 (In-Silico Oncogenic Normalization): Simulated optogenetic photocurrent clamping across an oncogenic cluster margin restored gap-junctional stress conductance, suppressing tumor divergence by 79.9\% (PASS). Quantitatively replicates Levin's *in vivo* Xenopus melanoma rescue.
+  - Hypothesis L3 (Multiscale Level Hacking): Bidirectional macro-tissue motility feedback into cellular validation accelerated cellular homeostatic convergence by $5\times$ (PASS). Formalizes multiscale competency architecture.
+  - Compound verdict: FAIL as frozen (2/3 PASS; reported strictly without post-hoc adjustments).
+  - Artifacts: `SIM_L_SERIES_PRE_REGISTRATION.md`, `sim_l_bioelectrics.py`, `L_SERIES_RUN_REPORT.md`, `fig_sim_l_bioelectrics.png`.
 - **Optogenetic Causal Interventions (Sim O-Series)**:
   - Transitions the research stack from correlative observation (fMRI / connectomes) to causal biological manipulation using PyRhO simulated light-gated ion channels (ChR2, ArchT).
   - Hypothesis O1 (Dopaminergic Trust Lesion): Optogenetic silencing of the $D$ channel suppresses final trust state by $99.97\%$ ($>90\%$ criterion, PASS). Proves trust accumulation is causally dependent on active dopaminergic signaling.

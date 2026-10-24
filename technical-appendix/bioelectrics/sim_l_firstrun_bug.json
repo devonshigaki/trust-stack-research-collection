@@ -1,0 +1,19 @@
+{
+  "sim": "SIM-L",
+  "run": "firstrun_bug",
+  "date": "2026-10-23",
+  "seed": 42,
+  "bugs": [
+    "L1: Spatial coordinate vs grid adjacency mismatch: target angles theta indexed linearly 0..1023 while neighbors were 2D lattice neighbors (row/col), causing diffusion across non-adjacent morphospace angles.",
+    "L2: Optogenetic rescue boundary conductance: photocurrent restored internal tumor coupling but boundary conductance between host and tumor remained unscaled, yielding 70.5% normalization (ratio 0.2954) vs frozen 0.25 threshold.",
+    "L3: Zero macroscopic center-of-mass initial displacement: initial tissue was centered exactly at (0.5, 0.5), rendering directional motility drift macro_drift = (center - com) identically zero."
+  ],
+  "criteria": "UNTOUCHED — frozen thresholds (C1 <= 0.30, C2 <= 0.25, C3 <= 0.50 / >= 2.0x) strictly preserved",
+  "raw_results": {
+    "L1_suppression_ratio": 4.9412,
+    "L2_divergence_ratio": 0.2954,
+    "L3_time_ratio": 1.0,
+    "L3_rate_ratio": 1.0
+  },
+  "note": "First run archived as instrument/harness-mechanics failure per Trust Stack epistemic standards. Amendments A1, A2, A3 filed pre-rerun."
+}
