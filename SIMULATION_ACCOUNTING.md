@@ -168,5 +168,21 @@ Pre-registered in `semantic_drift/SIM_S_SERIES_PRE_REGISTRATION.md`. Anchored to
 - **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
 - **Artifacts**: `semantic_drift/SIM_S_SERIES_PRE_REGISTRATION.md`, `semantic_drift/sim_s_semantics.py`, `semantic_drift/S_SERIES_RUN_REPORT.md`, `numbers/sim_s_results.json`, `figures/sim_visual_diagrams/19_sim_s_semantics.png`.
 
-## Q. The one handoff that closes everything
+## Q. Sim DMN-Series: Default Mode Network Analog & Bounded Counterfactual Rollouts (Version 4.1)
+Pre-registered in `dmn/SIM_DMN_SERIES_PRE_REGISTRATION.md`. Anchored to Buckner et al. (2008), Simon (1955), and `crates/sim-core/src/dmn.rs`.
+- **DMN-1 Deception Suppression**: Counterfactual rollout depth $K=5$ suppresses predatory contract uptake by $76.9\%$ under Sim D16 visual cloaking (ratio $0.231 \le 0.60$, **PASS**).
+- **DMN-2 Standing Advantage**: Agents with $K=5$ maintain a $1.17\times$ steady-state standing advantage over myopic $K=1$ agents (frozen criterion $\ge 1.30\times$, **FAIL as frozen**).
+- **DMN-3 Cognitive Saturation**: Marginal loss reduction from $K=7$ to $K=10$ is $\Delta \text{Loss} = 0.0031 < 0.05$, bounding human deliberation depth (**PASS**).
+- **Compound Verdict**: **FAIL as frozen (2/3 PASS)**.
+- **Artifacts**: `dmn/SIM_DMN_SERIES_PRE_REGISTRATION.md`, `dmn/sim_dmn_planning.py`, `dmn/DMN_SERIES_RUN_REPORT.md`, `numbers/sim_dmn_results.json`, `figures/sim_visual_diagrams/20_sim_dmn.png`.
+
+## R. Sim CRIT-Series: Neural Criticality & Branching Parameters (Version 4.1)
+Pre-registered in `criticality/SIM_CRIT_SERIES_PRE_REGISTRATION.md`. Anchored to Beggs & Plenz (2003), Kinouchi & Copelli (2006), and Touboul & Destexhe (2010, 2017).
+- **CRIT-1 Dynamic Range Peak**: Sensory dynamic range peaks at critical branching parameter $\sigma^* = 1.00$ with $18.1\text{ dB}$ excess over sub/supercritical regimes ($\ge 15.0\text{ dB}$, **PASS**).
+- **CRIT-2 Avalanche Scaling**: Finite-size avalanche scaling yields $\alpha = 0.682, R^2 = 0.867$ vs frozen $1.50$ (reproducing Touboul--Destexhe sub-sampling artifact, **FAIL as frozen**).
+- **CRIT-3 Information Transmission**: Off-criticality mutual information collapses by $50.0\%$ (ratio $0.50 \le 0.65$, **PASS**).
+- **Compound Verdict**: **FAIL as frozen (2/3 PASS)**.
+- **Artifacts**: `criticality/SIM_CRIT_SERIES_PRE_REGISTRATION.md`, `criticality/sim_crit_branching.py`, `criticality/CRIT_SERIES_RUN_REPORT.md`, `numbers/sim_crit_results.json`, `figures/sim_visual_diagrams/21_sim_crit.png`.
+
+## S. The one handoff that closes everything
 Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13_manifest.json`, `concepts.json`, `clics_dist.npy`, result JSONs, `run_full_pipeline.sh`, `*_firstrun_bug.json` files) + `Supporting Document — Statistical Verification and Significance Appendix.md` + `Simulation Pipeline — Replication and Build Guide.md` + the three pre-registration documents. With those we (a) re-run every original script for the manifest's bit-identity acceptance test, and (b) have the exact material to deposit to OSF and close the 15 `[OSF DOI pending]` placeholders — the single biggest remaining review finding.

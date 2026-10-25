@@ -7,6 +7,20 @@ numeric form: **"Version X.0 — Month Year"**. Sources of truth:
 ## Version 4.0 — October 2026 (current)
 
 Content:
+- **Default Mode Network & Counterfactual Rollouts (Sim DMN-Series)**:
+  - Pre-registered in `dmn/SIM_DMN_SERIES_PRE_REGISTRATION.md`. Anchored to Buckner et al. (2008), Simon (1955), and `crates/sim-core/src/dmn.rs`.
+  - Hypothesis DMN-1 (Deception Suppression): Counterfactual rollout depth $K=5$ suppresses predatory uptake under Sim D16 visual cloaking by $76.9\%$ (ratio $0.231 \le 0.60$, PASS).
+  - Hypothesis DMN-2 (Standing Advantage): Agents with $K=5$ maintain a $1.17\times$ steady-state standing advantage over myopic $K=1$ agents (frozen criterion $\ge 1.30\times$, FAIL as frozen).
+  - Hypothesis DMN-3 (Cognitive Saturation): Marginal loss reduction from $K=7$ to $K=10$ is $\Delta \text{Loss} = 0.0031 < 0.05$, bounding human deliberation depth (PASS).
+  - Compound verdict: **FAIL as frozen (2/3 PASS)**.
+  - Artifacts: `SIM_DMN_SERIES_PRE_REGISTRATION.md`, `sim_dmn_planning.py`, `DMN_SERIES_RUN_REPORT.md`, `sim_dmn_results.json`, `20_sim_dmn.png`.
+- **Neural Criticality & Branching Dynamics (Sim CRIT-Series)**:
+  - Pre-registered in `criticality/SIM_CRIT_SERIES_PRE_REGISTRATION.md`. Anchored to Beggs & Plenz (2003), Kinouchi & Copelli (2006), and Touboul & Destexhe (2010, 2017).
+  - Hypothesis CRIT-1 (Dynamic Range Peak): Sensory dynamic range peaks at critical branching parameter $\sigma^* = 1.00$ with $18.1\text{ dB}$ excess over sub/supercritical regimes ($\ge 15.0\text{ dB}$, PASS).
+  - Hypothesis CRIT-2 (Avalanche Scaling): Finite-size avalanche scaling yields $\alpha = 0.682, R^2 = 0.867$ vs frozen $1.50$ (reproducing Touboul--Destexhe sub-sampling artifact, FAIL as frozen).
+  - Hypothesis CRIT-3 (Information Transmission): Off-criticality mutual information collapses by $50.0\%$ (ratio $0.50 \le 0.65$, PASS).
+  - Compound verdict: **FAIL as frozen (2/3 PASS)**.
+  - Artifacts: `SIM_CRIT_SERIES_PRE_REGISTRATION.md`, `sim_crit_branching.py`, `CRIT_SERIES_RUN_REPORT.md`, `sim_crit_results.json`, `21_sim_crit.png`.
 - **Temporal Dynamics of Music & Metric Hierarchies (Sim M-Series)**:
   - Pre-registered in `music_tdf/SIM_M_SERIES_PRE_REGISTRATION.md`. Resolves scalar tempo (BPM) degeneracy across cognitive regimes by mapping metric hierarchy ($\tau$), spectral energy ($E$), session entropy ($H_s$), and skip dynamics ($\Delta \phi$) directly into DOCAS neurochemical channels.
   - Hypothesis C1 (Metric Hierarchy Disambiguation): Omnibus ANOVA on $N = 10,000$ sessions across 4 behavioral regimes yielded $F(3, 9996) = 3,561.48$ ($p < 10^{-15}, \eta^2 = 0.5166$ vs frozen $\ge 0.140$, PASS). Pairwise Tukey-Kramer HSD tests break scalar BPM overlap between Focus ($75\text{ BPM}$) vs Decompression ($68\text{ BPM}$) and Creative Flow ($110\text{ BPM}$) vs Exercise ($135\text{ BPM}$).
