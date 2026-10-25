@@ -200,5 +200,13 @@ Pre-registered in `cross_substrate/SIM_X_SERIES_PRE_REGISTRATION.md`. Anchored t
 - **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
 - **Artifacts**: `cross_substrate/SIM_X_SERIES_PRE_REGISTRATION.md`, `cross_substrate/sim_x_cross_substrate.py`, `cross_substrate/X_SERIES_RUN_REPORT.md`, `numbers/sim_x_results.json`, `figures/sim_visual_diagrams/23_sim_x_cross.png`.
 
-## U. The one handoff that closes everything
+## U. Sim META: The Universal Trust Vector & Affective Derivatives (Version 4.1)
+Pre-registered in `meta_simulation/SIM_META_PRE_REGISTRATION.md`. Anchored to Russell (1980), Barrett (2017), Friston (2017), and GTT §2.1.
+- **META-1 Affective Derivative Projection**: 3D trust derivatives (Valence $\varepsilon$, Arousal $r_C \cdot A$, Dominance $d(\Delta S)/dt$) classify 5 canonical emotion categories (Joy, Contentment, Anger, Fear, Grief) with Macro $F_1 = 0.9905 \ge 0.95$ (**PASS**).
+- **META-2 Cross-Scale Coherence**: Driving trust vector simultaneously couples cellular bioelectrics ($V_{\text{mem}}$), affective valence, semantic coherence, and credit standing (integrated states correlate $r > 0.95$, min correlation $r = 0.232$ due to derivative-integral phase lag, **FAIL as frozen**).
+- **META-3 Universal Transverse Contraction**: Unforced relaxation contracts across all four tiers at $\lambda_{\text{Lyap}} \approx -1.21$ (finite-difference steepening vs $[-1.10, -0.90]$, **FAIL as frozen**).
+- **Compound Verdict**: **FAIL as frozen (1/3 PASS)**.
+- **Artifacts**: `meta_simulation/SIM_META_PRE_REGISTRATION.md`, `meta_simulation/sim_meta_universal.py`, `meta_simulation/META_SERIES_RUN_REPORT.md`, `numbers/sim_meta_results.json`, `figures/sim_visual_diagrams/24_sim_meta.png`.
+
+## V. The one handoff that closes everything
 Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13_manifest.json`, `concepts.json`, `clics_dist.npy`, result JSONs, `run_full_pipeline.sh`, `*_firstrun_bug.json` files) + `Supporting Document — Statistical Verification and Significance Appendix.md` + `Simulation Pipeline — Replication and Build Guide.md` + the three pre-registration documents. With those we (a) re-run every original script for the manifest's bit-identity acceptance test, and (b) have the exact material to deposit to OSF and close the 15 `[OSF DOI pending]` placeholders — the single biggest remaining review finding.

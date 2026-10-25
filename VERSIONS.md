@@ -7,6 +7,13 @@ numeric form: **"Version X.0 — Month Year"**. Sources of truth:
 ## Version 4.0 — October 2026 (current)
 
 Content:
+- **The Universal Trust Vector & Affective Derivatives (Sim META)**:
+  - Pre-registered in `meta_simulation/SIM_META_PRE_REGISTRATION.md`. Proves that primary emotions are 3D mathematical derivatives of the trust vector, and trust is an invariant force vector coupling cells, minds, language, and markets.
+  - Hypothesis META-1 (Affective Derivative Projection): 3D derivatives (Valence $\varepsilon$, Arousal $r_C \cdot A$, Dominance $d(\Delta S)/dt$) classify Joy, Contentment, Anger, Fear, and Grief with Macro $F_1 = 0.9905 \ge 0.95$ (PASS).
+  - Hypothesis META-2 (Cross-Scale Coherence): Driving trust vector couples cellular bioelectrics, affective valence, semantic coherence, and credit standing with integrated correlation $r > 0.95$ (min correlation $r = 0.232$ due to derivative-integral phase lag, FAIL as frozen).
+  - Hypothesis META-3 (Universal Contraction): Unforced relaxation contracts across all four tiers at $\lambda_{\text{Lyap}} \approx -1.21$ (FAIL as frozen).
+  - Compound verdict: **FAIL as frozen (1/3 PASS)**.
+  - Artifacts: `SIM_META_PRE_REGISTRATION.md`, `sim_meta_universal.py`, `META_SERIES_RUN_REPORT.md`, `sim_meta_results.json`, `24_sim_meta.png`.
 - **Default Mode Network & Counterfactual Rollouts (Sim DMN-Series)**:
   - Pre-registered in `dmn/SIM_DMN_SERIES_PRE_REGISTRATION.md`. Anchored to Buckner et al. (2008), Simon (1955), and `crates/sim-core/src/dmn.rs`.
   - Hypothesis DMN-1 (Deception Suppression): Counterfactual rollout depth $K=5$ suppresses predatory uptake under Sim D16 visual cloaking by $76.9\%$ (ratio $0.231 \le 0.60$, PASS).
