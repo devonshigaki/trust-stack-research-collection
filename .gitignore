@@ -1,3 +1,7 @@
+# Lean build cache
+.lake/
+*/.lake/
+
 # OS and filesystem artifacts
 .DS_Store
 */.DS_Store
