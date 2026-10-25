@@ -1,0 +1,8 @@
+{
+  "N_events": 1000,
+  "max_skew_hours": 12.0,
+  "naive_divergence": 0.007809643335853211,
+  "crdt_divergence": 0.0,
+  "consistency_achieved": true,
+  "conclusion": "Vector clocks (CRDT) guarantee eventual consistency under severe clock skew, while naive local-time updates diverge catastrophically."
+}

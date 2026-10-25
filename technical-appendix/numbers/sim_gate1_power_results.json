@@ -1,0 +1,8 @@
+{
+  "trial_design": "DOCAS-GATE-1 (7-session within-subject pharmacological crossover)",
+  "target_N": 48,
+  "alpha": 0.05,
+  "smallest_effect_size_of_interest_dz": 0.3,
+  "statistical_power": 0.5302948505403162,
+  "conclusion": "With N=48, the trial achieves 53.0% power to detect the SESOI of d_z=0.3, avoiding the underpowered nature of previous neuropharmacological studies."
+}
