@@ -184,5 +184,21 @@ Pre-registered in `criticality/SIM_CRIT_SERIES_PRE_REGISTRATION.md`. Anchored to
 - **Compound Verdict**: **FAIL as frozen (2/3 PASS)**.
 - **Artifacts**: `criticality/SIM_CRIT_SERIES_PRE_REGISTRATION.md`, `criticality/sim_crit_branching.py`, `criticality/CRIT_SERIES_RUN_REPORT.md`, `numbers/sim_crit_results.json`, `figures/sim_visual_diagrams/21_sim_crit.png`.
 
-## S. The one handoff that closes everything
+## S. Sim B-Series: Basal Cognition & Non-Neural Maze Problem-Solving (Version 4.1)
+Pre-registered in `basal_cognition/SIM_B_SERIES_PRE_REGISTRATION.md`. Anchored to Michael Levin (TAME Framework) and *Physarum* non-neural intelligence.
+- **B1 Non-Neural Barrier Circumvention**: Collective of 512 cells circumvents dead-end wall in 102 steps under gap-junction coupling ($\gamma_O=0.60$), while insular cells ($\gamma_O=0.0$) remain permanently trapped (**PASS**).
+- **B2 Stress Gradient Steering**: Boundary collision mismatch leaks backward, rotating collective motility by $68.5^\circ \ge 60.0^\circ$ away from dead end (**PASS**).
+- **B3 Trajectory Recall (Basal Memory)**: Bioelectric state memory cuts re-navigation time by $42.2\% \ge 35.0\%$ in Trial 2 without synaptic plasticity (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `basal_cognition/SIM_B_SERIES_PRE_REGISTRATION.md`, `basal_cognition/sim_b_basal_maze.py`, `basal_cognition/B_SERIES_RUN_REPORT.md`, `numbers/sim_b_results.json`, `figures/sim_visual_diagrams/22_sim_b_basal.png`.
+
+## T. Sim X-Series: Cross-Substrate Dynamical Invariance (Cell → Fly → Mouse → Human) (Version 4.1)
+Pre-registered in `cross_substrate/SIM_X_SERIES_PRE_REGISTRATION.md`. Anchored to Substrate Independence, Multiple Realizability, and Buckingham $\Pi_{\text{Trust}}$ Scaling.
+- **X1 Lyapunov Contraction Invariance**: Leading Lyapunov exponent falls within contraction corridor $[-1.10, -0.90]$ across all 4 phylogenetic layers: Cell ($-0.970$), Fly ($-1.010$), Mouse ($-0.980$), Human ($-1.000$) (**PASS**).
+- **X2 Permutation Recurrence**: All 4 substrates retain dynamical throughput under partner permutation: Cell ($1.25$), Fly ($0.53$), Mouse ($1.34$), Human ($1.18$) $\ge 0.50$ (**PASS**).
+- **X3 Buckingham Pi Scaling**: Scale-invariance slope across 9 orders of temporal magnitude is $|\text{Slope}| = 0.0084 < 0.05$ (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `cross_substrate/SIM_X_SERIES_PRE_REGISTRATION.md`, `cross_substrate/sim_x_cross_substrate.py`, `cross_substrate/X_SERIES_RUN_REPORT.md`, `numbers/sim_x_results.json`, `figures/sim_visual_diagrams/23_sim_x_cross.png`.
+
+## U. The one handoff that closes everything
 Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13_manifest.json`, `concepts.json`, `clics_dist.npy`, result JSONs, `run_full_pipeline.sh`, `*_firstrun_bug.json` files) + `Supporting Document — Statistical Verification and Significance Appendix.md` + `Simulation Pipeline — Replication and Build Guide.md` + the three pre-registration documents. With those we (a) re-run every original script for the manifest's bit-identity acceptance test, and (b) have the exact material to deposit to OSF and close the 15 `[OSF DOI pending]` placeholders — the single biggest remaining review finding.

@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-10-24",
+  "seed": 42,
+  "compound_verdict": "COMPOUND PASS (3/3)",
+  "compound_pass": true,
+  "B1_barrier_circumvention": {
+    "coupled_reached": true,
+    "coupled_time": 102,
+    "insular_reached": false,
+    "insular_time": 300,
+    "pass": true
+  },
+  "B2_stress_steering": {
+    "deflection_angle_deg": 68.5,
+    "pass": true
+  },
+  "B3_trajectory_recall": {
+    "trial1_time": 102,
+    "trial2_time": 59,
+    "time_ratio": 0.5784313725490197,
+    "recall_accel_pct": 42.15686274509803,
+    "pass": true
+  }
+}

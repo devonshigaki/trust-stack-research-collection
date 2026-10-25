@@ -14,6 +14,20 @@ Content:
   - Hypothesis DMN-3 (Cognitive Saturation): Marginal loss reduction from $K=7$ to $K=10$ is $\Delta \text{Loss} = 0.0031 < 0.05$, bounding human deliberation depth (PASS).
   - Compound verdict: **FAIL as frozen (2/3 PASS)**.
   - Artifacts: `SIM_DMN_SERIES_PRE_REGISTRATION.md`, `sim_dmn_planning.py`, `DMN_SERIES_RUN_REPORT.md`, `sim_dmn_results.json`, `20_sim_dmn.png`.
+- **Basal Cognition & Maze Problem-Solving (Sim B-Series)**:
+  - Pre-registered in `basal_cognition/SIM_B_SERIES_PRE_REGISTRATION.md`. Anchored to Michael Levin (TAME Framework) and non-neural collective intelligence.
+  - Hypothesis B1 (Obstacle Circumvention): Coupled collective ($\gamma_O=0.60$) circumvents dead-end wall in 102 steps, while insular cells remain permanently trapped (PASS).
+  - Hypothesis B2 (Stress Steering Angle): Barrier collision leaks backward, steering collective motility by $68.5^\circ \ge 60.0^\circ$ (PASS).
+  - Hypothesis B3 (Trajectory Recall): Bioelectric memory cuts re-navigation time by $42.2\%$ in Trial 2 without synaptic plasticity (PASS).
+  - Compound verdict: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+  - Artifacts: `SIM_B_SERIES_PRE_REGISTRATION.md`, `sim_b_basal_maze.py`, `B_SERIES_RUN_REPORT.md`, `sim_b_results.json`, `22_sim_b_basal.png`.
+- **Cross-Substrate Dynamical Invariance (Sim X-Series)**:
+  - Pre-registered in `cross_substrate/SIM_X_SERIES_PRE_REGISTRATION.md`. Anchored to Substrate Independence and Multiple Realizability across Cell $\to$ Fly $\to$ Mouse $\to$ Human.
+  - Hypothesis X1 (Universal Lyapunov Contraction): Leading Lyapunov exponent falls within contraction corridor $[-1.10, -0.90]$ across all 4 substrates: Cell ($-0.970$), Fly ($-1.010$), Mouse ($-0.980$), Human ($-1.000$) (PASS).
+  - Hypothesis X2 (Permutation Recurrence): All 4 substrates retain dynamical throughput under partner permutation ($R_{\text{perm}} \ge 0.50$): Cell (1.25), Fly (0.53), Mouse (1.34), Human (1.18) (PASS).
+  - Hypothesis X3 (Buckingham Invariance): Invariant slope across 9 orders of temporal magnitude is $|\text{Slope}| = 0.0084 < 0.05$ (PASS).
+  - Compound verdict: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+  - Artifacts: `SIM_X_SERIES_PRE_REGISTRATION.md`, `sim_x_cross_substrate.py`, `X_SERIES_RUN_REPORT.md`, `sim_x_results.json`, `23_sim_x_cross.png`.
 - **Neural Criticality & Branching Dynamics (Sim CRIT-Series)**:
   - Pre-registered in `criticality/SIM_CRIT_SERIES_PRE_REGISTRATION.md`. Anchored to Beggs & Plenz (2003), Kinouchi & Copelli (2006), and Touboul & Destexhe (2010, 2017).
   - Hypothesis CRIT-1 (Dynamic Range Peak): Sensory dynamic range peaks at critical branching parameter $\sigma^* = 1.00$ with $18.1\text{ dB}$ excess over sub/supercritical regimes ($\ge 15.0\text{ dB}$, PASS).
