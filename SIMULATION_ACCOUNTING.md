@@ -144,5 +144,29 @@ Pre-registered in `experiments/simulations_repair_era/music_tdf/SIM_M_SERIES_PRE
 - **Compound Verdict**: **COMPOUND PASS (4/4 CRITERIA SATISFIED)**.
 - **Artifacts**: `music_tdf/SIM_M_SERIES_PRE_REGISTRATION.md`, `music_tdf/M_SERIES_RUN_REPORT.md`, `music_tdf/sim_m_tdf_music.py`, `results/statistical_validation.json`, `results/plots/` (`metric_distribution_anova.png`, `feature_effect_sizes.png`, `state_space_manifold.png`, `confusion_matrices_comparison.png`, `roc_curves_comparison.png`), `CODING_AGENT_INTEGRATION_PROMPT.md`.
 
-## N. The one handoff that closes everything
+## N. Sim K-Series: Genealogical Coalescence & Kingman Intensity Calibration (Version 4.1)
+Pre-registered in `genealogy/SIM_K_SERIES_PRE_REGISTRATION.md`. Anchored to DOCAS §4.1 twin literature benchmark $h^2 \approx 0.32$ and Kingman (1982) coalescent.
+- **K1 Heritability Calibration**: Sweep $\kappa \in [0.1, 2.0]$. Calibrated intensity $\kappa^* = 1.62$ settles at $h^2 = 0.342 \in [0.28, 0.36]$ (frozen $\kappa^* \in [0.80, 1.20]$, **FAIL as frozen**).
+- **K2 TMRCA Acceleration**: Selection on trust capital accelerates coalescence by $39.8\%$ ($T_{\text{MRCA}}$ ratio $0.602 \le 0.65$, **PASS**).
+- **K3 Genetic Stratification**: Additive genetic variance accounts for $R^2 = 0.262 \in [0.25, 0.45]$ of population trust inequality (**PASS**).
+- **Compound Verdict**: **FAIL as frozen (2/3 PASS)**.
+- **Artifacts**: `genealogy/SIM_K_SERIES_PRE_REGISTRATION.md`, `genealogy/sim_k_genealogy.py`, `genealogy/K_SERIES_RUN_REPORT.md`, `numbers/sim_k_results.json`, `figures/sim_visual_diagrams/17_sim_k_genealogy.png`.
+
+## O. Sim C-Series: Choice Architecture, Default Nudges & Asymmetric Loss Framing (Version 4.1)
+Pre-registered in `choice_architecture/SIM_C_SERIES_PRE_REGISTRATION.md`. Anchored to Thaler & Sunstein (2008), Kahneman & Tversky (1979), and TFP Master Law 4:1 asymmetry.
+- **C1 Default Nudge Adherence**: Default option elevates agreement adherence from $70.7\%$ to $94.8\%$ ($\ge 75.0\%$, **PASS**).
+- **C2 Loss Framing Asymmetry**: Loss framing ($\lambda^- = 0.02$) vs Gain framing ($\lambda^+ = 0.005$) amplifies compliance by $51.4\times \ge 3.0\times$ (**PASS**).
+- **C3 Cognitive Friction Damping**: 3 units friction penalty suppresses opt-out transitions by $60.0\%$ (ratio $0.40 \le 0.50$, **PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `choice_architecture/SIM_C_SERIES_PRE_REGISTRATION.md`, `choice_architecture/sim_c_choice.py`, `choice_architecture/C_SERIES_RUN_REPORT.md`, `numbers/sim_c_results.json`, `figures/sim_visual_diagrams/18_sim_c_choice.png`.
+
+## P. Sim S-Series: Semantic Drift, Linguistic Conventions & Betrayal Entropy Spikes (Version 4.1)
+Pre-registered in `semantic_drift/SIM_S_SERIES_PRE_REGISTRATION.md`. Anchored to Lewis (1969), CLICS 4.0, and `crates/sim-core/src/language_drift.rs`.
+- **S1 Inverse Trust Drift Law**: Semantic drift rate is inversely correlated with trust standing: $r = 0.994, p < 10^{-15} \ge 0.65$ (**PASS**).
+- **S2 Betrayal Entropy Spike**: Severe trust betrayal ($\varepsilon < -\theta_C$) induces an acute embedding entropy surge with Cohen's $d = 2.79 \ge 0.80$ (**PASS**).
+- **S3 Lexical Turnover Surge**: Low-trust populations exhibit a $3.12\times \ge 2.0\times$ surge in lexical turnover rate (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `semantic_drift/SIM_S_SERIES_PRE_REGISTRATION.md`, `semantic_drift/sim_s_semantics.py`, `semantic_drift/S_SERIES_RUN_REPORT.md`, `numbers/sim_s_results.json`, `figures/sim_visual_diagrams/19_sim_s_semantics.png`.
+
+## Q. The one handoff that closes everything
 Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13_manifest.json`, `concepts.json`, `clics_dist.npy`, result JSONs, `run_full_pipeline.sh`, `*_firstrun_bug.json` files) + `Supporting Document — Statistical Verification and Significance Appendix.md` + `Simulation Pipeline — Replication and Build Guide.md` + the three pre-registration documents. With those we (a) re-run every original script for the manifest's bit-identity acceptance test, and (b) have the exact material to deposit to OSF and close the 15 `[OSF DOI pending]` placeholders — the single biggest remaining review finding.

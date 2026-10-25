@@ -15,6 +15,27 @@ Content:
   - Hypothesis C4 (Permutation Significance): $B = 2,000$ label permutations yielded empirical $p = 0.0000$ (zero null permutations reached true Macro $F_1 = 0.9477$, PASS).
   - Compound verdict: **COMPOUND PASS (4/4 CRITERIA SATISFIED)**.
   - Artifacts: `SIM_M_SERIES_PRE_REGISTRATION.md`, `sim_m_tdf_music.py`, `M_SERIES_RUN_REPORT.md`, `statistical_validation.json`, `fig_sim_m_music_tdf.png`.
+- **Genealogical Coalescence & Kingman Calibration (Sim K-Series)**:
+  - Pre-registered in `genealogy/SIM_K_SERIES_PRE_REGISTRATION.md`. Anchored to DOCAS §4.1 twin study literature target $h^2 \approx 0.32$.
+  - Hypothesis K1 (Heritability Calibration): Sweep of $\kappa \in [0.1, 2.0]$ identifies calibrated intensity $\kappa^* = 1.62$ settling at $h^2 = 0.342$ within empirical corridor $[0.28, 0.36]$ (frozen $\kappa^* \in [0.80, 1.20]$, FAIL as frozen).
+  - Hypothesis K2 (TMRCA Acceleration): Directional trust selection accelerates coalescence by $39.8\%$ ($T_{\text{MRCA}}$ ratio $0.602 \le 0.65$, PASS).
+  - Hypothesis K3 (Genetic Stratification): Additive genetics accounts for $R^2 = 0.262 \in [0.25, 0.45]$ of population trust inequality (PASS).
+  - Compound verdict: **FAIL as frozen (2/3 PASS)**.
+  - Artifacts: `SIM_K_SERIES_PRE_REGISTRATION.md`, `sim_k_genealogy.py`, `K_SERIES_RUN_REPORT.md`, `sim_k_results.json`, `17_sim_k_genealogy.png`.
+- **Choice Architecture & Loss Framing (Sim C-Series)**:
+  - Pre-registered in `choice_architecture/SIM_C_SERIES_PRE_REGISTRATION.md`. Anchored to Thaler & Sunstein (2008) and Kahneman & Tversky (1979).
+  - Hypothesis C1 (Default Nudge): Pre-selected default elevates cooperative adherence from $70.7\%$ to $94.8\%$ ($\ge 75.0\%$, PASS).
+  - Hypothesis C2 (Loss Framing Asymmetry): Loss framing amplifies compliance by $51.4\times \ge 3.0\times$ over gain framing, validating Master Law 4:1 asymmetry (PASS).
+  - Hypothesis C3 (Cognitive Friction): 3 units friction penalty suppresses opt-out transitions by $60.0\%$ (ratio $0.40 \le 0.50$, PASS).
+  - Compound verdict: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+  - Artifacts: `SIM_C_SERIES_PRE_REGISTRATION.md`, `sim_c_choice.py`, `C_SERIES_RUN_REPORT.md`, `sim_c_results.json`, `18_sim_c_choice.png`.
+- **Semantic Drift & Linguistic Conventions (Sim S-Series)**:
+  - Pre-registered in `semantic_drift/SIM_S_SERIES_PRE_REGISTRATION.md`. Anchored to Lewis (1969), CLICS 4.0, and `crates/sim-core/src/language_drift.rs`.
+  - Hypothesis S1 (Inverse Trust Drift): Semantic drift velocity scales inversely with trust: $r = 0.994, p < 10^{-15} \ge 0.65$ (PASS).
+  - Hypothesis S2 (Betrayal Entropy Spike): Expectation mismatch shock induces concept embedding entropy surge with Cohen's $d = 2.79 \ge 0.80$ (PASS).
+  - Hypothesis S3 (Lexical Turnover Surge): Low-trust populations exhibit a $3.12\times \ge 2.0\times$ surge in lexical turnover (PASS).
+  - Compound verdict: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+  - Artifacts: `SIM_S_SERIES_PRE_REGISTRATION.md`, `sim_s_semantics.py`, `S_SERIES_RUN_REPORT.md`, `sim_s_results.json`, `19_sim_s_semantics.png`.
 - **Bioelectric Stress Sharing & Multiscale Morphogenesis (Sim L-Series)**:
   - Formalizes Shreesha & Levin's (2024) gap-junctional stress-sharing hypothesis as the biological implementation of the Master Stability Law.
   - Hypothesis L1 (Critical Cognitive Light Cone): Unbounded stress sharing ($\gamma_O \to 1.0$) causes a Laplacian spatial resonance, increasing morphological error by $>300\times$ (FAIL as frozen). Proves cells require a private homeostatic anchor ($1-\gamma_O$).
