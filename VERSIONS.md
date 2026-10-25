@@ -7,6 +7,14 @@ numeric form: **"Version X.0 — Month Year"**. Sources of truth:
 ## Version 4.0 — October 2026 (current)
 
 Content:
+- **Temporal Dynamics of Music & Metric Hierarchies (Sim M-Series)**:
+  - Pre-registered in `music_tdf/SIM_M_SERIES_PRE_REGISTRATION.md`. Resolves scalar tempo (BPM) degeneracy across cognitive regimes by mapping metric hierarchy ($\tau$), spectral energy ($E$), session entropy ($H_s$), and skip dynamics ($\Delta \phi$) directly into DOCAS neurochemical channels.
+  - Hypothesis C1 (Metric Hierarchy Disambiguation): Omnibus ANOVA on $N = 10,000$ sessions across 4 behavioral regimes yielded $F(3, 9996) = 3,561.48$ ($p < 10^{-15}, \eta^2 = 0.5166$ vs frozen $\ge 0.140$, PASS). Pairwise Tukey-Kramer HSD tests break scalar BPM overlap between Focus ($75\text{ BPM}$) vs Decompression ($68\text{ BPM}$) and Creative Flow ($110\text{ BPM}$) vs Exercise ($135\text{ BPM}$).
+  - Hypothesis C2 (Excess Mutual Information): Full TDF vector achieves $\text{MI} = 3.8766\text{ bits}$ vs baseline control $1.6366\text{ bits}$ ($+136.87\%$ relative information gain vs frozen $\ge +50.0\%$, PASS).
+  - Hypothesis C3 (Behavioral State Decoding): 5-fold cross-validated multi-class classification yields Macro $F_1 = 0.9445$, ROC-AUC $= 0.9931$, and error suppression from $19.14\%$ to $5.55\%$ (error ratio $0.290 \le 0.500$, representing $71.0\%$ error reduction, PASS).
+  - Hypothesis C4 (Permutation Significance): $B = 2,000$ label permutations yielded empirical $p = 0.0000$ (zero null permutations reached true Macro $F_1 = 0.9477$, PASS).
+  - Compound verdict: **COMPOUND PASS (4/4 CRITERIA SATISFIED)**.
+  - Artifacts: `SIM_M_SERIES_PRE_REGISTRATION.md`, `sim_m_tdf_music.py`, `M_SERIES_RUN_REPORT.md`, `statistical_validation.json`, `fig_sim_m_music_tdf.png`.
 - **Bioelectric Stress Sharing & Multiscale Morphogenesis (Sim L-Series)**:
   - Formalizes Shreesha & Levin's (2024) gap-junctional stress-sharing hypothesis as the biological implementation of the Master Stability Law.
   - Hypothesis L1 (Critical Cognitive Light Cone): Unbounded stress sharing ($\gamma_O \to 1.0$) causes a Laplacian spatial resonance, increasing morphological error by $>300\times$ (FAIL as frozen). Proves cells require a private homeostatic anchor ($1-\gamma_O$).
