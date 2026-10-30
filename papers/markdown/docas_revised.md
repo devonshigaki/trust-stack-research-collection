@@ -673,7 +673,7 @@ Across four pre-registered criteria frozen prior to execution, Sim D21 yielded:
 3. **C3 Vulnerability Gradient:** Exploitation odds ratio was $1.00\times$ (failing the frozen $\ge 12.00\times$ threshold; FAIL as frozen). Because multimodal cloaking completely erased the punitive terms from conscious perception, the contract was perceived as pure liquidity by all agents regardless of cognitive bandwidth.
 4. **C4 Ex-Post Insular Rebound Shock:** At loan maturity ($t+1$), physical extraction of the balloon penalty triggered a delayed aINS burst $3.37\times$ above baseline (vs. frozen $\ge 3.00\times$; PASS), biologically modeling the catastrophic default shock experienced by exploited borrowers.
 
-**Compound Verdict: FAIL as frozen (2/4 PASS).** Substantively, Sim D21 proves that predatory lending does not rely on consumers accepting unfair deals; rather, multimodal cloaking silences the biological unfairness alarm in the Anterior Insula, manufacturing a false perception of fairness.
+**Compound Verdict: FAIL as frozen (2/4 PASS).** Substantively, Sim D21 proves that multimodal cloaking operates as active threat neutralization on the fair-to-predatory spectrum, silencing the biological alarm in the Anterior Insula and rendering an objectively extractive contract subjectively non-threatening.
 
 <figure id="fig:sim-d21-grid" data-latex-placement="!tp">
 <img src="figures/fig_sim_d21_multimodal_brain_grid.png" />

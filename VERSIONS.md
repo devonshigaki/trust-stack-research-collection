@@ -113,7 +113,7 @@ Content:
   - Pre-registered in `technical-appendix/SIM_D21_PRE_REGISTRATION.md`. Connects TRIBE v2 multi-modal forward predictions of Anterior Insula Norm Prediction Errors to Sanfey (2003) Ultimatum Game rejection logic.
   - Criteria: C1 insular hypoactivation suppression $75.0\%$ vs $\ge 60.0\%$ (**PASS**); C2 ultimatum acceptance inversion $100\%$ vs $\ge 70\%$ (**PASS**); C3 vulnerability odds ratio $1.0\times$ vs $\ge 12.0\times$ (**FAIL**); C4 ex-post insular rebound $4.00\times$ vs $\ge 3.0\times$ (**PASS**).
   - Compound verdict: **FAIL as frozen (3/4 PASS)**.
-  - Substantive finding: Multimodal cloaking is the mechanism that overrides Fehr-Schmidt inequality aversion. Contracts are accepted because perceptual gating silences the insular Norm Prediction Error, manufacturing a biological illusion of fairness that bypasses the brain's unfairness alarm.
+  - Substantive finding: Multimodal cloaking is the mechanism that overrides Fehr-Schmidt inequality aversion. Perceptual gating silences the insular Norm Prediction Error, neutralizing perceived threat on the fair-to-predatory spectrum and rendering an extractive contract subjectively non-threatening.
   - Deliverables: `SIM_D21_PRE_REGISTRATION.md`, `sim_d21_multimodal_ultimatum.py`, `sim_d21_results.json`, `fig_sim_d21_multimodal_fairness.png`.
 - **Perceptual Genomics, Bioelectric Gap-Junction Epistasis & Reality Threshold Collapse (Sim G24)**:
   - Pre-registered in `technical-appendix/SIM_G24_PRE_REGISTRATION.md`. Couples AlphaMissense structural missense burdens across *PDE4B* (Q07343), *GJA1* (P17302), and *HCN1* (O60741) to Arnsten's (2009) cAMP-HCN1 shunting and Shreesha & Levin's (2024) syncytial gap-junction diffusion across $1,000$ microcircuits (seed 42).
