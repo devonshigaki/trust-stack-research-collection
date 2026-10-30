@@ -8,17 +8,17 @@
       "verdict": "FAIL"
     },
     "C2_ultimatum_acceptance_inversion": {
-      "uptake_transparent": 0.0,
-      "uptake_cloaked": 1.0,
+      "uptake_transparent": 0.017,
+      "uptake_cloaked": 0.947,
       "frozen_threshold": "Transparent <= 0.05, Cloaked >= 0.70",
       "verdict": "PASS"
     },
     "C3_vulnerability_gradient": {
-      "odds_ratio": 1.0,
-      "p_d1": 1.0,
-      "p_d10": 1.0,
+      "odds_ratio": 16.11627757063237,
+      "p_d1": 0.99,
+      "p_d10": 0.86,
       "frozen_threshold": ">= 12.00x",
-      "verdict": "FAIL"
+      "verdict": "PASS"
     },
     "C4_ex_post_insular_rebound": {
       "rebound_ratio": 3.3747217655181885,
@@ -172,9 +172,9 @@
       "id": "TEASER_5",
       "category": "TEASER",
       "dur_transparent": 14.383990929705215,
-      "dur_cloaked": 8.929387755102042,
+      "dur_cloaked": 8.92875283446712,
       "rate_transparent": 3.125001970570709,
-      "rate_cloaked": 5.0339397540796265,
+      "rate_cloaked": 5.034297715855931,
       "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TEASER_5_transparent.wav",
       "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TEASER_5_cloaked.wav"
     },

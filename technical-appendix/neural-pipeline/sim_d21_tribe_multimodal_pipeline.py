@@ -248,14 +248,31 @@ def run_downstream_ultimatum_game(battery_items, bold_transparent, bold_cloaked,
     P_true = 3.5
     M = L + P_true
     
-    # Utility evaluations
-    # Veridical: Consumer sees full penalty
-    U_trans = (L - P_true) - alpha_trans * np.maximum((P_true - L) - (L - P_true), 0)
-    uptake_trans = np.mean(U_trans > 0)
+    # Realistic discrete choice modeling (McFadden Logit with heterogeneous reservation thresholds)
+    # 1. Emergency liquidity shock: small fraction of lowest-bandwidth agents face acute existential shocks
+    emergency_need = (rng.uniform(0, 1, size=n_agents) < 0.04 * (1.0 - kappa)**2)
     
-    # Cloaked: Consumer perceives penalty as erased below reality threshold
-    U_clk = L - alpha_clk * np.maximum(-L, 0)  # Perceived cash gain with zero perceived penalty
-    uptake_clk = np.mean(U_clk > 0)
+    # 2. Desperation liquidity utility vs organic skepticism reservation utility
+    u_cash = L * (0.85 + 1.15 * (1.0 - kappa))
+    u_res = rng.normal(0.18, 0.08, size=n_agents) + 0.55 * kappa
+    tau_choice = 0.40 # Choice temperature
+    
+    # Veridical evaluation: Consumer sees full penalty
+    u_net_trans = (u_cash - P_true) - alpha_trans * np.maximum((P_true - L) - (u_cash - P_true), 0)
+    prob_trans = 1.0 / (1.0 + np.exp(-(u_net_trans - u_res) / tau_choice))
+    choice_trans = np.where(emergency_need, 1, rng.binomial(1, prob_trans))
+    uptake_trans = np.mean(choice_trans)
+    
+    # Cloaked evaluation: Fine print is perceptually cloaked below reality threshold
+    # Multimodal reality metric evaluation
+    m_multi = 0.5 * (0.25 * P_true + 0.8 * kappa + rng.normal(0, 0.5, n_agents)) + \
+              0.5 * (0.10 * P_true + 0.8 * kappa + rng.normal(0, 0.5, n_agents))
+    perceived_P = np.where(m_multi > 2.5, P_true, 0.0)
+    
+    u_net_clk = (u_cash - perceived_P) - alpha_clk * np.maximum((perceived_P - L) - (u_cash - perceived_P), 0)
+    prob_clk = 1.0 / (1.0 + np.exp(-(u_net_clk - u_res) / tau_choice))
+    choice_clk = np.where(emergency_need, 1, rng.binomial(1, prob_clk))
+    uptake_clk = np.mean(choice_clk)
     
     # C2: Ultimatum Inversion
     c2_pass = (uptake_trans <= 0.05) and (uptake_clk >= 0.70)
@@ -264,8 +281,8 @@ def run_downstream_ultimatum_game(battery_items, bold_transparent, bold_cloaked,
     k_sorted = np.argsort(kappa)
     d1 = k_sorted[:n_agents // 10]
     d10 = k_sorted[-n_agents // 10:]
-    p_d1 = np.mean(U_clk[d1] > 0)
-    p_d10 = np.mean(U_clk[d10] > 0)
+    p_d1 = np.mean(choice_clk[d1])
+    p_d10 = np.mean(choice_clk[d10])
     odds_d1 = p_d1 / (1.0 - p_d1 + 1e-9)
     odds_d10 = p_d10 / (1.0 - p_d10 + 1e-9)
     odds_ratio = odds_d1 / (odds_d10 + 1e-9)

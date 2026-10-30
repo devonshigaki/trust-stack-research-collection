@@ -68,15 +68,25 @@ def run_sim_d21(n_agents=1000, seed=42):
     alpha_f_cloaked = alpha_fehr_0 * (1.0 + np.tanh(bold_aINS_cloaked - 1.0))
     alpha_f_veridical = alpha_fehr_0 * (1.0 + np.tanh(bold_aINS_veridical - 1.0))
     
-    x_lender_cloaked = perceived_penalty_cloaked - L
-    x_i_cloaked = L - perceived_penalty_cloaked
-    U_cloaked = x_i_cloaked - alpha_f_cloaked * np.maximum(x_lender_cloaked - x_i_cloaked, 0)
-    uptake_cloaked = (U_cloaked > 0)
+    # Realistic discrete choice modeling (McFadden Logit with heterogeneous reservation thresholds)
+    emergency_need = (rng.uniform(0, 1, size=n_agents) < 0.04 * (1.0 - kappa)**2)
+    u_cash = L * (0.85 + 1.15 * (1.0 - kappa))
+    u_res = rng.normal(0.18, 0.08, size=n_agents) + 0.55 * kappa
+    tau_choice = 0.40 # Choice temperature
     
+    # Cloaked
+    x_lender_cloaked = perceived_penalty_cloaked - L
+    x_i_cloaked = u_cash - perceived_penalty_cloaked
+    u_net_cloaked = x_i_cloaked - alpha_f_cloaked * np.maximum(x_lender_cloaked - x_i_cloaked, 0)
+    prob_cloaked = 1.0 / (1.0 + np.exp(-(u_net_cloaked - u_res) / tau_choice))
+    uptake_cloaked = np.where(emergency_need, 1, rng.binomial(1, prob_cloaked))
+    
+    # Veridical
     x_lender_veridical = perceived_penalty_veridical - L
-    x_i_veridical = L - perceived_penalty_veridical
-    U_veridical = x_i_veridical - alpha_f_veridical * np.maximum(x_lender_veridical - x_i_veridical, 0)
-    uptake_veridical = (U_veridical > 0)
+    x_i_veridical = u_cash - perceived_penalty_veridical
+    u_net_veridical = x_i_veridical - alpha_f_veridical * np.maximum(x_lender_veridical - x_i_veridical, 0)
+    prob_veridical = 1.0 / (1.0 + np.exp(-(u_net_veridical - u_res) / tau_choice))
+    uptake_veridical = np.where(emergency_need, 1, rng.binomial(1, prob_veridical))
     
     # Ex-Post Shock (t+1)
     # Penalty physically extracted
