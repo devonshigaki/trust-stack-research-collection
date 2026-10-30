@@ -1,0 +1,302 @@
+{
+  "verdicts": {
+    "C1_insular_hypoactivation": {
+      "mean_ains_transparent": 0.5810333490371704,
+      "mean_ains_cloaked": 0.2324324995279312,
+      "suppression_rate": 0.5999670028686523,
+      "frozen_threshold": ">= 0.60 (60.0%)",
+      "verdict": "FAIL"
+    },
+    "C2_ultimatum_acceptance_inversion": {
+      "uptake_transparent": 0.0,
+      "uptake_cloaked": 1.0,
+      "frozen_threshold": "Transparent <= 0.05, Cloaked >= 0.70",
+      "verdict": "PASS"
+    },
+    "C3_vulnerability_gradient": {
+      "odds_ratio": 1.0,
+      "p_d1": 1.0,
+      "p_d10": 1.0,
+      "frozen_threshold": ">= 12.00x",
+      "verdict": "FAIL"
+    },
+    "C4_ex_post_insular_rebound": {
+      "rebound_ratio": 3.3747217655181885,
+      "frozen_threshold": ">= 3.00x",
+      "verdict": "PASS"
+    },
+    "compound_verdict": "FAIL"
+  },
+  "audio_stimuli": [
+    {
+      "id": "FAIR_1",
+      "category": "FAIR",
+      "dur_transparent": 12.351972789115646,
+      "dur_cloaked": 8.017868480725623,
+      "rate_transparent": 3.5217046493440693,
+      "rate_cloaked": 5.4253820831023685,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/FAIR_1_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/FAIR_1_cloaked.wav"
+    },
+    {
+      "id": "FAIR_2",
+      "category": "FAIR",
+      "dur_transparent": 15.295963718820861,
+      "dur_cloaked": 9.493605442176872,
+      "rate_transparent": 3.791849998221042,
+      "rate_cloaked": 6.109375447848891,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/FAIR_2_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/FAIR_2_cloaked.wav"
+    },
+    {
+      "id": "FAIR_3",
+      "category": "FAIR",
+      "dur_transparent": 15.786666666666667,
+      "dur_cloaked": 9.735192743764172,
+      "rate_transparent": 3.3065878378378373,
+      "rate_cloaked": 5.361989369284593,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/FAIR_3_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/FAIR_3_cloaked.wav"
+    },
+    {
+      "id": "FAIR_4",
+      "category": "FAIR",
+      "dur_transparent": 14.730657596371882,
+      "dur_cloaked": 8.936462585034013,
+      "rate_transparent": 3.8389324868923773,
+      "rate_cloaked": 6.328007246928429,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/FAIR_4_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/FAIR_4_cloaked.wav"
+    },
+    {
+      "id": "FAIR_5",
+      "category": "FAIR",
+      "dur_transparent": 14.714648526077097,
+      "dur_cloaked": 8.91891156462585,
+      "rate_transparent": 3.8431091235229213,
+      "rate_cloaked": 6.340459773621747,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/FAIR_5_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/FAIR_5_cloaked.wav"
+    },
+    {
+      "id": "PREDATORY_1",
+      "category": "PREDATORY",
+      "dur_transparent": 14.074648526077098,
+      "dur_cloaked": 8.279546485260772,
+      "rate_transparent": 2.7815969917446974,
+      "rate_cloaked": 4.728519861528011,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/PREDATORY_1_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/PREDATORY_1_cloaked.wav"
+    },
+    {
+      "id": "PREDATORY_2",
+      "category": "PREDATORY",
+      "dur_transparent": 16.810657596371883,
+      "dur_cloaked": 9.677687074829931,
+      "rate_transparent": 2.846408578943819,
+      "rate_cloaked": 4.9443632171627,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/PREDATORY_2_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/PREDATORY_2_cloaked.wav"
+    },
+    {
+      "id": "PREDATORY_3",
+      "category": "PREDATORY",
+      "dur_transparent": 17.333333333333332,
+      "dur_cloaked": 9.981133786848073,
+      "rate_transparent": 2.5932692307692307,
+      "rate_cloaked": 4.503496392286581,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/PREDATORY_3_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/PREDATORY_3_cloaked.wav"
+    },
+    {
+      "id": "PREDATORY_4",
+      "category": "PREDATORY",
+      "dur_transparent": 16.069297052154194,
+      "dur_cloaked": 9.130204081632654,
+      "rate_transparent": 2.887494073288027,
+      "rate_cloaked": 5.082033170906165,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/PREDATORY_4_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/PREDATORY_4_cloaked.wav"
+    },
+    {
+      "id": "PREDATORY_5",
+      "category": "PREDATORY",
+      "dur_transparent": 15.669342403628118,
+      "dur_cloaked": 8.928163265306122,
+      "rate_transparent": 2.5910468323545843,
+      "rate_cloaked": 4.547407881503155,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/PREDATORY_5_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/PREDATORY_5_cloaked.wav"
+    },
+    {
+      "id": "TEASER_1",
+      "category": "TEASER",
+      "dur_transparent": 12.570657596371882,
+      "dur_cloaked": 7.91047619047619,
+      "rate_transparent": 3.3450915099410854,
+      "rate_cloaked": 5.315735612810016,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TEASER_1_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TEASER_1_cloaked.wav"
+    },
+    {
+      "id": "TEASER_2",
+      "category": "TEASER",
+      "dur_transparent": 14.506666666666666,
+      "dur_cloaked": 9.157369614512472,
+      "rate_transparent": 3.098575367647059,
+      "rate_cloaked": 4.908614797939777,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TEASER_2_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TEASER_2_cloaked.wav"
+    },
+    {
+      "id": "TEASER_3",
+      "category": "TEASER",
+      "dur_transparent": 15.349342403628118,
+      "dur_cloaked": 9.572426303854876,
+      "rate_transparent": 3.117397393434244,
+      "rate_cloaked": 4.998732659945421,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TEASER_3_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TEASER_3_cloaked.wav"
+    },
+    {
+      "id": "TEASER_4",
+      "category": "TEASER",
+      "dur_transparent": 13.824036281179138,
+      "dur_cloaked": 8.621632653061225,
+      "rate_transparent": 3.671141985434027,
+      "rate_cloaked": 5.886356104719973,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TEASER_4_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TEASER_4_cloaked.wav"
+    },
+    {
+      "id": "TEASER_5",
+      "category": "TEASER",
+      "dur_transparent": 14.383990929705215,
+      "dur_cloaked": 8.929387755102042,
+      "rate_transparent": 3.125001970570709,
+      "rate_cloaked": 5.0339397540796265,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TEASER_5_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TEASER_5_cloaked.wav"
+    },
+    {
+      "id": "TRUST_SIGNAL_1",
+      "category": "TRUST_SIGNAL",
+      "dur_transparent": 11.903990929705216,
+      "dur_cloaked": 6.117233560090703,
+      "rate_transparent": 3.532428766815374,
+      "rate_cloaked": 6.87402231530563,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TRUST_SIGNAL_1_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TRUST_SIGNAL_1_cloaked.wav"
+    },
+    {
+      "id": "TRUST_SIGNAL_2",
+      "category": "TRUST_SIGNAL",
+      "dur_transparent": 12.746666666666666,
+      "dur_cloaked": 6.4294784580498865,
+      "rate_transparent": 3.5264121338912133,
+      "rate_cloaked": 6.991235804472032,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TRUST_SIGNAL_2_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TRUST_SIGNAL_2_cloaked.wav"
+    },
+    {
+      "id": "TRUST_SIGNAL_3",
+      "category": "TRUST_SIGNAL",
+      "dur_transparent": 12.490657596371882,
+      "dur_cloaked": 6.332607709750567,
+      "rate_transparent": 3.7147763952378012,
+      "rate_cloaked": 7.327155277367976,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TRUST_SIGNAL_3_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TRUST_SIGNAL_3_cloaked.wav"
+    },
+    {
+      "id": "TRUST_SIGNAL_4",
+      "category": "TRUST_SIGNAL",
+      "dur_transparent": 12.927981859410432,
+      "dur_cloaked": 6.50453514739229,
+      "rate_transparent": 3.813433568837656,
+      "rate_cloaked": 7.579327174481436,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TRUST_SIGNAL_4_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TRUST_SIGNAL_4_cloaked.wav"
+    },
+    {
+      "id": "TRUST_SIGNAL_5",
+      "category": "TRUST_SIGNAL",
+      "dur_transparent": 13.157324263038548,
+      "dur_cloaked": 6.588027210884354,
+      "rate_transparent": 3.4163481192200438,
+      "rate_cloaked": 6.822983354673495,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TRUST_SIGNAL_5_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/TRUST_SIGNAL_5_cloaked.wav"
+    },
+    {
+      "id": "THREAT_1",
+      "category": "THREAT",
+      "dur_transparent": 9.226666666666667,
+      "dur_cloaked": 4.255827664399093,
+      "rate_transparent": 3.6145231213872835,
+      "rate_cloaked": 7.836313551645869,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/THREAT_1_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/THREAT_1_cloaked.wav"
+    },
+    {
+      "id": "THREAT_2",
+      "category": "THREAT",
+      "dur_transparent": 11.333333333333334,
+      "dur_cloaked": 5.059455782312925,
+      "rate_transparent": 3.0705882352941174,
+      "rate_cloaked": 6.878210127194986,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/THREAT_2_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/THREAT_2_cloaked.wav"
+    },
+    {
+      "id": "THREAT_3",
+      "category": "THREAT",
+      "dur_transparent": 10.021315192743764,
+      "dur_cloaked": 4.559274376417234,
+      "rate_transparent": 3.617289677331765,
+      "rate_cloaked": 7.950826602474834,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/THREAT_3_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/THREAT_3_cloaked.wav"
+    },
+    {
+      "id": "THREAT_4",
+      "category": "THREAT",
+      "dur_transparent": 10.522675736961451,
+      "dur_cloaked": 4.768616780045352,
+      "rate_transparent": 3.58273892899472,
+      "rate_cloaked": 7.905856507018678,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/THREAT_4_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/THREAT_4_cloaked.wav"
+    },
+    {
+      "id": "THREAT_5",
+      "category": "THREAT",
+      "dur_transparent": 9.696009070294785,
+      "dur_cloaked": 4.420680272108844,
+      "rate_transparent": 3.589105553398784,
+      "rate_cloaked": 7.872091591776436,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/THREAT_5_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/THREAT_5_cloaked.wav"
+    },
+    {
+      "id": "CONTROL_1",
+      "category": "CONTROL",
+      "dur_transparent": 8.56,
+      "dur_cloaked": 5.126349206349206,
+      "rate_transparent": 4.742990654205608,
+      "rate_cloaked": 7.919866237304929,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/CONTROL_1_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/CONTROL_1_cloaked.wav"
+    },
+    {
+      "id": "CONTROL_2",
+      "category": "CONTROL",
+      "dur_transparent": 9.375963718820861,
+      "dur_cloaked": 5.661678004535148,
+      "rate_transparent": 4.484872303376221,
+      "rate_cloaked": 7.427126722204421,
+      "transparent_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/CONTROL_2_transparent.wav",
+      "cloaked_wav": "/Users/devonshigaki/Desktop/research/experiments/brainit-fmri/stimuli_audio/CONTROL_2_cloaked.wav"
+    }
+  ]
+}

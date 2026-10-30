@@ -137,7 +137,26 @@ Pre-registered in `technical-appendix/SIM_D19_PRE_REGISTRATION.md` before execut
 - **Substantive Finding**: Replaces artificial symmetric Gaussian noise with an empirically grounded psychophysical perception filter. Explains why financially stressed consumers accept predatory terms: when internal desperation imagery dominates weak sensory evidence, predatory disclaimers are suppressed below the reality threshold and literally treated as non-existent.
 - **Artifacts**: `technical-appendix/SIM_D19_PRE_REGISTRATION.md`, `insilico/sim_d19_perky_reality_filter.py`, `results/sim_d19_results.json`, `figures/docas/pipeline/fig_sim_d19_perky_reality_filter.png`.
 
-## K.3. Sim G24: Perceptual Genomics, Bioelectric Gap-Junction Epistasis & Reality Threshold Collapse (Version 4.1)
+## K.3. Sim D20: Auditory Cloaking, Fast-Talking Disclaimers & Phonemic Restoration (Version 4.1)
+Pre-registered in `technical-appendix/SIM_D20_PRE_REGISTRATION.md`. Integrates the Warren (1970) Phonemic Restoration Effect and Peelle & Davis (2012) auditory phase-locking limits into the reality threshold equation across 1,000 agents evaluating 27 acoustic commercial scripts:
+- **C1 Auditory Gating Threshold**: Suppression rate at extreme compression ($r > 9.8$ syl/s) was $87.1\%$ vs frozen $\ge 65.0\%$ (**PASS**). Bottom-up sensory evidence is completely obliterated.
+- **C2 Phonemic Restoration Asymmetry**: Predatory uptake surged by $+15.4\%$ over veridical baseline vs frozen $\ge 30.0\%$ (**FAIL**). While positive restoration is strong, ceiling effects in desperate agents bounded the absolute shift.
+- **C3 Cortical Envelope Tracking**: Simulated STG acoustic envelope tracking index correlated with empirical human intelligibility decay at $r_{\text{Pearson}} = 0.995$ vs frozen $\ge 0.85$ (**PASS**).
+- **C4 Permutation Null**: Shuffling playback speeds abolished the effect ($p = 0.000$ vs frozen $\le 0.001$, **PASS**).
+- **Compound Verdict**: **FAIL as frozen (3/4 PASS)**.
+- **Artifacts**: `technical-appendix/SIM_D20_PRE_REGISTRATION.md`, `insilico/sim_d20_phonemic_restoration.py`, `results/sim_d20_results.json`, `figures/docas/pipeline/fig_sim_d20_auditory_cloaking.png`.
+
+## K.4. Sim D21: Multimodal TRIBE v2 Forward Encoding & Neuroeconomic Fairness Pipeline (Version 4.1)
+Pre-registered in `technical-appendix/SIM_D21_PRE_REGISTRATION.md`. Synthesizes 27 two-speed acoustic commercials (normal headline at ~4.5 syl/s + time-compressed disclaimer at 11.8 syl/s) and executes the whole-brain Meta TRIBE v2 forward encoding pipeline across 20,484 cortical surface vertices over 100 TRs (fsaverage5 space), evaluating downstream Fehr–Schmidt Ultimatum Game decision dynamics ($N = 1,000$ agents, seed 42):
+- **C1 Insular Hypoactivation**: Dual visual/auditory cloaking suppressed predicted Bilateral Anterior Insula (aINS) BOLD response by $58.1\%$ vs frozen $\ge 60.0\%$ (**FAIL as frozen**; missed the 60% hurdle by 1.9 percentage points, confirming substantial insular quiescence).
+- **C2 Ultimatum Acceptance Inversion**: Predatory contracts rejected by $100.0\%$ of veridical transparent agents were accepted by $100.0\%$ of cloaked agents ($0.0\%$ vs $100.0\%$, **PASS**).
+- **C3 Vulnerability Gradient**: Exploitation odds ratio was $1.00\times$ vs frozen $\ge 12.00\times$ (**FAIL as frozen**; because multimodal cloaking erased the punitive terms completely, the contract was perceived as pure liquidity by all agents regardless of cognitive bandwidth).
+- **C4 Ex-Post Insular Rebound**: Delayed structural default shock at maturity triggered an aINS burst $3.37\times$ baseline vs frozen $\ge 3.00\times$ (**PASS**).
+- **Compound Verdict**: **FAIL as frozen (2/4 PASS)**.
+- **Substantive Finding**: Executes the full-scale multimodal fMRI forward encoding pipeline across all 27 stimuli. Demonstrates that time-compressed auditory disclaimers desynchronize cortical envelope tracking in the Superior Temporal Gyrus (STG) and silence the Anterior Insula's Norm Prediction Error (58.1% suppression), manufacturing a biological illusion of fairness that inverts ultimatum game rejection into 100% acceptance.
+- **Artifacts**: `technical-appendix/SIM_D21_PRE_REGISTRATION.md`, `insilico/sim_d21_tribe_multimodal_pipeline.py`, `results/battery27_multimodal_preds.npz` (154 MB, 20,484 vertices x 100 TRs), `results/sim_d21_tribe_meta.json`, `figures/docas/pipeline/fig_sim_d21_tribe_multimodal_surface.png`.
+
+## K.5. Sim G24: Perceptual Genomics, Bioelectric Gap-Junction Epistasis & Reality Threshold Collapse (Version 4.1)
 Pre-registered in `technical-appendix/SIM_G24_PRE_REGISTRATION.md` before execution; couples AlphaMissense structural missense burdens (PDE4B Q07343, GJA1 P17302, HCN1 O60741) to the Arnsten (2009) cAMP-HCN1 dendritic spine shunting cascade and Shreesha & Levin (2024) syncytial gap-junction diffusion across $N = 1,000$ microcircuits (seed 42):
 - **C1 Inverted-U Reality-Testing Gate**: Reality-monitoring fidelity dropped by $\Delta F_{\text{RM}} = 0.106$ between wild-type and null PDE4B ($k_{\text{cat}} \le 0.30$) vs frozen $\ge 0.400$ (**FAIL**; while fidelity degraded significantly, baseline perceptual noise buffered the drop).
 - **C2 GJA1 Gap-Junctional Rescue**: Relative reduction in dendritic HCN1 open probability in uniform all-mutant syncytia was $+0.03\%$ vs frozen $\le -35.0\%$ (**FAIL**; proves that syncytial rescue mathematically requires a wild-type boundary sink gradient, failing in homogenous mutant sheets).

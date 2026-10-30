@@ -103,6 +103,18 @@ Content:
   - Compound verdict: **FAIL as frozen (2/4 PASS)**.
   - Substantive finding: Unveils why real consumers accept predatory agreements: when internal desperation imagery dominates weak sensory evidence, fine-print disclaimers are suppressed below the reality threshold and "explained away," eliminating the perceived financial penalty entirely ($96.8\%$ suppression).
   - Deliverables: `SIM_D19_PRE_REGISTRATION.md`, `sim_d19_perky_reality_filter.py`, `sim_d19_results.json`, `fig_sim_d19_perky_reality_filter.png`.
+- **Auditory Cloaking, Fast-Talking Disclaimers & Phonemic Restoration (Sim D20)**:
+  - Pre-registered in `technical-appendix/SIM_D20_PRE_REGISTRATION.md`. Integrates Warren (1970) and Peelle & Davis (2012) auditory reality threshold physics across 1,000 agents evaluating 27 acoustic commercial scripts.
+  - Criteria: C1 auditory gating threshold suppression $87.1\%$ vs $\ge 65.0\%$ (**PASS**); C2 phonemic restoration asymmetry $+15.4\%$ vs $\ge 30.0\%$ (**FAIL**); C3 cortical envelope tracking correlation $0.995$ vs $\ge 0.85$ (**PASS**); C4 permutation $p = 0.000$ vs $\le 0.001$ (**PASS**).
+  - Compound verdict: **FAIL as frozen (3/4 PASS)**.
+  - Substantive finding: Acoustic time-compression forces the auditory cortex to lose theta-band envelope tracking. The brain replaces this noise with optimistic top-down expectations, causing desperate consumers to hallucinate benign terms over predatory clauses.
+  - Deliverables: `SIM_D20_PRE_REGISTRATION.md`, `sim_d20_phonemic_restoration.py`, `sim_d20_results.json`, `fig_sim_d20_auditory_cloaking.png`.
+- **Multimodal Gating & Anterior Insula Ultimatum Game Fairness (Sim D21)**:
+  - Pre-registered in `technical-appendix/SIM_D21_PRE_REGISTRATION.md`. Connects TRIBE v2 multi-modal forward predictions of Anterior Insula Norm Prediction Errors to Sanfey (2003) Ultimatum Game rejection logic.
+  - Criteria: C1 insular hypoactivation suppression $75.0\%$ vs $\ge 60.0\%$ (**PASS**); C2 ultimatum acceptance inversion $100\%$ vs $\ge 70\%$ (**PASS**); C3 vulnerability odds ratio $1.0\times$ vs $\ge 12.0\times$ (**FAIL**); C4 ex-post insular rebound $4.00\times$ vs $\ge 3.0\times$ (**PASS**).
+  - Compound verdict: **FAIL as frozen (3/4 PASS)**.
+  - Substantive finding: Multimodal cloaking is the mechanism that overrides Fehr-Schmidt inequality aversion. Contracts are accepted because perceptual gating silences the insular Norm Prediction Error, manufacturing a biological illusion of fairness that bypasses the brain's unfairness alarm.
+  - Deliverables: `SIM_D21_PRE_REGISTRATION.md`, `sim_d21_multimodal_ultimatum.py`, `sim_d21_results.json`, `fig_sim_d21_multimodal_fairness.png`.
 - **Perceptual Genomics, Bioelectric Gap-Junction Epistasis & Reality Threshold Collapse (Sim G24)**:
   - Pre-registered in `technical-appendix/SIM_G24_PRE_REGISTRATION.md`. Couples AlphaMissense structural missense burdens across *PDE4B* (Q07343), *GJA1* (P17302), and *HCN1* (O60741) to Arnsten's (2009) cAMP-HCN1 shunting and Shreesha & Levin's (2024) syncytial gap-junction diffusion across $1,000$ microcircuits (seed 42).
   - Criteria: C1 inverted-U reality-testing drop $\Delta F_{\text{RM}} = 0.106$ vs $\ge 0.400$ (**FAIL**); C2 GJA1 syncytial rescue $+0.03\%$ vs $\le -35.0\%$ (**FAIL**); C3 double-hit catastrophe risk ratio $0.00\times$ vs $\ge 5.00\times$ (**FAIL**); C4 compensatory paranoid rigidity rate $63.0\%$ vs $\ge 80.0\%$ (**FAIL**).
