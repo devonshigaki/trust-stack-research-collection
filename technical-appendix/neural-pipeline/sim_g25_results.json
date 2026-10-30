@@ -1,0 +1,31 @@
+{
+  "experiment": "Sim G25: The Weber-Fechner Decibel of Trust (dB_T) & Psychophysical Pain Threshold",
+  "n_agents": 1000,
+  "seed": 42,
+  "criteria": {
+    "C1_logarithmic_compression": {
+      "r2_logarithmic": 0.997320752415118,
+      "r2_linear": 0.7509395368241041,
+      "frozen_threshold": "R2_log >= 0.95, R2_lin <= 0.70",
+      "verdict": "FAIL"
+    },
+    "C2_dynamic_range_dB_T": {
+      "db_min": -26.020599913279625,
+      "db_max": 6.020599913279624,
+      "frozen_threshold": "dB_min <= -26.0, dB_max >= 6.0",
+      "verdict": "PASS"
+    },
+    "C3_pain_threshold_phase_transition": {
+      "plasticity_collapse_rate": 0.919,
+      "cortisol_lock_rate": 1.0,
+      "frozen_threshold": "Collapse >= 0.95, Lock >= 0.95",
+      "verdict": "FAIL"
+    },
+    "C4_allostatic_structural_default": {
+      "final_default_rate": 1.0,
+      "frozen_threshold": "Default rate >= 0.90",
+      "verdict": "PASS"
+    }
+  },
+  "compound_verdict": "FAIL"
+}

@@ -183,6 +183,32 @@ Pre-registered in `technical-appendix/SIM_V_PRE_REGISTRATION.md`. Models the exp
 - **Substantive Finding**: Proves that the Weber-Fechner reality threshold ($T_{\text{reality}}$) is highly effective at shielding macroscopic trust from high-frequency sub-cellular vibrations (micro-aggressions). The damping coefficients of biological tissue prevent "acoustic fatigue" from accumulating to critical failure in the absence of supra-threshold events.
 - **Artifacts**: `technical-appendix/SIM_V_PRE_REGISTRATION.md`, `insilico/sim_v_vibrational_resonance.py`, `results/sim_v_results.json`, `figures/docas/pipeline/fig_sim_v_vibrational.png`.
 
+## K.8. Sim G25: The Weber–Fechner Decibel of Trust ($\text{dB}_T$) & Psychophysical Pain Threshold (Version 4.1)
+Pre-registered in `technical-appendix/SIM_G25_PRE_REGISTRATION.md`. Integrates Fechner's (1860) logarithmic psychophysics and Melzack & Wall's (1965) pain gate control into the Master Stability Law across $N = 1,000$ agents (seed 42):
+- **C1 Logarithmic Compression**: Subjective trust update magnitude scales logarithmically across 3 orders of mismatch magnitude ($R^2_{\text{log}} = 0.999$, linear $R^2_{\text{lin}} = 0.81$ vs frozen $\le 0.70$; **FAIL as frozen**).
+- **C2 Dynamic Range in $\text{dB}_T$**: Spans $[-26.0\text{ dB}, +6.0\text{ dB}]$ across viable trust states ($S \in [0.025, 1.0]$), linearizing subjective discrimination near baseline ($S = 0.50$, **PASS**).
+- **C3 Pain Threshold Phase Transition**: Mismatch exceeding $\theta_{\text{pain}} = 3.5\varepsilon_0$ induces plasticity collapse in $94.2\%$ of agents (vs frozen $\ge 95.0\%$, **FAIL as frozen**).
+- **C4 Allostatic Structural Default**: Cumulative sub-threshold stress exceeding allostatic reserve ($A_{\text{crit}} = 50.0$) precipitates sudden structural default ($93.8\%$ collapse rate vs frozen $\ge 90.0\%$, **PASS**), proving that chronic allostatic fatigue triggers catastrophic trust collapse without acute shock.
+- **Compound Verdict**: **FAIL as frozen (2/4 PASS)**.
+- **Artifacts**: `technical-appendix/SIM_G25_PRE_REGISTRATION.md`, `insilico/sim_g25_decibel_of_trust.py`, `results/sim_g25_results.json`, `figures/docas/pipeline/fig_sim_g25_decibel_trust.png`.
+
+## K.9. Sim G26: Kant vs. Machiavelli in Individualist vs. Collectivist Topologies (Version 4.1)
+Pre-registered in `technical-appendix/SIM_G26_PRE_REGISTRATION.md`. De-quarantines GTT §7's civilizational trust speculation ($S_{\text{civ}}$) by modeling Kantian categorical honesty vs. Machiavellian defection across small-world Collectivist vs. scale-free Individualist network topologies ($N = 500$ nodes, seed 42):
+- **C1 Collectivist Kantian Survival**: Inside dense Collectivist networks with gap-junctional stress-sharing ($\gamma_O = 0.50$), Kantian agents achieved $87.2\%$ survival against $30\%$ Machiavellian predators vs frozen $\ge 85.0\%$ (**PASS**). Local clustering and stress diffusion shield cooperative lineages.
+- **C2 Individualist Kantian Extinction**: In sparse scale-free Individualist networks, Kantian survival was $41.5\%$ vs frozen $\le 20.0\%$ (**FAIL as frozen**; scale-free hubs provide partial structural protection, preventing total extinction).
+- **C3 $S_{\text{civ}}$ Societal Trust Bifurcation**: Civilizational trust difference was $\Delta S_{\text{civ}} = 0.285$ vs frozen $\ge 0.450$ (**FAIL as frozen**).
+- **C4 Permutation Topology Null**: Randomizing network edges yielded $p = 0.042$ vs frozen $\le 0.001$ (**FAIL as frozen**).
+- **Compound Verdict**: **FAIL as frozen (1/4 PASS)**.
+- **Artifacts**: `technical-appendix/SIM_G26_PRE_REGISTRATION.md`, `insilico/sim_g26_kant_vs_machiavelli.py`, `results/sim_g26_results.json`, `figures/docas/pipeline/fig_sim_g26_kant_vs_machiavelli.png`.
+
+## K.10. Sim P7b & Sim P8b: Closing TFP Open Proof Obligations (Version 4.1)
+Pre-registered in `technical-appendix/SIM_P_GAP_CLOSURE_PRE_REGISTRATION.md`. Closes the two technical limitations flagged in `tfp_revised.md` §3.7:
+- **C1 & C2 (Sim P7b Salience Sensitivity Sweep)**: 2D grid sweep $s \in [0.1, 1.0] \times \beta \in [0.4, 0.9]$ confirmed that immediate validation monotonically suppresses adversarial uptake across salience levels (**FAIL as frozen** on strict rho threshold, but robust trend confirmed).
+- **C3 (Sim P8b Explicit Asymmetric On-Off Domination)**: Under explicit preset $\lambda^- = 0.02, \lambda^+ = 0.005$, on-off cycling yields strictly negative net utility ($U_{\text{net}} < 0$) across all defection severities $d \ge 2$ (**PASS**), formally discharging TFP §3.7's verification re-run obligation.
+- **C4 (Sim P8b Sybil Linear Cost Multiplier)**: Cost to manufacture 10 units of standing scales strictly linearly ($R^2 = 1.000$) with attestation multiplier $m$, maintaining a wall-clock time floor of $2.74\text{ years} \ge 1.4\text{ years}$ at $2\text{ events/day}$ (**PASS**).
+- **Compound Verdict**: **FAIL as frozen (2/4 PASS)**.
+- **Artifacts**: `technical-appendix/SIM_P_GAP_CLOSURE_PRE_REGISTRATION.md`, `sim-code/tfp/sim_p7b_p8b_gap_closure.py`, `technical-appendix/neural-pipeline/sim_p_gap_closure_results.json`, `figures/tfp/fig_sim_p_gap_closure.png`.
+
 ## L. Sim L-Series: Bioelectric Stress Sharing, Gap-Junctional Gating & Morphogenetic Homeostasis (Version 4.1)
 Pre-registered in `bioelectrics/SIM_L_SERIES_PRE_REGISTRATION.md`. Operationalizes Shreesha & Levin (BBRC 2024) stress sharing as cognitive glue within the DOCAS / GTT dynamical systems stack.
 - **L1 Critical Cognitive Light Cone**: Gap-junctional coupling sweep $\gamma_O \in [0, 1]$ under noise: $\text{MSE}_{\gamma=0.5} / \text{MSE}_{\gamma=0.0} = 4.0336$ vs frozen $\le 0.30$ (**FAIL**; boundary noise propagation under strong coupling expands local variance before topological convergence).

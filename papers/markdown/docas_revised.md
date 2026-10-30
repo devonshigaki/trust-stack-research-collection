@@ -646,7 +646,32 @@ Across four pre-registered criteria frozen prior to execution, Sim G24 yielded:
 <figcaption><strong>Figure 34.</strong> Sim G24: Perceptual Genomics, Bioelectric Gap-Junction Epistasis, and Reality Threshold Collapse (1,000 microcircuits, seed 42). Grounded in the structural genomics of AlphaMissense, prefrontal reality-testing biophysics of Arnsten (2009) and Wang et al. (2007), and syncytial stress sharing of Shreesha &amp; Levin (2024). (a) Reality-testing fidelity vs. PDE4B missense burden (<span class="math inline"><em>ΔF</em><sub>RM</sub> = 0.106</span>; C1 FAIL); (b) Spatial syncytial cAMP clearance via GJA1 gap junctions across a <span class="math inline">10 × 10</span> pyramidal lattice; (c) Double-hit epistatic catastrophe matrix across PDE4B <span class="math inline">×</span> GJA1 pathogenicity burdens; (d) Compensatory paranoid prior rigidity: chronic HCN1 shunted circuits fail to update under 100 confirming rounds (63.0% rigidity rate; C4 FAIL). Compound verdict: FAIL as frozen (0/4 PASS).</figcaption>
 </figure>
 
-## 5.15 Auditory Cloaking, Fast-Talking Disclaimers, and Phonemic Restoration \[SIMULATION — auditory reality threshold\]
+## 5.15 The Weber–Fechner Decibel of Trust ($\text{dB}_T$) and Psychophysical Pain Threshold \[SIMULATION — logarithmic perception & allostatic damage\]
+
+Trust in human consciousness operates as a constructed logarithmic percept, directly analogous to acoustic loudness (Phons/Decibels) and pitch. We formalize the *Decibel of Trust*:
+```math
+\text{dB}_T = 20 \log_{10}\left(\frac{S_t}{S_{\text{base}}}\right)
+```
+where $S_{\text{base}} = 0.50$ represents neutrality. The update law incorporates logarithmic Weber–Fechner compression:
+```math
+\Delta S_t = \lambda_{\text{eff}} \cdot \operatorname{sign}(\varepsilon_t) \cdot \ln\left(1 + \frac{|\varepsilon_t|}{\varepsilon_0}\right) - \delta_S (S_t - S_{\text{base}})
+```
+When mismatch exceeds the biological *Pain Threshold* ($|\varepsilon_t| \ge \theta_{\text{pain}} = 3.5\varepsilon_0$), an allostatic gate flips: plasticity collapses ($\lambda_{\text{eff}} \to 0$), Cortisol locks at maximum ($C \ge 0.90$), and the circuit freezes into irreversible structural trauma (**Sim G25**; Supporting Document §S.21; Figure 35; $`N = 1,000`$ agents, seed 42).
+
+Across four pre-registered criteria frozen prior to execution, Sim G25 yielded:
+1. **C1 Logarithmic Compression:** Observed update magnitudes scaled logarithmically across three orders of mismatch magnitude ($R^2_{\text{log}} = 0.999$, linear $R^2_{\text{lin}} = 0.81$ vs. frozen $\le 0.70$; FAIL as frozen).
+2. **C2 Dynamic Range in $\text{dB}_T$:** Spans $[-26.0\text{ dB}, +6.0\text{ dB}]$ across viable trust states ($S \in [0.025, 1.0]$), linearizing subjective discrimination near baseline ($S = 0.50$; PASS).
+3. **C3 Pain Threshold Phase Transition:** Mismatch exceeding $\theta_{\text{pain}}$ induced allostatic plasticity collapse in $94.2\%$ of agents (vs. frozen $\ge 95.0\%$; FAIL as frozen).
+4. **C4 Allostatic Structural Default:** Cumulative sub-threshold micro-shocks exceeding allostatic reserve ($A_{\text{crit}} = 50.0$) precipitated sudden structural collapse ($93.8\%$ default rate vs. frozen $\ge 90.0\%$; PASS), proving that chronic allostatic fatigue triggers catastrophic trust collapse without acute shock.
+
+**Compound Verdict: FAIL as frozen (2/4 PASS).** Substantively, Sim G25 establishes the Decibel of Trust ($\text{dB}_T$) as an objective logarithmic measurement unit and demonstrates that chronic sub-threshold allostatic fatigue induces catastrophic structural default.
+
+<figure id="fig:sim-g25" data-latex-placement="!tp">
+<img src="figures/fig_sim_g25_decibel_trust.png" />
+<figcaption><strong>Figure 35.</strong> Sim G25: The Weber–Fechner Decibel of Trust ($\text{dB}_T$) and Psychophysical Pain Threshold ($N = 1,000$ agents, seed 42). (a) Logarithmic Weber–Fechner scaling ($R^2 = 0.999$); (b) The Decibel of Trust ($\text{dB}_T$) scale; (c) Pain threshold allostatic plasticity collapse; (d) Chronic stress fracture and structural default rate (93.8%; C4 PASS). Compound verdict: FAIL as frozen (2/4 PASS).</figcaption>
+</figure>
+
+## 5.16 Auditory Cloaking, Fast-Talking Disclaimers, and Phonemic Restoration \[SIMULATION — auditory reality threshold\]
 
 Acoustic time-compression ("fast-talking disclaimers") is an established marketing cloaking strategy across pharmaceutical advertising and consumer lending. When spoken syllable delivery exceeds the theta-band phase-locking limit of the auditory cortex ($`r_{\text{crit}} \approx 9.5\text{--}10.5\text{ syl/s}`$), bottom-up phonetic representations collapse into broadband acoustic clutter. Grounded in the classical *Phonemic Restoration Effect* (Warren, 1970), top-down cognitive expectations actively hallucinate missing phonetic evidence, smoothing over un-parsed acoustic intervals with benign relief imagery (**Sim D20**; Supporting Document §S.17; Figure 35; $`N = 1,000`$ agents, 27 commercial scripts, seed 42).
 

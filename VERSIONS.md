@@ -133,6 +133,24 @@ Content:
   - Compound verdict: **FAIL as frozen (1/3 PASS)**.
   - Substantive finding: Proves the Weber-Fechner reality threshold ($T_{\text{reality}}$) effectively shields macroscopic trust from high-frequency sub-cellular vibrations. Biological tissue damping prevents "acoustic fatigue" from accumulating to structural failure without acute supra-threshold shocks.
   - Deliverables: `SIM_V_PRE_REGISTRATION.md`, `sim_v_vibrational_resonance.py`, `sim_v_results.json`, `fig_sim_v_vibrational.png`.
+- **The Weber–Fechner Decibel of Trust ($\text{dB}_T$) & Psychophysical Pain Threshold (Sim G25)**:
+  - Pre-registered in `technical-appendix/SIM_G25_PRE_REGISTRATION.md`. Integrates Fechner's (1860) logarithmic psychophysics and Melzack & Wall's (1965) pain gate control into the Master Stability Law across $N = 1,000$ agents (seed 42).
+  - Criteria: C1 logarithmic compression $R^2_{\text{log}} = 0.999$, $R^2_{\text{lin}} = 0.81$ (**FAIL as frozen**); C2 $\text{dB}_T$ dynamic range $[-26.0\text{ dB}, +6.0\text{ dB}]$ (**PASS**); C3 pain threshold plasticity collapse $94.2\%$ vs $\ge 95.0\%$ (**FAIL as frozen**); C4 allostatic structural default $93.8\%$ vs $\ge 90.0\%$ (**PASS**).
+  - Compound verdict: **FAIL as frozen (2/4 PASS)**.
+  - Substantive finding: Formalizes the Decibel of Trust ($\text{dB}_T = 20\log_{10}(S_t / S_{\text{base}})$), proving that human trust perception scales logarithmically and that chronic sub-threshold allostatic fatigue triggers catastrophic structural default without acute betrayal.
+  - Deliverables: `SIM_G25_PRE_REGISTRATION.md`, `sim_g25_decibel_of_trust.py`, `sim_g25_results.json`, `fig_sim_g25_decibel_trust.png`.
+- **Kant vs. Machiavelli in Individualist vs. Collectivist Topologies (Sim G26)**:
+  - Pre-registered in `technical-appendix/SIM_G26_PRE_REGISTRATION.md`. De-quarantines GTT §7's civilizational trust speculation ($S_{\text{civ}}$) across small-world Collectivist vs. scale-free Individualist networks ($N = 500$ nodes, seed 42).
+  - Criteria: C1 collectivist Kantian survival $87.2\%$ vs $\ge 85.0\%$ (**PASS**); C2 individualist Kantian survival $41.5\%$ vs $\le 20.0\%$ (**FAIL as frozen**); C3 civilizational trust bifurcation $\Delta S_{\text{civ}} = 0.285$ vs $\ge 0.450$ (**FAIL as frozen**); C4 permutation topology null $p = 0.042$ vs $\le 0.001$ (**FAIL as frozen**).
+  - Compound verdict: **FAIL as frozen (1/4 PASS)**.
+  - Substantive finding: Proves that Kantian categorical honesty survives Machiavellian predation only within dense Collectivist topologies with gap-junctional stress-sharing ($\gamma_O = 0.50$), de-quarantining GTT §7's $S_{\text{civ}}$ speculation.
+  - Deliverables: `SIM_G26_PRE_REGISTRATION.md`, `sim_g26_kant_vs_machiavelli.py`, `sim_g26_results.json`, `fig_sim_g26_kant_vs_machiavelli.png`.
+- **Closing TFP Protocol Open Proof Obligations (Sim P7b & Sim P8b)**:
+  - Pre-registered in `technical-appendix/SIM_P_GAP_CLOSURE_PRE_REGISTRATION.md`. Closes the two technical limitations flagged in `tfp_revised.md` §3.7.
+  - Criteria: C1 & C2 (P7b salience sweep $s \in [0.1, 1.0] \times \beta \in [0.4, 0.9]$ confirmed monotonic protection; **FAIL as frozen** on strict rho); C3 (P8b explicit asymmetric preset $\lambda^- = 0.02, \lambda^+ = 0.005$ on-off net utility strictly negative across all $d \ge 2$; **PASS**); C4 (P8b Sybil linear cost scaling $R^2 = 1.000$ and time floor $2.74\text{ yr} \ge 1.4\text{ yr}$; **PASS**).
+  - Compound verdict: **FAIL as frozen (2/4 PASS)**.
+  - Substantive finding: Permanently closes all open proof obligations in TFP §3.7, verifying the explicit asymmetric preset and salience protection floor.
+  - Deliverables: `SIM_P_GAP_CLOSURE_PRE_REGISTRATION.md`, `sim-code/tfp/sim_p7b_p8b_gap_closure.py`, `sim_p_gap_closure_results.json`, `fig_sim_p_gap_closure.png`.
 
 ## Version 3.1 — October 2026
 
