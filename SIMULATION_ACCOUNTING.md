@@ -127,6 +127,16 @@ Pre-registered in `baylor/SIM_D18_PRE_REGISTRATION.md`. Evaluates the Baylor stu
 - **Compound Verdict**: **FAIL as frozen (2/4 PASS)**.
 - **Artifacts**: `baylor/SIM_D18_PRE_REGISTRATION.md`, `baylor/BAYLOR_RUN_REPORT.md`, `baylor/sim_d18_results.json`, `figures/docas/pipeline/fig_sim_d18_baylor.png`.
 
+## K.2. Sim D19: Perky Reality-Monitoring Perception Filter & Realistic Cognitive Noise (Version 4.1)
+Pre-registered in `technical-appendix/SIM_D19_PRE_REGISTRATION.md` before execution; integrates the Dijkstra & Fleming (2023, *Nature Communications*) reality-monitoring psychophysics threshold ($T_{\text{reality}} = 2.5$) and Mary Perky's (1910) assimilation effect into the 27 Brain-IT visual credit agreements across $N = 1,000$ heterogeneous agents ($\kappa_i \sim \text{Beta}(2, 5)$, seed 42):
+- **C1 Fine-Print Perky Blindness (Suppression Gate)**: Cloaked disclaimer fell below reality threshold ($m_{\text{disc}} \le T_{\text{reality}}$) in $96.8\%$ of predatory contract evaluations vs frozen $\ge 60.0\%$ (**PASS**). Fine-print terms are systematically "explained away" by stressed consumers.
+- **C2 Realistic vs. Symmetric Gaussian Noise Surge**: Realistic Perky reality filter drove a $+96.7\%$ surge in predatory contract uptake over the standard symmetric Gaussian noise baseline ($96.7\%$ vs $0.0\%$) vs frozen $\ge +25.0\%$ (**PASS**). Standard symmetric noise models fail completely to capture reality-monitoring failures.
+- **C3 Vulnerability Gradient (Decile Odds Ratio)**: Bottom decile of cognitive bandwidth ($D_1$) suffered an odds ratio of predatory exploitation of $3.98\times$ over the top decile ($D_{10}$) vs frozen $\ge 15.00\times$ (**FAIL**; while concentration is robust, high overall predatory uptake across stressed populations bounded the odds ratio).
+- **C4 Permutation Significance**: $p = 0.0355$ under $B = 2,000$ permutations vs frozen $p \le 0.001$ (**FAIL**; significant at $\alpha = 0.05$, fails frozen $0.001$).
+- **Compound Verdict**: **FAIL as frozen (2/4 PASS)**.
+- **Substantive Finding**: Replaces artificial symmetric Gaussian noise with an empirically grounded psychophysical perception filter. Explains why financially stressed consumers accept predatory terms: when internal desperation imagery dominates weak sensory evidence, predatory disclaimers are suppressed below the reality threshold and literally treated as non-existent.
+- **Artifacts**: `technical-appendix/SIM_D19_PRE_REGISTRATION.md`, `insilico/sim_d19_perky_reality_filter.py`, `results/sim_d19_results.json`, `figures/docas/pipeline/fig_sim_d19_perky_reality_filter.png`.
+
 ## L. Sim L-Series: Bioelectric Stress Sharing, Gap-Junctional Gating & Morphogenetic Homeostasis (Version 4.1)
 Pre-registered in `bioelectrics/SIM_L_SERIES_PRE_REGISTRATION.md`. Operationalizes Shreesha & Levin (BBRC 2024) stress sharing as cognitive glue within the DOCAS / GTT dynamical systems stack.
 - **L1 Critical Cognitive Light Cone**: Gap-junctional coupling sweep $\gamma_O \in [0, 1]$ under noise: $\text{MSE}_{\gamma=0.5} / \text{MSE}_{\gamma=0.0} = 4.0336$ vs frozen $\le 0.30$ (**FAIL**; boundary noise propagation under strong coupling expands local variance before topological convergence).

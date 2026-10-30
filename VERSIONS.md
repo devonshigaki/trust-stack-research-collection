@@ -97,6 +97,12 @@ Content:
   - Compound verdict: **FAIL as frozen (2/4 PASS)**.
   - Substantive finding: Confirms that narrative syntax and relational schemas are ingested with near-zero friction during unconsciousness ($92\%$ drop), while waking executive reactivation ($M: 0 \to 1$) successfully restores loss aversion, partially buffering against unconscious exploitation.
   - Deliverables: `SIM_D18_PRE_REGISTRATION.md`, `BAYLOR_RUN_REPORT.md`, `sim_d18_results.json`, `fig_sim_d18_baylor.png`.
+- **Perky Reality-Monitoring Perception Filter & Realistic Cognitive Noise (Sim D19)**:
+  - Pre-registered in `technical-appendix/SIM_D19_PRE_REGISTRATION.md`. Integrates the Dijkstra & Fleming (2023, *Nature Communications*) reality threshold ($T_{\text{reality}} = 2.5$) and Mary Perky's (1910) assimilation paradigm into the 27 Brain-IT visual credit agreements across $1,000$ agents ($\kappa_i \sim \text{Beta}(2, 5)$, seed 42).
+  - Criteria: C1 fine-print Perky blindness suppression rate $96.8\%$ vs $\ge 60\%$ (**PASS**); C2 realistic vs symmetric Gaussian excess uptake surge $+96.7\%$ vs $\ge 25\%$ (**PASS**); C3 vulnerability decile odds ratio $3.98\times$ vs $\ge 15.0\times$ (**FAIL**); C4 permutation $p = 0.0355$ vs $\le 0.001$ (**FAIL**).
+  - Compound verdict: **FAIL as frozen (2/4 PASS)**.
+  - Substantive finding: Unveils why real consumers accept predatory agreements: when internal desperation imagery dominates weak sensory evidence, fine-print disclaimers are suppressed below the reality threshold and "explained away," eliminating the perceived financial penalty entirely ($96.8\%$ suppression).
+  - Deliverables: `SIM_D19_PRE_REGISTRATION.md`, `sim_d19_perky_reality_filter.py`, `sim_d19_results.json`, `fig_sim_d19_perky_reality_filter.png`.
 
 ## Version 3.1 — October 2026
 
