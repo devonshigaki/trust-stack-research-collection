@@ -708,6 +708,42 @@ Across all four pre-registered criteria frozen prior to execution, Sim M-Series 
 <figcaption><strong>Figure 33.</strong> Sim M-Series: Temporal Dynamics of Music (TDF) and metric hierarchy gating in DOCAS (<span class="math inline"><em>N</em> = 10,000</span> sessions, seed 42). Stage 1: Acoustic feature streams under scalar BPM aliasing. Stage 2: Neurochemical channel isomorphism and metric hierarchy ratio <span class="math inline"><em>τ</em></span> (<span class="math inline">3/4</span> simple triple <span class="math inline"><em>τ</em> = 0.0</span>, <span class="math inline">4/4</span> simple duple <span class="math inline"><em>τ</em> = 0.5</span>, <span class="math inline">6/8</span> compound duple <span class="math inline"><em>τ</em> = 1.0</span>). Stage 3: Omnibus ANOVA (<span class="math inline"><em>F</em> = 3,561.5, <em>η</em><sup>2</sup> = 0.517</span>) and mutual information escalation (<span class="math inline">+136.9%</span>). Stage 4: 5-fold cross-validated state decoding confusion collapse (<span class="math inline">71.0%</span> error suppression; Macro <span class="math inline"><em>F</em><sub>1</sub> = 0.945</span>, AUC <span class="math inline">=0.993</span>). Compound verdict: COMPOUND PASS (4/4).</figcaption>
 </figure>
 
+## 5.16 Non-Dualism, Markov Blanket Dissolution, and Machiavellian Exploitation \[SIMULATION — philosophical priors\]
+
+Trust is a fundamental physical force vector—the expectation–validation differential ($\varepsilon_t = V_t - E_t$)—present in all systems from ion channels to societal ledgers. However, in the human species, this force vector is processed through the cognitive architecture of consciousness as a constructed perceptual phenomenon. Central to this perception is the philosophical prior of the Markov Blanket (Friston, 2013), the statistical boundary separating the "self-model" from the "external-world-model."
+
+To evaluate the metabolic and evolutionary consequences of these perceptual priors, we executed the **Sim N-Series** (Supporting Document §S.19; Figure 34; $`N = 1,000`$ agents, seed 42), parameterizing a dualism coefficient (blanket thickness $\mu_B$). Non-dual (Buddhist) agents ($\mu_B = 0.1$) process external states as internal states, neutralizing adversarial prediction errors, while Machiavellian individualists ($\mu_B = 0.9$) maintain rigid, impermeable boundaries hyper-weighted toward threat detection.
+
+Across three pre-registered criteria frozen prior to execution, Sim N yielded:
+1. **C1 Metabolic Resilience:** Under sustained betrayal attacks, non-dual agents incurred a cumulative allostatic load (Cortisol accumulation) $88.9\%$ lower than standard individualists, yielding a load ratio of $0.111$ (vs. frozen $\le 0.400$; PASS). Non-dualism dramatically buffers metabolic cost by refusing to register adversarial actions as external prediction errors.
+2. **C2 ESS Density Limit:** Under resource scarcity, non-dual populations completely collapsed (extinction $100.0\%$) at low densities ($\rho < 0.25$) but failed to out-survive Machiavellian agents at higher densities (survival $0.0\%$ vs. frozen $\ge 0.40$; FAIL as frozen). While providing internal metabolic resilience, non-dualism is evolutionarily unstable against aggressive individualists without structural protection.
+3. **C3 Equanimity Attractor:** Surviving non-dual agents converged to a neutral trust state ($S \to 0.504$) with minimal temporal variance ($\sigma_S^2 = 0.0004$ vs. frozen $\le 0.05$; PASS). Dissolving the Markov blanket mathematically forces the system into equanimity.
+
+**Compound Verdict: FAIL as frozen (2/3 PASS).**
+
+<figure id="fig:sim-n" data-latex-placement="!tp">
+<img src="figures/fig_sim_n_non_dualism.png" />
+<figcaption><strong>Figure 34.</strong> Sim N-Series: Non-Dualism, Markov Blanket Dissolution, and Machiavellian Exploitation (<span class="math inline"><em>N</em> = 1,000</span>, seed 42). (a) C1: Cumulative allostatic load (Cortisol cost) buffered by 88.9% in non-dual agents; (b) C2: Evolutionary payoff vs. initial non-dual density, showing failure to achieve an Evolutionarily Stable Strategy against Machiavellian predators under scarcity; (c) C3: Equanimity attractor (<span class="math inline"><em>S</em><sub><em>t</em></sub> → 0.5</span>) achieved via Markov blanket dissolution. Compound verdict: FAIL as frozen (2/3 PASS).</figcaption>
+</figure>
+
+## 5.17 Sub-Cellular 1D Vibrational Resonance and Acoustic Trust Fatigue \[SIMULATION — vibrational continuum\]
+
+Below the level of ion channels (§5.24) lies the 1D continuous vibrational wave of molecular expectation. Because macroscopic conscious trust perception scales logarithmically (Weber–Fechner Law, $\varepsilon_{\text{perceived}} \sim \ln(V/E)$), the Reality Threshold ($T_{\text{reality}}$) acts as a low-pass filter, ignoring high-frequency, low-amplitude prediction errors. However, at the physical 1D vibrational level, these sub-threshold micro-aggressions impart kinetic energy, analogous to "acoustic fatigue" in aerospace engineering.
+
+We modeled the expectation–validation loop as a 1D damped harmonic oscillator subjected to high-frequency ($10\text{--}200\text{ Hz}$), sub-threshold micro-betrayals ($A < T_{\text{reality}}/15$) (**Sim V-Series**; Supporting Document §S.20; Figure 35; seed 42).
+
+Across three pre-registered criteria frozen prior to execution, Sim V yielded:
+1. **C1 Sub-Threshold Invisibility:** Macroscopic conscious trust percept $S_{\text{conscious}}$ remained unperturbed (drift = $0.031$ vs. frozen $\le 0.05$) for the first 80% of the simulation window (PASS). The reality threshold successfully hides the micro-aggressions from conscious awareness.
+2. **C2 Acoustic Trust Fatigue:** Cumulative vibrational energy failed to reach the critical yield threshold before the simulation ended ($0.0\%$ collapse rate vs. frozen $\ge 95.0\%$; FAIL as frozen).
+3. **C3 Logarithmic Resonance Signature:** Because no collapses occurred, the logarithmic time-to-failure correlation was $0.0$ (vs. frozen $\ge 0.90$; FAIL as frozen).
+
+**Compound Verdict: FAIL as frozen (1/3 PASS).** Substantively, Sim V proves that the Weber–Fechner reality threshold ($T_{\text{reality}}$) effectively shields macroscopic trust from high-frequency sub-cellular vibrations. Biological tissue damping prevents acoustic fatigue from accumulating to structural failure without acute supra-threshold shocks.
+
+<figure id="fig:sim-v" data-latex-placement="!tp">
+<img src="figures/fig_sim_v_vibrational.png" />
+<figcaption><strong>Figure 35.</strong> Sim V-Series: Sub-Cellular 1D Vibrational Resonance and Acoustic Trust Fatigue (seed 42). (a) C1: Macroscopic conscious trust (<span class="math inline"><em>S</em><sub><em>t</em></sub></span>) remains stable, shielded by the reality threshold low-pass filter; (b) C2: 1D sub-cellular vibrational energy (allostatic load) accumulates but fails to reach the critical yield threshold under biological damping constraints; (c) C3: Logarithmic resonance correlation (null result). Compound verdict: FAIL as frozen (1/3 PASS).</figcaption>
+</figure>
+
 ## 5.18 Genealogical Coalescence and Trust Heritability [SIMULATION — population genetics]
 
 To establish empirical grounding for generational inheritance in Layer 2, we executed the **Sim K-Series** ($N = 1,024$ agents, $G = 50$ generations, seed 42) integrating forward-time Wright–Fisher selection with retrospective Kingman coalescent reconstruction. Trait heritability was benchmarked against the empirical behavioral genetics target of $h^2 \approx 0.32$ (CI: $[0.28, 0.36]$) established in §4.1 using Falconer's formula $h^2 = 2(r_{\text{MZ}} - r_{\text{DZ}})$.

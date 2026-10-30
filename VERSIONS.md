@@ -121,6 +121,18 @@ Content:
   - Compound verdict: **FAIL as frozen (0/4 PASS)**.
   - Substantive finding: Discloses the physical limits of cellular candidate-gene expression models. Demonstrates that syncytial gap-junctional rescue (GJA1) mathematically requires an external wild-type boundary sink gradient, failing in homogenous mutant sheets, and proves that while chronic HCN1 shunting induces substantial prior rigidity ($63\%$), the scalar reality threshold $T = 2.5$ provides greater intrinsic robustness against sensory noise than linear biophysical models predict.
   - Deliverables: `SIM_G24_PRE_REGISTRATION.md`, `sim_g24_perceptual_genomics.py`, `sim_g24_results.json`, `fig_sim_g24_perceptual_genomics.png`.
+- **Non-Dualism, Markov Blanket Dissolution & Machiavellian Exploitation (Sim N-Series)**:
+  - Pre-registered in `technical-appendix/SIM_N_PRE_REGISTRATION.md`. Models the philosophical prior of the Markov Blanket (dualism coefficient $\mu_B$) to test Buddhist non-dualism against Machiavellian attacks ($1,000$ agents, seed 42).
+  - Criteria: C1 metabolic resilience load ratio $0.111$ vs $\le 0.400$ (**PASS**); C2 ESS density limit survival $0.0\%$ vs $\ge 0.40$ (**FAIL**); C3 equanimity attractor variance $0.0004$ vs $\le 0.05$ (**PASS**).
+  - Compound verdict: **FAIL as frozen (2/3 PASS)**.
+  - Substantive finding: Dissolving the Markov blanket mathematical forces the system into equanimity by neutralizing the precision of external prediction errors, conferring massive metabolic resilience. However, without structural protection, it is evolutionarily unstable against aggressive individualists in resource-scarce environments.
+  - Deliverables: `SIM_N_PRE_REGISTRATION.md`, `sim_n_non_dualism.py`, `sim_n_results.json`, `fig_sim_n_non_dualism.png`.
+- **Sub-Cellular 1D Vibrational Resonance & Acoustic Trust Fatigue (Sim V-Series)**:
+  - Pre-registered in `technical-appendix/SIM_V_PRE_REGISTRATION.md`. Models the expectation-validation loop as a 1D damped harmonic oscillator subjected to high-frequency ($10\text{--}200\text{ Hz}$) sub-threshold micro-betrayals.
+  - Criteria: C1 sub-threshold invisibility drift $0.031$ vs $\le 0.05$ (**PASS**); C2 acoustic trust fatigue collapse rate $0.0\%$ vs $\ge 95.0\%$ (**FAIL**); C3 logarithmic resonance correlation $0.0$ vs $\ge 0.90$ (**FAIL**).
+  - Compound verdict: **FAIL as frozen (1/3 PASS)**.
+  - Substantive finding: Proves the Weber-Fechner reality threshold ($T_{\text{reality}}$) effectively shields macroscopic trust from high-frequency sub-cellular vibrations. Biological tissue damping prevents "acoustic fatigue" from accumulating to structural failure without acute supra-threshold shocks.
+  - Deliverables: `SIM_V_PRE_REGISTRATION.md`, `sim_v_vibrational_resonance.py`, `sim_v_results.json`, `fig_sim_v_vibrational.png`.
 
 ## Version 3.1 — October 2026
 

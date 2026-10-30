@@ -81,15 +81,17 @@ Since the original deposit, the collection has run a pre-registered connectome s
 | Sim G24 (C1–C4) | 1,000 microcircuits, AM missense | FAIL as frozen (0/4) | DOCAS §5.14 |
 | Sim D20 (C1–C4) | 1,000 agents, fast-talking audio | FAIL as frozen (3/4) | DOCAS §5.15 |
 | Sim D21 (C1–C4) | 27 stimuli, multimodal TRIBE v2 | FAIL as frozen (2/4) | DOCAS §5.16 |
-| Sim M (C1–C4) | 10,000 listening sessions | PASS (4/4) | DOCAS §5.17 |
-| Sim K (K1 / K2 / K3) | 1,024 agents, 50 generations | FAIL / PASS / PASS | DOCAS §5.18 |
-| Sim C (C1 / C2 / C3) | 1,000 present-biased agents | PASS (3/3) | DOCAS §5.19 |
-| Sim S (S1 / S2 / S3) | 256 agents, 8D embedding | PASS (3/3) | DOCAS §5.20 |
-| Sim DMN (DMN-1–3) | 1,000 agents, K in [1..10] | FAIL / PASS / PASS | DOCAS §5.21 |
-| Sim CRIT (CRIT-1–3) | 1,024 nodes, branching | FAIL / PASS / PASS | DOCAS §5.22 |
-| Sim B (B1 / B2 / B3) | 512 non-neural cells, maze | PASS (3/3) | DOCAS §5.23 |
-| Sim X (X1 / X2 / X3) | 4 substrates, Cell to Human | PASS (3/3) | DOCAS §5.24 |
-| Sim META (META-1–3) | Universal cross-scale vector | FAIL / PASS / PASS | DOCAS §5.25 |
+| Sim N (C1–C3) | 1,000 agents, Markov blanket | FAIL as frozen (2/3) | DOCAS §5.17 |
+| Sim V (C1–C3) | 1D harmonic oscillator, fatigue | FAIL as frozen (1/3) | DOCAS §5.18 |
+| Sim M (C1–C4) | 10,000 listening sessions | PASS (4/4) | DOCAS §5.19 |
+| Sim K (K1 / K2 / K3) | 1,024 agents, 50 generations | FAIL / PASS / PASS | DOCAS §5.20 |
+| Sim C (C1 / C2 / C3) | 1,000 present-biased agents | PASS (3/3) | DOCAS §5.21 |
+| Sim S (S1 / S2 / S3) | 256 agents, 8D embedding | PASS (3/3) | DOCAS §5.22 |
+| Sim DMN (DMN-1–3) | 1,000 agents, K in [1..10] | FAIL / PASS / PASS | DOCAS §5.23 |
+| Sim CRIT (CRIT-1–3) | 1,024 nodes, branching | FAIL / PASS / PASS | DOCAS §5.24 |
+| Sim B (B1 / B2 / B3) | 512 non-neural cells, maze | PASS (3/3) | DOCAS §5.25 |
+| Sim X (X1 / X2 / X3) | 4 substrates, Cell to Human | PASS (3/3) | DOCAS §5.26 |
+| Sim META (META-1–3) | Universal cross-scale vector | FAIL / PASS / PASS | DOCAS §5.27 |
 
 ## Perception-layer simulation — deposited
 
