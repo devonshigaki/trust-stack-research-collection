@@ -979,6 +979,29 @@ Across four pre-registered criteria frozen prior to execution, Sim D19 yielded:
 \label{fig:sim-perky}
 \end{figure}
 
+\subsection{Perceptual Genomics, Bioelectric Gap-Junction Epistasis, and Reality Threshold Collapse [SIMULATION --- structural genetics \& biophysical gating]}
+
+While the candidate-gene literature failed to identify a unitary ``trust gene'' at the behavioral endpoint (\S{}4.1--\S{}4.3), the cellular biophysics governing the reality-monitoring decision boundary ($T_{\text{reality}} = 2.5$; \S{}5.13) and syncytial stress sharing ($\gamma_O$; \S{}5.10) is directly grounded in structural genomics (\textbf{Sim G24}; Supporting Document \S{}S.16; Figure~\ref{fig:sim-genomics}; $N = 1{,}000$ microcircuits, seed 42). 
+
+We integrated structural pathogenicity burdens from the AlphaMissense catalogue \citep{cheng2023alphamissense} across three core proteins: (i) the intracellular cAMP brake \textit{PDE4B} (Q07343, 486 high-risk catalytic residues), (ii) the intercellular syncytial gap junction \textit{GJA1} / Connexin 43 (P17302, 74.0\% pathogenic burden), and (iii) the hyperpolarization-activated cyclic nucleotide-gated channel \textit{HCN1} (O60741, pore and CNBD burden $>0.80$). In Layer~III prefrontal pyramidal microcircuits, unconstrained cAMP opens HCN1 channels, generating an $I_h$ leak current that shunts dendritic spines and disconnects recurrent networks \citep{arnsten2009,wang2007}. Intercellular Connexin 43 gap junctions provide a spatial syncytium that dilutes local metabolic stress across neighboring cells \citep{shreesha2024}. 
+
+Across four pre-registered criteria frozen prior to execution, Sim G24 yielded:
+\begin{enumerate}
+\item \textbf{C1 Inverted-U Reality-Testing Gate:} Reality-monitoring fidelity dropped by $\Delta F_{\text{RM}} = 0.106$ between wild-type and null PDE4B ($k_{\text{cat}} \le 0.30$) (failing the frozen $\ge 0.400$ threshold; FAIL as frozen). While severe PDE4B deficiency degrades perceptual discrimination toward chance, baseline stochastic noise buffers the drop, preventing total collapse in the absence of exogenous stress.
+\item \textbf{C2 GJA1 Syncytial Rescue:} Relative reduction in dendritic HCN1 open probability in uniform all-mutant syncytia was $+0.03\%$ (failing the frozen $\le -35.0\%$ threshold; FAIL as frozen). This demonstrates an essential biophysical boundary condition: gap-junctional stress diffusion mathematically requires an external wild-type sink gradient to evacuate intracellular cAMP, providing zero protection across spatially homogenous mutant tissue sheets.
+\item \textbf{C3 Double-Hit Epistatic Catastrophe:} The observed risk ratio was $0.00\times$ (failing the frozen $\ge 5.00\times$ threshold; FAIL as frozen). The absolute false alarm rate peaked at $23.0\%$, bounded below the extreme $50\%$ catastrophic threshold.
+\item \textbf{C4 Compensatory Paranoid Prior Rigidity:} In microcircuits with chronic HCN1 shunting ($P_{\text{open}} \ge 0.75$), bayesian plasticity collapsed ($\lambda_{\text{eff}} \to 0$). Under 100 consecutive confirming validation rounds ($\varepsilon = +1.0$), $63.0\%$ of severe-burden agents remained permanently locked in the low-trust attractor ($S_{100} \le 0.250$) (failing the frozen $\ge 80.0\%$ ceiling; FAIL as frozen).
+\end{enumerate}
+
+\textbf{Compound Verdict: FAIL as frozen (0/4 PASS).} In accordance with the framework's unsparing epistemic discipline, the negative verdict is reported openly without post-hoc threshold adjustment. The substantive finding confirms the structural limits of single-gene and candidate-network models: macroscopic social trust cannot be rescued by searching for a genetic determinant, because syncytial gap junctions require environmental boundary sinks, and the non-linear reality threshold ($T = 2.5$) provides far greater intrinsic resistance to genetic variance than uncoupled biophysical models predict.
+
+\begin{figure}[!tp]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig_sim_g24_perceptual_genomics.png}
+\caption{Sim G24: Perceptual Genomics, Bioelectric Gap-Junction Epistasis, and Reality Threshold Collapse (1,000 microcircuits, seed 42). Grounded in the structural genomics of \citet{cheng2023alphamissense}, prefrontal reality-testing biophysics of \citet{arnsten2009} and \citet{wang2007}, and syncytial stress sharing of \citet{shreesha2024}. (a) Reality-testing fidelity vs.\ PDE4B missense burden ($\Delta F_{\text{RM}} = 0.106$; C1 FAIL); (b) Spatial syncytial cAMP clearance via GJA1 gap junctions across a $10 \times 10$ pyramidal lattice; (c) Double-hit epistatic catastrophe matrix across PDE4B $\times$ GJA1 pathogenicity burdens; (d) Compensatory paranoid prior rigidity: chronic HCN1 shunted circuits fail to update under 100 confirming rounds (63.0\% rigidity rate; C4 FAIL). Compound verdict: FAIL as frozen (0/4 PASS).}
+\label{fig:sim-genomics}
+\end{figure}
+
 \subsection{Temporal Dynamics of Music (TDF) and Metric Hierarchy Gating [SIMULATION --- auditory state gating]}
 
 The acoustic convention framework posited in \S{}4.5 (``Music is the superset channel'') was operationalized and empirically validated via the \textbf{Sim M-Series} simulation battery (Supporting Document \S{}S.15; Figure~\ref{fig:sim-music-tdf}; $N = 10{,}000$ listening sessions across four distinct behavioral regimes: Focus/Work, Physical Exercise, Creative Flow, and Decompression; seed 42). The underlying simulation substrate bridges the cognitive dynamics of musical expectation and downbeat prediction errors \citep{huron2006}, nonlinear oscillatory phase-locking \citep{large1999}, metric hierarchy and subdivision perception \citep{london2012}, and the multi-channel neurochemistry of music across dopamine, oxytocin, cortisol, and autonomic arousal \citep{chanda2013,salimpoor2011,koelsch2014,leman2008}.

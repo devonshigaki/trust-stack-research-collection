@@ -103,6 +103,12 @@ Content:
   - Compound verdict: **FAIL as frozen (2/4 PASS)**.
   - Substantive finding: Unveils why real consumers accept predatory agreements: when internal desperation imagery dominates weak sensory evidence, fine-print disclaimers are suppressed below the reality threshold and "explained away," eliminating the perceived financial penalty entirely ($96.8\%$ suppression).
   - Deliverables: `SIM_D19_PRE_REGISTRATION.md`, `sim_d19_perky_reality_filter.py`, `sim_d19_results.json`, `fig_sim_d19_perky_reality_filter.png`.
+- **Perceptual Genomics, Bioelectric Gap-Junction Epistasis & Reality Threshold Collapse (Sim G24)**:
+  - Pre-registered in `technical-appendix/SIM_G24_PRE_REGISTRATION.md`. Couples AlphaMissense structural missense burdens across *PDE4B* (Q07343), *GJA1* (P17302), and *HCN1* (O60741) to Arnsten's (2009) cAMP-HCN1 shunting and Shreesha & Levin's (2024) syncytial gap-junction diffusion across $1,000$ microcircuits (seed 42).
+  - Criteria: C1 inverted-U reality-testing drop $\Delta F_{\text{RM}} = 0.106$ vs $\ge 0.400$ (**FAIL**); C2 GJA1 syncytial rescue $+0.03\%$ vs $\le -35.0\%$ (**FAIL**); C3 double-hit catastrophe risk ratio $0.00\times$ vs $\ge 5.00\times$ (**FAIL**); C4 compensatory paranoid rigidity rate $63.0\%$ vs $\ge 80.0\%$ (**FAIL**).
+  - Compound verdict: **FAIL as frozen (0/4 PASS)**.
+  - Substantive finding: Discloses the physical limits of cellular candidate-gene expression models. Demonstrates that syncytial gap-junctional rescue (GJA1) mathematically requires an external wild-type boundary sink gradient, failing in homogenous mutant sheets, and proves that while chronic HCN1 shunting induces substantial prior rigidity ($63\%$), the scalar reality threshold $T = 2.5$ provides greater intrinsic robustness against sensory noise than linear biophysical models predict.
+  - Deliverables: `SIM_G24_PRE_REGISTRATION.md`, `sim_g24_perceptual_genomics.py`, `sim_g24_results.json`, `fig_sim_g24_perceptual_genomics.png`.
 
 ## Version 3.1 — October 2026
 

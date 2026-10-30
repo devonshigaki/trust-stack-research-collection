@@ -627,7 +627,26 @@ Across four pre-registered criteria frozen prior to execution, Sim D19 yielded:
 <figcaption><strong>Figure 33.</strong> Sim D19: Perky Reality-Monitoring Perception Filter and realistic cognitive noise in credit offer uptake (1,000 agents, seed 42). Grounded in the reality-monitoring psychophysics of Dijkstra &amp; Fleming (2023) and Perky (1910). (a) Dijkstra reality-monitoring decision axis: cloaked fine-print falls into the Perky blindness zone (<span class="math inline"><em>m</em> ≤ 2.5</span>) while headline relief breaches the threshold; (b) Predatory uptake across noise filters: rational benchmark (0.0%), symmetric Gaussian noise (0.0%), and Perky filter (96.7%, +96.7% surge; C2 PASS); (c) Decile vulnerability gradient: <span class="math inline">3.98×</span> exploitation odds ratio concentrated in low-bandwidth agents; (d) Visual salience permutation null distribution (<span class="math inline"><em>p</em> = 0.0355</span>). Compound verdict: FAIL as frozen (2/4 PASS).</figcaption>
 </figure>
 
-## 5.14 Temporal Dynamics of Music (TDF) and Metric Hierarchy Gating \[SIMULATION — auditory state gating\]
+## 5.14 Perceptual Genomics, Bioelectric Gap-Junction Epistasis, and Reality Threshold Collapse \[SIMULATION — structural genetics & biophysical gating\]
+
+While the candidate-gene literature failed to identify a unitary "trust gene" at the behavioral endpoint (§4.1–§4.3), the cellular biophysics governing the reality-monitoring decision boundary ($T_{\text{reality}} = 2.5$; §5.13) and syncytial stress sharing ($\gamma_O$; §5.10) is directly grounded in structural genomics (**Sim G24**; Supporting Document §S.16; Figure 34; $`N = 1,000`$ microcircuits, seed 42). 
+
+We integrated structural pathogenicity burdens from the AlphaMissense catalogue across three core proteins: (i) the intracellular cAMP brake *PDE4B* (Q07343, 486 high-risk catalytic residues), (ii) the intercellular syncytial gap junction *GJA1* / Connexin 43 (P17302, 74.0% pathogenic burden), and (iii) the hyperpolarization-activated cyclic nucleotide-gated channel *HCN1* (O60741, pore and CNBD burden $>0.80$). In Layer III prefrontal pyramidal microcircuits, unconstrained cAMP opens HCN1 channels, generating an $I_h$ leak current that shunts dendritic spines and disconnects recurrent networks. Intercellular Connexin 43 gap junctions provide a spatial syncytium that dilutes local metabolic stress across neighboring cells.
+
+Across four pre-registered criteria frozen prior to execution, Sim G24 yielded:
+1. **C1 Inverted-U Reality-Testing Gate:** Reality-monitoring fidelity dropped by $\Delta F_{\text{RM}} = 0.106$ between wild-type and null PDE4B ($k_{\text{cat}} \le 0.30$) (failing the frozen $\ge 0.400$ threshold; FAIL as frozen). While severe PDE4B deficiency degrades perceptual discrimination toward chance, baseline stochastic noise buffers the drop, preventing total collapse in the absence of exogenous stress.
+2. **C2 GJA1 Syncytial Rescue:** Relative reduction in dendritic HCN1 open probability in uniform all-mutant syncytia was $+0.03\%$ (failing the frozen $\le -35.0\%$ threshold; FAIL as frozen). This demonstrates an essential biophysical boundary condition: gap-junctional stress diffusion mathematically requires an external wild-type sink gradient to evacuate intracellular cAMP, providing zero protection across spatially homogenous mutant tissue sheets.
+3. **C3 Double-Hit Epistatic Catastrophe:** The observed risk ratio was $0.00\times$ (failing the frozen $\ge 5.00\times$ threshold; FAIL as frozen). The absolute false alarm rate peaked at $23.0\%$, bounded below the extreme $50\%$ catastrophic threshold.
+4. **C4 Compensatory Paranoid Prior Rigidity:** In microcircuits with chronic HCN1 shunting ($P_{\text{open}} \ge 0.75$), bayesian plasticity collapsed ($\lambda_{\text{eff}} \to 0$). Under 100 consecutive confirming validation rounds ($\varepsilon = +1.0$), $63.0\%$ of severe-burden agents remained permanently locked in the low-trust attractor ($S_{100} \le 0.250$) (failing the frozen $\ge 80.0\%$ ceiling; FAIL as frozen).
+
+**Compound Verdict: FAIL as frozen (0/4 PASS).** In accordance with the framework's unsparing epistemic discipline, the negative verdict is reported openly without post-hoc threshold adjustment. The substantive finding confirms the structural limits of single-gene and candidate-network models: macroscopic social trust cannot be rescued by searching for a genetic determinant, because syncytial gap junctions require environmental boundary sinks, and the non-linear reality threshold ($T = 2.5$) provides far greater intrinsic resistance to genetic variance than uncoupled biophysical models predict.
+
+<figure id="fig:sim-genomics" data-latex-placement="!tp">
+<img src="figures/fig_sim_g24_perceptual_genomics.png" />
+<figcaption><strong>Figure 34.</strong> Sim G24: Perceptual Genomics, Bioelectric Gap-Junction Epistasis, and Reality Threshold Collapse (1,000 microcircuits, seed 42). Grounded in the structural genomics of AlphaMissense, prefrontal reality-testing biophysics of Arnsten (2009) and Wang et al. (2007), and syncytial stress sharing of Shreesha &amp; Levin (2024). (a) Reality-testing fidelity vs. PDE4B missense burden (<span class="math inline"><em>ΔF</em><sub>RM</sub> = 0.106</span>; C1 FAIL); (b) Spatial syncytial cAMP clearance via GJA1 gap junctions across a <span class="math inline">10 × 10</span> pyramidal lattice; (c) Double-hit epistatic catastrophe matrix across PDE4B <span class="math inline">×</span> GJA1 pathogenicity burdens; (d) Compensatory paranoid prior rigidity: chronic HCN1 shunted circuits fail to update under 100 confirming rounds (63.0% rigidity rate; C4 FAIL). Compound verdict: FAIL as frozen (0/4 PASS).</figcaption>
+</figure>
+
+## 5.15 Temporal Dynamics of Music (TDF) and Metric Hierarchy Gating \[SIMULATION — auditory state gating\]
 
 The acoustic convention framework posited in §4.5 (“Music is the superset channel”) was operationalized and empirically validated via the **Sim M-Series** simulation battery (Supporting Document §S.15; Figure 33; $`N = 10,000`$ listening sessions across four distinct behavioral regimes: Focus/Work, Physical Exercise, Creative Flow, and Decompression; seed 42). 
 
@@ -650,7 +669,7 @@ Across all four pre-registered criteria frozen prior to execution, Sim M-Series 
 <figcaption><strong>Figure 33.</strong> Sim M-Series: Temporal Dynamics of Music (TDF) and metric hierarchy gating in DOCAS (<span class="math inline"><em>N</em> = 10,000</span> sessions, seed 42). Stage 1: Acoustic feature streams under scalar BPM aliasing. Stage 2: Neurochemical channel isomorphism and metric hierarchy ratio <span class="math inline"><em>τ</em></span> (<span class="math inline">3/4</span> simple triple <span class="math inline"><em>τ</em> = 0.0</span>, <span class="math inline">4/4</span> simple duple <span class="math inline"><em>τ</em> = 0.5</span>, <span class="math inline">6/8</span> compound duple <span class="math inline"><em>τ</em> = 1.0</span>). Stage 3: Omnibus ANOVA (<span class="math inline"><em>F</em> = 3,561.5, <em>η</em><sup>2</sup> = 0.517</span>) and mutual information escalation (<span class="math inline">+136.9%</span>). Stage 4: 5-fold cross-validated state decoding confusion collapse (<span class="math inline">71.0%</span> error suppression; Macro <span class="math inline"><em>F</em><sub>1</sub> = 0.945</span>, AUC <span class="math inline">=0.993</span>). Compound verdict: COMPOUND PASS (4/4).</figcaption>
 </figure>
 
-## 5.15 Genealogical Coalescence and Trust Heritability [SIMULATION — population genetics]
+## 5.16 Genealogical Coalescence and Trust Heritability [SIMULATION — population genetics]
 
 To establish empirical grounding for generational inheritance in Layer 2, we executed the **Sim K-Series** ($N = 1,024$ agents, $G = 50$ generations, seed 42) integrating forward-time Wright–Fisher selection with retrospective Kingman coalescent reconstruction. Trait heritability was benchmarked against the empirical behavioral genetics target of $h^2 \approx 0.32$ (CI: $[0.28, 0.36]$) established in §4.1 using Falconer's formula $h^2 = 2(r_{\text{MZ}} - r_{\text{DZ}})$.
 
@@ -661,7 +680,7 @@ Across an intensity sweep $\kappa \in [0.1, 2.0]$, emergent heritability scaled 
 <figcaption><strong>Figure 34.</strong> Sim K-Series: Genealogical Coalescence and Heritability Calibration (<span class="math inline"><em>N</em> = 1,024</span>, seed 42). (a) K1: Falconer heritability <span class="math inline"><em>h</em><sup>2</sup> = 2(<em>r</em><sub>MZ</sub> − <em>r</em><sub>DZ</sub>)</span> across Kingman intensity <span class="math inline"><em>κ</em></span>, identifying calibrated intensity <span class="math inline"><em>κ</em><sup>*</sup> = 1.62 → <em>h</em><sup>2</sup> = 0.342</span> within the empirical target window <span class="math inline">[0.28, 0.36]</span>. (b) K2: Directional trust selection accelerates lineage coalescence by <span class="math inline">39.8%</span> (<span class="math inline"><em>T</em><sub>MRCA</sub> = 1.21</span> vs. neutral <span class="math inline">2.01</span>). (c) K3: Polygenic decomposition of trust inequality (<span class="math inline"><em>R</em><sup>2</sup> = 0.262</span>).</figcaption>
 </figure>
 
-## 5.16 Choice Architecture and Asymmetric Loss Framing [SIMULATION — behavioral nudging]
+## 5.17 Choice Architecture and Asymmetric Loss Framing [SIMULATION — behavioral nudging]
 
 Bridging Thaler–Sunstein nudges and Kahneman–Tversky prospect theory into the Master Stability Law (**Sim C-Series**, $N = 1,000$ present-biased agents, seed 42), choice architecture was formalized not as an arbitrary heuristic, but as a prior-expectation shift ($E_0 \to E_0 + W$) coupled with the TFP break/build asymmetry ($\lambda^- = 4\lambda^+$).
 
@@ -672,7 +691,7 @@ Under pre-registered testing, setting cooperative agreements as the default opti
 <figcaption><strong>Figure 35.</strong> Sim C-Series: Choice Architecture and Behavioral Nudging (<span class="math inline"><em>N</em> = 1,000</span>, seed 42). (a) C1: Default nudge adherence surges from <span class="math inline">70.7%</span> to <span class="math inline">94.8%</span>. (b) C2: Loss framing engages the 4:1 Master Law asymmetry, amplifying compliance by <span class="math inline">51.4×</span> over gain framing. (c) C3: 3 units of cognitive friction suppress contract opt-out transitions by <span class="math inline">60.0%</span>.</figcaption>
 </figure>
 
-## 5.17 Semantic Drift and Betrayal Entropy Dynamics [SIMULATION — linguistic conventions]
+## 5.18 Semantic Drift and Betrayal Entropy Dynamics [SIMULATION — linguistic conventions]
 
 Operationalizing §4.5’s premise that linguistic conventions are shared expectation streams across the D–O–C–A–S semantic manifold, the **Sim S-Series** ($N = 256$ communicating agents across an 8D concept embedding space, seed 42) evaluated the LING-C1, LING-C2, and LING-C4 empirical predictions.
 
@@ -683,7 +702,7 @@ The simulation confirmed the Inverse Trust Drift Law (LING-C1): concept drift ve
 <figcaption><strong>Figure 36.</strong> Sim S-Series: Semantic Drift and Linguistic Conventions (<span class="math inline"><em>N</em> = 256</span>, seed 42). (a) S1: Inverse Trust Drift Law confirms <span class="math inline"><em>v</em><sub>drift</sub> ∝ 1/<em>τ</em></span> (<span class="math inline"><em>r</em> = 0.994, <em>p</em> &lt; 10<sup>−15</sup></span>). (b) S2: Acute betrayal shock induces an embedding entropy surge of Cohen's <span class="math inline"><em>d</em> = 2.79</span>. (c) S3: Low-trust populations exhibit a <span class="math inline">3.12×</span> surge in lexical turnover.</figcaption>
 </figure>
 
-## 5.18 Default Mode Network Counterfactual Rollouts [SIMULATION — cognitive deliberation]
+## 5.19 Default Mode Network Counterfactual Rollouts [SIMULATION — cognitive deliberation]
 
 To evaluate Layer 5's DMN analog (`mech-dmn`), we executed the **Sim DMN-Series** ($N = 1,000$ agents, 100 timesteps, seed 42) modeling counterfactual rollout planning across depths $K \in [1, 10]$ under Sim D16 predatory visual cloaking ($\chi = 3.65$).
 
@@ -694,7 +713,7 @@ The simulation established that deliberative counterfactual planning ($K = 5$) s
 <figcaption><strong>Figure 37.</strong> Sim DMN-Series: Default Mode Network Counterfactual Rollouts (<span class="math inline"><em>N</em> = 1,000</span>, seed 42). (a) DMN-1: Predatory uptake suppressed by <span class="math inline">76.9%</span> between myopic <span class="math inline"><em>K</em>=1</span> and deliberative <span class="math inline"><em>K</em>=5</span> planning. (b) DMN-2: Steady-state standing advantage (<span class="math inline">1.17×</span>). (c) DMN-3: Cognitive saturation corridor bounding marginal loss reduction beyond <span class="math inline"><em>K</em>=7</span>.</figcaption>
 </figure>
 
-## 5.19 Neural Criticality and Avalanche Power-Law Scaling [SIMULATION — branching dynamics]
+## 5.20 Neural Criticality and Avalanche Power-Law Scaling [SIMULATION — branching dynamics]
 
 Addressing §4.4’s contested criticality controversy, the **Sim CRIT-Series** ($N = 1,024$ nodes, seed 42) swept branching parameter $\sigma \in [0.60, 1.40]$ to evaluate sensory dynamic range and mutual information under the Master Stability Law.
 
@@ -705,7 +724,7 @@ Sensory dynamic range $\Delta$ peaked sharply at the critical branching point $\
 <figcaption><strong>Figure 38.</strong> Sim CRIT-Series: Neural Criticality and Branching Dynamics (<span class="math inline"><em>N</em> = 1,024</span>, seed 42). (a) CRIT-1: Sensory dynamic range peaks at critical branching parameter <span class="math inline"><em>σ</em><sup>*</sup> = 1.00</span> with <span class="math inline">18.1 dB</span> excess. (b) CRIT-2: Finite-size avalanche scaling (<span class="math inline"><em>α</em> = 0.682, <em>R</em><sup>2</sup> = 0.867</span>), reproducing the Touboul--Destexhe sub-sampling artifact. (c) CRIT-3: Mutual information transmission collapses by <span class="math inline">50.0%</span> off-criticality.</figcaption>
 </figure>
 
-## 5.20 Basal Cognition and Non-Neural Problem Solving [SIMULATION — barrier circumvention]
+## 5.21 Basal Cognition and Non-Neural Problem Solving [SIMULATION — barrier circumvention]
 
 To formally test Michael Levin's hypothesis that goal-directed navigation and collective problem solving do not require a central brain or nervous system, we executed the **Sim B-Series** ($N = 512$ non-neural cells, seed 42) navigating an unfamiliar 2D maze environment with a dead-end transverse barrier separating start $\mathbf{X}_0 = (0.15, 0.50)$ from target attractor $E^* = (0.85, 0.50)$.
 
@@ -716,7 +735,7 @@ Under gap-junctional stress sharing ($\gamma_O = 0.60$), the collective successf
 <figcaption><strong>Figure 39.</strong> Sim B-Series: Basal Cognition and Non-Neural Maze Problem-Solving (<span class="math inline"><em>N</em> = 512</span>, seed 42). (a) B1: Collective circumvents barrier under gap-junction stress sharing (<span class="math inline"><em>γ</em><sub><em>O</em></sub>=0.60</span>, green) while insular cells remain trapped (<span class="math inline"><em>γ</em><sub><em>O</em></sub>=0.0</span>, red). (b) B2: Stress gradient steering vector deflecting motility by <span class="math inline">68.5°</span>. (c) B3: Non-neural trajectory recall cuts navigation time by <span class="math inline">42.2%</span> in Trial 2.</figcaption>
 </figure>
 
-## 5.21 Cross-Substrate Dynamical Invariance: Cell to Fly to Mouse to Human [SIMULATION — multiple realizability]
+## 5.22 Cross-Substrate Dynamical Invariance: Cell to Fly to Mouse to Human [SIMULATION — multiple realizability]
 
 Demonstrating the stack's overarching claim of substrate independence, the **Sim X-Series** evaluated the Master Stability Law ($\Delta S_t = \lambda(V_t - E_t)$) running concurrently across four phylogenetic layers: (1) Cell bioelectrics ($\gamma_O = 0.50$), (2) Fly insect mushroom body (FlyWire v783 Kenyon-MBON convergence ratio $98.2\%$), (3) Mouse mammalian visual cortex (MICrONS v1822 distributed class budgets), and (4) Human temporal cortex and semantic networks (H01 dataset, mean sampled budget $3.2$ synapses/post).
 
