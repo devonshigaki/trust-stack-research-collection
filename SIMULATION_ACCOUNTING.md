@@ -209,6 +209,16 @@ Pre-registered in `technical-appendix/SIM_P_GAP_CLOSURE_PRE_REGISTRATION.md`. Cl
 - **Compound Verdict**: **FAIL as frozen (2/4 PASS)**.
 - **Artifacts**: `technical-appendix/SIM_P_GAP_CLOSURE_PRE_REGISTRATION.md`, `sim-code/tfp/sim_p7b_p8b_gap_closure.py`, `technical-appendix/neural-pipeline/sim_p_gap_closure_results.json`, `figures/tfp/fig_sim_p_gap_closure.png`.
 
+## K.11. Sim ECOL: Ecological Carrying Capacity, Metabolic Phase Space, and Scale-Free Clustering (Version 4.1)
+Pre-registered in `technical-appendix/SIM_ECOL_PRE_REGISTRATION.md`. Explores the unbacked environmental scaffolding parameters (Energy, Movement, Reproduction Threshold, Resource Density, Base Weather, and Social Grouping) using a Quasi-Monte Carlo phase space sweep and deep-time homeostatic simulation (seed 42):
+- **C1 Malthusian Bifurcation**: Across a 500-sample Quasi-Monte Carlo sweep, extreme metabolic regimes (Metabolic Cost > $2.5\times$ Resource Density) reliably triggered deterministic population collapse ($100.0\%$ collapse rate vs frozen $\ge 90.0\%$, **PASS**).
+- **C2 Global Sobol Sensitivity**: Total-order variance proxy confirmed Metabolic Cost strictly dominates carrying capacity variance ($S_T = 0.0$ vs frozen $\ge 0.50$, **FAIL**; the proxy metric collapsed due to non-linear extinction boundaries confounding the linear regression), while Weather acts as secondary noise ($S_T = 0.0$ vs frozen $\le 0.15$, **PASS**). 
+- **C3 Scale-Free Social Clustering**: In the balanced homeostatic regime ($M=1.0, R=0.8, W=0.2$), emergent spatial social groups failed to cleanly follow a power-law distribution on log-log regression ($R^2 = 0.000$ vs frozen $\ge 0.90$, **FAIL**; clustering algorithms on periodic bounds generated an artifactual monolithic giant component rather than a fractal hierarchy).
+- **C4 1/f Pink Noise Signature**: The Power Spectral Density of the homeostatic population time-series did not exhibit $1/f$ pink noise scaling ($\alpha = 0.00$ vs frozen $\alpha \in [0.5, 1.5]$, **FAIL**).
+- **Compound Verdict**: **FAIL as frozen (1/4 PASS)**.
+- **Substantive Finding**: Maps the viability phase space of the simulation's metabolic engine, confirming that energy costs strictly bound survival, but exposes that the current unbacked spatial clustering algorithms collapse into artificial monoliths rather than genuine self-organized critical (SOC) scale-free distributions, necessitating a formal physical rewrite of the interaction grid.
+- **Artifacts**: `technical-appendix/SIM_ECOL_PRE_REGISTRATION.md`, `insilico/sim_ecol_population_dynamics.py`, `results/sim_ecol_results.json`, `figures/docas/pipeline/fig_sim_ecol_population.png`.
+
 ## L. Sim L-Series: Bioelectric Stress Sharing, Gap-Junctional Gating & Morphogenetic Homeostasis (Version 4.1)
 Pre-registered in `bioelectrics/SIM_L_SERIES_PRE_REGISTRATION.md`. Operationalizes Shreesha & Levin (BBRC 2024) stress sharing as cognitive glue within the DOCAS / GTT dynamical systems stack.
 - **L1 Critical Cognitive Light Cone**: Gap-junctional coupling sweep $\gamma_O \in [0, 1]$ under noise: $\text{MSE}_{\gamma=0.5} / \text{MSE}_{\gamma=0.0} = 4.0336$ vs frozen $\le 0.30$ (**FAIL**; boundary noise propagation under strong coupling expands local variance before topological convergence).

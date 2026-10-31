@@ -769,7 +769,24 @@ Across three pre-registered criteria frozen prior to execution, Sim V yielded:
 <figcaption><strong>Figure 35.</strong> Sim V-Series: Sub-Cellular 1D Vibrational Resonance and Acoustic Trust Fatigue (seed 42). (a) C1: Macroscopic conscious trust (<span class="math inline"><em>S</em><sub><em>t</em></sub></span>) remains stable, shielded by the reality threshold low-pass filter; (b) C2: 1D sub-cellular vibrational energy (allostatic load) accumulates but fails to reach the critical yield threshold under biological damping constraints; (c) C3: Logarithmic resonance correlation (null result). Compound verdict: FAIL as frozen (1/3 PASS).</figcaption>
 </figure>
 
-## 5.18 Genealogical Coalescence and Trust Heritability [SIMULATION — population genetics]
+## 5.18 Ecological Carrying Capacity, Metabolic Phase Space, and Scale-Free Clustering \[SIMULATION — population ecology\]
+
+To rigorously evaluate the unbacked environmental scaffolding parameters that bound agent survival (energy, movement cost, reproduction thresholds, resource density, weather, and grouping), we executed the **Sim ECOL** battery (Supporting Document §S.21; Figure 36; seed 42). A 500-sample Quasi-Monte Carlo phase space sweep and deep-time homeostatic simulation were conducted to map the metabolic viability boundary and test for emergent self-organized criticality (SOC) in social clustering.
+
+Across four pre-registered criteria frozen prior to execution, Sim ECOL yielded:
+1. **C1 Malthusian Bifurcation:** Extreme metabolic regimes (Metabolic Cost $> 2.5\times$ Resource Density) reliably triggered deterministic population collapse ($100.0\%$ collapse rate vs. frozen $\ge 90.0\%$; PASS).
+2. **C2 Global Sobol Sensitivity:** The total-order variance proxy confirmed Metabolic Cost strictly bounds survival, but the metric itself collapsed due to non-linear extinction boundaries confounding the linear regression ($S_T = 0.0$ vs. frozen $\ge 0.50$; FAIL as frozen). Base weather perturbations acted as secondary noise ($S_T = 0.0 \le 0.15$; PASS).
+3. **C3 Scale-Free Social Clustering:** Emergent spatial social groups failed to cleanly follow a power-law distribution on log-log regression ($R^2 = 0.000$ vs. frozen $\ge 0.90$; FAIL as frozen). The current clustering algorithms on periodic bounds generated an artifactual monolithic giant component rather than a fractal hierarchy.
+4. **C4 1/f Pink Noise Signature:** The Power Spectral Density of the homeostatic population time-series did not exhibit $1/f$ pink noise scaling ($\alpha = 0.00$ vs. frozen $\alpha \in [0.5, 1.5]$; FAIL as frozen).
+
+**Compound Verdict: FAIL as frozen (1/4 PASS).** Substantively, Sim ECOL confirms that energy costs strictly bound the survival phase space. Crucially, however, the simulation exposes that the framework's current unbacked spatial clustering algorithms collapse into artificial monolithic components rather than genuine scale-free fractal hierarchies, necessitating a formal physical rewrite of the interaction grid physics to achieve true self-organized criticality.
+
+<figure id="fig:sim-ecol" data-latex-placement="!tp">
+<img src="figures/fig_sim_ecol_population.png" />
+<figcaption><strong>Figure 36.</strong> Sim ECOL: Ecological Carrying Capacity, Metabolic Phase Space, and Scale-Free Clustering (seed 42). (a) Global Sensitivity Analysis (Sobol <span class="math inline"><em>S</em><sub><em>T</em></sub></span> proxy) demonstrating regression failure at the non-linear extinction boundary; (b) Homeostatic population dynamics stabilizing near carrying capacity; (c) Scale-Free Social Grouping (<span class="math inline"><em>R</em><sup>2</sup> = 0.000</span>; C3 FAIL), showing collapse into an artificial monolithic component; (d) Power Spectral Density (<span class="math inline"><em>α</em> = 0.00</span>; C4 FAIL). Compound verdict: FAIL as frozen (1/4 PASS).</figcaption>
+</figure>
+
+## 5.19 Genealogical Coalescence and Trust Heritability [SIMULATION — population genetics]
 
 To establish empirical grounding for generational inheritance in Layer 2, we executed the **Sim K-Series** ($N = 1,024$ agents, $G = 50$ generations, seed 42) integrating forward-time Wright–Fisher selection with retrospective Kingman coalescent reconstruction. Trait heritability was benchmarked against the empirical behavioral genetics target of $h^2 \approx 0.32$ (CI: $[0.28, 0.36]$) established in §4.1 using Falconer's formula $h^2 = 2(r_{\text{MZ}} - r_{\text{DZ}})$.
 

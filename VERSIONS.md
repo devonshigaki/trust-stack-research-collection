@@ -145,6 +145,12 @@ Content:
   - Compound verdict: **FAIL as frozen (1/4 PASS)**.
   - Substantive finding: Proves that Kantian categorical honesty survives Machiavellian predation only within dense Collectivist topologies with gap-junctional stress-sharing ($\gamma_O = 0.50$), de-quarantining GTT §7's $S_{\text{civ}}$ speculation.
   - Deliverables: `SIM_G26_PRE_REGISTRATION.md`, `sim_g26_kant_vs_machiavelli.py`, `sim_g26_results.json`, `fig_sim_g26_kant_vs_machiavelli.png`.
+- **Ecological Carrying Capacity, Metabolic Phase Space, and Scale-Free Clustering (Sim ECOL)**:
+  - Pre-registered in `technical-appendix/SIM_ECOL_PRE_REGISTRATION.md`. Explores unbacked environmental scaffolding parameters (Energy, Movement, Reproduction, Resources, Base Weather, and Grouping) across a 500-sample Quasi-Monte Carlo phase space sweep and deep-time homeostatic simulation (seed 42).
+  - Criteria: C1 Malthusian bifurcation $100.0\%$ collapse vs $\ge 90.0\%$ (**PASS**); C2 global Sobol sensitivity $S_T = 0.0$ vs $\ge 0.50$ (**FAIL**); C3 scale-free clustering $R^2 = 0.0$ vs $\ge 0.90$ (**FAIL**); C4 pink noise signature $\alpha = 0.0$ vs $[0.5, 1.5]$ (**FAIL**).
+  - Compound verdict: **FAIL as frozen (1/4 PASS)**.
+  - Substantive finding: Confirms energy costs tightly bound the survival phase space, but proves that the current ad-hoc spatial clustering algorithms collapse into artificial monolithic components rather than genuine scale-free fractal hierarchies, necessitating a rewrite of the grid interaction physics.
+  - Deliverables: `SIM_ECOL_PRE_REGISTRATION.md`, `sim_ecol_population_dynamics.py`, `sim_ecol_results.json`, `fig_sim_ecol_population.png`.
 - **Closing TFP Protocol Open Proof Obligations (Sim P7b & Sim P8b)**:
   - Pre-registered in `technical-appendix/SIM_P_GAP_CLOSURE_PRE_REGISTRATION.md`. Closes the two technical limitations flagged in `tfp_revised.md` §3.7.
   - Criteria: C1 & C2 (P7b salience sweep $s \in [0.1, 1.0] \times \beta \in [0.4, 0.9]$ confirmed monotonic protection; **FAIL as frozen** on strict rho); C3 (P8b explicit asymmetric preset $\lambda^- = 0.02, \lambda^+ = 0.005$ on-off net utility strictly negative across all $d \ge 2$; **PASS**); C4 (P8b Sybil linear cost scaling $R^2 = 1.000$ and time floor $2.74\text{ yr} \ge 1.4\text{ yr}$; **PASS**).
