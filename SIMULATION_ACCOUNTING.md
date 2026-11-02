@@ -202,7 +202,7 @@ Pre-registered in `technical-appendix/SIM_G26_PRE_REGISTRATION.md`. De-quarantin
 - **Artifacts**: `technical-appendix/SIM_G26_PRE_REGISTRATION.md`, `insilico/sim_g26_kant_vs_machiavelli.py`, `results/sim_g26_results.json`, `figures/docas/pipeline/fig_sim_g26_kant_vs_machiavelli.png`.
 
 ## K.10. Sim P7b & Sim P8b: Closing TFP Open Proof Obligations (Version 4.1)
-Pre-registered in `technical-appendix/SIM_P_GAP_CLOSURE_PRE_REGISTRATION.md`. Closes the two technical limitations flagged in `tfp_revised.md` §3.7:
+Pre-registered in `technical-appendix/SIM_P_GAP_CLOSURE_PRE_REGISTRATION.md`. Closes the two technical limitations flagged in `tfp.md` §3.7:
 - **C1 & C2 (Sim P7b Salience Sensitivity Sweep)**: 2D grid sweep $s \in [0.1, 1.0] \times \beta \in [0.4, 0.9]$ confirmed that immediate validation monotonically suppresses adversarial uptake across salience levels (**FAIL as frozen** on strict rho threshold, but robust trend confirmed).
 - **C3 (Sim P8b Explicit Asymmetric On-Off Domination)**: Under explicit preset $\lambda^- = 0.02, \lambda^+ = 0.005$, on-off cycling yields strictly negative net utility ($U_{\text{net}} < 0$) across all defection severities $d \ge 2$ (**PASS**), formally discharging TFP §3.7's verification re-run obligation.
 - **C4 (Sim P8b Sybil Linear Cost Multiplier)**: Cost to manufacture 10 units of standing scales strictly linearly ($R^2 = 1.000$) with attestation multiplier $m$, maintaining a wall-clock time floor of $2.74\text{ years} \ge 1.4\text{ years}$ at $2\text{ events/day}$ (**PASS**).

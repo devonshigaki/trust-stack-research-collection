@@ -2,7 +2,7 @@
 
 All runs: numpy/matplotlib/scipy, seed 42 (multi-seed medians noted where used), honest nulls included.
 Figures at 150 dpi in `/mnt/agents/output/figures/whitepaper/`. Claims referenced to
-`/mnt/agents/output/revised/whitepaper_revised.md` and Sim-Battery A/B (`/mnt/agents/work/sims/sim_results_A.md`, `sim_results_B.md`).
+`/mnt/agents/output/revised/whitepaper.md` and Sim-Battery A/B (`/mnt/agents/work/sims/sim_results_A.md`, `sim_results_B.md`).
 
 Conventions enforced: master law `S ← S + λ⁺max(ε̃,0) + λ⁻min(ε̃,0) − δ(S − S_base)`, ε̃ = (V−E)/s_d (§M4/M8);
 stereographic phase map θ = 2 arctan(ε̃) (§M7); leakage K_eff = K(1−ℓ), σ_η = πℓ/2 (Sim-B Study 1 spec).

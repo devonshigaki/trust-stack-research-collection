@@ -1,6 +1,6 @@
 # Google Deep Review & PAT Audit Report
 
-- **Target Manuscript:** `gtt_revised.md`
+- **Target Manuscript:** `gtt.md`
 - **Review Engine:** Google Interactions API (`gemini-3.1-pro-preview`)
 - **Search Grounding:** Enabled (Google Search Agent)
 - **Review Latency:** 56.7 seconds

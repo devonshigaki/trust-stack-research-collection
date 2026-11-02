@@ -1,7 +1,7 @@
 # numbers_tfp.md — TFP full simulation battery re-run (SIM-P), claim vs re-run
 
 All re-runs: numpy/scipy/matplotlib, seed 42, honest nulls preserved. Figures at 150 dpi in `/mnt/agents/output/figures/tfp/`.
-Claims sourced from `/mnt/agents/output/revised/tfp_revised.md` (§3.6–3.10, Figures 2–10 captions) and the archived specs `/mnt/agents/work/sims/sim_results_A.md`, `sim_results_B.md`.
+Claims sourced from `/mnt/agents/output/revised/tfp.md` (§3.6–3.10, Figures 2–10 captions) and the archived specs `/mnt/agents/work/sims/sim_results_A.md`, `sim_results_B.md`.
 Verdicts: **PASS** = re-run inside claimed uncertainty or arithmetic exact; **DEVIATION** = mismatch that should change printed text.
 
 ---

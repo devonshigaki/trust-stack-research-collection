@@ -1,6 +1,6 @@
 # numbers_gtt.md — SIM-G full GTT re-run under repaired conventions
 
-Re-run of the GTT simulation battery against `/mnt/agents/output/revised/gtt_revised.md`
+Re-run of the GTT simulation battery against `/mnt/agents/output/revised/gtt.md`
 (claims G1–G21, §3.6 Sims G1–G9) per `/mnt/agents/work/math/math_repairs.md`.
 All runs: numpy/scipy/matplotlib, seed 42 (Sim G8 is deterministic, seed-free), honest nulls
 retained. Figures in this directory (PNG, 150 dpi, captioned, axis labels).

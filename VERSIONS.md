@@ -152,7 +152,7 @@ Content:
   - Substantive finding: Confirms energy costs tightly bound the survival phase space, but proves that the current ad-hoc spatial clustering algorithms collapse into artificial monolithic components rather than genuine scale-free fractal hierarchies, necessitating a rewrite of the grid interaction physics.
   - Deliverables: `SIM_ECOL_PRE_REGISTRATION.md`, `sim_ecol_population_dynamics.py`, `sim_ecol_results.json`, `fig_sim_ecol_population.png`.
 - **Closing TFP Protocol Open Proof Obligations (Sim P7b & Sim P8b)**:
-  - Pre-registered in `technical-appendix/SIM_P_GAP_CLOSURE_PRE_REGISTRATION.md`. Closes the two technical limitations flagged in `tfp_revised.md` §3.7.
+  - Pre-registered in `technical-appendix/SIM_P_GAP_CLOSURE_PRE_REGISTRATION.md`. Closes the two technical limitations flagged in `tfp.md` §3.7.
   - Criteria: C1 & C2 (P7b salience sweep $s \in [0.1, 1.0] \times \beta \in [0.4, 0.9]$ confirmed monotonic protection; **FAIL as frozen** on strict rho); C3 (P8b explicit asymmetric preset $\lambda^- = 0.02, \lambda^+ = 0.005$ on-off net utility strictly negative across all $d \ge 2$; **PASS**); C4 (P8b Sybil linear cost scaling $R^2 = 1.000$ and time floor $2.74\text{ yr} \ge 1.4\text{ yr}$; **PASS**).
   - Compound verdict: **FAIL as frozen (2/4 PASS)**.
   - Substantive finding: Permanently closes all open proof obligations in TFP §3.7, verifying the explicit asymmetric preset and salience protection floor.

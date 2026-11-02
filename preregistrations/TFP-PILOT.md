@@ -1,7 +1,7 @@
 # TFP-PILOT — Pre-Registration (Skeleton Draft): Fresh Protocol Pilot Program
 
 **Registration type:** OSF "Pre-Data Collection Registration" (deposit pending; OSF DOI to be assigned).
-**Source:** Extracted from *The Fresh Protocol* (tfp_revised.md) §1.4 "Hypotheses and proof obligations" (the registered form — an earlier draft stated the headline hypothesis backwards relative to what the simulations test; the current text matches the tested design) and §5 "Protocol Evolution and Benchmarking."
+**Source:** Extracted from *The Fresh Protocol* (tfp.md) §1.4 "Hypotheses and proof obligations" (the registered form — an earlier draft stated the headline hypothesis backwards relative to what the simulations test; the current text matches the tested design) and §5 "Protocol Evolution and Benchmarking."
 **Self-attestation status:** the in-silico proof obligations (1)–(3) below are discharged against criteria internally frozen and timestamped in the Supporting Document; external OSF registration of the same design is pending and must be filed **prior to any pilot data collection**. Until then, all frozen-criteria claims are self-attested.
 
 ---
@@ -46,4 +46,4 @@
 
 ## 6. Current status
 
-In-silico obligations (1)–(3) discharged and printed in tfp_revised.md §3.6 with seeds and audit trail (figures in this deposit: figures/tfp/, figures/robustness/); obligation (4) maintained against frozen figures plus the supplementary calculator. Pilot: no human/deployment data collected. Self-attested until this registration is filed; the collection index carries the correction history (the H1 inversion repair) in its correction register, and this registration files the CURRENT text.
+In-silico obligations (1)–(3) discharged and printed in tfp.md §3.6 with seeds and audit trail (figures in this deposit: figures/tfp/, figures/robustness/); obligation (4) maintained against frozen figures plus the supplementary calculator. Pilot: no human/deployment data collected. Self-attested until this registration is filed; the collection index carries the correction history (the H1 inversion repair) in its correction register, and this registration files the CURRENT text.

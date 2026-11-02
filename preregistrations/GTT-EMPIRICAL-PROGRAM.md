@@ -1,7 +1,7 @@
 # GTT-EMPIRICAL-PROGRAM — Pre-Registration (Skeleton Draft)
 
 **Registration type:** OSF "Pre-Data Collection Registration" (deposit pending; OSF DOI to be assigned).
-**Source:** Extracted from *The General Theory of Trust* (gtt_revised.md) §6 "Proposed Empirical Program" — the prospective-studies section of the theory paper. All hypotheses below are stated in their current, post-repair form.
+**Source:** Extracted from *The General Theory of Trust* (gtt.md) §6 "Proposed Empirical Program" — the prospective-studies section of the theory paper. All hypotheses below are stated in their current, post-repair form.
 **Self-attestation status:** internally specified and timestamped in this deposit; external OSF registration pending. Until this registration exists, all pre-registration and frozen-criteria claims referenced here are self-attested by the author. This deposit replaces that caveat once the OSF DOI is assigned.
 
 ---

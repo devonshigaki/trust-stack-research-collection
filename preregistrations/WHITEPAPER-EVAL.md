@@ -1,7 +1,7 @@
 # WHITEPAPER-EVAL — Pre-Registration (Skeleton Draft): FreshCredit Pilot Evaluation Program
 
 **Registration type:** OSF "Pre-Data Collection Registration" (deposit pending; OSF DOI to be assigned).
-**Source:** Extracted from *FreshCredit: Credit as Trust Quantified* (whitepaper_revised.md) §4 "Benchmarks and Projections (Discipline)" — including its pre-registration commitment ("the dual-layer DOCAS validation and the pilot evaluation are pre-registered (OSF) before data analysis") — together with the concordance-pilot protocol of §3.4, which is the pilot evaluation's measurement design, and the harm/benefit ledgers of §4.3/§4.4, which define the evaluation's harm-side endpoints.
+**Source:** Extracted from *FreshCredit: Credit as Trust Quantified* (whitepaper.md) §4 "Benchmarks and Projections (Discipline)" — including its pre-registration commitment ("the dual-layer DOCAS validation and the pilot evaluation are pre-registered (OSF) before data analysis") — together with the concordance-pilot protocol of §3.4, which is the pilot evaluation's measurement design, and the harm/benefit ledgers of §4.3/§4.4, which define the evaluation's harm-side endpoints.
 **Self-attestation status:** the pipeline-validation criteria below were frozen in code before the passing in-silico run (audit trail: four first-run failures preserved and disclosed); external OSF registration is pending. Until filed, all frozen-criteria and pre-registration claims are self-attested. The real-user concordance study is explicitly the stack's "A-grade gate."
 
 ---

@@ -1,6 +1,6 @@
 # Google Deep Review & PAT Audit Report
 
-- **Target Manuscript:** `docas_revised.md`
+- **Target Manuscript:** `docas.md`
 - **Review Engine:** Google Interactions API (`gemini-3.1-pro-preview`)
 - **Search Grounding:** Enabled (Google Search Agent)
 - **Review Latency:** 59.1 seconds

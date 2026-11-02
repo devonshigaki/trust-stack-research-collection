@@ -1,7 +1,7 @@
 # DOCAS x TRIBE v2 — Engineering Run Report
 
 **Date:** 2026-09-07 (sandbox clock) · **Agent:** ENG · **Scope:** set up and run the DOCAS
-paper's brain-decoding pipeline (docas_revised.md §4.6, §5.2) with real artifacts, or document
+paper's brain-decoding pipeline (docas.md §4.6, §5.2) with real artifacts, or document
 precisely what blocks it.
 
 ## 0. Verdict (one line)

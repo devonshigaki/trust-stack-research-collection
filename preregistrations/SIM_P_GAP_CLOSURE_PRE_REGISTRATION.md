@@ -14,7 +14,7 @@
 
 ## 1. Domain Hypotheses & Theoretical Motivation
 
-In `tfp_revised.md` §3.7, two technical limitations remained explicitly open:
+In `tfp.md` §3.7, two technical limitations remained explicitly open:
 1. **Sim P7 limitation:** The protective effect of immediate validation against present-biased contract exploitation was demonstrated at only a single salience setting. A full 2D salience sensitivity grid $s \in [0.1, 1.0] \times \beta \in [0.4, 0.9]$ was registered as a requirement for the Supporting Document.
 2. **Sim P8 limitation:** The canonical reputation attack taxonomy (Sybil, on-off, whitewashing) was evaluated on provisional code where the exact preset was unconfirmed. It was registered for a verification re-run under the explicit asymmetric preset $\lambda^- = 0.02, \lambda^+ = 0.005$ ($\lambda^- = 4\lambda^+$).
 
