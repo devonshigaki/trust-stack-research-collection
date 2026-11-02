@@ -688,7 +688,7 @@ Evaluating acoustic compression sweeps from $5.0$ to $15.0\text{ syl/s}$ against
 <figcaption><strong>Figure 35.</strong> Sim D20: Auditory Cloaking, Fast-Talking Disclaimers, and Phonemic Restoration (<span class="math inline"><em>N</em> = 1,000</span> agents, seed 42). Grounded in the phonemic restoration psychophysics of Warren (1970) and auditory cortical phase-locking limits. (a) Disclaimer syllable rate vs. reality threshold suppression: fine print is suppressed below <span class="math inline"><em>T</em><sub>reality</sub> = 2.5</span> in 87.1% of trials once speech exceeds 9.8 syl/s (C1 PASS); (b) Predatory uptake surge driven by top-down phonemic restoration (+15.4%; C2 FAIL as frozen); (c) Simulated STG acoustic envelope tracking correlation with human intelligibility curves (<span class="math inline"><em>r</em> = 0.995</span>; C3 PASS); (d) Playback rate permutation null distribution (<span class="math inline"><em>p</em> &lt; 0.001</span>; C4 PASS). Compound verdict: FAIL as frozen (3/4 PASS).</figcaption>
 </figure>
 
-## 5.16 Multimodal TRIBE v2 Forward Encoding, Anterior Insula Silencing, and Neuroeconomic Fairness \[SIMULATION — multi-modal brain encoding & Ultimatum Game\]
+## 5.17 Multimodal TRIBE v2 Forward Encoding, Anterior Insula Silencing, and Neuroeconomic Fairness \[SIMULATION — multi-modal brain encoding & Ultimatum Game\]
 
 Classical "revealed preference" economics assumes that consumers accept high-cost loans because they subjectively value liquidity enough to consider the transaction "fair." To determine whether subjective fairness is an authentic preference or an engineered perceptual artifact, we synthesized 27 two-speed acoustic commercials (normal headline at ~4.5 syl/s + time-compressed disclaimer at 11.8 syl/s) paired with their visual agreement cards, and executed the whole-brain Meta TRIBE v2 forward encoding pipeline across 20,484 cortical surface vertices over 100 TRs (fsaverage5 space), feeding the predicted Bilateral Anterior Insula (aINS) BOLD responses into an agent-based Ultimatum Game under Fehr–Schmidt inequality aversion (**Sim D21**; Supporting Document §S.18; Figure 36; Figure 37; $`N = 1,000`$ agents, seed 42; Sanfey et al., 2003; Fehr & Schmidt, 1999).
 
@@ -710,7 +710,7 @@ Across four pre-registered criteria frozen prior to execution, Sim D21 yielded:
 <figcaption><strong>Figure 37.</strong> Sim D21: Neuroeconomic Fairness Pipeline and Ultimatum Game Dynamics (<span class="math inline"><em>N</em> = 1,000</span> agents, seed 42). (a) Auditory cortical phase-locking collapse above 9.8 syl/s; (b) Bilateral Anterior Insula Norm Prediction Error time course (58.1% suppression under cloaking; C1 FAIL as frozen); (c) Ultimatum Game fairness acceptance inversion (0.0% transparent vs 100.0% cloaked; C2 PASS); (d) Delayed insular rebound shock at maturity (<span class="math inline">3.37×</span>; C4 PASS). Compound verdict: FAIL as frozen (2/4 PASS).</figcaption>
 </figure>
 
-## 5.17 Temporal Dynamics of Music (TDF) and Metric Hierarchy Gating \[SIMULATION — auditory state gating\]
+## 5.18 Temporal Dynamics of Music (TDF) and Metric Hierarchy Gating \[SIMULATION — auditory state gating\]
 
 The acoustic convention framework posited in §4.5 (“Music is the superset channel”) was operationalized and empirically validated via the **Sim M-Series** simulation battery (Supporting Document §S.15; Figure 33; $`N = 10,000`$ listening sessions across four distinct behavioral regimes: Focus/Work, Physical Exercise, Creative Flow, and Decompression; seed 42). 
 
@@ -733,7 +733,7 @@ Across all four pre-registered criteria frozen prior to execution, Sim M-Series 
 <figcaption><strong>Figure 33.</strong> Sim M-Series: Temporal Dynamics of Music (TDF) and metric hierarchy gating in DOCAS (<span class="math inline"><em>N</em> = 10,000</span> sessions, seed 42). Stage 1: Acoustic feature streams under scalar BPM aliasing. Stage 2: Neurochemical channel isomorphism and metric hierarchy ratio <span class="math inline"><em>τ</em></span> (<span class="math inline">3/4</span> simple triple <span class="math inline"><em>τ</em> = 0.0</span>, <span class="math inline">4/4</span> simple duple <span class="math inline"><em>τ</em> = 0.5</span>, <span class="math inline">6/8</span> compound duple <span class="math inline"><em>τ</em> = 1.0</span>). Stage 3: Omnibus ANOVA (<span class="math inline"><em>F</em> = 3,561.5, <em>η</em><sup>2</sup> = 0.517</span>) and mutual information escalation (<span class="math inline">+136.9%</span>). Stage 4: 5-fold cross-validated state decoding confusion collapse (<span class="math inline">71.0%</span> error suppression; Macro <span class="math inline"><em>F</em><sub>1</sub> = 0.945</span>, AUC <span class="math inline">=0.993</span>). Compound verdict: COMPOUND PASS (4/4).</figcaption>
 </figure>
 
-## 5.16 Non-Dualism, Markov Blanket Dissolution, and Machiavellian Exploitation \[SIMULATION — philosophical priors\]
+## 5.19 Non-Dualism, Markov Blanket Dissolution, and Machiavellian Exploitation \[SIMULATION — philosophical priors\]
 
 Trust is a fundamental physical force vector—the expectation–validation differential ($\varepsilon_t = V_t - E_t$)—present in all systems from ion channels to societal ledgers. However, in the human species, this force vector is processed through the cognitive architecture of consciousness as a constructed perceptual phenomenon. Central to this perception is the philosophical prior of the Markov Blanket (Friston, 2013), the statistical boundary separating the "self-model" from the "external-world-model."
 
@@ -751,7 +751,7 @@ Across three pre-registered criteria frozen prior to execution, Sim N yielded:
 <figcaption><strong>Figure 34.</strong> Sim N-Series: Non-Dualism, Markov Blanket Dissolution, and Machiavellian Exploitation (<span class="math inline"><em>N</em> = 1,000</span>, seed 42). (a) C1: Cumulative allostatic load (Cortisol cost) buffered by 88.9% in non-dual agents; (b) C2: Evolutionary payoff vs. initial non-dual density, showing failure to achieve an Evolutionarily Stable Strategy against Machiavellian predators under scarcity; (c) C3: Equanimity attractor (<span class="math inline"><em>S</em><sub><em>t</em></sub> → 0.5</span>) achieved via Markov blanket dissolution. Compound verdict: FAIL as frozen (2/3 PASS).</figcaption>
 </figure>
 
-## 5.17 Sub-Cellular 1D Vibrational Resonance and Acoustic Trust Fatigue \[SIMULATION — vibrational continuum\]
+## 5.20 Sub-Cellular 1D Vibrational Resonance and Acoustic Trust Fatigue \[SIMULATION — vibrational continuum\]
 
 Below the level of ion channels (§5.24) lies the 1D continuous vibrational wave of molecular expectation. Because macroscopic conscious trust perception scales logarithmically (Weber–Fechner Law, $\varepsilon_{\text{perceived}} \sim \ln(V/E)$), the Reality Threshold ($T_{\text{reality}}$) acts as a low-pass filter, ignoring high-frequency, low-amplitude prediction errors. However, at the physical 1D vibrational level, these sub-threshold micro-aggressions impart kinetic energy, analogous to "acoustic fatigue" in aerospace engineering.
 
@@ -769,7 +769,7 @@ Across three pre-registered criteria frozen prior to execution, Sim V yielded:
 <figcaption><strong>Figure 35.</strong> Sim V-Series: Sub-Cellular 1D Vibrational Resonance and Acoustic Trust Fatigue (seed 42). (a) C1: Macroscopic conscious trust (<span class="math inline"><em>S</em><sub><em>t</em></sub></span>) remains stable, shielded by the reality threshold low-pass filter; (b) C2: 1D sub-cellular vibrational energy (allostatic load) accumulates but fails to reach the critical yield threshold under biological damping constraints; (c) C3: Logarithmic resonance correlation (null result). Compound verdict: FAIL as frozen (1/3 PASS).</figcaption>
 </figure>
 
-## 5.18 Ecological Carrying Capacity, Metabolic Phase Space, and Scale-Free Clustering \[SIMULATION — population ecology\]
+## 5.21 Ecological Carrying Capacity, Metabolic Phase Space, and Scale-Free Clustering \[SIMULATION — population ecology\]
 
 To rigorously evaluate the unbacked environmental scaffolding parameters that bound agent survival (energy, movement cost, reproduction thresholds, resource density, weather, and grouping), we executed the **Sim ECOL** battery (Supporting Document §S.21; Figure 36; seed 42). A 500-sample Quasi-Monte Carlo phase space sweep and deep-time homeostatic simulation were conducted to map the metabolic viability boundary and test for emergent self-organized criticality (SOC) in social clustering.
 
@@ -786,7 +786,7 @@ Across four pre-registered criteria frozen prior to execution, Sim ECOL yielded:
 <figcaption><strong>Figure 36.</strong> Sim ECOL: Ecological Carrying Capacity, Metabolic Phase Space, and Scale-Free Clustering (seed 42). (a) Global Sensitivity Analysis (Sobol <span class="math inline"><em>S</em><sub><em>T</em></sub></span> proxy) demonstrating regression failure at the non-linear extinction boundary; (b) Homeostatic population dynamics stabilizing near carrying capacity; (c) Scale-Free Social Grouping (<span class="math inline"><em>R</em><sup>2</sup> = 0.000</span>; C3 FAIL), showing collapse into an artificial monolithic component; (d) Power Spectral Density (<span class="math inline"><em>α</em> = 0.00</span>; C4 FAIL). Compound verdict: FAIL as frozen (1/4 PASS).</figcaption>
 </figure>
 
-## 5.19 Genealogical Coalescence and Trust Heritability [SIMULATION — population genetics]
+## 5.22 Genealogical Coalescence and Trust Heritability [SIMULATION — population genetics]
 
 To establish empirical grounding for generational inheritance in Layer 2, we executed the **Sim K-Series** ($N = 1,024$ agents, $G = 50$ generations, seed 42) integrating forward-time Wright–Fisher selection with retrospective Kingman coalescent reconstruction. Trait heritability was benchmarked against the empirical behavioral genetics target of $h^2 \approx 0.32$ (CI: $[0.28, 0.36]$) established in §4.1 using Falconer's formula $h^2 = 2(r_{\text{MZ}} - r_{\text{DZ}})$.
 
@@ -797,7 +797,7 @@ Across an intensity sweep $\kappa \in [0.1, 2.0]$, emergent heritability scaled 
 <figcaption><strong>Figure 38.</strong> Sim K-Series: Genealogical Coalescence and Heritability Calibration (<span class="math inline"><em>N</em> = 1,024</span>, seed 42). (a) K1: Falconer heritability <span class="math inline"><em>h</em><sup>2</sup> = 2(<em>r</em><sub>MZ</sub> − <em>r</em><sub>DZ</sub>)</span> across Kingman intensity <span class="math inline"><em>κ</em></span>, identifying calibrated intensity <span class="math inline"><em>κ</em><sup>*</sup> = 1.62 → <em>h</em><sup>2</sup> = 0.342</span> within the empirical target window <span class="math inline">[0.28, 0.36]</span>. (b) K2: Directional trust selection accelerates lineage coalescence by <span class="math inline">39.8%</span> (<span class="math inline"><em>T</em><sub>MRCA</sub> = 1.21</span> vs. neutral <span class="math inline">2.01</span>). (c) K3: Polygenic decomposition of trust inequality (<span class="math inline"><em>R</em><sup>2</sup> = 0.262</span>).</figcaption>
 </figure>
 
-## 5.19 Choice Architecture and Asymmetric Loss Framing [SIMULATION — behavioral nudging]
+## 5.23 Choice Architecture and Asymmetric Loss Framing [SIMULATION — behavioral nudging]
 
 Bridging Thaler–Sunstein nudges and Kahneman–Tversky prospect theory into the Master Stability Law (**Sim C-Series**, $N = 1,000$ present-biased agents, seed 42), choice architecture was formalized not as an arbitrary heuristic, but as a prior-expectation shift ($E_0 \to E_0 + W$) coupled with the TFP break/build asymmetry ($\lambda^- = 4\lambda^+$).
 
@@ -808,7 +808,7 @@ Under pre-registered testing, setting cooperative agreements as the default opti
 <figcaption><strong>Figure 39.</strong> Sim C-Series: Choice Architecture and Behavioral Nudging (<span class="math inline"><em>N</em> = 1,000</span>, seed 42). (a) C1: Default nudge adherence surges from <span class="math inline">70.7%</span> to <span class="math inline">94.8%</span>. (b) C2: Loss framing engages the 4:1 Master Law asymmetry, amplifying compliance by <span class="math inline">51.4×</span> over gain framing. (c) C3: 3 units of cognitive friction suppress contract opt-out transitions by <span class="math inline">60.0%</span>.</figcaption>
 </figure>
 
-## 5.20 Semantic Drift and Betrayal Entropy Dynamics [SIMULATION — linguistic conventions]
+## 5.24 Semantic Drift and Betrayal Entropy Dynamics [SIMULATION — linguistic conventions]
 
 Operationalizing §4.5’s premise that linguistic conventions are shared expectation streams across the D–O–C–A–S semantic manifold, the **Sim S-Series** ($N = 256$ communicating agents across an 8D concept embedding space, seed 42) evaluated the LING-C1, LING-C2, and LING-C4 empirical predictions.
 
@@ -819,7 +819,7 @@ The simulation confirmed the Inverse Trust Drift Law (LING-C1): concept drift ve
 <figcaption><strong>Figure 40.</strong> Sim S-Series: Semantic Drift and Linguistic Conventions (<span class="math inline"><em>N</em> = 256</span>, seed 42). (a) S1: Inverse Trust Drift Law confirms <span class="math inline"><em>v</em><sub>drift</sub> ∝ 1/<em>τ</em></span> (<span class="math inline"><em>r</em> = 0.994, <em>p</em> &lt; 10<sup>−15</sup></span>). (b) S2: Acute betrayal shock induces an embedding entropy surge of Cohen's <span class="math inline"><em>d</em> = 2.79</span>. (c) S3: Low-trust populations exhibit a <span class="math inline">3.12×</span> surge in lexical turnover.</figcaption>
 </figure>
 
-## 5.21 Default Mode Network Counterfactual Rollouts [SIMULATION — cognitive deliberation]
+## 5.25 Default Mode Network Counterfactual Rollouts [SIMULATION — cognitive deliberation]
 
 To evaluate Layer 5's DMN analog (`mech-dmn`), we executed the **Sim DMN-Series** ($N = 1,000$ agents, 100 timesteps, seed 42) modeling counterfactual rollout planning across depths $K \in [1, 10]$ under Sim D16 predatory visual cloaking ($\chi = 3.65$).
 
@@ -830,7 +830,7 @@ The simulation established that deliberative counterfactual planning ($K = 5$) s
 <figcaption><strong>Figure 41.</strong> Sim DMN-Series: Default Mode Network Counterfactual Rollouts (<span class="math inline"><em>N</em> = 1,000</span>, seed 42). (a) DMN-1: Predatory uptake suppressed by <span class="math inline">76.9%</span> between myopic <span class="math inline"><em>K</em>=1</span> and deliberative <span class="math inline"><em>K</em>=5</span> planning. (b) DMN-2: Steady-state standing advantage (<span class="math inline">1.17×</span>). (c) DMN-3: Cognitive saturation corridor bounding marginal loss reduction beyond <span class="math inline"><em>K</em>=7</span>.</figcaption>
 </figure>
 
-## 5.22 Neural Criticality and Avalanche Power-Law Scaling [SIMULATION — branching dynamics]
+## 5.26 Neural Criticality and Avalanche Power-Law Scaling [SIMULATION — branching dynamics]
 
 Addressing §4.4’s contested criticality controversy, the **Sim CRIT-Series** ($N = 1,024$ nodes, seed 42) swept branching parameter $\sigma \in [0.60, 1.40]$ to evaluate sensory dynamic range and mutual information under the Master Stability Law.
 
@@ -841,7 +841,7 @@ Sensory dynamic range $\Delta$ peaked sharply at the critical branching point $\
 <figcaption><strong>Figure 38.</strong> Sim CRIT-Series: Neural Criticality and Branching Dynamics (<span class="math inline"><em>N</em> = 1,024</span>, seed 42). (a) CRIT-1: Sensory dynamic range peaks at critical branching parameter <span class="math inline"><em>σ</em><sup>*</sup> = 1.00</span> with <span class="math inline">18.1 dB</span> excess. (b) CRIT-2: Finite-size avalanche scaling (<span class="math inline"><em>α</em> = 0.682, <em>R</em><sup>2</sup> = 0.867</span>), reproducing the Touboul--Destexhe sub-sampling artifact. (c) CRIT-3: Mutual information transmission collapses by <span class="math inline">50.0%</span> off-criticality.</figcaption>
 </figure>
 
-## 5.21 Basal Cognition and Non-Neural Problem Solving [SIMULATION — barrier circumvention]
+## 5.27 Basal Cognition and Non-Neural Problem Solving [SIMULATION — barrier circumvention]
 
 To formally test Michael Levin's hypothesis that goal-directed navigation and collective problem solving do not require a central brain or nervous system, we executed the **Sim B-Series** ($N = 512$ non-neural cells, seed 42) navigating an unfamiliar 2D maze environment with a dead-end transverse barrier separating start $\mathbf{X}_0 = (0.15, 0.50)$ from target attractor $E^* = (0.85, 0.50)$.
 
@@ -852,7 +852,7 @@ Under gap-junctional stress sharing ($\gamma_O = 0.60$), the collective successf
 <figcaption><strong>Figure 39.</strong> Sim B-Series: Basal Cognition and Non-Neural Maze Problem-Solving (<span class="math inline"><em>N</em> = 512</span>, seed 42). (a) B1: Collective circumvents barrier under gap-junction stress sharing (<span class="math inline"><em>γ</em><sub><em>O</em></sub>=0.60</span>, green) while insular cells remain trapped (<span class="math inline"><em>γ</em><sub><em>O</em></sub>=0.0</span>, red). (b) B2: Stress gradient steering vector deflecting motility by <span class="math inline">68.5°</span>. (c) B3: Non-neural trajectory recall cuts navigation time by <span class="math inline">42.2%</span> in Trial 2.</figcaption>
 </figure>
 
-## 5.22 Cross-Substrate Dynamical Invariance: Cell to Fly to Mouse to Human [SIMULATION — multiple realizability]
+## 5.28 Cross-Substrate Dynamical Invariance: Cell to Fly to Mouse to Human [SIMULATION — multiple realizability]
 
 Demonstrating the stack's overarching claim of substrate independence, the **Sim X-Series** evaluated the Master Stability Law ($\Delta S_t = \lambda(V_t - E_t)$) running concurrently across four phylogenetic layers: (1) Cell bioelectrics ($\gamma_O = 0.50$), (2) Fly insect mushroom body (FlyWire v783 Kenyon-MBON convergence ratio $98.2\%$), (3) Mouse mammalian visual cortex (MICrONS v1822 distributed class budgets), and (4) Human temporal cortex and semantic networks (H01 dataset, mean sampled budget $3.2$ synapses/post).
 
@@ -863,7 +863,7 @@ The simulation proved universal dynamical contraction (Criterion X1 PASS): the l
 <figcaption><strong>Figure 40.</strong> Sim X-Series: Cross-Substrate Dynamical Invariance (<span class="math inline"><em>N</em> = 1,024</span> nodes per substrate, seed 42). (a) X1: Leading Lyapunov exponent <span class="math inline"><em>λ</em><sub>Lyap</sub></span> falls within contraction corridor <span class="math inline">[−1.10, −0.90]</span> across Cell, Fly, Mouse, and Human. (b) X2: Permutation throughput retention <span class="math inline"><em>R</em><sub>perm</sub> ≥ 0.50</span> holds across all substrates despite structural divergence. (c) X3: Buckingham <span class="math inline"><em>Π</em><sub>Trust</sub></span> scaling invariance across 9 orders of temporal magnitude.</figcaption>
 </figure>
 
-## 5.23 The Universal Trust Vector and Affective Derivatives [SIMULATION — cross-scale meta-analysis]
+## 5.29 The Universal Trust Vector and Affective Derivatives [SIMULATION — cross-scale meta-analysis]
 
 To empirically evaluate the framework's overarching thesis that primary emotions are not irreducible biological primitives but mathematical derivatives of the trust vector, we executed the **Sim META** meta-simulation ($N = 1,500$ expectation–validation events, seed 42) mapping the 3D trust derivative manifold:
 ```math
@@ -879,7 +879,7 @@ Simultaneously driving the Master Stability Law across a 200-step time series of
 <figcaption><strong>Figure 41.</strong> Sim META: The Universal Trust Vector and Affective Derivatives (<span class="math inline"><em>N</em> = 1,500</span>, seed 42). (a) META-1: 3D affective derivative manifold (Valence <span class="math inline"><em>ε</em></span>, Arousal <span class="math inline"><em>r</em><sub><em>C</em></sub> ⋅ <em>A</em></span>, Dominance <span class="math inline"><em>d</em>(<em>ΔS</em>)/<em>dt</em></span>) classifying five canonical emotion categories with Macro <span class="math inline"><em>F</em><sub>1</sub> = 0.991</span>. (b) META-2: Cross-scale force synchronization simultaneously coupling cellular bioelectrics (<span class="math inline"><em>V</em><sub>mem</sub></span>), affective valence, semantic coherence, and credit standing. (c) META-3: Universal transverse Lyapunov contraction across all four tiers.</figcaption>
 </figure>
 
-## 5.24 Closed-Loop Streaming BOLD to Bayesian State-Space Filter [SIMULATION — neural estimation]
+## 5.30 Closed-Loop Streaming BOLD to Bayesian State-Space Filter [SIMULATION — neural estimation]
 
 To bridge open-loop fMRI semantic predictions into dynamic state tracking (§6), the **Sim B1** battery ($N = 1,000$ multi-turn episodes, $T = 10$ turns, seed 42) coupled live in-silico DMN (Default Mode Network) BOLD proxies into a Bayesian state-space filter (Kalman/EM). While a behavior-only baseline filter relying on open-loop integration fails under high volatility in trust sensitivity ($\lambda_t$), augmenting the observation vector with the continuous DMN threat-activation proxy enabled near-perfect latent parameter recovery ($r = 0.996 \ge 0.85$; Criterion B1-2 PASS) and reduced trust state tracking MSE by 46.9% ($\ge 40.0\%$; Criterion B1-1 PASS; Figure 42). This validates that neural semantic proxies dramatically stabilize real-time Bayesian estimation of dynamic trust sensitivity.
 
@@ -888,7 +888,7 @@ To bridge open-loop fMRI semantic predictions into dynamic state tracking (§6),
 <figcaption><strong>Figure 42.</strong> Sim B1: Closed-Loop Streaming BOLD to Bayesian Filter ($N = 1,000$, seed 42). Left: Real-time tracking of cognitive volatility $\lambda_t$ ($r = 0.996$). Right: 46.9% reduction in state tracking Mean Squared Error (MSE) compared to behavior-only baseline filter. Compound verdict: PASS (2/2).</figcaption>
 </figure>
 
-## 5.25 Multi-Turn Generative Language Attacks vs. DMN Planning [SIMULATION — adversarial language]
+## 5.31 Multi-Turn Generative Language Attacks vs. DMN Planning [SIMULATION — adversarial language]
 
 Extending the threat landscape beyond static visual cloaking (Sim D16), the **Sim A1** battery ($N = 500$ game episodes, $T = 20$ rounds, seed 42) pitted an active generative LLM extortion adversary against present-biased agents with varying DMN counterfactual rollout planning depths ($K \in \{1, 5\}$). The adversary grooms trust over 10 rounds before springing an extortion trap ($E = 0.80, V = 0.10$). Myopic agents ($K = 1$) fall prey to the trap, driving terminal utility negative ($-1.000 < 0$; Criterion A1-1 PASS). In contrast, deep DMN rollout ($K = 5$) anticipates the delayed tail-risk extortion paths, maintaining net positive utility ($+0.750$) and neutralizing extortion trap losses by 100.0% ($\ge 80.0\%$; Criterion A1-2 PASS; Figure 43), confirming that counterfactual planning depth provides a decisive defense against generative language manipulation.
 
@@ -897,7 +897,7 @@ Extending the threat landscape beyond static visual cloaking (Sim D16), the **Si
 <figcaption><strong>Figure 43.</strong> Sim A1: Multi-Turn Generative Language Attacks vs. DMN Planning ($N = 500$, seed 42). Left: Cumulative utility trajectory; myopic agents ($K=1$) are extorted into negative utility ($-1.000$), while DMN planning ($K=5$) preserves positive return ($+0.750$). Right: 100.0% neutralization of extortion trap loss. Compound verdict: PASS (2/2).</figcaption>
 </figure>
 
-## 5.26 Biophysically Detailed MSN Eligibility Traces and Macroscopic Reduction [SIMULATION — microcircuit reduction]
+## 5.32 Biophysically Detailed MSN Eligibility Traces and Macroscopic Reduction [SIMULATION — microcircuit reduction]
 
 Resolving the multiscale bridge between continuous-time neurophysiology and the discrete Master Stability Law, the **Sim S1** battery ($N = 1,000$ events, seed 42) modeled Medium Spiny Neuron (MSN) dendritic coincidence-detection. Integrating the continuous-time synaptic eligibility trace $c(t)$ ($\tau_c = 100\text{ms}$) against a phasic Dopamine Reward Prediction Error burst $D(t) \propto V - E$ yielded terminal synaptic weight updates $\Delta W = \eta \int c(t)D(t)dt$ that correlated with the macroscopic discrete update $\Delta S_t = \lambda(V_t - E_t)$ at $r = 1.0000 \ge 0.95$ (Criterion S1-1 PASS; Figure 44). This formally demonstrates that the Master Law operates as an exact macroscopic mean-field reduction of striatal synaptic plasticity kinetics.
 
