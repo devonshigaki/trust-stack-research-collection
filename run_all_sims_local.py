@@ -3,7 +3,7 @@ import os
 import subprocess
 import sys
 
-base_dir = os.path.abspath(".")
+base_dir = os.path.dirname(os.path.abspath(__file__))
 venv_python = os.path.join(base_dir, ".venv/bin/python3")
 
 sims = [
@@ -55,6 +55,11 @@ sims = [
     {
         "name": "Sim-D18: Baylor Unconscious Narrative Gating & Attractor Drift",
         "path": "experiments/brainit-fmri/insilico/sim_d18_baylor_unconscious_gating.py",
+        "workdir": "experiments/brainit-fmri"
+    },
+    {
+        "name": "Sim-D19: Perky Reality-Monitoring Perception Filter (Dijkstra Psychophysics)",
+        "path": "experiments/brainit-fmri/insilico/sim_d19_perky_reality_filter.py",
         "workdir": "experiments/brainit-fmri"
     }
 ]

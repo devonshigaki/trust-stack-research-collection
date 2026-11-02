@@ -7,7 +7,7 @@ Credit is the largest-scale compliance measurement in the economy — and, on th
 **Epistemic labels used in this document:** \[DERIVED\], \[STANDARD\] (textbook results derived for self-containment), \[ANALOGY\], \[HOMOLOGY\], \[EMPIRICAL\], \[HYPOTHESIS\], \[SIMULATION\]. Simulation identifiers follow the stack-wide registry: this paper’s own simulations are "Sim W…"; companion preprints’ simulations are cited as "Sim P1…P8", "Sim G…", and "Sim D…" per the stack-wide registry. The symbol convention is fixed stack-wide: **$`\varepsilon_t := V_t - E_t`$** (validation minus expectation; positive $`\varepsilon`$ is a confirmation), and the normalized mismatch $`\tilde{\varepsilon} = (V - E)/\max(s_d, \epsilon_{\min})`$ (per-domain scale $`s_d`$ = RMSE of the expectation distribution; regularization floor $`\epsilon_{\min} = 10^{-4}`$ certifying numerical stability against zero-variance history profiles) is the dimensionless quantity entering all dynamics.
 
 **Contents**\
-. Hypotheses\
+0. Hypotheses\
 1. The Problem: A Failing Measurement\
 2. Why Financial Data Is the Cleanest Validation Stream\
 3. The Architecture: The Companion Measurement Protocol Configured for Financial Validation Streams\

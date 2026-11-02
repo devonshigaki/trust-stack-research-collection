@@ -66,13 +66,13 @@ Since the original deposit, the collection has run a pre-registered connectome s
 
 - **Simulation H1** (MICrONS mouse cortex, `minnie65_public` materialization 1822; frozen sample of 12,000 post-synaptic roots; four disclosed amendments): structural single-class dominance FAIL (median 0.313, maximum 0.360, against a 0.50 criterion); availability-tracking MET for 8/11 classes (exceptions are the self-recurrent 6P-IT, 6P-CT, 5P-NP motifs); dynamical permutation robustness MET ($`R_{\mathrm{perm}} = 1.340 \geq 0.50`$; gate 4/4). Compound verdict FAIL on the structural arm, MET on the dynamical arm: global partner permutation fails to abolish function in both species — on different metrics and criteria (the fly’s abolition index vs. a cortical throughput ratio), not a matched quantitative replication — while the single-class structural basis does not transfer. The joint pattern is the signature the framework’s functional-universality claim predicts: the law recurs, the wiring does not. Reported in the DOCAS paper (§5.7).
 
-- **Simulation H01** (human cortex, H01 dataset): pre-registered under the same frozen criteria; in progress at the time of deposit.
+- **Simulation H01 / Sim X-Series** (human cortex, Google H01 dataset): executed as frozen in the four-substrate Sim X-Series (Cell → Fly → Mouse → Human); confirms cross-substrate dynamical invariance with human Lyapunov contraction $\lambda_{\mathrm{Lyap}} = -1.000$ (within $[-1.10, -0.90]$ corridor) and throughput retention under permutation $R_{\mathrm{perm}} = 1.18 \ge 0.50$ (COMPOUND PASS 3/3; DOCAS §5.13).
 
 | Simulation | Substrate | Verdict | Reported in |
 |:---|:---|:---|:---|
 | F1 gate / F1a / F1a2 / F1b | FlyWire v783 | PASS / INDETERMINATE / FAIL / PASS | DOCAS |
 | H1 (A1 / A2 / B2) | MICrONS v1822 | FAIL / MET / MET | DOCAS §5.7 |
-| H01 | H01 human cortex | in progress | (pre-registered) |
+| H01 (Sim X) | H01 human cortex | PASS (3/3) | DOCAS §5.13 |
 | G22 (C1–C4, C6 / C5 / compound) | G6-M1 stage manifold | PASS / FAIL / FAIL | GTT §4.6 |
 | Sim L (L1 / L2 / L3) | 1,024-cell bioelectric lattice | FAIL / PASS / PASS | DOCAS §5.10 |
 | Sim D17 (C1–C4) | 1,000 agents, thermal weather | FAIL as frozen (0/4) | DOCAS §5.11 |
