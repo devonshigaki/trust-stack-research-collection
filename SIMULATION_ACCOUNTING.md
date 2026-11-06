@@ -309,3 +309,10 @@ Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13
 - **Substrate**: Stochastic molecular graph (500 atoms, 10,000 timesteps).
 - **Core Finding**: The GTT Master Law successfully acts as a selection force, generating macroscopic molecular complexity 66.0x larger than a thermodynamic random walk. However, increasing trust sensitivity directly shatters bonds under thermal noise rather than amplifying survival. True biological amplification requires compartmentalization (cell walls).
 - **Artifacts**: `technical-appendix/SIM_AT_PRE_REGISTRATION.md`, `technical-appendix/sim-code/sim_at_assembly.py`, `technical-appendix/numbers/sim_at_results.json`, `technical-appendix/AT_SERIES_RUN_REPORT.md`, `papers/source/figures/fig_sim_at_assembly.png`.
+
+### Sim AMP (The Trust Amplifier & TFP Digital Cellular Membrane)
+- **Status**: Executed as Frozen (Seed = 42). COMPOUND PASS (3/3).
+- **Date**: 2026-11-01
+- **Substrate**: Multiscale comparison: 1,000 agents across bioelectric tissue lattice (tau=10^3s), neural network (tau=10^-3s), and digital edge vaults (TFP vs Centralized under sigma=2.0 noise).
+- **Core Finding**: The nervous system accelerates error resolution by an exact temporal gain factor G = 10^6x over non-neural cell lattices while preserving Lyapunov stability (lambda_Lyap = -1.0000 in [-1.10, -0.90]). The Fresh Protocol (TFP) acts as a digital cell wall (database-per-tenant edge vaults + blockchain verification) that solves the Sim AT compartmentalization boundary, maintaining 100.0% contract retention under severe adversarial noise, whereas uncompartmentalized centralized databases suffer total collapse (0.0%).
+- **Artifacts**: `technical-appendix/SIM_AMP_PRE_REGISTRATION.md`, `technical-appendix/sim-code/sim_amp_trust_amplifier.py`, `technical-appendix/numbers/sim_amp_results.json`, `technical-appendix/AMP_SERIES_RUN_REPORT.md`, `papers/source/figures/fig_sim_amp_amplifier.png`.

@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-11-01",
+  "seed": 42,
+  "compound_verdict": "COMPOUND PASS (3/3)",
+  "compound_pass": true,
+  "amp1_temporal_gain": {
+    "tau_cellular_sec": 1000.0,
+    "tau_neural_sec": 0.001,
+    "gain_G": 1000000.0,
+    "threshold": 10000.0,
+    "pass": true
+  },
+  "amp2_lyapunov_invariance": {
+    "lambda_param": 0.6321205588,
+    "lyapunov_exponent": -0.9999999999223721,
+    "corridor": [
+      -1.1,
+      -0.9
+    ],
+    "pass": true
+  },
+  "amp3_digital_membrane": {
+    "retention_centralized": 0.0,
+    "retention_tfp": 1.0,
+    "noise_sigma": 2.0,
+    "threshold_central_max": 0.25,
+    "threshold_tfp_min": 0.85,
+    "pass": true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-11-01",
+  "seed": 42,
+  "compound_verdict": "FAIL as frozen",
+  "atm1_macro_complexity": {
+    "asi_gtt": 377,
+    "asi_null": 367,
+    "ratio": 1.0272479564032697,
+    "pass": false
+  },
+  "atm2_phase_transition": {
+    "asi_gtt": 377,
+    "threshold": 15,
+    "pass": true
+  },
+  "atm3_divergence": {
+    "asi_gtt": 377,
+    "lzw_gtt": 2401,
+    "pass": true
+  }
+}
