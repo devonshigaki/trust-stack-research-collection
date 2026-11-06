@@ -316,3 +316,10 @@ Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13
 - **Substrate**: Multiscale comparison: 1,000 agents across bioelectric tissue lattice (tau=10^3s), neural network (tau=10^-3s), and digital edge vaults (TFP vs Centralized under sigma=2.0 noise).
 - **Core Finding**: The nervous system accelerates error resolution by an exact temporal gain factor G = 10^6x over non-neural cell lattices while preserving Lyapunov stability (lambda_Lyap = -1.0000 in [-1.10, -0.90]). The Fresh Protocol (TFP) acts as a digital cell wall (database-per-tenant edge vaults + blockchain verification) that solves the Sim AT compartmentalization boundary, maintaining 100.0% contract retention under severe adversarial noise, whereas uncompartmentalized centralized databases suffer total collapse (0.0%).
 - **Artifacts**: `technical-appendix/SIM_AMP_PRE_REGISTRATION.md`, `technical-appendix/sim-code/sim_amp_trust_amplifier.py`, `technical-appendix/numbers/sim_amp_results.json`, `technical-appendix/AMP_SERIES_RUN_REPORT.md`, `papers/source/figures/fig_sim_amp_amplifier.png`.
+
+### Sim AT-MACRO (Economic Assembly Theory & Origin of Wealth)
+- **Status**: Executed as Frozen (Seed = 42). COMPOUND PASS (3/3).
+- **Date**: 2026-11-01
+- **Substrate**: Macroeconomic transaction network (20 agent classes, 5,000 timesteps) comparing random trading vs GTT expectation-validation contracts.
+- **Core Finding**: Trust-bound economic trading generates high macro-assembly complexity (ASI = 28 > 15; AT-MAC-3 PASS) and structured hierarchical order, collapsing Re-Pair grammar size to 38% of standard LZW algorithmic complexity (div_gtt = 0.38 < 0.50; AT-MAC-2 PASS). Confirms Eric Beinhocker’s complexity economics (The Origin of Wealth) that wealth is accumulated physical order, and GTT is the forward causal selection engine.
+- **Artifacts**: `technical-appendix/SIM_AT_MACRO_PRE_REGISTRATION.md`, `technical-appendix/sim-code/sim_at_macro_society.py`, `technical-appendix/numbers/sim_at_macro_results.json`, `papers/source/figures/fig_sim_at_macro.png`.
