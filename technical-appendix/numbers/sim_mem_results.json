@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-11-01",
+  "seed": 42,
+  "compound_verdict": "COMPOUND PASS (3/3)",
+  "compound_pass": true,
+  "mem1_isolation": {
+    "var_no_membrane": 1.2898219491805216,
+    "var_semi_permeable": 0.14651395173343948,
+    "autocorr_semi_permeable": 0.9239242958771946,
+    "pass": true
+  },
+  "mem2_starvation": {
+    "var_wall": 0.0,
+    "pass": true
+  },
+  "mem3_locus_of_selection": {
+    "r": 0.9999999999999997,
+    "pass": true
+  }
+}
