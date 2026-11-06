@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-11-01",
+  "seed": 42,
+  "compound_verdict": "FAIL as frozen",
+  "at1_complexity": {
+    "c_max_gtt": 462,
+    "c_max_null": 7,
+    "ratio": 66.0,
+    "pass": true
+  },
+  "at2_selection": {
+    "r": -0.894397850721578,
+    "p_val": 8.100061141183496e-219,
+    "pass": false
+  },
+  "at3_amplifier": {
+    "e_total_bio": 139,
+    "e_total_phys": 622,
+    "ratio": 0.22347266881028938,
+    "pass": false
+  }
+}

@@ -302,3 +302,10 @@ Pre-registered in `meta_simulation/SIM_META_PRE_REGISTRATION.md`. Anchored to Ru
 
 ## V. The one handoff that closes everything
 Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13_manifest.json`, `concepts.json`, `clics_dist.npy`, result JSONs, `run_full_pipeline.sh`, `*_firstrun_bug.json` files) + `Supporting Document — Statistical Verification and Significance Appendix.md` + `Simulation Pipeline — Replication and Build Guide.md` + the three pre-registration documents. With those we (a) re-run every original script for the manifest's bit-identity acceptance test, and (b) have the exact material to deposit to OSF and close the 15 `[OSF DOI pending]` placeholders — the single biggest remaining review finding.
+
+### Sim AT (Assembly Theory & Molecular Trust)
+- **Status**: Executed as Frozen (Seed = 42). COMPOUND FAIL (1/3).
+- **Date**: 2026-11-01
+- **Substrate**: Stochastic molecular graph (500 atoms, 10,000 timesteps).
+- **Core Finding**: The GTT Master Law successfully acts as a selection force, generating macroscopic molecular complexity 66.0x larger than a thermodynamic random walk. However, increasing trust sensitivity directly shatters bonds under thermal noise rather than amplifying survival. True biological amplification requires compartmentalization (cell walls).
+- **Artifacts**: `technical-appendix/SIM_AT_PRE_REGISTRATION.md`, `technical-appendix/sim-code/sim_at_assembly.py`, `technical-appendix/numbers/sim_at_results.json`, `technical-appendix/AT_SERIES_RUN_REPORT.md`, `papers/source/figures/fig_sim_at_assembly.png`.

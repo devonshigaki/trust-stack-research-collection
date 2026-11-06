@@ -99,6 +99,7 @@ Since the original deposit, the collection has run a pre-registered connectome s
 | Sim B1 (B1-1–2) | 1,000 episodes, Streaming BOLD | PASS (2/2) | DOCAS §5.30 |
 | Sim A1 (A1-1–2) | 500 episodes, LLM extortion vs DMN | PASS (2/2) | DOCAS §5.31 |
 | Sim S1 (S1-1) | 1,000 events, MSN plasticity | PASS (1/1) | DOCAS §5.32 |
+| Sim AT (AT-1–3) | 500 atoms, molecular assembly | FAIL as frozen (1/3) | DOCAS §5.33 |
 | G22 (C1–C4, C6 / C5 / compound) | G6-M1 stage manifold | PASS / FAIL / FAIL | GTT §4.6 |
 | Sim G26 (C1–C4) | 500 nodes, cultural topologies | FAIL as frozen (1/4) | GTT §7 |
 | Sim P1 / P1b / P1c | 500 nodes, Kuramoto surface | PASS (0.739) / FAIL | TFP §3.6 |
