@@ -1,8 +1,8 @@
 {
   "timestamp": "2026-11-01",
   "seed": 42,
-  "compound_verdict": "COMPOUND PASS (3/3)",
-  "compound_pass": true,
+  "compound_verdict": "FAIL as frozen",
+  "compound_pass": false,
   "amp1_temporal_gain": {
     "tau_cellular_sec": 1000.0,
     "tau_neural_sec": 0.001,
@@ -19,12 +19,16 @@
     ],
     "pass": true
   },
-  "amp3_digital_membrane": {
+  "amp3_realistic_membrane": {
     "retention_centralized": 0.0,
-    "retention_tfp": 1.0,
+    "retention_tfp": 0.785,
+    "gamma_M_permeability": 0.12,
     "noise_sigma": 2.0,
     "threshold_central_max": 0.25,
-    "threshold_tfp_min": 0.85,
-    "pass": true
+    "threshold_tfp_range": [
+      0.8,
+      0.95
+    ],
+    "pass": false
   }
 }

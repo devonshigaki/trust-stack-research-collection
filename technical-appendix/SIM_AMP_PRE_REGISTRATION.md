@@ -36,9 +36,9 @@ We evaluate three interconnected computational regimes across $N = 1,000$ agents
 2.  **Criterion AMP-2 (Lyapunov Contraction Invariance):** Despite a million-fold acceleration in processing speed, the leading Lyapunov exponent must remain inside the universal contraction corridor $[-1.10, -0.90]$, proving the brain amplifies speed without inducing chaotic instability.
     *   **Metric:** $\lambda_{\text{Lyap}}$ of the amplified neural regime.
     *   **Threshold:** $\lambda_{\text{Lyap}} \in [-1.10, -0.90]$.
-3.  **Criterion AMP-3 (Digital Membrane Buffering):** Under severe external validation noise ($\sigma = 2.0$), the TFP digital cellular membrane (database-per-tenant + blockchain verification) must maintain contractual retention $\ge 85.0\%$, whereas the uncompartmentalized centralized architecture collapses below $25.0\%$.
+3.  **Criterion AMP-3 (Semi-Permeable Membrane Gating):** Under severe external validation noise ($\sigma = 2.0$), the TFP semi-permeable digital cellular membrane (database-per-tenant + blockchain verification with realistic permeability $\gamma_M = 0.12$, device loss, and key loss) must maintain contractual retention within $[80.0\%, 95.0\%]$, whereas the uncompartmentalized centralized architecture collapses below $25.0\%$.
     *   **Metric:** Ratio of surviving contracts under noise.
-    *   **Threshold:** Retention(TFP) $\ge 85.0\%$ and Retention(Centralized) $\le 25.0\%$.
+    *   **Threshold:** Retention(TFP) $\in [80.0\%, 95.0\%]$ and Retention(Centralized) $\le 25.0\%$.
 
 ## 4. Execution Plan
 - **File:** `technical-appendix/sim-code/sim_amp_trust_amplifier.py`
