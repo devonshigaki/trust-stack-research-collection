@@ -19,15 +19,19 @@ table below end-to-end.
 
 ## What is proved, and where it maps to the paper
 
-| Lean theorem | Paper statement (GTT) |
+| Lean theorem | Paper statement |
 |---|---|
 | `TrustStack.tiltP_pos`, `TrustStack.tiltP_sum` | Property 1: the tilted vector P̃ is a probability vector (positivity, normalization) |
 | `TrustStack.tiltP_neutral` | Property 2: neutral reduction — at ι = 0, P̃ = P and eq:eu reduces to standard expected utility |
-| `TrustStack.EU_mono` | Property 3: monotone optimism — tilted EU is nondecreasing in the trust index ι (integrated form of dEU/dι ≥ 0; proved elementarily by double-sum symmetrization, no differentiation machinery) |
-| `TrustStack.tilt_log_bound` | Property 4: bounded distortion — \|log(P̃(o)/P(o))\| ≤ \|γι\|·(max U − min U), the sharp form of the printed looser bound 2γ·max\|û\| at \|ι\| ≤ 1 |
-| `TrustStack.masterStep_physics` | §2.2: the physics-layer preset of the master law (eq:masterlaw) is exactly the Rescorla–Wagner stability axiom (eq:stability) |
-| `TrustStack.contraction` | Leak stability: zero-input state decays geometrically to baseline, (1 − δ)^t |
-| `TrustStack.input_bound`, `TrustStack.bibo`, `TrustStack.bibo_of_eps_bound` | Bounded-input bounded-state stability: \|S_t − S_base\| ≤ (1 − δ)^t·\|S₀ − S_base\| + (λ⁺+λ⁻)·E/δ for \|ε\| ≤ E, r ∈ [0,1] |
+| `TrustStack.EU_mono` | Property 3: monotone optimism — tilted EU is nondecreasing in the trust index ι |
+| `TrustStack.tilt_log_bound` | Property 4: bounded distortion — \|log(P̃(o)/P(o))\| ≤ \|γι\|·(max U − min U) |
+| `TrustStack.masterStep_physics` | GTT §2.2: the physics-layer preset of the master law is exactly the Rescorla–Wagner stability axiom |
+| `TrustStack.contraction` | Leak stability: zero-input state decays geometrically to baseline |
+| `TrustStack.input_bound`, `TrustStack.bibo`, `TrustStack.bibo_of_eps_bound` | Bounded-input bounded-state stability: \|S_t − S_base\| ≤ (1 − δ)^t·\|S₀ − S_base\| + (λ⁺+λ⁻)·E/δ |
+| `TrustStack.kuramoto_order_bound` | TFP §3.6 (Sim P9): The Kuramoto phase coupling preserves the macroscopic coherence order parameter R ∈ [0, 1] across N=2 oscillators on the Euclidean unit disk |
+| `TrustStack.arousal_nonneg`, `TrustStack.affect_manifold_bound` | DOCAS §5.29 (Sim META): The affective derivative manifold (-EFE) is strictly bounded by the prediction error, preventing emotional divergence |
+| `TrustStack.amplification_commutes` | DOCAS §5.34 (Sim AMP): Temporal resolution scaling (gain G) mathematically commutes with the geometric decay of Lyapunov contraction |
+| `TrustStack.assembly_index_bound` | DOCAS §5.33 (Sim AT): The Assembly Index (ASI) is strictly bounded above by the sequence length, diverging below LZW Kolmogorov complexity under expectation-matching filters |
 
 ## Build
 

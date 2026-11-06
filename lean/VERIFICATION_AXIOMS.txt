@@ -8,4 +8,8 @@
 'TrustStack.input_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'TrustStack.bibo' depends on axioms: [propext, Classical.choice, Quot.sound]
 'TrustStack.bibo_of_eps_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
-ALLDONE
+Check.lean:15:14: error: unknown constant 'TrustStack.kuramoto_order_bound'
+Check.lean:16:14: error: unknown constant 'TrustStack.arousal_nonneg'
+Check.lean:17:14: error: unknown constant 'TrustStack.affect_manifold_bound'
+Check.lean:18:14: error: unknown constant 'TrustStack.amplification_commutes'
+Check.lean:19:14: error: unknown constant 'TrustStack.assembly_index_bound'
