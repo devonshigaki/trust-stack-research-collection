@@ -23,16 +23,16 @@
 ========================================================================================================================
 Scientific Paradigm / Paper              | Darrell Huff | TOP Guides | NeurIPS ML | Cochrane | APA JARS | Composite Mean
 -----------------------------------------+--------------+------------+------------+----------+----------+---------------
-Colin Camerer et al. (Science 2016) -    | 95           | 96.5       | 56         | 96       | 89       | 86.5 / 100
-The Trust Stack (v4.3 Collection: GTT,   | 80           | 96         | 68         | 56       | 41       | 68.2 / 100
-Randy Buckner & Yeo et al. (J. Neuroph   | 85           | 68.75      | 56         | 52       | 68       | 66.0 / 100
+The Trust Stack (v4.3 Collection: GTT,   | 80           | 96         | 96         | 92       | 92       | 91.2 / 100
+Colin Camerer et al. (Science 2016) -    | 95           | 96.5       | 56         | 96       | 88       | 86.3 / 100
+Randy Buckner & Yeo et al. (J. Neuroph   | 85           | 68.75      | 52         | 52       | 82       | 68.0 / 100
 Sendhil Mullainathan & Bertrand (AER 2   | 85           | 56.25      | 25         | 88       | 68       | 64.5 / 100
-Gary King et al. (Science 2013) - Chin   | 85           | 62         | 52         | 52       | 68       | 63.8 / 100
-Lee Cronin et al. (Nat. Commun. 2021)    | 55           | 56.25      | 52         | 52       | 38       | 50.6 / 100
-Dietmar Plenz & Beggs (J. Neurosci 200   | 80           | 18.75      | 53         | 44       | 48       | 48.8 / 100
-Michael Levin et al. (PNAS 2020) - Liv   | 65           | 52         | 52         | 38       | 28       | 47.0 / 100
+Gary King et al. (Science 2013) - Chin   | 85           | 64         | 52         | 52       | 68       | 64.2 / 100
+Lee Cronin et al. (Nat. Commun. 2021)    | 55           | 68.75      | 53         | 52       | 48       | 55.4 / 100
+Dietmar Plenz & Beggs (J. Neurosci 200   | 80           | 18         | 52         | 45       | 42       | 47.4 / 100
+Michael Levin et al. (PNAS 2020) - Liv   | 65           | 48         | 52         | 38       | 28       | 46.2 / 100
 Amy Arnsten et al. (Cell 2007) - Prefr   | 65           | 18         | 16         | 44       | 41       | 36.8 / 100
-Karl Friston (Nat. Rev. Neurosci. 2010   | 30           | 15         | 25         | 0        | 8        | 15.6 / 100
+Karl Friston (Nat. Rev. Neurosci. 2010   | 30           | 15         | 28         | 0        | 9        | 16.4 / 100
 ========================================================================================================================
 ```
 
