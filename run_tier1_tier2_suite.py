@@ -97,6 +97,12 @@ TASKS = [
         "workdir": "experiments/simulations_repair_era/docas"
     },
     {
+        "tier": "Tier 1: Simulation",
+        "name": "Sim AT-4: Metabolome-Wide Assembly & Allosteric Token Partition",
+        "script": "experiments/simulations_repair_era/docas/sim_at4_metabolome_assembly_partition.py",
+        "workdir": "experiments/simulations_repair_era/docas"
+    },
+    {
         "tier": "Tier 1: Formal Math",
         "name": "Z3 & SymPy Quantum-Biological Isomorphism (Theorems Q-1–Q-4)",
         "script": "formal-verification/z3_quantum_molecular_isomorphism.py",

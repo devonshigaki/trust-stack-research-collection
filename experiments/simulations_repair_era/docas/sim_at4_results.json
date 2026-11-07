@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-11-07",
+  "simulation_id": "Sim AT-4",
+  "compounds_evaluated": 57,
+  "compounds_at_ma_14": [
+    "cAMP",
+    "cGMP",
+    "Fructose-1,6-Bisphosphate",
+    "ADP",
+    "GMP",
+    "GTP",
+    "PRPP",
+    "Biotin (Vit B7)",
+    "Tetrahydrobiopterin (BH4)"
+  ],
+  "qualifying_information_tokens": [
+    "cAMP",
+    "cGMP",
+    "cCMP",
+    "cUMP"
+  ],
+  "verdict": "COMPOUND PASS (3/3)",
+  "criteria": {
+    "C1_camp_cgmp_at_14": true,
+    "C2_fuel_exclusion": true,
+    "C3_purine_uniqueness": true
+  }
+}

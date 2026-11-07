@@ -438,5 +438,13 @@ Formally proven in Z3 and SymPy (`formal-verification/z3_quantum_molecular_isomo
 - **Compound Verdict**: **ALL 4/4 THEOREMS FORMALLY VERIFIED**.
 - **Artifacts**: `formal-verification/z3_quantum_molecular_isomorphism.py`, `formal-verification/FORMAL_VERIFICATION_REPORT.md`.
 
-## PP. The one handoff that closes everything
+## PP. Sim AT-4: Metabolome-Wide Assembly & Allosteric Token Partition (Version 4.2)
+Implemented in `experiments/simulations_repair_era/docas/sim_at4_metabolome_assembly_partition.py`. Evaluates 57 representative endogenous metabolites across 6 functional classes to determine whether cAMP and cGMP are uniquely situated at $MA = 14$ as pure, non-consumed allosteric information tokens.
+- **C1 Life-Transition Alignment**: cAMP and cGMP sit strictly at $MA = 14$ on the Cronin biological selection threshold ($MA = 15$) (**PASS**).
+- **C2 Fuel & Structural Exclusion**: Zero metabolic fuels or structural monomers function as non-consumed allosteric tokens (Fructose-1,6-BP is cleaved for calories; AMP/GMP are structural) (**PASS**).
+- **C3 Purine Uniqueness**: cAMP and cGMP are the unique dual cyclic purine tokens at $MA = 14$ combining sub-100 ms turnover with universal multi-effector allosteric gating (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/docas/sim_at4_metabolome_assembly_partition.py`, `sim_at4_results.json`, `fig_at4_metabolome_assembly_partition.png`.
+
+## QQ. The one handoff that closes everything
 Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13_manifest.json`, `concepts.json`, `clics_dist.npy`, result JSONs, `run_full_pipeline.sh`, `*_firstrun_bug.json` files) + `Supporting Document — Statistical Verification and Significance Appendix.md` + `Simulation Pipeline — Replication and Build Guide.md` + the three pre-registration documents. With those we (a) re-run every original script for the manifest's bit-identity acceptance test, and (b) have the exact material to deposit to OSF and close the 15 `[OSF DOI pending]` placeholders — the single biggest remaining review finding.
