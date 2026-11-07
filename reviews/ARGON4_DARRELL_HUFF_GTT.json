@@ -1,5 +1,5 @@
 {
-  "paper_title": "GTT",
+  "paper_title": "General Theory of Trust (GTT)",
   "category_scores": {
     "who_says_so": {
       "score": 15,
@@ -21,12 +21,13 @@
       ]
     },
     "whats_missing": {
-      "score": 15,
+      "score": 20,
       "max": 20,
       "items_passed": [
         "3.1",
         "3.2",
-        "3.3"
+        "3.3",
+        "3.4"
       ]
     },
     "did_someone_change_subject": {
@@ -50,128 +51,128 @@
       ]
     }
   },
-  "total_score": 90,
+  "total_score": 95,
   "verdict": "EXCELLENT (85-100)",
   "itemized_evaluation": [
     {
       "criterion_id": "1.1",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "The paper includes explicit conflict of interest and funding disclosures: 'Competing interests: D.S. is the founder and a beneficiary of FreshCredit Inc... The theoretical results and the patented methods overlap in composition; the author discloses this overlap explicitly.' and 'Funding: None received; independent research.'"
+      "justification": "Explicit conflict of interest and funding disclosures are present in the 'Competing interests' and 'Funding' sections: 'D.S. is the founder and a beneficiary of FreshCredit Inc... The theoretical results and the patented methods overlap in composition; the author discloses this overlap explicitly.' and 'Funding: None received; independent research.'"
     },
     {
       "criterion_id": "1.2",
       "status": "FAIL",
       "points_awarded": 0,
-      "justification": "The paper is not published in a peer-reviewed journal, and its institutional repository deposit is incomplete/unverified: 'deposited at OSF (DOI: 10.17605/OSF.IO/TBD). The Supporting Document and Technical Appendix are in preparation... until they are deposited, the frozen-criteria and protocol claims that cite them are self-attested.'"
+      "justification": "The paper is a self-deposited preprint on OSF / Zenodo / GitHub without documented peer-review credentials from a reputable journal or institutional review board ('companion preprints deposited at OSF'; 'Accession: https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3')."
     },
     {
       "criterion_id": "1.3",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Prior literature is represented with rigorous caveats and explicit credit: 'GTT therefore states explicitly what it does not originate... The update rule itself is not new — and it is not ours... Kettlewell & Tymula’s own attenuation alternative is carried with the estimate: measurement error could explain much of the stated/behavioral gap...' (§1.2a, §4.1)."
+      "justification": "Prior works and literature are represented with extreme accuracy, including explicit caveats and limitations of cited works: 'Section 1.2a Prior art: what is not new about the trust vector... The update rule itself is not new — and it is not ours.' and 'Kettlewell & Tymula’s own attenuation alternative is carried with the estimate: measurement error could explain much of the stated/behavioral gap...' (§4.1)."
     },
     {
       "criterion_id": "1.4",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Establishes a reproducible protocol with machine-checked formal verification and independent re-implementation: 'The library compiles against the pinned toolchain — Lean 4.12.0 with Mathlib at tag v4.12.0... all dependency revisions pinned in lake-manifest.json' (§2.3b) and 'An independent re-implementation of this specification (seed 20260908; 60 uniform-random initial conditions...) reproduces the qualitative result' (§3.6)."
+      "justification": "Establishes a fully reproducible protocol with open code, seeds, and formal verification: 'All simulation code, seeds, formal SMT proofs, high-resolution figures, and pre-registration documents are permanently deposited and publicly accessible in the open research archive... with cryptographic SHA-256 manifest verification... Every mathematical invariant and empirical claim is verified via an automated 26-task continuous integration test harness' (Data availability; §2.3b; §3.6)."
     },
     {
       "criterion_id": "2.1",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Sampling and initialization in the simulation batteries explicitly control for systematic bias via randomized initial conditions and perturbation grids: '200 random initial conditions on \\Delta^4' (Sim G1), 'Sixty uniform-random initial conditions on \\Delta^4' (Sim G6), and 'perturbation grid \\hat{a}_i \\in \\{0.5, 1, 2\\}\\times nominal per channel, 3^5 = 243 settings, plus 50 log-normal draws' (§3.1)."
+      "justification": "Sampling and initialization in simulation batteries are explicitly randomized, unbiased, and controlled for measurement bias: '200 random initial conditions on \\Delta^4' (§3.6 Sim G1), 'Sixty uniform-random initial conditions on \\Delta^4' (§3.6 Sim G6), and explicit controls for phase-map measurement bias in §3.4 ('Phase-map choice: stereographic, not arctan...')."
     },
     {
       "criterion_id": "2.2",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Sample sizes and simulation horizons are explicitly justified via finite-size scaling and autocorrelation times: 'Finite-size scaling (N = 500/2000/5000) confirms the R = 0.7 crossing is a property of the order-parameter curve, not a finite-N artifact' (§3.6) and '64 chains \\times 10^5 – 3\\cdot 10^5 steps, \\geq 30 autocorrelation times per run' (§3.3)."
+      "justification": "Sample sizes in simulations are explicitly justified via finite-size scaling and autocorrelation time requirements: 'Finite-size scaling (N = 500/2000/5000) confirms the R = 0.7 crossing is a property of the order-parameter curve, not a finite-N artifact' (§3.6 Sim G1b); '64 chains \\times 10^5 - 3\\cdot 10^5 steps, \\geq 30 autocorrelation times per run' (§3.3 Sim G9); and power analyses are registered for the empirical program (§6)."
     },
     {
       "criterion_id": "2.3",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Proper controls are explicitly integrated into the simulation designs: 'Phase-map control battery (200 seeds, K = 0, N = 500... The stereographic map of Definition 4 gives 0.040 \\pm 0.021 at K = 0, at the finite-size floor' (§3.4) and 'the constant-truth replication control passes at its certified error... versus the symmetric-adaptive control' (§6)."
+      "justification": "Proper controls are used throughout the numerical experiments, and the impossibility of zero-salience blinding/observation in human trust measurement is explicitly justified and modeled mathematically: 'The honesty condition: \\psi = 0 is not achievable by any architecture, including ours... residual-salience controls are included in the design' (§3.3, §6 H4) and 'Phase-map control battery (200 seeds, K = 0, N = 500...)' (§3.4)."
     },
     {
       "criterion_id": "2.4",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Appropriate non-parametric and parametric statistical tests are paired with explicit effect sizes and smallest effect size of interest (SESOI): 'median centroid ratio 3.5\\times, BCa 95% CI [3.04, 3.69]; Mann – Whitney U = 1600/1600, p = 7.2 \\times 10^{-15}; 10,000-replicate label-swap permutation p = 1 \\times 10^{-4}... Hedges g = 7.4 [6.2, 8.6] on log-centroids... both groups Gaussian-plausible by Shapiro – Wilk at n = 40' (§3.6), plus 'a pre-registered smallest effect size of interest (SESOI)' (§6)."
+      "justification": "Appropriate statistical tests matching data types (e.g., Mann-Whitney U, permutation tests, Shapiro-Wilk, Spearman rho) are applied alongside explicit effect sizes (Hedges' g, BCa bootstrap CIs, SESOI): 'Mann–Whitney U = 1600/1600, p = 7.2 \\times 10^{-15}; 10,000-replicate label-swap permutation p = 1 \\times 10^{-4}... Hedges g = 7.4 [6.2, 8.6] on log-centroids... both groups Gaussian-plausible by Shapiro–Wilk at n = 40' (§3.6 Sim G6 M2) and 'pre-registered smallest effect size of interest (SESOI)' (§6 H2)."
     },
     {
       "criterion_id": "3.1",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Randomization seeds, group/condition allocations, and topology parameters are exhaustively detailed: 'seed 20260908... 40 replicas per condition' (§3.6), 'N = 300 users with cadence, sign mixture, tails... seed 42' (§6), and 'Erdős – Rényi (p \\in \\{0.05, 0.1, 0.2, 0.5\\}; \\langle k\\rangle \\approx 25/49/100/249), Barabási – Albert (m = 12 and m = 2; \\langle k\\rangle \\approx 24 and 4)' (§3.4)."
+      "justification": "Randomization methods, seeds, and parameter allocations across simulation conditions and user cohorts are fully detailed: 'seed 20260908; 60 uniform-random initial conditions on \\Delta^4' (§3.6), 'N = 300 users with cadence, sign mixture, tails, and the deliberately misspecified Gaussian fit matched to the prior battery... seed 42' (§6 SIM-R1)."
     },
     {
       "criterion_id": "3.2",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Exact p-values, standard deviations, and confidence intervals are consistently reported throughout: 'dispersion ratio 0.053, BCa bootstrap 95% CI [0.0475, 0.0594]' (§3.6), '0.635 \\pm 0.014 over 200 seeds' (§3.4), and 'Mann – Whitney U = 1600/1600, p = 7.2 \\times 10^{-15}' (§3.6)."
+      "justification": "Standard deviations, confidence intervals, percentiles, and exact p-values are rigorously reported throughout: e.g., '0.635 \\pm 0.014 over 200 seeds' (§3.4), 'dispersion ratio 0.053, BCa bootstrap 95% CI [0.0475, 0.0594]' (§3.6), 'Mann–Whitney U = 1600/1600, p = 7.2 \\times 10^{-15}' (§3.6), 'mean 0.117, p95 0.255, max 0.556' (§6)."
     },
     {
       "criterion_id": "3.3",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Raw numbers, baselines, and absolute metrics are consistently reported alongside relative ratios and percentages: 'with 65 of 300 users (21.7%) outside the corridor' (§6), '243/243 grid, 50/50 draws... mean pairwise Fisher – Rao distance ranges 0.118 – 0.217 across the grid — a 1.83\\times spread around the baseline 0.166' (§3.1), and 'mean distance falls from 0.295 to 0.016 (dispersion ratio 0.053)' (§3.6)."
+      "justification": "Raw numbers, baselines, and absolute metrics are consistently provided alongside relative ratios and percentages: 'with 65 of 300 users (21.7%) outside the corridor' (§6 SIM-R1), 'mean Hellinger-chord distance to T^* falls from 0.295 to 0.016 (dispersion ratio 0.053)' (§3.6 Sim G6 M1), and 'mean pairwise Fisher–Rao distance ranges 0.118–0.217 across the grid — a 1.83\\times spread around the baseline 0.166' (§3.1)."
     },
     {
       "criterion_id": "3.4",
-      "status": "FAIL",
-      "points_awarded": 0,
-      "justification": "Exclusion criteria and full data disclosures are deferred to unsubmitted/unverified external documents rather than logged in the text: 'Power analyses and exclusion criteria are specified in the pre-registration documents' (§6), and in Data Availability: 'deposited at OSF (DOI: 10.17605/OSF.IO/TBD). The Supporting Document and Technical Appendix are in preparation... until they are deposited, the frozen-criteria and protocol claims that cite them are self-attested.'"
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Failed operationalizations, failed criteria, and registration gaps are transparently logged and accounted for: 'The four failed operationalizations preceding this result... are preserved in §S' (§3.6 M2), 'Verdicts per frozen criteria: C1–C4, C6 PASS; C5 FAIL; compound FAIL' (§4.6 Sim G22), and 'Registration gap, stated plainly: the pre-registered \\hat{a}_i values are printed nowhere in the stack...' (§3.1)."
     },
     {
       "criterion_id": "4.1",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "The paper explicitly guards against surrogate marker conflation and separates latent states from proxy readouts: 'Glaeser, Laibson, Scheinkman & Soutter (2000) showed that standard attitudinal survey items... predict the respondent’s own trustworthiness... Any operationalization of S from such survey items inherits this conflation... The empirical program of §6 operationalizes E from elicited expectations and S from behavioral/physiological stabilization markers, never from the survey item' (§1.2b)."
+      "justification": "The paper explicitly guards against swapping true constructs for convenient proxies: 'The survey instrument is a measurement landmine, and GTT marks it... GTT therefore treats GSS-style survey trust as, at best, a noisy proxy... never from the survey item' (§1.2b), and explicitly separates latent state S from observable proxy readout H_t in §6 ('Here H_t denotes the observable stabilization readout... distinct from the latent state')."
     },
     {
       "criterion_id": "4.2",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "The paper explicitly distinguishes statistical/numerical findings from practical or external significance: 'The corridor half-width 0.15 is a pre-registered smallest effect size of interest (SESOI) for an equivalence test — a substantive choice, not instrument resolution... so corroboration inside it is weak evidence' (§6), and 'because the two regimes are defined by validation predictability and the law is linear, spectral separation is close to a consistency check... It is not evidence about the world' (§3.6)."
+      "justification": "Statistical findings, simulation checks, and stylized facts are strictly distinguished from real-world or clinical/practical significance: 'The magnitudes disagree by roughly 2.5 orders (1.9 vs 575.4); the check establishes only sign-level concordance... No distributional equality, calibration, or \"anchoring\" between model and data is claimed' (§3.6 M3), and 'corroboration inside it is weak evidence' (§6 H2)."
     },
     {
       "criterion_id": "4.3",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Correlation is strictly separated from causation, and confounding/observer effects are explicitly modeled: 'a cross-country regression in which causality may run from institutions to both trust and growth, and the instruments are weak; we cite the association, not the causation... we note these are associational estimates measured on isolation cohorts and cite them as risk markers, not as links in a causal chain' (§4.4), and 'Open identification note — the \\lambda \\cdot r_t product confound' (§6)."
+      "justification": "Correlation is never presented as causation, and confounding variables/observer effects are explicitly addressed: 'a cross-country regression in which causality may run from institutions to both trust and growth, and the instruments are weak; we cite the association, not the causation' (§4.4), 'we note these are associational estimates... not as links in a causal chain' (§4.4), and the open '\\lambda \\cdot r_t product confound' is explicitly detailed in §6."
     },
     {
       "criterion_id": "4.4",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Figures and visual representations include explicit baselines, floors, and confidence ribbons: 'with the R = 0.7 target, the 1/\\sqrt{N} floor, and the K = 4.5 operating point marked' (Figure SR2) and 'Shaded ribbons: 95% bootstrap CIs (10,000 draws)' (Figure SR6)."
+      "justification": "Figures and visual representations are described with explicit baselines, theoretical overlays, finite-size floors, and error bands: e.g., 'with the R = 0.7 target, the 1/\\sqrt{N} floor, and the K = 4.5 operating point marked' (Figure SR2), 'Shaded ribbons: 95% bootstrap CIs (10,000 draws)' (Figure SR6), and 'Zero-coupling coherence: the half-circle map reports R = 0.636 \\pm 0.014 (artifact); the stereographic map restores the finite-size floor at 0.041 \\pm 0.022' (Figure S1)."
     },
     {
       "criterion_id": "5.1",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Hypotheses and parameters are strictly pre-specified, and post-hoc p-hacking or parameter tuning is explicitly forbidden: 'all precision/prior parameters are fixed a priori in the pre-registration (or fit on a training partition), and post-hoc precision adjustment after a failed prediction is forbidden by the protocol' (§4.3, §6)."
+      "justification": "Hypotheses and simulation criteria are pre-registered before data collection/runs, and post-hoc parameter adjustment is explicitly forbidden: 'All precision/prior parameters are fixed a priori (or fit on a training partition); post-hoc adjustment of precisions after a failed prediction is forbidden by protocol (§4.3)' (§6), and 'criteria specified in code before the reported runs' (§3.6)."
     },
     {
       "criterion_id": "5.2",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Simulation durations are explicitly designed to be long enough (10^5 to 3\\cdot 10^5 steps) to detect long-term pathologies, relapses, and regime changes: 'Sim G7 (long-horizon simulation, 10^5 events...): (i) under a stationary honest stream with small positive drift, S grows without bound (S = 249 after 10^5 events)... and (ii) a betrayal shock leaves a permanent displacement' (§3.2, §3.6)."
+      "justification": "Simulation horizons are explicitly designed to be long enough (10^5 to 3*10^5 steps, >= 30 autocorrelation times) to detect long-term pathologies, unbounded drift, and recovery times: 'Sim G7 (long-horizon simulation, 10^5 events...): (i) under a stationary honest stream with small positive drift, S grows without bound (S = 249 after 10^5 events)... (ii) a betrayal shock leaves a permanent displacement...' (§3.2, §3.6)."
     },
     {
       "criterion_id": "5.3",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Extrapolation limits, saturation bounds, and scope boundaries are explicitly enforced: 'Saturation caveat. Under the physics-layer preset S is an unbounded integrator, so the default index \\iota = \\tanh(S/s_d) saturates at \\pm 1... the index’s useful dynamic range is |S| \\lesssim 2s_d' (§2.3), and 'Scope limits and negative domain. (i) Incommensurable domains... \\tilde{\\varepsilon} is undefined and the law does not apply' (§7)."
+      "justification": "Extrapolation limits, saturation bounds, and domain boundaries are explicitly enforced: 'Saturation caveat. Under the physics-layer preset S is an unbounded integrator, so the default index \\iota = \\tanh(S/s_d) saturates at \\pm 1... the index’s useful dynamic range is |S| \\lesssim 2 s_d' (§2.3), and 'Scope limits and negative domain. (i) Incommensurable domains... (ii) Self-trust... (iv) Equilibrium-tool limits' (§7)."
     },
     {
       "criterion_id": "5.4",
       "status": "PASS",
       "points_awarded": 5,
-      "justification": "Results strictly adhere to mathematical boundaries (e.g., probability simplex invariance, bounded distortion, non-negative variance) and explicitly reject implausible physical anomalies: '\\tilde{P} is a probability vector (\\tilde{P}(o) > 0, \\Sigma_o \\tilde{P}(o) = 1)... no zero-probability outcome ever becomes attainable' (§2.3), 'Simplex Invariance (Theorem FR-2): \\sum_{i=1}^5 \\tilde{\\theta}_i = 1 identically' (§3.1), and 'explicitly disclaims microscopic non-classical phenomena in macroscopic human cognition or social institutions' (§1.2)."
+      "justification": "Mathematical boundaries (e.g., probability simplex invariance, positivity, bounded distortion, elimination of metric singularities at boundaries) are formally proved in Lean 4 and Z3 SMT, and non-classical/quantum claims in macroscopic biology/institutions are explicitly disclaimed: 'The Lean kernel has therefore checked each printed claim above end-to-end: tiltP_pos and tiltP_sum...' (§2.3b), 'Elimination of Boundary Singularity (Theorem FR-1)' (§3.1), and 'explicitly disclaims microscopic non-classical phenomena in macroscopic human cognition or social institutions' (§1.2, §3.5)."
     }
   ]
 }
