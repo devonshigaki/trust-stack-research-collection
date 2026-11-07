@@ -122,6 +122,7 @@ Since the original deposit, the collection has run a pre-registered connectome s
 | Sim AT-3 (C1–C3) | Quantum Morse expectation & living repair | PASS (3/3) | GTT §3.6 / DOCAS §5.33 |
 | Sim AT-4 (C1–C3) | Metabolome assembly & allosteric token partition | PASS (3/3) | DOCAS §5.33 |
 | Sim AT-5 (C1–C3) | Token phase landscape & Monte Carlo null (1 in 14M) | PASS (3/3) | DOCAS §5.33 |
+| Sim CRIT-2 (C1–C3) | Connectome spectral radius & quasicritical corridor | PASS (3/3) | DOCAS §5.26 |
 | Theorems Q-1–Q-4 | Quantum-biological SMT/CAS isomorphism | PASS (4/4) | GTT §3.6 / DOCAS §5.33 |
 | Theorems E-1–E-4 | Tri-critical invariant & variational extremum SMT | PASS (4/4) | GTT §3.6 / DOCAS §5.33 |
 | Theorems MS-1–MS-4 | Multiscale SMT/CAS assembly manifold proofs | PASS (4/4) | GTT §3.1 / DOCAS §5.33 |

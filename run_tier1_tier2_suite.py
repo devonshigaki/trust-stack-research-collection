@@ -116,6 +116,12 @@ TASKS = [
         "workdir": "experiments/simulations_repair_era/docas"
     },
     {
+        "tier": "Tier 1: Simulation",
+        "name": "Sim CRIT-2: Empirical Connectome Spectral Radius & Quasicritical Corridor",
+        "script": "experiments/simulations_repair_era/criticality/sim_crit2_connectome_spectral_radius.py",
+        "workdir": "experiments/simulations_repair_era/criticality"
+    },
+    {
         "tier": "Tier 1: Formal Math",
         "name": "Z3 & SymPy Quantum-Biological Isomorphism (Theorems Q-1–Q-4)",
         "script": "formal-verification/z3_quantum_molecular_isomorphism.py",

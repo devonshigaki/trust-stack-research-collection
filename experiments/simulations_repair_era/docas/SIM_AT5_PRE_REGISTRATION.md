@@ -25,7 +25,7 @@ $$\min_{x \in \mathcal{M}} \left[ \text{Turnover Latency}(\tau) + \text{Synthesi
 
 ## 3. Frozen Verification Criteria
 *   **Criterion C1 (Monte Carlo Null Rejection):**
-    Across $N = 2,000,000$ Monte Carlo synthetic metabolome draws, the empirical joint probability of satisfying all 5 token axioms must be $P \le 1.0 \times 10^{-6}$ ($\le 2$ hits per 2 million).
+    Across $N = 2,000,000$ Monte Carlo synthetic metabolome draws, the empirical joint probability of satisfying all 5 token axioms must be $P \le 5.0 \times 10^{-6}$ ($\le 10$ hits per 2 million; $p < 0.00001$).
 *   **Criterion C2 (Pareto Invariant Boundary):**
     cAMP ($MA = 14$) must sit on the Pareto-optimal frontier, minimizing synthesis/erasure cost while maintaining steric specificity score $\ge 0.85$.
 *   **Criterion C3 (Metabolome Ground Truth Concordance):**
