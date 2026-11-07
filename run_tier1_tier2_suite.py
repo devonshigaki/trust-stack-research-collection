@@ -115,6 +115,12 @@ TASKS = [
         "workdir": "formal-verification"
     },
     {
+        "tier": "Tier 1: Formal Math",
+        "name": "Z3 & SymPy Tri-Critical Invariant & Variational Extremum (Theorems E-1–E-4)",
+        "script": "formal-verification/z3_information_token_extremum.py",
+        "workdir": "formal-verification"
+    },
+    {
         "tier": "Tier 2: Public Data",
         "name": "CFPB Consumer Complaint Database (Live REST API)",
         "script": "experiments/simulations_repair_era/whitepaper/query_cfpb_complaints.py",

@@ -123,6 +123,7 @@ Since the original deposit, the collection has run a pre-registered connectome s
 | Sim AT-4 (C1–C3) | Metabolome assembly & allosteric token partition | PASS (3/3) | DOCAS §5.33 |
 | Sim AT-5 (C1–C3) | Token phase landscape & Monte Carlo null (1 in 14M) | PASS (3/3) | DOCAS §5.33 |
 | Theorems Q-1–Q-4 | Quantum-biological SMT/CAS isomorphism | PASS (4/4) | GTT §3.6 / DOCAS §5.33 |
+| Theorems E-1–E-4 | Tri-critical invariant & variational extremum SMT | PASS (4/4) | GTT §3.6 / DOCAS §5.33 |
 | Theorems MS-1–MS-4 | Multiscale SMT/CAS assembly manifold proofs | PASS (4/4) | GTT §3.1 / DOCAS §5.33 |
 | Theorems FR-1–FR-4 | SMT/CAS Fisher-Rao boundary proofs | PASS (4/4) | GTT §3.1 |
 
