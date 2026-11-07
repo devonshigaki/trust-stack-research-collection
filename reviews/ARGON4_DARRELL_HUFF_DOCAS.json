@@ -1,0 +1,177 @@
+{
+  "paper_title": "DOCAS",
+  "category_scores": {
+    "who_says_so": {
+      "score": 15,
+      "max": 20,
+      "items_passed": [
+        "1.1",
+        "1.3",
+        "1.4"
+      ]
+    },
+    "how_does_researcher_know": {
+      "score": 20,
+      "max": 20,
+      "items_passed": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4"
+      ]
+    },
+    "whats_missing": {
+      "score": 20,
+      "max": 20,
+      "items_passed": [
+        "3.1",
+        "3.2",
+        "3.3",
+        "3.4"
+      ]
+    },
+    "did_someone_change_subject": {
+      "score": 15,
+      "max": 20,
+      "items_passed": [
+        "4.1",
+        "4.2",
+        "4.3"
+      ]
+    },
+    "does_it_make_sense": {
+      "score": 20,
+      "max": 20,
+      "items_passed": [
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4"
+      ]
+    }
+  },
+  "total_score": 90,
+  "verdict": "EXCELLENT (85-100)",
+  "itemized_evaluation": [
+    {
+      "criterion_id": "1.1",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "The paper provides full funding source disclosures and an explicit conflict of interest statement in the Declarations section: 'Competing interests. D.S. is the founder and a beneficiary of FreshCredit Inc. and the founder of The FreshCredit Lab. FreshCredit Inc holds granted US utility patents... Funding. None received; independent research.'"
+    },
+    {
+      "criterion_id": "1.2",
+      "status": "FAIL",
+      "points_awarded": 0,
+      "justification": "The text explicitly identifies itself as an unreviewed preprint with pending institutional repository deposits: 'The companion theory preprint defines trust...' and 'Simulation code, seeds, figures, and pre-registration documents are deposited at OSF (DOI: 10.17605/OSF.IO/TBD). The Supporting Document and Technical Appendix are in preparation... until they are deposited, the frozen-criteria and protocol claims that cite them are self-attested.'"
+    },
+    {
+      "criterion_id": "1.3",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Prior works and negative literature are thoroughly and accurately represented without selective framing, e.g., in Section 2.2: 'Against the “trust molecule” framing: the foundational intranasal-oxytocin trust effect is dead. Meta-analysis of the trust-game literature (pooled n = 481) finds a combined effect statistically indistinguishable from zero' and Section 4.4: 'The contested status must now be stated as plainly as the hypothesis, because the demolitions are substantial and come from both outside and inside the criticality camp.'"
+    },
+    {
+      "criterion_id": "1.4",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "The paper explicitly evaluates independent replications (and failures to replicate) and establishes a reproducible protocol with exact seeds and byte-verified checkpoints: 'A genetics section evaluates loci by modern evidentiary standards — genome-wide significance and independent replication... The released TRIBE v2 checkpoint (facebook/tribev2 best.ckpt) was verified byte-exactly for this work — exactly 708,856,138 bytes... Repeat inference is bit-exact (max |Delta| = 0.0).'"
+    },
+    {
+      "criterion_id": "2.1",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Sampling selection and author-selection biases are explicitly controlled or remedied via randomized sampling and blinded rating protocols, e.g., Section 5.7: 'A frozen uniform sample of 12,000 post-synaptic roots (seed 45...)' and Section 5.2: 'The author-selection limitation of §4.6... now has a specified remedy, pre-registered before rating begins: minimum three independent raters per artifact... blind to the framework’s hypotheses and to author assignments'."
+    },
+    {
+      "criterion_id": "2.2",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Explicit power calculations and large sample sizes are documented throughout, e.g., Section 5.1: 'N = 60 enrolled -> 48 completers (20% multi-session attrition)... Power at N = 48: 0.78–0.92 for the per-probe test at d_z = 0.5–0.6 (alpha = 0.01, Bonferroni over five confirmatory tests)... and 0.92 for the pooled test at d_z = 0.5, alpha = 0.05'."
+    },
+    {
+      "criterion_id": "2.3",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Proper controls (permutation nulls, shuffle controls, semantic-only controls) and double-blinding are explicitly incorporated, e.g., Section 5.1: 'DOCAS-GATE-1: a double-blind, placebo-controlled, within-subject crossover with 7 sessions per participant' and Section 5.5: 'E3 — shuffling the update stream (breaking the temporal operator coupling) destroys the law in 200/200 negative-control replicates — PASS'."
+    },
+    {
+      "criterion_id": "2.4",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Appropriate statistical tests (Mantel tests, permutation tests, one-way ANOVA, Tukey-Kramer HSD, TOST equivalence) are paired with explicit effect sizes (OR, Cohen's d, eta^2, R^2, Pearson r), e.g., Section 5.18: 'In omnibus one-way ANOVA across the four regimes, metric hierarchy tau yielded F(3, 9996) = 3,561.48 (p < 10^-15, large effect size eta^2 = 0.5166 vs. frozen >= 0.140; PASS).' and Section 5.4: 'TRIBE v2 is deterministic, so its within-run temporal variability is not measurement noise and supplies no valid effect-size denominator; a Cohen’s d computed against it is uninterpretable as an effect size.'"
+    },
+    {
+      "criterion_id": "3.1",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Randomization, counterbalancing, and group/condition allocations are fully detailed, e.g., Section 5.1: 'session order counterbalanced by a Williams-balanced assignment over the six probes (48 = 8 x 6 preserves the balance), with the placebo session at a fixed position. N = 60 enrolled -> 48 completers' and Section 5.7: '12,000 post-synaptic roots (seed 45; 8,256 class-typed, spanning 11 classes from 23P and 4P through basket, Martinotti, and neurogliaform cells)'."
+    },
+    {
+      "criterion_id": "3.2",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Exact p-values, confidence intervals, standard errors, and permutation bounds are rigorously reported throughout, e.g., Section 4.2: 'lead SNP rs7528604, p = 5.39 x 10^-11, OR = 0.89 (95% CI 0.86–0.92)... failed its lookup in the largest independent anxiety GWAS — UK Biobank... rs7528604 p = .18, OR = 0.97 (95% CI 0.93–1.02)' and Section 5.14: 'beta_IVW(ADCY8) = 0.2284 (SE = 0.0223, p = 2.4 x 10^-24)'."
+    },
+    {
+      "criterion_id": "3.3",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Raw numbers, baseline metrics, and absolute values are consistently provided alongside relative ratios and percentages, e.g., Section 4.6: 'within-set density 0.267 (12/45 edges)... background density is 0.0027', Section 5.13: '96.7% vs. 0.0%', and Section 5.17: 'rejected by 98.3% of rational Fehr–Schmidt agents under transparent disclosure (1.7% baseline emergency uptake) were accepted by 95.7% of agents under multimodal cloaking... bottom cognitive bandwidth decile (D_1) suffered an exploitation odds ratio of 16.12x relative to the top decile (D_10, 98.0% vs. 75.2% uptake)'."
+    },
+    {
+      "criterion_id": "3.4",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Exclusions, unmapped items, attrition, and indeterminate runs are fully logged and accounted for, e.g., Section 5.4: '114 of 196 content words mapped to Concepticon nodes (tiered matching fully logged: 52 exact gloss, 19 morphological, 43 via a documented synonym table; 82 unmapped, mostly finance jargon with no Concepticon gloss)' and Section 5.6: 'Four studies, each fully pre-registered with frozen PASS/FAIL/INDETERMINATE criteria before any criterion-relevant data were touched; INDETERMINATE outcomes are reported, never dropped.'"
+    },
+    {
+      "criterion_id": "4.1",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "The paper explicitly refuses to swap true biological endpoints for convenient surrogate or computational markers, repeatedly stating the exact scope of its proxies, e.g., Abstract: 'All in-silico evidence reported here is instrument-level: no neurochemistry was measured anywhere in this paper' and Section 5: 'it tests pipeline decodability and separable channel signatures, not the carrier mapping — HRV, sleep, and activity measures are several inference steps from neuromodulatory tone and cannot distinguish the named carriers; pharmacological or PET-level perturbation is the actual gate for carrier claims'."
+    },
+    {
+      "criterion_id": "4.2",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Statistical significance is strictly separated from practical/construct validity and magnitude of correspondence, e.g., Section 1.1: 'the delivered cross-geometry correspondence is Mantel r = 0.252 (cortical) and 0.240 (embedding), with a recorded null on out-of-distribution stimuli (§4.6) — correlation, not isometry' and Section 4.6: 'the N.3 category-LOO decode survives every correction while being a known artifact (templatic lexicon; the semantic-only control also decodes at 1.000) — multiplicity correction controls the false-positive rate, not construct validity'."
+    },
+    {
+      "criterion_id": "4.3",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Correlation is explicitly distinguished from causation and confounding variables (such as LD, pleiotropy, and expectancy) are rigorously addressed, e.g., Section 4.7: 'Because every tier of gene-level evidence available to this framework is associational, we state explicitly what publicly available in-silico resources can and cannot license... convergent associational tiers, not causal claims... Because no tier is causal and the genetic tiers substantially re-descend from circular legacy genetics, this triangulation licenses no causal claim'."
+    },
+    {
+      "criterion_id": "4.4",
+      "status": "FAIL",
+      "points_awarded": 0,
+      "justification": "In the provided paper text, all figures are embedded as broken/external local file links (e.g., '<img src=\"figures/figD_operators_masterlaw.png\" />') that cannot be visually inspected for axis baselines, and the text explicitly admits that several numbered figures are missing entirely: 'The architecture schematic (Figure 1), the core-battery TRIBE v2 summary (Figure 3), and the original-battery flatmap (Figure 6) have no deposited image files and are therefore not typeset as floats'."
+    },
+    {
+      "criterion_id": "5.1",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Hypotheses and criteria were pre-specified and frozen prior to execution, failed criteria are reported plainly as failures, and any post-hoc analyses are explicitly quarantined and labeled as carrying no evidential weight, e.g., Section 5.5: 'E2 — the failure, stated plainly: the framework failed its pre-registered double-dissociation criterion as frozen... The failure is not re-narrated as support. What follows is post-hoc hypothesis generation, labeled as such... carries no evidential weight for the current framework'."
+    },
+    {
+      "criterion_id": "5.2",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Study timeframes, physiological timescales, washout periods, and multi-generational simulation horizons are logically matched to the biological and dynamical phenomena under study, e.g., Section 1: 'Because the five neuromodulatory systems involved operate on timescales spanning more than four orders of magnitude (0.1 s to ~2,700 s)...', Section 5.1: '7 sessions per participant... >=7-day washouts... ~8–12 weeks per participant', and Section 5.22: 'G = 50 generations'."
+    },
+    {
+      "criterion_id": "5.3",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Extrapolation limits, out-of-distribution failures, and non-linear boundary conditions are explicitly enforced and documented, e.g., Section 4.6: 'Single words are, however, out-of-distribution input for instruments trained on naturalistic narrative... these models’ representational geometry is stimulus-class-sensitive', Section 4.2: 'resolved through the classic Arnsten inverted-U profile of prefrontal cortical cAMP signaling', and Section 5.4: 'the translated cloud shrinks toward the centroid (ridge regression-to-mean)'."
+    },
+    {
+      "criterion_id": "5.4",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "The entire architecture is explicitly revised and constrained to respect physiological, mathematical, and thermodynamic boundaries, e.g., Abstract: 'Because the five neuromodulatory systems involved operate on timescales spanning more than four orders of magnitude... no serial five-step cascade is physiologically coherent. DOCAS is therefore framed here as a parallel, multi-timescale modulation architecture', Section 2.4: 'catecholamines do not cross the blood–brain barrier : circulating epinephrine cannot be the carrier of a central activation signal', and Section 2.9: 'The component-wise non-negative vector... is what the theory’s Fisher–Rao construction normalizes into the stage-mix simplex coordinate theta... the simplex applies to these non-negative activities, not to the signed components of T.'"
+    }
+  ]
+}

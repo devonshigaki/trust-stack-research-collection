@@ -1,0 +1,173 @@
+{
+  "paper_title": "Whitepaper",
+  "category_scores": {
+    "who_says_so": {
+      "score": 5,
+      "max": 20,
+      "items_passed": [
+        "1.3"
+      ]
+    },
+    "how_does_researcher_know": {
+      "score": 15,
+      "max": 20,
+      "items_passed": [
+        "2.1",
+        "2.3",
+        "2.4"
+      ]
+    },
+    "whats_missing": {
+      "score": 15,
+      "max": 20,
+      "items_passed": [
+        "3.1",
+        "3.2",
+        "3.3"
+      ]
+    },
+    "did_someone_change_subject": {
+      "score": 20,
+      "max": 20,
+      "items_passed": [
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4"
+      ]
+    },
+    "does_it_make_sense": {
+      "score": 15,
+      "max": 20,
+      "items_passed": [
+        "5.1",
+        "5.3",
+        "5.4"
+      ]
+    }
+  },
+  "total_score": 70,
+  "verdict": "MODERATE RISK OF BIAS (65-84)",
+  "itemized_evaluation": [
+    {
+      "criterion_id": "1.1",
+      "status": "FAIL",
+      "points_awarded": 0,
+      "justification": "Although funding is disclosed ('Funding: none received; independent research'), the author holds a direct commercial and financial stake in the outcome ('Competing interests. D.S. is the founder and a beneficiary of FreshCredit Inc. and the founder of The FreshCredit Lab. FreshCredit Inc holds granted US utility patents covering methods in three commercial verticals...')."
+    },
+    {
+      "criterion_id": "1.2",
+      "status": "FAIL",
+      "points_awarded": 0,
+      "justification": "The document is a commercial/technical 'Whitepaper' referencing companion preprints and an un-finalized repository ('OSF DOI: 10.17605/OSF.IO/TBD', 'The Supporting Document and Technical Appendix are in preparation... until they are deposited, the frozen-criteria and protocol claims that cite them are self-attested'). It is not published in a peer-reviewed journal."
+    },
+    {
+      "criterion_id": "1.3",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Prior works and cited literature are represented with extreme rigor and explicit caveats against selective framing: 'All financial statistics cited here are regulator- or primary-source verified where cited as fact; vendor-reported figures are labeled as such... Two caveats are kept explicit, per the stack’s evidentiary discipline: the deployment figures are vendor-published case studies... subject to selection and marketing bias'."
+    },
+    {
+      "criterion_id": "1.4",
+      "status": "FAIL",
+      "points_awarded": 0,
+      "justification": "Independent replication failed and the reproducible protocol deposit is incomplete: 'A second-encoder replication attempt (Sim D9, companion biology preprint, § 5.2; Tuckute 2024 language-network encoder, disjoint subjects) also failed its frozen criteria and is reported as failed; the instrument claim remains single-encoder pending a whole-brain replication' and 'OSF (DOI: 10.17605/OSF.IO/TBD). The Supporting Document and Technical Appendix are in preparation... until they are deposited, the frozen-criteria and protocol claims that cite them are self-attested.'"
+    },
+    {
+      "criterion_id": "2.1",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Sampling and measurement biases are explicitly documented and controlled for in the simulation and analytical frameworks: 'Consumer Reports, 2024 — volunteer sample, not nationally representative; cited alongside the FTC’s representative 2013 estimate of 26%' and 'wearable owners differ systematically from non-owners, so the concordance pilot’s population inference carries a self-selection caveat — stated here and carried into the pre-registration'."
+    },
+    {
+      "criterion_id": "2.2",
+      "status": "FAIL",
+      "points_awarded": 0,
+      "justification": "The paper does not provide an explicit statistical power calculation to justify its simulation sample sizes (e.g., '300 synthetic users', 'N = 500') or for the planned human concordance pilot."
+    },
+    {
+      "criterion_id": "2.3",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "The study uses explicit negative controls and shuffled-label controls in its simulations: 'A planted \\lambda = 0 negative control recovers max|\\hat{\\lambda}| = 0.0092 (no phantom sensitivity)... shuffled-label negative control correctly null (p = 0.684)' and 'CLICS provides the semantic control geometry'."
+    },
+    {
+      "criterion_id": "2.4",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Appropriate statistical tests (e.g., Mantel permutation tests, Kalman/EM state-space estimation) are paired with explicit effect sizes and practical significance metrics (SESOI, NNT, NNH): 'Mantel permutation tests score concordance between the three spaces’ distance geometries... planted neural\\timesbehavioral concordance detected at Mantel r = 1.0, p = 0.002' and 'The 0.15 half-width is a pre-registered smallest effect size of interest (SESOI) for an equivalence test'."
+    },
+    {
+      "criterion_id": "3.1",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Simulation randomization seeds and parameter allocations are fully detailed: '300 synthetic users, true \\lambda \\sim U[0.05, 0.95], mixed-sign \\tilde{\\varepsilon} streams (12–15% negative, heavier-tailed betrayals), Poisson cadence 0.3–3.0 events/day over 365 days (median 569 events/user, range 112–1100)' and 'analytic values and Monte-Carlo crosses (2M files, seed 42)'."
+    },
+    {
+      "criterion_id": "3.2",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Exact p-values, standard deviations, means, medians, and percentiles are clearly reported: 'reports |\\hat{\\lambda} - \\lambda| mean 0.0074, p95 0.0215, max 0.0343', 'R = 0.739 \\pm 0.029 coupled vs. 0.040 \\pm 0.001 isolated', 'uptake 0.725 \\rightarrow 0.284, p = 0.004', 'day 318 \\pm 133'."
+    },
+    {
+      "criterion_id": "3.3",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Raw numbers, baselines, absolute risks, and NNT/NNH are explicitly provided alongside relative metrics: 'The complaint-database statistics are stated against their exact counting base: of the 2,365,586 published credit-reporting complaints received in 2024, \"incorrect information on your report\" accounts for 1,175,009 (49.7%)', 'Where effects are quantified we report relative risk alongside absolute risk differences... The promised number-needed-to-harm accounting is performed in-paper in § 4.3... The error-correction NNT is 52 / 24 / 19'."
+    },
+    {
+      "criterion_id": "3.4",
+      "status": "FAIL",
+      "points_awarded": 0,
+      "justification": "Because the paper has not yet conducted its human-subject concordance trial ('What remains open, and is now the A-grade gate: the same tests on real users'), there is no logging of participant withdrawals, dropouts, or missing human data, and no outlier exclusion log is documented."
+    },
+    {
+      "criterion_id": "4.1",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "The paper explicitly distinguishes its surrogate compliance metric from the target construct (trustworthiness) rather than swapping them silently: 'on the stack’s [HYPOTHESIS]-labeled bridge (§ 2.2: the score’s contract-enforced inputs are assurance-channel validations whose correlation with trustworthiness is hypothesized, not identical to it)' and 'A missed payment measures shock exposure and capacity at least as much as willingness; a made payment is not clean evidence of \"trust validation.\"'"
+    },
+    {
+      "criterion_id": "4.2",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Statistical significance is explicitly separated from practical and clinical impact: 'the 0.15 half-width is a pre-registered smallest effect size of interest (SESOI) for an equivalence test — a substantive choice, not instrument resolution' and 'immediate validation of deferred costs cuts uptake of adversarial contracts from 0.725 to 0.284 (p = 0.004; the companion protocol preprint’s Sim P7; existence-of-effect at one salience setting, not an effect-size estimate)'."
+    },
+    {
+      "criterion_id": "4.3",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Correlation is rigorously separated from causation, and confounding variables and observation/Hawthorne effects are explicitly analyzed: 'The stakes extend beyond loan books, and the evidence is stated here with its causal strength graded rather than inflated... associations in which reverse causation is not excluded... Critically, the credit–health correlation is substantially confounded: in the Dunedin cohort (N = 1,037), human-capital factors (education, cognition, self-control) explain ~45% of the credit-score–cardiovascular-risk association' and 'demand characteristics show heterogeneous, bidirectional participation effects with frequent nulls (McCambridge, 2014)'."
+    },
+    {
+      "criterion_id": "4.4",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Graphs and visual representations are documented with explicit baseline corrections and clear axis scales to prevent visual distortion: 'the incoherent-control baseline under the stereographic map is \\approx 0.03–0.05 (a half-circle arctan map would report R \\approx 0.635 at K = 0 — Technical Appendix, Sim-Battery B, Study 1)' and 'Figure 12: NNH — the win and the counter-term... (a) Fee totals (log scale)'."
+    },
+    {
+      "criterion_id": "5.1",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Hypotheses and criteria were pre-specified and frozen in code before running simulations, and failed tests are transparently reported rather than p-hacked: 'against pre-registered criteria frozen in code before the passing run... the multilingual arms failed their frozen criteria and are reported as failed — no cross-language claim is made. A second-encoder replication attempt (Sim D9...) also failed its frozen criteria and is reported as failed'."
+    },
+    {
+      "criterion_id": "5.2",
+      "status": "FAIL",
+      "points_awarded": 0,
+      "justification": "There is no real-world longitudinal follow-up of human participants or borrowers; all time-series durations ('over 365 days', '10 years', '36-Month Transitional Migration') exist strictly as synthetic in-silico simulations ('What remains open, and is now the A-grade gate: the same tests on real users')."
+    },
+    {
+      "criterion_id": "5.3",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Extrapolation limits and boundary failures are explicitly bounded and disclosed: 'Anything not quantifiable from printed numbers is declared non-quantifiable rather than invented... Declared not computable without new data: the Experian-Boost-based NNT... and the global-inclusion benefit' and 'under a Behrens-style adaptive-\\lambda ground truth... the constant-\\lambda estimator does not recover the time-average gain within the certified 0.15 tolerance'."
+    },
+    {
+      "criterion_id": "5.4",
+      "status": "PASS",
+      "points_awarded": 5,
+      "justification": "Mathematical formulations and results adhere strictly to domain and probability bounds: 'with the trust index \\iota(T) = \\tanh(w\\,\\tilde{T}) \\in (-1, 1)... at neutral trust \\iota = 0 it reduces exactly to standard expected utility, and the distortion is bounded' and 'regularization floor \\epsilon_{\\min} = 10^{-4} certifying numerical stability against zero-variance history profiles'."
+    }
+  ]
+}
