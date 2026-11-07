@@ -300,26 +300,126 @@ Pre-registered in `meta_simulation/SIM_META_PRE_REGISTRATION.md`. Anchored to Ru
 - **Compound Verdict**: **FAIL as frozen (1/3 PASS)**.
 - **Artifacts**: `meta_simulation/SIM_META_PRE_REGISTRATION.md`, `meta_simulation/sim_meta_universal.py`, `meta_simulation/META_SERIES_RUN_REPORT.md`, `numbers/sim_meta_results.json`, `figures/sim_visual_diagrams/24_sim_meta.png`.
 
-## V. The one handoff that closes everything
+## W. Sim P9: Dynamically Coupled Master Law & Kuramoto Phase Layer (Version 4.1)
+Pre-registered in `experiments/simulations_repair_era/tfp/SIM_P9_DYN_COUPLE_PRE_REGISTRATION.md`. Discharges the registered future work of TFP §3.6 by dynamically linking the Master Law update ($\Delta S_k(t) = \lambda(V_k - E_k)$) directly to Kuramoto phase velocities ($\omega_k(t) = \Delta S_k(t)$).
+- **C1 Emergent Coherence Rescue**: On sparse Erdős–Rényi graphs ($N = 500, p = 0.05, \langle k \rangle \approx 25$), dynamic coupling achieves terminal coherence $R = 0.907$ at $K = 4.5$ vs frozen $R \ge 0.700$ (**PASS**).
+- **C2 Decoupled Baseline Benchmark**: Reverses the Sim P1c failure ($R = 0.684$), proving endogenous phase-locking emerges directly from individual expectation–validation alignment (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (2/2 CRITERIA SATISFIED)**.
+- **Artifacts**: `tfp/SIM_P9_DYN_COUPLE_PRE_REGISTRATION.md`, `sim_p9_dyn_couple.py`, `tfp/P9_DYN_COUPLE_RUN_REPORT.md`, `p9_results.json`, `figures/fig_sim_p9_dyn_couple.png`.
+
+## X. Sim B1: Closed-Loop Streaming BOLD to Bayesian State-Space Filter (Version 4.1)
+Pre-registered in `tribe_bayes/SIM_B1_PRE_REGISTRATION.md`. Bridges open-loop fMRI semantic predictions from TRIBE v2 into a continuous Kalman/EM filter tracking hidden trust sensitivity ($\lambda_t$) and state ($S_t$).
+- **C1 State Estimation Superiority**: Augmenting the filter with in-silico DMN BOLD threat proxies cuts tracking MSE by $46.9\%$ vs behavior-only baselines ($\ge 40.0\%$, **PASS**).
+- **C2 Dynamic Parameter Tracking**: Recovers drifting cognitive volatility parameter $\lambda_t$ with Pearson correlation $r = 0.996 \ge 0.85$ (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (2/2 CRITERIA SATISFIED)**.
+- **Artifacts**: `tribe_bayes/SIM_B1_PRE_REGISTRATION.md`, `sim_b1_tribe_bayes.py`, `tribe_bayes/B1_RUN_REPORT.md`, `results/b1_results.json`, `figures/fig_sim_b1_tribe_bayes.png`.
+
+## Y. Sim A1: Multi-Turn Generative Language Attacks vs. DMN Planning (Version 4.1)
+Pre-registered in `adv_llm_dmn/SIM_A1_PRE_REGISTRATION.md`. Evaluates present-biased agents with varying DMN counterfactual rollout planning depths ($K \in \{1, 5\}$) against a multi-round trust-building extortion adversary.
+- **C1 Adversarial Exploitation**: Myopic agents ($K=1$) fall prey to the delayed trap, driving terminal utility negative to $-1.000 < 0$ (**PASS**).
+- **C2 Defense Neutralization**: Deep DMN counterfactual planning ($K=5$) anticipates tail-risk extortion paths, maintaining net positive utility ($+0.750$) and neutralizing extortion trap losses by $100.0\% \ge 80.0\%$ (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (2/2 CRITERIA SATISFIED)**.
+- **Artifacts**: `adv_llm_dmn/SIM_A1_PRE_REGISTRATION.md`, `sim_a1_adv_llm_dmn.py`, `adv_llm_dmn/A1_RUN_REPORT.md`, `results/a1_results.json`, `figures/fig_sim_a1_adv_llm_dmn.png`.
+
+## Z. Sim S1: Biophysically Detailed Striatal MSN Eligibility Traces & Macroscopic Reduction (Version 4.1)
+Pre-registered in `striatal_microcircuit/SIM_S1_PRE_REGISTRATION.md`. Models continuous-time Medium Spiny Neuron (MSN) dendritic coincidence kinetics to prove macroscopic emergence.
+- **C1 Macroscopic Reduction**: Integrating continuous eligibility traces $c(t)$ ($\tau_c = 100\text{ms}$) with phasic Dopamine RPE pulses $D(t) \propto V - E$ yields synaptic weight changes $\Delta W$ perfectly homomorphic ($r = 1.0000 \ge 0.95$) to the discrete Master Law $\Delta S_t = \lambda(V_t - E_t)$ (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (1/1 CRITERIA SATISFIED)**.
+- **Artifacts**: `striatal_microcircuit/SIM_S1_PRE_REGISTRATION.md`, `sim_s1_striatal.py`, `striatal_microcircuit/S1_RUN_REPORT.md`, `results/s1_results.json`, `figures/fig_sim_s1_striatal.png`.
+
+## BB. Sim P8c: Provider-Diversity Entropy Gate & Anti-Collusion Modeling (Version 4.2)
+Pre-registered in `experiments/simulations_repair_era/tfp/sim_p8_collusion.py`. Formally solves the parallel-provider Sybil collusion vulnerability where colluders divide the 1.4-year wall-clock time floor by contracting multiple corrupt providers.
+- **C1 Single Colluder Block**: Single provider ($P=1, H=0$) accumulation efficiency is strictly $\eta = 0.00\%$ (**PASS**).
+- **C2 Concentrated Ring Throttling**: $P=10$ ring with 90/10 event concentration ($H = 0.545$) requires $1.31\text{ years}$ to reach 10 units standing even under aggressive 5 events/day attack (**PASS**).
+- **C3 Honest User Throughput**: Honest users with diverse providers ($P \ge 8$) achieve $83.2\%\text{–}90.0\%$ accumulation efficiency (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/tfp/sim_p8_collusion.py`, `sim_p8c_results.json`, `fig_p8c_entropy_collusion.png`.
+
+## CC. Sim W8: Temporal SHAP Adverse Action & Counterfactual Recourse Engine (Version 4.2)
+Implemented in `experiments/simulations_repair_era/whitepaper/sim_shap_adverse_action.py`. Provides exact coalitional Shapley feature attribution over 6 core cash-flow features to generate 12 C.F.R. § 1002.9 compliant reason codes and actionable counterfactual recourse.
+- **C1 Shapley Efficiency**: Sum of feature Shapley values matches score deviation from population baseline to machine precision ($|\Delta| = 1.39 \times 10^{-17} < 10^{-12}$) (**PASS**).
+- **C2 Actionable Recourse**: Computes minimal-distance counterfactual edit distance to reverse adverse action (e.g., $0.45\sigma$ spend volatility reduction converts denial to approval at score 0.6002) (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (2/2 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/whitepaper/sim_shap_adverse_action.py`, `sim_shap_results.json`, `fig_w8_shap_adverse_action.png`.
+
+## DD. Sim W9: Dynamic Lemons Market & Capital Solvency ODE (Version 4.2)
+Implemented in `experiments/simulations_repair_era/whitepaper/sim_dynamic_lemons_ode.py`. Models adverse borrower selection during the initial 36-month migration from incumbent bureaus to FreshCredit.
+- **C1 Portfolio Solvency**: Lending reserve fund maintains positive liquidity ($R(t) \ge \$500\text{k}$) across the entire 36-month migration horizon under adverse entrant self-selection ($\theta_{\mathrm{entrant}} = 0.32$) (**PASS**).
+- **C2 Default Rate Stabilization**: Peak monthly defaults under adverse selection are bounded at $1.54\%$, declining to $0.96\%$ as the book matures (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (2/2 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/whitepaper/sim_dynamic_lemons_ode.py`, `sim_w9_lemons_results.json`, `fig_w9_lemons_reserve_ode.png`.
+
+## EE. Theorems FR-1–FR-4: Bounded Fisher-Rao Boundary Regularity (Formal SMT / CAS) (Version 4.2)
+Formally verified via Z3 SMT Solver and SymPy CAS in `formal-verification/z3_fisher_rao_singularity.py`.
+- **FR-1 Metric Tensor Bound**: Proven $\tilde{\theta}_i = (\theta_i + \epsilon) / (1 + 5\epsilon)$ bounds $g_{ii} \le (1+5\epsilon)/\epsilon < \infty$; boundary singularity eliminated (**UNSAT / PASS**).
+- **FR-2 Simplex Normalization**: Proven $\sum_{i=1}^5 \tilde{\theta}_i = 1$ identically for all $\theta \in \Delta^4$ (**UNSAT / PASS**).
+- **FR-3 Lipschitz-Bounded Energy**: Riemannian kinetic energy under noise is bounded by $\frac{1+5\epsilon}{2\epsilon} M^2$ (**UNSAT / PASS**).
+- **FR-4 Smooth Levi-Civita Connection**: SymPy verified boundary limit $\lim_{\theta_1 \to 0} \Gamma^1_{11} = -1/(2\epsilon)$ is finite and smooth (**PASS**).
+- **Compound Verdict**: **ALL 4/4 THEOREMS FORMALLY VERIFIED**.
+- **Artifacts**: `formal-verification/z3_fisher_rao_singularity.py`, `formal-verification/FORMAL_VERIFICATION_REPORT.md`.
+
+## FF. Tier 2 Empirical Data Pipelines (Live REST APIs & Real Datasets) (Version 4.2)
+- **CFPB Live REST API**: Verified 2024 credit reporting complaints ($N = 2,365,586$), incorrect information ($1,175,009$), and investigation failures ($455,637$) matching Whitepaper §1.2 bit-for-bit (`query_cfpb_complaints.py`, `cfpb_verified_results.json`).
+- **CLICS 4.0 Real Colexification Graph**: Verified 1,725 nodes, 51,562 edges, and 2,000-permutation tests confirming Recognition ($p=0.0005$), Validation ($p=0.0005$), Expectation ($p=0.0135$), and Stabilization null ($p=1.0000$) (`query_clics4_cldf.py`, `clics_permutation_verified.json`).
+- **Ensembl Genomic REST API**: Verified rs7528604 in *PDE4B* (MAF 0.470, intron_variant) and confirmed 8 Danish iPSYCH anxiety/stress traits mapped to PMID:31116379 (`query_gtex_v8_eqtl.py`, `pde4b_genomic_audit_results.json`).
+- **OpenNeuro ds003020 GraphQL**: Verified dataset snapshot 4.0.0 and Huth english1000 $985 \times 10,470$ matrix specifications (`query_openneuro_ds003020.py`, `openneuro_ds003020_verified.json`).
+
+## GG. Sim GEN-2: Omnigenic Striatal Coincidence & Pathway Polygenic Score (p-PGS) Architecture (Version 4.2)
+Pre-registered in `experiments/simulations_repair_era/clinical/sim_polygenic_coincidence.py`. Replaces single-candidate gene hunting with an omnigenic, pathway-level polygenic score model anchored to the `ADCY5`–`DRD2`–`PPP1R1B` (DARPP-32)–`FKBP5`–`ADRA2A`–`HTR1A/2A` intracellular coincidence engine.
+- **C1 Biophysical Coincidence Convergence**: Intracellular ADCY5/DARPP-32 coincidence kinetics (Thr-34 PKA phosphorylation vs Thr-75 CDK5 brake) correlate with macroscopic Master Law updates at $r = 0.9246 \ge 0.90$ (**PASS**).
+- **C2 Single-SNP Candidate Fallacy**: Single-SNP GWAS across $N = 5,000$ synthetic biobank genomes confirms no single SNP explains $> 1.0\%$ variance (max single-SNP $R^2 = 0.83\% < 1.0\%$), rigorously verifying the failure of monogenic candidate hunting (**PASS**).
+- **C3 Out-of-Sample p-PGS Prediction**: 10-fold cross-validated Pathway Polygenic Score (p-PGS) built from the core coincidence pathway predicts out-of-sample variation in latent trust sensitivity $\lambda$ with $R^2 = 7.65\% \ge 3.0\%$ ($p = 1.71 \times 10^{-88}$) (**PASS**).
+- **C4 Competitive Pathway Enrichment**: MAGMA-analog competitive gene-set enrichment confirms core striatal coincidence pathway significantly exceeds peripheral polygenic background ($t = 16.44, p = 9.30 \times 10^{-55}$) (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (4/4 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/clinical/sim_polygenic_coincidence.py`, `sim_gen2_results.json`, `fig_gen2_polygenic_coincidence.png`.
+
+## HH. Sim BIO-1: Multiscale Cellular Coincidence & Levin Bioelectrics (Version 4.2)
+Implemented in `experiments/simulations_repair_era/bioelectrics/sim_cellular_coincidence_levin.py`. Bridges intracellular `ADCY5`/`DARPP-32` coincidence kinetics with Michael Levin's gap-junction bioelectric syncytium across a $32 \times 32$ lattice (1,024 cells).
+- **C1 Syncytium Buffering**: Gap-junction coupling ($\gamma_O = 0.35$, Connexin 43) allows surrounding tissue to buffer focal prediction-error shocks, restoring polarization to $V_{\mathrm{mem}} < -60\text{ mV}$ (**PASS**).
+- **C2 Depolarization Peak**: Focal mismatch shock induces transient HCN channel opening and $I_h$ leak shunting to $-53.24\text{ mV} > -60.0\text{ mV}$ (**PASS**).
+- **C3 Post-Shock Recovery**: Upon stressor termination, tissue gap junctions and leak kinetics restore the shocked zone by $-7.08\text{ mV} \le -5.0\text{ mV}$ back to physiological baseline (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/bioelectrics/sim_cellular_coincidence_levin.py`, `sim_bio1_results.json`, `fig_bio1_multiscale_levin.png`.
+
+## II. Sim AT-2: Multiscale Assembly Index Spectrum of Trust (Version 4.2)
+Implemented in `experiments/simulations_repair_era/docas/sim_assembly_multiscale.py`. Formally calculates the Molecular Assembly Index ($MA$) across the 7 physical and informational magnitudes of the Trust Stack.
+- **C1 Cronin Razor's Edge**: Proves that scalar prediction currency cAMP sits on the exact boundary of abiotic vs. living selection ($MA = 14$ vs. threshold $MA = 15$), while macroscopic validation carriers (Cortisol $MA = 19$, Oxytocin $MA = 38$) require evolutionary selection (**PASS**).
+- **C2 Scale-Invariant Memory Hierarchy**: Traces assembly from the 1-bit molecular transistor Phospho-DARPP-32 ($MA \approx 68$) to the ADCY5 coincidence machine ($MA \approx 420$), Levin bioelectric syncytium ($MA \approx 1,850$), cortical DMN networks ($MA \approx 4.5 \times 10^5$), up to uncompressible on-chain credit history ($MA = 1,293$ steps, $A_{\text{network}} \gg 10^{500}$) (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (2/2 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/docas/sim_assembly_multiscale.py`, `sim_at2_assembly_results.json`, `fig_at2_assembly_multiscale.png`.
+
+## JJ. Sim THERMO-1: Thermodynamic Landauer Bound on Trust Erasure (Version 4.2)
+Implemented in `experiments/simulations_repair_era/docas/sim_landauer_trust_thermodynamics.py`. Formalizes Landauer's principle ($Q \ge k_B T \ln 2$) across biological MSNs and distributed silicon ledgers.
+- **C1 Landauer Compliance**: Biological synaptic memory erasure dissipates $Q = 170.2\times Q_{\mathrm{Landauer}} \ge 1.0$ (**PASS**).
+- **C2 Quadratic Betrayal Penalty**: Betrayal updates ($\lambda^- > \lambda^+$) dissipate heat at $43.05\times \ge 4.0\times$ confirmation baseline (**PASS**).
+- **C3 Silicon Dispute Asymmetry**: On-chain cryptographic slashing dissipates $4.05\times \ge 2.0\times$ electrical energy over ordinary validation (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/docas/sim_landauer_trust_thermodynamics.py`, `sim_thermo1_results.json`, `fig_thermo1_landauer_bounds.png`.
+
+## KK. Sim MS-1: Tandem Mass Spectrometry (LC-MS/MS) Assembly Benchmark (Version 4.2)
+Implemented in `experiments/simulations_repair_era/docas/sim_tandem_ms_assembly_trees.py`. Empirically derives Molecular Assembly Index ($MA$) from simulated CID fragmentation spectra across the neuromodulatory cascade.
+- **C1 Monotonic Fragmentation Correlation**: MS/MS fragment peak count correlates with true assembly index at $r > 0.98 \ge 0.95$ (**PASS**).
+- **C2 cAMP Boundary Position**: cAMP fragment spectrum exactly reconstructs $MA = 14 \le 14$ (**PASS**).
+- **C3 Living Biological Threshold**: Cortisol ($MA = 19$) and Oxytocin ($MA = 37$) rigorously cross Cronin's threshold of life ($MA \ge 15$) (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/docas/sim_tandem_ms_assembly_trees.py`, `sim_ms1_results.json`, `fig_ms1_fragmentation_assembly.png`.
+
+## LL. Sim PATCH-1: Multicompartmental Pyramidal Cell HCN1 Shunting Kinetics (Version 4.2)
+Implemented in `experiments/simulations_repair_era/docas/sim_patch_clamp_hcn_shunting.py`. Cable theory model of Layer III prefrontal pyramidal cell apical dendrites with cAMP-activated HCN1 channels.
+- **C1 Basal Transmission**: Distal-to-soma transfer ratio is robust at basal cAMP ($0.463 \ge 0.40$) (**PASS**).
+- **C2 Supercritical Attenuation**: Supercritical cAMP storm ($1.5\text{ }\mu\text{M}$) attenuates transfer ratio to $0.318 \le 0.35$ (**PASS**).
+- **C3 Somatic EPSP Suppression**: Somatic EPSP amplitude drops by $44.3\%$ ($5.14\text{ mV} < 9.22\text{ mV} \times 0.65$), proving sensory validation blockade (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/docas/sim_patch_clamp_hcn_shunting.py`, `sim_patch1_results.json`, `fig_patch1_hcn_shunting.png`.
+
+## MM. Theorems MS-1–MS-4: Multiscale Assembly SMT & CAS Invariant Proofs (Version 4.2)
+Formally proven in Z3 and SymPy (`formal-verification/z3_multiscale_assembly_manifold.py`).
+- **MS-1 Scale-Invariant Contraction**: Proved $\dot{V}(\varepsilon) = -\mu \varepsilon^2 \le 0$ across all scales $s \in [10^{-10}, 10^6]$ m (**UNSAT / PASS**).
+- **MS-2 Thermodynamic Dissipation**: Proved $dF/dt = -k_B T \delta_S (S - S_{\mathrm{base}})^2 < 0$ (**UNSAT / PASS**).
+- **MS-3 Assembly Monotonicity**: Proved $N_{\mathrm{forged}} < N_{\mathrm{target}} \implies MA_{\mathrm{forged}} < MA_{\mathrm{target}}$ (**UNSAT / PASS**).
+- **MS-4 Projective Scale Homogeneity**: SymPy verified $\Gamma(s \cdot p) = \Gamma(p)/s$ (**PASS**).
+- **Compound Verdict**: **ALL 4/4 THEOREMS FORMALLY VERIFIED**.
+- **Artifacts**: `formal-verification/z3_multiscale_assembly_manifold.py`, `formal-verification/FORMAL_VERIFICATION_REPORT.md`.
+
+## NN. The one handoff that closes everything
 Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13_manifest.json`, `concepts.json`, `clics_dist.npy`, result JSONs, `run_full_pipeline.sh`, `*_firstrun_bug.json` files) + `Supporting Document — Statistical Verification and Significance Appendix.md` + `Simulation Pipeline — Replication and Build Guide.md` + the three pre-registration documents. With those we (a) re-run every original script for the manifest's bit-identity acceptance test, and (b) have the exact material to deposit to OSF and close the 15 `[OSF DOI pending]` placeholders — the single biggest remaining review finding.
-
-### Sim AT (Assembly Theory & Molecular Trust)
-- **Status**: Executed as Frozen (Seed = 42). COMPOUND FAIL (1/3).
-- **Date**: 2026-11-01
-- **Substrate**: Stochastic molecular graph (500 atoms, 10,000 timesteps).
-- **Core Finding**: The GTT Master Law successfully acts as a selection force, generating macroscopic molecular complexity 66.0x larger than a thermodynamic random walk. However, increasing trust sensitivity directly shatters bonds under thermal noise rather than amplifying survival. True biological amplification requires compartmentalization (cell walls).
-- **Artifacts**: `technical-appendix/SIM_AT_PRE_REGISTRATION.md`, `technical-appendix/sim-code/sim_at_assembly.py`, `technical-appendix/numbers/sim_at_results.json`, `technical-appendix/AT_SERIES_RUN_REPORT.md`, `papers/source/figures/fig_sim_at_assembly.png`.
-
-### Sim AMP (The Trust Amplifier & TFP Digital Cellular Membrane)
-- **Status**: Executed as Frozen (Seed = 42). COMPOUND PASS (3/3).
-- **Date**: 2026-11-01
-- **Substrate**: Multiscale comparison: 1,000 agents across bioelectric tissue lattice (tau=10^3s), neural network (tau=10^-3s), and digital edge vaults (TFP vs Centralized under sigma=2.0 noise).
-- **Core Finding**: The nervous system accelerates error resolution by an exact temporal gain factor G = 10^6x over non-neural cell lattices while preserving Lyapunov stability (lambda_Lyap = -1.0000 in [-1.10, -0.90]). The Fresh Protocol (TFP) acts as a digital cell wall (database-per-tenant edge vaults + blockchain verification) that solves the Sim AT compartmentalization boundary, maintaining 100.0% contract retention under severe adversarial noise, whereas uncompartmentalized centralized databases suffer total collapse (0.0%).
-- **Artifacts**: `technical-appendix/SIM_AMP_PRE_REGISTRATION.md`, `technical-appendix/sim-code/sim_amp_trust_amplifier.py`, `technical-appendix/numbers/sim_amp_results.json`, `technical-appendix/AMP_SERIES_RUN_REPORT.md`, `papers/source/figures/fig_sim_amp_amplifier.png`.
-
-### Sim AT-MACRO (Economic Assembly Theory & Origin of Wealth)
-- **Status**: Executed as Frozen (Seed = 42). COMPOUND PASS (3/3).
-- **Date**: 2026-11-01
-- **Substrate**: Macroeconomic transaction network (20 agent classes, 5,000 timesteps) comparing random trading vs GTT expectation-validation contracts.
-- **Core Finding**: Trust-bound economic trading generates high macro-assembly complexity (ASI = 28 > 15; AT-MAC-3 PASS) and structured hierarchical order, collapsing Re-Pair grammar size to 38% of standard LZW algorithmic complexity (div_gtt = 0.38 < 0.50; AT-MAC-2 PASS). Confirms Eric Beinhocker’s complexity economics (The Origin of Wealth) that wealth is accumulated physical order, and GTT is the forward causal selection engine.
-- **Artifacts**: `technical-appendix/SIM_AT_MACRO_PRE_REGISTRATION.md`, `technical-appendix/sim-code/sim_at_macro_society.py`, `technical-appendix/numbers/sim_at_macro_results.json`, `papers/source/figures/fig_sim_at_macro.png`.
