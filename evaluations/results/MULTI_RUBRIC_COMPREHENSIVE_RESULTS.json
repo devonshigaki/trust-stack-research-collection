@@ -1,0 +1,122 @@
+{
+  "TRUST_STACK": {
+    "entity": "The Trust Stack (v4.3 Collection: GTT, TFP, DOCAS, Whitepaper)",
+    "domain": "Theoretical Physics, Quasicritical Connectomics & Distributed Protocols",
+    "scores": {
+      "DARRELL_HUFF": 80,
+      "TOP_GUIDELINES": 96,
+      "NEURIPS_COMP": 68,
+      "COCHRANE_ROB2": 56,
+      "APA_JARS": 41
+    },
+    "mean_score": 68.2
+  },
+  "CAMERER_2016": {
+    "entity": "Colin Camerer et al. (Science 2016) - Economics Replication",
+    "domain": "Experimental Economics & Open Science Replication",
+    "scores": {
+      "DARRELL_HUFF": 95,
+      "TOP_GUIDELINES": 96.5,
+      "NEURIPS_COMP": 56,
+      "COCHRANE_ROB2": 96,
+      "APA_JARS": 89
+    },
+    "mean_score": 86.5
+  },
+  "MULLAINATHAN_2004": {
+    "entity": "Sendhil Mullainathan & Bertrand (AER 2004) - Labor Audit",
+    "domain": "Labor Economics & Randomized Field Experiment",
+    "scores": {
+      "DARRELL_HUFF": 85,
+      "TOP_GUIDELINES": 56.25,
+      "NEURIPS_COMP": 25,
+      "COCHRANE_ROB2": 88,
+      "APA_JARS": 68
+    },
+    "mean_score": 64.5
+  },
+  "PLENZ_2003": {
+    "entity": "Dietmar Plenz & Beggs (J. Neurosci 2003) - Neuronal Avalanches",
+    "domain": "Neurophysics & Systems Neuroscience",
+    "scores": {
+      "DARRELL_HUFF": 80,
+      "TOP_GUIDELINES": 18.75,
+      "NEURIPS_COMP": 53,
+      "COCHRANE_ROB2": 44,
+      "APA_JARS": 48
+    },
+    "mean_score": 48.8
+  },
+  "KING_2013": {
+    "entity": "Gary King et al. (Science 2013) - Chinese Censorship",
+    "domain": "Big Data, Natural Language Processing & Political Science",
+    "scores": {
+      "DARRELL_HUFF": 85,
+      "TOP_GUIDELINES": 62,
+      "NEURIPS_COMP": 52,
+      "COCHRANE_ROB2": 52,
+      "APA_JARS": 68
+    },
+    "mean_score": 63.8
+  },
+  "ARNSTEN_2007": {
+    "entity": "Amy Arnsten et al. (Cell 2007) - Prefrontal Biophysics",
+    "domain": "Cellular Molecular Neurobiology & Primate Electrophysiology",
+    "scores": {
+      "DARRELL_HUFF": 65,
+      "TOP_GUIDELINES": 18,
+      "NEURIPS_COMP": 16,
+      "COCHRANE_ROB2": 44,
+      "APA_JARS": 41
+    },
+    "mean_score": 36.8
+  },
+  "CRONIN_2021": {
+    "entity": "Lee Cronin et al. (Nat. Commun. 2021) - Assembly Theory",
+    "domain": "Physical Chemistry, Mass Spectrometry & Origin of Life",
+    "scores": {
+      "DARRELL_HUFF": 55,
+      "TOP_GUIDELINES": 56.25,
+      "NEURIPS_COMP": 52,
+      "COCHRANE_ROB2": 52,
+      "APA_JARS": 38
+    },
+    "mean_score": 50.6
+  },
+  "FRISTON_2010": {
+    "entity": "Karl Friston (Nat. Rev. Neurosci. 2010) - Free Energy Principle",
+    "domain": "Theoretical Mathematical Physics & Computational Brain Theory",
+    "scores": {
+      "DARRELL_HUFF": 30,
+      "TOP_GUIDELINES": 15,
+      "NEURIPS_COMP": 25,
+      "COCHRANE_ROB2": 0,
+      "APA_JARS": 8
+    },
+    "mean_score": 15.6
+  },
+  "BUCKNER_2011": {
+    "entity": "Randy Buckner & Yeo et al. (J. Neurophysiol. 2011) - Cortical Networks",
+    "domain": "Human Cognitive Neuroimaging & Functional Connectivity",
+    "scores": {
+      "DARRELL_HUFF": 85,
+      "TOP_GUIDELINES": 68.75,
+      "NEURIPS_COMP": 56,
+      "COCHRANE_ROB2": 52,
+      "APA_JARS": 68
+    },
+    "mean_score": 66.0
+  },
+  "LEVIN_2020": {
+    "entity": "Michael Levin et al. (PNAS 2020) - Living Xenobots",
+    "domain": "Synthetic Biology, Bio-Engineering & Evolutionary Computing",
+    "scores": {
+      "DARRELL_HUFF": 65,
+      "TOP_GUIDELINES": 52,
+      "NEURIPS_COMP": 52,
+      "COCHRANE_ROB2": 38,
+      "APA_JARS": 28
+    },
+    "mean_score": 47.0
+  }
+}

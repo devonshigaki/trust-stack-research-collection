@@ -4,8 +4,8 @@
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3",
-  "total_files_hashed": 1345,
-  "total_manifest_size_mb": 238.43,
+  "total_files_hashed": 1357,
+  "total_manifest_size_mb": 238.81,
   "automated_ci_tasks_verified": 26,
   "files": {
     "README.md": {
@@ -17,8 +17,8 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "cecf53f89fe5eb8e6e0a8d505f1716d1f98b9dc9978704fe971fdf003d13bafc",
-      "bytes": 236357
+      "sha256": "c93bebf588c974378646bc03f3333c9b3c2171c506da649852085227f76d1c4d",
+      "bytes": 236666
     },
     "SIMULATION_ACCOUNTING.md": {
       "sha256": "c86b7b77e31fbff860ceee88444c66c0657765f8b2a9967788944a267ff1f84c",
@@ -45,8 +45,8 @@
       "bytes": 3953
     },
     "run_tier1_tier2_suite.py": {
-      "sha256": "8c67e65b5e1bb3ed90392e5b9c3fd330194b90e74aa8541a38f905eb0f62ddbe",
-      "bytes": 9162
+      "sha256": "eb8e51a3b30816f1663d406840977ac93edfd327e406202641fc0a8fa411debd",
+      "bytes": 9408
     },
     "technical-appendix/AMP_SERIES_RUN_REPORT.md": {
       "sha256": "d19ea32b29854cc1d76843688c00f7c04f20c8ff0f30b6d2fac4eb72c8904120",
@@ -1144,6 +1144,38 @@
       "sha256": "42be8419aa623bcfef1991067a3262a13e71d15999190311ba6d1bf63a549810",
       "bytes": 2841
     },
+    "evaluations/MULTI_RUBRIC_COMPREHENSIVE_BENCHMARK.md": {
+      "sha256": "9a25bd5240c191bf9386a0a3833934316450eccc7ac6717797107124745461c0",
+      "bytes": 5048
+    },
+    "evaluations/multi_rubric_evaluator.py": {
+      "sha256": "195fa61ff404513a026e4a19ac1829e8d39ef447727b9a9be335d5b2533564f2",
+      "bytes": 6478
+    },
+    "evaluations/run_multi_perspective_benchmarks.py": {
+      "sha256": "6fca9e9ec466d46b18616ae5fcf193dd11b5da34e5e7bb347002171a00fc2de8",
+      "bytes": 19093
+    },
+    "evaluations/rubrics/apa_jars_quant_behavioral.json": {
+      "sha256": "df9e9aaba0ef9994877ae884b0c519081a6e8a5aae5a3b47559f4505ba67f562",
+      "bytes": 3217
+    },
+    "evaluations/rubrics/cochrane_rob2_causal_trials.json": {
+      "sha256": "e7c4a52548a1de99def28938158eb6ec43f6e9c60fdb0acff115e4df8b32f441",
+      "bytes": 1945
+    },
+    "evaluations/rubrics/darrell_huff_statistical_integrity.json": {
+      "sha256": "f6978e4076fc05b6347cbe3ae8821574f2caaaf11085e0a834383a875676e9cd",
+      "bytes": 4802
+    },
+    "evaluations/rubrics/neurips_computational_checklist.json": {
+      "sha256": "204198076e860dac807c43eba75a21cd25341e9700def77bc94c953be71c2952",
+      "bytes": 3170
+    },
+    "evaluations/rubrics/top_guidelines_open_science.json": {
+      "sha256": "783879f68146a4b78d906eac4e80c5e93c2d170ede7534b477b8010be10435eb",
+      "bytes": 2538
+    },
     "papers/collection.md": {
       "sha256": "de9c869053811f0f32fd6d7419723161e1d5cc71da669b19dcb419c9c1e89de3",
       "bytes": 27411
@@ -1165,8 +1197,8 @@
       "bytes": 14731
     },
     "papers/whitepaper.md": {
-      "sha256": "97ebc57cda7aafcba5e709d9f0bb4f0b93fc7d4fb1e1baa62eac074c4b75bc12",
-      "bytes": 157841
+      "sha256": "901872e08cd9071b670e7c19267a3c15aab11cea6ed6d37507e710824ba2525e",
+      "bytes": 159736
     },
     "papers/markdown/collection.md": {
       "sha256": "91ab7b9c0e57d61d39cf1118c42e0cd554368ad364d422e3801aab97ad784945",
@@ -5317,24 +5349,24 @@
       "bytes": 5269
     },
     "reviews/ARGON4_DARRELL_HUFF_DOCAS.json": {
-      "sha256": "fc5177e8ff206580b2acc297994af150a6f36feff276b88a7ff33285f2004025",
-      "bytes": 13566
+      "sha256": "c1fe1499a59255204a8563b924943fd263137353328c753ecd66c27e7f2406e2",
+      "bytes": 13256
     },
     "reviews/ARGON4_DARRELL_HUFF_GTT.json": {
-      "sha256": "3078c96ebcd401fb381660623fa883fdc27f8ba5bd0906c5f0137fc749086bd4",
-      "bytes": 11528
+      "sha256": "0718ba5b534b761ebdf720d3e307c06511bb658b25560dd8bebc9208b1a4c46b",
+      "bytes": 11841
     },
     "reviews/ARGON4_DARRELL_HUFF_MASTER_REPORT.md": {
-      "sha256": "0ef1de1332fed163c497f1c3fd1dda71f81f5bb8458de90e9a2ff8c4d9a88cac",
-      "bytes": 54349
+      "sha256": "0a5755a74f46b5b5415a8e54525d4cdb651a65a330be0a1360248d09ccc37023",
+      "bytes": 59737
     },
     "reviews/ARGON4_DARRELL_HUFF_TFP.json": {
-      "sha256": "759cce97ac3aac8b7addb8c74574e7724bc0f2211d08281177f41262a3302f46",
-      "bytes": 14239
+      "sha256": "b278e733e576ca978f51295b7dca59fa70df465c93dc20bb4209260dab3c4cf3",
+      "bytes": 14584
     },
     "reviews/ARGON4_DARRELL_HUFF_WHITEPAPER.json": {
-      "sha256": "cc2aa908721f66426784f92d93867feedbe3f29b59e063b65e65947998af42e2",
-      "bytes": 12320
+      "sha256": "27e911ef94c82187455d624be480a42603b63a151591248e3eb5b49008f6413d",
+      "bytes": 16855
     },
     "reviews/ARGON4_DEEP_REVIEW_MATH_AUDIT.md": {
       "sha256": "026190899bfb7e9170670c8d7f9e31e60b035a54857d47289c66d8f98648ba37",
@@ -5359,6 +5391,22 @@
     "reviews/CITATION_INTEGRITY_LEDGER.md": {
       "sha256": "69cacee491809bce86541fb036065b244589abaa0ece122b7c25079c1dbe3ad7",
       "bytes": 5408
+    },
+    "reviews/COMPERATIVE_BENCHMARK_22_RESEARCHERS.json": {
+      "sha256": "72a33e63b7f74c89835cf13ab7a71b50086ae29343cd1d44634c7abb44155c90",
+      "bytes": 147177
+    },
+    "reviews/COMPERATIVE_BENCHMARK_22_RESEARCHERS.md": {
+      "sha256": "f90b4c15e37d2bbec8da6341a1a94dd5fced09b008da1335b6270730fd0904e3",
+      "bytes": 10091
+    },
+    "reviews/COMPERATIVE_BENCHMARK_MOST_CITED_PAPERS.json": {
+      "sha256": "dd09d4c923df63b5155f3de90fccbd03e48e1ccac71ab535e34829ed1c46a059",
+      "bytes": 171186
+    },
+    "reviews/COMPERATIVE_BENCHMARK_MOST_CITED_PAPERS.md": {
+      "sha256": "37e03e9bf7182edae179ccd00de7c7acace5bd4e5bad4bdf5516382a2eb8077b",
+      "bytes": 8484
     },
     "reviews/DARRELL_HUFF_STATISTICAL_INTEGRITY_AUDIT.md": {
       "sha256": "db2b9952534d18de7033e467cbd036d143aa2b6498b51b627308662645f07bc7",

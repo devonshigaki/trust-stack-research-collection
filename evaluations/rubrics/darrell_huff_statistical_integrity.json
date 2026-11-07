@@ -1,0 +1,65 @@
+{
+  "rubric_id": "DARRELL_HUFF_20",
+  "name": "Darrell Huff 5-Question Statistical Integrity Framework",
+  "authority": "Darrell Huff (1954) / Academic Audit Standard",
+  "domain": "Forensic Statistical Fraud & Bias Detection",
+  "total_score": 100,
+  "scoring_type": "binary_unsparing_5pt",
+  "categories": [
+    {
+      "id": "who_says_so",
+      "title": "Question 1: Who Says So?",
+      "max_score": 20,
+      "criteria": [
+        {"id": "1.1", "name": "Conflict of Interest & Funding Disclosure", "weight": 5, "description": "Explicit statement showing no commercial stake OR full funding disclosures."},
+        {"id": "1.2", "name": "Publication Quality & Repository Provenance", "weight": 5, "description": "Published in peer-reviewed venue or verified repository with permanent accession."},
+        {"id": "1.3", "name": "Data Origin & Independent Sampling", "weight": 5, "description": "Data collected directly or from verified independent registries, not cherry-picked."},
+        {"id": "1.4", "name": "Replication & Transparent Failure Reporting", "weight": 5, "description": "Independent replications documented and negative results / frozen failures openly logged."}
+      ]
+    },
+    {
+      "id": "how_does_researcher_know",
+      "title": "Question 2: How Does the Researcher Know?",
+      "max_score": 20,
+      "criteria": [
+        {"id": "2.1", "name": "Empirical Primary Data vs Pure Narrative", "weight": 5, "description": "Based on empirical data, formal mathematical derivations, or machine-checked proofs."},
+        {"id": "2.2", "name": "Sample Size Adequacy & Power Calculation", "weight": 5, "description": "Sample size explicitly justified with formal statistical power calculations."},
+        {"id": "2.3", "name": "Controls, Counter-Factuals & Blinding", "weight": 5, "description": "Negative controls, shuffle permutations, or blinding mechanisms documented."},
+        {"id": "2.4", "name": "Appropriate Statistical Tests & Exact Reporting", "weight": 5, "description": "Correct statistical tests specified with exact p-values, test statistics, and DF."}
+      ]
+    },
+    {
+      "id": "whats_missing",
+      "title": "Question 3: What's Missing?",
+      "max_score": 20,
+      "criteria": [
+        {"id": "3.1", "name": "Absolute Risk Baselines Alongside Relative Rates", "weight": 5, "description": "Absolute baselines, NNT, or NNH reported alongside relative percentages."},
+        {"id": "3.2", "name": "Confidence Intervals & Uncertainty Bounds", "weight": 5, "description": "Confidence intervals (95% CI) or error bars reported on all primary and secondary outcomes."},
+        {"id": "3.3", "name": "Confounder & Covariate Adjustment", "weight": 5, "description": "Multivariate controls, propensity scores, or covariate conditioning documented."},
+        {"id": "3.4", "name": "Exclusion, Dropout & Attrition Logs", "weight": 5, "description": "All participant withdrawals, data filtering, and outlier exclusions fully logged."}
+      ]
+    },
+    {
+      "id": "did_someone_change_subject",
+      "title": "Question 4: Did Someone Change the Subject?",
+      "max_score": 20,
+      "criteria": [
+        {"id": "4.1", "name": "Construct Validity & Measurement Alignment", "weight": 5, "description": "Operationalized measure matches the theoretical construct without semantic drift."},
+        {"id": "4.2", "name": "Generalization & Ecological Validity", "weight": 5, "description": "Conclusions strictly bounded to the population and context tested without overreach."},
+        {"id": "4.3", "name": "Correlation vs. Causation Discipline", "weight": 5, "description": "Correlational associations explicitly not described as causal mechanisms."},
+        {"id": "4.4", "name": "Visual Honesty & Un-Truncated Axes", "weight": 5, "description": "Charts include zero baselines, proportional scaling, and un-truncated axes."}
+      ]
+    },
+    {
+      "id": "does_it_make_sense",
+      "title": "Question 5: Does It Make Sense?",
+      "max_score": 20,
+      "criteria": [
+        {"id": "5.1", "name": "Objective Endpoint vs Unvalidated Surrogate", "weight": 5, "description": "Measures objective, validated functional endpoints rather than uncalibrated proxies."},
+        {"id": "5.2", "name": "Longitudinal Follow-up & Temporal Horizon", "weight": 5, "description": "Follow-up duration sufficient to observe chronic trajectory, decay, or rebound."},
+        {"id": "5.3", "name": "Biological & Physical Plausibility", "weight": 5, "description": "Mechanisms conform to established thermodynamic and biophysical principles."},
+        {"id": "5.4", "name": "Independent Practical & Systemic Significance", "weight": 5, "description": "Effect size is practically meaningful, not just statistically significant via massive N."}
+      ]
+    }
+  ]
+}

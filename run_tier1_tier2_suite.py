@@ -174,6 +174,12 @@ TASKS = [
         "name": "OpenNeuro ds003020 Dataset & Semantic Model Verification",
         "script": "experiments/brainit-fmri/query_openneuro_ds003020.py",
         "workdir": "experiments/brainit-fmri"
+    },
+    {
+        "tier": "Tier 1: Scientific Integrity",
+        "name": "Multi-Rubric Integrity & Standards Verification (TOP, NeurIPS, Cochrane, APA, Huff)",
+        "script": "evaluations/multi_rubric_evaluator.py",
+        "workdir": "."
     }
 ]
 
