@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-11-07",
+  "simulation_id": "Sim CRIT-3",
+  "beta_rw": -0.02540807024350399,
+  "beta_ddm": 1.9636062173786124,
+  "beta_hgf": 0.026522268667107746,
+  "beta_gtt": 1.0597304617248424,
+  "bic_gtt": -56.84021917301787,
+  "delta_bic_vs_hgf": 1105.1999268221252,
+  "bayes_factor_vs_hgf": "> 10^239",
+  "verdict": "COMPOUND PASS (3/3)",
+  "criteria": {
+    "C1_quasicritical_beta": true,
+    "C2_model_discrimination": true,
+    "C3_decisive_bayes_factor": true
+  }
+}

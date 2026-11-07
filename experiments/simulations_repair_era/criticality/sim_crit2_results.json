@@ -3,9 +3,9 @@
   "simulation_id": "Sim CRIT-2",
   "connectome_dataset": "MICrONS Mouse Visual Cortex & FlyWire",
   "evaluated_nodes": 5000,
-  "spectral_radius_quasicritical": 0.9800000000000043,
-  "spectral_radius_void": 0.7500000000000032,
-  "spectral_radius_chaos": 1.2500000000000084,
+  "spectral_radius_quasicritical": 0.9800000000000035,
+  "spectral_radius_void": 0.7500000000000075,
+  "spectral_radius_chaos": 1.25,
   "verdict": "COMPOUND PASS (3/3)",
   "criteria": {
     "C1_quasicritical_corridor": true,

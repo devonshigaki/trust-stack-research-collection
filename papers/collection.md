@@ -115,6 +115,7 @@ Since the original deposit, the collection has run a pre-registered connectome s
 | Sim GEN-2 (C1–C4) | Omnigenic coincidence & p-PGS | PASS (4/4) | DOCAS §4.3 |
 | Sim GEN-3 (C1–C3) | 2S-MR & COLOC (DOCAS-GATE-2) | PASS (3/3) | DOCAS §5.1b |
 | Sim GEN-4 (C1–C3) | ADCY coincidence engine 2S-MR | PASS (3/3) | DOCAS §4.3 / §5.14 |
+| Sim EVOL-1 (C1–C3) | 600M-Yr cross-species rutabaga/ADCY8 conservation | PASS (3/3) | DOCAS §5.14 / §5.36 |
 | Sim BIO-1 (C1–C3) | Multiscale coincidence & Levin bioelectrics | PASS (3/3) | DOCAS §5.10 / §5.27 |
 | Sim AT-2 (C1–C2) | Multiscale assembly spectrum of trust (7 scales) | PASS (2/2) | DOCAS §5.33 |
 | Sim THERMO-1 (C1–C3) | Thermodynamic Landauer bound on trust erasure | PASS (3/3) | DOCAS §5.33 |
@@ -124,6 +125,7 @@ Since the original deposit, the collection has run a pre-registered connectome s
 | Sim AT-4 (C1–C3) | Metabolome assembly & allosteric token partition | PASS (3/3) | DOCAS §5.33 |
 | Sim AT-5 (C1–C3) | Token phase landscape & Monte Carlo null (1 in 14M) | PASS (3/3) | DOCAS §5.33 |
 | Sim CRIT-2 (C1–C3) | Connectome spectral radius & quasicritical corridor | PASS (3/3) | DOCAS §5.26 |
+| Sim CRIT-3 (C1–C3) | Bayes factor model comparison (1/f vs non-critical) | PASS (3/3) | GTT §4.6 / DOCAS §5.26 |
 | Theorems Q-1–Q-4 | Quantum-biological SMT/CAS isomorphism | PASS (4/4) | GTT §3.6 / DOCAS §5.33 |
 | Theorems E-1–E-4 | Tri-critical invariant & variational extremum SMT | PASS (4/4) | GTT §3.6 / DOCAS §5.33 |
 | Theorems MS-1–MS-4 | Multiscale SMT/CAS assembly manifold proofs | PASS (4/4) | GTT §3.1 / DOCAS §5.33 |

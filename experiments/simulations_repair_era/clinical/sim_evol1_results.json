@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-11-07",
+  "simulation_id": "Sim EVOL-1",
+  "rutabaga_adcy8_identity": 99.16666666666667,
+  "cambd_conservation_score": 0.8571428571428571,
+  "mean_tau_wt": 6.344,
+  "mean_tau_mut": 33.03,
+  "extinction_ratio": 5.206494325346784,
+  "verdict": "COMPOUND PASS (3/3)",
+  "criteria": {
+    "C1_catalytic_identity": true,
+    "C2_cambd_conservation": true,
+    "C3_extinction_ratio": true
+  }
+}

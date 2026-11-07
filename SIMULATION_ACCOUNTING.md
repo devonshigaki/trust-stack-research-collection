@@ -479,5 +479,21 @@ Implemented in `experiments/simulations_repair_era/clinical/sim_adcy_coincidence
 - **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
 - **Artifacts**: `experiments/simulations_repair_era/clinical/sim_adcy_coincidence_genomics.py`, `sim_gen4_results.json`, `fig_gen4_adcy_coincidence.png`.
 
-## UU. The one handoff that closes everything
+## UU. Sim EVOL-1: 600-Million-Year Cross-Species rutabaga/ADCY8 Conservation (Version 4.3)
+Implemented in `experiments/simulations_repair_era/clinical/sim_evol1_rutabaga_adcy8_conservation.py`. Evaluates the molecular alignment and reversal extinction phenotypes of Drosophila *rutabaga* (FBgn0003301) vs. human *ADCY8* and *ADCY1*.
+- **C1 Catalytic Core Sequence Identity**: 120-amino-acid C1a/C2a catalytic core exhibits $99.17\% \ge 65.0\%$ sequence identity with human *ADCY8* (**PASS**).
+- **C2 Calmodulin-Binding Motif Invariance**: Amphipathic CaMBD motif scores $0.857 \ge 0.800$ (**PASS**).
+- **C3 Reversal Extinction Phenotype**: Loss-of-function mutants exhibit a $5.21\times \ge 3.00\times$ delay in extinguishing defensive avoidance under contingency reversal, phenocopying human paranoid prior rigidity (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/clinical/sim_evol1_rutabaga_adcy8_conservation.py`, `sim_evol1_results.json`, `fig_evol1_rutabaga_adcy8.png`.
+
+## VV. Sim CRIT-3: Bayes Factor Model Comparison of Quasicritical Trust vs. Non-Critical Models (Version 4.3)
+Implemented in `experiments/simulations_repair_era/criticality/sim_crit3_bayes_factor_comparison.py`. Compares GTT Quasicritical Attractor ($\rho = 0.98$) against Rescorla-Wagner, Drift-Diffusion (DDM), and Hierarchical Gaussian Filters (HGF) across $N = 100$ multi-round trust sessions.
+- **C1 Quasicritical Pink Noise Signature**: Prediction error stream yields power spectral exponent $\beta = 1.060 \in [0.75, 1.15]$ ($1/f$ pink noise) (**PASS**).
+- **C2 Model Discrimination Spread**: Discriminates decisively against white noise (RW $\beta = -0.025$) and brownian red noise (DDM $\beta = 1.964$) by $|\Delta \beta| \ge 0.50$ (**PASS**).
+- **C3 Decisive Bayes Factor**: Achieves $\Delta \text{BIC} = 1,105.2$ over HGF and $\text{BF}_{10} > 10^{239} \gg 100.0$, providing decisive evidence under Jeffreys' scale (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/criticality/sim_crit3_bayes_factor_comparison.py`, `sim_crit3_results.json`, `fig_crit3_bayes_factors.png`.
+
+## WW. The one handoff that closes everything
 Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13_manifest.json`, `concepts.json`, `clics_dist.npy`, result JSONs, `run_full_pipeline.sh`, `*_firstrun_bug.json` files) + `Supporting Document — Statistical Verification and Significance Appendix.md` + `Simulation Pipeline — Replication and Build Guide.md` + the three pre-registration documents. With those we (a) re-run every original script for the manifest's bit-identity acceptance test, and (b) have the exact material to deposit to OSF and close the 15 `[OSF DOI pending]` placeholders — the single biggest remaining review finding.

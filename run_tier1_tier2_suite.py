@@ -69,6 +69,12 @@ TASKS = [
     },
     {
         "tier": "Tier 1: Simulation",
+        "name": "Sim EVOL-1: 600M-Yr Evolutionary Conservation (Drosophila rutabaga to ADCY8)",
+        "script": "experiments/simulations_repair_era/clinical/sim_evol1_rutabaga_adcy8_conservation.py",
+        "workdir": "experiments/simulations_repair_era/clinical"
+    },
+    {
+        "tier": "Tier 1: Simulation",
         "name": "Sim BIO-1: Multiscale Coincidence & Levin Bioelectrics",
         "script": "experiments/simulations_repair_era/bioelectrics/sim_cellular_coincidence_levin.py",
         "workdir": "experiments/simulations_repair_era/bioelectrics"
@@ -125,6 +131,12 @@ TASKS = [
         "tier": "Tier 1: Simulation",
         "name": "Sim CRIT-2: Empirical Connectome Spectral Radius & Quasicritical Corridor",
         "script": "experiments/simulations_repair_era/criticality/sim_crit2_connectome_spectral_radius.py",
+        "workdir": "experiments/simulations_repair_era/criticality"
+    },
+    {
+        "tier": "Tier 1: Simulation",
+        "name": "Sim CRIT-3: Bayes Factor Model Comparison (Quasicritical 1/f vs Non-Critical)",
+        "script": "experiments/simulations_repair_era/criticality/sim_crit3_bayes_factor_comparison.py",
         "workdir": "experiments/simulations_repair_era/criticality"
     },
     {
