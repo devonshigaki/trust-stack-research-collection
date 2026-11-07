@@ -1,0 +1,10 @@
+{
+  "K1_agent_utility": -1.0000000000000002,
+  "K1_trap_loss": -3.5000000000000004,
+  "K5_agent_utility": 0.75,
+  "K5_trap_loss": 0.0,
+  "trap_loss_reduction_pct": 100.0,
+  "C1_pass": true,
+  "C2_pass": true,
+  "verdict": "COMPOUND PASS"
+}

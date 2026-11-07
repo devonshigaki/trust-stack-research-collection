@@ -1,0 +1,9 @@
+{
+  "mse_baseline": 0.0810421631078268,
+  "mse_augmented": 0.04301822674677304,
+  "mse_reduction_pct": 46.91870861154436,
+  "lambda_correlation": 0.9956657771126589,
+  "C1_pass": true,
+  "C2_pass": true,
+  "verdict": "COMPOUND PASS"
+}

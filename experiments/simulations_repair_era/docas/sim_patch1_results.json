@@ -1,0 +1,60 @@
+{
+  "timestamp": "2026-11-06",
+  "simulation_id": "Sim PATCH-1",
+  "results": [
+    {
+      "camp_concentration_uM": 0.02,
+      "regime": "Basal (0.05 uM)",
+      "v_half_hcn": -83.96296296296296,
+      "v_rest_soma": -52.340991421571836,
+      "distal_epsp_amplitude_mV": 19.89528331159364,
+      "soma_epsp_amplitude_mV": 9.216760579714496,
+      "transfer_ratio": 0.46326360049085524,
+      "status": "OPEN / TRANSMITTING"
+    },
+    {
+      "camp_concentration_uM": 0.1,
+      "regime": "Optimal (0.15 uM)",
+      "v_half_hcn": -81.0,
+      "v_rest_soma": -51.412960979593436,
+      "distal_epsp_amplitude_mV": 19.053869841189616,
+      "soma_epsp_amplitude_mV": 8.274493315156867,
+      "transfer_ratio": 0.43426838663868267,
+      "status": "OPEN / TRANSMITTING"
+    },
+    {
+      "camp_concentration_uM": 0.3,
+      "regime": "Moderate Stress (0.35 uM)",
+      "v_half_hcn": -77.36363636363636,
+      "v_rest_soma": -50.42224636560014,
+      "distal_epsp_amplitude_mV": 17.942375138184875,
+      "soma_epsp_amplitude_mV": 7.00794354295293,
+      "transfer_ratio": 0.39058059420676466,
+      "status": "OPEN / TRANSMITTING"
+    },
+    {
+      "camp_concentration_uM": 0.8,
+      "regime": "Severe Shock (0.75 uM)",
+      "v_half_hcn": -74.33333333333333,
+      "v_rest_soma": -49.727326805141864,
+      "distal_epsp_amplitude_mV": 16.87928033261825,
+      "soma_epsp_amplitude_mV": 5.850136846879138,
+      "transfer_ratio": 0.3465868645817844,
+      "status": "OPEN / TRANSMITTING"
+    },
+    {
+      "camp_concentration_uM": 2.0,
+      "regime": "Supercritical Storm (1.50 uM)",
+      "v_half_hcn": -72.55555555555556,
+      "v_rest_soma": -49.374525660801154,
+      "distal_epsp_amplitude_mV": 16.159707913551603,
+      "soma_epsp_amplitude_mV": 5.135416362779324,
+      "transfer_ratio": 0.3177914099841335,
+      "status": "OPEN / TRANSMITTING"
+    }
+  ],
+  "c1_basal_transmission_pass": true,
+  "c2_supercritical_attenuation_pass": true,
+  "c3_monotonic_shunting_pass": true,
+  "verdict": "COMPOUND PASS (3/3 CRITERIA MET)"
+}

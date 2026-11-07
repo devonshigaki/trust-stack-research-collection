@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-10-24",
+  "seed": 42,
+  "compound_verdict": "COMPOUND PASS (3/3)",
+  "compound_pass": true,
+  "C1_default_nudge": {
+    "adherence_neutral": 0.7065647931564214,
+    "adherence_default": 0.9482522790385235,
+    "pass": true
+  },
+  "C2_loss_framing": {
+    "mean_comp_gain": 0.7111236418235282,
+    "mean_comp_loss": 0.9409586320333813,
+    "compliance_ratio": 51.415127936367334,
+    "pass": true
+  },
+  "C3_cognitive_friction": {
+    "mean_optout_free": 0.0517477209614765,
+    "mean_optout_friction": 0.020699088384590596,
+    "optout_ratio": 0.39999999227019106,
+    "suppression_pct": 60.00000077298089,
+    "pass": true
+  }
+}

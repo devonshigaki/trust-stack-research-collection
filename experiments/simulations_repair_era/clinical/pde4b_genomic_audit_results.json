@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-11-06",
+  "variant_id": "rs7528604",
+  "maf": 0.470173,
+  "consequence": "intron_variant",
+  "ensembl_location": "chr1:65941669",
+  "total_phenotypes": 13,
+  "meier_2019_pmid31116379_confirmed": true,
+  "two_gate_standard_status": "Discovery Gate MET (iPSYCH GWS), Replication Gate NOT MET (UK Biobank null)"
+}

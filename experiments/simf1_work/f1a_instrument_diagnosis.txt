@@ -1,0 +1,22 @@
+Sim F1a instrument diagnosis (2026-09-12) — why the frozen CS yielded B0 = 0
+=============================================================================
+Frozen F1a CS: ORN_DL3 drive (n=79) @ default 150 Hz, frozen circuit subgraph
+(6,006 neurons / 555,325 edges / 62,261 KC->MBON plastic edges).
+
+Layer-resolved spike counts, 1 s CS drive, default params:
+  ORN_DL3 : 79/79 active, max 177 Hz          (drive delivered)
+  uniPN   : 10/264 active, max 133 Hz         (DL3 PNs fire; ORN->PN works)
+  KC      : 0/5,177 active                    <- FAILURE POINT
+  MBON    : 0/96 active                       (B0 = 0 -> R undefined)
+
+Localization controls:
+  drive all 264 uniPNs direct: KC 3,601/5,177 active (mean 21.1 Hz),
+                               MBON 60/96 active (mean 69.1 Hz)  -> chain works
+  drive all 5,177 KCs direct:  MBON 96/96 active (mean 203.8 Hz) -> readout works
+
+Cause: single-glomerulus input (10 DL3 PNs) is too sparse to bring KCs
+(~5 presynaptic PNs each, sampled across 264 PNs) to threshold at the published
+default w_syn = 0.275 mV; the Shiu et al. model was validated on strong
+multi-channel SEZ drives. Property of the published model calibration, not of
+the DOCAS overlay. F1a therefore INDETERMINATE (instrument); criteria (1)-(5)
+un-evaluable as frozen; reported, not dropped.

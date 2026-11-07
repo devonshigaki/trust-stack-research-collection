@@ -1,0 +1,212 @@
+{
+  "ADCY5": {
+    "ensembl_id": "ENSG00000173175",
+    "approved_name": "adenylate cyclase 5",
+    "functional_channel": "Gain Integrator (cAMP Engine)",
+    "loss_of_function_constraint": 1,
+    "missense_constraint": 4.566999912261963,
+    "total_associated_traits": 373,
+    "top_associated_traits": [
+      {
+        "trait": "dyskinesia with orofacial involvement, autosomal dominant",
+        "overall_score": 0.793086333660454,
+        "genetic_score": 0.8621584768133733
+      },
+      {
+        "trait": "dyskinesia with orofacial involvement, autosomal recessive",
+        "overall_score": 0.6960832964266659,
+        "genetic_score": 0.8180589272045964
+      },
+      {
+        "trait": "neurodevelopmental disorder with hyperkinetic movements and dyskinesia",
+        "overall_score": 0.6623994669254595,
+        "genetic_score": 0.8188776417348297
+      },
+      {
+        "trait": "type 2 diabetes mellitus",
+        "overall_score": 0.5628798069037839,
+        "genetic_score": 0.8984398188739482
+      },
+      {
+        "trait": "diabetes mellitus",
+        "overall_score": 0.5363115799519538,
+        "genetic_score": 0.8711834418650207
+      }
+    ]
+  },
+  "DRD2": {
+    "ensembl_id": "ENSG00000149295",
+    "approved_name": "dopamine receptor D2",
+    "functional_channel": "Expectation (Dopamine RPE)",
+    "loss_of_function_constraint": 0.9998000264167786,
+    "missense_constraint": 3.542099952697754,
+    "total_associated_traits": 1690,
+    "top_associated_traits": [
+      {
+        "trait": "schizophrenia",
+        "overall_score": 0.7489566059976499,
+        "genetic_score": 0.653944599423199
+      },
+      {
+        "trait": "major depressive disorder",
+        "overall_score": 0.7426643349493968,
+        "genetic_score": 0.8542709480449686
+      },
+      {
+        "trait": "bipolar disorder",
+        "overall_score": 0.7260948924022088,
+        "genetic_score": 0.7617919161456643
+      },
+      {
+        "trait": "depressive disorder",
+        "overall_score": 0.6602209273255308,
+        "genetic_score": 0.5395780247682923
+      },
+      {
+        "trait": "Tourette syndrome",
+        "overall_score": 0.6470194256356021,
+        "genetic_score": 0.5141277433169164
+      }
+    ]
+  },
+  "FKBP5": {
+    "ensembl_id": "ENSG00000096060",
+    "approved_name": "FKBP prolyl isomerase 5",
+    "functional_channel": "Recognition (Cortisol HPA Gate)",
+    "loss_of_function_constraint": 0.024498000741004944,
+    "missense_constraint": 2.577199935913086,
+    "total_associated_traits": 593,
+    "top_associated_traits": [
+      {
+        "trait": "hypothyroidism",
+        "overall_score": 0.4344042950314189,
+        "genetic_score": 0.7145620796611455
+      },
+      {
+        "trait": "thyroid gland disorder",
+        "overall_score": 0.31662564924560854,
+        "genetic_score": 0.5208251506413828
+      },
+      {
+        "trait": "osteoarthritis, hip",
+        "overall_score": 0.28399360229228476,
+        "genetic_score": 0.46714791125570704
+      },
+      {
+        "trait": "ulcerative colitis",
+        "overall_score": 0.25608527667807846,
+        "genetic_score": 0.41126250029974615
+      },
+      {
+        "trait": "ovarian dysfunction",
+        "overall_score": 0.2464038035572897,
+        "genetic_score": 0.40531554664665254
+      }
+    ]
+  },
+  "ADRA2A": {
+    "ensembl_id": "ENSG00000150594",
+    "approved_name": "adrenoceptor alpha 2A",
+    "functional_channel": "Activation (Noradrenaline Gain)",
+    "loss_of_function_constraint": 0.0045854998752474785,
+    "missense_constraint": 0.6985899806022644,
+    "total_associated_traits": 562,
+    "top_associated_traits": [
+      {
+        "trait": "asthma",
+        "overall_score": 0.6150997223001591,
+        "genetic_score": 0.0
+      },
+      {
+        "trait": "attention deficit-hyperactivity disorder",
+        "overall_score": 0.6106393175483604,
+        "genetic_score": 0.0
+      },
+      {
+        "trait": "major depressive disorder",
+        "overall_score": 0.6082504769543567,
+        "genetic_score": 0.0
+      },
+      {
+        "trait": "hypertensive disorder",
+        "overall_score": 0.6037360136530139,
+        "genetic_score": 0.0
+      },
+      {
+        "trait": "ocular hypertension",
+        "overall_score": 0.599427649872328,
+        "genetic_score": 0.0
+      }
+    ]
+  },
+  "HTR1A": {
+    "ensembl_id": "ENSG00000178394",
+    "approved_name": "5-hydroxytryptamine receptor 1A",
+    "functional_channel": "Stabilization (Serotonergic Patience)",
+    "loss_of_function_constraint": 9.002900333143771e-05,
+    "missense_constraint": 0.899590015411377,
+    "total_associated_traits": 477,
+    "top_associated_traits": [
+      {
+        "trait": "major depressive disorder",
+        "overall_score": 0.628520605534408,
+        "genetic_score": 0.0
+      },
+      {
+        "trait": "schizophrenia",
+        "overall_score": 0.624658384009796,
+        "genetic_score": 0.0
+      },
+      {
+        "trait": "bipolar disorder",
+        "overall_score": 0.6152650656274639,
+        "genetic_score": 0.07513134089193593
+      },
+      {
+        "trait": "anxiety disorder",
+        "overall_score": 0.6073536695816156,
+        "genetic_score": 0.0
+      },
+      {
+        "trait": "autism",
+        "overall_score": 0.6001471782479573,
+        "genetic_score": 0.0
+      }
+    ]
+  },
+  "HTR2A": {
+    "ensembl_id": "ENSG00000102468",
+    "approved_name": "5-hydroxytryptamine receptor 2A",
+    "functional_channel": "Stabilization (Prior Relaxation)",
+    "loss_of_function_constraint": 0.08547700196504593,
+    "missense_constraint": 2.3387999534606934,
+    "total_associated_traits": 601,
+    "top_associated_traits": [
+      {
+        "trait": "major depressive disorder",
+        "overall_score": 0.7029601028936457,
+        "genetic_score": 0.547137717850459
+      },
+      {
+        "trait": "schizophrenia",
+        "overall_score": 0.6233580006249911,
+        "genetic_score": 0.0
+      },
+      {
+        "trait": "autism",
+        "overall_score": 0.6159311693201021,
+        "genetic_score": 0.0
+      },
+      {
+        "trait": "psychotic disorder",
+        "overall_score": 0.6149226960272772,
+        "genetic_score": 0.0
+      },
+      {
+        "trait": "bipolar disorder",
+        "overall_score": 0.6143193062632866,
+        "genetic_score": 0.0
+      }
+    ]
+  }
+}

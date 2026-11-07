@@ -9,7 +9,14 @@ import sys
 import subprocess
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PYTHON = os.path.join(BASE_DIR, ".venv/bin/python3")
+venv_python = os.path.join(BASE_DIR, ".venv/bin/python3")
+desktop_venv = "/Users/devonshigaki/Desktop/Research/.venv/bin/python3"
+if os.path.exists(venv_python):
+    PYTHON = venv_python
+elif os.path.exists(desktop_venv):
+    PYTHON = desktop_venv
+else:
+    PYTHON = sys.executable
 
 TASKS = [
     {

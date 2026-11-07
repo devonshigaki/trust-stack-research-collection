@@ -1,0 +1,22 @@
+{
+  "experiment": "Sim O-Series: Optogenetics",
+  "seed": 42,
+  "criteria_evaluations": {
+    "O1_Dopamine_Lesion": {
+      "observed_suppression": 0.9996514994231189,
+      "threshold": 0.9,
+      "verdict": "PASS"
+    },
+    "O2_Induced_Vulnerability": {
+      "observed_relative_risk": 1.7413755573802643,
+      "threshold": 5.0,
+      "verdict": "FAIL"
+    },
+    "O3_Macro_Fragmentation": {
+      "observed_collapse": 0.11394223732646602,
+      "threshold": 0.4,
+      "verdict": "FAIL"
+    }
+  },
+  "compound_verdict": "FAIL"
+}

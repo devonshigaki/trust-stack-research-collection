@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-11-06",
+  "api_endpoint": "https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/",
+  "query_product": "Credit reporting or other personal consumer reports",
+  "date_range": "2024-01-01 to 2024-12-31",
+  "total_complaints": 2365586,
+  "incorrect_info_complaints": 1175009,
+  "investigation_problem_complaints": 455637,
+  "combined_error_complaints": 1630646,
+  "combined_share": 0.6893201092667948,
+  "exact_match_verified": true
+}

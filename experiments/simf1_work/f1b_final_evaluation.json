@@ -1,0 +1,99 @@
+{
+  "sim": "F1b",
+  "registration": "SIM_F1B_PRE_REGISTRATION.md (frozen 2026-09-12, before any F1b conditioning data)",
+  "n_runs_per_arm": 4,
+  "aggregation": "run-mean primary (locked); per-run secondary",
+  "criteria": {
+    "(1) intact_av acquisition": {
+      "rule": "rho<=-0.8 AND R_cond_final<=0.70",
+      "rho": -1.0,
+      "R_cond_final": 0.451,
+      "per_run_R_final": [
+        0.446,
+        0.464,
+        0.453,
+        0.442
+      ],
+      "verdict": "MET"
+    },
+    "(2) compartment specificity": {
+      "rule": "R_noncond_final>0.95",
+      "R_noncond_final": 0.963,
+      "per_run_R_noncond_final": [
+        0.951,
+        0.999,
+        0.963,
+        0.94
+      ],
+      "verdict": "MET"
+    },
+    "(3) D-ablation": {
+      "rule": "R_cond_final>0.95",
+      "R_cond_final": 0.99,
+      "per_run_R_final": [
+        0.971,
+        0.994,
+        0.997,
+        0.999
+      ],
+      "verdict": "MET"
+    },
+    "(4) S-ablation": {
+      "rule": "R_cond>=0.90 within 8 ext probes AND intact_av not >=0.90 in-window",
+      "S_abl_first_probe_ge090": 4,
+      "S_abl_ext_final": 0.995,
+      "intact_ext_in_window_max": 0.817,
+      "verdict": "MET"
+    },
+    "(5) gate-map shuffle av": {
+      "rule": "R_cond_final>0.95",
+      "R_cond_final": 1.119,
+      "per_run_R_final": [
+        1.121,
+        1.104,
+        1.127,
+        1.125
+      ],
+      "verdict": "MET"
+    },
+    "(6) intact_app acquisition": {
+      "rule": "rho<=-0.8 AND R_cond_final<=0.70",
+      "rho": -0.994,
+      "R_cond_final": 0.0,
+      "curve": [
+        0.866,
+        0.698,
+        0.571,
+        0.408,
+        0.092,
+        0.004,
+        0.0,
+        0.0
+      ],
+      "verdict": "MET",
+      "note": "curve saturates to floor: all 3,719 KC->MBON07 inputs eligible, depression compounds to silence; rho computable (non-degenerate curve); calibration observation reported honestly"
+    },
+    "(7) gate-map shuffle app": {
+      "rule": "R_cond_final>0.95",
+      "R_cond_final": 0.996,
+      "per_run_R_final": [
+        0.972,
+        1.021,
+        1.012,
+        0.98
+      ],
+      "verdict": "MET"
+    }
+  },
+  "descriptive": {
+    "partnershuf_av_R_cond_final_mean": 0.681,
+    "per_run": [
+      0.685,
+      0.684,
+      0.688,
+      0.668
+    ],
+    "note": "attenuated vs intact_av 0.451 but still substantial acquisition under partner permutation; no PASS leg (F1a2 settled the absolute form FAIL); gate-map shuffle is the topology control appropriate to a gating theory and abolishes acquisition (1.119)"
+  },
+  "OVERALL": "PASS (7/7 criteria MET)"
+}

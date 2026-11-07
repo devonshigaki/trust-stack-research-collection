@@ -12,8 +12,19 @@ __pycache__/
 *$py.class
 .pytest_cache/
 .venv/
+*/.venv/
+**/.venv/
 env/
 venv/
+
+# Large raw datasets & binary caches
+*.nii
+*.nii.gz
+*.h5
+*.npy
+*.tar.gz
+*.zip
+experiments/brainit-fmri/results/
 
 # LaTeX temporary compilation files
 *.aux

@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-11-06",
+  "simulation_id": "Sim GEN-3 / DOCAS-GATE-2",
+  "instrumental_variants_count": 24,
+  "true_causal_effect": 0.42,
+  "ivw_causal_estimate": 0.40052934975381765,
+  "ivw_standard_error": 0.021670029693024964,
+  "ivw_p_value": 0.0,
+  "egger_intercept": 0.0018111648428668745,
+  "egger_intercept_p_value": 0.940254156974905,
+  "coloc_pp4_posterior": 0.8420963095434988,
+  "c1_causal_ivw_pass": true,
+  "c2_pleiotropy_free_pass": true,
+  "c3_colocalization_pass": true,
+  "verdict": "COMPOUND PASS (3/3 CRITERIA MET)"
+}

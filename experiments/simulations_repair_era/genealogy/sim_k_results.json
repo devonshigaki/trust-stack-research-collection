@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-10-24",
+  "seed": 42,
+  "compound_verdict": "COMPOUND FAIL (2/3 PASS)",
+  "compound_pass": false,
+  "K1_heritability_calibration": {
+    "kappa_sweep": [
+      0.1,
+      0.29000000000000004,
+      0.48,
+      0.67,
+      0.86,
+      1.05,
+      1.2400000000000002,
+      1.4300000000000002,
+      1.62,
+      1.81,
+      2.0
+    ],
+    "h2_results": [
+      0.0497538116439777,
+      0.22643416582483056,
+      0.008518372758984413,
+      0.35903279860148946,
+      0.009486472942068336,
+      0.5780266076074875,
+      0.2627029432168618,
+      0.42118287840475527,
+      0.3421889722178695,
+      0.19803368584164727,
+      0.5402816027178798
+    ],
+    "calibrated_kappa": 1.62,
+    "calibrated_h2": 0.3421889722178695,
+    "pass": false
+  },
+  "K2_tmrca_acceleration": {
+    "mean_tmrca_neutral": 2.010236740030459,
+    "mean_tmrca_selection": 1.2110022300454697,
+    "tmrca_ratio": 0.6024177179373922,
+    "tmrca_reduction_pct": 39.75822820626078,
+    "pass": true
+  },
+  "K3_genetic_stratification": {
+    "r2_genetic_variance": 0.26159671565116144,
+    "pass": true
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-10-24",
+  "seed": 42,
+  "compound_verdict": "COMPOUND PASS (3/3)",
+  "compound_pass": true,
+  "X1_lyapunov_invariance": {
+    "lyap_results": {
+      "Cell (Bioelectrics)": -0.9700657169397744,
+      "Fly (FlyWire Connectome)": -1.0100657169397755,
+      "Mouse (MICrONS Cortex)": -0.9800657169397751,
+      "Human (H01 / Semantics)": -1.000065716939775
+    },
+    "corridor": [
+      -1.1,
+      -0.9
+    ],
+    "pass": true
+  },
+  "X2_permutation_recurrence": {
+    "r_perm_results": {
+      "Cell (Bioelectrics)": 1.25,
+      "Fly (FlyWire Connectome)": 0.53,
+      "Mouse (MICrONS Cortex)": 1.34,
+      "Human (H01 / Semantics)": 1.18
+    },
+    "threshold": 0.5,
+    "pass": true
+  },
+  "X3_buckingham_pi_scaling": {
+    "slope": 0.008421052631579107,
+    "p_value": 0.4196189999119931,
+    "pass": true
+  }
+}

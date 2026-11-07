@@ -1,0 +1,17 @@
+{
+ "cond_av": {
+  "cells": 41,
+  "active": 28,
+  "mean_hz": 80.03
+ },
+ "cond_app": {
+  "cells": 4,
+  "active": 4,
+  "mean_hz": 174.64
+ },
+ "noncond": {
+  "cells": 51,
+  "active": 26,
+  "mean_hz": 64.65
+ }
+}

@@ -1,0 +1,7 @@
+{
+  "dataset": "H01 Human Cortex (Partial - 18/166 Shards)",
+  "analyzed_shards": 18,
+  "total_synapses_processed": 55987,
+  "mean_sampled_input_budget": 3.2330657735173527,
+  "theoretical_extrapolation": "Assuming uniformity across the remaining 148 shards, the structural density prevents single-class input dominance. H01 follows the mammalian cortex (MICrONS) distributed-budget paradigm, rather than the insect (FlyWire) extreme bottleneck paradigm."
+}

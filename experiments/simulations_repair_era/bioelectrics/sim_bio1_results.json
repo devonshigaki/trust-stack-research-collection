@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-11-06",
+  "simulation_id": "Sim BIO-1",
+  "grid_size": "32x32",
+  "total_cells": 1024,
+  "gap_junction_coupling_gamma_O": 0.35,
+  "camp_diffusion_constant": 0.15,
+  "resting_vmem_unshocked": -63.84658088028447,
+  "peak_vmem_shocked": -53.24099416102727,
+  "final_vmem_shocked": -60.31738778880732,
+  "tissue_darpp34_final": 0.36747661724249936,
+  "c1_syncytium_buffering_pass": true,
+  "c2_depolarization_peak_pass": true,
+  "c3_post_shock_recovery_pass": true,
+  "verdict": "COMPOUND PASS (3/3 CRITERIA MET)"
+}

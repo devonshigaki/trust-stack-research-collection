@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-11-06",
+  "simulation_id": "Sim AT-3",
+  "bond_type": "Silicon-Oxygen (Quartz / Rock)",
+  "ground_expectation_angstroms": 1.61,
+  "dissociation_energy_ev": 4.77,
+  "harmonic_k_eff": 42.0714,
+  "linearized_mu_contraction": 49.49576470588235,
+  "final_abiotic_distance": 13.314330862734439,
+  "final_biological_distance": 1.5600079103216926,
+  "c1_linear_isomorphism_pass": true,
+  "c2_abiotic_fracture_pass": true,
+  "c3_active_biological_repair_pass": true,
+  "verdict": "COMPOUND PASS (3/3 CRITERIA MET)"
+}

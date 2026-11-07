@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-11-06",
+  "simulation_id": "Sim P8d",
+  "events_target": 1005,
+  "daily_rate": 10.0,
+  "audit_detection_per_key": 0.06,
+  "scenarios": {
+    "Cost_$150": {
+      "min_breakeven_credit_limit": 340.65753734721596,
+      "optimal_attacker_K": 2,
+      "breakeven_at_K5": 1023.3013814859291,
+      "breakeven_at_K10": 2786.7858898135855
+    },
+    "Cost_$350": {
+      "min_breakeven_credit_limit": 793.3510638297873,
+      "optimal_attacker_K": 2,
+      "breakeven_at_K5": 2385.877371640361,
+      "breakeven_at_K10": 6500.012547704247
+    },
+    "Cost_$750": {
+      "min_breakeven_credit_limit": 1698.73811679493,
+      "optimal_attacker_K": 2,
+      "breakeven_at_K5": 5111.029351949225,
+      "breakeven_at_K10": 13926.465863485568
+    },
+    "Cost_$1200": {
+      "min_breakeven_credit_limit": 2717.2985513807157,
+      "optimal_attacker_K": 2,
+      "breakeven_at_K5": 8176.825329796697,
+      "breakeven_at_K10": 22281.22584373955
+    }
+  },
+  "unmitigated_k1_time_days": Infinity,
+  "k2_time_days": 201.0,
+  "k5_time_days": 125.625,
+  "c1_monopoly_block_pass": true,
+  "c2_economic_unprofitability_pass": true,
+  "c3_detection_scaling_pass": true,
+  "verdict": "COMPOUND PASS (3/3 CRITERIA MET)"
+}

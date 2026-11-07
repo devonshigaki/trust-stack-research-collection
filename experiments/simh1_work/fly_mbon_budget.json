@@ -1,0 +1,26 @@
+{
+ "substrate": "FlyWire v783 whole brain (Shiu repo Connectivity_783.parquet)",
+ "mbon_cells": 96,
+ "kc_cells": 5177,
+ "total_synapse_weight_onto_MBON": 261521.0,
+ "class_composition_of_MBON_input": {
+  "Kenyon_Cell": 0.9816381858435843,
+  "DAN": 0.05844272544078678,
+  "ALPN": 0.001869830721051082,
+  "AN": 0.000757109371713935,
+  "unannotated": 0.00048562065761449365,
+  "CX": 0.0004626779493807381,
+  "ALON": 0.00012618489528565583,
+  "bilateral": 3.823784705625934e-05,
+  "hygrosensory": 1.1471354116877803e-05,
+  "ALLN": 7.647569411251868e-06,
+  "LHLN": -0.0001797178811644189,
+  "mAL": -0.00022942708233755606,
+  "ALIN": -0.0004932682270257456,
+  "MBIN": -0.0028907812374532062,
+  "LHCENT": -0.008741171837060887,
+  "MBON": -0.031305325384959524
+ },
+ "KC_share_of_MBON_input_budget": 0.9816381858435843,
+ "wall_s": 10.7
+}

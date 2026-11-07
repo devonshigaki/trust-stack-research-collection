@@ -1,0 +1,65 @@
+{
+  "Recognition (C)": {
+    "concepts_tested": [
+      "UNDERSTAND",
+      "SEE",
+      "HEAR",
+      "LEARN",
+      "FIND",
+      "SEEM"
+    ],
+    "present_count": 6,
+    "actual_edges": 6,
+    "max_possible_edges": 15,
+    "density": 0.4,
+    "fold_enrichment": 96.3176116407426,
+    "permutation_p": 0.0004997501249375312,
+    "status": "PASS (p <= 0.05)"
+  },
+  "Validation (O)": {
+    "concepts_tested": [
+      "TRUE",
+      "TRUTH",
+      "BELIEVE",
+      "ANSWER",
+      "RIGHT"
+    ],
+    "present_count": 5,
+    "actual_edges": 2,
+    "max_possible_edges": 10,
+    "density": 0.2,
+    "fold_enrichment": 48.1588058203713,
+    "permutation_p": 0.0004997501249375312,
+    "status": "PASS (p <= 0.05)"
+  },
+  "Expectation (D)": {
+    "concepts_tested": [
+      "HOPE",
+      "WANT",
+      "WAIT (FOR)"
+    ],
+    "present_count": 3,
+    "actual_edges": 1,
+    "max_possible_edges": 3,
+    "density": 0.3333333333333333,
+    "fold_enrichment": 80.26467636728549,
+    "permutation_p": 0.013493253373313344,
+    "status": "PASS (p <= 0.05)"
+  },
+  "Stabilization (S)": {
+    "concepts_tested": [
+      "REST",
+      "SLEEP",
+      "PEACE",
+      "QUIET",
+      "STABLE"
+    ],
+    "present_count": 5,
+    "actual_edges": 0,
+    "max_possible_edges": 10,
+    "density": 0.0,
+    "fold_enrichment": 0.0,
+    "permutation_p": 1.0,
+    "status": "NULL"
+  }
+}

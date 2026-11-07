@@ -1,0 +1,99 @@
+{
+  "timestamp": "2026-11-06",
+  "simulation_id": "Sim MS-1",
+  "molecules_audited": 8,
+  "results": [
+    {
+      "name": "Glycine",
+      "formula": "C2H5NO2",
+      "exact_mass": 75.032,
+      "category": "Prebiotic Amino Acid",
+      "unique_fragment_peaks": 8,
+      "true_assembly_index": 4,
+      "reconstructed_ma": 6,
+      "discrepancy": 2,
+      "crosses_life_threshold": false
+    },
+    {
+      "name": "Adenine",
+      "formula": "C5H5N5",
+      "exact_mass": 135.054,
+      "category": "Prebiotic Nucleobase",
+      "unique_fragment_peaks": 11,
+      "true_assembly_index": 6,
+      "reconstructed_ma": 8,
+      "discrepancy": 2,
+      "crosses_life_threshold": false
+    },
+    {
+      "name": "Dopamine",
+      "formula": "C8H11NO2",
+      "exact_mass": 153.078,
+      "category": "Channel D (RPE)",
+      "unique_fragment_peaks": 12,
+      "true_assembly_index": 8,
+      "reconstructed_ma": 9,
+      "discrepancy": 1,
+      "crosses_life_threshold": false
+    },
+    {
+      "name": "Serotonin",
+      "formula": "C10H12N2O",
+      "exact_mass": 176.094,
+      "category": "Channel S (Patience)",
+      "unique_fragment_peaks": 14,
+      "true_assembly_index": 11,
+      "reconstructed_ma": 10,
+      "discrepancy": 1,
+      "crosses_life_threshold": false
+    },
+    {
+      "name": "ATP",
+      "formula": "C10H16N5O13P3",
+      "exact_mass": 506.995,
+      "category": "Thermodynamic Driver",
+      "unique_fragment_peaks": 19,
+      "true_assembly_index": 13,
+      "reconstructed_ma": 14,
+      "discrepancy": 1,
+      "crosses_life_threshold": false
+    },
+    {
+      "name": "cAMP",
+      "formula": "C10H12N5O6P",
+      "exact_mass": 329.052,
+      "category": "Coincidence Token",
+      "unique_fragment_peaks": 19,
+      "true_assembly_index": 14,
+      "reconstructed_ma": 14,
+      "discrepancy": 0,
+      "crosses_life_threshold": false
+    },
+    {
+      "name": "Cortisol",
+      "formula": "C21H30O5",
+      "exact_mass": 362.209,
+      "category": "Channel C (Mismatch)",
+      "unique_fragment_peaks": 27,
+      "true_assembly_index": 19,
+      "reconstructed_ma": 19,
+      "discrepancy": 0,
+      "crosses_life_threshold": true
+    },
+    {
+      "name": "Oxytocin",
+      "formula": "C43H66N12O12S2",
+      "exact_mass": 1006.44,
+      "category": "Channel O (Validation)",
+      "unique_fragment_peaks": 53,
+      "true_assembly_index": 38,
+      "reconstructed_ma": 37,
+      "discrepancy": 1,
+      "crosses_life_threshold": true
+    }
+  ],
+  "c1_monotonic_correlation_pass": true,
+  "c2_camp_boundary_pass": true,
+  "c3_cortisol_biological_pass": true,
+  "verdict": "COMPOUND PASS (3/3 CRITERIA MET)"
+}
