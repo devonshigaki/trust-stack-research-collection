@@ -1,0 +1,95 @@
+{
+  "timestamp": "2026-11-07",
+  "simulation_id": "Sim NET-1",
+  "total_nodes": 70,
+  "total_edges": 55,
+  "pi_count": 22,
+  "bridge_count": 48,
+  "top_strategic_bridges": [
+    {
+      "name": "Giovanni Pezzulo",
+      "betweenness_centrality": 0.013640238704177323,
+      "degree_centrality": 0.028985507246376812,
+      "connected_labs": [
+        "Karl Friston",
+        "Lisa Feldman Barrett"
+      ]
+    },
+    {
+      "name": "Sarah Garfinkel",
+      "betweenness_centrality": 0.011508951406649617,
+      "degree_centrality": 0.028985507246376812,
+      "connected_labs": [
+        "Camilla Nord",
+        "Lisa Feldman Barrett"
+      ]
+    },
+    {
+      "name": "Joshua Conrad Jackson",
+      "betweenness_centrality": 0.0038363171355498722,
+      "degree_centrality": 0.028985507246376812,
+      "connected_labs": [
+        "Kristen Lindquist",
+        "Richard Thaler"
+      ]
+    },
+    {
+      "name": "Stuart M. Marshall",
+      "betweenness_centrality": 0.0,
+      "degree_centrality": 0.014492753623188406,
+      "connected_labs": [
+        "Lee Cronin"
+      ]
+    },
+    {
+      "name": "Sara Imari Walker",
+      "betweenness_centrality": 0.0,
+      "degree_centrality": 0.028985507246376812,
+      "connected_labs": [
+        "Lee Cronin",
+        "Cole Mathis"
+      ]
+    },
+    {
+      "name": "Cole Mathis",
+      "betweenness_centrality": 0.0,
+      "degree_centrality": 0.028985507246376812,
+      "connected_labs": [
+        "Lee Cronin",
+        "Sara Imari Walker"
+      ]
+    },
+    {
+      "name": "Lakshwin Shreesha",
+      "betweenness_centrality": 0.0,
+      "degree_centrality": 0.014492753623188406,
+      "connected_labs": [
+        "Michael Levin"
+      ]
+    },
+    {
+      "name": "Douglas Blackiston",
+      "betweenness_centrality": 0.0,
+      "degree_centrality": 0.014492753623188406,
+      "connected_labs": [
+        "Michael Levin"
+      ]
+    },
+    {
+      "name": "Franz Kuchling",
+      "betweenness_centrality": 0.0,
+      "degree_centrality": 0.014492753623188406,
+      "connected_labs": [
+        "Michael Levin"
+      ]
+    },
+    {
+      "name": "Samuel Kriegman",
+      "betweenness_centrality": 0.0,
+      "degree_centrality": 0.014492753623188406,
+      "connected_labs": [
+        "Michael Levin"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "timestamp": "2026-11-07",
+  "total_preprints": 14,
+  "preprints": [
+    {
+      "title": "Large-Language Models as a Cognitive Virus",
+      "authors": [
+        "Ricard Sol\u00e9",
+        "Giulio Ruffini",
+        "Francesca Castaldo",
+        "Marco Tuccio",
+        "Luis F. Seoane",
+        "Manlio de Domenico",
+        "Santiago F. Elena",
+        "David C. Krakauer",
+        "Michael Levin"
+      ],
+      "published": "2026-09-03T04:03:49Z",
+      "id": "http://arxiv.org/abs/2609.03344v1",
+      "summary_snippet": "Large-language models (LLMs) are rapidly becoming part of human culture, reshaping how information is produced, transmitted, and used. Here we propose that their diffusion can be understood through a viral analogy, with LLM use spreading th...",
+      "query_matched": "au:\"Michael Levin\" AND (\"bioelectric\" OR \"cognition\")"
+    },
+    {
+      "title": "Training Ecosystems: A Computational Approach to Uncovering Learning Behavior in Unconventional Contexts",
+      "authors": [
+        "Adrita Samanta",
+        "Hananel Hazan",
+        "Michael Levin"
+      ],
+      "published": "2026-05-28T15:47:20Z",
+      "id": "http://arxiv.org/abs/2605.30109v1",
+      "summary_snippet": "Recent progress in diverse intelligence has shown simple learning capacities below the organism level - single cells and even molecular networks. However, there are still many knowledge gaps around learning capacity above the organism level...",
+      "query_matched": "au:\"Michael Levin\" AND (\"bioelectric\" OR \"cognition\")"
+    },
+    {
+      "title": "Positive Alignment: Artificial Intelligence for Human Flourishing",
+      "authors": [
+        "Ruben Laukkonen",
+        "Seb Krier",
+        "Chlo\u00e9 Bakalar",
+        "Shamil Chandaria",
+        "Morten Kringelbach",
+        "Adam Elwood",
+        "Daniel Ford",
+        "Fernando Rosas",
+        "Maty Bohacek",
+        "Matija Franklin",
+        "Nenad Toma\u0161ev",
+        "Stephanie Chan",
+        "Verena Rieser",
+        "Roma Patel",
+        "Michael Levin",
+        "Arun Rao"
+      ],
+      "published": "2026-05-11T10:11:08Z",
+      "id": "http://arxiv.org/abs/2605.10310v3",
+      "summary_snippet": "Existing alignment research is dominated by concerns about safety and preventing harm: safeguards, controllability, and compliance. This paradigm of alignment parallels early psychology's focus on mental illness: necessary but incomplete. W...",
+      "query_matched": "au:\"Michael Levin\" AND (\"bioelectric\" OR \"cognition\")"
+    },
+    {
+      "title": "Renormalising Generative Models for Active Inference: Foundations, Derivations, and Verification",
+      "authors": [
+        "Karim Zaghw",
+        "Andrew Pashea",
+        "Marc Pritsch",
+        "Wouter Nuijten",
+        "Karl Friston",
+        "Lancelot Da Costa"
+      ],
+      "published": "2026-08-10T12:14:05Z",
+      "id": "http://arxiv.org/abs/2608.09512v2",
+      "summary_snippet": "Active inference offers a unified framework for perception, learning, and action, but scaling discrete active-inference models to rich spatial and temporal domains remains difficult. Renormalising generative models (RGMs) address this chall...",
+      "query_matched": "au:\"Karl Friston\" AND (\"active inference\" OR \"renormalis\")"
+    },
+    {
+      "title": "The adaptive nature of confirmation bias",
+      "authors": [
+        "Dorje C. Brody",
+        "Karl J. Friston",
+        "Bernhard K. Meister",
+        "Emmanuel M. Pothos"
+      ],
+      "published": "2026-06-22T13:35:24Z",
+      "id": "http://arxiv.org/abs/2606.23325v1",
+      "summary_snippet": "In this paper, the phenomenon generally classified as confirmation bias is formulated on the space of square-root probabilities (or equivalently, using the structures of quantum probability). In this framework, observations are modelled by ...",
+      "query_matched": "au:\"Karl Friston\" AND (\"active inference\" OR \"renormalis\")"
+    },
+    {
+      "title": "Active Inference as the Test-Time Scaling Law for Physical AI Agents",
+      "authors": [
+        "Omar Hashash",
+        "Christo Kurisummoottil Thomas",
+        "Walid Saad",
+        "Merouane Debbah",
+        "Karl Friston",
+        "Adeel Razi"
+      ],
+      "published": "2026-06-22T03:41:31Z",
+      "id": "http://arxiv.org/abs/2606.22813v1",
+      "summary_snippet": "In this paper, a novel test-time scaling law for physical artificial intelligence (AI) agents is introduced. This scaling law enables physical AI agents to reason with their world models to generalize in unforeseen scenarios at test time. T...",
+      "query_matched": "au:\"Karl Friston\" AND (\"active inference\" OR \"renormalis\")"
+    },
+    {
+      "title": "Renormalising Generative Models for Active Inference: Foundations, Derivations, and Verification",
+      "authors": [
+        "Karim Zaghw",
+        "Andrew Pashea",
+        "Marc Pritsch",
+        "Wouter Nuijten",
+        "Karl Friston",
+        "Lancelot Da Costa"
+      ],
+      "published": "2026-08-10T12:14:05Z",
+      "id": "http://arxiv.org/abs/2608.09512v2",
+      "summary_snippet": "Active inference offers a unified framework for perception, learning, and action, but scaling discrete active-inference models to rich spatial and temporal domains remains difficult. Renormalising generative models (RGMs) address this chall...",
+      "query_matched": "au:\"Lancelot Da Costa\" AND (\"active inference\" OR \"markov\")"
+    },
+    {
+      "title": "Learning POMDP World Models from Observations with Language-Model Priors",
+      "authors": [
+        "Valentin Six",
+        "Frederik Panse",
+        "Mathis Fajeau",
+        "Lancelot Da Costa",
+        "Mridul Sharma",
+        "Alfonso Amayuelas",
+        "Tim Z. Xiao",
+        "David Hyland",
+        "Philipp Hennig",
+        "Bernhard Sch\u00f6lkopf"
+      ],
+      "published": "2026-05-13T16:18:15Z",
+      "id": "http://arxiv.org/abs/2605.13740v2",
+      "summary_snippet": "Whether navigating a building, operating a robot, or playing a game, an agent that acts effectively in an environment must first learn an internal model of how that environment works. Partially-observable Markov decision processes (POMDPs) ...",
+      "query_matched": "au:\"Lancelot Da Costa\" AND (\"active inference\" OR \"markov\")"
+    },
+    {
+      "title": "Active inference and artificial reasoning",
+      "authors": [
+        "Karl Friston",
+        "Lancelot Da Costa",
+        "Alexander Tschantz",
+        "Conor Heins",
+        "Christopher Buckley",
+        "Tim Verbelen",
+        "Thomas Parr"
+      ],
+      "published": "2025-12-24T11:59:36Z",
+      "id": "http://arxiv.org/abs/2512.21129v1",
+      "summary_snippet": "This technical note considers the sampling of outcomes that provide the greatest amount of information about the structure of underlying world models. This generalisation furnishes a principled approach to structure learning under a plausib...",
+      "query_matched": "au:\"Lancelot Da Costa\" AND (\"active inference\" OR \"markov\")"
+    },
+    {
+      "title": "Social Perception of Faces in a Vision-Language Model",
+      "authors": [
+        "Carina I. Hausladen",
+        "Manuel Knott",
+        "Colin F. Camerer",
+        "Pietro Perona"
+      ],
+      "published": "2024-08-26T17:21:54Z",
+      "id": "http://arxiv.org/abs/2408.14435v2",
+      "summary_snippet": "We explore social perception of human faces in CLIP, a widely used open-source vision-language model. To this end, we compare the similarity in CLIP embeddings between different textual prompts and a set of face images. Our textual prompts ...",
+      "query_matched": "au:\"Colin Camerer\" AND (\"trust\" OR \"machine learning\")"
+    },
+    {
+      "title": "From Predictive Algorithms to Automatic Generation of Anomalies",
+      "authors": [
+        "Sendhil Mullainathan",
+        "Ashesh Rambachan"
+      ],
+      "published": "2024-04-15T19:50:46Z",
+      "id": "http://arxiv.org/abs/2404.10111v2",
+      "summary_snippet": "How can we extract theoretical insights from machine learning algorithms? We take a familiar lesson: researchers often turn their intuitions into theoretical insights by constructing \"anomalies\" -- specific examples highlighting hypothesize...",
+      "query_matched": "au:\"Sendhil Mullainathan\" AND (\"algorithm\" OR \"scarcity\")"
+    },
+    {
+      "title": "The Challenge of Understanding What Users Want: Inconsistent Preferences and Engagement Optimization",
+      "authors": [
+        "Jon Kleinberg",
+        "Sendhil Mullainathan",
+        "Manish Raghavan"
+      ],
+      "published": "2022-02-23T20:45:31Z",
+      "id": "http://arxiv.org/abs/2202.11776v3",
+      "summary_snippet": "Online platforms have a wealth of data, run countless experiments and use industrial-scale algorithms to optimize user experience. Despite this, many users seem to regret the time they spend on these platforms. One possible explanation is m...",
+      "query_matched": "au:\"Sendhil Mullainathan\" AND (\"algorithm\" OR \"scarcity\")"
+    },
+    {
+      "title": "The Algorithmic Automation Problem: Prediction, Triage, and Human Effort",
+      "authors": [
+        "Maithra Raghu",
+        "Katy Blumer",
+        "Greg Corrado",
+        "Jon Kleinberg",
+        "Ziad Obermeyer",
+        "Sendhil Mullainathan"
+      ],
+      "published": "2019-03-28T18:53:58Z",
+      "id": "http://arxiv.org/abs/1903.12220v1",
+      "summary_snippet": "In a wide array of areas, algorithms are matching and surpassing the performance of human experts, leading to consideration of the roles of human judgment and algorithmic prediction in these domains. The discussion around these developments...",
+      "query_matched": "au:\"Sendhil Mullainathan\" AND (\"algorithm\" OR \"scarcity\")"
+    },
+    {
+      "title": "Temporal meta-states are associated with differential patterns of dynamic connectivity, network topology and attention",
+      "authors": [
+        "James M. Shine",
+        "Oluwasanmi Koyejo",
+        "Russell A. Poldrack"
+      ],
+      "published": "2016-01-19T20:28:00Z",
+      "id": "http://arxiv.org/abs/1601.05065v2",
+      "summary_snippet": "Little is currently known about the coordination of neural activity over longitudinal time-scales and how these changes relate to behavior. To investigate this issue, we used resting-state fMRI data from a single individual to identify the ...",
+      "query_matched": "au:\"Russell Poldrack\" AND (\"phenotyping\" OR \"reproducib\")"
+    }
+  ]
+}
