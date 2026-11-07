@@ -252,9 +252,25 @@ Architect of The Fresh Protocol (TFP) · ORCID: 0009-0003-8977-8010
 ---
 
 ### 4. Lisa Feldman Barrett (Northeastern University)
-*Author of "How Emotions Are Made"; Pioneer of the Theory of Constructed Emotion*  
+*University Distinguished Professor of Psychology; Author of "How Emotions Are Made"*  
 *Contact:* `l.barrett@northeastern.edu`  
-*Key Lab Personnel to Track:* Karen Quigley, Ajay Satpute, Maria Gendron.
+*Lab:* Interdisciplinary Affective Science Laboratory (IASLab), Northeastern University / Massachusetts General Hospital, 125 Nightingale Hall, Boston, MA 02115.  
+*Primary Funding:* NIH (R01, U01), NSF, Templeton World Charity Foundation.
+
+#### Institutional Network & 2-Hop Entry Points:
+*   **Lab Co-Director & Allostatic Physiology Lead:** **Dr. Karen S. Quigley, PhD** (Professor of Psychology, Northeastern). Co-director of the IASLab. World authority on autonomic interoceptive physiology, peripheral impedance cardiography, and physiological core affect.
+*   **Assistant Professor & Allostasis Theorist:** **Dr. Jordan Theriault, PhD** (Assistant Professor, Northeastern). Focuses on computational models of allostasis, predictive regulation, and body-budgeting. *Action:* Send him `sim_at2_assembly_results.json` and the Core Affect derivation in DOCAS §3.
+*   **Postdoctoral Fellow (Interoception & Emotion):** **Dr. Phil Deming, PhD** (IASLab Postdoc). Investigates how visceral interoceptive signals constrain emotional experience.
+*   **Key Alumni Network:**
+    *   **Prof. Kristen Lindquist** (Professor, Ohio State / UNC; colexification of emotion concepts).
+    *   **Prof. Ajay Satpute** (Associate Professor, Northeastern; fMRI parcellation of affect).
+    *   **Prof. Maria Gendron** (Assistant Professor, Yale; cross-cultural emotion perception).
+*   **Recent High-Impact Papers to Anchor:**
+    1.  Barrett (2024) *Current Opinion in Behavioral Sciences*: "Allostasis and the brain's predictive architecture."
+    2.  Theriault, Quigley, Barrett (2023) *Perspectives on Psychological Science*: "The body-budgeting brain."
+*   **Multi-Stage Outreach Strategy:**
+    *   *Stage 1 (Postdoc Review):* Contact Dr. Jordan Theriault and Dr. Phil Deming sharing our mathematical derivation of Valence, Arousal, and Dominance as the signed error and magnitude of predictive mismatch (ε = V - E).
+    *   *Stage 2 (PI Strategic Inquiry):* Send the formal outreach letter to Prof. Lisa Feldman Barrett on Sim META ($F_1 = 0.991$) and the elimination of essentialist 'trust modules'.
 
 #### 1. Her Intellectual Battle:
 Barrett proved that emotions do not have dedicated brain circuits (no "fear circuit" or "trust molecule"). The brain constructs emotion from continuous interoceptive Core Affect (Valence + Arousal) through predictive allostasis. Skeptics argue her theory is purely descriptive and lacks a mathematical update law predicting when and how fast an affective state transitions into behavior.
@@ -425,9 +441,23 @@ Architect of The Fresh Protocol (TFP) · ORCID: 0009-0003-8977-8010
 ---
 
 ### 8. Dietmar Plenz (National Institute of Mental Health / NIH)
-*Discoverer of Neuronal Avalanches; Leader of the Critical Brain Hypothesis*  
+*Chief, Section on Critical Brain Dynamics, NIMH / NIH*  
 *Contact:* `plenzd@mail.nih.gov`  
-*Key Lab Personnel to Track:* Woodrow Shew, Shan Yu, K. Srinivasan.
+*Lab:* Section on Critical Brain Dynamics, National Institute of Mental Health, Building 35, Convent Drive, Bethesda, MD 20892.  
+*Primary Funding:* NIH Intramural Research Program.
+
+#### Institutional Network & 2-Hop Entry Points:
+*   **Staff Scientist / Mathematical Lead:** **Dr. Sinisa Pajevic, PhD** (Staff Scientist, NIMH). Specialist in mathematical modeling of topological and critical neural networks. *Action:* Send him `experiments/simulations_repair_era/criticality/sim_crit_branching.py`.
+*   **Postdoctoral Fellow (IRTA):** **Dr. Yelena Bibineyshvili** (NIMH). Investigates high-density multielectrode array (MEA) avalanche recordings.
+*   **Key Alumni Network:**
+    *   **Prof. Woodrow Shew** (Associate Professor, University of Arkansas; optimal dynamic range at criticality).
+    *   **Prof. Shan Yu** (Principal Investigator, Chinese Academy of Sciences; information capacity in neuronal avalanches).
+*   **Recent High-Impact Papers to Anchor:**
+    1.  Plenz et al. (2021) *Frontiers in Systems Neuroscience*: "Self-organized criticality in the brain."
+    2.  Miller, Plenz (2023) *Journal of Neuroscience*: "Neuronal avalanches optimize multi-sensory cue integration."
+*   **Multi-Stage Outreach Strategy:**
+    *   *Stage 1 (Brian2 Code Check):* Contact Dr. Sinisa Pajevic sharing our open Brian2 simulation of the branching parameter ($\sigma = 1.0 \implies lpha = 1.503$).
+    *   *Stage 2 (Chief Inquiry):* Send the formal outreach letter to Dr. Dietmar Plenz on criticality as the non-negotiable operating point for the Master Stability Law.
 
 #### 1. His Intellectual Battle:
 Plenz discovered that the cerebral cortex organizes itself near a critical phase transition ("neuronal avalanches") with a power-law exponent of $-1.5$, maximizing dynamic range and information processing.
@@ -462,9 +492,21 @@ Architect of The Fresh Protocol (TFP) · ORCID: 0009-0003-8977-8010
 ---
 
 ### 9. Randy Buckner (Harvard University)
-*Pioneer of the Default Mode Network (DMN), Episodic Simulation, and Prospection*  
+*Sosland Family Professor of Psychology and of Neuroscience, Harvard University*  
 *Contact:* `randy_buckner@harvard.edu`  
-*Key Lab Personnel to Track:* Justin Vincent, Jessica Andrews-Hanna.
+*Lab:* The Buckner Laboratory, Center for Brain Science, Harvard University, 52 Oxford Street, Northwest Building, Cambridge, MA 02138.  
+*Primary Funding:* NIH, Howard Hughes Medical Institute, Harvard University.
+
+#### Institutional Network & 2-Hop Entry Points:
+*   **Postdoctoral Fellow (Precision Neuroimaging):** **Dr. Anne Billot, PhD** (Buckner Lab Postdoc). Specializes in precision individual-specific fMRI mapping of association networks.
+*   **Postdoctoral Fellow (Cortical Parcellation):** **Dr. Jingnan Du, PhD** (Buckner Lab Postdoc). Developed the DU15NET parcellation mapping the parallel organization of the association cortex. *Action:* Send him our Schaefer-400 and Yeo-7 projection maps from Sim D21.
+*   **Postdoctoral Fellow (Social Learning):** **Dr. Setayesh Radkani, PhD** (Buckner Lab Postdoc). Researches social learning and neural decision-making mechanisms.
+*   **Recent High-Impact Papers to Anchor:**
+    1.  Du, Buckner (2024) *Journal of Neurophysiology*: "Parallel interdigitated distributed networks in the human cerebral cortex."
+    2.  Buckner, DiNicola (2023) *Trends in Cognitive Sciences*: "The selfish network: Why the default network expanded in humans."
+*   **Multi-Stage Outreach Strategy:**
+    *   *Stage 1 (Parcellation Alignment):* Contact Dr. Jingnan Du discussing our cortical projection of counterfactual rollout depth ($K=5$) on DMN subsystems.
+    *   *Stage 2 (PI Strategic Inquiry):* Send the formal outreach letter to Prof. Randy Buckner on DMN episodic simulation as an adversarial defense against generative LLM extortion.
 
 #### 1. His Intellectual Battle:
 Buckner proved that the brain’s default state is not passive resting, but active prospective memory—using the Default Mode Network to simulate counterfactual futures.
@@ -884,9 +926,23 @@ Architect of The Fresh Protocol (TFP) · ORCID: 0009-0003-8977-8010
 ---
 
 ### 19. Camilla Nord (University of Cambridge)
-*Author of "The Balanced Brain"; Head of Mental Health Neuroscience at Cambridge MRC*  
+*Professor of Cognitive Neuroscience; Programme Leader, MRC Cognition and Brain Sciences Unit*  
 *Contact:* `camilla.nord@mrc-cbu.cam.ac.uk`  
-*Key Lab Personnel to Track:* Sarah Garfinkel, Hugo Critchley.
+*Lab:* Mental Health Neuroscience Lab, MRC Cognition and Brain Sciences Unit, University of Cambridge, 15 Chaucer Road, Cambridge CB2 7EF, UK.  
+*Primary Funding:* Wellcome Trust, Medical Research Council (MRC).
+
+#### Institutional Network & 2-Hop Entry Points:
+*   **Postdoctoral Research Associate (Interoception):** **Dr. Lydia Hickman, PhD** (Wellcome Postdoc, Nord Lab). Specializes in the empirical measurement of interoception (cardiac and respiratory perception) in mental health. *Action:* Send her our Apple Watch overnight RMSSD clearing-shock protocol.
+*   **Postdoctoral Research Associate (Metabolic Psychiatry):** **Dr. Sara Mehrhof, PhD** (Wellcome Postdoc, Nord Lab). Uses computational modeling to investigate metabolic and reward-processing mechanisms in psychiatric conditions.
+*   **Key Senior Collaborators:**
+    *   **Prof. Sarah Garfinkel** (UCL Institute of Cognitive Neuroscience; the 3-dimensional model of interoception).
+    *   **Prof. Hugo Critchley** (Brighton and Sussex Medical School; central autonomic network).
+*   **Recent High-Impact Papers to Anchor:**
+    1.  Nord (2023) *Penguin Press*: "The Balanced Brain: The Science of Mental Health."
+    2.  Hickman, Nord (2024) *Neuroscience & Biobehavioral Reviews*: "Interoceptive precision in psychiatric illness."
+*   **Multi-Stage Outreach Strategy:**
+    *   *Stage 1 (Protocol Review):* Contact Dr. Lydia Hickman sharing our empirical telemetry pipeline linking Plaid bank clearing events with continuous overnight RMSSD collapse.
+    *   *Stage 2 (Programme Leader Inquiry):* Send the formal outreach letter to Prof. Camilla Nord on financial clearing shocks as an objective interoceptive perturbation of the body budget.
 
 #### 1. Her Intellectual Battle:
 Nord proved that subjective experience and psychiatric disorders are rooted in *interoception*—how the brain manages the body's physical energy and allostatic budget.
@@ -924,9 +980,24 @@ Architect of The Fresh Protocol (TFP) · ORCID: 0009-0003-8977-8010
 ---
 
 ### 20. Russell Poldrack (Stanford University)
-*Father of Dense Single-Subject Longitudinal Phenotyping (MyConnectome)*  
+*Albert Ray Lang Professor of Psychology; Director of Center for Open and Reproducible Science*  
 *Contact:* `poldrack@stanford.edu`  
-*Key Lab Personnel to Track:* Craig Moodie, Patrick Bissett.
+*Lab:* The Poldrack Lab, Stanford University, Building 420, Jordan Hall, Stanford, CA 94305.  
+*Primary Funding:* NIH, NSF, Laura and John Arnold Foundation (Open Science).
+
+#### Institutional Network & 2-Hop Entry Points:
+*   **Senior Research Scientist (Inhibition & Cognitive Control):** **Dr. Patrick Bissett, PhD** (Senior Scientist, Poldrack Lab). Specialist in response inhibition and longitudinal cognitive stability.
+*   **Postdoctoral Scholar (Biostatistics & Connectomics):** **Dr. Eric Bridgeford, PhD** (Postdoc, Poldrack Lab). Expert in high-dimensional neuroimaging statistics and time-series corrections. *Action:* Send him our stationary block bootstrap Granger causality pipeline.
+*   **Lead Software Architect (OpenNeuro):** **Chris Markiewicz** (Stanford / OpenNeuro Team). Lead engineer maintaining OpenNeuro ds003020 and BIDS pipelines.
+*   **Key Alumni Network:**
+    *   **Prof. Sanmi Koyejo** (Associate Professor of Computer Science, Stanford; machine learning for neuroscience).
+    *   **Dr. Chris Gorgolewski** (Software Engineer, Google; co-creator of BIDS).
+*   **Recent High-Impact Papers to Anchor:**
+    1.  Poldrack et al. (2024) *Nature Reviews Neuroscience*: "Longitudinal precision neuroimaging."
+    2.  Poldrack (2023) *MIT Press*: "The New Mind Readers: What Neuroimaging Can and Cannot Tell Us."
+*   **Multi-Stage Outreach Strategy:**
+    *   *Stage 1 (Time-Series QC):* Contact Dr. Eric Bridgeford regarding our stationary block bootstrap controls (2,000 resamples) for single-subject financial time-series.
+    *   *Stage 2 (Director Inquiry):* Send the formal outreach letter to Prof. Russell Poldrack on our $N=1, T=30$ day dense financial-neuroscience trial.
 
 #### 1. His Intellectual Battle:
 Poldrack proved that dense longitudinal tracking of a single human ($N=1, T=104$) over 18 months reveals dynamical brain trajectories that traditional cross-sectional studies with hundreds of people completely wash out.
@@ -1021,43 +1092,7 @@ Architect of The Fresh Protocol (TFP) · ORCID: 0009-0003-8977-8010
     *   *Stage 1 (Data Science Audit):* Contact Dr. Steven Worthington sharing our 19-task continuous integration test suite (`run_tier1_tier2_suite.py`), showcasing how we automated bit-exact live REST API queries to the CFPB complaint database (2.36M records) and machine-checked Lean 4 formal proofs.
     *   *Stage 2 (Director Inquiry):* Send the formal outreach letter to Prof. Gary King on machine-checked formal verification in economic modeling and unsparing epistemic accounting.
     *   *Stage 3 (IQSS Dataverse Deposit):* Deposit the complete 35-simulation replication package and automated Lean 4 containers directly onto the Harvard Dataverse network.
-*Director of the Institute for Quantitative Social Science (IQSS)*  
-*Contact:* `king@harvard.edu`  
-*Key Lab Personnel to Track:* Stefano Iacus, Kosuke Imai.
 
-#### 1. His Intellectual Battle:
-King is the leading academic voice fighting the replication crisis, demanding open science, verifiable code, and radical transparency in empirical research.
-
-#### 2. What We Built for Him:
-*   **Zero-Sorry Formal Verification:** Verified Theorems M1–M3 in **Lean 4 + Mathlib4**, and Theorems FR-1–FR-4, MS-1–MS-4, and Q-1–Q-4 in **Z3 and SymPy CAS**.
-*   **The 19-Task Verification Suite:** Engineered `run_tier1_tier2_suite.py`, validating all mathematical invariants, simulation models, and live REST API database queries with 100% zero-failure reproducibility.
-
-#### 3. Outreach Letter:
-```text
-To: king@harvard.edu
-Subject: Verification check: Machine-checked Lean 4 formal proofs & open empirical replication stack
-
-Dear Professor King,
-
-As the Director of IQSS, you have spent your career building rigorous quantitative methods, defending replication standards, and eliminating statistical fragility in the social sciences.
-
-In our open research collection on the dynamical measurement of trust, we adopted your standards as our foundational operating discipline:
-1. Zero-Sorry Formal Verification: We machine-checked our core formal theorems (Theorems M1–M3) in Lean 4 + Mathlib4, and our information-geometric boundary regularity and multiscale assembly theorems (Theorems FR-1–FR-4, MS-1–MS-4, Q-1–Q-4) in Z3 and SymPy CAS.
-2. Unsparing Epistemic Bookkeeping: Every empirical simulation in our 35-battery collection carries pre-registered falsification criteria. All frozen failures (such as Sim G24 and Sim AT) are published openly in the manuscripts without post-hoc adjustment.
-3. Automated Test Suite: We automated our entire empirical pipeline into a 19-task continuous integration runner (run_tier1_tier2_suite.py), querying live REST APIs from the CFPB complaint database (2.36M records) and the CLICS 4.0 cross-linguistic graph (51k edges) bit-for-bit.
-
-We want to ask you directly:
-1. Did we properly implement your open-science replication standards by distributing our complete Lean 4 proof environment alongside automated Python reproduction runners on GitHub?
-2. In your view, does machine-checked formal verification in Lean 4 and Z3 adequately eliminate the risk of hidden mathematical misspecification in theoretical economic models?
-3. Where could our statistical reporting be improved to provide even greater causal and inferential transparency for independent auditors?
-
-Our complete code and verification pipelines are open on GitHub (devonshigaki/trust-stack-research-collection). We would be deeply honored by IQSS's review of our open-science verification stack.
-
-Warm regards,
-Devon Shigaki
-The FreshCredit Lab · Independent Research
-Architect of The Fresh Protocol (TFP) · ORCID: 0009-0003-8977-8010
-```
 
 ---
 
