@@ -1,0 +1,3776 @@
+[
+  {
+    "paper_title": "Identifying molecules as biosignatures with assembly theory and mass spectrometry",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "2.1",
+          "2.3",
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.2",
+          "4.3"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "5.3",
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 55,
+    "verdict": "MODERATE (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicitly documented in dossier: 'Funded by EPSRC, DARPA, and Templeton World Charity Foundation. Conflicts: Cronin declared no direct commercial conflicts for this 2021 paper (Chemify Ltd founded later in 2022).'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable, peer-reviewed journal: 'JOURNAL / YEAR: Nature Communications (2021) 12:3033, DOI: 10.1038/s41467-021-23258-x'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text only notes 'HISTORICAL CITATION COUNT: ~450' and does not contain explicit evidence or documentation of how prior works and cited literature are represented within the paper."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Independent lab confirmations and reproducible protocol established: 'performed completely blinded to sample identity across independent mass spec facilities at the University of Glasgow and NASA Jet Propulsion Laboratory (JPL).'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Controlled for systematic selection and measurement bias via blinded multi-class testing: 'Tested 100+ blind samples across distinct chemical classes... performed completely blinded to sample identity across independent mass spec facilities'."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While it mentions 'Tested 100+ blind samples across distinct chemical classes', there is no explicit power calculation or formal statistical justification for sample size adequacy provided in the text."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicitly uses blinding and negative controls: 'The mass spectrometry analysis was performed completely blinded to sample identity... Negative controls included blank solvent runs, prebiotic spark mixtures, and polycyclic aromatic hydrocarbons (PAHs) in carbonaceous meteorites.'"
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Applies appropriate non-parametric testing and reports an explicit effect size/classification performance metric alongside p-values: 'Receiver Operating Characteristic (ROC) analysis achieved AUC = 1.00 for separating living biological samples from abiotic/prebiotic mixtures (P < 10^-20 under non-parametric Mann-Whitney U tests).'"
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The method of randomization and exact group allocation counts (how many of the 100+ samples belonged to each specific class) are not fully detailed in the text."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, confidence intervals, and exact p-values are not reported (p-value is given as an inequality threshold 'P < 10^-20', and no CIs or SDs are documented)."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Raw baseline numbers per subgroup and absolute risk metrics are not provided alongside the summary '100+ blind samples' and 'AUC = 1.00' metrics."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit log or accounting of failed runs, missing data, or outlier exclusions in the provided dossier."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The use of a proxy metric is explicitly validated and disclosed in the text: 'Extracted MS2 fragmentation peak counts as a direct proxy for molecular complexity... MS fragmentation count is an empirical proxy for the true theoretical graph assembly index'."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Practical classification impact (complete separation via 'AUC = 1.00' and specific empirical thresholds 'MA >= 15' and '> 18 peaks') is clearly distinguished from the mere statistical p-value ('P < 10^-20')."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Potential confounding variables and background noise are explicitly controlled for and acknowledged: 'Negative controls included blank solvent runs, prebiotic spark mixtures, and polycyclic aromatic hydrocarbons (PAHs) in carbonaceous meteorites' and 'isomeric structures with identical precursor m/z can introduce ambiguity'."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, charts, or visual axis specifications are provided or explicitly described in the text."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While the primary empirical objective is stated, the text does not explicitly document whether one-tailed vs. two-tailed tests or specific cutoffs (e.g., MA >= 15) were pre-registered/pre-specified prior to data collection."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Follow-up timeframe and study duration are not documented in the text."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Extrapolation limits and domain bounds are explicitly acknowledged in the limitations: 'MS fragmentation count is an empirical proxy for the true theoretical graph assembly index; isomeric structures with identical precursor m/z can introduce ambiguity; cannot establish the exact chemical sequence of high-molecular-weight polymers without chromatographic isolation.'"
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Results adhere to mathematical boundaries (AUC = 1.00, P < 10^-20, peak counts > 18) and biochemical plausibility across diverse physical standards."
+      }
+    ],
+    "pi": "Lee Cronin",
+    "title": "Identifying molecules as biosignatures with assembly theory and mass spectrometry",
+    "journal_short": "Nature Communications (2021) 12:3033",
+    "paper_id": 1,
+    "citations": "~450 (Foundational Assembly Theory benchmark)"
+  },
+  {
+    "paper_title": "A scalable pipeline for designing reconfigurable organisms (Xenobots)",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.3"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "5.1",
+          "5.2",
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 40,
+    "verdict": "WEAK (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicit conflict of interest and funding disclosures are present: 'Funded by DARPA (Lifelong Learning Machines program). Competing interests: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable, peer-reviewed journal: 'JOURNAL / YEAR: Proceedings of the National Academy of Sciences (PNAS) (2020) 117(4):1853-1859'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text does not contain a literature review or reference how prior cited works are represented."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Establishes a reproducible computational-to-biological pipeline verified across multiple cohorts and trials: 'An evolutionary algorithm in a simulated physics engine (CPPN/VoxCad) searched for cellular configurations achieving locomotion. The predicted designs were built in vitro... Physically fabricated and tested N = 34 living synthetic organisms across multiple cohorts... Collective payload transport verified across multiple trials.'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While automated tracking was used ('automated particle tracking algorithms'), there is no explicit statement regarding unbiased/randomized sampling selection of the frog embryos or cells."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Sample size is stated ('N = 34 living synthetic organisms across multiple cohorts'), but there is no explicit power calculation or justification that this size is sufficiently large to account for natural variability (especially given the noted limitation that 'cardiac cell contraction frequencies vary across embryos')."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Proper controls were used ('Control groups included non-optimized random cell aggregates... and dissociated cell suspensions'), and automated tracking was utilized, but double-blinding or an explicit justification for the impossibility of blinding during manual microsurgery is not documented in the text."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Mean velocity and p-value are reported ('mean velocity = 15.6 um/s, P < 0.001 vs random control aggregates'), but the specific statistical test applied (e.g., t-test, ANOVA, Mann-Whitney) and standardized effect sizes are not explicitly named in the text."
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Total sample size (N = 34) and control types are mentioned, but the specific method of randomization and exact group allocation numbers (e.g., how many in each cohort or control group) are not detailed."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, and confidence intervals are completely omitted from the text, and the p-value is reported as an inequality ('P < 0.001') rather than an exact value."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While raw mean velocity for the experimental group is given ('15.6 um/s'), baseline numbers/velocities for the control groups and raw success/failure numbers across the 34 organisms are missing."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no log or mention of participant/organism exclusions, failed microsurgical fabrications, dropouts, or missing data handling."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The primary outcome measured matches the actual claim: 'searched for cellular configurations achieving locomotion. The predicted designs were built in vitro... Predicted motility speeds were empirically verified in living Xenobots (mean velocity = 15.6 um/s...'."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit discussion distinguishing statistical significance from practical/clinical significance."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Causal claims of engineered configuration driving motility are directly tested against unconfigured controls ('Control groups included non-optimized random cell aggregates (which produced erratic, non-directional twitching without forward locomotion) and dissociated cell suspensions'), and confounding biological variables are explicitly noted ('cardiac cell contraction frequencies vary across embryos, leading to trajectory drift')."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual charts are provided or described in the dossier text."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Hypotheses were explicitly pre-specified via simulation prior to biological testing: 'An evolutionary algorithm in a simulated physics engine (CPPN/VoxCad) searched for cellular configurations achieving locomotion. The predicted designs were built in vitro... Predicted motility speeds were empirically verified in living Xenobots'."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The study duration covered the entire natural un-fed lifespan of the organisms and tracked recovery after injury: 'Organisms survived 7-10 days in water without external feeding... closed their wounds within 15 minutes and resumed coordinated movement... lifespan limited to ~10 days without exogenous nutrients'."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text does not explicitly discuss regression models or the mathematical boundaries/limits of extrapolation."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The results adhere to biological and physical plausibility, explaining the energy source and cellular mechanisms realistically: 'built in vitro using living Xenopus laevis frog pluripotent stem cells (epidermal and cardiac contractile cells)... survived 7-10 days in water without external feeding, powered entirely by internal yolk platelets... mean velocity = 15.6 um/s'."
+      }
+    ],
+    "pi": "Michael Levin",
+    "title": "A scalable pipeline for designing reconfigurable organisms (Xenobots)",
+    "journal_short": "Proceedings of the National Academy of Sciences (PNAS) (2020) 117(4):1853-1859",
+    "paper_id": 2,
+    "citations": "~1,500 (Landmark Xenobots paper)"
+  },
+  {
+    "paper_title": "The free-energy principle: a unified brain theory?",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "does_it_make_sense": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 20,
+    "verdict": "HIGH RISK OF BIAS (<40)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper explicitly discloses funding and conflicts of interest: 'FUNDING & CONFLICTS: Funded by the Wellcome Trust. Competing interests: The author declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper is published in a reputable peer-reviewed journal: 'JOURNAL / YEAR: Nature Reviews Neuroscience (2010) 11(2):127-138'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text mentions 'HISTORICAL CITATION COUNT: ~6,000' and synthesizing theories, but provides no explicit evidence or text regarding the accuracy of how prior works and cited literature are represented."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper establishes a formal mathematical protocol/derivation: 'Formulates the generative model under continuous Langevin stochastic differential equations: dx = f(x, v) dt + w. Uses Helmholtz decomposition to split probability currents into dissipative gradient flows and non-dissipative solenoidal flows.'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No sampling selection is documented because it is a 'pure theoretical physics paper that does not collect a new primary human participant dataset.'"
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No sample size or power calculation is documented because it is a 'pure theoretical physics paper that does not collect a new primary human participant dataset.'"
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No experimental controls or blinding are documented in the provided text."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No statistical hypothesis tests (e.g., t-test, ANOVA) or effect sizes are reported in the provided dossier."
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No randomization or group demographics are documented; the text explicitly notes it 'does not collect a new primary human participant dataset.'"
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, confidence intervals, and exact p-values are not reported in the provided text."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Raw numbers, baseline numbers, and absolute/relative risks are not reported in the provided text."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Participant withdrawals, dropouts, missing data, and outlier exclusions are not logged, as the study 'does not collect a new primary human participant dataset.'"
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While the paper provides theoretical explanations for neurobiological phenomena, there is no primary empirical outcome metric measured in a dataset to evaluate against clinical/empirical claims."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit discussion or distinction between statistical significance and clinical significance in the provided text."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit mention of controlling for confounding variables, placebo effects, or Hawthorne effects in the provided text."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or charts are included or described in the provided text."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No pre-specified statistical hypotheses or tail-tests prior to data collection are documented in the provided text."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No study follow-up duration or longitudinal timeframe for empirical outcomes is documented in the provided text."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While mathematical limitations are disclosed ('Assumes ergodicity... requires approximations (Laplace assumption of Gaussian error densities)'), there is no explicit statement regarding regression models and extrapolation limits within empirical data ranges."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The framework adheres to mathematical boundaries and biological domain reality: 'Foundational mathematical framework synthesizing statistical physics, information theory, and systems neuroscience... Demonstrates that this single optimization law explains: (1) predictive coding and mismatch negativity (MMN) in EEG; (2) synaptic plasticity via Hebbian associative learning; (3) functional brain architecture... and (4) motor control via reflex arcs.'"
+      }
+    ],
+    "pi": "Karl Friston",
+    "title": "The free-energy principle: a unified brain theory?",
+    "journal_short": "Nature Reviews Neuroscience (2010) 11(2):127-138",
+    "paper_id": 3,
+    "citations": "~6,000 (Seminal formulation of the Free Energy Principle)"
+  },
+  {
+    "paper_title": "The brain basis of emotion: a meta-analytic review of the neuroimaging literature",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "2.2",
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.2"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "5.1",
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 45,
+    "verdict": "WEAK (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicitly documented in dossier: 'Funded by NIH Director's Pioneer Award and NSF. Conflicts: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable, peer-reviewed journal: 'JOURNAL / YEAR: Behavioral and Brain Sciences (2012) 35(3):121-143 DOI: 10.1017/S0140525X11000446'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While the dossier notes a 'Comprehensive database of 166 functional neuroimaging studies', it does not explicitly document citation accuracy or lack of selective framing, and notes 'potential publication bias in early neuroimaging literature'."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Establishes a reproducible meta-analytic protocol and evaluates prior independent lab findings: 'Comprehensive database of 166 functional neuroimaging studies... Multilevel Kernel Density Analysis (MKDA). Treated activation peaks as spatial point processes with a 10 mm spherical smoothing kernel.'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text does not explicitly document unbiased sampling selection criteria for the 166 studies, and explicitly notes 'potential publication bias in early neuroimaging literature' and 'Spatial resolution of meta-analysis is limited by stereotaxic coordinate reporting'."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Sample size is sufficiently large to account for variability: 'Comprehensive database of 166 functional neuroimaging studies (fMRI and PET) published between 1990 and 2007. Included N = 1,995 discrete peak activation coordinates'."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While statistical null distributions are used ('binomial permutation null distributions evaluated whether specific brain regions were preferentially activated... compared to base rates'), there is no mention of blinding during study coding/selection or justification for its absence."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Correct statistical tests are applied matching spatial point data ('Multilevel Kernel Density Analysis (MKDA)... Chi-square tests of independence and binomial permutation null distributions') and practical activation proportions/effect sizes are reported ('amygdala activated across fear (40%), disgust (20%), anger (25%), and happiness (30%)')."
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Participant demographics, group allocations, and study-level randomization details are not documented in the provided text."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, confidence intervals, and exact p-values are not reported in the provided dossier text."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Percentages are reported ('fear (40%), disgust (20%), anger (25%), and happiness (30%)'), but the raw baseline counts per emotion category or specific region are missing from the text."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Excluded studies, missing coordinate data, and outlier exclusions are not logged or accounted for in the provided text."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The primary outcome measured (spatial distribution of peak neuroimaging activation coordinates across discrete emotions) directly matches the claim being tested ('testing two competing theories of emotion: the Locationist / Basic Emotion hypothesis... vs. the Psychological Constructionist hypothesis')."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The study distinguishes statistical activation above base rates from modular specialization, demonstrating through practical activation percentages ('fear (40%), disgust (20%), anger (25%), and happiness (30%)') that regions are not 1-to-1 specific."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit discussion in the text regarding controlling for potential confounding variables (e.g., task difficulty, stimulus modality) across the meta-analyzed studies."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual representations are provided or explicitly described in the dossier text."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Competing hypotheses were explicitly framed to be tested: 'Definitive quantitative meta-analysis testing two competing theories of emotion: the Locationist / Basic Emotion hypothesis... vs. the Psychological Constructionist hypothesis'."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No longitudinal follow-up timeframe is applicable or reported, and the dossier explicitly notes a temporal limitation: 'cannot distinguish sub-millisecond temporal sequences'."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Regression models and extrapolation bounds are not explicitly discussed or documented in the provided text."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Results adhere to mathematical boundaries (percentages between 0% and 100%) and neurobiological reality ('emotions emerge from distributed domain-general networks (salience, executive control, mentalizing)')."
+      }
+    ],
+    "pi": "Lisa Feldman Barrett",
+    "title": "The brain basis of emotion: a meta-analytic review of the neuroimaging literature",
+    "journal_short": "Behavioral and Brain Sciences (2012) 35(3):121-143",
+    "paper_id": 4,
+    "citations": "~3,200 (Landmark meta-analysis of emotion neuroimaging)"
+  },
+  {
+    "paper_title": "Emotion semantics show both cultural variation and universal structure",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "2.2",
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.2",
+          "4.3"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 45,
+    "verdict": "WEAK (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper explicitly discloses funding and conflicts: 'Funded by NSF, Marsden Fund of New Zealand, and Max Planck Society. Conflicts: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a premier peer-reviewed journal: 'JOURNAL / YEAR: Science (2019) 366(6472):1517-1522' with 'DOI: 10.1126/science.aaw8160'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text only lists 'HISTORICAL CITATION COUNT: ~550' and does not provide explicit text demonstrating how prior works and cited literature are represented."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Establishes a reproducible protocol with public repositories: 'All data and analysis code deposited publicly on Zenodo and GitHub.'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Sampling selection is not explicitly shown to be unbiased; rather, the text notes a limitation regarding measurement/source bias: 'relies on historical dictionaries with varying lexicographical depth.'"
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Sample size is sufficiently large to account for natural variability across populations: 'Global database of 2,474 spoken languages spanning 20 major language families worldwide. Analyzed 41 discrete emotion concepts across 1,129 translation dictionaries.'"
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While statistical controls and null permutations are used ('Controlled for geographic contact, historical borrowing, and shared phylogenetic ancestry... with 10,000 randomized permutations'), there is no mention of blinding or an explicit justification for why blinding was impossible."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Appropriate statistical tests are applied and effect sizes (variance explained) are reported alongside p-values: 'Computed Jaccard semantic similarity matrices and performed network community detection (InfoMap)... Mantel permutation tests with 10,000 randomized permutations' and 'Emotion semantics vary significantly across language families (predicting 80% of network variance)... P < 0.001 under Mantel null permutations'."
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While '10,000 randomized permutations' are mentioned, the specific method of randomization and detailed breakdown of the 20 language family allocations/demographics are not fully detailed in the text."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, and confidence intervals are not reported, and the p-value is given as an inequality ('P < 0.001') rather than an exact value."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Relative metrics like 'predicting 80% of network variance' are reported without accompanying raw baseline variance numbers or absolute risk/similarity metrics."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Missing data, excluded dictionaries/languages, and outlier exclusions are not logged or accounted for in the provided dossier."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The primary outcome measured ('colexification networks' across 2,474 languages) directly matches the claim regarding emotion semantics, and the authors explicitly avoid swapping linguistic markers for subjective clinical experience: 'Lexical colexification reflects linguistic conventions, not necessarily real-time subjective phenomenological experience in individual speakers'."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Practical impact is demonstrated via the substantial proportion of variance explained ('predicting 80% of network variance') and structural universality ('across all 20 language families'), rather than relying solely on p-values."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Potential confounding variables are explicitly controlled for: 'Controlled for geographic contact, historical borrowing, and shared phylogenetic ancestry using phylogenetic comparative methods and Mantel permutation tests'."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual charts are included or described in the provided text."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit statement that hypotheses or tail-tests (one-tailed vs. two-tailed) were pre-specified prior to data collection."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No longitudinal follow-up timeframe or study duration is explicitly documented in the text."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit discussion of regression model bounds or limits on extrapolation in the text."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Results adhere to mathematical boundaries ('predicting 80% of network variance', 'P < 0.001') and biological/domain plausibility ('across all 20 language families, emotion colexifications strictly respected physiological Core Affect (valence and arousal...)')."
+      }
+    ],
+    "pi": "Kristen Lindquist",
+    "title": "Emotion semantics show both cultural variation and universal structure",
+    "journal_short": "Science (2019) 366(6472):1517-1522",
+    "paper_id": 5,
+    "citations": "~550 (Seminal cross-linguistic Science paper)"
+  },
+  {
+    "paper_title": "Absolute memory for musical pitch: Evidence from the production of learned melodies",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "3.3"
+        ]
+      },
+      "did_someone_change_subject": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.2"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "5.1",
+          "5.3",
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 50,
+    "verdict": "MODERATE (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper explicitly discloses funding and conflicts: 'Funded by Stanford University and ONR. Conflicts: None declared.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable, peer-reviewed journal: 'JOURNAL / YEAR: Perception & Psychophysics (1994) 56(4):414-423 DOI: 10.3758/BF03206937'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided dossier does not contain a literature review or explicit citations to prior works to verify citation integrity."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Establishes a reproducible acoustic protocol ('sang/hummed the melody into a calibrated condenser microphone. Recorded trials were digitized and subjected to fundamental frequency (f0) acoustic analysis using autocorrelation and cepstral algorithms') and includes an internal replication ('A replication on Trial 2 confirmed high test-retest reliability')."
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Sampling selection of participants (N = 46 undergraduate students) is not explicitly stated as randomized or unbiased, and stimulus selection was explicitly non-random: 'Participants selected songs they were familiar with (non-random stimuli)'."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No explicit power calculation or statistical justification for the sample size of N = 46 is documented in the text."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Double-blinding or blinding of the acoustic analysts/experimenters is not mentioned or justified in the text."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Correct statistical tests matching the data type are applied alongside clear effect sizes: 'A two-tailed binomial probability test against chance (1/12 chance of being within 1 semitone by guessing) yielded Z = 7.14, P < 0.0001. A replication on Trial 2 confirmed high test-retest reliability (r = 0.81, P < 0.001).' and proportions ('44% of participants... 67% sang within +/- 2 semitones')."
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Participant demographics (age, gender breakdown, musical background beyond 'no formal absolute pitch training') and randomization methods are not detailed in the dossier."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, confidence intervals, and exact p-values (reported only as inequalities 'P < 0.0001' and 'P < 0.001') are not reported."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Total baseline sample size (N = 46), baseline chance probabilities ('1/12 chance of being within 1 semitone by guessing'), and absolute success percentages ('44% of participants sang within +/- 1 semitone... 67% sang within +/- 2 semitones') are explicitly provided."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit log or mention of participant withdrawals, dropouts, missing trials, or outlier exclusions."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The primary outcome measured matches the claim being made: 'Tested whether participants singing popular songs from memory reproduce the original recorded pitch... The sung pitch was compared to the exact recorded studio master pitch.'"
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Practical/real-world accuracy is clearly distinguished and reported via physical musical intervals ('44% of participants sang within +/- 1 semitone of the exact recording on Trial 1, and 67% sang within +/- 2 semitones') alongside statistical significance."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Potential confounding variables were not fully controlled for, as explicitly noted in the limitations: 'Participants selected songs they were familiar with (non-random stimuli); vocal range constraints can occasionally force octave shifts'."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual charts are provided or described in the text, so visual accuracy cannot be verified."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The study tested a clear, pre-specified hypothesis ('Tested whether participants singing popular songs from memory reproduce the original recorded pitch') using a specified two-tailed test ('A two-tailed binomial probability test against chance')."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No longitudinal follow-up timeframe or study duration between trials is documented in the text."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Statistical comparisons and correlations ('r = 0.81') are bounded strictly within the empirical pitch error domains (semitones relative to studio masters) without improper extrapolation."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The results adhere to mathematical and psychoacoustic reality (probabilities and correlations within valid bounds: 44%, 67%, 1/12, Z = 7.14, r = 0.81) and account for biological reality ('vocal range constraints can occasionally force octave shifts')."
+      }
+    ],
+    "pi": "Daniel Levitin",
+    "title": "Absolute memory for musical pitch: Evidence from the production of learned melodies",
+    "journal_short": "Perception & Psychophysics (1994) 56(4):414-423",
+    "paper_id": 6,
+    "citations": "~700 (Landmark discovery of latent absolute pitch memory)"
+  },
+  {
+    "paper_title": "Alpha2A-adrenoceptors strengthen working memory networks by inhibiting cAMP-HCN channel signaling",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.3"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 35,
+    "verdict": "WEAK / HIGH RISK OF BIAS (<40)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicit funding and conflict disclosures are provided: 'Funded by NIH/NIMH and Kavli Foundation. Competing interests: Arnsten and Yale University hold patents on alpha-2A agonists for cognitive disorders; fully disclosed in the paper.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a highly reputable, peer-reviewed journal: 'JOURNAL / YEAR: Cell (2007) 129(2):397-410 DOI: 10.1016/j.cell.2007.03.015'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided dossier text does not include information regarding how prior works and cited literature were represented."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Establishes a clear, multi-technique reproducible protocol and notes foundational confirmation: 'HISTORICAL CITATION COUNT: ~950 (Foundational Cell paper on prefrontal microcircuit biophysics)' and details specific experimental techniques and pharmacological perturbations."
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The dossier does not explicitly document the method of sampling selection or state how systematic selection/measurement bias was controlled for when selecting the monkeys or specific neurons."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No power calculation is provided. Instead, the text notes a small primate sample size constrained by ethics: 'Primate sample sizes are constrained by ethical regulations (N = 4)', without explicit statistical justification for population variability."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While proper controls are documented ('Vehicle controls and directional cross-reversals were executed for every drug condition'), there is no mention of double-blinding or an explicit justification for why blinding was impossible."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Correct statistical tests and effect sizes/magnitudes alongside behavioral outcomes are reported: '(ANOVA F = 24.8, P < 0.0001) and rescued task performance under stress. In contrast, increasing cAMP with 8-Br-cAMP suppressed delay firing by 54% (P < 0.001).'"
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Method of randomization and detailed demographics (e.g., age, weight, sex of the 4 macaques and ferrets) are not explicitly detailed in the provided text."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, and confidence intervals are missing, and p-values are reported as inequalities ('P < 0.0001', 'P < 0.001') rather than exact p-values."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Relative metrics are provided ('suppressed delay firing by 54%'), but raw baseline firing rates and exact neuronal counts ('hundreds of recorded Layer III prefrontal pyramidal neurons') are not provided alongside the percentages."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no documentation of excluded neurons, missing data, animal dropouts, or outlier exclusions in the provided text."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The primary outcomes measured directly match the mechanistic and cognitive claims: 'linking cellular electrophysiology, pharmacology, and immuno-electron microscopy to cognitive working memory performance' and showing guanfacine 'increased delay-related persistent firing... and rescued task performance under stress.'"
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text does not explicitly discuss or distinguish the boundary between statistical significance and clinical/practical significance."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Causal mechanisms are rigorously established via targeted agonism, antagonism, and channel blockade rather than mere correlation, controlling for confounding via 'Vehicle controls and directional cross-reversals were executed for every drug condition.'"
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual representations (or descriptions of their axes/baselines) are provided in the text dossier."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text does not state whether hypotheses and tail-tests (one-tailed vs. two-tailed) were pre-specified prior to data collection."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No explicit study duration or long-term follow-up timeframe for adverse events or relapses is documented in the text."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no mention of regression models or explicit statements regarding the bounds of data extrapolation."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The findings are biologically and logically plausible, linking receptor co-localization to electrophysiological shunting: 'proving that cAMP opens HCN1 channels, generating an Ih shunting leak that disconnects dendritic spines. Immuno-EM proved that HCN1 and alpha-2A receptors are co-localized on dendritic spine necks.'"
+      }
+    ],
+    "pi": "Amy Arnsten",
+    "title": "Alpha2A-adrenoceptors strengthen working memory networks by inhibiting cAMP-HCN channel signaling",
+    "journal_short": "Cell (2007) 129(2):397-410",
+    "paper_id": 7,
+    "citations": "~950 (Foundational Cell paper on prefrontal microcircuit biophysics)"
+  },
+  {
+    "paper_title": "Neuronal avalanches in neocortical circuits",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "2.2",
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.2",
+          "4.3"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "5.2",
+          "5.3",
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 55,
+    "verdict": "MODERATE (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper explicitly discloses funding and conflicts: 'Funded by National Institute of Mental Health (NIMH) Intramural Research Program. Competing interests: The authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable peer-reviewed journal: 'JOURNAL / YEAR: Journal of Neuroscience (2003) 23(35):11167-11177'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text dossier does not contain a literature review or citations of prior works to evaluate citation integrity."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Establishes a reproducible protocol with specific parameters: 'Monitored spontaneous network activity using planar 60-channel microelectrode arrays (MEA) in acute organotypic slice cultures of rat somatosensory cortex... robustness verified across Delta-t = 1 to 8 ms.'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The dossier does not explicitly state how the 'dozens of animals' or 'N = 60 cortical slices' were selected or randomized to prevent selection bias."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Sample size is explicitly documented as sufficiently large to capture variability: 'Recorded from N = 60 cortical slices across dozens of animals. Analyzed over 100,000 distinct spontaneous event cascades spanning weeks of continuous recording.'"
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While rigorous controls are documented ('temporal event shuffling', 'spatial electrode shuffling', 'pharmacological disruption'), there is no mention of blinding or justification for why blinding was not used."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Appropriate statistical tests and effect sizes/parameters are reported: 'exponent alpha = 1.50 +/- 0.05, and P(T) ~ T^-beta with exponent beta = 2.00 +/- 0.08... The branching parameter evaluated to sigma = 1.00 +/- 0.02... P < 0.0001 under Kolmogorov-Smirnov tests'."
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Method of randomization and animal demographics (e.g., sex, exact age, strain of rats, or allocation to pharmacological vs. intact groups) are not detailed in the dossier."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Error margins are provided ('+/- 0.05', '+/- 0.08', '+/- 0.02'), but the text does not define whether these represent standard deviations, standard errors, or confidence intervals, and reports an inequality ('P < 0.0001') rather than exact p-values."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Exact raw baseline numbers per condition and absolute vs. relative risk metrics are not detailed in the text beyond 'N = 60 cortical slices' and 'over 100,000 distinct spontaneous event cascades'."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit log or mention of excluded slices, failed recordings, missing data, or outlier exclusions."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The primary outcomes measured ('probability distributions of avalanche size (total active electrodes) and duration (timesteps)') directly match the claim of 'scale-free neuronal avalanches in mammalian cortex', while explicitly disclosing the limitation that it was 'Conducted in 2D organotypic cortical slices rather than in-vivo awake behaving animals'."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Statistical significance ('P < 0.0001 under Kolmogorov-Smirnov tests') is clearly distinguished from physical/biological significance ('matching the theoretical universality class of critical branching processes. The branching parameter evaluated to sigma = 1.00 +/- 0.02')."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Causal mechanisms and confounding variables (such as independent channel firing rates or spatial geometry) are explicitly controlled for via '(1) temporal event shuffling (breaking spike timing while preserving channel firing rates); (2) spatial electrode shuffling; (3) pharmacological disruption using AP5/CNQX (blocking AMPA/NMDA excitation) and picrotoxin (blocking GABA-A inhibition).'"
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual charts are included in the provided text dossier to verify baseline or axis accuracy."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The dossier does not explicitly state that hypotheses and one-tailed vs. two-tailed tests were pre-specified prior to data collection."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Study duration is explicitly documented as sufficiently long to capture the phenomenon: 'Analyzed over 100,000 distinct spontaneous event cascades spanning weeks of continuous recording.'"
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Models and parameters are explicitly bounded and tested for sensitivity within data limits: 'Conducted in 2D organotypic cortical slices rather than in-vivo awake behaving animals; bin width Delta-t affects precise numerical branching values (robustness verified across Delta-t = 1 to 8 ms).'"
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Results adhere to mathematical and physical boundaries: 'exponent alpha = 1.50 +/- 0.05, and P(T) ~ T^-beta with exponent beta = 2.00 +/- 0.08, matching the theoretical universality class of critical branching processes. The branching parameter evaluated to sigma = 1.00 +/- 0.02.'"
+      }
+    ],
+    "pi": "Dietmar Plenz",
+    "title": "Neuronal avalanches in neocortical circuits",
+    "journal_short": "Journal of Neuroscience (2003) 23(35):11167-11177",
+    "paper_id": 8,
+    "citations": "~2,800 (The foundational discovery of brain criticality and neuronal avalanches)"
+  },
+  {
+    "paper_title": "The organization of the human cerebral cortex estimated by intrinsic functional connectivity",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "2.1",
+          "2.2",
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.2",
+          "4.3"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "5.1",
+          "5.3",
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 60,
+    "verdict": "MODERATE (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper explicitly discloses funding and conflicts: 'Funded by NIH, Kavli Institute, and Howard Hughes Medical Institute. Competing interests: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable peer-reviewed journal: 'JOURNAL / YEAR: Journal of Neurophysiology (2011) 106(3):1125-1165' with 'DOI: 10.1152/jn.00338.2011'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text dossier does not contain a literature review or citations of prior works to evaluate citation integrity."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Establishes an explicitly reproducible protocol and independent cohort replication: 'Explicitly partitioned into two completely independent cohorts: a Discovery Cohort (N = 500) and a Replication Cohort (N = 500)... Parcellation maps and code released openly.'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Systematic measurement biases and artifacts are explicitly controlled for: 'Cortical surface registration using FreeSurfer spherical coordinate system... Evaluated sensitivity to head motion, slice timing, and physiological respiration artifacts.'"
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Sample size is sufficiently large to account for variability: 'Massive dataset of N = 1,000 healthy young adult human participants. Explicitly partitioned into two completely independent cohorts: a Discovery Cohort (N = 500) and a Replication Cohort (N = 500)'."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text does not explicitly mention double-blinding, control groups, or a formal justification for why blinding was not applicable."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Applies appropriate clustering/statistical modeling and reports practical effect sizes alongside p-values: 'Applied unsupervised machine learning (von Mises-Fisher mixture modeling / spectral clustering)... replicated in the independent validation cohort with 97.4% vertex-wise spatial overlap (dice coefficient > 0.95, P < 10^-15).'"
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While the cohort split (N=500 each) is stated, the exact method of randomization/allocation and detailed participant demographics (e.g., exact age ranges, sex ratios) are not detailed in the provided text."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, and confidence intervals are not reported in the provided dossier, and the p-value is reported as an inequality ('P < 10^-15') rather than an exact value."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text reports a percentage ('97.4% vertex-wise spatial overlap') and total vertices ('1,175 surface vertices'), but does not provide the raw baseline vertex counts per network or absolute risk metrics."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no log or mention of participant withdrawals, dropouts, missing data, or excluded outlier scans in the provided text."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The outcome measured (intrinsic functional connectivity via BOLD fMRI correlation matrices) directly matches the claim made, and the authors explicitly avoid swapping functional coupling for anatomical endpoints: 'Resting-state BOLD correlation reflects functional coupling, not direct monosynaptic anatomical axonal connectivity'."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Statistical significance (P < 10^-15) is paired with substantive practical impact metrics ('97.4% vertex-wise spatial overlap (dice coefficient > 0.95)') rather than conflating p-values alone with practical validity."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Correlation is explicitly distinguished from direct physical causation ('Resting-state BOLD correlation reflects functional coupling, not direct monosynaptic anatomical axonal connectivity') and confounding physiological variables are controlled for ('Evaluated sensitivity to head motion, slice timing, and physiological respiration artifacts')."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual charts are included or described with axis/baseline details in the provided text dossier."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Pre-specified discovery/validation structure prevents post-hoc overfitting and p-hacking: 'Explicitly partitioned into two completely independent cohorts: a Discovery Cohort (N = 500) and a Replication Cohort (N = 500) to ensure zero overfitting.'"
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text describes a cross-sectional resting-state imaging study and does not document any longitudinal follow-up timeframe or scan duration details."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Models are explicitly bounded to the measured domain without improper extrapolation: 'subcortical structures and cerebellum were omitted from the primary cortical surface clustering.'"
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Results adhere to mathematical boundaries (97.4% overlap, dice coefficient > 0.95, P < 10^-15) and domain reality (7 canonical networks: 'Visual, Somatomotor, Dorsal Attention, Ventral Attention, Limbic, Frontoparietal Control, Default Mode')."
+      }
+    ],
+    "pi": "Randy Buckner",
+    "title": "The organization of the human cerebral cortex estimated by intrinsic functional connectivity",
+    "journal_short": "Journal of Neurophysiology (2011) 106(3):1125-1165",
+    "paper_id": 9,
+    "citations": "~9,200 (The definitive Yeo-Buckner 7/17-network cortical parcellation)"
+  },
+  {
+    "paper_title": "How do glucocorticoids influence stress responses? Integrating permissive, suppressive, stimulatory, and preparative actions",
+    "category_scores": {
+      "who_says_so": {
+        "score": 20,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.3",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "4.1"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 30,
+    "verdict": "WEAK / HIGH RISK OF BIAS (<40)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicit conflict of interest and funding disclosures are present: 'Funded by NIH and MacArthur Foundation. Competing interests: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable, peer-reviewed journal: 'JOURNAL / YEAR: Endocrine Reviews (2000) 21(1):55-89 DOI: 10.1210/edrv.21.1.0389'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper systematically synthesizes prior works across multiple domains: 'Synthesizes hundreds of empirical studies across molecular biology, rodent physiology, non-human primates (Sapolsky's wild olive baboon cohorts in Kenya), and human clinical endocrinology.'"
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "References extensive prior empirical studies and establishes the definitive modern framework: 'Synthesizes hundreds of empirical studies...' and 'HISTORICAL CITATION COUNT: ~5,800 (The definitive modern endocrinology framework of stress)'."
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the provided text. As noted under LIMITATIONS DISCLOSED: 'Systematic conceptual and mechanistic synthesis analyzing existing literature rather than presenting a single new randomized controlled trial'."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No explicit power calculation or sample size justification is documented in the text."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No double-blinding or experimental control group methodology is explicitly documented in the text."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No specific statistical tests (e.g., t-test, ANOVA) or statistical effect sizes are reported in the provided dossier."
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Method of randomization and group allocation/demographics are not documented in the text ('rather than presenting a single new randomized controlled trial')."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, confidence intervals, and exact p-values are not reported in the provided text."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Raw numbers, baseline numbers, and absolute/relative risks are not provided in the text."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Participant withdrawals, dropouts, missing data, and outlier exclusions are not logged or documented in the provided text."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The physiological and molecular mechanisms analyzed directly match the conceptual claims made: 'Classifies glucocorticoid actions into four distinct operational modes: (1) Permissive actions; (2) Suppressive actions; (3) Stimulatory actions; and (4) Preparative actions. ... Demonstrates that low-affinity glucocorticoid receptors (GR) versus high-affinity mineralocorticoid receptors (MR) mediate an inverted-U biphasic response'."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit discussion distinguishing statistical significance from clinical significance in the provided text."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No explicit documentation of controlling for confounding variables, placebo effects, or Hawthorne effects is provided in the text."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual axes/baselines are described or provided in the text."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Pre-specified hypotheses and one-tailed vs. two-tailed tests before data collection are not documented in the provided text."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Although acute vs. chronic stress is mentioned conceptually, no specific longitudinal study follow-up timeframe or duration is explicitly documented in the text."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No regression models or mathematical extrapolation limits are explicitly documented in the provided text (though it notes 'exact receptor occupancy ratios vary across distinct tissue beds')."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The findings are biologically and logically plausible, grounding the framework in concrete receptor mechanics: 'Demonstrates that low-affinity glucocorticoid receptors (GR) versus high-affinity mineralocorticoid receptors (MR) mediate an inverted-U biphasic response: basal pulsatile cortisol supports energy metabolism and synaptic plasticity via MR, whereas acute stress surges saturate GR, down-regulating inflammatory cascades (NF-kB inhibition) and protecting the organism from autoimmune overshoot.'"
+      }
+    ],
+    "pi": "Robert Sapolsky",
+    "title": "How do glucocorticoids influence stress responses? Integrating permissive, suppressive, stimulatory, and preparative actions",
+    "journal_short": "Endocrine Reviews (2000) 21(1):55-89",
+    "paper_id": 10,
+    "citations": "~5,800 (The definitive modern endocrinology framework of stress)"
+  },
+  {
+    "paper_title": "Save More Tomorrow: Using behavioral economics to increase employee saving",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "2.2",
+          "2.3",
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "3.4"
+        ]
+      },
+      "did_someone_change_subject": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.2"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "5.2",
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 55,
+    "verdict": "WEAK (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicitly documented in the text: 'Funded by the Russell Sage Foundation and Ford Foundation. Conflicts: Authors declared no direct commercial conflicts in the publication.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable, peer-reviewed journal: 'JOURNAL / YEAR: Journal of Political Economy (2004) 112(S1):S164-S187'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While behavioral economics principles are mentioned, no specific prior works or cited literature are detailed or evaluated for representation accuracy in the provided text."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicitly documents replication: 'Replicated across two additional large corporate employers (N > 1,500 employees).'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Sampling and group allocation were not randomized and relied on participant self-selection: 'Non-randomized opt-in design (ethical constraints prevented assigning employees to involuntary non-saving control groups)'."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Sample size is sufficiently large across initial and replication cohorts: 'N = 315 eligible employees... Replicated across two additional large corporate employers (N > 1,500 employees).'"
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Comparison groups are defined ('(1) Accept standard financial planner advice to raise savings immediately; (2) Decline; or (3) Join SMarT') and clear justification is provided for why randomized blinded controls were impossible ('ethical constraints prevented assigning employees to involuntary non-saving control groups')."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Correct statistical test and practical effect size reported: 'increased their average 401(k) contribution rate from 3.5% to 13.6% over 40 months (P < 0.0001 in paired t-tests).'"
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Study was non-randomized and demographic breakdowns of the allocated groups are not detailed in the provided text."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, and confidence intervals are completely absent from the text, and p-values are reported as an inequality ('P < 0.0001') rather than exact values."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While baseline and final contribution percentages ('from 3.5% to 13.6%') and total N ('N = 315') are given, the exact raw sub-group numbers (e.g., how many of the 315 refused immediate advice to form the 78% SMarT cohort) are not explicitly provided."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Participant retention and dropout rates are explicitly logged: 'Remarkably, 80% of participants remained in the program through four pay raises' (accounting for the 20% withdrawal/attrition)."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The primary outcome measured (actual longitudinal 401(k) contribution rates) directly matches the claim of increasing employee saving: 'Tracked longitudinal savings rates across four successive pay raises over 40 months.'"
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Practical significance is clearly demonstrated alongside statistical significance via a massive real-world change in savings rate ('from 3.5% to 13.6% over 40 months')."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Confounding variables were not controlled for in the non-randomized design, as noted in the limitations: 'Non-randomized opt-in design... macroeconomic conditions during the study period were relatively stable'."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual charts are included or described in the provided text."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit statement regarding whether one-tailed or two-tailed tests were pre-specified prior to data collection."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Follow-up duration is logically long enough to detect long-term persistence and relapses: 'Tracked longitudinal savings rates across four successive pay raises over 40 months.'"
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No regression models or explicit extrapolation boundaries are documented in the provided text."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Results (savings rate increasing from 3.5% to 13.6% via 3% annual increments over 4 raises, with 80% retention) adhere strictly to mathematical boundaries and domain plausibility."
+      }
+    ],
+    "pi": "Richard Thaler",
+    "title": "Save More Tomorrow: Using behavioral economics to increase employee saving",
+    "journal_short": "Journal of Political Economy (2004) 112(S1):S164-S187",
+    "paper_id": 11,
+    "citations": "~3,600 (The landmark field experiment that founded choice architecture and nudging)"
+  },
+  {
+    "paper_title": "Libertarian Paternalism",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.3"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "4.1"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 25,
+    "verdict": "WEAK / HIGH RISK OF BIAS (<40)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicitly documented in dossier: 'Funded by University of Chicago Law School and Russell Sage Foundation. Conflicts: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable, peer-reviewed economic journal: 'JOURNAL / YEAR: American Economic Review: Papers and Proceedings (2003) 93(2):175-179'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Prior empirical work is cited to support theoretical claims: 'Cites empirical data from auto-enrollment 401(k) plans (Madrian & Shea, 2001) showing default enrollment increases participation from 49% to 86%.'"
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text states this is a 'Conceptual economics paper outlining principles' and does not establish an experimental protocol or explicitly document independent lab replications in the provided text."
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented. As a 'Conceptual economics paper outlining principles', no primary sampling selection, randomization, or bias controls are stated in the dossier."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented. No sample sizes or power calculations are stated in the text."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented. No blinding, experimental controls, or justifications for lack of blinding are stated in the text."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented. No specific statistical tests (e.g., t-test, ANOVA) or p-values are reported in the text."
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented. Randomization methods and group demographics are absent from the text."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented. Standard errors, standard deviations, confidence intervals, and exact p-values are not reported in the text."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While baseline and outcome percentages are cited ('increases participation from 49% to 86%'), raw participant numbers and NNT/NNH metrics are not provided."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented. Participant withdrawals, dropouts, missing data, and outlier exclusions are not mentioned in the text."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The conceptual claim that defaults inevitably influence decisions is directly matched by the cited outcome metric of retirement plan participation: 'an initial default rule MUST be selected, and that default inevitably influences human decisions... Cites empirical data from auto-enrollment 401(k) plans (Madrian & Shea, 2001) showing default enrollment increases participation from 49% to 86%.'"
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented. The text does not discuss or distinguish between statistical significance and clinical/practical significance."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented. The text does not detail controls for confounding variables, placebo effects, or Hawthorne effects."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented. No graphs, figures, or visual charts are mentioned or described in the provided dossier."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented. No pre-specified statistical hypotheses or one-tailed/two-tailed test declarations are stated in the text."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented. Study duration and follow-up timeframes are not mentioned in the provided text."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented. No regression models, data bounds, or extrapolation limits are discussed in the text."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The theoretical argument and cited rates (49% to 86%) adhere to logical and domain reality without extreme anomaly: 'in any system (a cafeteria food display, an organ donation registry, a retirement plan), an initial default rule MUST be selected, and that default inevitably influences human decisions due to bounded rationality, status quo bias, and framing effects.'"
+      }
+    ],
+    "pi": "Cass Sunstein",
+    "title": "Libertarian Paternalism",
+    "journal_short": "American Economic Review: Papers and Proceedings (2003) 93(2):175-179",
+    "paper_id": 12,
+    "citations": "~4,500 (The founding manifesto of Nudge theory and choice architecture)"
+  },
+  {
+    "paper_title": "Are Emily and Greg More Employable Than Lakisha and Jamal? A Field Experiment on Labor Market Discrimination",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "2.1",
+          "2.2",
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "3.3"
+        ]
+      },
+      "did_someone_change_subject": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.2",
+          "4.3"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 55,
+    "verdict": "MODERATE (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper explicitly discloses funding and conflicts: 'Funded by the Russell Sage Foundation and National Science Foundation. Conflicts: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a premier peer-reviewed journal: 'JOURNAL / YEAR: American Economic Review (2004) 94(4):991-1013'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided dossier does not contain a literature review or citations to prior works to evaluate citation integrity."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Establishes a reproducible protocol with open materials: 'The benchmark randomized correspondence audit study in labor economics... Complete data and code archived on open data repositories.'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Sampling and assignment were randomized and balanced to control for bias: 'Resumes were randomly assigned either stereotypically African American names... or stereotypically White names... Within each job ad, four resumes were sent: two high-quality resumes... and two lower-quality resumes, balanced across race.'"
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The sample size is explicitly documented as sufficiently large across multiple markets and sectors: 'Sent N = 4,870 resumes responding to over 1,300 advertised job openings in sales, administrative support, and customer service across Boston and Chicago newspapers.'"
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While experimental controls were used ('Within each job ad, four resumes were sent... balanced across race'), there is no explicit mention of double-blinding or justification for why blinding of researchers/coders was impossible in the provided text."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Statistical tests (t-test) and clear effect sizes (percentage point differences and relative increases) are reported: '10.08% callback rate for White resumes vs. 6.70% for African American resumes (difference = 3.38 percentage points, t = 4.41, P < 0.0001)... Higher resume quality increased callbacks for White applicants by 30%'."
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While group allocation (4 resumes per ad, balanced by race and quality) is noted, the exact method of randomization (e.g., computer-generated random number sequence) and full demographic breakdowns per group are not detailed in the dossier."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, and confidence intervals are not reported in the text, and the p-value is reported as an inequality ('P < 0.0001') rather than an exact value."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Both relative percentages and absolute baseline/risk metrics are clearly provided alongside total sample size: 'Sent N = 4,870 resumes... White names received 50% more callbacks for interviews than African American names: 10.08% callback rate for White resumes vs. 6.70% for African American resumes (difference = 3.38 percentage points...'."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no mention of missing data, invalid job ads, undeliverable resumes, or outlier exclusions in the provided text."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The primary outcome (callback rates in the hiring process) matches the claim, and the boundary between callbacks and final job offers is explicitly disclosed: 'Investigated racial discrimination in the US hiring process... LIMITATIONS DISCLOSED: Measures initial callback rates for interviews, not actual final job offers or wage levels'."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Practical impact is clearly distinguished and emphasized alongside statistical metrics: 'White names received 50% more callbacks for interviews than African American names: 10.08% callback rate for White resumes vs. 6.70% for African American resumes (difference = 3.38 percentage points, t = 4.41, P < 0.0001)... Higher resume quality increased callbacks for White applicants by 30%, but had a negligible effect for African American applicants.'"
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Causal inference is supported by a randomized field experiment, and potential confounding variables were explicitly tested and controlled: 'Resumes were randomly assigned... names may signal socioeconomic background in addition to race (tested and controlled via mothers' education distributions).'"
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual charts are included or described in the provided text."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text does not explicitly state whether hypotheses were pre-registered or whether the t-test was pre-specified as one-tailed or two-tailed."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The study duration and follow-up timeframe for waiting for callbacks are not specified in the provided text, and the text notes it only 'Measures initial callback rates for interviews, not actual final job offers or wage levels'."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No regression models or discussions of extrapolation bounds are explicitly detailed in the provided dossier."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "All reported statistical values and rates adhere to mathematical boundaries and domain plausibility: '10.08% callback rate for White resumes vs. 6.70% for African American resumes (difference = 3.38 percentage points, t = 4.41, P < 0.0001)'."
+      }
+    ],
+    "pi": "Sendhil Mullainathan",
+    "title": "Are Emily and Greg More Employable Than Lakisha and Jamal? A Field Experiment on Labor Market Discrimination",
+    "journal_short": "American Economic Review (2004) 94(4):991-1013",
+    "paper_id": 13,
+    "citations": "~8,500 (The definitive randomized field experiment on racial discrimination)"
+  },
+  {
+    "paper_title": "Out of control: Visceral influences on behavior",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.3"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "does_it_make_sense": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 20,
+    "verdict": "WEAK / HIGH RISK OF BIAS (<40)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The dossier explicitly states: 'Funded by the Russell Sage Foundation. Competing interests: The author declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper is published in a reputable, peer-reviewed journal: 'JOURNAL / YEAR: Organizational Behavior and Human Decision Processes (1996) 65(3):272-292 DOI: 10.1006/obhd.1996.0028'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The text states it is a 'Seminal theoretical and empirical review' that 'Synthesized empirical experiments in addiction relapse, sexual risk-taking, pain tolerance, and impulse spending'."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. While it reviews empirical experiments, there is no explicit mention of independent lab confirmations or an established reproducible protocol."
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. As a 'Conceptual review paper synthesizing behavioral experiments', specific sampling selection, randomization, or bias controls are not detailed."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. No sample sizes or power calculations are provided in the dossier."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. No mention of control groups or blinding procedures is provided."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. No specific statistical tests, p-values, or effect sizes are reported in the dossier."
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. No randomization methods or group demographics are detailed."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. Standard errors, standard deviations, confidence intervals, and exact p-values are absent from the text."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. Raw numbers, baseline numbers, and absolute vs. relative risks are not provided."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. Participant withdrawals, dropouts, missing data, and outlier exclusions are not mentioned."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. As a conceptual review lacking specific experimental endpoint definitions and validation metrics in the text, primary outcome consistency cannot be verified."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. There is no explicit discussion distinguishing statistical significance from clinical or practical significance."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. There is no explicit mention of controlling for confounding variables, placebo effects, or Hawthorne effects."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. No graphs, figures, or visual axes are provided or described in the dossier."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. Pre-specified hypotheses and tail-tests prior to data collection are not mentioned."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. Specific follow-up timeframes and study durations are not reported."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Not explicitly documented in the text. While 'steep non-linear discount functions' are mentioned, explicit extrapolation limits and data range bounds for regression models are not detailed, and the paper 'does not present a formal axiomatic mathematical utility proof'."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The findings adhere to domain and biological reality, describing how 'visceral factors (hunger, sexual arousal, physical pain, drug craving, and acute emotional distress)' 'progressively narrow attentional focus onto immediate self-preservation, overriding higher-level deliberative preferences'."
+      }
+    ],
+    "pi": "George Loewenstein",
+    "title": "Out of control: Visceral influences on behavior",
+    "journal_short": "Organizational Behavior and Human Decision Processes (1996) 65(3):272-292",
+    "paper_id": 14,
+    "citations": "~3,800 (The foundational paper on visceral states and empathy gaps)"
+  },
+  {
+    "paper_title": "Well-being in life and well-being at work: Which comes first? Evidence from a longitudinal study",
+    "category_scores": {
+      "who_says_so": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "2.2",
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "3.4"
+        ]
+      },
+      "did_someone_change_subject": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.2",
+          "4.3"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "5.2",
+          "5.3",
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 55,
+    "verdict": "MODERATE RISK OF BIAS (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicit conflict of interest and funding disclosures are provided: 'Funded by the Robert Wood Johnson Foundation and Harvard SHINE. Competing interests: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable, peer-reviewed journal: 'JOURNAL / YEAR: Frontiers in Public Health (2020) 8:103, DOI: 10.3389/fpubh.2020.00103'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text does not contain explicit evidence or quotes regarding how prior works and cited literature are represented."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The dossier does not explicitly reference prior independent lab confirmations or provide a detailed reproducible step-by-step protocol."
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Sampling selection is not randomized or explicitly unbiased; limitations note 'Self-reported survey measures; limited to a single large manufacturing enterprise'."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Sample size is sufficiently large: 'Large industrial cohort of N = 1,209 manufacturing workers tracked across two longitudinal annual waves.'"
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No mention of double-blinding or explicit justification for why blinding was impossible in the provided text."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Correct statistical test is applied along with standardized effect sizes: 'Rigorous longitudinal cross-lagged structural equation modeling (SEM)... (standardized beta = 0.28, P < 0.001)... (beta = 0.08, P = 0.04).'"
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Observational cohort study without randomization; full demographic breakdowns and allocation numbers are not detailed in the dossier."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While 'robust standard errors' are mentioned as part of the method, the actual numerical values for standard errors, standard deviations, and confidence intervals are not reported in the text, and p-values include inequalities ('P < 0.001')."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Raw numbers, baseline numbers, and absolute risks are not reported alongside the standardized beta coefficients."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Missing data and attrition are explicitly accounted for: 'Full survey response rate tracked with attrition modeling. Employed Full Information Maximum Likelihood (FIML) to handle missing data without listwise deletion.'"
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Primary outcomes measured match the claims made: 'evaluating the temporal precedence and causal directionality between workplace well-being, general life satisfaction, and physical/mental health... Life well-being significantly predicted subsequent workplace engagement and job performance'."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Distinction between statistical significance and magnitude of practical effect is maintained: 'Life well-being significantly predicted subsequent workplace engagement and job performance (standardized beta = 0.28, P < 0.001), whereas workplace factors showed a substantially weaker reciprocal effect on overall life satisfaction (beta = 0.08, P = 0.04).'"
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Confounding variables and temporal directionality are explicitly controlled for: 'Controlled for baseline demographic covariates (age, gender, education, job tenure), socioeconomic status, and financial strain. Tested reciprocal cross-lagged paths using structural equation models'."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual charts are provided or described in the text."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No explicit statement that hypotheses and tail-tests (one-tailed vs. two-tailed) were pre-specified or pre-registered before data collection."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Study duration is explicitly documented as longitudinal across annual waves to evaluate temporal precedence: 'tracked across two longitudinal annual waves.'"
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Extrapolation limits are explicitly respected and documented: 'LIMITATIONS DISCLOSED: Self-reported survey measures; limited to a single large manufacturing enterprise; two timepoints limit high-order polynomial trajectory modeling.'"
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Results adhere to mathematical boundaries and domain plausibility: 'standardized beta = 0.28, P < 0.001... beta = 0.08, P = 0.04. Demonstrated that financial stability is a critical exogenous baseline prerequisite for cognitive well-being.'"
+      }
+    ],
+    "pi": "Piotr Bia\u0142owolski",
+    "title": "Well-being in life and well-being at work: Which comes first? Evidence from a longitudinal study",
+    "journal_short": "Frontiers in Public Health (2020) 8:103",
+    "paper_id": 15,
+    "citations": "~250 (Longitudinal causal study linking financial distress and health)"
+  },
+  {
+    "paper_title": "Evaluating replicability of laboratory experiments in economics",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "2.1",
+          "2.2",
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "3.3"
+        ]
+      },
+      "did_someone_change_subject": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.2",
+          "4.3"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "5.1",
+          "5.3",
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 65,
+    "verdict": "MODERATE (65-84)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper explicitly discloses funding and conflicts: 'Funded by the Sloan Foundation, Swedish Research Council, and Austrian Science Fund. Competing interests: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a premier peer-reviewed journal: 'JOURNAL / YEAR: Science (2016) 351(6280):1433-1436'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While original authors were consulted ('Original authors were consulted to ensure protocol fidelity'), there is no explicit statement regarding citation integrity or representation of broader cited literature in the provided text."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The entire study establishes reproducible protocols and conducts independent replications: 'Every replication protocol, sample size calculation, and analysis plan was pre-registered on the Open Science Framework (OSF) before data collection began... Complete data, code, and logs deposited on OSF.'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Sampling selection of the studies was explicitly unbiased by taking the entire population of eligible studies: 'Conducted high-powered replications of all 18 between-subject laboratory experiments published in the American Economic Review (AER) and Quarterly Journal of Economics (QJE) between 2011 and 2014.'"
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Sample size is explicitly justified with a power calculation: 'Total sample of N = 3,576 human participants across replication laboratories. Pre-registered replication protocols designed with 90% statistical power to detect 50% of the original effect size (average replication sample size was 5.4 times larger than the original studies).'"
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text mentions 'between-subject laboratory experiments', which implies experimental groups/controls, but there is no explicit mention of double-blinding or justification for why blinding was not used."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Both statistical tests (p-values, meta-analytic pooling) and effect sizes are explicitly evaluated and reported: '(1) 11 of the 18 studies (61.1%) replicated with a statistically significant effect in the same direction (P < 0.05); (2) 14 of 18 (77.8%) replicated using meta-analytic pooling; (3) The average relative effect size in replications was 66% of the original published effect size.'"
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The method of participant randomization and specific group demographics are not detailed in the provided text, aside from noting that 'replication teams used university student pools'."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, confidence intervals, and exact p-values are not reported in the provided dossier text (only a threshold 'P < 0.05' is mentioned)."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Raw baseline numbers and counts are explicitly provided alongside percentages: '11 of the 18 studies (61.1%)' and '14 of 18 (77.8%)'."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While 'Complete data, code, and logs deposited on OSF' is noted, the provided text does not explicitly detail participant withdrawals, dropouts, missing data, or outlier exclusions."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The primary outcome measured (direct replication of the 18 lab studies using their original protocols) directly matches the claim being made ('Evaluating replicability of laboratory experiments in economics')."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The study explicitly distinguishes between mere statistical significance (P < 0.05) and practical impact/effect magnitude by evaluating both separately: '(1) 11 of the 18 studies (61.1%) replicated with a statistically significant effect... (3) The average relative effect size in replications was 66% of the original published effect size.'"
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The study evaluates controlled 'between-subject laboratory experiments' and ensures 'Original authors were consulted to ensure protocol fidelity', avoiding improper conflation of correlation and causation."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or charts are included or described in the provided text."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Hypotheses and analysis plans were strictly pre-specified before data collection: 'Every replication protocol, sample size calculation, and analysis plan was pre-registered on the Open Science Framework (OSF) before data collection began.'"
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text mentions the publication window of the original studies ('between 2011 and 2014'), but does not explicitly state the study duration or follow-up timeframe for the laboratory experiments."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The authors explicitly bound their findings and avoid extrapolating beyond the data range: 'Focused exclusively on lab experiments in top economics journals; cannot evaluate non-experimental econometrics or structural field models; replication teams used university student pools.'"
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "All reported metrics (e.g., 61.1%, 77.8%, 66% relative effect size, N = 3,576) adhere to mathematical boundaries and domain plausibility without extreme anomaly."
+      }
+    ],
+    "pi": "Colin Camerer",
+    "title": "Evaluating replicability of laboratory experiments in economics",
+    "journal_short": "Science (2016) 351(6280):1433-1436",
+    "paper_id": 16,
+    "citations": "~1,600 (The landmark Science replication audit of experimental economics)"
+  },
+  {
+    "paper_title": "Learning the value of information in an uncertain, fickle world",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "does_it_make_sense": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 20,
+    "verdict": "WEAK / HIGH RISK OF BIAS (<40)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicitly documented in FUNDING & CONFLICTS: 'Funded by the Wellcome Trust and Medical Research Council (MRC). Competing interests: The authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable, peer-reviewed journal as documented in header: 'JOURNAL / YEAR: Nature Neuroscience (2007) 10(9):1214-1221 DOI: 10.1038/nn1954'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text does not include citations to prior works or demonstrate how cited literature was represented."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Establishes a reproducible mathematical protocol and experimental task: 'Developed a two-level hierarchical Bayesian model: Level 1 estimates reward probability (the trust / expectation parameter); Level 2 estimates environmental volatility (the rate of change of reward contingencies). Human participants (N = 16) performed a reward decision-making task in the 3-Tesla fMRI scanner across blocks with stable reward probabilities vs. volatile, rapidly switching reward probabilities.'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Sampling selection methodology is not explicitly documented; the text only states 'Human participants (N = 16) performed a reward decision-making task'."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No power calculation is provided, and the text explicitly notes the small sample size under LIMITATIONS DISCLOSED: 'fMRI sample size (N = 16) is standard for 2007 neuroimaging but small by modern standards'."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While within-subject task blocks ('stable reward probabilities vs. volatile, rapidly switching reward probabilities') serve as task conditions, there is no mention of double-blinding or justification for why blinding was impossible."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While statistical tests are stated ('general linear models with cluster-based multiple comparison correction (Z > 2.3, P < 0.05 corrected)'), effect sizes and practical/clinical significance metrics are not reported alongside p-values."
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Method of randomization and participant demographics are not detailed in the provided text."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, confidence intervals, and exact p-values are missing; only threshold inequalities ('Z > 2.3, P < 0.05 corrected', 'P < 0.001') are reported."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No raw baseline numbers, absolute figures, or relative metrics are provided in the text."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Participant withdrawals, dropouts, missing data, and outlier exclusions are not logged or mentioned in the text."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The paper makes claims about neural computations ('human brain implements an exact hierarchical Bayesian learning algorithm') while relying on surrogate hemodynamic markers, as acknowledged in LIMITATIONS DISCLOSED: 'BOLD hemodynamics cannot measure millisecond-scale synaptic dopamine/acetylcholine gating'."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit distinction made between statistical significance (e.g., 'P < 0.001') and practical or clinical significance."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Correlational fMRI findings ('Correlated model-derived parameters with fMRI BOLD signals', 'Anterior cingulate cortex (ACC) activation correlated precisely with the estimated environmental volatility') are framed as causal mechanisms ('When volatility was high, ACC elevated the effective learning rate, allowing agents to rapidly overwrite outdated expectations') without explicit control for confounding variables."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual charts are included or described in the provided dossier."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text does not explicitly state whether hypotheses and tail-tests (one-tailed vs. two-tailed) were pre-specified prior to data collection."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Exact study duration and follow-up timeframe are not documented in the text."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Findings from a narrow, artificial experimental setup ('tasks were non-social monetary gambles') are extrapolated to broad general claims in the title and methodology ('Learning the value of information in an uncertain, fickle world', 'track environmental volatility') without explicit mathematical bounding in the text."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The methodology and results adhere to mathematical and biological boundaries: 'Developed a two-level hierarchical Bayesian model: Level 1 estimates reward probability (the trust / expectation parameter); Level 2 estimates environmental volatility... Individual learning rates dynamically adjusted to environmental volatility, exactly as predicted by the normative Bayesian model.'"
+      }
+    ],
+    "pi": "Timothy Behrens",
+    "title": "Learning the value of information in an uncertain, fickle world",
+    "journal_short": "Nature Neuroscience (2007) 10(9):1214-1221",
+    "paper_id": 17,
+    "citations": "~2,100 (The foundational discovery of Bayesian volatility tracking in the brain)"
+  },
+  {
+    "paper_title": "Anticipation of increasing monetary reward selectively recruits nucleus accumbens",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "2.1"
+        ]
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.3"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 35,
+    "verdict": "WEAK / HIGH RISK OF BIAS (<40)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The text explicitly documents funding and conflict of interest: 'Funded by the National Institute on Alcohol Abuse and Alcoholism (NIAAA) intramural research program. Conflicts: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable peer-reviewed journal: 'JOURNAL / YEAR: Journal of Neuroscience (2001) 21(16):RC159 DOI: 10.1523/JNEUROSCI.21-16-j0159.2001'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text does not contain a bibliography or discussion of prior cited works to verify citation integrity."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The text establishes a reproducible protocol (the Monetary Incentive Delay task) and explicitly references independent replications: '(subsequently replicated across thousands of subjects in ABCD and HCP)'."
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Measurement bias and systematic performance variance were explicitly controlled: 'Task difficulty was dynamically adjusted via adaptive staircase algorithms to maintain a constant ~66% success rate across all participants.'"
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No power calculation is documented, and the sample size is explicitly noted as a limitation: 'Small sample size (N = 8) characteristic of proof-of-concept 2001 neuroimaging papers'."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While within-subject controls were used ('comparing reward anticipation directly to neutral non-reward trials'), there is no explicit documentation of double-blinding or justification for why blinding was impossible."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Although appropriate statistical tests are named ('voxel-wise multiple regression with random effects and Bonferroni correction') and an F-statistic is given ('F = 18.2, P < 0.001'), explicit effect sizes (e.g., R-squared, Cohen's d, or percent signal change values) are not reported in the text."
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Trial randomization methods and detailed participant demographics (e.g., age, sex breakdown) are not documented in the text, which only states 'N = 8 healthy human adults'."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, confidence intervals, and exact p-values are missing; the text only provides a threshold p-value ('F = 18.2, P < 0.001')."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Raw numbers, baseline BOLD numbers, or absolute vs. relative metrics are not reported in the provided dossier."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit log or statement regarding participant withdrawals, dropouts, missing data, or outlier exclusions."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The primary outcome measured (BOLD activation in the nucleus accumbens during reward cue anticipation) directly matches the claim made in the title and findings ('Activation in the nucleus accumbens increased linearly as a function of anticipated monetary reward magnitude')."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit discussion distinguishing statistical significance from clinical or practical impact in the provided text."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Confounding variables were explicitly controlled through experimental manipulation: 'Controlled for motor execution and visual presentation by comparing reward anticipation directly to neutral non-reward trials. Task difficulty was dynamically adjusted via adaptive staircase algorithms to maintain a constant ~66% success rate across all participants.'"
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual charts are included or described in the text to verify baseline and axis accuracy."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text does not explicitly state whether hypotheses and tail-tests (one-tailed vs. two-tailed) were pre-specified prior to data collection."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no long-term follow-up, and the study duration is explicitly listed as a limitation: 'brief scan runs'."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While the text notes 'monetary rewards were small in magnitude ($0-$5)' as a limitation, there is no explicit discussion regarding the mathematical extrapolation limits of the linear regression model."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The findings adhere to mathematical boundaries and neurobiological plausibility: 'Activation in the nucleus accumbens increased linearly as a function of anticipated monetary reward magnitude (F = 18.2, P < 0.001). NAcc activation occurred specifically during reward anticipation, whereas outcome notification recruited the medial prefrontal cortex.'"
+      }
+    ],
+    "pi": "Brian Knutson",
+    "title": "Anticipation of increasing monetary reward selectively recruits nucleus accumbens",
+    "journal_short": "Journal of Neuroscience (2001) 21(16):RC159",
+    "paper_id": 18,
+    "citations": "~3,100 (The foundational Monetary Incentive Delay [MID] task paper)"
+  },
+  {
+    "paper_title": "Neural predictors of treatment response in depression: a meta-analysis of functional neuroimaging",
+    "category_scores": {
+      "who_says_so": {
+        "score": 20,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.3",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "2.1",
+          "2.2",
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.3"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 50,
+    "verdict": "WEAK / MODERATE RISK OF BIAS (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicit conflict of interest and funding disclosures are present: 'Funded by the Medical Research Council (MRC) and Wellcome Trust. Competing interests: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable, peer-reviewed journal with full citation credentials: 'JOURNAL / YEAR: NeuroImage (2017) 162:105-118 DOI: 10.1016/j.neuroimage.2017.08.058'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Prior literature is systematically integrated and controlled against selective framing: 'Analyzed 42 independent neuroimaging studies... Controlled for publication bias using Egger regression and fail-safe N calculations.'"
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The methodology aggregates findings across independent confirmations using reproducible algorithms: 'Analyzed 42 independent neuroimaging studies... Activation Likelihood Estimation (ALE) and seed-based d-mapping (SDM) meta-analytic algorithms.'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicitly controlled for systematic selection/publication bias and heterogeneity: 'Controlled for publication bias using Egger regression and fail-safe N calculations. LIMITATIONS DISCLOSED: Heterogeneity in imaging modalities (PET, fMRI, SPECT)...'"
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Sample size is explicitly documented and sufficiently large to account for variability across studies: 'Analyzed 42 independent neuroimaging studies comprising N = 1,024 depressed patients undergoing standardized clinical trials'."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No explicit mention of blinding protocols (either in the included trials or during meta-analytic data extraction) is provided in the text."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Correct statistical tests matching spatial neuroimaging data are used alongside effect size mapping (d-mapping, Z-scores): 'Activation Likelihood Estimation (ALE) and seed-based d-mapping (SDM) meta-analytic algorithms... Monte Carlo permutations (10,000 permutations, false discovery rate FDR q < 0.05)... (Z = 4.12, P < 0.0001 corrected).'"
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Randomization methods and specific group demographics (e.g., age, sex breakdown, responder vs. non-responder group numbers) are not detailed in the dossier."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, and confidence intervals are not reported, and p-values are given as inequalities ('P < 0.0001', 'q < 0.05') rather than exact values."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Raw numbers of responders vs. non-responders, baseline depression scores, and absolute risks/NNT are not provided in the text."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Participant withdrawals, study exclusions, dropouts, and missing data logs are not documented in the provided text."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The measured outcomes (baseline functional neuroimaging predictors across clinical responders vs. non-responders) directly match the claim: 'Pre-treatment rostral anterior cingulate cortex (rACC) and insula hyperactivity reliably predicted positive clinical treatment response across both medication and psychotherapy'."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit discussion distinguishing statistical significance from clinical significance or practical clinical utility thresholds."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The study appropriately frames findings as predictive/observational rather than improper causation and explicitly notes confounding heterogeneity: 'LIMITATIONS DISCLOSED: Heterogeneity in imaging modalities (PET, fMRI, SPECT) and cognitive activation paradigms; clinical trials used varying depression rating scales (HAM-D, MADRS); observational meta-analysis.'"
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual charts are included or described in the provided dossier text."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text does not explicitly state whether hypotheses were pre-specified/pre-registered before data collection or specify one-tailed vs. two-tailed testing."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Study duration and follow-up timeframes for the clinical trials are not documented in the text."
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Extrapolation limits and boundary constraints of the regression models are not explicitly discussed in the text."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Results adhere to mathematical and neurobiological domain plausibility: 'Pre-treatment rostral anterior cingulate cortex (rACC) and insula hyperactivity reliably predicted positive clinical treatment response... (Z = 4.12, P < 0.0001 corrected). Identified hypoactive striatal prediction-error encoding as a marker of treatment-resistant anhedonia.'"
+      }
+    ],
+    "pi": "Camilla Nord",
+    "title": "Neural predictors of treatment response in depression: a meta-analysis of functional neuroimaging",
+    "journal_short": "NeuroImage (2017) 162:105-118",
+    "paper_id": 19,
+    "citations": "~250 (Comprehensive neuroimaging meta-analysis of depression treatment)"
+  },
+  {
+    "paper_title": "Scanning the horizon: towards transparent and reproducible neuroimaging",
+    "category_scores": {
+      "who_says_so": {
+        "score": 20,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.3",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "2.2",
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.2",
+          "4.3"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "5.2",
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 55,
+    "verdict": "MODERATE (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicitly documented in the dossier: 'Funded by the Laura and John Arnold Foundation and NIH. Competing interests: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable, peer-reviewed journal: 'JOURNAL / YEAR: Nature Reviews Neuroscience (2017) 18(2):115-126'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Prior works and literature are accurately represented and systematically audited: 'Audited the statistical power and methodological rigor of over 10,000 published fMRI studies' and cited 'Eklund et al. bug inflating false positive rates to 70%'."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Establishes reproducible protocols and references independent findings: 'Established the Brain Imaging Data Structure (BIDS), the OpenNeuro raw data archive, and automated execution pipelines.'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While the dossier notes the authors 'Audited the statistical power and methodological rigor of over 10,000 published fMRI studies', the specific sampling selection methodology or controls for selection bias in gathering those 10,000 studies are not explicitly documented in the text."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Sample size of the meta-audit is massive ('over 10,000 published fMRI studies') and explicit power calculations are central to the paper: 'Calculated statistical power across typical neuroimaging effect sizes (Cohen's d = 0.5), showing that median power was only ~8%'."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No mention of blinding, control groups, or explicit justification for the impossibility of blinding is provided in the text."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Uses appropriate non-parametric descriptive metrics (medians) and explicitly evaluates effect sizes: 'Calculated the median sample size of fMRI studies across 20 years (median N = 28.5 in 2015, rising from N = 10 in 1995). Calculated statistical power across typical neuroimaging effect sizes (Cohen's d = 0.5)'."
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Method of randomization and group allocation/demographics are not detailed in the dossier."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, confidence intervals, and exact p-values are not explicitly reported in the provided text."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While some baseline and raw numbers are given ('median N = 28.5 in 2015, rising from N = 10 in 1995'), raw counts and absolute risks alongside relative percentages (such as '~8%' and '70%') are not fully provided."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Study exclusions, missing data, or outlier exclusions from the 10,000+ audited studies are not logged or accounted for in the provided text."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The primary outcomes measured (sample sizes, statistical power, analysis pipeline counts) directly match the claims made regarding the reproducibility crisis: 'The landmark methodological manifesto diagnosing the reproducibility crisis in functional neuroimaging... Audited the statistical power and methodological rigor of over 10,000 published fMRI studies.'"
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicitly distinguishes between statistical significance (false positives/inflated effects) and true practical/clinical effect sizes: 'showing that median power was only ~8%, yielding massive inflation of published effect sizes ('winner's curse')' and noting 'Multiple comparison software bugs (e.g., Eklund et al. bug inflating false positive rates to 70%).'"
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Explicitly identifies and critiques improper correlational/causal inference and analytical confounding: 'Documented four structural failure modes... (2) Flexibility in data analysis pipelines... (3) Circular inference ('double dipping' / voodoo correlations)'."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual representations are described or documented in the provided dossier."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While the paper critiques post-hoc flexibility in the literature, the dossier does not explicitly state that the authors' own meta-audit hypotheses or tail-tests were pre-specified prior to data collection."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The study duration/timeframe evaluated spans two decades, which is logically sufficient to detect long-term methodological trends: 'Calculated the median sample size of fMRI studies across 20 years (median N = 28.5 in 2015, rising from N = 10 in 1995).'"
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Regression models and their extrapolation limits are not explicitly mentioned or documented in the text."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "All reported metrics adhere to mathematical boundaries and domain plausibility (e.g., 'median N = 28.5', 'Cohen's d = 0.5', 'median power was only ~8%', '69,120 unique analysis pipelines', 'false positive rates to 70%')."
+      }
+    ],
+    "pi": "Russell Poldrack",
+    "title": "Scanning the horizon: towards transparent and reproducible neuroimaging",
+    "journal_short": "Nature Reviews Neuroscience (2017) 18(2):115-126",
+    "paper_id": 20,
+    "citations": "~1,800 (The landmark manifesto on neuroimaging statistical power and open science)"
+  },
+  {
+    "paper_title": "Money buys happiness when spending fits our personality",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "4.1",
+          "4.3"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "5.1",
+          "5.2",
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 45,
+    "verdict": "WEAK (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper explicitly discloses funding and conflicts: 'Funded by Cambridge University and Columbia University. Competing interests: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Published in a reputable, peer-reviewed journal: 'JOURNAL / YEAR: Psychological Science (2016) 27(5):715-725'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text does not contain explicit evidence or quotes regarding prior works, cited literature, or citation integrity."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper establishes a reproducible protocol via an internal preregistered experimental replication: 'Study 2: Preregistered experimental replication (N = 79 participants) receiving real monetary gift vouchers ($10)...'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Sampling in Study 1 was not randomized or unbiased ('Study 1 was correlational using an opt-in customer app panel'), and measurement noise was acknowledged ('transaction categories were categorized via standard merchant category codes (MCC) which can carry noise')."
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No explicit power calculation is mentioned in the text, and the authors explicitly note a sample size limitation for the experimental study: 'Study 2 had a modest sample size (N = 79).'"
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no mention of double-blinding or justification for the lack of blinding in the provided text."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Appropriate statistical models (multi-level regression and ANOVA/F-test) are used, and effect sizes (standardized beta) are reported alongside p-values: 'Multi-level regression modeling with robust standard errors... (standardized beta = 0.17, P < 0.001)... (F = 5.21, P = 0.025).'"
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While participants in Study 2 were 'assigned to spend money congruently', the exact method of randomization and group demographics/allocation details are not provided in the text."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Although the text mentions 'robust standard errors' were used in modeling, the actual numerical values for standard errors, standard deviations, and confidence intervals are missing from the text, and Study 1 reports an inexact p-value ('P < 0.001')."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Raw baseline numbers and absolute scores for the satisfaction with life scales and immediate happiness metrics are not reported in the provided text."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no mention or logging of participant withdrawals, dropouts, missing data, or outlier exclusions in the provided text."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The primary outcomes measured ('satisfaction with life scales', 'immediate happiness', and 'objective bank account transaction data') directly match the claims made regarding spending fit and well-being/happiness."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit discussion in the text distinguishing statistical significance from clinical or practical significance."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The authors explicitly note that 'Study 1 was correlational', control for key confounding variables ('Controlled for total spending volume, annual income, liquid savings, and age'), and follow up with an experimental study ('Study 2: Preregistered experimental replication') to test causation."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual charts are included or described in the provided text."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Pre-specification of hypotheses and tests is explicitly documented for the replication: 'Study 2: Preregistered experimental replication (N = 79 participants)'."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Study 1 tracks longitudinal transaction data over a logically sufficient timeframe of half a year: 'linked to N = 76,883 objective retail bank debit and credit transactions across 6 months.'"
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text does not explicitly state or discuss the bounds or extrapolation limits of the regression models."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The reported statistical metrics ('standardized beta = 0.17, P < 0.001', 'F = 5.21, P = 0.025') and psychological findings adhere to standard mathematical boundaries and domain plausibility without extreme anomaly."
+      }
+    ],
+    "pi": "Joe Gladstone",
+    "title": "Money buys happiness when spending fits our personality",
+    "journal_short": "Psychological Science (2016) 27(5):715-725",
+    "paper_id": 21,
+    "citations": "~420 (Landmark big-data study linking objective bank transactions to well-being)"
+  },
+  {
+    "paper_title": "How censorship in China allows government criticism but silences collective action",
+    "category_scores": {
+      "who_says_so": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ]
+      },
+      "how_does_researcher_know": {
+        "score": 15,
+        "max": 20,
+        "items_passed": [
+          "2.1",
+          "2.2",
+          "2.4"
+        ]
+      },
+      "whats_missing": {
+        "score": 0,
+        "max": 20,
+        "items_passed": []
+      },
+      "did_someone_change_subject": {
+        "score": 5,
+        "max": 20,
+        "items_passed": [
+          "4.1"
+        ]
+      },
+      "does_it_make_sense": {
+        "score": 10,
+        "max": 20,
+        "items_passed": [
+          "5.2",
+          "5.4"
+        ]
+      }
+    },
+    "total_score": 45,
+    "verdict": "MODERATE (40-64)",
+    "itemized_evaluation": [
+      {
+        "criterion_id": "1.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The text explicitly documents funding and conflict of interest disclosures: 'Funded by the National Science Foundation (NSF) and Harvard University. Competing interests: Authors declared no competing financial interests.'"
+      },
+      {
+        "criterion_id": "1.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The paper is published in a reputable, peer-reviewed journal: 'JOURNAL / YEAR: Science (2013) 340(6131):326-329'."
+      },
+      {
+        "criterion_id": "1.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The provided text does not include citations or a review of prior literature to verify citation integrity."
+      },
+      {
+        "criterion_id": "1.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The study establishes a reproducible protocol by making data and code publicly available: 'Complete code and replication data deposited on the Harvard Dataverse.'"
+      },
+      {
+        "criterion_id": "2.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Sampling and measurement bias are explicitly controlled via massive automated harvesting before censor intervention and hand-coded validation: 'Harvested N = 11,382,540 real-time social media posts across 1,382 Chinese social media platforms before government censors could intervene... Hand-coded validation samples of 10,000 posts confirmed classification accuracy (> 95%).'"
+      },
+      {
+        "criterion_id": "2.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The sample size is explicitly documented as sufficiently large to account for population variability: 'Harvested N = 11,382,540 real-time social media posts across 1,382 Chinese social media platforms' alongside 'Hand-coded validation samples of 10,000 posts'."
+      },
+      {
+        "criterion_id": "2.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While the text states 'posts critical of the government or policies were NOT censored at higher rates' (serving as a comparative baseline), there is no explicit mention of double-blinding (e.g., whether human coders of the 10,000 validation posts were blinded to censorship status) or justification for the lack of blinding."
+      },
+      {
+        "criterion_id": "2.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "Appropriate statistical tests and effect sizes are explicitly reported: 'Compared deletion rates across topics using logistic regression and Fisher's exact tests... (Odds Ratio = 12.8, P < 10^-15).'"
+      },
+      {
+        "criterion_id": "3.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text states posts were classified into '85 topic clusters', but does not provide the specific allocation counts, sample breakdown per topic cluster, or method of randomization for the 10,000 validation sample."
+      },
+      {
+        "criterion_id": "3.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Standard errors, standard deviations, and confidence intervals are not reported in the text, and the p-value is given as an inequality ('P < 10^-15') rather than an exact value."
+      },
+      {
+        "criterion_id": "3.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "Only a relative metric ('Odds Ratio = 12.8') is reported; raw deletion counts, baseline deletion rates, and absolute risk figures are omitted."
+      },
+      {
+        "criterion_id": "3.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The dossier does not log or account for missing data, scraper failures, un-revisitable posts, or outlier exclusions from the 11,382,540 harvested posts."
+      },
+      {
+        "criterion_id": "4.1",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The primary outcome measured (post deletion by censors across topic clusters) directly matches the claim made: 'revisited each post over weeks to record whether it was subsequently deleted by censors... posts with collective action potential... were systematically censored'."
+      },
+      {
+        "criterion_id": "4.2",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text emphasizes 'extreme statistical significance (Odds Ratio = 12.8, P < 10^-15)' without an explicit discussion distinguishing statistical significance from practical/real-world impact in a massive sample of over 11 million posts."
+      },
+      {
+        "criterion_id": "4.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "While the text discloses limitations ('cannot observe private messaging (WeChat) or pre-publication keyword blocking'), it does not explicitly state how confounding variables (e.g., platform-specific rules, user follower counts, or timing) were controlled for in the logistic regression."
+      },
+      {
+        "criterion_id": "4.4",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "No graphs, figures, or visual representations are provided or described in the text dossier."
+      },
+      {
+        "criterion_id": "5.1",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "There is no explicit statement regarding pre-specified hypotheses prior to data collection or whether one-tailed or two-tailed tests were specified."
+      },
+      {
+        "criterion_id": "5.2",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The follow-up timeframe is explicitly documented and logically sufficient to detect post deletion: 'revisited each post over weeks to record whether it was subsequently deleted by censors.'"
+      },
+      {
+        "criterion_id": "5.3",
+        "status": "FAIL",
+        "points_awarded": 0,
+        "justification": "The text does not explicitly detail the bounds or extrapolation limits of the logistic regression models used."
+      },
+      {
+        "criterion_id": "5.4",
+        "status": "PASS",
+        "points_awarded": 5,
+        "justification": "The results ('accuracy (> 95%)', 'Odds Ratio = 12.8, P < 10^-15') adhere to mathematical boundaries and domain plausibility without extreme anomaly."
+      }
+    ],
+    "pi": "Gary King",
+    "title": "How censorship in China allows government criticism but silences collective action",
+    "journal_short": "Science (2013) 340(6131):326-329",
+    "paper_id": 22,
+    "citations": "~1,700 (The landmark automated Science audit of Chinese social media censorship)"
+  }
+]
