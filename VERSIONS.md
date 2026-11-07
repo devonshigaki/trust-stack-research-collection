@@ -44,6 +44,11 @@ Content:
   - Sim PATCH-1: Cable theory model of Layer III prefrontal apical dendrites proves supercritical cAMP storm drops distal-to-soma transfer ratio by $31.3\%$ and suppresses somatic EPSP amplitude by $44.3\%$, physically enforcing sensory validation blockade (COMPOUND PASS 3/3).
   - Theorems MS-1–MS-4: Formally proven in Z3/SymPy that Lyapunov contraction $\dot{V} \le 0$, thermodynamic free energy decay $dF/dt < 0$, and Levi-Civita connections $\Gamma(s \cdot p) = \Gamma(p)/s$ hold invariantly across all 7 orders of magnitude from $10^{-10}$ m to $10^6$ m (4/4 THEOREMS VERIFIED).
   - Artifacts: `sim_patch_clamp_hcn_shunting.py`, `z3_multiscale_assembly_manifold.py`, `sim_patch1_results.json`, `fig_patch1_hcn_shunting.png`.
+- **Quantum Molecular Expectation & Living Active Repair (Sim AT-3 & Theorems Q-1–Q-4)**:
+  - Implemented in `docas/sim_quantum_molecular_expectation.py` and `formal-verification/z3_quantum_molecular_isomorphism.py`.
+  - Sim AT-3: Models Silicon-Oxygen (Si-O) covalent bonds in quartz/rock under quantum Morse potential. Proves harmonic restoring force linearizes identically to GTT transverse contraction ($k_{\mathrm{eff}} = 42.07\text{ eV/\AA}^2$, $r = 1.0$), while severe displacement shatters abiotic matter permanently ($F \to 0$, Broken = True). Living systems break this limit via active metabolic pumping (cAMP, $MA=14$, consuming ATP), restoring the bond back to equilibrium ($r \to 1.56\text{ \AA}$, Repaired = True) (COMPOUND PASS 3/3).
+  - Theorems Q-1–Q-4: Formally proven in Z3/SymPy that Morse restoring force is isomorphic to GTT contraction, abiotic restoring force vanishes in dissociation tail, active repair restores global Lyapunov stability, and active repair complies with non-equilibrium thermodynamic dissipation ($dG/dt < 0$) (4/4 THEOREMS VERIFIED).
+  - Artifacts: `sim_quantum_molecular_expectation.py`, `z3_quantum_molecular_isomorphism.py`, `sim_at3_results.json`, `fig_at3_quantum_molecular_expectation.png`.
 
 ## Version 4.0 — October 2026
 

@@ -91,6 +91,18 @@ TASKS = [
         "workdir": "experiments/simulations_repair_era/docas"
     },
     {
+        "tier": "Tier 1: Simulation",
+        "name": "Sim AT-3: Quantum Molecular Expectation & Active Biological Repair",
+        "script": "experiments/simulations_repair_era/docas/sim_quantum_molecular_expectation.py",
+        "workdir": "experiments/simulations_repair_era/docas"
+    },
+    {
+        "tier": "Tier 1: Formal Math",
+        "name": "Z3 & SymPy Quantum-Biological Isomorphism (Theorems Q-1–Q-4)",
+        "script": "formal-verification/z3_quantum_molecular_isomorphism.py",
+        "workdir": "formal-verification"
+    },
+    {
         "tier": "Tier 2: Public Data",
         "name": "CFPB Consumer Complaint Database (Live REST API)",
         "script": "experiments/simulations_repair_era/whitepaper/query_cfpb_complaints.py",

@@ -421,5 +421,22 @@ Formally proven in Z3 and SymPy (`formal-verification/z3_multiscale_assembly_man
 - **Compound Verdict**: **ALL 4/4 THEOREMS FORMALLY VERIFIED**.
 - **Artifacts**: `formal-verification/z3_multiscale_assembly_manifold.py`, `formal-verification/FORMAL_VERIFICATION_REPORT.md`.
 
-## NN. The one handoff that closes everything
+## NN. Sim AT-3: Quantum Molecular Expectation vs. Active Biological Repair (Version 4.2)
+Implemented in `experiments/simulations_repair_era/docas/sim_quantum_molecular_expectation.py`. Models Silicon-Oxygen (Si-O) covalent bonds in quartz/rock under quantum Morse potential vs. active living repair.
+- **C1 Linear Isomorphism**: Harmonic spring constant near equilibrium $k_{\mathrm{eff}} = 42.07\text{ eV/\AA}^2 \ge 30.0$ linearizes identically to GTT transverse contraction ($r = 1.0$) (**PASS**).
+- **C2 Abiotic Fracture**: High-energy shear exceeding dissociation energy forces abiotic bond into dissociation tail ($r = 13.31\text{ \AA}$), permanently shattering the rock (**PASS**).
+- **C3 Active Biological Repair**: Intracellular cAMP synthesis (MA=14) drives active metabolic restoring pump ($F_{\mathrm{active}} = -35.0$), pulling the bond back to $r = 1.56\text{ \AA} \approx r_e$ (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/docas/sim_quantum_molecular_expectation.py`, `sim_at3_results.json`, `fig_at3_quantum_molecular_expectation.png`.
+
+## OO. Theorems Q-1–Q-4: Quantum-Biological Isomorphism & Stability SMT Proofs (Version 4.2)
+Formally proven in Z3 and SymPy (`formal-verification/z3_quantum_molecular_isomorphism.py`).
+- **Q-1 Morse-GTT Isomorphism**: SymPy proved $\lim_{\varepsilon \to 0} F_{\mathrm{Morse}}(\varepsilon) / (-k_{\mathrm{eff}} \varepsilon) = 1$ identically (**PASS**).
+- **Q-2 Vanishing Abiotic Restoring Force**: Z3 proved restoring force vanishes in dissociation tail ($F \to 0$), producing irreversible shattering (`UNSAT` / **PASS**).
+- **Q-3 Active Metabolic Global Stability**: Z3 proved active pump $F_{\mathrm{active}} = -k_{\mathrm{pump}} \operatorname{sgn}(\varepsilon)$ guarantees $\dot{V} < 0$ across the entire domain (`UNSAT` / **PASS**).
+- **Q-4 Thermodynamic Dissipation Rate**: SymPy proved active repair strictly dissipates chemical free energy ($dG/dt = -J_{\mathrm{pump}} \Delta G_{\mathrm{ATP}} < 0$) (**PASS**).
+- **Compound Verdict**: **ALL 4/4 THEOREMS FORMALLY VERIFIED**.
+- **Artifacts**: `formal-verification/z3_quantum_molecular_isomorphism.py`, `formal-verification/FORMAL_VERIFICATION_REPORT.md`.
+
+## PP. The one handoff that closes everything
 Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13_manifest.json`, `concepts.json`, `clics_dist.npy`, result JSONs, `run_full_pipeline.sh`, `*_firstrun_bug.json` files) + `Supporting Document — Statistical Verification and Significance Appendix.md` + `Simulation Pipeline — Replication and Build Guide.md` + the three pre-registration documents. With those we (a) re-run every original script for the manifest's bit-identity acceptance test, and (b) have the exact material to deposit to OSF and close the 15 `[OSF DOI pending]` placeholders — the single biggest remaining review finding.

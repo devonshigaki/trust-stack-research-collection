@@ -119,6 +119,8 @@ Since the original deposit, the collection has run a pre-registered connectome s
 | Sim THERMO-1 (C1–C3) | Thermodynamic Landauer bound on trust erasure | PASS (3/3) | DOCAS §5.33 |
 | Sim MS-1 (C1–C3) | Tandem MS/MS fragmentation assembly benchmark | PASS (3/3) | DOCAS §5.33 |
 | Sim PATCH-1 (C1–C3) | Multicompartment pyramidal HCN1 shunting | PASS (3/3) | DOCAS §5.14 |
+| Sim AT-3 (C1–C3) | Quantum Morse expectation & living repair | PASS (3/3) | GTT §3.6 / DOCAS §5.33 |
+| Theorems Q-1–Q-4 | Quantum-biological SMT/CAS isomorphism | PASS (4/4) | GTT §3.6 / DOCAS §5.33 |
 | Theorems MS-1–MS-4 | Multiscale SMT/CAS assembly manifold proofs | PASS (4/4) | GTT §3.1 / DOCAS §5.33 |
 | Theorems FR-1–FR-4 | SMT/CAS Fisher-Rao boundary proofs | PASS (4/4) | GTT §3.1 |
 

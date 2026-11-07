@@ -940,6 +940,18 @@ To operationalize the ontological alignment between Lee Cronin's Assembly Theory
 6. *Cortical Circuit Parcellation ($10^{-2}\text{ m}, \tau \approx 10^0\text{–}10^6\text{ s}$):* Yeo-7 / Schaefer-400 DMN-Control networks ($MA_{\text{circuit}} \approx 4.5 \times 10^5$). Evaluates generative models ($\tau = -\text{EFE}$).
 7. *Societal Cryptographic Ledger ($10^6\text{ m}, \tau \approx 10^7\text{ s}$, 1.4 Years):* FreshCredit libSQL edge databases anchored on Substrate ($MA_{\text{credit}} = 1,293$ uncompressible validation steps). Externalizes biological memory onto cryptographic silicon ($A_{\text{network}} \gg 10^{500}$). Figure 48; `sim_at2_assembly_results.json`.
 
+**Quantum Molecular Expectation vs. Active Living Repair (Sim AT-3 & Theorems Q-1–Q-4; \[SIMULATION & FORMAL SMT\]).** To resolve whether abiotic matter (such as the atomic lattice of a mineral rock) possesses "expectation," **Sim AT-3** modeled the Silicon–Oxygen (Si–O) covalent bond of quartz under a quantum Morse potential:
+``` math
+\begin{equation}
+V_{\mathrm{Morse}}(r) = D_e \left(1 - e^{-a(r - r_e)}\right)^2
+\end{equation}
+```
+where equilibrium bond length $r_e = 1.61\text{ \AA}$ operates as the **passive ground-state expectation ($E$)** and dissociation energy $D_e = 4.77\text{ eV}$ represents bond strength. Four theorems formally verified in Z3 and SymPy (`formal-verification/z3_quantum_molecular_isomorphism.py`) delineate the exact boundary between physical stability and biological trust:
+1. *Passive Restoring Force Isomorphism (Theorem Q-1):* Near equilibrium ($\varepsilon = r - r_e \to 0$), the quantum restoring force linearizes identically to the GTT Master Law: $F_{\mathrm{Morse}}(\varepsilon) \approx -k_{\mathrm{eff}} \varepsilon$ with $k_{\mathrm{eff}} = 2 D_e a^2 = 42.07\text{ eV/\AA}^2$, proving that inanimate molecular bonds maintain passive conservative expectation.
+2. *The Abiotic Fracture Threshold (Theorem Q-2):* Under severe shear displacement exceeding the dissociation energy ($\varepsilon > r_{\mathrm{yield}}$), the restoring force vanishes ($F \to 0$), causing the rock crystal to shatter permanently and irreversibly ($r \to 13.31\text{ \AA}$, Broken = True).
+3. *Active Metabolic Repair (Theorem Q-3):* Living biological systems break this abiotic limit: when a displacement shock pushes the bond into the dissociation tail, the intracellular coincidence engine synthesizes cAMP ($MA=14$, consuming ATP free energy), driving an **active non-equilibrium restoring pump** ($F_{\mathrm{active}} = -k_{\mathrm{pump}} \operatorname{sgn}(\varepsilon)$) that pulls the bond back into the potential well ($r \to 1.56\text{ \AA}$, Repaired = True).
+4. *Thermodynamic Consistency (Theorem Q-4):* Active repair strictly dissipates chemical free energy ($dG/dt < 0$), proving that **life is active, dissipative expectation maintenance**, whereas a rock is passive, conservative equilibrium. Figure 49; `sim_at3_results.json`.
+
 <figure id="fig:sim-at" data-latex-placement="!tp">
 <img src="figures/fig_sim_at_assembly.png" />
 <figcaption><strong>Figure 45.</strong> Sim AT: Assembly Theory, Molecular Trust, and Pre-Biological Selection (seed 42). Left: The GTT Master Law generates macroscopic complexity $66.0\times$ larger than a thermodynamic random walk. Center: Inverse selection correlation ($r = -0.8944$) under long-term thermal noise accumulation. Right: High $\lambda$ biological sensitivity shatters uncompartmentalized molecular bonds ($0.22\times$ retention). Compound verdict: FAIL as frozen (1/3 PASS).</figcaption>
