@@ -19,6 +19,7 @@ You are entering the **Trust Stack (Version 4.0 / 4.2)** research environment de
 3. **Simulation & Invariant Ledgers:**
    - `Desktop/Research/SIMULATION_ACCOUNTING.md` (Comprehensive index of all simulations through Version 4.2).
    - `Desktop/Research/VERSIONS.md` (Version changelog).
+   - `Desktop/Research/RESEARCHER_OUTREACH.md` (Living outreach registry: 22 PIs, lab personnel, and peer-review engagement tracker).
    - `Desktop/Research/formal-verification/FORMAL_VERIFICATION_REPORT.md` (Lean 4, Z3, SymPy, TLA+ certificates).
 
 ## 2. Core Resolved Archival Landmarks
