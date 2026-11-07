@@ -114,6 +114,7 @@ Since the original deposit, the collection has run a pre-registered connectome s
 | Sim W9 (C1–C2) | Dynamic lemons market solvency ODE | PASS (2/2) | WP §5 |
 | Sim GEN-2 (C1–C4) | Omnigenic coincidence & p-PGS | PASS (4/4) | DOCAS §4.3 |
 | Sim GEN-3 (C1–C3) | 2S-MR & COLOC (DOCAS-GATE-2) | PASS (3/3) | DOCAS §5.1b |
+| Sim GEN-4 (C1–C3) | ADCY coincidence engine 2S-MR | PASS (3/3) | DOCAS §4.3 / §5.14 |
 | Sim BIO-1 (C1–C3) | Multiscale coincidence & Levin bioelectrics | PASS (3/3) | DOCAS §5.10 / §5.27 |
 | Sim AT-2 (C1–C2) | Multiscale assembly spectrum of trust (7 scales) | PASS (2/2) | DOCAS §5.33 |
 | Sim THERMO-1 (C1–C3) | Thermodynamic Landauer bound on trust erasure | PASS (3/3) | DOCAS §5.33 |

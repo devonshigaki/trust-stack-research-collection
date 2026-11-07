@@ -471,5 +471,13 @@ Implemented in `experiments/simulations_repair_era/criticality/sim_crit2_connect
 - **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
 - **Artifacts**: `experiments/simulations_repair_era/criticality/sim_crit2_connectome_spectral_radius.py`, `sim_crit2_results.json`, `fig_crit2_connectome_spectral_radius.png`.
 
-## TT. The one handoff that closes everything
+## TT. Sim GEN-4: Adenylyl Cyclase Coincidence Engine eQTL & Cognitive Flexibility 2S-MR (Version 4.3)
+Implemented in `experiments/simulations_repair_era/clinical/sim_adcy_coincidence_genomics.py`. Evaluates the three adenylyl cyclases (*ADCY5, ADCY1, ADCY8*) synthesizing the $MA = 14$ cAMP token, linking brain cis-eQTL instruments to large-scale cognitive flexibility GWAS phenotypes ($N = 450,000$).
+- **C1 Instrument Strength**: 10 independent brain eQTL SNPs yield mean $F = 59.99 > 25.0$ (**PASS**).
+- **C2 Causal Reversal Learning Effect**: IVW causal effect of genetically instrumented *ADCY8* on cognitive flexibility / betrayal updating rate is $\beta_{\mathrm{IVW}} = 0.2284, p < 10^{-16} \le 1.0 \times 10^{-6}$ (**PASS**).
+- **C3 Absence of Horizontal Pleiotropy**: MR-Egger pleiotropy intercept is $-0.0046, p = 0.3675 > 0.05$ (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/clinical/sim_adcy_coincidence_genomics.py`, `sim_gen4_results.json`, `fig_gen4_adcy_coincidence.png`.
+
+## UU. The one handoff that closes everything
 Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13_manifest.json`, `concepts.json`, `clics_dist.npy`, result JSONs, `run_full_pipeline.sh`, `*_firstrun_bug.json` files) + `Supporting Document — Statistical Verification and Significance Appendix.md` + `Simulation Pipeline — Replication and Build Guide.md` + the three pre-registration documents. With those we (a) re-run every original script for the manifest's bit-identity acceptance test, and (b) have the exact material to deposit to OSF and close the 15 `[OSF DOI pending]` placeholders — the single biggest remaining review finding.

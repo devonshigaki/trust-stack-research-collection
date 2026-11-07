@@ -63,6 +63,12 @@ TASKS = [
     },
     {
         "tier": "Tier 1: Simulation",
+        "name": "Sim GEN-4: ADCY Coincidence Engine eQTL & Cognitive Flexibility 2S-MR",
+        "script": "experiments/simulations_repair_era/clinical/sim_adcy_coincidence_genomics.py",
+        "workdir": "experiments/simulations_repair_era/clinical"
+    },
+    {
+        "tier": "Tier 1: Simulation",
         "name": "Sim BIO-1: Multiscale Coincidence & Levin Bioelectrics",
         "script": "experiments/simulations_repair_era/bioelectrics/sim_cellular_coincidence_levin.py",
         "workdir": "experiments/simulations_repair_era/bioelectrics"
