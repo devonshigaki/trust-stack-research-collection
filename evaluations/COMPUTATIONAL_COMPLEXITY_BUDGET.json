@@ -144,5 +144,27 @@
     "internal_consistency_cronbach_alpha": 0.84,
     "convergent_validity_with_investment_ratio": "r = 0.76 (p < 0.001)",
     "discriminant_validity_with_general_risk_taking": "r = 0.22 (p = 0.04)"
+  },
+  "standardized_wearable_hardware": {
+    "cortical_hemodynamics_headband": {
+      "device": "Muse S Athena Headband (Newest Generation with fNIRS)",
+      "sensors": "5-optode bilateral prefrontal fNIRS + 4-channel EEG",
+      "optical_wavelengths_nm": [730, 850, 660],
+      "sampling_rates": {"fnirs_hz": 64, "eeg_hz": 256},
+      "measurement_target": "Prefrontal cortex oxygenated and deoxygenated hemoglobin (Delta [HbO2], Delta [HbR]) via Modified Beer-Lambert Law",
+      "brain_regions": "Medial prefrontal cortex (mPFC / BA10 / BA32)"
+    },
+    "autonomic_smartwatch": {
+      "device": "Apple Watch Series 8 (Model MNU73LL/A)",
+      "chassis": "41mm Midnight Aluminum Case, Midnight Sport Band (GPS, US Model)",
+      "processor": "Apple S8 SiP (64-bit dual-core)",
+      "sensors": {
+        "heart_sensor": "3rd-generation optical heart sensor (continuous photoplethysmography / HRV: SDNN and RMSSD)",
+        "temperature_sensor": "Dual-temperature sensing array (0.01 C resolution, basal wrist temperature deviations)",
+        "blood_oxygen": "Optical SpO2 sensor (green, red, infrared LEDs + photodiodes)",
+        "electrical_heart": "Single-lead ECG"
+      },
+      "integration_pipeline": "Apple HealthKit edge store (libSQL encrypted on-device database; zero cloud upload)"
+    }
   }
 }

@@ -4,8 +4,8 @@
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3",
-  "total_files_hashed": 1357,
-  "total_manifest_size_mb": 238.81,
+  "total_files_hashed": 1358,
+  "total_manifest_size_mb": 238.83,
   "automated_ci_tasks_verified": 26,
   "files": {
     "README.md": {
@@ -17,8 +17,8 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "c93bebf588c974378646bc03f3333c9b3c2171c506da649852085227f76d1c4d",
-      "bytes": 236666
+      "sha256": "2a2f37b2b0f59c686a2859f5606133fae64142b0fab2c9df71b54d4578f8c728",
+      "bytes": 238726
     },
     "SIMULATION_ACCOUNTING.md": {
       "sha256": "c86b7b77e31fbff860ceee88444c66c0657765f8b2a9967788944a267ff1f84c",
@@ -1144,8 +1144,12 @@
       "sha256": "42be8419aa623bcfef1991067a3262a13e71d15999190311ba6d1bf63a549810",
       "bytes": 2841
     },
+    "evaluations/COMPUTATIONAL_COMPLEXITY_BUDGET.json": {
+      "sha256": "778f512d5e7d12586ed47d1c85541dfef925a8256cd55dab1e15e5f5d364ed27",
+      "bytes": 8875
+    },
     "evaluations/MULTI_RUBRIC_COMPREHENSIVE_BENCHMARK.md": {
-      "sha256": "9a25bd5240c191bf9386a0a3833934316450eccc7ac6717797107124745461c0",
+      "sha256": "191301ed095a399b809036ebba794ff3f8e3bea75fd232dbc74bccf5a318aa91",
       "bytes": 5048
     },
     "evaluations/multi_rubric_evaluator.py": {
@@ -1153,8 +1157,8 @@
       "bytes": 6478
     },
     "evaluations/run_multi_perspective_benchmarks.py": {
-      "sha256": "6fca9e9ec466d46b18616ae5fcf193dd11b5da34e5e7bb347002171a00fc2de8",
-      "bytes": 19093
+      "sha256": "5d57b063ccd2841213a3dea2537dc42c710dd6219865cd9bcd10a30400ad327a",
+      "bytes": 21854
     },
     "evaluations/rubrics/apa_jars_quant_behavioral.json": {
       "sha256": "df9e9aaba0ef9994877ae884b0c519081a6e8a5aae5a3b47559f4505ba67f562",
@@ -1181,8 +1185,8 @@
       "bytes": 27411
     },
     "papers/docas.md": {
-      "sha256": "33861db04569244093d27bb70a831acf7f29ab3e358c1e2c9535e99ee877a053",
-      "bytes": 303770
+      "sha256": "5b00888a5a800b56b9571d8bd12042d6b7bb412dbbe59dcf08b62066234ca690",
+      "bytes": 311218
     },
     "papers/gtt.md": {
       "sha256": "09aa2c3f450536c6cb1cc02994eea8895e6d6ec4fc50d97ba9bad688804ff399",
@@ -1197,8 +1201,8 @@
       "bytes": 14731
     },
     "papers/whitepaper.md": {
-      "sha256": "901872e08cd9071b670e7c19267a3c15aab11cea6ed6d37507e710824ba2525e",
-      "bytes": 159736
+      "sha256": "521a7438f53ba426a554c354bf130f643ae81c3c8bfae452815975bf76fc93cc",
+      "bytes": 160937
     },
     "papers/markdown/collection.md": {
       "sha256": "91ab7b9c0e57d61d39cf1118c42e0cd554368ad364d422e3801aab97ad784945",
