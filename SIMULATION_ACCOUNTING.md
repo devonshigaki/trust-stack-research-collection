@@ -446,5 +446,13 @@ Implemented in `experiments/simulations_repair_era/docas/sim_at4_metabolome_asse
 - **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
 - **Artifacts**: `experiments/simulations_repair_era/docas/sim_at4_metabolome_assembly_partition.py`, `sim_at4_results.json`, `fig_at4_metabolome_assembly_partition.png`.
 
-## QQ. The one handoff that closes everything
+## QQ. Sim AT-5: Multi-Constraint Token Landscape & Monte Carlo Null Model (Version 4.2)
+Implemented in `experiments/simulations_repair_era/docas/sim_at5_probabilistic_landscape.py`. Evaluates the 5-dimensional biochemical optimization landscape across $N = 2,000,000$ Monte Carlo synthetic draws fitted to empirical HMDB 5.0 parameter distributions.
+- **C1 Monte Carlo Null Rejection**: Zero hits out of 2,000,000 samples satisfy all 5 token axioms ($P_{\mathrm{empirical}} = 0.0 \le 1.0 \times 10^{-6}$; theoretical product probability $P \approx 7.14 \times 10^{-8} \approx 1\text{ in } 14,000,000$) (**PASS**).
+- **C2 Pareto Invariant Boundary**: cAMP at $MA = 14$ sits on the Pareto-optimal frontier, minimizing synthesis/erasure cost while maintaining steric specificity score $\ge 0.85$ (**PASS**).
+- **C3 Metabolome Ground Truth**: Across the real human metabolome, only the cyclic purine nucleotide twins (cAMP and cGMP) qualify (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/docas/sim_at5_probabilistic_landscape.py`, `sim_at5_results.json`, `fig_at5_probabilistic_landscape.png`.
+
+## RR. The one handoff that closes everything
 Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13_manifest.json`, `concepts.json`, `clics_dist.npy`, result JSONs, `run_full_pipeline.sh`, `*_firstrun_bug.json` files) + `Supporting Document — Statistical Verification and Significance Appendix.md` + `Simulation Pipeline — Replication and Build Guide.md` + the three pre-registration documents. With those we (a) re-run every original script for the manifest's bit-identity acceptance test, and (b) have the exact material to deposit to OSF and close the 15 `[OSF DOI pending]` placeholders — the single biggest remaining review finding.

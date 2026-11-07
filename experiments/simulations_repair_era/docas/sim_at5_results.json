@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-11-07",
+  "simulation_id": "Sim AT-5",
+  "monte_carlo_trials": 2000000,
+  "empirical_matches": 0,
+  "empirical_probability": 0.0,
+  "theoretical_probability": 7.14e-08,
+  "odds_ratio": "1 in 14,000,000",
+  "verdict": "COMPOUND PASS (3/3)",
+  "criteria": {
+    "C1_monte_carlo_null_rejection": true,
+    "C2_pareto_invariant_boundary": true,
+    "C3_metabolome_ground_truth": true
+  }
+}

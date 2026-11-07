@@ -103,6 +103,12 @@ TASKS = [
         "workdir": "experiments/simulations_repair_era/docas"
     },
     {
+        "tier": "Tier 1: Simulation",
+        "name": "Sim AT-5: Multi-Constraint Token Landscape & Monte Carlo Null Permutation",
+        "script": "experiments/simulations_repair_era/docas/sim_at5_probabilistic_landscape.py",
+        "workdir": "experiments/simulations_repair_era/docas"
+    },
+    {
         "tier": "Tier 1: Formal Math",
         "name": "Z3 & SymPy Quantum-Biological Isomorphism (Theorems Q-1–Q-4)",
         "script": "formal-verification/z3_quantum_molecular_isomorphism.py",
