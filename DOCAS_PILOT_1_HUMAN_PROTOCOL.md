@@ -64,7 +64,8 @@ To ensure that physiological shifts are driven by psychological and financial tr
     $$G_{\mathrm{stress}}(t) = G_{\mathrm{measured}}(t) - \hat{G}_{\mathrm{postprandial}}(t; \text{Carbs}, t_{\mathrm{meal}})$$
 2.  *Physical Exercise & Workout Tracking (Tachycardia Confounder Filter):* Continuous logging of workout sessions (`HKWorkout`), active calories burned (`activeEnergyBurned`), VO2 max, and movement accelerometer intensity. Allows the pipeline to residualize physical exertion tachycardia from psychological betrayal adrenaline surges:
     $$\mathrm{HRV}_{\mathrm{stress}}(t) = \mathrm{HRV}_{\mathrm{measured}}(t) - \hat{\mathrm{HRV}}_{\mathrm{exertion}}(t; \text{METs}, t_{\mathrm{workout}})$$
-3.  *Smart Scale Anthropometrics (Somatic Stationarity):* Daily morning weighing under standardized conditions (fasted, post-void) syncing directly to Apple HealthKit: Body Mass (`bodyMass` in kg), Body Mass Index (`bodyMassIndex`), Body Fat Percentage (`bodyFatPercentage`), and Lean Body Mass (`leanBodyMass`). Certifies that 30-day baseline metabolic stationarity is maintained ($\Delta \text{BodyMass} \le \pm 2.0\%$).
+3.  *Smart Scale Anthropometrics & DPF Calibration (Fitindex Model ES-26M):* Daily morning weighing under standardized conditions (fasted, post-void) utilizing the **Fitindex Smart Scale (Model ES-26M)**. Incorporates 4 high-precision strain gauge weight sensors ($0.05\text{ kg} / 0.1\text{ lb}$ resolution) and 4 Bioelectrical Impedance Analysis (BIA) alternating-current electrodes. Ingests directly via Bluetooth / Apple HealthKit: Body Mass (`bodyMass`), Body Mass Index (`bodyMassIndex`), Body Fat Percentage (`bodyFatPercentage`), Lean Body Mass (`leanBodyMass`), Visceral Fat, and Body Water Percentage.  
+    *Primary Epistemic Role:* (a) Certifies 30-day baseline somatic and hydration stationarity ($\Delta \text{BodyMass} \le \pm 2.0\%$); (b) Calibrates the cranial Differential Pathlength Factor ($\text{DPF}_u$) in the Modified Beer-Lambert Law based on individualized subcutaneous adipose tissue thickness, eliminating optical fNIRS pathlength distortion across subjects with different body compositions.
 
 ### F. The Dedicated Edge Hub (Wiped iPhone 12 Pro Research Kiosk)
 *   **Device:** **iPhone 12 Pro** (A14 Bionic SiP, 6 GB RAM, Wi-Fi 6, Bluetooth 5.0, Ultra Wideband U1).
@@ -79,6 +80,18 @@ To enable multi-participant scaling while maintaining rigorous scientific precis
 ### H. Environmental & Ambient Confounder Controls: Presence & Circadian Light
 1.  *Logitech Circle View (PIR Motion & HomeKit Presence):* HomeKit-enabled ambient sensor with high-precision Passive Infrared (PIR) motion detection and geofencing. Formally logs objective **Home vs. Away** status, room occupancy, and provides physical ground-truth verification of bed entry/exit times, cross-validating Apple Watch accelerometer sleep staging.
 2.  *Philips Hue Smart Lamps (Circadian Photic Confounder Filter):* Captures ambient Correlated Color Temperature (CCT in Kelvin, 2000K–6500K), brightness (0–100%), and lamp power state. In affective chronobiology (DOCAS §5.17 Sim D17: *Photic and Thermal Gating*), exposure to high-CCT blue daylight at night suppresses melatonin and drives nocturnal cortisol ($C$-channel). Logging Hue parameters ensures that nocturnal autonomic/temperature deviations driven by bright artificial lighting are not misattributed to financial contractual stress.
+
+### I. Cohort-Adaptive Video & Acoustic Journaling Schedule (Logitech Brio 4K V-U0040)
+To capture rich vocal biomarkers ($f_0$ pitch variability, jitter, shimmer via `openSMILE`) and facial Action Units without causing participant fatigue, video journaling is structured adaptively by cohort duration:
+*   *Cohort 4 ($N = 30$ Participants, 1-Day Trial):* **Same-Day Intake & Exit Schedule.**  
+    1.  **Morning / Start Intake (3 minutes):** Standardized neutral reading passage upon receiving the kiosk. Calibrates baseline vocal fundamental frequency ($f_0$) and resting facial symmetry.  
+    2.  **Mid-Day Active Epoch:** Active financial contract evaluation with Muse S Athena fNIRS + Apple Watch.  
+    3.  **Evening / Finish Exit (3 minutes):** Retrospective verbal reflection on perceived contract transparency and acute financial anxiety before returning the kiosk.  
+    *(Both intake and exit are completed on the same calendar day, eliminating participant burden).*
+*   *Cohort 3 ($N = 10$ Participants, 3-Day Trial):* Day 1 Morning Intake ($3\text{ min}$) $\to$ Event-triggered "Hot Debriefs" ($90\text{ s}$ if transaction occurs) $\to$ Day 3 Evening Exit Reflection ($3\text{ min}$).
+*   *Cohort 2 ($N = 3$ Participants, 10-Day Trial):* Day 1 Morning Intake ($3\text{ min}$) $\to$ Event-triggered "Hot Debriefs" $\to$ Day 10 Evening Exit Reflection ($3\text{ min}$).
+*   *Cohort 1 ($N = 1$ Investigator, 30-Day Dense Trial):* Day 1 Morning Intake $\to$ Event-triggered "Hot Debriefs" (Days 5, 14, 22) $\to$ Day 30 Comprehensive Longitudinal Exit Reflection.
+*   *Processing & Storage:* Audio transcripts generated on-device via `whisper.cpp` into `apple_journal_affect` in **local libSQL**. Raw 4K video is stored locally in the participant's encrypted private directory and wiped upon kiosk return.
 
 ---
 

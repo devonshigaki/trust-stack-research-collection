@@ -196,6 +196,18 @@
       "device": "Philips Hue Smart Lighting System",
       "parameters": "Correlated Color Temperature (CCT Kelvin: 2000K–6500K), brightness percentage, lamp power state",
       "measurement_target": "Circadian photic zeitgeber confounder filter (DOCAS §5.17 Sim D17: isolating artificial light melatonin suppression from financial stress)"
+    },
+    "smart_scale_anthropometrics": {
+      "device": "Fitindex Smart Scale (Model ES-26M)",
+      "sensors": "4 high-precision strain gauge weight sensors (0.05 kg increment) + 4 BIA alternating-current electrodes",
+      "measurement_target": "Body mass (kg), BMI, Body fat %, Lean body mass, and Total body water % for 30-day somatic stationarity and cranial DPF optical pathlength calibration",
+      "integration_pipeline": "Apple HealthKit (HKQuantityTypeIdentifierBodyMass, BodyFatPercentage, LeanBodyMass) into libSQL"
+    },
+    "acoustic_video_webcam": {
+      "device": "Logitech Brio 4K Ultra HD Pro Webcam (Model V-U0040 / MSIP-REM-DZL-V-U0040)",
+      "sensors": "4K Ultra HD optical sensor (RightLight 3 HDR) + dual omnidirectional noise-canceling microphones",
+      "sampling_protocol": "Cohort-adaptive same-day and multi-day Intake/Exit reflections and event-triggered hot debriefs",
+      "feature_extraction": "openSMILE vocal pitch f0 variability/jitter and on-device whisper.cpp speech transcription into libSQL"
     }
   }
 }

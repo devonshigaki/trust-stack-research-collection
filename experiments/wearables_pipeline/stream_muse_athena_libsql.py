@@ -92,7 +92,9 @@ def init_libsql_schema(conn):
         dietary_calories_kcal REAL DEFAULT 0,
         workout_active_calories REAL DEFAULT 0,
         smart_scale_weight_kg REAL,
-        smart_scale_bmi REAL
+        smart_scale_bmi REAL,
+        smart_scale_body_fat_pct REAL,
+        smart_scale_lean_mass_kg REAL
     );
     """)
     print("✓ Local libSQL schema successfully verified and indexed.")
