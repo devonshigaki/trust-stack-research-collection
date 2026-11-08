@@ -175,6 +175,27 @@
       "deployment_schedule": "Two consecutive 15-day sensors (30 days total in Phase 1 dense phenotyping)",
       "measurement_target": "Interstitial glucose concentration (mg/dL) and flux (dG/dt) capturing glucocorticoid-mediated hepatic glycogenolysis",
       "integration_pipeline": "Apple HealthKit / Dexcom Share edge ingestion into libSQL"
+    },
+    "edge_kiosk_hub": {
+      "device": "iPhone 12 Pro (Dedicated Wiped Research Kiosk)",
+      "operating_mode": "Wi-Fi 6, Bluetooth 5.0, zero cellular SIM required; encrypted libSQL edge store",
+      "role": "Central portable edge aggregator, local MBLL preprocessor, and zero-cloud vault"
+    },
+    "secondary_smartwatch": {
+      "device": "Apple Watch Series 3 (Model MTF32LL/A; watchOS 8.8.1)",
+      "chassis": "42mm Space Gray Aluminum Case (GPS, S3 SiP)",
+      "sensors": "1st-generation optical heart sensor (PPG @ 1 Hz, basic HRV SDNN, accelerometer sleep duration; no temperature or SpO2)",
+      "role": "Secondary participant kit instrumentation for Cohorts 2–4"
+    },
+    "ambient_presence_camera": {
+      "device": "Logitech Circle View (Apple HomeKit Secure Video)",
+      "sensors": "Passive Infrared (PIR) motion detection, geofenced occupancy",
+      "measurement_target": "Objective Home vs. Away presence and physical sleep/wake boundaries cross-validating wearable sleep staging"
+    },
+    "ambient_photic_lighting": {
+      "device": "Philips Hue Smart Lighting System",
+      "parameters": "Correlated Color Temperature (CCT Kelvin: 2000K–6500K), brightness percentage, lamp power state",
+      "measurement_target": "Circadian photic zeitgeber confounder filter (DOCAS §5.17 Sim D17: isolating artificial light melatonin suppression from financial stress)"
     }
   }
 }

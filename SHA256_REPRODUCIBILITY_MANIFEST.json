@@ -4,13 +4,13 @@
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3",
-  "total_files_hashed": 2028,
-  "total_manifest_size_mb": 416.87,
+  "total_files_hashed": 2029,
+  "total_manifest_size_mb": 417.49,
   "automated_ci_tasks_verified": 26,
   "files": {
     "DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
-      "sha256": "c4eee00a0a2751f64ae08a62864cd5c3310b34b0612463557a7e5de270028f5e",
-      "bytes": 22803
+      "sha256": "bdf66ed65a0e9af640089e6bcffa03610cdbd2831885cc2baa746ba6f8dd03ad",
+      "bytes": 25543
     },
     "DOCAS_PILOT_1_PROOF_OF_CONCEPT.md": {
       "sha256": "c03daac82220a7f5b8082f92e5b49940e87afd103903ca7c401a30921aeb7dd7",
@@ -25,7 +25,7 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "5f660eba9661a1aa43ec6434c25d8ea66297947f884caf069b0b56cd5faefbd8",
+      "sha256": "8c50a8a58b81c61f8f1247534911f0374d87a48f45fbfd9c2e57c6dec28dbfab",
       "bytes": 381731
     },
     "SIMULATION_ACCOUNTING.md": {
@@ -1153,8 +1153,8 @@
       "bytes": 2841
     },
     "evaluations/COMPUTATIONAL_COMPLEXITY_BUDGET.json": {
-      "sha256": "c962714a58d9302cec94a922e5871219e192cbb0dc46e8e69956a06dedc25037",
-      "bytes": 9570
+      "sha256": "fe8fb5119c980031840a8357a19f5e5638e9a70f13c49e0027ae208633583faa",
+      "bytes": 10971
     },
     "evaluations/MULTI_RUBRIC_COMPREHENSIVE_BENCHMARK.md": {
       "sha256": "191301ed095a399b809036ebba794ff3f8e3bea75fd232dbc74bccf5a318aa91",
@@ -4636,6 +4636,10 @@
       "sha256": "08e37cf1e1cd108cf7daa0f2c11efeac5f4ff796978844f7b91ffcee9fa385fb",
       "bytes": 256168
     },
+    "papers/figures/fig_wearable_triad_fusion.png": {
+      "sha256": "da3374ef825135499444e9ff06525fda4f207af399532cb0a12d3ee6c06fb3f0",
+      "bytes": 644594
+    },
     "experiments/vec2vec/README.md": {
       "sha256": "a3fc3aeee04af12ecd77449486b9c4485c783f7fea9540d6fc030dc65bb6fd26",
       "bytes": 3213
@@ -5517,7 +5521,7 @@
       "bytes": 9331
     },
     "experiments/simulations_repair_era/criticality/sim_crit2_results.json": {
-      "sha256": "a1469881f67a1b0344002a38b824abcb0b383bced96bc4249f94f9d8cf210ee2",
+      "sha256": "16fa95744098f2ef8b8fafcc3e0816c6ae6f3c37086c5b9c55c569923435cef7",
       "bytes": 464
     },
     "experiments/simulations_repair_era/criticality/sim_crit3_bayes_factor_comparison.py": {

@@ -66,6 +66,20 @@ To ensure that physiological shifts are driven by psychological and financial tr
     $$\mathrm{HRV}_{\mathrm{stress}}(t) = \mathrm{HRV}_{\mathrm{measured}}(t) - \hat{\mathrm{HRV}}_{\mathrm{exertion}}(t; \text{METs}, t_{\mathrm{workout}})$$
 3.  *Smart Scale Anthropometrics (Somatic Stationarity):* Daily morning weighing under standardized conditions (fasted, post-void) syncing directly to Apple HealthKit: Body Mass (`bodyMass` in kg), Body Mass Index (`bodyMassIndex`), Body Fat Percentage (`bodyFatPercentage`), and Lean Body Mass (`leanBodyMass`). Certifies that 30-day baseline metabolic stationarity is maintained ($\Delta \text{BodyMass} \le \pm 2.0\%$).
 
+### F. The Dedicated Edge Hub (Wiped iPhone 12 Pro Research Kiosk)
+*   **Device:** **iPhone 12 Pro** (A14 Bionic SiP, 6 GB RAM, Wi-Fi 6, Bluetooth 5.0, Ultra Wideband U1).
+*   **Operating State:** Completely wiped (`Erase All Content and Settings`) and provisioned as an isolated research kiosk. SIM-locked status has zero impact on Wi-Fi data collection, BLE sensor streaming, or HealthKit operations.
+*   **Role in Protocol:** Carried as the central portable edge hub by the participant. Ingests real-time streams from Muse S Athena, Dexcom Stelo CGM, and Apple Watch, processes local Modified Beer-Lambert Law transformations, and writes into **local libSQL (AES-256-GCM)** with zero cloud transmission. When handed to a new participant, the kiosk undergoes a cryptographically verified zero-fill wipe.
+
+### G. Smartwatch Tiering: Series 8 (Primary) vs. Series 3 MTF32LL/A (Secondary)
+To enable multi-participant scaling while maintaining rigorous scientific precision, smartwatch hardware is tiered:
+*   *Primary Phase 1 Dense Phenotyping ($N = 1 \times 30\text{ days}$):* Standardized exclusively on **Apple Watch Series 8 (Model MNU73LL/A)**. Captures dual-temperature nocturnal wrist deviations ($\Delta T_{\text{wrist}}$ at $0.01^\circ\mathrm{C}$ resolution), advanced sleep staging (REM, Core, Deep slow-wave sleep duration), and active optical pulse oximetry (SpO2).
+*   *Secondary Participant Kits (Cohorts 2–4):* Supported by **Apple Watch Series 3 (Model MTF32LL/A)** (42mm Space Gray, S3 SiP, watchOS 8.8.1). Captures continuous 1st-generation optical Heart Rate (PPG @ 1 Hz), basic HRV SDNN, and binary accelerometer sleep duration, but does *not* capture wrist temperature or SpO2. This trade-off is formally pre-registered.
+
+### H. Environmental & Ambient Confounder Controls: Presence & Circadian Light
+1.  *Logitech Circle View (PIR Motion & HomeKit Presence):* HomeKit-enabled ambient sensor with high-precision Passive Infrared (PIR) motion detection and geofencing. Formally logs objective **Home vs. Away** status, room occupancy, and provides physical ground-truth verification of bed entry/exit times, cross-validating Apple Watch accelerometer sleep staging.
+2.  *Philips Hue Smart Lamps (Circadian Photic Confounder Filter):* Captures ambient Correlated Color Temperature (CCT in Kelvin, 2000K–6500K), brightness (0–100%), and lamp power state. In affective chronobiology (DOCAS §5.17 Sim D17: *Photic and Thermal Gating*), exposure to high-CCT blue daylight at night suppresses melatonin and drives nocturnal cortisol ($C$-channel). Logging Hue parameters ensures that nocturnal autonomic/temperature deviations driven by bright artificial lighting are not misattributed to financial contractual stress.
+
 ---
 
 ## 3. Comprehensive Metric Mapping Across the 5 DOCAS Channels
