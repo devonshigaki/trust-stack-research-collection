@@ -130,6 +130,9 @@ Since the original deposit, the collection has run a pre-registered connectome s
 | Theorems E-1–E-4 | Tri-critical invariant & variational extremum SMT | PASS (4/4) | GTT §3.6 / DOCAS §5.33 |
 | Theorems MS-1–MS-4 | Multiscale SMT/CAS assembly manifold proofs | PASS (4/4) | GTT §3.1 / DOCAS §5.33 |
 | Theorems FR-1–FR-4 | SMT/CAS Fisher-Rao boundary proofs | PASS (4/4) | GTT §3.1 |
+| Sim WEARABLE-TRIAD (C1–C3) | Multi-rate biosensor fusion (Muse Athena, Watch S8, Stelo) | PASS (3/3) | DOCAS §5.37 |
+| Sim PERSUADE-1 (C1–C3) | Lindquist-Watson agential convergence & mutual persuasion ODE | PASS (3/3) | DOCAS §5.38 |
+| Sim PILOT-1 (C1–C3) | End-to-end 30-day multimodal pre-flight mock trial runner | PASS (3/3) | DOCAS §5.37 / DOCAS-PILOT-1 |
 
 ## Perception-layer simulation — deposited
 

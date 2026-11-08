@@ -1172,6 +1172,11 @@ The pre-registered prospective clinical trial **DOCAS-GATE-1** adheres strictly 
     2.  *Autonomic Vagal Modulation & Allostatic Temperature Drift:* Specifically the **Apple Watch Series 8 (Model MNU73LL/A)** (41mm Midnight Aluminum, S8 SiP, dual-temperature sensors tracking basal wrist temperature deviations at $0.01^\circ\mathrm{C}$ resolution, 3rd-generation optical photoplethysmography measuring continuous HRV via SDNN and RMSSD, and SpO2 blood oxygenation via Apple HealthKit).
     3.  *Interstitial Glycemic Flux & Glucocorticoid Mobilization:* The **Dexcom Stelo Glucose Biosensor** (Continuous Glucose Monitor / CGM; 5-minute sampling cadence; deployed across two consecutive 15-day wear periods for 30 continuous days in Phase 1 dense phenotyping to capture glucocorticoid-driven hepatic glycogenolysis $dG/dt$ and cellular ATP substrate availability required for cAMP prediction-error synthesis).
 
+<figure id="fig:sim-pilot1" data-latex-placement="!tp">
+<img src="figures/fig_pilot1_30day_mock_trajectory.png" style="width:98.0%" />
+<figcaption><strong>Figure 40.</strong> Sim PILOT-1: End-to-End In-Silico 30-Day Multimodal Pre-Flight Mock Trial (N = 1 x 30 days = 8,640 epochs). (a) Ground-truth trust trajectory $S(t)$ across 720 hours under Master Law asymmetric updates and multi-day relaxation. (b) Dexcom Stelo CGM trace: convolving logged carbohydrate meals with postprandial clearance ($R^2 = 0.9434$) isolates pure non-dietary cortisol glycogenolysis on Day 14 betrayal. (c) Apple Watch S8 autonomic vagal tone (RMSSD in ms) showing post-betrayal vagal collapse and multi-day recovery ($\hat{\tau}_{\mathrm{relax}} = 2.85\text{ days}$). (d) Muse S Athena daily prefrontal fNIRS $\Delta [\mathrm{HbO}_2]$ active arousal spikes. Compound verdict: PASS (3/3).</figcaption>
+</figure>
+
 ## 5.38 The Lindquist-Watson Agential Convergence: Mutual Persuasion Across Neural & Visceral Scales [SIMULATION]
 
 A fundamental theoretical bottleneck in biological modeling is the Cartesian persistence of "central command": classical models assume the brain sits atop a biological hierarchy, issuing deterministic, dictatorial instructions to a passive somatic body. 

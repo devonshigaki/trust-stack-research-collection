@@ -5,7 +5,7 @@
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3",
   "total_files_hashed": 2028,
-  "total_manifest_size_mb": 416.86,
+  "total_manifest_size_mb": 416.87,
   "automated_ci_tasks_verified": 26,
   "files": {
     "DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
@@ -25,20 +25,20 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "2e76f0896e4f24c8e7255627bd1afc2b93e64c8a469b14e1bac5ce1b3bbb7456",
-      "bytes": 380857
+      "sha256": "5f660eba9661a1aa43ec6434c25d8ea66297947f884caf069b0b56cd5faefbd8",
+      "bytes": 381731
     },
     "SIMULATION_ACCOUNTING.md": {
-      "sha256": "c86b7b77e31fbff860ceee88444c66c0657765f8b2a9967788944a267ff1f84c",
-      "bytes": 76360
+      "sha256": "b14931c1175c9a6badd0d8588c6f6a1b34d2f0884a033f53fcffd9e2ada8ff46",
+      "bytes": 79681
     },
     "STARTUP_PROMPT.md": {
       "sha256": "c55ea6a523f42aac54b3d9bc6d4f0b8cb6c579756710cec149d1db52fbd235b3",
       "bytes": 3797
     },
     "VERSIONS.md": {
-      "sha256": "3d1d07381b36f689cb8844b3830f4b482e1c5534f1e67466c32e95cca5de0740",
-      "bytes": 43957
+      "sha256": "1dfcefd604a19c443f9a67068b82e684dda92cc914c69fec9e5b5db2cef8189f",
+      "bytes": 49764
     },
     "embed_all_media_and_sections.py": {
       "sha256": "254ff7f48b0e88a6428abf7aa26ef8ee58e73b611c4972f4a2758b7997f7a336",
@@ -3737,12 +3737,12 @@
       "bytes": 11307
     },
     "papers/collection.md": {
-      "sha256": "de9c869053811f0f32fd6d7419723161e1d5cc71da669b19dcb419c9c1e89de3",
-      "bytes": 27411
+      "sha256": "4a4888966f34c0ec770c2db767d7e050c1af50cf4956458391b46b18e512e6e9",
+      "bytes": 27784
     },
     "papers/docas.md": {
-      "sha256": "3e5d3c757ef85e178be66c9a001ee0a34de46f1e511f3a3b5a43d1d2006c51d3",
-      "bytes": 316299
+      "sha256": "a6ead5d09674f12ab88070bf541d263bf0eb7af0e0b897cfcc0e5a5a5a7b3492",
+      "bytes": 317192
     },
     "papers/gtt.md": {
       "sha256": "09aa2c3f450536c6cb1cc02994eea8895e6d6ec4fc50d97ba9bad688804ff399",

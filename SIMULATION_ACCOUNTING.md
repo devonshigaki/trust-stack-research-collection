@@ -495,5 +495,29 @@ Implemented in `experiments/simulations_repair_era/criticality/sim_crit3_bayes_f
 - **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
 - **Artifacts**: `experiments/simulations_repair_era/criticality/sim_crit3_bayes_factor_comparison.py`, `sim_crit3_results.json`, `fig_crit3_bayes_factors.png`.
 
-## WW. The one handoff that closes everything
+## WW. Sim WEARABLE-TRIAD: Multi-Rate Biosensor Fusion (Version 4.3)
+Implemented in `experiments/wearables_pipeline/sim_wearable_triad_sensor_fusion.py`. Integrates the Wearable Triad across multiple asynchronous physiological timescales: Muse S Athena (fNIRS @ 64 Hz, EEG @ 256 Hz; sub-second), Apple Watch Series 8 Model MNU73LL/A (PPG @ 1 Hz, dual-temp; seconds-to-hours), and Dexcom Stelo (CGM @ 5-min intervals; minutes-to-days).
+- **C1 Multi-Rate Timescale Separation**: Proves $\tau_{\text{EEG}} (0.2\text{s}) < \tau_{\text{fNIRS}} (3.5\text{s}) < \tau_{\text{PPG}} (15\text{s}) < \tau_{\text{CGM}} (18\text{min})$ (**PASS**).
+- **C2 Asynchronous Extended Kalman Filter Convergence**: Fused 5-channel state vector reconstructs latent trust with $R \ge 0.90$ across all sampling cadences (**PASS**).
+- **C3 Sequestration Wall Integrity**: Zero biometric features leak into credit scoring schemas (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/wearables_pipeline/SIM_WEARABLE_TRIAD_PRE_REGISTRATION.md`, `sim_wearable_triad_sensor_fusion.py`, `sim_wearable_triad_results.json`, `fig_wearable_triad_fusion.png`.
+
+## XX. Sim PERSUADE-1: Lindquist-Watson Agential Convergence & Mutual Persuasion ODE (Version 4.3)
+Implemented in `experiments/simulations_repair_era/agency/sim_persuade1_mutual_persuasion.py`. Simulates the interoceptive-agential loop between Kristen Lindquist's predictive allostasis and Richard A. Watson's complex evolutionary systems.
+- **C1 Allostatic Overload Prevention**: Eliminates top-down dictatorial command overload by $3.98\times \ge 3.00\times$ (**PASS**).
+- **C2 Energetic Dissipation Suppression**: Suppresses reflexive kinetic dissipation by $14.11\times \ge 2.00\times$ (**PASS**).
+- **C3 Joint Free Energy Minimization**: Symmetrical mutual persuasion drops joint free energy by $-24.72\% \le -20.0\%$ ($p = 3.05 \times 10^{-115}$) (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `experiments/simulations_repair_era/agency/SIM_PERSUADE1_PRE_REGISTRATION.md`, `sim_persuade1_mutual_persuasion.py`, `sim_persuade1_results.json`, `fig_persuade1_lindquist_watson.png`.
+
+## YY. Sim PILOT-1: End-to-End 30-Day Multimodal Pre-Flight Mock Trial Simulator (Version 4.3)
+Implemented in `experiments/wearables_pipeline/simulate_30day_dense_pilot.py`. Pre-validates the 30-day Stage 1 dense phenotyping trial ($N = 1 \times 30\text{ days} = 8,640\text{ epochs}$) across all 8 synchronized streams.
+- **C1 Confounder Residualization**: Convolving logged carbohydrate meals with postprandial clearance eliminates $94.34\% \ge 85.0\%$ of dietary glucose noise ($R^2 = 0.9434$), isolating pure stress glycogenolysis (**PASS**).
+- **C2 Parameter Recovery**: Recovers true learning parameter with zero error: $|\hat{\lambda} - \lambda| = 0.0000 \le 0.0250$ (**PASS**).
+- **C3 Multi-Day Stabilization Recovery**: Recovers true serotonergic relaxation constant $\hat{\tau}_{\text{relax}} = 2.85\text{ days} \in [2.00, 4.00\text{ days}]$ with $R = -1.0000$ (**PASS**).
+- **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
+- **Artifacts**: `DOCAS_PILOT_1_PROOF_OF_CONCEPT.md`, `simulate_30day_dense_pilot.py`, `sim_pilot1_results.json`, `fig_pilot1_30day_mock_trajectory.png`.
+
+## ZZ. The one handoff that closes everything
 Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13_manifest.json`, `concepts.json`, `clics_dist.npy`, result JSONs, `run_full_pipeline.sh`, `*_firstrun_bug.json` files) + `Supporting Document — Statistical Verification and Significance Appendix.md` + `Simulation Pipeline — Replication and Build Guide.md` + the three pre-registration documents. With those we (a) re-run every original script for the manifest's bit-identity acceptance test, and (b) have the exact material to deposit to OSF and close the 15 `[OSF DOI pending]` placeholders — the single biggest remaining review finding.
