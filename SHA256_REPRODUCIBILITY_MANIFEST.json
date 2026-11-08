@@ -4,10 +4,14 @@
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3",
-  "total_files_hashed": 1358,
-  "total_manifest_size_mb": 238.83,
+  "total_files_hashed": 1359,
+  "total_manifest_size_mb": 238.85,
   "automated_ci_tasks_verified": 26,
   "files": {
+    "DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
+      "sha256": "fa007da1f9c811482834ac06770eb8cd218285458a64aa533e557ccc07b51a93",
+      "bytes": 16680
+    },
     "README.md": {
       "sha256": "fa6e1c4555bcb0c528015f85bc671201c583ee8a9feff4a21b2d3bd0b88dd9db",
       "bytes": 5961
@@ -17,8 +21,8 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "2a2f37b2b0f59c686a2859f5606133fae64142b0fab2c9df71b54d4578f8c728",
-      "bytes": 238726
+      "sha256": "87a7b9ad999511bcddc7723f6c56f664fa30b8ec77501370be851e9518fa38d2",
+      "bytes": 238895
     },
     "SIMULATION_ACCOUNTING.md": {
       "sha256": "c86b7b77e31fbff860ceee88444c66c0657765f8b2a9967788944a267ff1f84c",
@@ -2905,8 +2909,8 @@
       "bytes": 9331
     },
     "experiments/simulations_repair_era/criticality/sim_crit2_results.json": {
-      "sha256": "caf2ce21ba28d6f5166c0446aada364aef900b19a18075c043a9abc976ab18e2",
-      "bytes": 450
+      "sha256": "024f181ba53bcbda48c7bf2ed96c0942d48e6a848ce1c726a2be0118d1f5de8d",
+      "bytes": 464
     },
     "experiments/simulations_repair_era/criticality/sim_crit3_bayes_factor_comparison.py": {
       "sha256": "63dde526c6c02c9231ea0aa0ec2b0e37e5a063680efe088c4a375e843e173851",
