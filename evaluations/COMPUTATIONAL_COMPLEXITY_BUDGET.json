@@ -165,6 +165,14 @@
         "electrical_heart": "Single-lead ECG"
       },
       "integration_pipeline": "Apple HealthKit edge store (libSQL encrypted on-device database; zero cloud upload)"
+    },
+    "metabolic_glucose_cgm": {
+      "device": "Dexcom Stelo Glucose Biosensor (Continuous Glucose Monitor)",
+      "sensor": "Enzymatic subcutaneous interstitial glucose filament (15-day wear lifespan)",
+      "sampling_cadence_minutes": 5,
+      "deployment_schedule": "Two consecutive 15-day sensors (30 days total in Phase 1 dense phenotyping)",
+      "measurement_target": "Interstitial glucose concentration (mg/dL) and flux (dG/dt) capturing glucocorticoid-mediated hepatic glycogenolysis",
+      "integration_pipeline": "Apple HealthKit / Dexcom Share edge ingestion into libSQL"
     }
   }
 }

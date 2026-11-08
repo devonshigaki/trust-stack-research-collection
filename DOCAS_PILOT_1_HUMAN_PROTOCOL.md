@@ -20,18 +20,18 @@ Stage 2: Cross-Subject  | N = 3      | 10 Days  | 30 Person-Days | Anatomical va
 Stage 3: Reliability   | N = 10     | 3 Days   | 30 Person-Days | Multi-day test-retest reliability & S-channel decay
 Stage 4: Population CLT | N = 30     | 1 Day    | 30 Person-Days | Central Limit Theorem normative distribution & power
 ========================================================================================================================
-TOTAL ENROLLMENT: 44 Unique Human Subjects | EXACT VOLUME: 120 Person-Days | HARDWARE: Muse Athena + Apple Watch S8
+TOTAL ENROLLMENT: 44 Unique Human Subjects | EXACT VOLUME: 120 Person-Days | HARDWARE TRIAD: Muse Athena + Apple Watch S8 + Dexcom Stelo
 ========================================================================================================================
 ```
 
 ---
 
-## 2. Dedicated Hardware Instrumentation Specifications
+## 2. Dedicated Hardware Instrumentation Specifications (The Wearable Triad)
 
 ### A. Prefrontal Cortical Hemodynamics & Neural Synchrony (Headband)
 *   **Device:** **Muse S Athena Headband** (Newest Generation with integrated fNIRS).
 *   **Sensors:** 5-optode bilateral prefrontal functional Near-Infrared Spectroscopy (fNIRS) array + 4-channel gold/silver-thread EEG (AF7, AF8, TP9, TP10) + reference/ground (Fpz).
-*   **Optical Optical Wavelengths:** Triple-wavelength near-infrared LEDs: $\lambda_1 = 730\text{ nm}$, $\lambda_2 = 850\text{ nm}$, and $\lambda_3 = 660\text{ nm}$.
+*   **Optical Wavelengths:** Triple-wavelength near-infrared LEDs: $\lambda_1 = 730\text{ nm}$, $\lambda_2 = 850\text{ nm}$, and $\lambda_3 = 660\text{ nm}$.
 *   **Sampling Frequencies:** fNIRS sampled at $64\text{ Hz}$; EEG sampled at $256\text{ Hz}$.
 *   **Biophysical Target:** Measures real-time molar concentration shifts of oxygenated and deoxygenated hemoglobin ($\Delta [\mathrm{HbO}_2]$ and $\Delta [\mathrm{HbR}]$ in $\mu\mathrm{M}$) in the medial prefrontal cortex (mPFC / Brodmann Area 10/32) via the Modified Beer-Lambert Law (MBLL).
 *   **Usage Window:** Discrete active task epochs ($10\text{--}15\text{ minutes}$ during structured financial offer evaluation or transaction logging).
@@ -44,6 +44,13 @@ TOTAL ENROLLMENT: 44 Unique Human Subjects | EXACT VOLUME: 120 Person-Days | HAR
     2.  *Dual-Temperature Sensing Array:* High-precision negative temperature coefficient (NTC) thermistors on back crystal and under display, tracking basal sleeping wrist temperature deviations at $0.01^\circ\mathrm{C}$ resolution.
     3.  *Blood Oxygen Sensor:* SpO2 optical sensor (green, red, and infrared LED cluster).
 *   **Usage Window:** Continuous 24/7 ambulatory monitoring (daytime baseline vagal tone, physical activity bursts, and overnight circadian sleep architecture).
+
+### C. Interstitial Glycemic Flux & Glucocorticoid Mobilization (Biosensor)
+*   **Device:** **Dexcom Stelo Glucose Biosensor** (Continuous Glucose Monitor / CGM).
+*   **Form Factor & Deployment:** Subcutaneous enzymatic interstitial filament worn on the back of the upper arm; $15\text{-day}$ wear lifespan per sensor. Deployed across **two consecutive 15-day sensors** for the entire $30\text{-day}$ duration of the Stage 1 dense phenotyping protocol ($N = 1 \times 30\text{ days}$).
+*   **Sampling Cadence:** Automated reading every $5\text{ minutes}$ ($288\text{ readings/day}$; $8,640\text{ measurements}$ across the 30-day trial).
+*   **Biophysical Target:** Measures interstitial glucose concentration ($G_t\text{ in mg/dL}$) and rate of change ($dG/dt$). Captures glucocorticoid-mediated hepatic glycogenolysis: acute psychological betrayal ($\varepsilon < 0$) activates the HPA axis, dumping glucose into circulation with a physiological delay of $\tau \in [15, 45\text{ minutes}]$ in the absence of caloric intake.
+*   **Allosteric Substrate Grounding:** Directly tracks systemic cellular energy reserves (ATP availability) required by Adenylyl Cyclase (ADCY) to synthesize the $MA = 14$ cAMP prediction error token.
 
 ---
 
@@ -66,8 +73,9 @@ O: Validation          | Apple Watch S8 (MNU73LL/A)             | • Post-event
                        |                                        | • Positive prediction confirmation (ε > 0|
 -----------------------+----------------------------------------+------------------------------------------+--------------------
 C: Recognition         | Apple Watch S8 (MNU73LL/A)             | • Nocturnal wrist temp drift (ΔT ± 0.01°C| Cohorts 1, 2, 3
-   (Cortisol / Stress) | Muse S Athena (fNIRS)                  | • Chronic baseline HRV SDNN depression   | (Requires multi-day
-                       |                                        | • Sustained frontal Δ[HbR] elevation     | nocturnal sleep)
+   (Cortisol / Stress) | Dexcom Stelo CGM (5-min cadence)       | • Interstitial glucose surge (dG/dt > 0) | (★ Dexcom Stelo in
+   & Metabolic Fuel    | Muse S Athena (fNIRS)                  | • Chronic baseline HRV SDNN depression   |    Cohort 1: 30 days)
+                       |                                        | • Sustained frontal Δ[HbR] elevation     |
 -----------------------+----------------------------------------+------------------------------------------+--------------------
 A: Activation          | Apple Watch S8 (MNU73LL/A)             | • Acute tachycardic spike (ΔHR ≥ 15 bpm) | Cohorts 1, 2, 3, 4
    (Norepinephrine)    | Muse S Athena (EEG)                    | • Tri-axial accelerometer kinetic energy | (All stages)
@@ -101,6 +109,11 @@ Because serotonin-mediated stabilization operates on a physiological timescale o
 |   | (Model MNU73LL/A PPG) |       (On-device XML exporter)     |      LOCAL DUCKDB / libSQL       |   |
 |   +-----------------------+                                    |   (Encrypted per-tenant edge)    |   |
 |                                                                +----------------------------------+   |
+|   +-----------------------+     Dexcom Share API / HealthKit                    ^                     |
+|   |   DEXCOM STELO CGM    | --------------------------------->                  |                     |
+|   | (5-min glucose dG/dt) |     (Interstitial glucose flux)                     |                     |
+|   +-----------------------+                                                     |                     |
+|                                                                                 |                     |
 |   +-----------------------+     Plaid OAuth 2.0 Link                            |                     |
 |   |  FINANCIAL TRANSACTIONS| --------------------------------->                 v                     |
 |   | (Spend, due dates)    |     (Zero bank credentials stored) |    KALMAN / EM TRUST ESTIMATOR   |   |
