@@ -4,8 +4,8 @@
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3",
-  "total_files_hashed": 2022,
-  "total_manifest_size_mb": 415.4,
+  "total_files_hashed": 2023,
+  "total_manifest_size_mb": 415.41,
   "automated_ci_tasks_verified": 26,
   "files": {
     "DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
@@ -21,8 +21,8 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "8b29dbbecd1514b1dd6895e055a917f85b1ea61d3494ba4d6930d06f8ac2d06c",
-      "bytes": 379738
+      "sha256": "fe914b4afb10e704efea09c54498a58bedf7c378ac0026cf6688a7d747c10d63",
+      "bytes": 380691
     },
     "SIMULATION_ACCOUNTING.md": {
       "sha256": "c86b7b77e31fbff860ceee88444c66c0657765f8b2a9967788944a267ff1f84c",
@@ -1149,12 +1149,16 @@
       "bytes": 2841
     },
     "evaluations/COMPUTATIONAL_COMPLEXITY_BUDGET.json": {
-      "sha256": "7e9e11c709e48072a860bc4b23fc8710521a7b8b84638a0c02bfab9c8915db55",
-      "bytes": 9470
+      "sha256": "c962714a58d9302cec94a922e5871219e192cbb0dc46e8e69956a06dedc25037",
+      "bytes": 9570
     },
     "evaluations/MULTI_RUBRIC_COMPREHENSIVE_BENCHMARK.md": {
       "sha256": "191301ed095a399b809036ebba794ff3f8e3bea75fd232dbc74bccf5a318aa91",
       "bytes": 5048
+    },
+    "evaluations/STATE_TRANSITION_ACCOUNTING.json": {
+      "sha256": "a9d92b75c1f99f4e2e918ee150575b5df7d7a95cc974aefb9dcaeee988e9f98b",
+      "bytes": 5306
     },
     "evaluations/multi_rubric_evaluator.py": {
       "sha256": "195fa61ff404513a026e4a19ac1829e8d39ef447727b9a9be335d5b2533564f2",

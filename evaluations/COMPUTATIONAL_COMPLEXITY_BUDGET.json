@@ -13,7 +13,9 @@
     },
     "total_suite_runtime_seconds": 23.4,
     "energy_consumption_kwh": 0.00015,
-    "carbon_footprint_g_co2e": 0.05
+    "carbon_footprint_g_co2e": 0.05,
+    "total_cumulative_state_transitions": 7216747186,
+    "total_state_transitions_billion": 7.217
   },
   "computational_complexity_table": [
     {

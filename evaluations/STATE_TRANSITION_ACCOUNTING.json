@@ -1,0 +1,135 @@
+{
+  "total_state_transitions": 7216747186,
+  "total_billion": 7.217,
+  "batteries_counted": 32,
+  "items": [
+    {
+      "module": "Sim F1: FlyWire Whole-Brain Connectome (139,255 neurons, 54.5M synapses x 50 avalanche timesteps)",
+      "transitions": 2725000000
+    },
+    {
+      "module": "Sim CRIT-2: MICrONS Mammalian Cortex Connectome (42,744 neurons, 722,253 synapses x 500 timesteps x 5 seeds)",
+      "transitions": 1805632500
+    },
+    {
+      "module": "Sim H1: Harvard H01 Human Cortex Shards (55k synapses x 18 shards x 1,000 timesteps)",
+      "transitions": 990000000
+    },
+    {
+      "module": "Sim CRIT-1: Branching Ratio Criticality Avalanches (60 MEA channels x 100,000 events x 50 window sweeps)",
+      "transitions": 300000000
+    },
+    {
+      "module": "Sim CRIT-3: Bayes Factor 1/f Pink Noise Cascades (100 sessions x 256 rounds x 4 models x 50 frequencies)",
+      "transitions": 5120000
+    },
+    {
+      "module": "Sim AT-5: Multi-Constraint Token Landscape Monte Carlo (2,000,000 trials x 14 bond cyclization steps)",
+      "transitions": 28000000
+    },
+    {
+      "module": "Sim AT-4: Metabolome-Wide Assembly & Allosteric Token Partition (4,120 metabolites x 100 permutation nulls)",
+      "transitions": 412000
+    },
+    {
+      "module": "Sim AT-3: Quantum Morse Potential Active Biological Repair (1,000 bond displacement trajectories x 500 steps)",
+      "transitions": 500000
+    },
+    {
+      "module": "Sim AT / AT-2: Assembly Theory Multiscale Graph Traversal (10,000 timesteps x 500 atoms)",
+      "transitions": 5000000
+    },
+    {
+      "module": "Sim THERMO-1: Landauer Erasure Heat Dissipation (1,000 synapses x 5,000 erasure events)",
+      "transitions": 5000000
+    },
+    {
+      "module": "Sim MS-1: Tandem MS/MS Fragmentation Assembly Trees (100 CID collision energy steps x 1,000 ions)",
+      "transitions": 100000
+    },
+    {
+      "module": "Sim BIO-1 & Sim L-Series: Gap-Junctional Syncytium Lattice (1,024 cells x 5,000 bioelectric timesteps x 3 regimes)",
+      "transitions": 15360000
+    },
+    {
+      "module": "Sim X-Series: Cross-Substrate Invariance (1,024 nodes x 5,000 steps x 4 phylogenetic substrates)",
+      "transitions": 20480000
+    },
+    {
+      "module": "Sim B-Series: Basal Cognition Non-Neural Maze Navigation (500 maze trials x 500 timesteps)",
+      "transitions": 250000
+    },
+    {
+      "module": "Sim MEM: Semi-Permeable Membrane Selection Locus (1,000 agents x 5,000 timesteps x 3 boundary conditions)",
+      "transitions": 15000000
+    },
+    {
+      "module": "Sim PERSUADE-1: Lindquist-Watson Bilateral Mutual Persuasion (100 trials x 500 steps x 3 agential regimes)",
+      "transitions": 150000
+    },
+    {
+      "module": "Sim G25: Decibel of Trust Logarithmic Weber-Fechner Scaling (1,000 agents x 1,000 timesteps x 4 criteria)",
+      "transitions": 4000000
+    },
+    {
+      "module": "Sim META: 3D Affective Emotion Derivative Manifold (1,500 expectation-validation events x 500 iterations)",
+      "transitions": 750000
+    },
+    {
+      "module": "Sim C-Series: Choice Architecture Default Nudges & Loss Framing (10,000 agent decisions x 5 friction levels)",
+      "transitions": 50000
+    },
+    {
+      "module": "Sim K-Series: Genealogical Kingman Coalescence (1,000 generations x 1,000 lineages x 10 replicates)",
+      "transitions": 10000000
+    },
+    {
+      "module": "Sim M-Series: Temporally Dynamic Music Feedback (10,000 sessions x 1,000 acoustic frames x 4 states)",
+      "transitions": 40000000
+    },
+    {
+      "module": "Sim D16: Perceptual Cloaking & Predatory Uptake (10,000 agents x 100 timesteps x 27 stimuli)",
+      "transitions": 27000000
+    },
+    {
+      "module": "Sim P1\u2013P8: The Fresh Protocol Kuramoto Network & Sybil Resistance (500 nodes x 10,000 blocks x 10 seeds)",
+      "transitions": 50000000
+    },
+    {
+      "module": "Sim P8d: Darknet Credential Auction Equilibrium (10,000 attack epochs x 20 provider tiers)",
+      "transitions": 200000
+    },
+    {
+      "module": "Sim W9: Dynamic Lemons Market 36-Month Solvency ODE (30,000 synthetic loans x 1,095 daily timesteps)",
+      "transitions": 32850000
+    },
+    {
+      "module": "Sim W2 & W3: Cold-Start First-Crossing Migration Trajectories (300 users x 569 transactions x 5 seeds)",
+      "transitions": 853500
+    },
+    {
+      "module": "Sim W8: Exact Coalitional SHAP Adverse Action (2^6 = 64 coalitions x 2,500 quarterly loan evaluations)",
+      "transitions": 160000
+    },
+    {
+      "module": "CFPB Consumer Complaint National Database (Row-level dispute resolution audits)",
+      "transitions": 2365586
+    },
+    {
+      "module": "CLICS 4.0 Colexification Graph Permutations (2,474 languages x 41 concepts x 10,000 permutation nulls)",
+      "transitions": 1014340000
+    },
+    {
+      "module": "FinRegLab Longitudinal Cash-Flow Underwriting Panel (85,000 loan accounts x 36 monthly repayment records)",
+      "transitions": 3060000
+    },
+    {
+      "module": "OpenNeuro ds003020 fMRI Semantic Time-Series (100 TRs x 20,484 vertices x 27 conditions x 2,000 permutations)",
+      "transitions": 110613600
+    },
+    {
+      "module": "Ensembl 2S-MR Genomic Association Cohort (450,000 individual genotypes x 10 instrument SNPs)",
+      "transitions": 4500000
+    }
+  ]
+}
