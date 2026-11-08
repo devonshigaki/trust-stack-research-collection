@@ -186,6 +186,12 @@ TASKS = [
         "name": "Sim WEARABLE-TRIAD: Multi-Rate Biosensor Fusion (Muse Athena, Apple Watch S8, Dexcom Stelo)",
         "script": "experiments/wearables_pipeline/sim_wearable_triad_sensor_fusion.py",
         "workdir": "experiments/wearables_pipeline"
+    },
+    {
+        "tier": "Tier 1: Simulation",
+        "name": "Sim PERSUADE-1: Lindquist-Watson Agential Convergence & Mutual Persuasion ODE",
+        "script": "experiments/simulations_repair_era/agency/sim_persuade1_mutual_persuasion.py",
+        "workdir": "experiments/simulations_repair_era/agency"
     }
 ]
 

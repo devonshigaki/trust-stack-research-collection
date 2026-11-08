@@ -4,8 +4,8 @@
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3",
-  "total_files_hashed": 2017,
-  "total_manifest_size_mb": 414.48,
+  "total_files_hashed": 2022,
+  "total_manifest_size_mb": 415.4,
   "automated_ci_tasks_verified": 26,
   "files": {
     "DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
@@ -21,8 +21,8 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "000791744e76be4bfb066e281815f5c21c227ed2701075b42743559ef126d3d9",
-      "bytes": 378815
+      "sha256": "8b29dbbecd1514b1dd6895e055a917f85b1ea61d3494ba4d6930d06f8ac2d06c",
+      "bytes": 379738
     },
     "SIMULATION_ACCOUNTING.md": {
       "sha256": "c86b7b77e31fbff860ceee88444c66c0657765f8b2a9967788944a267ff1f84c",
@@ -49,8 +49,8 @@
       "bytes": 3953
     },
     "run_tier1_tier2_suite.py": {
-      "sha256": "c82da9fe52b8017f091381ad2a469663da0b79eeb0940ce62092d11e1fbda084",
-      "bytes": 9710
+      "sha256": "873ae5f886fa3a3b6f2a32cbeb541f551ce96d739eca4919902fe7b1636ac17a",
+      "bytes": 10019
     },
     "technical-appendix/AMP_SERIES_RUN_REPORT.md": {
       "sha256": "d19ea32b29854cc1d76843688c00f7c04f20c8ff0f30b6d2fac4eb72c8904120",
@@ -3733,8 +3733,8 @@
       "bytes": 27411
     },
     "papers/docas.md": {
-      "sha256": "a007961c3635c36b26bc11bb882d1eae28e4848f7c27959c5ade4f598401db12",
-      "bytes": 311664
+      "sha256": "3e5d3c757ef85e178be66c9a001ee0a34de46f1e511f3a3b5a43d1d2006c51d3",
+      "bytes": 316299
     },
     "papers/gtt.md": {
       "sha256": "09aa2c3f450536c6cb1cc02994eea8895e6d6ec4fc50d97ba9bad688804ff399",
@@ -4483,6 +4483,10 @@
     "papers/figures/fig_patch1_hcn_shunting.png": {
       "sha256": "a119c233c7d97ccfd86519275562763da33c8a92d024aabb565776c6c8f80fbc",
       "bytes": 322999
+    },
+    "papers/figures/fig_persuade1_lindquist_watson.png": {
+      "sha256": "c2c85f74f604f46eab52cbb7f409aabb7ec507f98f35bdd9fd0cb748f5ad5adc",
+      "bytes": 470732
     },
     "papers/figures/fig_phasemap_control.png": {
       "sha256": "d87f8a0860fbf96731dc3df8140c32d2ad7548ac3897c0d782b437dffd293117",
@@ -5315,6 +5319,22 @@
     "experiments/simulations_repair_era/sim_visual_diagrams/13_sim_o_optogenetics.png": {
       "sha256": "92f44f2867106cb9437795eeb4b9baa4fb92b6f353725db67d4789bd82423de9",
       "bytes": 702372
+    },
+    "experiments/simulations_repair_era/agency/SIM_PERSUADE1_PRE_REGISTRATION.md": {
+      "sha256": "f80849fe2394c79f64dc9ab6f012566fd911040b399ef533fd53e6a7be13e7b5",
+      "bytes": 4463
+    },
+    "experiments/simulations_repair_era/agency/fig_persuade1_lindquist_watson.png": {
+      "sha256": "c2c85f74f604f46eab52cbb7f409aabb7ec507f98f35bdd9fd0cb748f5ad5adc",
+      "bytes": 470732
+    },
+    "experiments/simulations_repair_era/agency/sim_persuade1_mutual_persuasion.py": {
+      "sha256": "5bf9c6569b640565878ba8ea2bbaea4e4782cf5101097ecd9b149a0afd72253d",
+      "bytes": 10019
+    },
+    "experiments/simulations_repair_era/agency/sim_persuade1_results.json": {
+      "sha256": "0167c0f0953872ce69cd22f8af223465d3cd4b582f6c47eaaafb7a23325646b7",
+      "bytes": 394
     },
     "experiments/simulations_repair_era/cross_substrate/SIM_X_SERIES_PRE_REGISTRATION.md": {
       "sha256": "2255aa5778a6aa6179fc1f00c2898ef56a5e95c7e4f7b8bbe7d604f8157cc6af",
