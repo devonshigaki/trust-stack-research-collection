@@ -4,8 +4,8 @@
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3",
-  "total_files_hashed": 2012,
-  "total_manifest_size_mb": 413.85,
+  "total_files_hashed": 2017,
+  "total_manifest_size_mb": 414.48,
   "automated_ci_tasks_verified": 26,
   "files": {
     "DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
@@ -21,7 +21,7 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "412be52355907b2bb24f4f202b7a3a21e52e090241281c1b70bde7b32d805b1a",
+      "sha256": "000791744e76be4bfb066e281815f5c21c227ed2701075b42743559ef126d3d9",
       "bytes": 378815
     },
     "SIMULATION_ACCOUNTING.md": {
@@ -49,8 +49,8 @@
       "bytes": 3953
     },
     "run_tier1_tier2_suite.py": {
-      "sha256": "eb8e51a3b30816f1663d406840977ac93edfd327e406202641fc0a8fa411debd",
-      "bytes": 9408
+      "sha256": "c82da9fe52b8017f091381ad2a469663da0b79eeb0940ce62092d11e1fbda084",
+      "bytes": 9710
     },
     "technical-appendix/AMP_SERIES_RUN_REPORT.md": {
       "sha256": "d19ea32b29854cc1d76843688c00f7c04f20c8ff0f30b6d2fac4eb72c8904120",
@@ -4796,6 +4796,26 @@
       "sha256": "ebd1661c23652b89c14bb0c8b59b1932d096ed79a21652931d720c84fc27399c",
       "bytes": 7637
     },
+    "experiments/wearables_pipeline/SIM_WEARABLE_TRIAD_PRE_REGISTRATION.md": {
+      "sha256": "0e4875d04ddaf9890e1223711024c1bf4190d46434bdfc00016759fd7f858a8c",
+      "bytes": 3185
+    },
+    "experiments/wearables_pipeline/fig_wearable_triad_fusion.png": {
+      "sha256": "da3374ef825135499444e9ff06525fda4f207af399532cb0a12d3ee6c06fb3f0",
+      "bytes": 644594
+    },
+    "experiments/wearables_pipeline/sim_wearable_triad_results.json": {
+      "sha256": "37276bf44836d25f7828a69d3c4909c579d6f8849b395d04bdc082d5f2d33848",
+      "bytes": 425
+    },
+    "experiments/wearables_pipeline/sim_wearable_triad_sensor_fusion.py": {
+      "sha256": "e37f89b429fe33792695452e513779a99f26a9bae76a3bfd6b1944688fe3c464",
+      "bytes": 10414
+    },
+    "experiments/wearables_pipeline/stream_muse_athena_libsql.py": {
+      "sha256": "e6c9f1ee929c3ffd056acdb46bca45485e90752be9acac9fcdbf8fbcdf422850",
+      "bytes": 7593
+    },
     "experiments/simf1_work/SIM_F1A2_AMENDMENT_1.md": {
       "sha256": "5e92329e20dac0104156a81a4810d074dd970205224520c2265002cc7c70669d",
       "bytes": 2463
@@ -5453,7 +5473,7 @@
       "bytes": 9331
     },
     "experiments/simulations_repair_era/criticality/sim_crit2_results.json": {
-      "sha256": "10de87ecb2688dd01d0cd8946b2d687ca3d9184303b797b75b10ccaf3589935c",
+      "sha256": "a1469881f67a1b0344002a38b824abcb0b383bced96bc4249f94f9d8cf210ee2",
       "bytes": 464
     },
     "experiments/simulations_repair_era/criticality/sim_crit3_bayes_factor_comparison.py": {

@@ -180,6 +180,12 @@ TASKS = [
         "name": "Multi-Rubric Integrity & Standards Verification (TOP, NeurIPS, Cochrane, APA, Huff)",
         "script": "evaluations/multi_rubric_evaluator.py",
         "workdir": "."
+    },
+    {
+        "tier": "Tier 1: Simulation",
+        "name": "Sim WEARABLE-TRIAD: Multi-Rate Biosensor Fusion (Muse Athena, Apple Watch S8, Dexcom Stelo)",
+        "script": "experiments/wearables_pipeline/sim_wearable_triad_sensor_fusion.py",
+        "workdir": "experiments/wearables_pipeline"
     }
 ]
 
