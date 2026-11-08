@@ -5,12 +5,12 @@
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3",
   "total_files_hashed": 2012,
-  "total_manifest_size_mb": 413.71,
+  "total_manifest_size_mb": 413.85,
   "automated_ci_tasks_verified": 26,
   "files": {
     "DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
-      "sha256": "db94c485f42eaad8b7260868f8ae03d5873129b9752a85048c8f3f2ebfc81d2b",
-      "bytes": 18588
+      "sha256": "c4eee00a0a2751f64ae08a62864cd5c3310b34b0612463557a7e5de270028f5e",
+      "bytes": 22803
     },
     "README.md": {
       "sha256": "fa6e1c4555bcb0c528015f85bc671201c583ee8a9feff4a21b2d3bd0b88dd9db",
@@ -21,8 +21,8 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "bfb56604af7aed8d0c7af17079631a086d19d5ad20076aceede43691a64c2bb6",
-      "bytes": 239048
+      "sha256": "412be52355907b2bb24f4f202b7a3a21e52e090241281c1b70bde7b32d805b1a",
+      "bytes": 378815
     },
     "SIMULATION_ACCOUNTING.md": {
       "sha256": "c86b7b77e31fbff860ceee88444c66c0657765f8b2a9967788944a267ff1f84c",
@@ -5453,7 +5453,7 @@
       "bytes": 9331
     },
     "experiments/simulations_repair_era/criticality/sim_crit2_results.json": {
-      "sha256": "9f84db3f4c271f9263f9183bd3b2131fc78845562ffe2a9fe43e423ec32a6703",
+      "sha256": "10de87ecb2688dd01d0cd8946b2d687ca3d9184303b797b75b10ccaf3589935c",
       "bytes": 464
     },
     "experiments/simulations_repair_era/criticality/sim_crit3_bayes_factor_comparison.py": {

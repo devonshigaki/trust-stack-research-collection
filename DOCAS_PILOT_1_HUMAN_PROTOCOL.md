@@ -52,6 +52,20 @@ TOTAL ENROLLMENT: 44 Unique Human Subjects | EXACT VOLUME: 120 Person-Days | HAR
 *   **Biophysical Target:** Measures interstitial glucose concentration ($G_t\text{ in mg/dL}$) and rate of change ($dG/dt$). Captures glucocorticoid-mediated hepatic glycogenolysis: acute psychological betrayal ($\varepsilon < 0$) activates the HPA axis, dumping glucose into circulation with a physiological delay of $\tau \in [15, 45\text{ minutes}]$ in the absence of caloric intake.
 *   **Allosteric Substrate Grounding:** Directly tracks systemic cellular energy reserves (ATP availability) required by Adenylyl Cyclase (ADCY) to synthesize the $MA = 14$ cAMP prediction error token.
 
+### D. Qualitative Affective Ground Truth & Subjective State (Apple Journal)
+*   **Instrumentation:** Apple Journal & Apple HealthKit State of Mind logging (`HKCategoryTypeIdentifierStateOfMind`).
+*   **Protocol:** Event-triggered logging at the exact moment of major financial transactions, contractual offer reviews, or significant subjective stress.
+*   **Data Fields:** Discrete valence rating (Pleasant to Unpleasant on a 7-point circumplex scale), perceived arousal, and free-text narrative context.
+*   **Epistemic Function:** Provides qualitative subjective ground truth to cross-validate against prefrontal fNIRS oxygenation and TRIBE v2 semantic sentiment embeddings.
+
+### E. Confounder Isolation Filters: Diet, Exercise & Smart Scale
+To ensure that physiological shifts are driven by psychological and financial trust events rather than physical confounders, the 30-day trial captures three objective control streams:
+1.  *Dietary Carbohydrate & Meal Logging (Glycemic Confounder Filter):* Timestamped intake of carbohydrates (grams), calories, and meal timing logged via HealthKit (`dietaryCarbohydrates`). Allows the analytical pipeline to mathematically isolate dietary postprandial glucose surges from acute stress-induced hepatic glucose dumps:
+    $$G_{\mathrm{stress}}(t) = G_{\mathrm{measured}}(t) - \hat{G}_{\mathrm{postprandial}}(t; \text{Carbs}, t_{\mathrm{meal}})$$
+2.  *Physical Exercise & Workout Tracking (Tachycardia Confounder Filter):* Continuous logging of workout sessions (`HKWorkout`), active calories burned (`activeEnergyBurned`), VO2 max, and movement accelerometer intensity. Allows the pipeline to residualize physical exertion tachycardia from psychological betrayal adrenaline surges:
+    $$\mathrm{HRV}_{\mathrm{stress}}(t) = \mathrm{HRV}_{\mathrm{measured}}(t) - \hat{\mathrm{HRV}}_{\mathrm{exertion}}(t; \text{METs}, t_{\mathrm{workout}})$$
+3.  *Smart Scale Anthropometrics (Somatic Stationarity):* Daily morning weighing under standardized conditions (fasted, post-void) syncing directly to Apple HealthKit: Body Mass (`bodyMass` in kg), Body Mass Index (`bodyMassIndex`), Body Fat Percentage (`bodyFatPercentage`), and Lean Body Mass (`leanBodyMass`). Certifies that 30-day baseline metabolic stationarity is maintained ($\Delta \text{BodyMass} \le \pm 2.0\%$).
+
 ---
 
 ## 3. Comprehensive Metric Mapping Across the 5 DOCAS Channels
@@ -96,43 +110,55 @@ Because serotonin-mediated stabilization operates on a physiological timescale o
 ## 4. Edge Software Architecture, Ingestion & Security
 
 ```
-+-------------------------------------------------------------------------------------------------------+
-|                                    USER DEVICE (THE DIGITAL MEMBRANE)                                  |
-|                                                                                                       |
-|   +-----------------------+     Bluetooth Low Energy (BLE)     +----------------------------------+   |
-|   |    MUSE S ATHENA      | ---------------------------------> |       BRAINFLOW / LSL DAQ        |   |
-|   |  (fNIRS @ 64Hz, EEG)  |    (Lab Streaming Layer 1.16)      | (Artifact cleaning, MBLL filter) |   |
-|   +-----------------------+                                    +----------------------------------+   |
-|                                                                                 |                     |
-|   +-----------------------+     HealthKit Private Edge Sync                     v                     |
-|   | APPLE WATCH SERIES 8  | ---------------------------------> +----------------------------------+   |
-|   | (Model MNU73LL/A PPG) |       (On-device XML exporter)     |      LOCAL DUCKDB / libSQL       |   |
-|   +-----------------------+                                    |   (Encrypted per-tenant edge)    |   |
-|                                                                +----------------------------------+   |
-|   +-----------------------+     Dexcom Share API / HealthKit                    ^                     |
-|   |   DEXCOM STELO CGM    | --------------------------------->                  |                     |
-|   | (5-min glucose dG/dt) |     (Interstitial glucose flux)                     |                     |
-|   +-----------------------+                                                     |                     |
-|                                                                                 |                     |
-|   +-----------------------+     Plaid OAuth 2.0 Link                            |                     |
-|   |  FINANCIAL TRANSACTIONS| --------------------------------->                 v                     |
-|   | (Spend, due dates)    |     (Zero bank credentials stored) |    KALMAN / EM TRUST ESTIMATOR   |   |
-|   +-----------------------+                                    |    ΔS = λ(V - E) State Engine    |   |
-|                                                                +----------------------------------+   |
-+-------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------+
+|                                        USER DEVICE (THE DIGITAL MEMBRANE)                                         |
+|                                                                                                                   |
+|   +-----------------------+     Bluetooth Low Energy (BLE)         +------------------------------------------+   |
+|   |    MUSE S ATHENA      | -------------------------------------> |           BRAINFLOW / LSL DAQ            |   |
+|   |  (fNIRS @ 64Hz, EEG)  |    (Lab Streaming Layer 1.16)          | (Artifact cleaning, MBLL transformation) |   |
+|   +-----------------------+                                        +------------------------------------------+   |
+|                                                                                         |                         |
+|   +-----------------------+     HealthKit Private Edge Sync                             v                         |
+|   | APPLE WATCH SERIES 8  | -------------------------------------> +------------------------------------------+   |
+|   | (Model MNU73LL/A PPG) |       (On-device XML / Swift)          |          LOCAL libSQL EDGE STORE         |   |
+|   +-----------------------+                                        |        (Encrypted AES-256-GCM)           |   |
+|                                                                    |                                          |   |
+|   +-----------------------+     Dexcom Share API / HealthKit       |  • Plaid financial transactions          |   |
+|   |   DEXCOM STELO CGM    | -------------------------------------> |  • Muse fNIRS (Δ[HbO₂], Δ[HbR])          |   |
+|   | (5-min glucose dG/dt) |     (Interstitial glucose flux)        |  • Apple Watch HRV (SDNN, RMSSD)         |   |
+|   +-----------------------+                                        |  • Nocturnal sleeping wrist temperature  |   |
+|                                                                    |  • Dexcom Stelo glucose flux (dG/dt)     |   |
+|   +-----------------------+     Apple Journal / HealthKit          |  • Apple Journal valence/arousal entries |   |
+|   |  APPLE JOURNAL & EMAs | -------------------------------------> |  • Dietary carbohydrate / calorie logs   |   |
+|   | (Valence/Arousal log) |     (Affective text ground truth)      |  • Exercise workout sessions (HKWorkout) |   |
+|   +-----------------------+                                        |  • Smart scale body mass & BMI logs      |   |
+|                                                                    +------------------------------------------+   |
+|   +-----------------------+     Smart Scale / HealthKit                                 |                         |
+|   |  SMART SCALE & DIET   | ------------------------------------->                      v                         |
+|   | (Weight, BMI, Carbs)  |     (Confounder isolation filters)     |        KALMAN / EM TRUST ESTIMATOR       |   |
+|   +-----------------------+                                        |        ΔS = λ(V - E) State Engine        |   |
+|                                                                    +------------------------------------------+   |
+|   +-----------------------+     Plaid OAuth 2.0 Link                                    |                         |
+|   |  FINANCIAL LEDGER     | ------------------------------------->                      v                         |
+|   | (Spend, due dates)    |     (Zero bank credentials stored)     |    USER-OWNED AUDITABLE CREDENTIAL       |   |
+|   +-----------------------+                                        |    (Zero cloud biometric leakage)        |   |
++-------------------------------------------------------------------------------------------------------------------+
 ```
 
 ### Data Pipeline Specifications:
 1.  **Optical Hemodynamics (fNIRS):**
     *   Ingested via `brainflow` (v5.12+) or `bleak` over BLE.
     *   Preprocessed with `mne-nirs` (v0.6+): Optical density conversion $\to$ bandpass filter ($0.01\text{--}0.20\text{ Hz}$) $\to$ Modified Beer-Lambert Law transformation using standard adult differential pathlength factor ($\text{DPF} = 6.0$).
-2.  **Heart Rate Variability (Apple HealthKit):**
-    *   Ingested via local HealthKit queries (`HKQuantityTypeIdentifierHeartRateVariabilitySDNN`, `HKQuantityTypeIdentifierHeartRate`).
+2.  **Heart Rate Variability & Autonomic Telemetry (Apple HealthKit):**
+    *   Ingested via local HealthKit queries (`HKQuantityTypeIdentifierHeartRateVariabilitySDNN`, `HKQuantityTypeIdentifierHeartRate`, `HKQuantityTypeIdentifierAppleSleepingWristTemperature`).
     *   Processed with `neurokit2`: Cleaned with automated ectopic beat interpolation; extracted time-domain (RMSSD, SDNN) and frequency-domain (HF, LF, LF/HF ratio) metrics.
-3.  **Cryptographic Security & Zero-Surveillance Architecture:**
-    *   All raw physiological waveforms stay strictly on the local device.
-    *   Stored in an encrypted `libSQL` / `DuckDB` database using AES-256-GCM.
-    *   Zero server-side telemetry or cloud database uploads; only cryptographic hashes of state checkpoints are anchored to the blockchain ledger.
+3.  **Confounder Residualization Pipeline:**
+    *   Dietary intake (`dietaryCarbohydrates`) subtracted from Stelo glycemic trends using a standard 2-hour postprandial clearance model, isolating non-dietary glucocorticoid mobilization.
+    *   Workout sessions (`HKWorkout`) masked from baseline HRV epochs, isolating psychological betrayal reactivity from physical exertion tachycardia.
+4.  **Cryptographic Security & Zero-Surveillance Architecture:**
+    *   All raw physiological waveforms, journal entries, and scale metrics stay strictly on the local device.
+    *   Stored exclusively in an encrypted **local libSQL database** using AES-256-GCM. Zero cloud telemetry. Zero third-party data leakage.
+    *   Only cryptographic Blake2b-256 hashes of mathematical state checkpoints are anchored to the blockchain ledger.
 
 ---
 
