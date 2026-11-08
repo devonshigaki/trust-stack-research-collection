@@ -192,6 +192,12 @@ TASKS = [
         "name": "Sim PERSUADE-1: Lindquist-Watson Agential Convergence & Mutual Persuasion ODE",
         "script": "experiments/simulations_repair_era/agency/sim_persuade1_mutual_persuasion.py",
         "workdir": "experiments/simulations_repair_era/agency"
+    },
+    {
+        "tier": "Tier 1: Simulation",
+        "name": "Sim PILOT-1: End-to-End 30-Day Multimodal Pre-Flight Mock Trial Runner",
+        "script": "experiments/wearables_pipeline/simulate_30day_dense_pilot.py",
+        "workdir": "experiments/wearables_pipeline"
     }
 ]
 

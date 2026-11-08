@@ -97,22 +97,47 @@ def init_libsql_schema(conn):
     """)
     print("✓ Local libSQL schema successfully verified and indexed.")
 
-def compute_modified_beer_lambert(od_730, od_850, dpf=6.0, interoptode_dist_cm=3.0):
+def compute_scholkmann_dpf(wavelength_nm: float, age_years: float = 30.0) -> float:
+    """
+    Computes wavelength- and age-dependent adult prefrontal Differential Pathlength Factor (DPF)
+    according to Scholkmann & Wolf (2013, J. Biomed. Opt. 18(10), 105004, Eq. 7):
+      DPF(λ, A) = 223.3 + 0.05624 * A^0.8493 - 5.723e-7 * λ^3 + 0.001245 * λ^2 - 0.9025 * λ
+    """
+    wl = float(wavelength_nm)
+    age = float(max(18.0, min(80.0, age_years)))
+    dpf = 223.3 + 0.05624 * (age ** 0.8493) - 5.723e-7 * (wl ** 3) + 0.001245 * (wl ** 2) - 0.9025 * wl
+    return float(np.clip(dpf, 3.5, 8.0))
+
+def compute_modified_beer_lambert(od_730, od_850, interoptode_dist_cm=3.0, age_years=30.0):
     """
     Modified Beer-Lambert Law (MBLL) calculation:
     Converts raw optical density changes at 730 nm and 850 nm into micromolar
     concentration shifts of oxygenated (HbO2) and deoxygenated (HbR) hemoglobin.
-    Extinction coefficients (cm^-1 / mM):
-    730 nm: eps_HbO2 = 0.44, eps_HbR = 1.34
-    850 nm: eps_HbO2 = 1.06, eps_HbR = 0.78
+    Extinction coefficients (cm^-1 / mM) from Wray et al. (1988):
+      730 nm: eps_HbO2 = 0.4328, eps_HbR = 1.3008
+      850 nm: eps_HbO2 = 1.0577, eps_HbR = 0.7818
+    Uses wavelength-specific Scholkmann & Wolf (2013) DPF(λ, A) to prevent chromophore cross-talk.
     """
-    eps_o1, eps_r1 = 0.44, 1.34 # 730 nm
-    eps_o2, eps_r2 = 1.06, 0.78 # 850 nm
-    denom = (eps_o2 * eps_r1 - eps_o1 * eps_r2) * interoptode_dist_cm * dpf
-    
-    delta_hbo2 = ((eps_r1 * od_850 - eps_r2 * od_730) / denom) * 1000.0 # micromolar
-    delta_hbr  = ((eps_o2 * od_730 - eps_o1 * od_850) / denom) * 1000.0
-    return delta_hbo2, delta_hbr
+    eps_o1, eps_r1 = 0.4328, 1.3008 # 730 nm
+    eps_o2, eps_r2 = 1.0577, 0.7818 # 850 nm
+
+    dpf_730 = compute_scholkmann_dpf(730.0, age_years)
+    dpf_850 = compute_scholkmann_dpf(850.0, age_years)
+
+    l_730 = interoptode_dist_cm * dpf_730
+    l_850 = interoptode_dist_cm * dpf_850
+
+    # Invert 2x2 system:
+    # [ΔOD_730 / l_730] = [eps_o1  eps_r1] [ΔHbO2]
+    # [ΔOD_850 / l_850]   [eps_o2  eps_r2] [ΔHbR ]
+    y1 = od_730 / l_730
+    y2 = od_850 / l_850
+    det = eps_o1 * eps_r2 - eps_r1 * eps_o2
+
+    delta_hbo2_mM = (eps_r2 * y1 - eps_r1 * y2) / det
+    delta_hbr_mM  = (-eps_o2 * y1 + eps_o1 * y2) / det
+
+    return float(delta_hbo2_mM * 1000.0), float(delta_hbr_mM * 1000.0)
 
 def run_pipeline_self_test(n_samples=50):
     print("=" * 80)
@@ -147,31 +172,46 @@ def run_pipeline_self_test(n_samples=50):
         hbo2, hbr = compute_modified_beer_lambert(od_730, od_850)
         sqi = 92.5 + np.random.normal(0, 2.0)
 
-        conn.execute(f"""
-        INSERT INTO muse_fnirs_stream (timestamp_posix, optode_pair, raw_od_730, raw_od_850, delta_hbo2_micromolar, delta_hbr_micromolar, sqi_percent)
-        VALUES ({t_sample}, 'AF7-AF8_mPFC', {od_730:.5f}, {od_850:.5f}, {hbo2:.4f}, {hbr:.4f}, {sqi:.1f});
-        """)
+        conn.execute(
+            """
+            INSERT INTO muse_fnirs_stream (timestamp_posix, optode_pair, raw_od_730, raw_od_850, delta_hbo2_micromolar, delta_hbr_micromolar, sqi_percent)
+            VALUES (?, 'AF7-AF8_mPFC', ?, ?, ?, ?, ?)
+            """,
+            (t_sample, round(float(od_730), 5), round(float(od_850), 5), round(float(hbo2), 4), round(float(hbr), 4), round(float(sqi), 1)),
+        )
 
     # Insert sample multi-modal row (Apple Watch, Stelo, Journal, Smart Scale)
-    conn.execute(f"""
-    INSERT INTO apple_watch_telemetry (timestamp_posix, heart_rate_bpm, rmssd_ms, sdnn_ms, sleeping_wrist_temp_c, spo2_percent)
-    VALUES ({t_now}, 68.4, 48.2, 54.1, 35.84, 98.5);
-    """)
+    conn.execute(
+        """
+        INSERT INTO apple_watch_telemetry (timestamp_posix, heart_rate_bpm, rmssd_ms, sdnn_ms, sleeping_wrist_temp_c, spo2_percent)
+        VALUES (?, 68.4, 48.2, 54.1, 35.84, 98.5)
+        """,
+        (t_now,),
+    )
 
-    conn.execute(f"""
-    INSERT INTO dexcom_stelo_cgm (timestamp_posix, glucose_mg_dl, dG_dt_rate, is_postprandial_flag)
-    VALUES ({t_now}, 94.2, 0.12, 0);
-    """)
+    conn.execute(
+        """
+        INSERT INTO dexcom_stelo_cgm (timestamp_posix, glucose_mg_dl, dG_dt_rate, is_postprandial_flag)
+        VALUES (?, 94.2, 0.12, 0)
+        """,
+        (t_now,),
+    )
 
-    conn.execute(f"""
-    INSERT INTO apple_journal_affect (timestamp_posix, valence_score, arousal_score, journal_text)
-    VALUES ({t_now}, 0.75, 0.30, 'Feeling focused and confident reviewing the loan terms.');
-    """)
+    conn.execute(
+        """
+        INSERT INTO apple_journal_affect (timestamp_posix, valence_score, arousal_score, journal_text)
+        VALUES (?, 0.75, 0.30, ?)
+        """,
+        (t_now, "Feeling focused and confident reviewing the loan terms."),
+    )
 
-    conn.execute(f"""
-    INSERT INTO confounder_filters (timestamp_posix, dietary_carbohydrates_g, dietary_calories_kcal, workout_active_calories, smart_scale_weight_kg, smart_scale_bmi)
-    VALUES ({t_now}, 45.0, 420.0, 310.0, 74.2, 22.8);
-    """)
+    conn.execute(
+        """
+        INSERT INTO confounder_filters (timestamp_posix, dietary_carbohydrates_g, dietary_calories_kcal, workout_active_calories, smart_scale_weight_kg, smart_scale_bmi)
+        VALUES (?, 45.0, 420.0, 310.0, 74.2, 22.8)
+        """,
+        (t_now,),
+    )
 
     conn.commit()
     print(f"✓ Ingested {n_samples} synchronized fNIRS and multimodal records into local libSQL.")

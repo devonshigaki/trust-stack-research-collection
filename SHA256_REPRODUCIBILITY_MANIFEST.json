@@ -4,13 +4,17 @@
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3",
-  "total_files_hashed": 2023,
-  "total_manifest_size_mb": 415.41,
+  "total_files_hashed": 2028,
+  "total_manifest_size_mb": 416.86,
   "automated_ci_tasks_verified": 26,
   "files": {
     "DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
       "sha256": "c4eee00a0a2751f64ae08a62864cd5c3310b34b0612463557a7e5de270028f5e",
       "bytes": 22803
+    },
+    "DOCAS_PILOT_1_PROOF_OF_CONCEPT.md": {
+      "sha256": "c03daac82220a7f5b8082f92e5b49940e87afd103903ca7c401a30921aeb7dd7",
+      "bytes": 5836
     },
     "README.md": {
       "sha256": "fa6e1c4555bcb0c528015f85bc671201c583ee8a9feff4a21b2d3bd0b88dd9db",
@@ -21,8 +25,8 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "fe914b4afb10e704efea09c54498a58bedf7c378ac0026cf6688a7d747c10d63",
-      "bytes": 380691
+      "sha256": "2e76f0896e4f24c8e7255627bd1afc2b93e64c8a469b14e1bac5ce1b3bbb7456",
+      "bytes": 380857
     },
     "SIMULATION_ACCOUNTING.md": {
       "sha256": "c86b7b77e31fbff860ceee88444c66c0657765f8b2a9967788944a267ff1f84c",
@@ -49,8 +53,8 @@
       "bytes": 3953
     },
     "run_tier1_tier2_suite.py": {
-      "sha256": "873ae5f886fa3a3b6f2a32cbeb541f551ce96d739eca4919902fe7b1636ac17a",
-      "bytes": 10019
+      "sha256": "cf8cc65fc186cf35b13d30ea59202358f24855802910fb63c4eb31a63c6af954",
+      "bytes": 10294
     },
     "technical-appendix/AMP_SERIES_RUN_REPORT.md": {
       "sha256": "d19ea32b29854cc1d76843688c00f7c04f20c8ff0f30b6d2fac4eb72c8904120",
@@ -4496,6 +4500,10 @@
       "sha256": "d87f8a0860fbf96731dc3df8140c32d2ad7548ac3897c0d782b437dffd293117",
       "bytes": 118152
     },
+    "papers/figures/fig_pilot1_30day_mock_trajectory.png": {
+      "sha256": "7b9cb798513a57905720776cc96aaac784de4d3fadaf5d3c9e788f319f672721",
+      "bytes": 749479
+    },
     "papers/figures/fig_sim_a1_adv_llm_dmn.png": {
       "sha256": "902666590c8733a27ed59c05e2c6206d5dbb3c682c42a07a543d1ba05c771b59",
       "bytes": 260238
@@ -4808,9 +4816,17 @@
       "sha256": "0e4875d04ddaf9890e1223711024c1bf4190d46434bdfc00016759fd7f858a8c",
       "bytes": 3185
     },
+    "experiments/wearables_pipeline/fig_pilot1_30day_mock_trajectory.png": {
+      "sha256": "7b9cb798513a57905720776cc96aaac784de4d3fadaf5d3c9e788f319f672721",
+      "bytes": 749479
+    },
     "experiments/wearables_pipeline/fig_wearable_triad_fusion.png": {
       "sha256": "da3374ef825135499444e9ff06525fda4f207af399532cb0a12d3ee6c06fb3f0",
       "bytes": 644594
+    },
+    "experiments/wearables_pipeline/sim_pilot1_results.json": {
+      "sha256": "d94f978232591b06a92da6ec7847e42888e508318721ad5f08064cc5e374875c",
+      "bytes": 409
     },
     "experiments/wearables_pipeline/sim_wearable_triad_results.json": {
       "sha256": "37276bf44836d25f7828a69d3c4909c579d6f8849b395d04bdc082d5f2d33848",
@@ -4820,9 +4836,13 @@
       "sha256": "e37f89b429fe33792695452e513779a99f26a9bae76a3bfd6b1944688fe3c464",
       "bytes": 10414
     },
+    "experiments/wearables_pipeline/simulate_30day_dense_pilot.py": {
+      "sha256": "e835210a2a7f8255595ce08ebfd9ef1331528220bd5890f31e6d346f2cef0851",
+      "bytes": 14810
+    },
     "experiments/wearables_pipeline/stream_muse_athena_libsql.py": {
-      "sha256": "e6c9f1ee929c3ffd056acdb46bca45485e90752be9acac9fcdbf8fbcdf422850",
-      "bytes": 7593
+      "sha256": "413da138f45f7509041a87590666e15c12937b7b5fd9c021f9e7e9328beb2fc0",
+      "bytes": 8943
     },
     "experiments/simf1_work/SIM_F1A2_AMENDMENT_1.md": {
       "sha256": "5e92329e20dac0104156a81a4810d074dd970205224520c2265002cc7c70669d",
