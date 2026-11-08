@@ -21,8 +21,8 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "87a7b9ad999511bcddc7723f6c56f664fa30b8ec77501370be851e9518fa38d2",
-      "bytes": 238895
+      "sha256": "0f361bc86bb00fa483749cc055348eb2e96ab03915ef650968978c4d122adb14",
+      "bytes": 239048
     },
     "SIMULATION_ACCOUNTING.md": {
       "sha256": "c86b7b77e31fbff860ceee88444c66c0657765f8b2a9967788944a267ff1f84c",
@@ -2909,7 +2909,7 @@
       "bytes": 9331
     },
     "experiments/simulations_repair_era/criticality/sim_crit2_results.json": {
-      "sha256": "024f181ba53bcbda48c7bf2ed96c0942d48e6a848ce1c726a2be0118d1f5de8d",
+      "sha256": "9f84db3f4c271f9263f9183bd3b2131fc78845562ffe2a9fe43e423ec32a6703",
       "bytes": 464
     },
     "experiments/simulations_repair_era/criticality/sim_crit3_bayes_factor_comparison.py": {

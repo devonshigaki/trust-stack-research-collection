@@ -1,0 +1,32 @@
+{
+ "OA": {
+  "active": 0,
+  "n": 43,
+  "mean_hz": 0.0,
+  "max": 0
+ },
+ "PAM": {
+  "active": 0,
+  "n": 307,
+  "mean_hz": 0.0,
+  "max": 0
+ },
+ "PPL1": {
+  "active": 0,
+  "n": 16,
+  "mean_hz": 0.0,
+  "max": 0
+ },
+ "MBON": {
+  "active": 1,
+  "n": 96,
+  "mean_hz": 0.01,
+  "max": 1
+ },
+ "KC": {
+  "active": 0,
+  "n": 5177,
+  "mean_hz": 0.0,
+  "max": 0
+ }
+}

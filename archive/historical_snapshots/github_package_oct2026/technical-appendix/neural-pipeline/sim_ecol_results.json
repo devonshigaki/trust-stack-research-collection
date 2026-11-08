@@ -1,0 +1,29 @@
+{
+  "experiment": "Sim ECOL: Ecological Carrying Capacity & Metabolic Phase Space",
+  "n_samples": 500,
+  "seed": 42,
+  "criteria": {
+    "C1_malthusian_bifurcation": {
+      "collapse_rate_extreme": 1.0,
+      "frozen_threshold": ">= 0.90 (90.0%)",
+      "verdict": "PASS"
+    },
+    "C2_global_sobol_sensitivity": {
+      "S_T_metabolism": 0.33243679832754763,
+      "S_T_weather": 0.007293771669232883,
+      "frozen_threshold": "Metabolism >= 0.50, Weather <= 0.15",
+      "verdict": "FAIL"
+    },
+    "C3_scale_free_social_clustering": {
+      "r2_powerlaw": 0.0,
+      "frozen_threshold": ">= 0.90",
+      "verdict": "FAIL"
+    },
+    "C4_pink_noise_signature": {
+      "psd_alpha": 2.1180219779464617,
+      "frozen_threshold": "alpha in [0.5, 1.5]",
+      "verdict": "FAIL"
+    }
+  },
+  "compound_verdict": "FAIL"
+}

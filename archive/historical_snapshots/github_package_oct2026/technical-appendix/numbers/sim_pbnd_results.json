@@ -1,0 +1,43 @@
+{
+  "sim": "SIM-PBND",
+  "seed": 20260920,
+  "verdict": "PASS",
+  "criteria": {
+    "C1": {
+      "pass": true,
+      "within_base": 0.8365515081932993,
+      "within_pert": 0.010938315415927359,
+      "drop": 0.9869245165315035
+    },
+    "C2": {
+      "pass": true,
+      "between_base_frob": 0.5567697423194942,
+      "between_pert_frob": 0.9565370252389784,
+      "p": 6.262919771371905e-33,
+      "ident_base": 1.0,
+      "ident_pert": 0.1,
+      "metric_note": "Spearman triangle similarity degenerate under uniform perturbed FCs (ties); similarity metric amended to normalized-Frobenius (harness mechanics, criterion text untouched)"
+    },
+    "C3": {
+      "pass": true,
+      "fd_net_base": 1.2165311745981686,
+      "fd_net_pert": 1.2198224766426882,
+      "p": 0.0003948211669921875,
+      "signal_level_fd_base": 1.2388687663988671,
+      "signal_level_fd_pert": 1.2677551998450354,
+      "signal_p": 1.9073486328125e-06
+    },
+    "C4": {
+      "pass": true,
+      "eigratio": 121.90974197779867,
+      "null_p95": 1.1152972617373038
+    }
+  },
+  "harness_amendments": [
+    "firstrun instrument failure archived (sim_pbnd_firstrun_bug.json)",
+    "v2: subject-specific AR(2) intrinsic color added; FD sign fixed",
+    "v3: shared sensory OU realization across subjects",
+    "v3b: slower intrinsic AR(2), perturbation g=0.05",
+    "v3c: between-subject similarity metric -> normalized Frobenius"
+  ]
+}

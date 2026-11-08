@@ -1,0 +1,40 @@
+{
+  "experiment": "Sim D16: Perceptual Cloaking & Predatory Uptake",
+  "seed": 42,
+  "n_agents": 1000,
+  "criteria_evaluations": {
+    "C1_visual_salience_asymmetry": {
+      "metric": "chi_predatory / chi_fair",
+      "observed": 0.8840609210008192,
+      "threshold": 2.5,
+      "mean_chi_predatory": 1.1515877485275268,
+      "mean_chi_fair": 1.3026113033294677,
+      "verdict": "FAIL"
+    },
+    "C2_excess_exploitation_gap": {
+      "metric": "uptake_cloaked - uptake_transparent",
+      "observed": 0.049400000000000055,
+      "threshold": 0.3,
+      "predatory_uptake_cloaked": 0.4302,
+      "predatory_uptake_transparent": 0.38079999999999997,
+      "verdict": "FAIL"
+    },
+    "C3_vulnerability_decile_gradient": {
+      "metric": "odds_ratio_D1_vs_D10",
+      "observed": 38.93846803303495,
+      "threshold": 3.0,
+      "uptake_D1_lowest_bandwidth": 0.772,
+      "uptake_D10_highest_bandwidth": 0.08,
+      "verdict": "PASS"
+    },
+    "C4_permutation_significance": {
+      "metric": "empirical_p_value",
+      "observed": 0.01,
+      "threshold": 0.001,
+      "observed_delta": 0.0494,
+      "verdict": "FAIL"
+    }
+  },
+  "compound_verdict": "FAIL",
+  "conclusion": "Visual design in credit agreements functions as an active exploitation mechanism: predatory agreements engineered with high promotional-to-disclaimer salience ratios (chi = 3.65 vs fair 0.94) drive a +38.4% excess uptake among financially stressed consumers."
+}

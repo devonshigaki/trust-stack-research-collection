@@ -1,0 +1,5 @@
+{
+  "sim": "SIM-OBS",
+  "run": "firstrun_bug",
+  "bug": "estimator harness hack: ad-hoc EM-lite reconstruction mathematically invalid (state not identifiable as coded); replaced with the Sim-W1-spec Kalman/EM + RTS smoother; criteria untouched"
+}

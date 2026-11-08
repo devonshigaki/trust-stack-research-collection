@@ -1,0 +1,109 @@
+{
+  "sim": "SIM-PBND-2",
+  "seed": 20260921,
+  "date": "2026-09-21",
+  "preregistration": "SIM_PBND2_PRE_REGISTRATION.md (+ Amendment A1, disclosed before main batch)",
+  "design": {
+    "subjects": 40,
+    "units": 24,
+    "epoch_samples": 2000,
+    "burnin": 500,
+    "doses_g": [
+      0.9,
+      0.45,
+      0.2,
+      0.05
+    ],
+    "controls": [
+      "sensory-noise g=0.90 \u03c3E=0.30",
+      "subject-specific-sensory g=0.05"
+    ],
+    "recovery": "g restored 0.90 after g=0.05 epoch"
+  },
+  "calibration": {
+    "batch": 10,
+    "note": "sensory-noise within-drop matching infeasible: grid \u03c3E 0.05-0.30 gives drops -0.04..-0.02 vs prior-relaxation drop 1.05; Amendment A1",
+    "sigmaE_star": 0.3
+  },
+  "criteria": {
+    "C1_replication_at_scale": {
+      "within_drop_mean": 1.1265972057766664,
+      "threshold": 0.3,
+      "verdict": "PASS"
+    },
+    "C2_dose_response": {
+      "spearman_rho": 1.0,
+      "p": 0.0,
+      "thresholds": "rho>=0.8, p<0.05",
+      "levels": {
+        "0.9": -0.3603770793823357,
+        "0.45": 0.9988210630677844,
+        "0.2": 0.9999124250589008,
+        "0.05": 0.9999856214829139
+      },
+      "verdict": "PASS",
+      "note": "saturates by g=0.45; transition mapped in exploratory E2",
+      "supplementary_post_battery": {
+        "label": "supplementary, computed after the frozen battery (2026-09-21); not part of the frozen verdict",
+        "level_mean_exact_permutation_p": 0.0833,
+        "level_mean_note": "n=4 levels: minimum achievable exact two-sided p is 1/12=0.083 for ANY outcome; the frozen p<0.05 clause is satisfiable only under the asymptotic test (as recorded)",
+        "subject_level_trend": {
+          "n_subject_dose_pairs": 160,
+          "spearman_abs_rho": 0.9683,
+          "p": 4.679e-97,
+          "note": "per-subject mean similarity to all others at each dose; similarity increases as g decreases"
+        }
+      }
+    },
+    "C3_specificity": {
+      "ratio_vs_sensory_noise": "inf (control increase -0.005)",
+      "p_vs_sensory": 1.8189894035458565e-12,
+      "ratio_vs_subject_specific": 1.000063179697557,
+      "p_vs_subject_specific": 1.8189894035458565e-12,
+      "thresholds": ">=2x vs each control, p<0.05",
+      "verdict": "FAIL",
+      "note": "subject-specific-sensory control converges identically (1.328 vs 1.329): at full prior collapse any single dominant stream homogenizes the correlation FC; normalized-Frobenius similarity is structurally insensitive to stream identity"
+    },
+    "C4_recovery": {
+      "median_recovery_fraction": 1.0,
+      "threshold": 0.7,
+      "verdict": "PASS"
+    }
+  },
+  "compound_verdict": "FAIL (3/4: C1, C2, C4 PASS; C3 FAIL)",
+  "identifiability": {
+    "baseline": 1.0,
+    "perturbed_g0.05": 0.025
+  },
+  "exploratory_post_battery": {
+    "E1_shared_vs_independent_partial": {
+      "0.65": {
+        "shared": 0.9880262803185258,
+        "indep": 0.989914077303212,
+        "wilcoxon_p": 2.546585164964199e-11
+      },
+      "0.55": {
+        "shared": 0.9974047321060264,
+        "indep": 0.9976473549516927,
+        "wilcoxon_p": 2.2706761228619143e-05
+      },
+      "0.45": {
+        "shared": 0.9985002944222628,
+        "indep": 0.9990242613037688,
+        "wilcoxon_p": 1.8189894035458565e-12
+      }
+    },
+    "E1_note": "stream identity invisible to the convergence metric even at partial relaxation (g=0.65: 0.988 vs 0.990) \u2014 instrument-level finding",
+    "E2_fine_dose_grid": {
+      "0.85": -0.10487082615719923,
+      "0.75": 0.7935058917817625,
+      "0.65": 0.9893808342924844,
+      "0.55": 0.9977095880905964
+    },
+    "E2_note": "sharp threshold-like transition between g=0.90 and g=0.75, consistent with 'organized state transition' of DOCAS \u00a75.8 component (a)"
+  },
+  "firstrun_bug": null,
+  "amendments": [
+    "A1: C3 control design (calibration infeasibility disclosed pre-run; sensory-noise at grid max + subject-specific-sensory control added; criteria thresholds untouched)"
+  ]
+}

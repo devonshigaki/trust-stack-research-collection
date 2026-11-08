@@ -1,0 +1,16 @@
+# Core (Tier 1-2 simulations: GTT, TFP P1/P1b, robustness batteries)
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+pandas>=2.0
+pyarrow>=12.0
+networkx>=3.0
+
+# Tier 3 (per docs/RUNBOOK.md; install only what you need):
+# brian2            # F1 series, H1-B spiking simulations
+# caveclient        # MICrONS pulls (needs CAVE auth token)
+# pysam             # D15 GTEx scan
+# alphagenome       # D14 (API key required; non-commercial use only)
+# torch transformers safetensors tribev2  # neural pipeline (GPU-scale)
+# nilearn nibabel h5py scikit-learn       # neural pipeline figures/decoding
+# fastavro          # H01 aggregation

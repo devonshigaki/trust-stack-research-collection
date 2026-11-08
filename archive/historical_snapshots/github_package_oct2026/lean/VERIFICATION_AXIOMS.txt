@@ -1,0 +1,11 @@
+'TrustStack.tiltP_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TrustStack.tiltP_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TrustStack.tiltP_neutral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TrustStack.EU_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TrustStack.tilt_log_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TrustStack.masterStep_physics' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TrustStack.contraction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TrustStack.input_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TrustStack.bibo' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TrustStack.bibo_of_eps_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+ALLDONE

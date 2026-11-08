@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this research collection, please cite it as below."
+title: "The Value of Trust: a five-work trust-measurement research collection (GTT / DOCAS / TFP / FreshCredit whitepaper / collection index)"
+authors:
+  - family-names: Shigaki
+    given-names: Devon
+    orcid: "https://orcid.org/0009-0003-8977-8010"
+year: 2026
+license: CC-BY-4.0
+notes: "FlyWire-derived and AlphaGenome-derived materials are CC BY-NC 4.0 (research use only). Mirrored at OSF (DOI: [insert on publication])."

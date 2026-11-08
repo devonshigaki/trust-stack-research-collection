@@ -1,0 +1,29 @@
+{
+  "experiment": "Sim D21: Multimodal Gating & Ultimatum Game Fairness",
+  "n_agents": 1000,
+  "seed": 42,
+  "criteria": {
+    "C1_insular_hypoactivation": {
+      "suppression_rate": 0.75,
+      "frozen_threshold": ">= 0.60",
+      "verdict": "PASS"
+    },
+    "C2_ultimatum_acceptance_inversion": {
+      "reject_veridical": 1.0,
+      "accept_cloaked": 1.0,
+      "frozen_threshold": "Accept >= 0.70, Reject >= 0.95",
+      "verdict": "PASS"
+    },
+    "C3_vulnerability_gradient": {
+      "odds_ratio": 1.0,
+      "frozen_threshold": ">= 12.0",
+      "verdict": "FAIL"
+    },
+    "C4_ex_post_insular_rebound": {
+      "rebound_ratio": 3.9999999959999997,
+      "frozen_threshold": ">= 3.0",
+      "verdict": "PASS"
+    }
+  },
+  "compound_verdict": "FAIL"
+}
