@@ -188,12 +188,6 @@
       "measurement_target": "Bristol Stool Scale categorization (Types 1–7), gut motility velocity, peak urinary flow rate (Qmax), and hydration index",
       "integration_pipeline": "App BLE export to Parquet / libSQL"
     },
-    "under_mattress_bcg_pad": {
-      "device": "Withings Sleep Analyzer Under-Mattress Pad",
-      "sensors": "Pneumatic ballistocardiography (BCG) sensor",
-      "measurement_target": "Contactless heart rate, respiratory rate, sleep apnea hypopnea index, and sleep staging cross-validating wearable EEG/PPG",
-      "integration_pipeline": "Withings local API JSON sync to libSQL"
-    },
     "indoor_air_quality": {
       "device": "Awair Element Indoor Air Quality Monitor",
       "sensors": "Laser particle counter, NDIR CO2 sensor, semiconductor TVOC sensor",
@@ -236,12 +230,6 @@
       "sensors": "4 high-precision strain gauge weight sensors (0.05 kg increment) + 4 BIA alternating-current electrodes",
       "measurement_target": "Body mass (kg), BMI, Body fat %, Lean body mass, and Total body water % for 30-day somatic stationarity and cranial DPF optical pathlength calibration",
       "integration_pipeline": "Apple HealthKit (HKQuantityTypeIdentifierBodyMass, BodyFatPercentage, LeanBodyMass) into libSQL"
-    },
-    "smart_water_bottle": {
-      "device": "HidrateSpark PRO Smart Water Bottle (Bluetooth Low Energy)",
-      "sensors": "Internal capacitive fluid level sensor puck (milliliter resolution)",
-      "measurement_target": "Passive fluid volume intake (mL) and timestamps to model closed-loop fluid mass-balance and residualize the autonomic water-ingestion pressor reflex",
-      "integration_pipeline": "Apple HealthKit (HKQuantityTypeIdentifierDietaryWater) edge ingestion into libSQL"
     },
     "acoustic_video_webcam": {
       "device": "Logitech Brio 4K Ultra HD Pro Webcam (Model V-U0040 / MSIP-REM-DZL-V-U0040)",

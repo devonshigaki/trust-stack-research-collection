@@ -58,7 +58,6 @@ $$\text{Cohort 2: } 3 \text{ subjects} \times 10\text{ days} \quad \longrightarr
 │ • Apple Watch S8 (HRV, dual-temp, SpO2) ──────► HealthKit API ────┼─► Daily │
 │ • Continuous Glucose (Dexcom Stelo CGM) ──────► HealthKit Export ─┤   Harvest│
 │ • Continuous Cuffless BP (Aktiia / Hilo) ─────► Local BLE / CSV ──┤   Script │
-│ • Under-Mattress BCG (Withings Sleep Analyzer)► Local JSON Sync ──┤          │
 │ • Enteric & Hydration (Throne Smart Toilet) ──► App BLE Export ───┘          │
 ├───────────────────────────────────────────────────────────────────┤          │
 │ AMBIENT, ENVIRONMENTAL & FINANCIAL LAYER                          │          │
@@ -106,28 +105,23 @@ $$\text{Cohort 2: } 3 \text{ subjects} \times 10\text{ days} \quad \longrightarr
 *   **Sensors:** Non-invasive downward-facing optical and thermal sensor array mounted to the porcelain rim.
 *   **Biophysical Target:** Automated Bristol Stool Scale categorization (Types 1–7), gut transit speed, hydration index, peak urinary flow rate ($Q_{\text{max}}$), and voided volume. Quantifies enteric nervous system recovery and autonomic tone shifts during cannabis cessation.
 
-### F. Contactless Bed Physics & Ballistocardiography (Sleep Pad)
-*   **Device:** **Withings Sleep Analyzer**.
-*   **Sensors:** Pneumatic sensor pad placed under the mattress capturing mechanical cardiac recoil (ballistocardiography / BCG), respiratory rate, and sleep-disordered breathing.
-*   **Biophysical Target:** Provides unencumbered mechanical validation of sleep staging (REM, Deep Slow-Wave Sleep, Light, Wake) and apnea-hypopnea index (AHI), cross-validating Apple Watch accelerometer sleep metrics.
-
-### G. Somatic Stationarity & Cranial DPF Calibration (Smart Scale)
+### F. Somatic Stationarity & Cranial DPF Calibration (Smart Scale)
 *   **Device:** **Fitindex Smart Scale (Model ES-26M)**.
 *   **Sensors:** 4 high-precision strain gauge weight sensors ($0.05\text{ kg} / 0.1\text{ lb}$ resolution) and 4 Bioelectrical Impedance Analysis (BIA) alternating-current electrodes.
 *   **Biophysical Target:** Daily morning fasted Body Mass, BMI, Body Fat %, Lean Body Mass, and Body Water %.  
     *Primary Epistemic Role:* (a) Certifies somatic stationarity ($\Delta \text{BodyMass} \le \pm 2.0\%$); (b) Dynamically scales the individualized cranial Differential Pathlength Factor ($\text{DPF}_u$) in the Modified Beer-Lambert Law based on subcutaneous adipose tissue thickness.
 
-### H. Ambient Environmental Context (Air Quality Monitor)
+### G. Ambient Environmental Context (Air Quality Monitor)
 *   **Device:** **Awair Element Indoor Air Quality Monitor**.
 *   **Sensors:** Laser particle counter, non-dispersive infrared (NDIR) $\mathrm{CO}_2$ sensor, and semiconductor TVOC sensor.
 *   **Biophysical Target:** Continuous indoor $\mathrm{CO}_2$ (ppm), Total Volatile Organic Compounds (TVOCs), $\mathrm{PM}_{2.5}$ particulate density, ambient temperature, and relative humidity, controlling for stale-air cognitive fatigue.
 
-### I. Circadian Photic Confounder Filter (Smart Lighting)
+### H. Circadian Photic Confounder Filter (Smart Lighting)
 *   **Device:** **Philips Hue Smart Lighting System**.
 *   **Parameters:** Ambient Correlated Color Temperature (CCT in Kelvin, 2000K–6500K), brightness percentage (0–100%), and lamp power state.
 *   **Biophysical Target:** Isolates artificial blue-light melatonin suppression from financial allostatic stress (DOCAS §5.17 Sim D17: *Photic and Thermal Gating*).
 
-### J. Multimodal Video & Studio Acoustic Debrief Station (Brio 4K & Blue Yeti Nano on Integrated Isolation Shield)
+### I. Multimodal Video & Studio Acoustic Debrief Station (Brio 4K & Blue Yeti Nano on Integrated Isolation Shield)
 *   **Optical Sensor (Primary):** **Logitech Brio 4K Ultra HD Pro Webcam (Model V-U0040 / MSIP-REM-DZL-V-U0040)** (Sony 1/2.8-inch 4K HDR optical sensor, RightLight 3, manual exposure lock at 30/60 fps) mounted at eye level.
 *   **Optical Sensor (Mobile Backup):** Built-in MacBook Air 1080p FaceTime HD camera utilizing Apple Silicon ISP for remote travel sessions.
 *   **Acoustic Sensor (Studio Condenser on Acoustic Isolation Shield):** **Blue Yeti Nano USB Condenser Microphone (Model A00098)** mounted inside an **integrated curved high-density acoustic foam reflection shield (mini sound wall) with inline pop filter**.
@@ -145,10 +139,15 @@ $$\text{Cohort 2: } 3 \text{ subjects} \times 10\text{ days} \quad \longrightarr
     *   *Cohort 1 ($N = 1$, 180-Day Trial):* Day 1 Intake $\to$ Event-triggered debriefs $\to$ Day 180 Final Longitudinal Synthesis.
     *   *Processing:* `openSMILE` extracts standardized eGeMAPS acoustic feature vectors (88 parameters). On-device `whisper.cpp` transcribes text into local libSQL. Raw WAV and 4K video are preserved on encrypted local storage.
 
-### K. The Dedicated Edge Hub (Wiped iPhone 12 Pro Kiosk)
+### J. The Dedicated Edge Hub (Wiped iPhone 12 Pro Kiosk)
 *   **Device:** **iPhone 12 Pro** (A14 Bionic SiP, 6 GB RAM, Wi-Fi 6, Bluetooth 5.0, Ultra Wideband U1).
 *   **Operating Mode:** Completely wiped (`Erase All Content and Settings`) and provisioned as an isolated research kiosk. SIM-locked status has zero impact on Wi-Fi data collection, BLE sensor streaming, or HealthKit operations.
 *   **Ambient Light Sensing:** TrueDepth camera samples ambient CCT (Kelvin) and Lux on screen unlock. Runs the local encrypted **libSQL edge database**.
+
+### K. Objective Bedroom Presence & Sleep Boundaries (Logitech Circle View)
+*   **Device:** **Logitech Circle View (Apple HomeKit Secure Video)**.
+*   **Sensors:** High-precision Passive Infrared (PIR) motion detection and geofenced occupancy tracking.
+*   **Biophysical Target:** Establishes objective physical bed entry and morning bed exit ground truth, cross-validating Apple Watch accelerometer sleep staging with zero wearable contact artifacts.
 
 ### L. Static Clinical Genomics (30x Whole Genome Sequencing)
 *   **Platform:** 30x Clinical Whole Genome Sequencing (WGS; Nebula Genomics / Dante Labs).
@@ -167,15 +166,7 @@ Drawn at Day 1 (Cessation Baseline), Day 30 (Post-Acute Withdrawal), Day 60, Day
 *   *Endocrine & Allostatic Axis:* Morning Cortisol (8:00 AM standardized), Free & Total Testosterone, DHEA-Sulfate, Thyroid Panel (TSH, Free T3, Free T4).
 *   *Organ Function & Cytology:* Comprehensive Metabolic Panel (CMP-14), Complete Blood Count (CBC with Differential).
 
-### N. Fluid Inflow & Osmosensitive Pressor Confounder Filter (Smart Water Bottle)
-*   **Device:** **HidrateSpark PRO Smart Water Bottle** (Stainless Steel, Bluetooth Low Energy).
-*   **Sensors:** Internal capacitive sensor puck measuring fluid level changes at milliliter resolution with automated consumption timestamping.
-*   **Integration Pipeline:** Native Bluetooth Low Energy sync directly into Apple HealthKit (`HKQuantityTypeIdentifierDietaryWater`) with zero manual logging.
-*   **Biophysical & Mathematical Role:**
-    1.  *Closed-Loop Fluid Mass-Balance:* Completes the fluid conservation triad: Inflow (Smart Water Bottle in $\text{mL}$) $\longrightarrow$ Somatic Reservoir (Fitindex BIA Total Body Water %) $\longrightarrow$ Outflow (Throne Smart Toilet voided volume and optical osmolality).
-    2.  *Osmosensitive Pressor Reflex Residualization:* Ingestion of water activates spinal sympathetic efferents via hepatic portal vein hypo-osmotic receptors (Jordan et al., *Circulation* 2000; Robertson et al., *Hypertension* 2002), eliciting an acute $+5\text{ to }+15\text{ mmHg}$ surge in systolic blood pressure and transient vagal HRV suppression lasting $20\text{--}40\text{ minutes}$. Timestamped intake volume allows the analytical pipeline to mathematically residualize this transient pressor response from Aktiia continuous blood pressure and Apple Watch HRV.
-
-### O. The Unified Executive Neuro-Battery (Akai MPK Mini Controller)
+### N. The Unified Executive Neuro-Battery (Akai MPK Mini Controller)
 *   **Device:** **Akai Professional MPK Mini USB MIDI Controller (Class-Compliant)**.
 *   **Sensors & Actuators:** 8 backlit, velocity-sensitive thick MPC drum pads (piezoelectric force transducers capturing arrival times at sub-millisecond precision and 7-bit strike velocity $v \in [1, 127]$), 25 velocity-sensitive mini keys, and a dynamic 4-way spring-centered analog thumbstick (14-bit Pitch Bend on X-axis and 7-bit CC#1 Modulation on Y-axis).
 *   **Integration Pipeline:** Direct USB connection to MacBook Air / Python listener using `mido` / `CoreMIDI` (zero audio drivers, sub-millisecond hardware interrupt latency).
@@ -218,8 +209,8 @@ A: Activation          | Apple Watch S8 (MNU73LL/A)             | • Acute tach
                        | Muse S Athena (EEG)                    | • Frontal Beta desynchronization (13–30Hz|
 -----------------------+----------------------------------------+------------------------------------------+--------------------
 S: Stabilization       | Apple Watch S8 (MNU73LL/A)             | • Multi-day recovery latency (τ_relax)   | Cohorts 1, 2, 3 ONLY
-   (Serotonin)         | Withings Sleep Analyzer (BCG Pad)      | • Deep / Slow-Wave Sleep (SWS) duration  | (★ CANNOT be measured
-                       |                                        | • Long-range temporal correlation (1/f)  |    in 1-day Cohort 4)
+   (Serotonin)         | Muse S Athena (Sleep EEG)              | • Deep / Slow-Wave Sleep (SWS) duration  | (★ CANNOT be measured
+                       | Logitech Circle View (Bed Boundaries)  | • Long-range temporal correlation (1/f)  |    in 1-day Cohort 4)
 ========================================================================================================================
 ```
 
@@ -245,11 +236,6 @@ To ensure that physiological shifts are driven by psychological and financial tr
 4.  **Circadian Photic Zeitgeber Filter:**  
     Quantifies ambient artificial light exposure to control for nocturnal melatonin suppression:
     $$\text{Zeitgeber}(t) = \ln(1 + \text{Lux}) \cdot \left(\frac{\text{CCT}}{5500\text{ K}}\right)$$
-5.  **Osmosensitive Water Ingestion Pressor Residualization:**  
-    Subtracts the transient sympathetic pressor response elicited by water ingestion from Aktiia continuous blood pressure and Apple Watch HRV:
-    $$\text{BP}_{\mathrm{stress}}(t) = \text{BP}_{\mathrm{measured}}(t) - \hat{\text{BP}}_{\mathrm{pressor}}(t; V_{\mathrm{water}}, t_{\mathrm{drink}})$$
-    $$\mathrm{HRV}_{\mathrm{stress}}(t) = \mathrm{HRV}_{\mathrm{measured}}(t) - \hat{\mathrm{HRV}}_{\mathrm{pressor}}(t; V_{\mathrm{water}}, t_{\mathrm{drink}})$$
-    where $\hat{\text{BP}}_{\mathrm{pressor}}$ models an acute portal osmosensitive activation peaking at $15\text{--}25\text{ minutes}$ post-ingestion ($\tau \in [20, 40\text{ min}]$).
 
 ### B. Daily Operational Schedule & The 8-Minute Evening Sequence
 To ensure 180 days of continuous compliance without skin breakdown or battery depletion, operations follow two daily maintenance windows with a standardized 8-minute evening cognitive docking sequence:
@@ -267,7 +253,6 @@ To ensure 180 days of continuous compliance without skin breakdown or battery de
 │ • Strap Muse Athena: fNIRS + EEG active during legal, business, and trading.  │
 │ • Plaid API tracks transaction execution timestamps and trade sizing.         │
 │ • Throne passively logs enteric motility (Bristol score) and hydration index. │
-│ • HidrateSpark PRO tracks passive fluid intake volume at desk.                 │
 ├───────────────────────────────────────────────────────────────────────────────┤
 │ 08:00 PM – 10:00 PM | CHARGING & MAINTENANCE BLOCK #2 (THE 8-MINUTE STATION)  │
 │ • 08:00 PM: Headband off; place Muse pod on charger; swap fabric strap.       │
@@ -281,7 +266,8 @@ To ensure 180 days of continuous compliance without skin breakdown or battery de
 ├───────────────────────────────────────────────────────────────────────────────┤
 │ 10:00 PM – 08:00 AM | NOCTURNAL SLEEP MONITORING BLOCK #2 (10 HOURS)          │
 │ • Re-strap Dry Muse Athena: Sleep staging, frontal delta SWS, and REM rebound.│
-│ • Dual-Layer Bed Physics: Withings Sleep Analyzer BCG + Apple Watch temp/HRV. │
+│ • Dual-Layer Sleep Tracking: Apple Watch S8 (sleep stages/wrist temp) +       │
+│   Logitech Circle View (PIR bedroom presence and bed exit/entry ground truth).│
 │ • Aktiia tracks nocturnal blood pressure dipping percentage.                  │
 └───────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -306,9 +292,9 @@ Continuous 1-minute resolution telemetry is processed by **`harvest_telemetry.py
 |   | (Model MNU73LL/A PPG) |       (On-device XML / Swift)          |          LOCAL libSQL EDGE STORE         |   |
 |   +-----------------------+                                        |        (Encrypted AES-256-GCM)           |   |
 |                                                                    |                                          |   |
-|   +-----------------------+     Aktiia / Withings API Sync         |  • Daily Parquet Master Files            |   |
-|   | AKTIIA BP & WITHINGS  | -------------------------------------> |  • Continuous BP (Aktiia) & Sleep (BCG)  |   |
-|   | (Cuffless BP, BCG)    |     (Continuous vascular & sleep)      |  • Muse fNIRS (Δ[HbO₂], Δ[HbR])          |   |
+|   +-----------------------+     Aktiia BLE Sync                    |  • Daily Parquet Master Files            |   |
+|   | AKTIIA BP WRISTBAND   | -------------------------------------> |  • Continuous BP (Aktiia cuffless)       |   |
+|   | (Cuffless 24/7 BP)    |     (Continuous vascular dipping)      |  • Muse fNIRS (Δ[HbO₂], Δ[HbR])          |   |
 |   +-----------------------+                                        |  • Apple Watch HRV & Wrist Temperature   |   |
 |                                                                    |  • Dexcom Stelo glucose flux (dG/dt)     |   |
 |   +-----------------------+     Dexcom Share API / HealthKit       |  • Throne Bristol stool score & flow     |   |
@@ -342,7 +328,7 @@ Continuous 1-minute resolution telemetry is processed by **`harvest_telemetry.py
 *   **Hypothesis PILOT-H4 (Multi-Day Test-Retest Reliability):**  
     In Cohort 3 ($N = 10, 3\text{ days}$), the estimated personal trust sensitivity parameter $\hat{\lambda}$ achieves test-retest reliability $r_{\text{test-retest}} \ge 0.75$ across consecutive testing days.
 *   **Hypothesis PILOT-H5 ($\mathrm{CB}_1\mathrm{R}$ Washout & REM Rebound in Stage 1):**  
-    During Phase 1 (Days 1–30), Withings Sleep Analyzer and Apple Watch record an average REM sleep proportion $\ge 25.0\%$ of total sleep time, normalizing to $18.0\text{--}22.0\%$ in Phase 2 (Days 31–180) as $\mathrm{CB}_1\mathrm{R}$ density recalibrates.
+    During Phase 1 (Days 1–30), Apple Watch Series 8 and Muse S Athena record an average REM sleep proportion $\ge 25.0\%$ of total sleep time, normalizing to $18.0\text{--}22.0\%$ in Phase 2 (Days 31–180) as $\mathrm{CB}_1\mathrm{R}$ density recalibrates.
 *   **Hypothesis PILOT-H6 (Cuffless BP & Enteric Motility Coupling):**  
     Days with elevated daily subjective financial distress correlate with reduced nocturnal SBP dipping ($< 10\%$ dip, $p < 0.01$) and altered enteric transit consistency (Throne Bristol scores shifting away from Type 4).
 *   **Hypothesis PILOT-H7 (Striatal Motor Timing Washout & Psychomotor Allostasis):**  
@@ -402,9 +388,8 @@ PILOT STUDY COMPOSITE SCORE: 92.4 / 100 (UNASSAILABLE INDUSTRIAL RIGOR)
 │[ ]│ Requisition Day 1 Baseline Blood Panel via Jason Health (Quest/Labcorp).  │
 │[ ]│ Mount Throne smart toilet sensor to porcelain bowl & calibrate flush.    │
 │[ ]│ Position Logitech Brio 4K & connect Blue Yeti Nano mic (Cardioid mode).   │
+│[ ]│ Mount Logitech Circle View camera in bedroom for presence/sleep boundary. │
 │[ ]│ Pair Aktiia / Hilo continuous cuffless BP band & complete baseline init. │
-│[ ]│ Install Withings Sleep Analyzer pad under mattress & verify local sync.   │
-│[ ]│ Pair HidrateSpark PRO smart water bottle to Apple HealthKit (intake mL).  │
 │[ ]│ Connect Akai MPK Mini via USB & verify 60-second mido tapping script.    │
 │[ ]│ Verify harvest_telemetry.py compiles daily Parquet matrix & libSQL row.   │
 │[ ]│ Confirm Day 1 Cannabis Cessation start timestamp (T = 0).                 │
