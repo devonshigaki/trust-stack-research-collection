@@ -9,8 +9,8 @@
   "automated_ci_tasks_verified": 26,
   "files": {
     "DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
-      "sha256": "2263f09fe89ab155135466420b8e4973d9de918412cc9de3b2b9aa70345004e5",
-      "bytes": 34803
+      "sha256": "3b6b2758c4cd7c8e6fb02d40befb5925e403475e745d317ec20dad746104cd01",
+      "bytes": 37964
     },
     "DOCAS_PILOT_1_PROOF_OF_CONCEPT.md": {
       "sha256": "c03daac82220a7f5b8082f92e5b49940e87afd103903ca7c401a30921aeb7dd7",
@@ -25,8 +25,8 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "824f70d7b6a9c6af2f202e8d5c0149bbe1cd733290a24500c088a4d298ca6c15",
-      "bytes": 382070
+      "sha256": "95ab4eb13c1411ef7c22b12fe08dd8121f9067787307442805cc420d683253f2",
+      "bytes": 382071
     },
     "SIMULATION_ACCOUNTING.md": {
       "sha256": "b14931c1175c9a6badd0d8588c6f6a1b34d2f0884a033f53fcffd9e2ada8ff46",
@@ -1153,8 +1153,8 @@
       "bytes": 2841
     },
     "evaluations/COMPUTATIONAL_COMPLEXITY_BUDGET.json": {
-      "sha256": "572f609fe3881db11b3a47af523952d9b51a834adb92ff918af516a1deeb4669",
-      "bytes": 14858
+      "sha256": "f253b37ae84e9f8c8f056d570b0982c63a6b1f24e4dcfec4e94ca3d209e608a3",
+      "bytes": 15372
     },
     "evaluations/MULTI_RUBRIC_COMPREHENSIVE_BENCHMARK.md": {
       "sha256": "191301ed095a399b809036ebba794ff3f8e3bea75fd232dbc74bccf5a318aa91",
@@ -4849,8 +4849,8 @@
       "bytes": 14810
     },
     "experiments/wearables_pipeline/stream_muse_athena_libsql.py": {
-      "sha256": "39141b22a6f28d6a89a082b865fcbeaf3035e4d9921251fa42c232185827de42",
-      "bytes": 9061
+      "sha256": "8b1604cac79efe9353126dd909e139d4677f047dbde2384ed8f2385e2a41c614",
+      "bytes": 9676
     },
     "experiments/simf1_work/SIM_F1A2_AMENDMENT_1.md": {
       "sha256": "5e92329e20dac0104156a81a4810d074dd970205224520c2265002cc7c70669d",
@@ -5525,7 +5525,7 @@
       "bytes": 9331
     },
     "experiments/simulations_repair_era/criticality/sim_crit2_results.json": {
-      "sha256": "8d83225db90f235daf4a94b42cdb3ec8f17f588fd606e520281b2f3dd7427eab",
+      "sha256": "f86b16d711cb8a87e518f45ad1dc4a7f1080e6275ef0cc3ddedb785c22ef0d66",
       "bytes": 464
     },
     "experiments/simulations_repair_era/criticality/sim_crit3_bayes_factor_comparison.py": {

@@ -98,6 +98,24 @@ def init_libsql_schema(conn):
         water_intake_ml REAL DEFAULT 0
     );
     """)
+
+    conn.execute("""
+    CREATE TABLE IF NOT EXISTS acoustic_vocal_ledger (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp_posix REAL NOT NULL,
+        study_day INTEGER NOT NULL,
+        fundamental_frequency_f0_mean REAL,
+        fundamental_frequency_f0_sd REAL,
+        jitter_local_percent REAL,
+        shimmer_local_percent REAL,
+        harmonics_to_noise_ratio_hnr REAL,
+        cepstral_peak_prominence_cpp REAL,
+        speech_rate_syllables_per_sec REAL,
+        pause_to_speech_ratio REAL,
+        transcript_sentiment_score REAL,
+        audio_wav_path TEXT NOT NULL
+    );
+    """)
     print("✓ Local libSQL schema successfully verified and indexed.")
 
 def compute_scholkmann_dpf(wavelength_nm: float, age_years: float = 30.0) -> float:

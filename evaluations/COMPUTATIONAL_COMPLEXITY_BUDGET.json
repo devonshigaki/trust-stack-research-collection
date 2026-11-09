@@ -245,9 +245,15 @@
     },
     "acoustic_video_webcam": {
       "device": "Logitech Brio 4K Ultra HD Pro Webcam (Model V-U0040 / MSIP-REM-DZL-V-U0040)",
-      "sensors": "4K Ultra HD optical sensor (RightLight 3 HDR) + dual omnidirectional noise-canceling microphones",
+      "sensors": "4K Ultra HD optical sensor (RightLight 3 HDR, manual exposure lock) with MacBook Air 1080p FaceTime camera mobile backup",
       "sampling_protocol": "Cohort-adaptive same-day and multi-day Intake/Exit reflections and event-triggered hot debriefs",
-      "feature_extraction": "openSMILE vocal pitch f0 variability/jitter and on-device whisper.cpp speech transcription into libSQL"
+      "feature_extraction": "py-feat FACS micro-expression Action Units (AU4, AU12, AU15) and facial capillary rPPG"
+    },
+    "acoustic_studio_microphone": {
+      "device": "Blue Yeti Nano USB Condenser Microphone (Model A00098)",
+      "capsules": "Dual 14mm custom condenser capsules operating in dedicated Cardioid polar pattern",
+      "recording_format": "Uncompressed 24-bit / 48 kHz Linear PCM WAV audio directly bypassing OS AGC/DSP",
+      "feature_extraction": "openSMILE eGeMAPS acoustic feature vector (f0, jitter, shimmer, HNR, Cepstral Peak Prominence) and on-device whisper.cpp transcription into libSQL"
     }
   }
 }

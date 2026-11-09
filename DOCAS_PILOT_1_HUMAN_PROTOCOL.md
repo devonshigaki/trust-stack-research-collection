@@ -127,14 +127,19 @@ $$\text{Cohort 2: } 3 \text{ subjects} \times 10\text{ days} \quad \longrightarr
 *   **Parameters:** Ambient Correlated Color Temperature (CCT in Kelvin, 2000K–6500K), brightness percentage (0–100%), and lamp power state.
 *   **Biophysical Target:** Isolates artificial blue-light melatonin suppression from financial allostatic stress (DOCAS §5.17 Sim D17: *Photic and Thermal Gating*).
 
-### J. Acoustic & Facial Debrief Webcam (4K Sensor)
-*   **Device:** **Logitech Brio 4K Ultra HD Pro Webcam (Model V-U0040 / MSIP-REM-DZL-V-U0040)**.
-*   **Sensors:** 4K optical HDR sensor (RightLight 3) + dual omnidirectional noise-canceling microphones.
+### J. Multimodal Video & Studio Acoustic Debrief Station (Brio 4K & Blue Yeti Nano)
+*   **Optical Sensor (Primary):** **Logitech Brio 4K Ultra HD Pro Webcam (Model V-U0040 / MSIP-REM-DZL-V-U0040)** (Sony 1/2.8-inch 4K HDR optical sensor, RightLight 3, manual exposure lock at 30/60 fps) mounted at eye level.
+*   **Optical Sensor (Mobile Backup):** Built-in MacBook Air 1080p FaceTime HD camera utilizing Apple Silicon ISP for remote travel sessions.
+*   **Acoustic Sensor (Studio Condenser):** **Blue Yeti Nano USB Condenser Microphone (Model A00098)**. Features dual 14mm custom condenser capsules operating in dedicated Cardioid polar pattern, recording uncompressed 24-bit / 48 kHz Linear PCM WAV audio directly bypassing macOS Automatic Gain Control (AGC) and non-linear noise gating.
+*   **Biophysical & Biomarker Targets:**
+    1.  *Acoustic Laryngeal Motor Dynamics (Vagus Nerve CN-X / O- and S-channels):* Fundamental frequency ($f_0$ mean and variability $f_0\text{-SD}$), sub-harmonic jitter (period perturbation $< 1.0\%$), shimmer (amplitude perturbation $< 3.0\%$), Harmonics-to-Noise Ratio (HNR in dB), and Cepstral Peak Prominence (CPP in dB; indexing vocal fold closure tension under allostatic load).
+    2.  *Facial Action Coding System (FACS) Micro-Expressions:* AU4 (brow furrow / corrugator strain), AU12 (zygomaticus smile), AU15 (lip corner depression), and remote photoplethysmography (rPPG) cross-validating Apple Watch cardiac pulse.
+    3.  *Semantic Natural Language Processing:* Local on-device `whisper.cpp` speech-to-text generating sentiment and syntactic complexity vectors stored in **local libSQL (`trust_wearables_edge.db`)**.
 *   **Cohort-Adaptive Journaling Protocol:**
     *   *Cohort 4 ($N = 30$, 1-Day Trial):* **Same-Day Intake & Exit Schedule.** Morning 3-minute intake baseline (vocal pitch $f_0$ calibration) $\to$ Midday active financial task $\to$ Evening 3-minute exit reflection. Both completed on the same calendar day.
     *   *Cohorts 2–3 ($N = 3\times 10\text{d}, N = 10\times 3\text{d}$):* Day 1 Morning Intake $\to$ Event-triggered "Hot Debriefs" ($90\text{ s}$ if transaction occurs) $\to$ Final Day Evening Exit.
     *   *Cohort 1 ($N = 1$, 180-Day Trial):* Day 1 Intake $\to$ Event-triggered debriefs $\to$ Day 180 Final Longitudinal Synthesis.
-    *   *Processing:* `openSMILE` extracts acoustic vocal pitch ($f_0$ variability), shimmer, and jitter. On-device `whisper.cpp` transcribes text into local libSQL.
+    *   *Processing:* `openSMILE` extracts standardized eGeMAPS acoustic feature vectors (88 parameters). On-device `whisper.cpp` transcribes text into local libSQL. Raw WAV and 4K video are preserved on encrypted local storage.
 
 ### K. The Dedicated Edge Hub (Wiped iPhone 12 Pro Kiosk)
 *   **Device:** **iPhone 12 Pro** (A14 Bionic SiP, 6 GB RAM, Wi-Fi 6, Bluetooth 5.0, Ultra Wideband U1).
@@ -325,4 +330,24 @@ Evaluation Rubric                       | Score Awarded | Verdict          | Key
 ========================================================================================================================
 PILOT STUDY COMPOSITE SCORE: 92.4 / 100 (UNASSAILABLE INDUSTRIAL RIGOR)
 ========================================================================================================================
+```
+
+---
+
+## 9. Actionable Pre-Flight Launch Checklist (T-Minus 14 Days)
+
+```
+┌───┬───────────────────────────────────────────────────────────────────────────┐
+│   │ PRE-FLIGHT TASK DESCRIPTION                                               │
+├───┼───────────────────────────────────────────────────────────────────────────┤
+│[ ]│ Order 30x Clinical Whole Genome Sequencing (WGS) saliva collection kit.   │
+│[ ]│ Requisition Day 1 Baseline Blood Panel via Jason Health (Quest/Labcorp).  │
+│[ ]│ Mount Throne smart toilet sensor to porcelain bowl & calibrate flush.    │
+│[ ]│ Position Logitech Brio 4K & connect Blue Yeti Nano mic (Cardioid mode).   │
+│[ ]│ Pair Aktiia / Hilo continuous cuffless BP band & complete baseline init. │
+│[ ]│ Install Withings Sleep Analyzer pad under mattress & verify local sync.   │
+│[ ]│ Pair HidrateSpark PRO smart water bottle to Apple HealthKit (intake mL).  │
+│[ ]│ Verify harvest_telemetry.py compiles daily Parquet matrix & libSQL row.   │
+│[ ]│ Confirm Day 1 Cannabis Cessation start timestamp (T = 0).                 │
+└───┴───────────────────────────────────────────────────────────────────────────┘
 ```
