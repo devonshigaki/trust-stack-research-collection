@@ -116,6 +116,22 @@ def init_libsql_schema(conn):
         audio_wav_path TEXT NOT NULL
     );
     """)
+
+    conn.execute("""
+    CREATE TABLE IF NOT EXISTS psychomotor_tapping_ledger (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp_posix REAL NOT NULL,
+        study_day INTEGER NOT NULL,
+        total_taps INTEGER NOT NULL,
+        mean_iti_ms REAL NOT NULL,
+        sd_iti_ms REAL NOT NULL,
+        cv_iti_percent REAL NOT NULL,
+        mean_velocity REAL NOT NULL,
+        velocity_decay_slope REAL NOT NULL,
+        central_clock_variance_ms2 REAL,
+        motor_execution_variance_ms2 REAL
+    );
+    """)
     print("✓ Local libSQL schema successfully verified and indexed.")
 
 def compute_scholkmann_dpf(wavelength_nm: float, age_years: float = 30.0) -> float:

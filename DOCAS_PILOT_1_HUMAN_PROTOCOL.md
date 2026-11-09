@@ -175,6 +175,20 @@ Drawn at Day 1 (Cessation Baseline), Day 30 (Post-Acute Withdrawal), Day 60, Day
     1.  *Closed-Loop Fluid Mass-Balance:* Completes the fluid conservation triad: Inflow (Smart Water Bottle in $\text{mL}$) $\longrightarrow$ Somatic Reservoir (Fitindex BIA Total Body Water %) $\longrightarrow$ Outflow (Throne Smart Toilet voided volume and optical osmolality).
     2.  *Osmosensitive Pressor Reflex Residualization:* Ingestion of water activates spinal sympathetic efferents via hepatic portal vein hypo-osmotic receptors (Jordan et al., *Circulation* 2000; Robertson et al., *Hypertension* 2002), eliciting an acute $+5\text{ to }+15\text{ mmHg}$ surge in systolic blood pressure and transient vagal HRV suppression lasting $20\text{--}40\text{ minutes}$. Timestamped intake volume allows the analytical pipeline to mathematically residualize this transient pressor response from Aktiia continuous blood pressure and Apple Watch HRV.
 
+### O. Striatal Psychomotor Timing & Internal Pacemaker Calibration (Akai MPK Mini)
+*   **Device:** **Akai MPK Mini USB MIDI Controller (Class-Compliant)**.
+*   **Sensors:** 8 backlit, velocity-sensitive thick MPC drum pads (piezoelectric force transducers capturing mechanical strike arrival at sub-millisecond precision and 7-bit strike velocity $v \in [1, 127]$).
+*   **Integration Pipeline:** Direct USB connection to MacBook Air / Python listener using `mido` / `CoreMIDI` (zero audio drivers, zero DAW latency).
+*   **Standardized 60-Second Psychomotor Task:**
+    *   Executed once daily during the evening debrief station (Charging Block #2, 8:00–10:00 PM) immediately preceding the spoken video journal.
+    *   *Protocol:* 60-Second Finger-Tapping Test (FTT) / Synchronization-Continuation Task. The participant taps Pad 1 steadily at their natural spontaneous motor tempo (SMT) with their dominant index finger.
+*   **Biophysical & Mathematical Targets:**
+    1.  *Striatal Dopaminergic Motor Tone ($D$-Channel):* In the central nervous system, interval timing is governed by the corticostriatal loop (`ADCY5`–`DRD2`–`DARPP-32` coincidence engine). The task measures the **Inter-Tap Interval Coefficient of Variation ($\text{CV}_{\text{ITI}} = \sigma_{\text{ITI}} / \mu_{\text{ITI}}$)**. Normal alert baseline: $\text{CV}_{\text{ITI}} < 4.5\%$; dopamine-depleted allostatic fatigue: $\text{CV}_{\text{ITI}} > 7.5\%$.
+    2.  *Wing-Kristofferson Timing Decomposition:* Mathematically separates central internal clock variance ($\sigma^2_{\text{clock}}$) from peripheral neuromuscular execution delay variance ($\sigma^2_{\text{motor}}$):
+        $$\sigma^2_{\text{total}} = \sigma^2_{\text{clock}} + 2\sigma^2_{\text{motor}} - 2\text{Cov}(\Delta t_i, \Delta t_{i+1})$$
+    3.  *Kinetic Strike Force Decay:* Measures the linear regression slope of strike velocity over the 60-second trial, objectively indexing psychomotor exhaustion.
+    4.  *Endocannabinoid Motor Resensitization:* $\mathrm{CB}_1$ receptors are densely expressed in the basal ganglia and cerebellum. The FTT tracks the exact day when cerebellar-striatal motor timing jitter stabilizes during Phase 1 (Days 1–30) cannabis cessation.
+
 ---
 
 ## 3. Comprehensive Metric Mapping Across the 5 DOCAS Channels
@@ -187,7 +201,8 @@ Channel & Carrier      | Sensor Modality & Metric Source        | Biophysical Me
 -----------------------+----------------------------------------+------------------------------------------+--------------------
 D: Expectation         | Muse S Athena (fNIRS)                  | • Prefrontal Δ[HbO₂] surge in mPFC       | Cohorts 1, 2, 3, 4
    (Dopamine)          | Muse S Athena (EEG)                    | • Frontal midline theta (Fmθ, 4–8 Hz)    | (All stages)
-                       |                                        | • Theta/Beta Ratio (TBR) suppression     |
+                       | Akai MPK Mini (USB MIDI)               | • Tapping interval jitter (CV_ITI)       | (★ MPK Mini in
+                       |                                        | • Strike velocity force decay & clock var|    Cohort 1: 180 days)
 -----------------------+----------------------------------------+------------------------------------------+--------------------
 O: Validation          | Apple Watch S8 (MNU73LL/A)             | • Post-event HRV RMSSD surge (≥ 15%)     | Cohorts 1, 2, 3, 4
    (Oxytocin)          | Plaid Transaction Feed                 | • High-frequency vagal power (0.15–0.4Hz)| (All stages)
@@ -295,6 +310,8 @@ Continuous 1-minute resolution telemetry is processed by **`harvest_telemetry.py
     During Phase 1 (Days 1–30), Withings Sleep Analyzer and Apple Watch record an average REM sleep proportion $\ge 25.0\%$ of total sleep time, normalizing to $18.0\text{--}22.0\%$ in Phase 2 (Days 31–180) as $\mathrm{CB}_1\mathrm{R}$ density recalibrates.
 *   **Hypothesis PILOT-H6 (Cuffless BP & Enteric Motility Coupling):**  
     Days with elevated daily subjective financial distress correlate with reduced nocturnal SBP dipping ($< 10\%$ dip, $p < 0.01$) and altered enteric transit consistency (Throne Bristol scores shifting away from Type 4).
+*   **Hypothesis PILOT-H7 (Striatal Motor Timing Washout & Psychomotor Allostasis):**  
+    During Phase 1 (Days 1–30), the 60-second Akai MPK Mini finger-tapping task observes an exponential decline in motor timing variability ($\text{CV}_{\text{ITI}}$ improving from $> 7.0\%$ to $< 4.5\%$, $p < 0.001$), reflecting $\mathrm{CB}_1\mathrm{R}$ cerebellar-striatal motor resensitization. Across Phase 2, acute contractual betrayal events ($\varepsilon < 0$) trigger transient motor timing jitter spikes ($\Delta \text{CV}_{\text{ITI}} \ge +20\%$, $p < 0.01$) directly cross-correlating with Apple Watch vagal HRV collapse.
 *   **Frozen Stopping & Falsification Rules:**  
     If prefrontal fNIRS motion artifacts exceed $40.0\%$ of task time in Stage 1, or if Apple Watch nocturnal temperature measurements fail to record for $\ge 3$ consecutive nights, the study enters a mandatory hardware calibration gate before cohort rotation.
 
@@ -351,6 +368,7 @@ PILOT STUDY COMPOSITE SCORE: 92.4 / 100 (UNASSAILABLE INDUSTRIAL RIGOR)
 │[ ]│ Pair Aktiia / Hilo continuous cuffless BP band & complete baseline init. │
 │[ ]│ Install Withings Sleep Analyzer pad under mattress & verify local sync.   │
 │[ ]│ Pair HidrateSpark PRO smart water bottle to Apple HealthKit (intake mL).  │
+│[ ]│ Connect Akai MPK Mini via USB & verify 60-second mido tapping script.    │
 │[ ]│ Verify harvest_telemetry.py compiles daily Parquet matrix & libSQL row.   │
 │[ ]│ Confirm Day 1 Cannabis Cessation start timestamp (T = 0).                 │
 └───┴───────────────────────────────────────────────────────────────────────────┘

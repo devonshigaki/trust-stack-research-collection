@@ -254,6 +254,12 @@
       "capsules": "Dual 14mm custom condenser capsules in Cardioid pattern mounted inside curved acoustic reflection shield with pop filter",
       "recording_format": "Uncompressed 24-bit / 48 kHz Linear PCM WAV audio directly bypassing OS AGC/DSP (DRR > 12 dB, RT60 < 0.2s)",
       "feature_extraction": "openSMILE eGeMAPS acoustic feature vector (f0, jitter, shimmer, HNR, Cepstral Peak Prominence) and on-device whisper.cpp transcription into libSQL"
+    },
+    "psychomotor_midi_controller": {
+      "device": "Akai MPK Mini USB MIDI Controller (Class-Compliant)",
+      "sensors": "8 velocity-sensitive backlit MPC drum pads (piezoelectric force transducers capturing arrival times at sub-millisecond precision and 7-bit velocity)",
+      "task_protocol": "Standardized 60-second Finger-Tapping Test (FTT) / Synchronization-Continuation Task executed daily during evening debrief",
+      "measurement_target": "Striatal dopaminergic interval timing (CV_ITI), Wing-Kristofferson central clock vs. motor execution delay variance, and kinetic strike force decay"
     }
   }
 }

@@ -5,12 +5,12 @@
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3",
   "total_files_hashed": 2030,
-  "total_manifest_size_mb": 417.51,
+  "total_manifest_size_mb": 417.52,
   "automated_ci_tasks_verified": 26,
   "files": {
     "DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
-      "sha256": "06916ca47a7d9994543bc6024a291c33e807d7e78e5290353b869f943e058a38",
-      "bytes": 39335
+      "sha256": "7928270a3d38ac26553e11b17ea4526cdd7ab5bbdbf48105a9477abf433817bb",
+      "bytes": 42416
     },
     "DOCAS_PILOT_1_PROOF_OF_CONCEPT.md": {
       "sha256": "c03daac82220a7f5b8082f92e5b49940e87afd103903ca7c401a30921aeb7dd7",
@@ -25,7 +25,7 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "aebe7291d1dfa52485b7b50cc173a53ac9cf5f0ea1363feba859b14958f12a3c",
+      "sha256": "f7e2df77ebe983769691ccd545bc0e50ec9cdb0f3cdd7db5d467ab9404b467ad",
       "bytes": 382071
     },
     "SIMULATION_ACCOUNTING.md": {
@@ -1153,8 +1153,8 @@
       "bytes": 2841
     },
     "evaluations/COMPUTATIONAL_COMPLEXITY_BUDGET.json": {
-      "sha256": "8daace3dcdc3817330c79f7490b776e9edb4c86c56992dca1070fd3e76c7f4d9",
-      "bytes": 15475
+      "sha256": "be17310cddf562dfbe705a59feab2fe1a7427092fcb66e5944e5f3baed198392",
+      "bytes": 16086
     },
     "evaluations/MULTI_RUBRIC_COMPREHENSIVE_BENCHMARK.md": {
       "sha256": "191301ed095a399b809036ebba794ff3f8e3bea75fd232dbc74bccf5a318aa91",
@@ -3741,8 +3741,8 @@
       "bytes": 27784
     },
     "papers/docas.md": {
-      "sha256": "d074e0de97662c3b51fcf9035163448ff74e54d3c3434f657539227fe092055f",
-      "bytes": 319735
+      "sha256": "dd34ed2f9b73300f4780d0ac9a70f2068d4a425920e7a35873a1660e13aa4f4e",
+      "bytes": 320315
     },
     "papers/gtt.md": {
       "sha256": "09aa2c3f450536c6cb1cc02994eea8895e6d6ec4fc50d97ba9bad688804ff399",
@@ -4849,8 +4849,8 @@
       "bytes": 14810
     },
     "experiments/wearables_pipeline/stream_muse_athena_libsql.py": {
-      "sha256": "8b1604cac79efe9353126dd909e139d4677f047dbde2384ed8f2385e2a41c614",
-      "bytes": 9676
+      "sha256": "28f6c91f76ae7693a1555b8196d5cc13c7a69835579663c731f74a445c226462",
+      "bytes": 10202
     },
     "experiments/simf1_work/SIM_F1A2_AMENDMENT_1.md": {
       "sha256": "5e92329e20dac0104156a81a4810d074dd970205224520c2265002cc7c70669d",
@@ -5525,7 +5525,7 @@
       "bytes": 9331
     },
     "experiments/simulations_repair_era/criticality/sim_crit2_results.json": {
-      "sha256": "9eaa0a4e5e9854988cfc19a29575d5fa875da1533be663ec1044129c79e2ab09",
+      "sha256": "723d309e163d7ee6102e8fb85f2b8d58eb9ff7a61b1117e32bdfed09bb53f6b7",
       "bytes": 464
     },
     "experiments/simulations_repair_era/criticality/sim_crit3_bayes_factor_comparison.py": {
