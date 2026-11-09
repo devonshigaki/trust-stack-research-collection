@@ -175,19 +175,19 @@ Drawn at Day 1 (Cessation Baseline), Day 30 (Post-Acute Withdrawal), Day 60, Day
     1.  *Closed-Loop Fluid Mass-Balance:* Completes the fluid conservation triad: Inflow (Smart Water Bottle in $\text{mL}$) $\longrightarrow$ Somatic Reservoir (Fitindex BIA Total Body Water %) $\longrightarrow$ Outflow (Throne Smart Toilet voided volume and optical osmolality).
     2.  *Osmosensitive Pressor Reflex Residualization:* Ingestion of water activates spinal sympathetic efferents via hepatic portal vein hypo-osmotic receptors (Jordan et al., *Circulation* 2000; Robertson et al., *Hypertension* 2002), eliciting an acute $+5\text{ to }+15\text{ mmHg}$ surge in systolic blood pressure and transient vagal HRV suppression lasting $20\text{--}40\text{ minutes}$. Timestamped intake volume allows the analytical pipeline to mathematically residualize this transient pressor response from Aktiia continuous blood pressure and Apple Watch HRV.
 
-### O. Striatal Psychomotor Timing & Internal Pacemaker Calibration (Akai MPK Mini)
-*   **Device:** **Akai MPK Mini USB MIDI Controller (Class-Compliant)**.
-*   **Sensors:** 8 backlit, velocity-sensitive thick MPC drum pads (piezoelectric force transducers capturing mechanical strike arrival at sub-millisecond precision and 7-bit strike velocity $v \in [1, 127]$).
-*   **Integration Pipeline:** Direct USB connection to MacBook Air / Python listener using `mido` / `CoreMIDI` (zero audio drivers, zero DAW latency).
-*   **Standardized 60-Second Psychomotor Task:**
-    *   Executed once daily during the evening debrief station (Charging Block #2, 8:00–10:00 PM) immediately preceding the spoken video journal.
-    *   *Protocol:* 60-Second Finger-Tapping Test (FTT) / Synchronization-Continuation Task. The participant taps Pad 1 steadily at their natural spontaneous motor tempo (SMT) with their dominant index finger.
-*   **Biophysical & Mathematical Targets:**
-    1.  *Striatal Dopaminergic Motor Tone ($D$-Channel):* In the central nervous system, interval timing is governed by the corticostriatal loop (`ADCY5`–`DRD2`–`DARPP-32` coincidence engine). The task measures the **Inter-Tap Interval Coefficient of Variation ($\text{CV}_{\text{ITI}} = \sigma_{\text{ITI}} / \mu_{\text{ITI}}$)**. Normal alert baseline: $\text{CV}_{\text{ITI}} < 4.5\%$; dopamine-depleted allostatic fatigue: $\text{CV}_{\text{ITI}} > 7.5\%$.
-    2.  *Wing-Kristofferson Timing Decomposition:* Mathematically separates central internal clock variance ($\sigma^2_{\text{clock}}$) from peripheral neuromuscular execution delay variance ($\sigma^2_{\text{motor}}$):
+### O. The Unified Executive Neuro-Battery (Akai MPK Mini Controller)
+*   **Device:** **Akai Professional MPK Mini USB MIDI Controller (Class-Compliant)**.
+*   **Sensors & Actuators:** 8 backlit, velocity-sensitive thick MPC drum pads (piezoelectric force transducers capturing arrival times at sub-millisecond precision and 7-bit strike velocity $v \in [1, 127]$), 25 velocity-sensitive mini keys, and a dynamic 4-way spring-centered analog thumbstick (14-bit Pitch Bend on X-axis and 7-bit CC#1 Modulation on Y-axis).
+*   **Integration Pipeline:** Direct USB connection to MacBook Air / Python listener using `mido` / `CoreMIDI` (zero audio drivers, sub-millisecond hardware interrupt latency).
+*   **Standardized 5-Minute Cognitive Battery (Executed Daily at 8:05 PM):**
+    1.  *Task 1 (10 Seconds): 2D Emotion Circumplex Joystick:* The participant nudges the 4-way analog thumbstick to physicalize their momentary Core Affect:
+        $$\text{Valence } (X) = \frac{\text{PitchBend} - 8192}{8192} \in [-1.0, +1.0] \quad (\text{Left: Loss/Displeasure} \longleftrightarrow \text{Right: Gain/Pleasure})$$
+        $$\text{Arousal } (Y) = \frac{\text{CC}_1 - 64}{64} \in [-1.0, +1.0] \quad (\text{Down: Exhaustion/Numbness} \longleftrightarrow \text{Up: Panic/Hyper-Arousal})$$
+    2.  *Task 2 (60 Seconds): Striatal Internal Pacemaker Test:* Spontaneous motor tempo on MPC Pad 1. Measures the **Inter-Tap Interval Coefficient of Variation ($\text{CV}_{\text{ITI}} = \sigma_{\text{ITI}} / \mu_{\text{ITI}}$)** and applies the **Wing-Kristofferson Timing Decomposition**:
         $$\sigma^2_{\text{total}} = \sigma^2_{\text{clock}} + 2\sigma^2_{\text{motor}} - 2\text{Cov}(\Delta t_i, \Delta t_{i+1})$$
-    3.  *Kinetic Strike Force Decay:* Measures the linear regression slope of strike velocity over the 60-second trial, objectively indexing psychomotor exhaustion.
-    4.  *Endocannabinoid Motor Resensitization:* $\mathrm{CB}_1$ receptors are densely expressed in the basal ganglia and cerebellum. The FTT tracks the exact day when cerebellar-striatal motor timing jitter stabilizes during Phase 1 (Days 1–30) cannabis cessation.
+        separating central striatal dopaminergic clock jitter ($\sigma^2_{\text{clock}}$) from peripheral neuromuscular execution delay ($\sigma^2_{\text{motor}}$), and tracking kinetic strike force decay ($\Delta v / \Delta t$).
+    3.  *Task 3 (2 Minutes): NASA Brief Psychomotor Vigilance Task (PVT-B):* Visual reaction-time counter flashes on screen at pseudo-random intervals ($1\text{--}4\text{ seconds}$ inter-stimulus interval / ISI). The participant slaps MPC Pad 1 instantly upon stimulus onset. Extracts Mean Reaction Time ($\text{RT}$ in ms), optimum motor speed (fastest 10% RT), and **Attentional Lapses ($\text{RT} > 500\text{ ms}$)**, providing the aerospace gold standard for allostatic cognitive exhaustion.
+    4.  *Task 4 (2 Minutes): Go / No-Go Prefrontal Executive Inhibitory Control Task:* Fast sequential visual cues ($80\%$ Green Go cues, $20\%$ Red No-Go cues; $400\text{ ms}$ presentation). Measures right inferior frontal cortical inhibitory gating: Commission Errors (impulsive failure to withhold response on Red No-Go cues), Omission Errors (attentional dropouts on Green Go cues), and **Signal Detection Theory Perceptual Sensitivity ($d' = Z(\text{Hit Rate}) - Z(\text{False Alarm Rate}))$**.
 
 ---
 
@@ -251,6 +251,41 @@ To ensure that physiological shifts are driven by psychological and financial tr
     $$\mathrm{HRV}_{\mathrm{stress}}(t) = \mathrm{HRV}_{\mathrm{measured}}(t) - \hat{\mathrm{HRV}}_{\mathrm{pressor}}(t; V_{\mathrm{water}}, t_{\mathrm{drink}})$$
     where $\hat{\text{BP}}_{\mathrm{pressor}}$ models an acute portal osmosensitive activation peaking at $15\text{--}25\text{ minutes}$ post-ingestion ($\tau \in [20, 40\text{ min}]$).
 
+### B. Daily Operational Schedule & The 8-Minute Evening Sequence
+To ensure 180 days of continuous compliance without skin breakdown or battery depletion, operations follow two daily maintenance windows with a standardized 8-minute evening cognitive docking sequence:
+
+```
+                      DAILY SENSOR & MAINTENANCE TIMELINE
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 08:00 AM – 10:00 AM | CHARGING & MAINTENANCE BLOCK #1                         │
+│ • Headband off: Muse S Athena pod placed on USB charging cradle.              │
+│ • Morning Weigh-in: Fasted weigh-in on Fitindex ES-26M (Weight, Fat %, Water) │
+│ • Physical Exercise / Hygiene: Apple Watch + Stelo track cardiac/glucose load.│
+│ • Skin Hygiene: Shower, clean forehead with gentle micellar water/alcohol.    │
+├───────────────────────────────────────────────────────────────────────────────┤
+│ 10:00 AM – 08:00 PM | ACTIVE EXECUTIVE MONITORING BLOCK #1 (10 HOURS)         │
+│ • Strap Muse Athena: fNIRS + EEG active during legal, business, and trading.  │
+│ • Plaid API tracks transaction execution timestamps and trade sizing.         │
+│ • Throne passively logs enteric motility (Bristol score) and hydration index. │
+│ • HidrateSpark PRO tracks passive fluid intake volume at desk.                 │
+├───────────────────────────────────────────────────────────────────────────────┤
+│ 08:00 PM – 10:00 PM | CHARGING & MAINTENANCE BLOCK #2 (THE 8-MINUTE STATION)  │
+│ • 08:00 PM: Headband off; place Muse pod on charger; swap fabric strap.       │
+│ • 08:05 PM: Run ./run_evening_station.py (THE UNIFIED 8-MINUTE DOCKING RIG):  │
+│   - Task 1 (10s): 2D Emotion Circumplex Joystick (MPK Mini 4-Way Thumbstick)  │
+│   - Task 2 (60s): Striatal Internal Pacemaker Test (FTT on MPC Drum Pad 1)    │
+│   - Task 3 (2m):  NASA Brief Psychomotor Vigilance Task (PVT-B on Pad 1)      │
+│   - Task 4 (2m):  Go / No-Go Executive Inhibitory Control (Pad 1 vs Pad 2)    │
+│   - Task 5 (3m):  Spoken Video Reflection (Brio 4K + Blue Yeti Nano on foam)  │
+│ • 08:13 PM: Docking complete. Remaining 107 minutes are 100% free time.       │
+├───────────────────────────────────────────────────────────────────────────────┤
+│ 10:00 PM – 08:00 AM | NOCTURNAL SLEEP MONITORING BLOCK #2 (10 HOURS)          │
+│ • Re-strap Dry Muse Athena: Sleep staging, frontal delta SWS, and REM rebound.│
+│ • Dual-Layer Bed Physics: Withings Sleep Analyzer BCG + Apple Watch temp/HRV. │
+│ • Aktiia tracks nocturnal blood pressure dipping percentage.                  │
+└───────────────────────────────────────────────────────────────────────────────┘
+```
+
 ---
 
 ## 5. Daily Telemetry Aggregation & Software Pipeline
@@ -312,6 +347,8 @@ Continuous 1-minute resolution telemetry is processed by **`harvest_telemetry.py
     Days with elevated daily subjective financial distress correlate with reduced nocturnal SBP dipping ($< 10\%$ dip, $p < 0.01$) and altered enteric transit consistency (Throne Bristol scores shifting away from Type 4).
 *   **Hypothesis PILOT-H7 (Striatal Motor Timing Washout & Psychomotor Allostasis):**  
     During Phase 1 (Days 1–30), the 60-second Akai MPK Mini finger-tapping task observes an exponential decline in motor timing variability ($\text{CV}_{\text{ITI}}$ improving from $> 7.0\%$ to $< 4.5\%$, $p < 0.001$), reflecting $\mathrm{CB}_1\mathrm{R}$ cerebellar-striatal motor resensitization. Across Phase 2, acute contractual betrayal events ($\varepsilon < 0$) trigger transient motor timing jitter spikes ($\Delta \text{CV}_{\text{ITI}} \ge +20\%$, $p < 0.01$) directly cross-correlating with Apple Watch vagal HRV collapse.
+*   **Hypothesis PILOT-H8 (Prefrontal Inhibitory Control & Vigilance Degradation under Financial Stress):**  
+    Across Phase 2, acute contractual betrayal events ($\varepsilon < 0$) elicit a statistically significant degradation in executive control on the evening battery: Go/No-Go commission errors increase by $\ge 2.0\times$ ($p < 0.01$) and PVT attentional lapses ($\text{RT} > 500\text{ ms}$) increase by $\ge 40\%$ ($p < 0.001$), cross-correlating with prefrontal deoxygenation ($\Delta [\mathrm{HbR}] \uparrow$) on the Muse S Athena.
 *   **Frozen Stopping & Falsification Rules:**  
     If prefrontal fNIRS motion artifacts exceed $40.0\%$ of task time in Stage 1, or if Apple Watch nocturnal temperature measurements fail to record for $\ge 3$ consecutive nights, the study enters a mandatory hardware calibration gate before cohort rotation.
 

@@ -132,6 +132,24 @@ def init_libsql_schema(conn):
         motor_execution_variance_ms2 REAL
     );
     """)
+
+    conn.execute("""
+    CREATE TABLE IF NOT EXISTS executive_cognition_ledger (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp_posix REAL NOT NULL,
+        study_day INTEGER NOT NULL,
+        affect_valence_x REAL,
+        affect_arousal_y REAL,
+        tapping_cv_iti_percent REAL,
+        tapping_clock_variance_ms2 REAL,
+        pvt_mean_reaction_time_ms REAL,
+        pvt_fastest_10pct_rt_ms REAL,
+        pvt_lapses_count INTEGER,
+        gonogo_commission_errors INTEGER,
+        gonogo_omission_errors INTEGER,
+        gonogo_perceptual_sensitivity_dprime REAL
+    );
+    """)
     print("✓ Local libSQL schema successfully verified and indexed.")
 
 def compute_scholkmann_dpf(wavelength_nm: float, age_years: float = 30.0) -> float:

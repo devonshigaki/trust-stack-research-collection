@@ -256,10 +256,10 @@
       "feature_extraction": "openSMILE eGeMAPS acoustic feature vector (f0, jitter, shimmer, HNR, Cepstral Peak Prominence) and on-device whisper.cpp transcription into libSQL"
     },
     "psychomotor_midi_controller": {
-      "device": "Akai MPK Mini USB MIDI Controller (Class-Compliant)",
-      "sensors": "8 velocity-sensitive backlit MPC drum pads (piezoelectric force transducers capturing arrival times at sub-millisecond precision and 7-bit velocity)",
-      "task_protocol": "Standardized 60-second Finger-Tapping Test (FTT) / Synchronization-Continuation Task executed daily during evening debrief",
-      "measurement_target": "Striatal dopaminergic interval timing (CV_ITI), Wing-Kristofferson central clock vs. motor execution delay variance, and kinetic strike force decay"
+      "device": "Akai Professional MPK Mini USB MIDI Controller (Class-Compliant)",
+      "sensors": "8 velocity-sensitive backlit MPC drum pads (piezoelectric force transducers with sub-millisecond precision), 25 velocity keys, and dynamic 4-way spring-centered analog thumbstick",
+      "task_protocol": "Standardized 5-minute cognitive battery during evening debrief: 10s 2D Emotion Joystick, 60s Striatal FTT, 2-min NASA PVT-B, and 2-min Go/No-Go Inhibitory Control",
+      "measurement_target": "Continuous valence/arousal coordinates, striatal clock timing (CV_ITI), Wing-Kristofferson variance, PVT attentional lapses, and Go/No-Go commission errors"
     }
   }
 }
