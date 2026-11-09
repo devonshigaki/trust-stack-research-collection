@@ -172,9 +172,44 @@
       "device": "Dexcom Stelo Glucose Biosensor (Continuous Glucose Monitor)",
       "sensor": "Enzymatic subcutaneous interstitial glucose filament (15-day wear lifespan)",
       "sampling_cadence_minutes": 5,
-      "deployment_schedule": "Two consecutive 15-day sensors (30 days total in Phase 1 dense phenotyping)",
+      "deployment_schedule": "Twelve consecutive 15-day sensors (180 days total in Phase 1 dense phenotyping)",
       "measurement_target": "Interstitial glucose concentration (mg/dL) and flux (dG/dt) capturing glucocorticoid-mediated hepatic glycogenolysis",
       "integration_pipeline": "Apple HealthKit / Dexcom Share edge ingestion into libSQL"
+    },
+    "continuous_cuffless_bp": {
+      "device": "Aktiia / Hilo Continuous Blood Pressure Wristband",
+      "sensors": "Optical photoplethysmography sensor array",
+      "measurement_target": "24/7 continuous Systolic BP, Diastolic BP, Pulse Wave Velocity, and nocturnal vascular dipping percentage without cuff disruption",
+      "integration_pipeline": "Direct local BLE / CSV export to libSQL"
+    },
+    "enteric_toilet_sensor": {
+      "device": "Throne Smart Toilet Passive Monitoring Sensor",
+      "sensors": "Automated non-invasive optical and thermal bowl array",
+      "measurement_target": "Bristol Stool Scale categorization (Types 1–7), gut motility velocity, peak urinary flow rate (Qmax), and hydration index",
+      "integration_pipeline": "App BLE export to Parquet / libSQL"
+    },
+    "under_mattress_bcg_pad": {
+      "device": "Withings Sleep Analyzer Under-Mattress Pad",
+      "sensors": "Pneumatic ballistocardiography (BCG) sensor",
+      "measurement_target": "Contactless heart rate, respiratory rate, sleep apnea hypopnea index, and sleep staging cross-validating wearable EEG/PPG",
+      "integration_pipeline": "Withings local API JSON sync to libSQL"
+    },
+    "indoor_air_quality": {
+      "device": "Awair Element Indoor Air Quality Monitor",
+      "sensors": "Laser particle counter, NDIR CO2 sensor, semiconductor TVOC sensor",
+      "measurement_target": "Indoor CO2 (ppm), TVOCs (ppb), PM2.5 (ug/m3), temperature, and humidity for cognitive allostatic confounder filtering",
+      "integration_pipeline": "Local network HTTP API JSON pull to libSQL"
+    },
+    "static_clinical_wgs": {
+      "platform": "30x Clinical Whole Genome Sequencing (Nebula Genomics / Dante Labs)",
+      "raw_data_size_gb": 120.0,
+      "storage_architecture": "Air-gapped local encrypted NAS RAID storage (zero cloud persistence)",
+      "target_analyses": "PGx CYP450 liver clearance kinetics (CYP2C9, CYP2D6), ECS FAAH/CNR1 variants, striatal ADCY5/ADCY8/DRD2/DARPP-32 coincidence engine, and autism/bipolar PRSs"
+    },
+    "serial_blood_panels": {
+      "schedule": "6 monthly requisitions across 180 days (Days 1, 30, 60, 90, 120, 150, 180)",
+      "biomarkers": "hs-CRP, Homocysteine, Fasting Insulin, HbA1c, ApoB, Standard Lipids, 8 AM Cortisol, Testosterone, DHEA-S, Thyroid panel, CMP-14, CBC with Differential",
+      "funding_offset": "100% self-funded via capital freed from cannabis cessation ($0 net out-of-pocket)"
     },
     "edge_kiosk_hub": {
       "device": "iPhone 12 Pro (Dedicated Wiped Research Kiosk)",

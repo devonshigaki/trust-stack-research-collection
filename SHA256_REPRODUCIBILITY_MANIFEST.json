@@ -4,13 +4,13 @@
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3",
-  "total_files_hashed": 2029,
-  "total_manifest_size_mb": 417.49,
+  "total_files_hashed": 2030,
+  "total_manifest_size_mb": 417.5,
   "automated_ci_tasks_verified": 26,
   "files": {
     "DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
-      "sha256": "18526f546b09c2a8d2588a0c9659f6c8d7d9e1d215af4579df0fb85b9e18ab0d",
-      "bytes": 27955
+      "sha256": "98b348e1e37f8209c5b330bb68ab19065cefe659d628709c82468d860b7e8c9b",
+      "bytes": 23783
     },
     "DOCAS_PILOT_1_PROOF_OF_CONCEPT.md": {
       "sha256": "c03daac82220a7f5b8082f92e5b49940e87afd103903ca7c401a30921aeb7dd7",
@@ -25,7 +25,7 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "e7a2c1189b9ebf55342e7a448c22371e2ab496f7bf85f2b2a54692f01a9569f6",
+      "sha256": "f8ccbc0f3980baf212f75dad8cf29476089f3a464cb3a5baa0b7fc06699d9414",
       "bytes": 381899
     },
     "SIMULATION_ACCOUNTING.md": {
@@ -1153,8 +1153,8 @@
       "bytes": 2841
     },
     "evaluations/COMPUTATIONAL_COMPLEXITY_BUDGET.json": {
-      "sha256": "99fa6b4446638875da8323641bf200f0fceab337b6290c22742e13495dc4292c",
-      "bytes": 12013
+      "sha256": "7a1791870a2f340c36fe64f33b1f1f5c4950e4395a027b88ea938e5b6207743c",
+      "bytes": 14472
     },
     "evaluations/MULTI_RUBRIC_COMPREHENSIVE_BENCHMARK.md": {
       "sha256": "191301ed095a399b809036ebba794ff3f8e3bea75fd232dbc74bccf5a318aa91",
@@ -3741,8 +3741,8 @@
       "bytes": 27784
     },
     "papers/docas.md": {
-      "sha256": "a6ead5d09674f12ab88070bf541d263bf0eb7af0e0b897cfcc0e5a5a5a7b3492",
-      "bytes": 317192
+      "sha256": "55b21b4750708936ae8c89764c61e913a479e46c072b9199c8805199a48c3784",
+      "bytes": 318579
     },
     "papers/gtt.md": {
       "sha256": "09aa2c3f450536c6cb1cc02994eea8895e6d6ec4fc50d97ba9bad688804ff399",
@@ -4828,6 +4828,10 @@
       "sha256": "da3374ef825135499444e9ff06525fda4f207af399532cb0a12d3ee6c06fb3f0",
       "bytes": 644594
     },
+    "experiments/wearables_pipeline/harvest_telemetry.py": {
+      "sha256": "034169c110e80e17c0191073b47ccec9cc7f30e19d9056dbf79d7e0c6be593c4",
+      "bytes": 5963
+    },
     "experiments/wearables_pipeline/sim_pilot1_results.json": {
       "sha256": "d94f978232591b06a92da6ec7847e42888e508318721ad5f08064cc5e374875c",
       "bytes": 409
@@ -5521,8 +5525,8 @@
       "bytes": 9331
     },
     "experiments/simulations_repair_era/criticality/sim_crit2_results.json": {
-      "sha256": "0001ff53a1b1fb775e855b4471a6a6264bcb6d4416eb51a3df745b4f9bb58fae",
-      "bytes": 464
+      "sha256": "358ddf07c257a7d8e08de52c36ad9c16712c33b244c359bee1ee528e6fa17ab4",
+      "bytes": 463
     },
     "experiments/simulations_repair_era/criticality/sim_crit3_bayes_factor_comparison.py": {
       "sha256": "63dde526c6c02c9231ea0aa0ec2b0e37e5a063680efe088c4a375e843e173851",
