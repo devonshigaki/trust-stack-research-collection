@@ -158,6 +158,14 @@ Drawn at Day 1 (Cessation Baseline), Day 30 (Post-Acute Withdrawal), Day 60, Day
 *   *Endocrine & Allostatic Axis:* Morning Cortisol (8:00 AM standardized), Free & Total Testosterone, DHEA-Sulfate, Thyroid Panel (TSH, Free T3, Free T4).
 *   *Organ Function & Cytology:* Comprehensive Metabolic Panel (CMP-14), Complete Blood Count (CBC with Differential).
 
+### N. Fluid Inflow & Osmosensitive Pressor Confounder Filter (Smart Water Bottle)
+*   **Device:** **HidrateSpark PRO Smart Water Bottle** (Stainless Steel, Bluetooth Low Energy).
+*   **Sensors:** Internal capacitive sensor puck measuring fluid level changes at milliliter resolution with automated consumption timestamping.
+*   **Integration Pipeline:** Native Bluetooth Low Energy sync directly into Apple HealthKit (`HKQuantityTypeIdentifierDietaryWater`) with zero manual logging.
+*   **Biophysical & Mathematical Role:**
+    1.  *Closed-Loop Fluid Mass-Balance:* Completes the fluid conservation triad: Inflow (Smart Water Bottle in $\text{mL}$) $\longrightarrow$ Somatic Reservoir (Fitindex BIA Total Body Water %) $\longrightarrow$ Outflow (Throne Smart Toilet voided volume and optical osmolality).
+    2.  *Osmosensitive Pressor Reflex Residualization:* Ingestion of water activates spinal sympathetic efferents via hepatic portal vein hypo-osmotic receptors (Jordan et al., *Circulation* 2000; Robertson et al., *Hypertension* 2002), eliciting an acute $+5\text{ to }+15\text{ mmHg}$ surge in systolic blood pressure and transient vagal HRV suppression lasting $20\text{--}40\text{ minutes}$. Timestamped intake volume allows the analytical pipeline to mathematically residualize this transient pressor response from Aktiia continuous blood pressure and Apple Watch HRV.
+
 ---
 
 ## 3. Comprehensive Metric Mapping Across the 5 DOCAS Channels
@@ -213,6 +221,11 @@ To ensure that physiological shifts are driven by psychological and financial tr
 4.  **Circadian Photic Zeitgeber Filter:**  
     Quantifies ambient artificial light exposure to control for nocturnal melatonin suppression:
     $$\text{Zeitgeber}(t) = \ln(1 + \text{Lux}) \cdot \left(\frac{\text{CCT}}{5500\text{ K}}\right)$$
+5.  **Osmosensitive Water Ingestion Pressor Residualization:**  
+    Subtracts the transient sympathetic pressor response elicited by water ingestion from Aktiia continuous blood pressure and Apple Watch HRV:
+    $$\text{BP}_{\mathrm{stress}}(t) = \text{BP}_{\mathrm{measured}}(t) - \hat{\text{BP}}_{\mathrm{pressor}}(t; V_{\mathrm{water}}, t_{\mathrm{drink}})$$
+    $$\mathrm{HRV}_{\mathrm{stress}}(t) = \mathrm{HRV}_{\mathrm{measured}}(t) - \hat{\mathrm{HRV}}_{\mathrm{pressor}}(t; V_{\mathrm{water}}, t_{\mathrm{drink}})$$
+    where $\hat{\text{BP}}_{\mathrm{pressor}}$ models an acute portal osmosensitive activation peaking at $15\text{--}25\text{ minutes}$ post-ingestion ($\tau \in [20, 40\text{ min}]$).
 
 ---
 

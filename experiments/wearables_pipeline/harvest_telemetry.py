@@ -84,6 +84,12 @@ def aggregate_daily_telemetry(date_str: str, out_dir: str = None) -> str:
     df.loc[event_idx, "plaid_transaction_flag"] = 1
     df.loc[event_idx, "plaid_amount_usd"] = 450.00
 
+    # (H) Fluid Inflow: HidrateSpark PRO Smart Water Bottle (Periodic intake during 10h active block)
+    df["water_intake_ml"] = 0.0
+    for sip_hour in [9, 11, 13, 15, 17, 19]:
+        sip_idx = sip_hour * 60 + int(np.random.uniform(5, 45))
+        df.loc[sip_idx, "water_intake_ml"] = float(np.random.normal(220, 25))
+
     # 4. Save to Master Parquet Store
     parquet_filename = os.path.join(out_dir, f"master_telemetry_day_{day_number:03d}_{date_str}.parquet")
     df.to_parquet(parquet_filename, compression="snappy", index=False)
@@ -106,15 +112,22 @@ def aggregate_daily_telemetry(date_str: str, out_dir: str = None) -> str:
             mean_fnirs_hbo2 REAL,
             morning_weight_kg REAL,
             body_fat_pct REAL,
+            total_water_intake_ml REAL,
             parquet_path TEXT NOT NULL
         );
         """)
+        # Ensure migration if table already exists
+        cursor = conn.cursor()
+        cursor.execute("PRAGMA table_info(daily_telemetry_ledger)")
+        existing_cols = [row[1] for row in cursor.fetchall()]
+        if "total_water_intake_ml" not in existing_cols:
+            conn.execute("ALTER TABLE daily_telemetry_ledger ADD COLUMN total_water_intake_ml REAL DEFAULT 0;")
         conn.execute("""
         INSERT OR REPLACE INTO daily_telemetry_ledger (
             day_number, date_str, phase_label, mean_hrv_rmssd, mean_systolic_bp,
             mean_diastolic_bp, mean_glucose, mean_fnirs_hbo2, morning_weight_kg,
-            body_fat_pct, parquet_path
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+            body_fat_pct, total_water_intake_ml, parquet_path
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
         """, (
             int(day_number),
             date_str,
@@ -126,6 +139,7 @@ def aggregate_daily_telemetry(date_str: str, out_dir: str = None) -> str:
             float(df["fnirs_hbo2_prefrontal"].mean()),
             float(df["smart_scale_weight_kg"].iloc[0]),
             float(df["smart_scale_body_fat_pct"].iloc[0]),
+            float(df["water_intake_ml"].sum()),
             parquet_filename
         ))
     conn.close()

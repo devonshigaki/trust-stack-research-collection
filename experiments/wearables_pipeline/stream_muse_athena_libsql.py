@@ -94,7 +94,8 @@ def init_libsql_schema(conn):
         smart_scale_weight_kg REAL,
         smart_scale_bmi REAL,
         smart_scale_body_fat_pct REAL,
-        smart_scale_lean_mass_kg REAL
+        smart_scale_lean_mass_kg REAL,
+        water_intake_ml REAL DEFAULT 0
     );
     """)
     print("✓ Local libSQL schema successfully verified and indexed.")

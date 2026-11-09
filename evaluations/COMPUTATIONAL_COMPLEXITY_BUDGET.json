@@ -237,6 +237,12 @@
       "measurement_target": "Body mass (kg), BMI, Body fat %, Lean body mass, and Total body water % for 30-day somatic stationarity and cranial DPF optical pathlength calibration",
       "integration_pipeline": "Apple HealthKit (HKQuantityTypeIdentifierBodyMass, BodyFatPercentage, LeanBodyMass) into libSQL"
     },
+    "smart_water_bottle": {
+      "device": "HidrateSpark PRO Smart Water Bottle (Bluetooth Low Energy)",
+      "sensors": "Internal capacitive fluid level sensor puck (milliliter resolution)",
+      "measurement_target": "Passive fluid volume intake (mL) and timestamps to model closed-loop fluid mass-balance and residualize the autonomic water-ingestion pressor reflex",
+      "integration_pipeline": "Apple HealthKit (HKQuantityTypeIdentifierDietaryWater) edge ingestion into libSQL"
+    },
     "acoustic_video_webcam": {
       "device": "Logitech Brio 4K Ultra HD Pro Webcam (Model V-U0040 / MSIP-REM-DZL-V-U0040)",
       "sensors": "4K Ultra HD optical sensor (RightLight 3 HDR) + dual omnidirectional noise-canceling microphones",

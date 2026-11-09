@@ -1175,6 +1175,7 @@ The pre-registered prospective clinical trial **DOCAS-GATE-1** adheres strictly 
     5.  *Passive Enteric Motility & Hydration:* The **Throne Smart Toilet Sensor** providing automated optical Bristol Stool Scale (Types 1–7) categorization, gut transit velocity, and peak urinary flow rate ($Q_{\text{max}}$) tracking autonomic enteric tone during cessation.
     6.  *Contactless Bed Ballistocardiography:* The **Withings Sleep Analyzer** under-mattress pneumatic pad capturing continuous mechanical cardiac recoil, respiratory rate, and sleep architecture.
     7.  *Multi-Omics & Biochemical Grounding:* Static 30x Whole Genome Sequencing (WGS; PGx CYP450, PRS Dopaminergic/Autism) paired with 6 serial monthly blood draws (hs-CRP, Homocysteine, Fasting Insulin, HbA1c, ApoB, 8 AM Cortisol, Testosterone, CMP-14, CBC with Differential) establishing longitudinal biochemical ground truth across five full 30-day steady-state cycles.
+    8.  *Fluid Inflow & Osmosensitive Pressor Confounder Filter:* The **HidrateSpark PRO Smart Water Bottle** (Bluetooth Low Energy capacitive sensor syncing to Apple HealthKit `HKQuantityTypeIdentifierDietaryWater`), completing the closed-loop fluid mass-balance triad (Inflow $\to$ Storage via Fitindex BIA body water % $\to$ Outflow via Throne optical urine osmolality) and mathematically residualizing the water-ingestion pressor reflex from Aktiia continuous blood pressure and Apple Watch HRV.
 
 <figure id="fig:sim-pilot1" data-latex-placement="!tp">
 <img src="figures/fig_pilot1_30day_mock_trajectory.png" style="width:98.0%" />
