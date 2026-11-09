@@ -250,9 +250,9 @@
       "feature_extraction": "py-feat FACS micro-expression Action Units (AU4, AU12, AU15) and facial capillary rPPG"
     },
     "acoustic_studio_microphone": {
-      "device": "Blue Yeti Nano USB Condenser Microphone (Model A00098)",
-      "capsules": "Dual 14mm custom condenser capsules operating in dedicated Cardioid polar pattern",
-      "recording_format": "Uncompressed 24-bit / 48 kHz Linear PCM WAV audio directly bypassing OS AGC/DSP",
+      "device": "Blue Yeti Nano USB Condenser Microphone (Model A00098) on Integrated Foam Sound Wall Shield",
+      "capsules": "Dual 14mm custom condenser capsules in Cardioid pattern mounted inside curved acoustic reflection shield with pop filter",
+      "recording_format": "Uncompressed 24-bit / 48 kHz Linear PCM WAV audio directly bypassing OS AGC/DSP (DRR > 12 dB, RT60 < 0.2s)",
       "feature_extraction": "openSMILE eGeMAPS acoustic feature vector (f0, jitter, shimmer, HNR, Cepstral Peak Prominence) and on-device whisper.cpp transcription into libSQL"
     }
   }
