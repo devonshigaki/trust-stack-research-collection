@@ -208,8 +208,7 @@
     },
     "serial_blood_panels": {
       "schedule": "6 monthly requisitions across 180 days (Days 1, 30, 60, 90, 120, 150, 180)",
-      "biomarkers": "hs-CRP, Homocysteine, Fasting Insulin, HbA1c, ApoB, Standard Lipids, 8 AM Cortisol, Testosterone, DHEA-S, Thyroid panel, CMP-14, CBC with Differential",
-      "funding_offset": "100% self-funded via capital freed from cannabis cessation ($0 net out-of-pocket)"
+      "biomarkers": "hs-CRP, Homocysteine, Fasting Insulin, HbA1c, ApoB, Standard Lipids, 8 AM Cortisol, Testosterone, DHEA-S, Thyroid panel, CMP-14, CBC with Differential"
     },
     "edge_kiosk_hub": {
       "device": "iPhone 12 Pro (Dedicated Wiped Research Kiosk)",
