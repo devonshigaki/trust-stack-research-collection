@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadDescription</key>
+			<string>Locks the device into Autonomous Single App Mode for the DOCAS-PILOT-1 Research Kiosk.</string>
+			<key>PayloadDisplayName</key>
+			<string>App Lock (DOCAS Kiosk)</string>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.app.lock.DOCAS</string>
+			<key>PayloadType</key>
+			<string>com.apple.app.lock</string>
+			<key>PayloadUUID</key>
+			<string>A1B2C3D4-E5F6-7890-1234-56789ABCDEF0</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>App</key>
+			<dict>
+				<key>Identifier</key>
+				<string>xyz.freshcredit.kiosk.docas</string>
+			</dict>
+			<key>Options</key>
+			<dict>
+				<key>DisableTouch</key>
+				<false/>
+				<key>DisableDeviceRotation</key>
+				<true/>
+				<key>DisableVolumeButtons</key>
+				<true/>
+				<key>DisableRingerSwitch</key>
+				<true/>
+				<key>DisableSleepWakeButton</key>
+				<true/>
+				<key>DisableAutoLock</key>
+				<true/>
+				<key>EnableVoiceOver</key>
+				<false/>
+				<key>EnableZoom</key>
+				<false/>
+				<key>EnableInvertColors</key>
+				<false/>
+			</dict>
+		</dict>
+		<dict>
+			<key>PayloadDescription</key>
+			<string>Defers OS Updates for 90 days to prevent disruption of the 180-day pilot.</string>
+			<key>PayloadDisplayName</key>
+			<string>Restrictions</string>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.applicationaccess.DOCAS</string>
+			<key>PayloadType</key>
+			<string>com.apple.applicationaccess</string>
+			<key>PayloadUUID</key>
+			<string>F0E1D2C3-B4A5-6789-0123-456789ABCDEF</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>enforcedSoftwareUpdateDelay</key>
+			<integer>90</integer>
+			<key>forceDelayedSoftwareUpdates</key>
+			<true/>
+		</dict>
+	</array>
+	<key>PayloadDisplayName</key>
+	<string>DOCAS-PILOT-1 Research Kiosk Lockdown</string>
+	<key>PayloadIdentifier</key>
+	<string>xyz.freshcredit.kiosk.profile</string>
+	<key>PayloadOrganization</key>
+	<string>The FreshCredit Lab</string>
+	<key>PayloadRemovalDisallowed</key>
+	<true/>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>00000000-0000-0000-0000-000000000000</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
