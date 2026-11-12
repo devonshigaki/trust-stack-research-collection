@@ -210,6 +210,18 @@ TASKS = [
         "name": "Sim PILOT-1: End-to-End 30-Day Multimodal Pre-Flight Mock Trial Runner",
         "script": "experiments/wearables_pipeline/simulate_30day_dense_pilot.py",
         "workdir": "experiments/wearables_pipeline"
+    },
+    {
+        "tier": "Tier 1: Simulation",
+        "name": "Sim PILOT-2: Full 180-Day 14-Stream Synthetic Benchmark (V4.5 Protocol)",
+        "script": "experiments/wearables_pipeline/simulate_180day_dense_pilot.py",
+        "workdir": "experiments/wearables_pipeline"
+    },
+    {
+        "tier": "Tier 1: Formal Math",
+        "name": "ZK-STP Master Stability Law Fixed-Point Proof & Tamper Verification",
+        "script": "formal-verification/zk_master_law_stp.py",
+        "workdir": "formal-verification"
     }
 ]
 
