@@ -25,7 +25,7 @@
       "bytes": 124276
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "d6fdf9d3d88c542a7aa67456f18c3ba077813799959950195b600908b8d45207",
+      "sha256": "dabc870ad8ab6d07e5a491e343e9cb98d64a0b6eaf07631b076c6df0117b9160",
       "bytes": 385373
     },
     "SIMULATION_ACCOUNTING.md": {
@@ -3745,12 +3745,12 @@
       "bytes": 185623
     },
     "papers/tdf.md": {
-      "sha256": "fbf8889e63737b29bff2795ad13e612475f72b26c4d5cd8cf51584d7b15f7256",
-      "bytes": 323599
+      "sha256": "2c3dd28c43edf427d9102bccdbd8488a6f1a59242090f25cdf81eb4978340548",
+      "bytes": 323608
     },
     "papers/tfp.md": {
-      "sha256": "b24a7287e930197870e4cb807c756c9182d17a6c4fef6da263d8826cd849274b",
-      "bytes": 152074
+      "sha256": "ca3c23fdec1cc5370de1bf78ec6dba8424fe7c11c5de881271e4abcdb991ac8d",
+      "bytes": 152081
     },
     "papers/the_value_of_trust.md": {
       "sha256": "7f349640e07de772f72cd550c19ef61029024916f2381cb38a8c786387acca0b",
@@ -3769,12 +3769,12 @@
       "bytes": 185510
     },
     "papers/markdown/tdf.md": {
-      "sha256": "5fcf2bdff20eb5562fcf4dc0cb17cc97e50f420f223455c411b2cd61c0f2e51d",
-      "bytes": 323412
+      "sha256": "d951a39b480d53b881bbd4d1184dddb516619f34c0223cc441fc45db53e9ab84",
+      "bytes": 323421
     },
     "papers/markdown/tfp.md": {
-      "sha256": "1b7ab2bd9d979481175896cad207e4811a22cb4f2ad7f90d9d2cc35ce1bb5e0d",
-      "bytes": 152276
+      "sha256": "9a204b19af8afa8cb88d3d762e740b0a7cf76ef3344e69f3cfd0524b8e6a8d17",
+      "bytes": 152283
     },
     "papers/markdown/the_value_of_trust.md": {
       "sha256": "7f349640e07de772f72cd550c19ef61029024916f2381cb38a8c786387acca0b",
@@ -3793,12 +3793,12 @@
       "bytes": 187734
     },
     "papers/source/tdf.tex": {
-      "sha256": "5a0ffd38ded313c6192529e7ef3101ec883dc72d20b85a19ef52a8fe516a5486",
-      "bytes": 318803
+      "sha256": "f78a88e1f8a95b1ed6c16eee37ed7ba0e880b452a90c20e979f3409b5b9223a7",
+      "bytes": 318810
     },
     "papers/source/tfp.tex": {
-      "sha256": "d4a14f61cf90f358c449f62b404aa648d5ca1ad763709e4562adf8b83bccf818",
-      "bytes": 153586
+      "sha256": "b65011fe99cb639809fc71597191722846d1cc97b39ac234f72fca7d1ab7dc41",
+      "bytes": 152908
     },
     "papers/source/value_of_trust.tex": {
       "sha256": "da3157aab6eac3c5face2ffa568394c64df13757da045e411ca55a7b8233f9f1",

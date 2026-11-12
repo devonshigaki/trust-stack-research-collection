@@ -1114,9 +1114,9 @@ Tier & Scale              | Canonical Disciplines                 | Primary Inva
                           |                                       | • Sim N: Buddhist non-dualism & Markov blankets.
                           |                                       | • Sapolsky Determinism: Restorative cybernetic damping.
 --------------------------+---------------------------------------+-----------------------------------------------------
-6. Economic & Legal       | Behavioral Economics, Game Theory,    | • Sim P8c/d: Entropy Gate & Nash anti-collusion auction.
-   (10² to 10⁶ m)         | Institutional Law, Mechanism Design   | • Sim W8: 12 C.F.R. § 1002.9 Temporal SHAP recourse.
-                          |                                       | • Sim W9: Solvency reserve ODE under lemons migration.
+6. Population & Social    | Behavioral Ecology, Game Theory,      | • Sim PERSUADE-1: Lindquist-Watson agential convergence.
+   (10² to 10⁶ m)         | Collective Coordination Dynamics      | • Sim G26: Kantian honesty vs. Machiavellian predation.
+                          |                                       | • Sim ECOL: Malthusian carrying capacity & phase space.
 --------------------------+---------------------------------------+-----------------------------------------------------
 7. Cryptographic Societal | Distributed Systems, Blockchain,      | • The Fresh Protocol (TFP): libSQL edge database
    (10⁶ to 10⁷ m)         | Edge Verification Architecture        |   per tenant with x402 streaming micropayments.
@@ -1158,7 +1158,7 @@ The Quasicritical Trust Attractor is benchmarked directly against competitive in
 *   *Rescorla-Wagner (Standard delta rule):* Memoryless Markov assumption produces white noise error streams ($\beta = -0.025$). Falsified by GTT Quasicritical scale-free $1/f$ pink noise ($\beta = 1.060$) with $\Delta \text{BIC} = 2,207.1, \text{BF} > 10^{239}$.
 *   *Drift-Diffusion Model (DDM / Ratcliff walk):* Accumulates unbounded Brownian random walk ($\beta = 1.964$). Falsified by GTT bounded $500\text{ ms}$ relaxation ($\Delta \text{BIC} = 1,948.9, \text{BF} > 10^{200}$).
 *   *Hierarchical Gaussian Filter (HGF / Friston & Mathys):* Step-like volatility filter lacking non-equilibrium thermodynamic bounds. Falsified by GTT Landauer-bounded variational extremum ($\Delta \text{BIC} = 1,105.2, \text{BF} > 10^{239}$).
-*   *Conventional Credit Scoring (legacy centralized credit scores):* Centralized surveillance file leaving $32\text{M}$ adults invisible/unscorable. Outperformed by user-owned edge cash-flow models (FinRegLab $N=85,000$, $\Delta p = -0.031$ default reduction).
+*   *Conventional In-Scanner Neuroimaging:* Artificial laboratory fMRI tasks with high demand characteristics ($m \to 1$). Outperformed by naturalistic continuous ambulatory phenotyping ($\psi \to \psi_{\min}$).
 
 ### 4. Clinical & Behavioral Trial Protocols: DOCAS-GATE-1 (Cochrane RoB 2 & APA JARS-Quant)
 The pre-registered prospective clinical trial **DOCAS-GATE-1** adheres strictly to CONSORT and Cochrane RoB 2 guidelines:
@@ -1208,7 +1208,7 @@ where $\boldsymbol{\mu} \in \mathbb{R}^k$ represents the predictive neural contr
 
 ### 3. Societal & Cryptographic Isomorphism (The Digital Membrane)
 This biological convergence maps directly onto the architecture of **The Fresh Protocol (TFP)** and **FreshCredit**:
-*   The centralized credit bureau is the flawed **Cartesian dictator**: attempting to issue top-down credit scores while remaining completely deaf to the consumer's local lived reality.
+*   The centralized cortical homunculus is the flawed **Cartesian dictator**: attempting to issue top-down control commands while remaining completely deaf to the peripheral somatic lived reality of tissue syncytia.
 *   The **FreshCredit edge architecture** is the **Lindquist-Watson mutual persuasion engine**: the financial network cannot command or extract data from the user's encrypted local `libSQL` database; it can only "persuade" the user through transparent, mathematically auditable, Pareto-improving offers. Conscious trust emerges from this reciprocal, non-coercive negotiation.
 
 ## 5.39 The Axioms of Trust, Multiple-Trace Memory, and Evolutionary Assembly (Sim AXIOM-Series) [SIMULATION]
@@ -1216,7 +1216,7 @@ This biological convergence maps directly onto the architecture of **The Fresh P
 To formally unify Lee Cronin's Assembly Theory, Michael Levin's bioelectrics, and Eric Beinhocker's evolutionary economics across the multiscale spectrum, the **Sim AXIOM-Series** was pre-registered and executed (`experiments/simulations_repair_era/axioms_of_trust/SIM_AXIOM_PRE_REGISTRATION.md`, `sim_axiom_series.py`; seed 42):
 
 1.  **Trust Defined as the Active Boundary State:** Trust is the active state of alignment that exists at the semi-permeable boundary the moment before selection—evaluating signed mismatch $\varepsilon_t = V_t - E_t$. When the boundary resolves this mismatch, the **Selection Reaction** performs the thermodynamic work of breaking and re-forming bonds. That reaction updates the trust state, committing a new memory trace ($S_{t+1}$) that recursively feeds into the subsequent Expectation ($E_{t+1}$).
-2.  **Multiple-Trace Memory vs. Scalar Prototype Underwriting (Sim AXIOM-1):** In an evaluation of $N = 1,000$ consumers experiencing a transient macroeconomic shock (10 epochs, $t=50$), underwriters relying on scalar "Prototypes" (analogous to legacy scalar credit scores) suffered severe prior rigidity ("stuck priors"), exhibiting a **$8.69\times$ higher false-positive credit denial rate** during recovery compared to an underwriter utilizing a **Multiple-Trace Memory** architecture (storing episodic transaction event logs at the edge; Criterion AX1.A PASS; $\ge 3.0\times$). Furthermore, the Multiple-Trace engine converged back to ground-truth risk **$85.7\%$ faster** (Time-to-Recovery ratio $0.14 \le 0.50$; Criterion AX1.B PASS; Compound Verdict: PASS 2/2).
+2.  **Multiple-Trace Memory vs. Scalar Prototype Models (Sim AXIOM-1):** In an evaluation of $N = 1,000$ adaptive agents experiencing a transient environmental perturbation (10 epochs, $t=50$), cognitive decision-makers relying on scalar "Prototypes" (storing an un-differentiated scalar running mean) suffered severe prior rigidity ("stuck priors"), exhibiting an **$8.69\times$ higher false-alarm rejection rate** during recovery compared to agents utilizing a **Multiple-Trace Memory** architecture (storing uncompressed episodic interaction traces; Criterion AX1.A PASS; $\ge 3.0\times$). Furthermore, the Multiple-Trace engine converged back to ground-truth environmental state **$85.7\%$ faster** (Time-to-Recovery ratio $0.14 \le 0.50$; Criterion AX1.B PASS; Compound Verdict: PASS 2/2).
 3.  **Beinhocker Evolutionary Assembly of Business Designs (Sim AXIOM-2):** Across an ecology of $F = 100$ competing firm boundaries subjected to acute resource scarcity shocks, decentralized firms with semi-permeable membranes ($\gamma_M = 0.15$) retained strictly superior thermodynamic buffers, holding **$+84.79$ excess capital reserves** over monolithic uncompartmentalized competitors ($\gamma_M = 1.0$; Criterion AX2.B PASS). Under finite simulation windows, the baseline survival ratio remained at $1.0\times$ (Criterion AX2.A FAIL as frozen; $\ge 2.5\times$; Compound Verdict: FAIL as frozen 1/2).
 
 <figure id="fig:sim-axiom-series" data-latex-placement="!tp">
