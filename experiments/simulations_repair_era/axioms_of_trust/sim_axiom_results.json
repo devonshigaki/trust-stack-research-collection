@@ -1,0 +1,16 @@
+{
+    "Sim_AXIOM_1": {
+        "false_positive_ratio": 8.694789081885855,
+        "recovery_ratio": 0.14285714285714285,
+        "criterion_A_pass": true,
+        "criterion_B_pass": true,
+        "compound_pass": true
+    },
+    "Sim_AXIOM_2": {
+        "survival_ratio": 1.0,
+        "delta_reserves": 84.79981548841994,
+        "criterion_A_pass": false,
+        "criterion_B_pass": true,
+        "compound_pass": false
+    }
+}

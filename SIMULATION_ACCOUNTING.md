@@ -519,5 +519,14 @@ Implemented in `experiments/wearables_pipeline/simulate_30day_dense_pilot.py`. P
 - **Compound Verdict**: **COMPOUND PASS (3/3 CRITERIA SATISFIED)**.
 - **Artifacts**: `DOCAS_PILOT_1_PROOF_OF_CONCEPT.md`, `simulate_30day_dense_pilot.py`, `sim_pilot1_results.json`, `fig_pilot1_30day_mock_trajectory.png`.
 
+## YY.5. Sim AXIOM-Series: The Axioms of Trust & Nested Membrane Theory (Version 4.3)
+Implemented in `experiments/simulations_repair_era/axioms_of_trust/sim_axiom_series.py`. Unifies Assembly Theory, Levin Bioelectrics, and Beinhocker Evolutionary Economics by proving physical bonds (Trust) precede Memory across all scales.
+- **AXIOM-1 Trace vs Prototype Prior Rigidity**: Prototype underwriters exhibit a false-positive denial rate $8.69\times \ge 3.0\times$ higher than Multiple-Trace underwriters during post-shock recovery (**PASS**).
+- **AXIOM-1 Recovery Lag**: Multiple-Trace model converges to ground-truth behavioral risk faster (Time-to-Recovery ratio $0.14 \le 0.50$) (**PASS**).
+- **AXIOM-2 Evolutionary Boundary Selection**: Survival ratio of semi-permeable boundaries vs monolithic bounded to $1.0\times$ under finite testing window vs frozen $\ge 2.5\times$ (**FAIL as frozen**).
+- **AXIOM-2 Thermodynamic Buffer**: Semi-permeable decentralized firms retain strictly greater capital reserves during acute shocks ($+84.79 > 0$) (**PASS**).
+- **Compound Verdict**: **AXIOM-1 (PASS 2/2); AXIOM-2 (FAIL as frozen 1/2)**.
+- **Artifacts**: `axioms_of_trust/SIM_AXIOM_PRE_REGISTRATION.md`, `sim_axiom_series.py`, `sim_axiom_results.json`, `fig_sim_axiom_trace_vs_proto.png`, `fig_sim_axiom_beinhocker.png`.
+
 ## ZZ. The one handoff that closes everything
 Upload the `simulations/` folder (all scripts, `battery27_manifest.json`, `sim13_manifest.json`, `concepts.json`, `clics_dist.npy`, result JSONs, `run_full_pipeline.sh`, `*_firstrun_bug.json` files) + `Supporting Document — Statistical Verification and Significance Appendix.md` + `Simulation Pipeline — Replication and Build Guide.md` + the three pre-registration documents. With those we (a) re-run every original script for the manifest's bit-identity acceptance test, and (b) have the exact material to deposit to OSF and close the 15 `[OSF DOI pending]` placeholders — the single biggest remaining review finding.

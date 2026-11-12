@@ -26,6 +26,18 @@ TASKS = [
         "workdir": "formal-verification"
     },
     {
+        "tier": "Tier 1: Formal Math",
+        "name": "Z3 Trust vs. Selection Thermodynamic & Architectural Invariants",
+        "script": "formal-verification/z3_trust_vs_selection_thermodynamic_invariance.py",
+        "workdir": "formal-verification"
+    },
+    {
+        "tier": "Tier 1: Simulation",
+        "name": "Sim AXIOM-Series: Axioms of Trust & Evolutionary Assembly",
+        "script": "experiments/simulations_repair_era/axioms_of_trust/sim_axiom_series.py",
+        "workdir": "experiments/simulations_repair_era/axioms_of_trust"
+    },
+    {
         "tier": "Tier 1: Simulation",
         "name": "Sim P8c: Provider-Diversity Entropy Gate (Anti-Collusion)",
         "script": "experiments/simulations_repair_era/tfp/sim_p8_collusion.py",

@@ -61,6 +61,11 @@ sims = [
         "name": "Sim-D19: Perky Reality-Monitoring Perception Filter (Dijkstra Psychophysics)",
         "path": "experiments/brainit-fmri/insilico/sim_d19_perky_reality_filter.py",
         "workdir": "experiments/brainit-fmri"
+    },
+    {
+        "name": "Sim AXIOM-Series: Axioms of Trust & Evolutionary Assembly",
+        "path": "experiments/simulations_repair_era/axioms_of_trust/sim_axiom_series.py",
+        "workdir": "experiments/simulations_repair_era/axioms_of_trust"
     }
 ]
 
