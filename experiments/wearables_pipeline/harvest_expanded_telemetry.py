@@ -69,18 +69,15 @@ def init_expanded_tables(db_path: str):
     """)
 
     cur.execute("""
-    CREATE TABLE IF NOT EXISTS spirometry_curve_stream (
+    CREATE TABLE IF NOT EXISTS sustained_inhalation_stream (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         session_id TEXT NOT NULL,
         timestamp_posix REAL NOT NULL,
-        curve_index INTEGER NOT NULL,
-        time_offset_ms INTEGER NOT NULL,
-        flow_liters_per_sec REAL NOT NULL,
-        volume_liters REAL NOT NULL,
-        is_peak_flow_point INTEGER DEFAULT 0,
-        fev1_liters REAL,
-        fvc_liters REAL,
-        btps_correction_factor REAL NOT NULL
+        trial_index INTEGER NOT NULL,
+        hold_duration_seconds REAL NOT NULL,
+        target_flow_cc_sec REAL NOT NULL,
+        best_of_three_seconds REAL NOT NULL,
+        borg_effort_rating INTEGER NOT NULL
     );
     """)
 
@@ -177,27 +174,25 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None) -> dict:
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, music_recs)
 
-    # 4. Harvest Spirometry (Daily 8:05 PM Evening Station maneuver)
-    t_spiro = base_posix + 20 * 3600 + 5 * 60
-    # Thermodynamic BTPS factor for 22C, 755 mmHg, 45% RH
-    btps = 1.092
-    fvc_true = 5.25 * btps
-    fev1_true = 4.35 * btps
-    spiro_recs = []
-    # 600 points across 6-second exhalation (100 Hz / 10ms ticks)
-    for tick in range(600):
-        t_ms = tick * 10
-        sec = t_ms / 1000.0
-        # Flow curve modeling (Gamma-like burst)
-        flow = (10.5 * (sec ** 0.5) * np.exp(-1.5 * sec)) * btps
-        vol = min(fvc_true, (1.0 - np.exp(-1.2 * sec)) * fvc_true)
-        is_pef = 1 if tick == 12 else 0
-        spiro_recs.append(("SESS_DAILY_EVENING_01", t_spiro, tick, t_ms, flow, vol, is_pef, fev1_true, fvc_true, btps))
+    # 4. Harvest Sustained Maximal Inspiration (Tyeingo Breathing Exercise Device & Stopwatch)
+    t_smi = base_posix + 20 * 3600 + 5 * 60 # 8:05 PM Evening Station
+    # 3 trials of sustained inhalation ball hold, 60s rest interval
+    smi_trials = [
+        float(np.random.normal(4.8, 0.3)),
+        float(np.random.normal(5.2, 0.3)),
+        float(np.random.normal(5.6, 0.3))
+    ]
+    smi_best = max(smi_trials)
+    smi_mean = float(np.mean(smi_trials))
+    smi_recs = []
+    for idx, hold_sec in enumerate(smi_trials):
+        t_trial = t_smi + idx * 60
+        smi_recs.append(("SESS_DAILY_EVENING_01", t_trial, idx + 1, hold_sec, 900.0, smi_best, 3))
     cur.executemany("""
-    INSERT INTO spirometry_curve_stream
-    (session_id, timestamp_posix, curve_index, time_offset_ms, flow_liters_per_sec, volume_liters, is_peak_flow_point, fev1_liters, fvc_liters, btps_correction_factor)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, spiro_recs)
+    INSERT INTO sustained_inhalation_stream
+    (session_id, timestamp_posix, trial_index, hold_duration_seconds, target_flow_cc_sec, best_of_three_seconds, borg_effort_rating)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+    """, smi_recs)
 
     # 5. Harvest Hair Metabolomics (Monthly segment log)
     # 3cm segment representing prior 90 days
@@ -220,9 +215,8 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None) -> dict:
         "workout_duration_min": 45.0,
         "workout_mean_power_watts": 280.0,
         "music_tracks_played": len(music_recs),
-        "spirometry_fev1_liters": fev1_true,
-        "spirometry_fvc_liters": fvc_true,
-        "spirometry_valsalva_buffer_adhered": True,
+        "tyeingo_smi_hold_best_seconds": smi_best,
+        "tyeingo_smi_hold_mean_seconds": smi_mean,
         "hair_cortisol_pg_per_mg": 4.25,
         "hair_cortisone_pg_per_mg": 7.82,
         "hair_soht_correlation_target_met": True,
@@ -237,7 +231,7 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None) -> dict:
         "reading_events": len(read_recs),
         "workout_points": len(work_recs),
         "music_tracks": len(music_recs),
-        "spirometry_points": len(spiro_recs),
+        "sustained_inhalation_trials": len(smi_recs),
         "hair_records": 1,
         "parquet_path": out_parquet
     }

@@ -36,8 +36,8 @@ Stream Name               | Acquisition Modality         | Sampling Resolution  
 3. Apple Music Telemetry  | Passive Ambient Background   | Discrete per-track   | Acoustic arousal, tempo/valence,
    (Playback / DSP)       | Event Logging                | (ISRC / skips / DSP) | isolating insomnia from allostasis
 --------------------------+------------------------------+----------------------+---------------------------------------
-4. Lung Capacity          | Strictly Active Physical     | 500 Hz raw ADC       | Pulmonary boundary constraints;
-   (Medical Spirometry)   | Forced Exhalation Maneuver   | differential pressure| Respiratory Sinus Arrhythmia limits
+4. Sustained Inhalation   | Strictly Active Physical     | Manual stopwatch     | Diaphragmatic endurance,
+   (Tyeingo Exerciser)    | Inhalation Exercise          | seconds (3-trial log) | Hering-Breuer vagal brake, RSA reserve
 --------------------------+------------------------------+----------------------+---------------------------------------
 5. Hair Metabolomics      | Active Scalp Harvest of a    | Longitudinal 90–180d | Chronic HPA-axis allostatic load,
    (LC-MS/MS & ICP-MS)    | Passive Historical Matrix    | retrospective segment| baseline cortisol/cortisone time-capsule
@@ -61,10 +61,9 @@ Stream Name               | Acquisition Modality         | Sampling Resolution  
 *   **Hypothesis:** Late-night acoustic music feature vectors (tempo $> 120\text{ BPM}$, valence $< 0.35$, high spectral centroid) predict nocturnal sleeping wrist temperature elevation ($\Delta T_{\text{wrist}} \ge 0.15^\circ\text{C}$), allowing the circadian filter to isolate acute cognitive arousal from systemic allostatic cortisol elevation ($C$-channel).
 *   **Frozen Criterion:** Multi-modal GLM demonstrates that acoustic tempo explains $\ge 30\%$ of nocturnal temperature variance independently of daytime financial prediction errors.
 
-### Hypothesis H-SPIRO (Pulmonary Bounds on Vagal Brake):
-*   **Hypothesis:** Individualized Forced Vital Capacity ($FVC$) and Forced Expiratory Volume in 1 second ($FEV_1$), corrected for ambient BTPS thermodynamic variables, mathematically bound the maximum dynamic range of Respiratory Sinus Arrhythmia (RSA), setting the physiological ceiling for vagal recovery ($O$- and $S$-channels).
-*   **Frozen Criterion:** Normalizing high-frequency HRV by BTPS-corrected $FVC$ collapses inter-subject vagal recovery variance by $\ge 40\%$.
-*   **Valsalva Baroreflex Decoupling:** To decouple the acute Valsalva baroreflex surge ($> 40\text{ mmHg}$ intrathoracic pressure elevation) induced by maximal forced exhalation from baseline vagal resting tone, spirometric testing is quarantined to the end of the evening docking station, enforcing a minimum 30-minute quiet-recovery buffer before any subsequent sleep-onset vagal metric calculation.
+### Hypothesis H-SMI (Sustained Maximal Inspiration & Vagal Reserve):
+*   **Hypothesis:** Daily Sustained Maximal Inspiration (SMI) ball-hold duration ($t_{\text{hold}}$ in seconds) measured via the Tyeingo breathing exercise device and digital stopwatch provides an active behavioral probe of diaphragmatic muscle endurance and pulmonary stretch receptor sensitivity. Under financial allostatic stress ($\varepsilon < 0$), diaphragmatic exhaustion and sympathetic dominance reduce evening SMI hold duration by $\ge 20\%$.
+*   **Frozen Criterion:** Daily SMI hold time ($t_{\text{hold}}$) exhibits a statistically significant positive correlation ($r \ge 0.35, p < 0.01$) with subsequent nocturnal sleep-onset RMSSD (Apple Watch) and a negative correlation with daytime subjective allostatic distress, proving that sustained inhalation actively probes parasympathetic vagal reserve without triggering forced expiratory Valsalva artifacts.
 
 ### Hypothesis H-HAIR (Longitudinal Endocrine Ground Truth):
 *   **Hypothesis:** Scalp hair segmental cortisol and cortisone concentrations (LC-MS/MS; pg/mg) measured from proximal $3\text{ cm}$ segments correlate with the cumulative time-integral of 90-day daily ambulatory interstitial glycemic excursions ($dG/dt$) captured by continuous glucose monitoring.

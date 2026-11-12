@@ -51,7 +51,7 @@ Executing an $N=1$ 180-day dense phenotyping protocol carries a profound risk of
 
 1. **ACTIVE (High-Effort / Intentional Cognitive or Physical Load):** Requires dedicated time blocks, conscious execution, and strict behavioral compliance.
    *   **Manual Reading Logs:** Daily reading of physical books, followed by hand-written or typed marginalia digested into the pipeline.
-   *   **Forced Spirometry (FVC/FEV1):** Maximal expiratory flow volume curves; requires explosive physical effort and breath holding.
+   *   **Tyeingo Breathing Exercise Device:** Sustained Maximal Inspiration (SMI) ball-hold duration timed with a stopwatch; measures diaphragmatic endurance, inspiratory capacity, and Hering-Breuer vagal activation.
    *   **Cognitive/Motor Battery (Akai MPK Mini):** Standardized psychomotor vigilance tests (PVT) and sequence replication.
 2. **SEMI-ACTIVE (Continuous Wear / Daily Logistics):** Sensors that collect data passively but require daily management (hygiene, charging, calibration).
    *   **Muse S (Athena) fNIRS/EEG Headband:** High burden (precise skin contact, impedance checks, daily charging).
@@ -203,10 +203,11 @@ Drawn at Day 1 (Cessation Baseline), Day 30 (Post-Acute Withdrawal), Day 60, Day
     3.  *Task 3 (2 Minutes): NASA Brief Psychomotor Vigilance Task (PVT-B):* Visual reaction-time counter flashes on screen at pseudo-random intervals ($1\text{--}4\text{ seconds}$ inter-stimulus interval / ISI). The participant slaps MPC Pad 1 instantly upon stimulus onset. Extracts Mean Reaction Time ($\text{RT}$ in ms), optimum motor speed (fastest 10% RT), and **Attentional Lapses ($\text{RT} > 500\text{ ms}$)**, providing the aerospace gold standard for allostatic cognitive exhaustion.
     4.  *Task 4 (2 Minutes): Go / No-Go Prefrontal Executive Inhibitory Control Task:* Fast sequential visual cues ($80\%$ Green Go cues, $20\%$ Red No-Go cues; $400\text{ ms}$ presentation). Measures right inferior frontal cortical inhibitory gating: Commission Errors (impulsive failure to withhold response on Red No-Go cues), Omission Errors (attentional dropouts on Green Go cues), and **Signal Detection Theory Perceptual Sensitivity ($d' = Z(\text{Hit Rate}) - Z(\text{False Alarm Rate}))$**.
 
-### O. Active Reading Telemetry (Kindle / Goodreads)
-*   **Collection Modality:** Passive local telemetry capture of an Active behavior.
-*   **Ingestion Pipeline:** Scheduled extraction of local e-reader SQLite databases (`reader.sqlite`, `annotation.sqlite`) parsed directly into the `reading_telemetry_stream` libSQL table.
-*   **Biophysical Target:** Precise millisecond page-flip timestamps, character dwell time, reading speed (WPM) drops indexing cognitive fatigue, and raw text byte-offset highlights bounding the temporal window of intellectual engagement.
+### O. Manual Reading Logs & Marginalia NLP (Physical Books)
+*   **Collection Modality:** Strictly Active / Conscious Executive Logging.
+*   **Protocol:** Daily reading of physical books. The participant records daily reading session intervals (start/stop) and pages read, followed by typing or scanning digested marginalia notes into the terminal docking station.
+*   **Ingestion Pipeline:** On-device Python pipeline extracts text length, time-to-digitization latency, and NLP syntactic/semantic metrics (Flesch-Kincaid grade level, semantic valence drift) directly into the `manual_reading_log_stream` libSQL table.
+*   **Biophysical Target:** Time-to-digitization latency and syntactic complexity drops act as sensitive behavioral proxies of prefrontal cognitive depletion under financial allostatic load.
 
 ### P. High-Frequency Workout Kinematics & Exertion (Apple Watch / CoreMotion)
 *   **Collection Modality:** Hybrid (Active workout initiation + Passive continuous ambient sensor logging).
@@ -218,10 +219,12 @@ Drawn at Day 1 (Cessation Baseline), Day 30 (Post-Acute Withdrawal), Day 60, Day
 *   **Ingestion Pipeline:** On-device CoreData SQLite interception (`MediaLibrary.sqlitedb`) logging exact Unix start/stop times and skip latencies into `music_telemetry_stream`. Offline DSP feature extraction (Essentia) computes MFCCs, spectral centroid, and tempo.
 *   **Biophysical Target:** Correlating late-night acoustic tempo and valence with nocturnal wrist temperature (Apple Watch) to isolate mental stimulation from circadian allostatic stress (cortisol C-channel).
 
-### R. Forced Pulmonary Mechanics (Spirometry)
-*   **Collection Modality:** Strictly Active.
-*   **Ingestion Pipeline:** Direct BLE IEEE 11073-10421 medical driver extracting $500\text{ Hz}$ raw ADC differential pressure voltages $V_{\text{raw}}(t)$ into `spirometry_curve_stream`.
-*   **Biophysical Target:** Instantaneous flow-volume coordinates $Q(t)$, Forced Expiratory Volume in 1 second ($FEV_1$), and Forced Vital Capacity ($FVC$) adjusted via exact BTPS thermodynamic correction to track pulmonary capacity and respiratory sinus arrhythmia limits.
+### R. Sustained Maximal Inspiration (Tyeingo Breathing Exercise Device & Stopwatch)
+*   **Collection Modality:** Strictly Active Respiratory Exercise.
+*   **Apparatus:** Tyeingo Incentive Breathing Exerciser (flow-oriented ball levitation column) + calibrated digital stopwatch.
+*   **Protocol:** During the 8:05 PM evening docking station, the participant sits upright ($90^\circ$ orthostatic posture), exhales normally, seals lips around the Tyeingo mouthpiece, and executes a slow, deep, Sustained Maximal Inspiration (SMI) to lift the target ball to the chamber ceiling and hold it suspended against gravity for as long as possible. The participant records the exact hold duration in seconds using a stopwatch across three repeated trials (60s rest interval; individual trials and best-of-three logged).
+*   **Ingestion Pipeline:** Logged directly via the terminal docking station into the `sustained_inhalation_stream` table in `trust_wearables_edge.db`.
+*   **Biophysical Target:** Measures **Sustained Inspiratory Hold Duration ($t_{\text{hold}}$ in seconds)**, diaphragmatic muscle endurance, and pulmonary stretch receptor activation. Slow diaphragmatic expansion triggers the **Hering-Breuer inspiratory-inhibitory reflex** via the vagus nerve, directly engaging the **vagal brake ($O$-channel)** and providing an active, non-invasive probe of autonomic parasympathetic reserve without inducing forced expiratory Valsalva spikes.
 
 ### S. Segmental Scalp Hair Metabolomics (LC-MS/MS & ICP-MS)
 *   **Collection Modality:** Active Harvest of a Passive Retrospective Biological Matrix.

@@ -9,8 +9,8 @@
   "automated_ci_tasks_verified": 26,
   "files": {
     "DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
-      "sha256": "b83b6a88ec47b39840bedb8bd0540264efbb90cb38d7054411600f7f689b99a2",
-      "bytes": 50360
+      "sha256": "b01f87f50fcdcaf0708333076306a6d8746d4e75fc7a9bfd15c89e5ecea33a8a",
+      "bytes": 51572
     },
     "DOCAS_PILOT_1_PROOF_OF_CONCEPT.md": {
       "sha256": "c03daac82220a7f5b8082f92e5b49940e87afd103903ca7c401a30921aeb7dd7",
@@ -25,8 +25,8 @@
       "bytes": 124276
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "294764e75381a384ed78dc7c1da3bd6296881742f62ae32d4a009a4a655f91fb",
-      "bytes": 385372
+      "sha256": "dc47cfdc25080e6aa5829becdf234b02fe8aa27a478a8709f63c39f8ce173f55",
+      "bytes": 385374
     },
     "SIMULATION_ACCOUNTING.md": {
       "sha256": "c959b5114f25a5349de3cd2f9ac175ac55494369b9c00d4f90c03834a7f6828f",
@@ -4853,8 +4853,8 @@
       "bytes": 644594
     },
     "experiments/wearables_pipeline/harvest_expanded_telemetry.py": {
-      "sha256": "defb3be19b898e7a1f524ff3d7de6f2309c668c27ca5edffd8d074d62816a04e",
-      "bytes": 10067
+      "sha256": "0479fa404325b8bb7eebc3c6b374c9507d1e1eeec3e119f7c853fa3b31e5bb5a",
+      "bytes": 9818
     },
     "experiments/wearables_pipeline/harvest_telemetry.py": {
       "sha256": "278b709ea9c6ea8e752f283e28c7d43ca9ba9d3683ed09db63b245eb9b4e83c2",
@@ -7021,8 +7021,8 @@
       "bytes": 43846
     },
     "preregistrations/DOCAS_PILOT_1_AMENDMENT_V4_5.md": {
-      "sha256": "a76ae9e8aa4e2f71413ec88d0d337cb9785191a1fe9a99ce5fb3f42450cf0df7",
-      "bytes": 10846
+      "sha256": "933fdaa8c47a949e8f7d04957708e83964bad9560bcd0a1a73ecbcf88e4a2d9a",
+      "bytes": 10844
     },
     "preregistrations/GTT-EMPIRICAL-PROGRAM.md": {
       "sha256": "54ebcbdedb43051972c8c10b02b7aa28b624b7f543a980671148a80fc0971b2c",
