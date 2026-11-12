@@ -23,15 +23,17 @@ def init_expanded_tables(db_path: str):
     cur = conn.cursor()
     
     cur.execute("""
-    CREATE TABLE IF NOT EXISTS reading_telemetry_stream (
+    CREATE TABLE IF NOT EXISTS manual_reading_log_stream (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        timestamp_posix REAL NOT NULL,
-        book_asin TEXT NOT NULL,
-        page_number INTEGER NOT NULL,
-        dwell_time_seconds REAL NOT NULL,
-        reading_speed_wpm REAL NOT NULL,
-        annotation_flag INTEGER DEFAULT 0,
-        highlight_length_chars INTEGER DEFAULT 0
+        reading_session_start_posix REAL NOT NULL,
+        reading_session_end_posix REAL NOT NULL,
+        book_isbn TEXT NOT NULL,
+        pages_read INTEGER NOT NULL,
+        note_digitization_timestamp_posix REAL NOT NULL,
+        time_to_digitization_seconds REAL NOT NULL,
+        nlp_flesch_kincaid_grade REAL NOT NULL,
+        nlp_semantic_valence REAL NOT NULL,
+        raw_markdown_byte_length INTEGER NOT NULL
     );
     """)
 
@@ -118,21 +120,25 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None) -> dict:
     conn = sqlite3.connect(db_path)
     cur = conn.cursor()
 
-    # 1. Harvest Reading Telemetry (e.g. 45 min evening session, 30 page flips)
+    # 1. Harvest Manual Reading Log (e.g. 45 min evening session, digitized later)
     read_recs = []
     t_read_start = base_posix + 20 * 3600 + 15 * 60 # 8:15 PM
-    t_curr = t_read_start
-    for page in range(1, 31):
-        dwell = np.random.normal(75.0, 15.0)
-        wpm = 250.0 * (60.0 / dwell)
-        annot = 1 if np.random.rand() < 0.15 else 0
-        h_len = int(np.random.normal(120, 30)) if annot else 0
-        read_recs.append((t_curr, "B08N5WRWNW", page, dwell, wpm, annot, h_len))
-        t_curr += dwell
+    t_read_end = t_read_start + 45 * 60
+    pages = int(np.random.normal(30, 5))
+    
+    # Simulating delayed digitization indicating cognitive fatigue
+    delay_seconds = np.random.normal(12 * 3600, 2 * 3600) 
+    t_digitize = t_read_end + delay_seconds
+    
+    fk_grade = np.random.normal(11.5, 1.2) # Flesch-Kincaid complexity
+    valence = np.random.uniform(0.4, 0.9)
+    md_len = int(np.random.normal(1500, 300))
+    
+    read_recs.append((t_read_start, t_read_end, "978-0143111443", pages, t_digitize, delay_seconds, fk_grade, valence, md_len))
     cur.executemany("""
-    INSERT INTO reading_telemetry_stream 
-    (timestamp_posix, book_asin, page_number, dwell_time_seconds, reading_speed_wpm, annotation_flag, highlight_length_chars)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO manual_reading_log_stream 
+    (reading_session_start_posix, reading_session_end_posix, book_isbn, pages_read, note_digitization_timestamp_posix, time_to_digitization_seconds, nlp_flesch_kincaid_grade, nlp_semantic_valence, raw_markdown_byte_length)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, read_recs)
 
     # 2. Harvest Workout Kinematics (e.g. 45 min run at 7:00 AM)

@@ -11,7 +11,7 @@
 
 To prevent post-hoc data dredging (HARKing / p-hacking) and ensure uncompromised scientific integrity under **TOP (Transparency and Openness Promotion) Guidelines**, this amendment formally freezes the mathematical hypotheses, data structures, and de-biasing filters for five newly integrated multimodal observation streams prior to trial data analysis:
 
-1.  **Books Currently Reading (Kindle / E-Reader Telemetry)**
+1.  **Books Currently Reading (Manual Physical Books & Digested Notes)**
 2.  **High-Frequency Workout Kinematics & Exertion (Apple Watch / CoreMotion)**
 3.  **Ambient Acoustic Exposure & Music Choices (Apple Music Telemetry)**
 4.  **Forced Pulmonary Mechanics & Flow-Volume Dynamics (Medical Spirometry)**
@@ -27,8 +27,8 @@ To prevent post-hoc data dredging (HARKing / p-hacking) and ensure uncompromised
 ========================================================================================================================
 Stream Name               | Acquisition Modality         | Sampling Resolution  | Primary Epistemic Function
 --------------------------+------------------------------+----------------------+---------------------------------------
-1. Books Reading          | Passive Telemetry of an      | Millisecond event log| Cognitive fatigue, reading velocity
-   (Kindle / E-Reader)    | Active Conscious Behavior    | (page-flips / dwell) | (WPM), attention span under stress
+1. Books Reading          | Strictly Active / Conscious  | Daily hand-written   | Cognitive fatigue, semantic valence
+   (Physical + Notes)     | Executive Logging            | logs & OCR/NLP digest| drift, and attention span friction
 --------------------------+------------------------------+----------------------+---------------------------------------
 2. Workout Dynamics       | Hybrid (Active Bout Start +  | 50 Hz – 100 Hz IMU   | Mechanical power decoupling; isolating
    (CoreMotion / Apple W) | Passive Ambient Sensors)     | 1 Hz PPG optical     | physical exertion from mental stress
@@ -48,9 +48,9 @@ Stream Name               | Acquisition Modality         | Sampling Resolution  
 
 ## 3. Pre-Registered Hypotheses & Success Criteria
 
-### Hypothesis H-READ (Cognitive Fatigue & Attention Gating):
-*   **Hypothesis:** Sustained contractual allostatic load ($\varepsilon < 0$ financial shock) induces prefrontal executive depletion, manifested as a statistically significant drop in reading velocity ($\Delta \text{WPM} \ge 25.0\%$) and a $> 2.0\times$ increase in character dwell time dispersion during evening reading sessions.
-*   **Frozen Criterion:** Permutation test $p < 0.01$ correlating evening reading velocity drops with daytime prefrontal fNIRS $\Delta [\mathrm{HbO}_2]$ attenuation in medial prefrontal cortex (BA10/BA32).
+### Hypothesis H-READ (Cognitive Fatigue & Semantic Drift):
+*   **Hypothesis:** Sustained contractual allostatic load ($\varepsilon < 0$ financial shock) induces prefrontal executive depletion, manifested as a statistically significant increase in "time-to-digitization" (latency between reading and logging notes) and a collapse in syntactic complexity (measured via Flesch-Kincaid NLP extraction) in manual reading marginalia.
+*   **Frozen Criterion:** Permutation test $p < 0.01$ correlating evening reading latency and semantic valence drops with daytime prefrontal fNIRS $\Delta [\mathrm{HbO}_2]$ attenuation in medial prefrontal cortex (BA10/BA32).
 
 ### Hypothesis H-WORKOUT (Exertion Confounder Decoupling):
 *   **Hypothesis:** Convolving high-frequency workout kinematics (CoreMotion IMU mechanical power in Watts, cadence, and active METs) with an exponential cardiac recovery kernel residualizes physical exertion tachycardia, leaving unconfounded psychological vagal modulation ($O$-channel).

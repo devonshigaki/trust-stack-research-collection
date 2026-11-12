@@ -46,6 +46,29 @@ The dense phenotyping benchmark spans **180 Continuous Days ($T = 180\text{ days
 Following the completion and locking of the 180-day baseline, the standardized turnkey research kiosk hardware array rotates sequentially across $N = 43$ external participants across three stepped cohorts:
 $$\text{Cohort 2: } 3 \text{ subjects} \times 10\text{ days} \quad \longrightarrow \quad \text{Cohort 3: } 10 \text{ subjects} \times 3\text{ days} \quad \longrightarrow \quad \text{Cohort 4: } 30 \text{ subjects} \times 1\text{ day}$$
 
+### C. Comprehensive Data Acquisition Taxonomy (Active vs. Passive)
+Executing an $N=1$ 180-day dense phenotyping protocol carries a profound risk of participant fatigue and compliance drift. To guarantee trial survivability, data streams are strictly categorized by their cognitive and logistical burden:
+
+1. **ACTIVE (High-Effort / Intentional Cognitive or Physical Load):** Requires dedicated time blocks, conscious execution, and strict behavioral compliance.
+   *   **Manual Reading Logs:** Daily reading of physical books, followed by hand-written or typed marginalia digested into the pipeline.
+   *   **Forced Spirometry (FVC/FEV1):** Maximal expiratory flow volume curves; requires explosive physical effort and breath holding.
+   *   **Cognitive/Motor Battery (Akai MPK Mini):** Standardized psychomotor vigilance tests (PVT) and sequence replication.
+2. **SEMI-ACTIVE (Continuous Wear / Daily Logistics):** Sensors that collect data passively but require daily management (hygiene, charging, calibration).
+   *   **Muse S (Athena) fNIRS/EEG Headband:** High burden (precise skin contact, impedance checks, daily charging).
+   *   **Apple Watch Series 8:** Moderate burden (daily charging, specific wrist placement).
+   *   **Aktiia 24/7 Blood Pressure:** Moderate burden (weekly charging, initial optical-to-cuff initialization).
+3. **SEMI-ACTIVE (Long-Duration Wear):** Continuous passive collection with episodic semi-monthly application.
+   *   **Dexcom Stelo CGM:** Requires subcutaneous filament insertion and adhesive management every 15 days.
+4. **PASSIVE (Ambient / Zero-Interaction):** The participant lives normally; the environment extracts the data.
+   *   **Throne Smart Toilet:** Optical classification of Bristol scale/hydration.
+   *   **Awair Element:** Ambient indoor air quality (CO2, VOCs, PM2.5).
+   *   **Logitech Circle View:** Ambient optical sleep boundaries via Secure Video.
+   *   **Apple Music & Plaid API:** Zero-touch ingestion of listening history and financial transactional telemetry.
+5. **EPISODIC / ONE-OFF (Clinical Interventions):** High-friction biological harvesting.
+   *   **Monthly Venous Blood Draws:** Phlebotomy for longitudinal proteomics and inflammatory markers.
+   *   **Hair Follicle Harvest:** Longitudinal retrospective endocrine chronometry (cortisol deposition).
+   *   **1x WGS (Whole Genome Sequencing):** Single baseline 30x genome to establish polygenic risk scores.
+
 ---
 
 ## 2. Dedicated Hardware & Multi-Omics Array (The Biophysical Stack)
