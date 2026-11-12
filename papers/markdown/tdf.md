@@ -1211,7 +1211,7 @@ This biological convergence maps directly onto the architecture of **The Fresh P
 *   The centralized credit bureau is the flawed **Cartesian dictator**: attempting to issue top-down credit scores while remaining completely deaf to the consumer's local lived reality.
 *   The **FreshCredit edge architecture** is the **Lindquist-Watson mutual persuasion engine**: the financial network cannot command or extract data from the user's encrypted local `libSQL` database; it can only "persuade" the user through transparent, mathematically auditable, Pareto-improving offers. Conscious trust emerges from this reciprocal, non-coercive negotiation.
 
-## 5.37 The Axioms of Trust, Multiple-Trace Memory, and Evolutionary Assembly (Sim AXIOM-Series) [SIMULATION]
+## 5.39 The Axioms of Trust, Multiple-Trace Memory, and Evolutionary Assembly (Sim AXIOM-Series) [SIMULATION]
 
 To formally unify Lee Cronin's Assembly Theory, Michael Levin's bioelectrics, and Eric Beinhocker's evolutionary economics across the multiscale spectrum, the **Sim AXIOM-Series** was pre-registered and executed (`experiments/simulations_repair_era/axioms_of_trust/SIM_AXIOM_PRE_REGISTRATION.md`, `sim_axiom_series.py`; seed 42):
 
