@@ -4,13 +4,13 @@
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.3",
-  "total_files_hashed": 2030,
-  "total_manifest_size_mb": 417.52,
+  "total_files_hashed": 2047,
+  "total_manifest_size_mb": 420.2,
   "automated_ci_tasks_verified": 26,
   "files": {
     "DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
-      "sha256": "2203932fd3f59f6d7d6e6af0a527b3db2161cde1020c220439f4a13301376631",
-      "bytes": 44900
+      "sha256": "b83b6a88ec47b39840bedb8bd0540264efbb90cb38d7054411600f7f689b99a2",
+      "bytes": 50360
     },
     "DOCAS_PILOT_1_PROOF_OF_CONCEPT.md": {
       "sha256": "c03daac82220a7f5b8082f92e5b49940e87afd103903ca7c401a30921aeb7dd7",
@@ -25,20 +25,20 @@
       "bytes": 123605
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "badf3c470742feae750440aa4644b00dedc54b352fd56703f870ac6dd9bfa6ad",
+      "sha256": "c48a22b08e81051a312c6aac69f4911ce205f189103ebd72feb0c04109711185",
       "bytes": 382072
     },
     "SIMULATION_ACCOUNTING.md": {
-      "sha256": "b14931c1175c9a6badd0d8588c6f6a1b34d2f0884a033f53fcffd9e2ada8ff46",
-      "bytes": 79681
+      "sha256": "c959b5114f25a5349de3cd2f9ac175ac55494369b9c00d4f90c03834a7f6828f",
+      "bytes": 80998
     },
     "STARTUP_PROMPT.md": {
       "sha256": "c55ea6a523f42aac54b3d9bc6d4f0b8cb6c579756710cec149d1db52fbd235b3",
       "bytes": 3797
     },
     "VERSIONS.md": {
-      "sha256": "1dfcefd604a19c443f9a67068b82e684dda92cc914c69fec9e5b5db2cef8189f",
-      "bytes": 49764
+      "sha256": "587943297b57bdce48e0a2babe8be9cf2ef1adf42ccdcb4885ceb8654978a82a",
+      "bytes": 50764
     },
     "embed_all_media_and_sections.py": {
       "sha256": "254ff7f48b0e88a6428abf7aa26ef8ee58e73b611c4972f4a2758b7997f7a336",
@@ -49,12 +49,12 @@
       "bytes": 3874
     },
     "run_all_sims_local.py": {
-      "sha256": "4ca69b380890689843de3b587386d9ae998e9a19d8c085f1f37fa8eae0f4e5b1",
-      "bytes": 3953
+      "sha256": "b170748937506f2d43da6ebefdd1b2a21f1372cbdbcbf5513083e0fa908e1c03",
+      "bytes": 4205
     },
     "run_tier1_tier2_suite.py": {
-      "sha256": "cf8cc65fc186cf35b13d30ea59202358f24855802910fb63c4eb31a63c6af954",
-      "bytes": 10294
+      "sha256": "18139b7cf295fae68afb4d23caeda757a148a1562ebe3027f17f1787a4d1bf22",
+      "bytes": 10853
     },
     "technical-appendix/AMP_SERIES_RUN_REPORT.md": {
       "sha256": "d19ea32b29854cc1d76843688c00f7c04f20c8ff0f30b6d2fac4eb72c8904120",
@@ -3741,72 +3741,72 @@
       "bytes": 27784
     },
     "papers/docas.md": {
-      "sha256": "b6987ef1a297b56820fcefaa16a717cf6c6fa7e3de9e02f9907af110a8b66c04",
-      "bytes": 320120
+      "sha256": "b211a838d3834f5aa4711102df3c7e979aa64e6ba737c8b751549fd2481cf14a",
+      "bytes": 323246
     },
     "papers/gtt.md": {
       "sha256": "09aa2c3f450536c6cb1cc02994eea8895e6d6ec4fc50d97ba9bad688804ff399",
       "bytes": 185510
     },
     "papers/tfp.md": {
-      "sha256": "19e9adb0c7876c4d06dcb07b56a29187fc27bdc327717b4b82fb12750a307601",
-      "bytes": 152384
+      "sha256": "f83f06768063d9ae33f38fd97f47d8bf09403d1f3b0f61d67400c86614c5efff",
+      "bytes": 152076
     },
     "papers/the_value_of_trust.md": {
-      "sha256": "669aefb30b8cf8894c10d00b53db753d3aaec86dd23986183122df5405a7c476",
-      "bytes": 14731
+      "sha256": "7f349640e07de772f72cd550c19ef61029024916f2381cb38a8c786387acca0b",
+      "bytes": 17320
     },
     "papers/whitepaper.md": {
-      "sha256": "ac35adcf565d6d645de99329ed34bcb948330d71507975143ff24ce022ccf4ff",
-      "bytes": 161388
+      "sha256": "d21433e94e97343b46f4d06ecb85a3a5eb3914dd2057a60b1677ddc5f2fb2181",
+      "bytes": 172470
     },
     "papers/markdown/collection.md": {
       "sha256": "91ab7b9c0e57d61d39cf1118c42e0cd554368ad364d422e3801aab97ad784945",
       "bytes": 26129
     },
     "papers/markdown/docas.md": {
-      "sha256": "f58beeccc07abf1b5b6c4ae150a63fe8c9a8547d61d9cc2b712374e79f19904d",
-      "bytes": 270957
+      "sha256": "b211a838d3834f5aa4711102df3c7e979aa64e6ba737c8b751549fd2481cf14a",
+      "bytes": 323246
     },
     "papers/markdown/gtt.md": {
-      "sha256": "f7309efd4b0cf17fbb5956ead3ba2e521129b1382a0f3ec408f10c34ad122543",
-      "bytes": 183285
+      "sha256": "09aa2c3f450536c6cb1cc02994eea8895e6d6ec4fc50d97ba9bad688804ff399",
+      "bytes": 185510
     },
     "papers/markdown/tfp.md": {
-      "sha256": "70edee64ea557ad82683104e2ca36646711b0490c3da8e510800c1b12f113183",
-      "bytes": 150323
+      "sha256": "f83f06768063d9ae33f38fd97f47d8bf09403d1f3b0f61d67400c86614c5efff",
+      "bytes": 152076
     },
     "papers/markdown/the_value_of_trust.md": {
-      "sha256": "0ae8505d933dbc9eff6054a1f134940b732f26ecdd6d4d34c3feed9e77f1b795",
-      "bytes": 14258
+      "sha256": "7f349640e07de772f72cd550c19ef61029024916f2381cb38a8c786387acca0b",
+      "bytes": 17320
     },
     "papers/markdown/whitepaper.md": {
-      "sha256": "956646a2ffc89474226b2b44b47a4eedc2442b3c0b25c3a43bd06f214ef12e90",
-      "bytes": 154383
+      "sha256": "d21433e94e97343b46f4d06ecb85a3a5eb3914dd2057a60b1677ddc5f2fb2181",
+      "bytes": 172470
     },
     "papers/source/collection.tex": {
-      "sha256": "213c1e47b2ce08d7528dd6a380be988ec0e8e999c44894be9c0b13ada1ab1d9d",
-      "bytes": 25890
+      "sha256": "ed8e3474dc6d9af3dc4636cc839fba5695151a76fc19b34406aafb2c9a27fe3a",
+      "bytes": 31441
     },
     "papers/source/docas.tex": {
-      "sha256": "676472b34d535bae003579fe3846fed02dd0c15715194021c21fbf47ad3dc38c",
-      "bytes": 262245
+      "sha256": "be5fc49560b3e09fabfefacaf9c7db59d55acf76895a9596e3f8517da06ce7f8",
+      "bytes": 318489
     },
     "papers/source/gtt.tex": {
-      "sha256": "a561e47dd80ed9cc9dc6fdeb62ea4a1da695af04759499c26caaa6c29b564a35",
-      "bytes": 178957
+      "sha256": "181f8103cfac755c70b4a0e80df072b8c8fd4cffb5f676ddaaad223f0ce81b2b",
+      "bytes": 187617
     },
     "papers/source/tfp.tex": {
-      "sha256": "f7cf3c9c7280bf92e9078e6296572d38a21ecfc6a11b021855109fa9f3874d5c",
-      "bytes": 146716
+      "sha256": "88fc6b3eb1baa411cd3889cacb0e95ba8c0a46f3972142c10e94abf7d8f40a44",
+      "bytes": 152085
     },
     "papers/source/value_of_trust.tex": {
-      "sha256": "5de1463801e6fc858209a5a18d105dc4bc58942e742a3bcf980149062a92c6ce",
-      "bytes": 15527
+      "sha256": "da3157aab6eac3c5face2ffa568394c64df13757da045e411ca55a7b8233f9f1",
+      "bytes": 19048
     },
     "papers/source/whitepaper.tex": {
-      "sha256": "ba366d8b25501d33a99fabab07a2ffca421a0dee2f9a4f7f16c836a232d82e36",
-      "bytes": 149884
+      "sha256": "1580b550daec8e2d72576380f633f6620f9c3ceccc2243cdbf60e85efc96b8a4",
+      "bytes": 177000
     },
     "papers/source/figures/01_sim_g6_m1_trust_manifold.png": {
       "sha256": "c65f0b845fa8262f383eb468c1a88338e80d8d2daac6decd8258ca7a0c7c3841",
@@ -3907,6 +3907,10 @@
     "papers/source/figures/24_sim_meta.png": {
       "sha256": "1409702c66395b2b39928bc70dc9eb9a397ba31ee2b0c54b7b86bdd321bf227d",
       "bytes": 565417
+    },
+    "papers/source/figures/25_sim_axiom_series.png": {
+      "sha256": "b443e761bde8eed691a3f86b02f063e5646fedc5d5914407489d5d57b1219799",
+      "bytes": 712262
     },
     "papers/source/figures/bridge_a_cosine_dist.png": {
       "sha256": "ec5c0b040cd6cae8b5a5b81829c66ed57663dedc289c66349cd79b297b9a8771",
@@ -4200,6 +4204,14 @@
       "sha256": "15f9a108dbdab0b18936c62003707554a4d23e42409d61563ca972811530f332",
       "bytes": 155934
     },
+    "papers/source/figures/fig_sim_axiom_beinhocker.png": {
+      "sha256": "3abe0543ef290240006d81bf1a86877fb7abaaebb6f75f2de09eebba432a5774",
+      "bytes": 52174
+    },
+    "papers/source/figures/fig_sim_axiom_trace_vs_proto.png": {
+      "sha256": "bd98476a952268cf2ae85f040e76d7071ed169f2e07bd0c8748675e74aedd460",
+      "bytes": 53154
+    },
     "papers/source/figures/fig_sim_b1_tribe_bayes.png": {
       "sha256": "ca8a0cb3cb6ac40337894c81c36e4dfeb995c48dbb71bf4d8f27c2596afaaef2",
       "bytes": 281473
@@ -4384,6 +4396,10 @@
       "sha256": "42aac873d8c332b9d9a1945c82199219ea2f7f6c7b0f75bda1d1a77f2012ce42",
       "bytes": 479928
     },
+    "papers/figures/25_sim_axiom_series.png": {
+      "sha256": "b443e761bde8eed691a3f86b02f063e5646fedc5d5914407489d5d57b1219799",
+      "bytes": 712262
+    },
     "papers/figures/fig_academic_network_graph.png": {
       "sha256": "047f5cbf5c994e64c1ec69213410dfe2a368b033f583acbe12383566bee0b778",
       "bytes": 791678
@@ -4519,6 +4535,14 @@
     "papers/figures/fig_sim_at_music_macro.png": {
       "sha256": "15f9a108dbdab0b18936c62003707554a4d23e42409d61563ca972811530f332",
       "bytes": 155934
+    },
+    "papers/figures/fig_sim_axiom_beinhocker.png": {
+      "sha256": "3abe0543ef290240006d81bf1a86877fb7abaaebb6f75f2de09eebba432a5774",
+      "bytes": 52174
+    },
+    "papers/figures/fig_sim_axiom_trace_vs_proto.png": {
+      "sha256": "bd98476a952268cf2ae85f040e76d7071ed169f2e07bd0c8748675e74aedd460",
+      "bytes": 53154
     },
     "papers/figures/fig_sim_b1_tribe_bayes.png": {
       "sha256": "ca8a0cb3cb6ac40337894c81c36e4dfeb995c48dbb71bf4d8f27c2596afaaef2",
@@ -4827,6 +4851,10 @@
     "experiments/wearables_pipeline/fig_wearable_triad_fusion.png": {
       "sha256": "da3374ef825135499444e9ff06525fda4f207af399532cb0a12d3ee6c06fb3f0",
       "bytes": 644594
+    },
+    "experiments/wearables_pipeline/harvest_expanded_telemetry.py": {
+      "sha256": "aeb279bc681471ef83cc028fce59008658ba75a2047d18b70eb0260d0ba5972c",
+      "bytes": 9902
     },
     "experiments/wearables_pipeline/harvest_telemetry.py": {
       "sha256": "278b709ea9c6ea8e752f283e28c7d43ca9ba9d3683ed09db63b245eb9b4e83c2",
@@ -5352,6 +5380,26 @@
       "sha256": "92f44f2867106cb9437795eeb4b9baa4fb92b6f353725db67d4789bd82423de9",
       "bytes": 702372
     },
+    "experiments/simulations_repair_era/axioms_of_trust/SIM_AXIOM_PRE_REGISTRATION.md": {
+      "sha256": "1d0f44e707714a767c1449937aa2211b0eb64135635c6daee4882c9711f4e517",
+      "bytes": 2758
+    },
+    "experiments/simulations_repair_era/axioms_of_trust/fig_sim_axiom_beinhocker.png": {
+      "sha256": "3abe0543ef290240006d81bf1a86877fb7abaaebb6f75f2de09eebba432a5774",
+      "bytes": 52174
+    },
+    "experiments/simulations_repair_era/axioms_of_trust/fig_sim_axiom_trace_vs_proto.png": {
+      "sha256": "bd98476a952268cf2ae85f040e76d7071ed169f2e07bd0c8748675e74aedd460",
+      "bytes": 53154
+    },
+    "experiments/simulations_repair_era/axioms_of_trust/sim_axiom_results.json": {
+      "sha256": "035fc9c8b9eab85ceafba9d01a350bfe927d7401e8218f2a6367320ef1f60882",
+      "bytes": 430
+    },
+    "experiments/simulations_repair_era/axioms_of_trust/sim_axiom_series.py": {
+      "sha256": "877122cfadd6819a20484f04e241a7f91f3d335baa4f7a90d5ccbf4af90d38d9",
+      "bytes": 5846
+    },
     "experiments/simulations_repair_era/agency/SIM_PERSUADE1_PRE_REGISTRATION.md": {
       "sha256": "f80849fe2394c79f64dc9ab6f012566fd911040b399ef533fd53e6a7be13e7b5",
       "bytes": 4463
@@ -5525,8 +5573,8 @@
       "bytes": 9331
     },
     "experiments/simulations_repair_era/criticality/sim_crit2_results.json": {
-      "sha256": "808e59d455b4e901d43a6551e6c6550845ea29615df32a3a130fee9d2c341591",
-      "bytes": 463
+      "sha256": "772f0eb54e6e6ced8d80b0f47c42478f982ea26578930b50e19d4a81b9e49a2c",
+      "bytes": 464
     },
     "experiments/simulations_repair_era/criticality/sim_crit3_bayes_factor_comparison.py": {
       "sha256": "63dde526c6c02c9231ea0aa0ec2b0e37e5a063680efe088c4a375e843e173851",
@@ -6964,6 +7012,10 @@
       "sha256": "61e010e7b2e2d35e46dbfde2c9d04d0e24ad853f32ed457dca911d0c82bc5ce4",
       "bytes": 43846
     },
+    "preregistrations/DOCAS_PILOT_1_AMENDMENT_V4_5.md": {
+      "sha256": "411258be9e0f5388bdde5d545fd41a3e866fb3ee87b3c00f07c35afaf67fee0c",
+      "bytes": 8052
+    },
     "preregistrations/GTT-EMPIRICAL-PROGRAM.md": {
       "sha256": "54ebcbdedb43051972c8c10b02b7aa28b624b7f543a980671148a80fc0971b2c",
       "bytes": 10782
@@ -7095,6 +7147,10 @@
     "figures/13_sim_o_optogenetics.png": {
       "sha256": "92f44f2867106cb9437795eeb4b9baa4fb92b6f353725db67d4789bd82423de9",
       "bytes": 702372
+    },
+    "figures/25_sim_axiom_series.png": {
+      "sha256": "b443e761bde8eed691a3f86b02f063e5646fedc5d5914407489d5d57b1219799",
+      "bytes": 712262
     },
     "figures/fig1_surface_means.png": {
       "sha256": "211afd1555f88140fc6f0d8fd8708d3a9bef81942de4d90f4699d7da02f98eaf",
@@ -7331,6 +7387,14 @@
     "figures/fig_phasemap_control.png": {
       "sha256": "d87f8a0860fbf96731dc3df8140c32d2ad7548ac3897c0d782b437dffd293117",
       "bytes": 118152
+    },
+    "figures/fig_sim_axiom_beinhocker.png": {
+      "sha256": "3abe0543ef290240006d81bf1a86877fb7abaaebb6f75f2de09eebba432a5774",
+      "bytes": 52174
+    },
+    "figures/fig_sim_axiom_trace_vs_proto.png": {
+      "sha256": "bd98476a952268cf2ae85f040e76d7071ed169f2e07bd0c8748675e74aedd460",
+      "bytes": 53154
     },
     "figures/fig_sim_b_basal.png": {
       "sha256": "cf3a4559658a038f21aadfd1f2bf83eecb709b96dbed9727d66e8949f5c72b68",
@@ -8005,16 +8069,16 @@
       "bytes": 6351
     },
     "formal-verification/FORMAL_VERIFICATION_REPORT.md": {
-      "sha256": "f800eaec2c56cffe827a08cf925b233ba679cba5b9bf1df91e5a23b8800ccb90",
-      "bytes": 8101
+      "sha256": "fa0e409b3ec13cf689bf78c70b63c8d29ad7f9c5f84e53b65845c977bab69a4b",
+      "bytes": 5835
     },
     "formal-verification/TFP_Edge_Protocol.tla": {
       "sha256": "de998cc405eabeffaadfe96901aefac34e6d617f82a041281c166bd7c188f380",
       "bytes": 4606
     },
     "formal-verification/run_all_formal_verifications.py": {
-      "sha256": "9c364565ab6b3b532199a29b8a8d36e6b2b61498ab4d78bdcb229680b21dde11",
-      "bytes": 6817
+      "sha256": "65fac2b63132472a454482053be8553a50f81afb93182f6035c282f3de92a4c8",
+      "bytes": 8775
     },
     "formal-verification/sympy_symbolic_dynamics.py": {
       "sha256": "9b094703303e3b63be14da8318a7a931889ee66af15709afbccb23935a6bfbf8",
@@ -8039,6 +8103,10 @@
     "formal-verification/z3_quantum_molecular_isomorphism.py": {
       "sha256": "d6c138332fa023690c9721b5cac9ce007d48a33a8009797e58be2e7d0d2f0107",
       "bytes": 5269
+    },
+    "formal-verification/z3_trust_vs_selection_thermodynamic_invariance.py": {
+      "sha256": "15590655d90fcab173926f9e44dfa745fe833827b79f71832c1a2d6f3c09905c",
+      "bytes": 12417
     },
     "reviews/ARGON4_DARRELL_HUFF_DOCAS.json": {
       "sha256": "c1fe1499a59255204a8563b924943fd263137353328c753ecd66c27e7f2406e2",

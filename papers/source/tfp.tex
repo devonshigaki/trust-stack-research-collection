@@ -550,24 +550,26 @@ application whitepaper) instantiate TFP for specific commercial domains
 (finance, commerce, insurance). 2. \textbf{The Digital Cellular Wall:}
 TFP is deliberately domain-agnostic. It specifies the digital equivalent
 of a cellular membrane for arbitrary information networks: provisioning
-every agent an edge database (\texttt{libSQL}/SQLite) they hold and
-control, combined with Substrate blockchain cryptographic attestation
-for tamper-proof verification. It provides the intelligent,
-semi-permeable boundary that decides what enters and exits, selectively
-sampling validation inputs while filtering ambient adversarial noise and
-bounding failure reach. 3. \textbf{Multiple-Trace Memory Architecture:}
-TFP implements \textbf{Multiple-Trace Memory} (Hintzman, 1986). Rather
-than collapsing an agent's history into a single lossy scalar running
-prototype (like centralized credit scores or reputation scalars), TFP's
-user-owned edge vault stores the full, immutable episodic trace of
-individual validation events. In \textbf{Sim AXIOM-1}, storing the full
-episodic event history in user-owned edge storage eliminated the
-paranoid prior rigidity of scalar prototype models, cutting
-false-positive rejections by \textbf{\(8.69\times\)} and accelerating
-post-shock recovery by \textbf{\(85.7\%\)}. 4. \textbf{Empirical
-Membrane Proofs:} * In \textbf{Sim AMP (companion biology preprint,
-§5.34)}, this digital cellular wall was evaluated against severe
-external noise (\(\sigma = 2.0\)): TFP's semi-permeable edge isolation
+every agent a sovereign local state store
+(\(\mathcal{S}_{\text{edge}}\)) they hold and control, combined with
+decentralized blockchain cryptographic attestation
+(\(\mathcal{L}_{\text{audit}}\)) for tamper-proof verification. It
+provides the intelligent, semi-permeable boundary that decides what
+enters and exits, selectively sampling validation inputs while filtering
+ambient adversarial noise and bounding failure reach. 3.
+\textbf{Multiple-Trace Memory Architecture:} TFP implements
+\textbf{Multiple-Trace Memory} (Hintzman, 1986). Rather than collapsing
+an agent's history into a single lossy scalar running prototype (like
+centralized credit scores or reputation scalars), TFP's user-owned edge
+vault stores the full, immutable episodic trace of individual validation
+events. In \textbf{Sim AXIOM-1}, storing the full episodic event history
+in user-owned edge storage eliminated the paranoid prior rigidity of
+scalar prototype models, cutting false-positive rejections by
+\textbf{\(8.69\times\)} and accelerating post-shock recovery by
+\textbf{\(85.7\%\)}. 4. \textbf{Empirical Membrane Proofs:} * In
+\textbf{Sim AMP (companion biology preprint, §5.34)}, this digital
+cellular wall was evaluated against severe external noise
+(\(\sigma = 2.0\)): TFP's semi-permeable edge isolation
 (\(\gamma_M = 0.12\)) maintained \textbf{\(78.5\%\) contract retention},
 whereas an uncompartmentalized centralized database suffered
 catastrophic contagion collapse to \textbf{\(0.0\%\)}. * In \textbf{Sim
@@ -580,7 +582,18 @@ AXIOM-2}, decentralized firms with semi-permeable contractual boundaries
 retained \textbf{\(+84.79\) excess capital reserves} over monolithic
 centralized firms during severe resource shocks, proving that systemic
 survival under complexity is an evolutionary selection on boundary
-integrity.
+integrity. 5. \textbf{Concrete Rust Protocol Substrate Implementation:}
+The open-source protocol substrate is actively developed in
+high-performance Rust across the workspace core library crates:
+\texttt{crates/core} (mathematical types, Master Law state transitions),
+\texttt{crates/db} (sovereign edge database drivers and schema
+migrations), \texttt{crates/sim-core} (multi-agent dynamic kinetics and
+MasterLawConfig presets), \texttt{crates/nomt-wasm} (compact state
+tries), and \texttt{crates/agent} (autonomous agent runtime and policy
+evaluation). The commercial product applications (web portal, matching
+engine, native mobile clients) sit strictly at Layer 5
+(\texttt{apps/product/}) as decoupled applications built on top of this
+open-source protocol substrate.
 
 \subsection{3.0.1 The core flow}\label{the-core-flow}
 

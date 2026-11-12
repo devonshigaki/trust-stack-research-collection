@@ -1125,6 +1125,24 @@ insurance:
   flows, ensuring complete compliance with the Equal Credit Opportunity
   Act (ECOA / Regulation B, 12 C.F.R. § 1002) and the Fair Credit
   Reporting Act (FCRA, 15 U.S.C. § 1681).
+\item
+  \textbf{Decoupled Architecture (Protocol Substrate vs.~Commercial
+  Products):} The protocol substrate is open-source and architecturally
+  decoupled from FreshCredit's commercial product layers. The upstream
+  protocol components reside in open-source library crates
+  (\texttt{crates/core}, \texttt{crates/db}, \texttt{crates/sim-core},
+  \texttt{crates/agent}), while FreshCredit's commercial product
+  applications (web portal, matching engine, rules orchestrator, and
+  native iOS/Android clients via UniFFI) reside strictly at the
+  application layer (\texttt{apps/product/}). The mathematical stability
+  update implements the canonical presets specified in
+  \texttt{crates/sim-core/src/master\_law.rs}: (a)
+  \texttt{PhysicsLeakFree} limit
+  (\(\lambda^+ = \lambda^- = 0.35, r=1, \delta=0, S_{\text{base}}=0\));
+  (b) \texttt{BiologyHomeostatic} baseline
+  (\(\lambda^+ = \lambda^- = 0.01, r \in [0, 1], \delta=0.01, S_{\text{base}}=0.5\));
+  and (c) \texttt{ProtocolAsymmetric} credit preset
+  (\(\lambda^+ = 0.005, \lambda^- = 0.02, r=1, \delta=0.01, S_{\text{base}}=0.5\)).
 \end{enumerate}
 
 FreshCredit consumes the companion measurement protocol unchanged

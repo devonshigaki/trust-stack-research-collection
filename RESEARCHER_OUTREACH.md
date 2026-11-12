@@ -1,7 +1,7 @@
 # TRUST STACK: ACADEMIC & SCIENTIFIC RESEARCHER OUTREACH REGISTRY
 **The FreshCredit Lab · Independent Research**  
 **Repository:** [github.com/devonshigaki/trust-stack-research-collection](https://github.com/devonshigaki/trust-stack-research-collection)  
-**Version:** 4.2 (Living Registry) · **Last Updated:** November 2026  
+**Version:** 4.5 (Living Registry) · **Last Updated:** November 2026  
 **Primary Architect:** Devon Shigaki (ORCID: [0009-0003-8977-8010](https://orcid.org/0009-0003-8977-8010))
 
 ---
@@ -10,9 +10,10 @@
 This document is the living directory and engagement tracker for academic peer review, scientific critique, and empirical collaboration across the Trust Stack research collection.
 
 ### Core Architectural Mandates for Outreach:
-1. **The Fresh Protocol (TFP) is the Molecular Pump & Digital Membrane:** TFP is the domain-agnostic, low-level decentralized infrastructure (libSQL database-per-tenant, x402 micropayments, Substrate audit chain, and the Master Stability Law $\Delta S_t = \lambda(V_t - E_t)$).
-2. **FreshCredit is the Financial Application:** FreshCredit points TFP at consumer cash-flow streams (Plaid/banking ledgers) to replace centralized credit bureaus.
-3. **Living Lab Tracking:** For each primary investigator (PI), this registry tracks their intellectual battle, what our research built for them, their full personalized outreach letter, and **key lab members, postdocs, and co-authors** to build relationships with as our research expands.
+1. **The Fresh Protocol (TFP) is the Open-Source Protocol Substrate:** TFP is the domain-agnostic, open-source mathematical specification across five capability classes ($\mathcal{I}_{\text{DID}}$, $\mathcal{A}_{\text{attest}}$, $\mathcal{S}_{\text{edge}}$, $\mathcal{L}_{\text{audit}}$, $\mathcal{V}_{\text{light}}$, $\mathcal{R}_{\text{pay}}$), implemented in high-performance Rust (`crates/core`, `crates/db`, `crates/sim-core`, `crates/agent`), and verified in Microsoft Z3 SMT (Theorems TS-1 to TS-5).
+2. **FreshCredit is the Decoupled Commercial Application:** FreshCredit points TFP at consumer cash-flow streams (Plaid/banking ledgers) to replace centralized credit bureaus, implemented in `apps/product/` on top of the open-source protocol.
+3. **Working Open-Source Reality:** Every outreach communication highlights that our work is backed by: (a) a running open-source Rust monorepo with 32/32 passing CI tasks, (b) 284 pages of recompiled formal treatises across 4 formats, and (c) an OSF pre-registered 180-day multimodal human pilot protocol (DOCAS-PILOT-1 V4.5).
+4. **Living Lab Tracking:** For each primary investigator (PI), this registry tracks their intellectual battle, what our research built for them, their full personalized outreach letter, and **key lab members, postdocs, and co-authors** to build relationships with as our research expands.
 
 ---
 
@@ -20,9 +21,9 @@ This document is the living directory and engagement tracker for academic peer r
 
 | # | Researcher | Institution | Domain / Framework | Key Stack Artifact | Target Lab Members / Co-Authors | Status |
 | :- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | **Lee Cronin** | U. Glasgow / Chemify | Assembly Theory | Sim AT, AT-2, AT-3 | Sara Walker, Stuart Marshall, Abhishek Sharma | Ready to Send |
-| 2 | **Michael Levin** | Tufts / Allen Discovery | Developmental Bioelectrics | Sim L, Sim B, Sim BIO-1 | Lakshwin Shreesha, Douglas Blackiston | Ready to Send |
-| 3 | **Karl Friston** | UCL / Wellcome Centre | Active Inference & FEP | Sim N, Sim THERMO-1 | Thomas Parr, Lancelot Da Costa, Maxwell Ramstead | Ready to Send |
+| 1 | **Lee Cronin** | U. Glasgow / Chemify | Assembly Theory | Sim AT, AT-2, Sim AXIOM-1/2 | Sara Walker, Stuart Marshall, Abhishek Sharma | Ready to Send |
+| 2 | **Michael Levin** | Tufts / Allen Discovery | Developmental Bioelectrics | Sim L, Sim B, Sim BIO-1, Sim AXIOM-2 | Lakshwin Shreesha, Douglas Blackiston | Ready to Send |
+| 3 | **Karl Friston** | UCL / Wellcome Centre | Active Inference & FEP | Sim N, Sim THERMO-1, Theorem TS-2 | Thomas Parr, Lancelot Da Costa, Maxwell Ramstead | Ready to Send |
 | 4 | **Lisa Feldman Barrett** | Northeastern University | Constructed Emotion | Sim META ($F_1=0.991$) | Karen Quigley, Ajay Satpute, Maria Gendron | Ready to Send |
 | 5 | **Kristen Lindquist** | UNC Chapel Hill | Emotion Colexification | CLICS 4.0, Sim S-Series | Joshua Conrad Jackson, Joseph Watts | Ready to Send |
 | 6 | **Daniel Levitin** | McGill / Minerva | Music & Neurochemistry | Sim M, Sim AT-Music | Mona Lisa Chanda, Vinod Menon | Ready to Send |
