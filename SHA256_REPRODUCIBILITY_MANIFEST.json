@@ -25,7 +25,7 @@
       "bytes": 124276
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "dabc870ad8ab6d07e5a491e343e9cb98d64a0b6eaf07631b076c6df0117b9160",
+      "sha256": "6842b2a80213ca64c0f4b932ecc5a8acfe5b2cd32f46f2455917cd1db6e49251",
       "bytes": 385373
     },
     "SIMULATION_ACCOUNTING.md": {
@@ -3745,8 +3745,8 @@
       "bytes": 185623
     },
     "papers/tdf.md": {
-      "sha256": "2c3dd28c43edf427d9102bccdbd8488a6f1a59242090f25cdf81eb4978340548",
-      "bytes": 323608
+      "sha256": "9950eee6cf94bf0c5e7a7782b92b2b594265659a0dd5ebf6e42f66603d3416e5",
+      "bytes": 323603
     },
     "papers/tfp.md": {
       "sha256": "ca3c23fdec1cc5370de1bf78ec6dba8424fe7c11c5de881271e4abcdb991ac8d",
@@ -3757,7 +3757,7 @@
       "bytes": 17320
     },
     "papers/whitepaper.md": {
-      "sha256": "8b3c35deaae5244c373ea07b9bf40a4e382daf66bfa4e948812fd361107bc28b",
+      "sha256": "4c94a36c584fd19cf9d63096a723b5d254ac701d977d2412a169ff560420b1d4",
       "bytes": 172468
     },
     "papers/markdown/collection.md": {
@@ -3781,7 +3781,7 @@
       "bytes": 17320
     },
     "papers/markdown/whitepaper.md": {
-      "sha256": "8b3c35deaae5244c373ea07b9bf40a4e382daf66bfa4e948812fd361107bc28b",
+      "sha256": "4c94a36c584fd19cf9d63096a723b5d254ac701d977d2412a169ff560420b1d4",
       "bytes": 172468
     },
     "papers/source/collection.tex": {
@@ -3793,8 +3793,8 @@
       "bytes": 187734
     },
     "papers/source/tdf.tex": {
-      "sha256": "f78a88e1f8a95b1ed6c16eee37ed7ba0e880b452a90c20e979f3409b5b9223a7",
-      "bytes": 318810
+      "sha256": "50ab567a6947ac34708b4dc6862013303ed6233963a189b6272340aac12aa241",
+      "bytes": 318805
     },
     "papers/source/tfp.tex": {
       "sha256": "b65011fe99cb639809fc71597191722846d1cc97b39ac234f72fca7d1ab7dc41",
@@ -3805,7 +3805,7 @@
       "bytes": 19048
     },
     "papers/source/whitepaper.tex": {
-      "sha256": "401a3ab3af19d85c569fd28cebe147e420b5134e39d49aa1f94cd3dc68b8c437",
+      "sha256": "f903de200620d5dd010a202ac30798d2d6bbfd1fa89ef91a3075a9819d54267d",
       "bytes": 178092
     },
     "papers/source/figures/01_sim_g6_m1_trust_manifold.png": {
