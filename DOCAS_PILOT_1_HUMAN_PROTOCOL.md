@@ -180,6 +180,31 @@ Drawn at Day 1 (Cessation Baseline), Day 30 (Post-Acute Withdrawal), Day 60, Day
     3.  *Task 3 (2 Minutes): NASA Brief Psychomotor Vigilance Task (PVT-B):* Visual reaction-time counter flashes on screen at pseudo-random intervals ($1\text{--}4\text{ seconds}$ inter-stimulus interval / ISI). The participant slaps MPC Pad 1 instantly upon stimulus onset. Extracts Mean Reaction Time ($\text{RT}$ in ms), optimum motor speed (fastest 10% RT), and **Attentional Lapses ($\text{RT} > 500\text{ ms}$)**, providing the aerospace gold standard for allostatic cognitive exhaustion.
     4.  *Task 4 (2 Minutes): Go / No-Go Prefrontal Executive Inhibitory Control Task:* Fast sequential visual cues ($80\%$ Green Go cues, $20\%$ Red No-Go cues; $400\text{ ms}$ presentation). Measures right inferior frontal cortical inhibitory gating: Commission Errors (impulsive failure to withhold response on Red No-Go cues), Omission Errors (attentional dropouts on Green Go cues), and **Signal Detection Theory Perceptual Sensitivity ($d' = Z(\text{Hit Rate}) - Z(\text{False Alarm Rate}))$**.
 
+### O. Active Reading Telemetry (Kindle / Goodreads)
+*   **Collection Modality:** Passive local telemetry capture of an Active behavior.
+*   **Ingestion Pipeline:** Scheduled extraction of local e-reader SQLite databases (`reader.sqlite`, `annotation.sqlite`) parsed directly into the `reading_telemetry_stream` libSQL table.
+*   **Biophysical Target:** Precise millisecond page-flip timestamps, character dwell time, reading speed (WPM) drops indexing cognitive fatigue, and raw text byte-offset highlights bounding the temporal window of intellectual engagement.
+
+### P. High-Frequency Workout Kinematics & Exertion (Apple Watch / CoreMotion)
+*   **Collection Modality:** Hybrid (Active workout initiation + Passive continuous ambient sensor logging).
+*   **Ingestion Pipeline:** CoreMotion IMU ($50/100\text{ Hz}$), raw 1 Hz beat-to-beat optical PPG, and active METs ingested via Apple HealthKit into the `workout_highfreq_stream` libSQL table.
+*   **Biophysical Target:** Decoupling physical mechanical exertion (tachycardia) from psychological prediction errors (vagal modulation), updating the Exertion Confounder Filter with exact mechanical power and instantaneous cadence.
+
+### Q. Ambient Acoustic Exposure & Music Choices (Apple Music Telemetry)
+*   **Collection Modality:** Passive ambient logging.
+*   **Ingestion Pipeline:** On-device CoreData SQLite interception (`MediaLibrary.sqlitedb`) logging exact Unix start/stop times and skip latencies into `music_telemetry_stream`. Offline DSP feature extraction (Essentia) computes MFCCs, spectral centroid, and tempo.
+*   **Biophysical Target:** Correlating late-night acoustic tempo and valence with nocturnal wrist temperature (Apple Watch) to isolate mental stimulation from circadian allostatic stress (cortisol C-channel).
+
+### R. Forced Pulmonary Mechanics (Spirometry)
+*   **Collection Modality:** Strictly Active.
+*   **Ingestion Pipeline:** Direct BLE IEEE 11073-10421 medical driver extracting $500\text{ Hz}$ raw ADC differential pressure voltages $V_{\text{raw}}(t)$ into `spirometry_curve_stream`.
+*   **Biophysical Target:** Instantaneous flow-volume coordinates $Q(t)$, Forced Expiratory Volume in 1 second ($FEV_1$), and Forced Vital Capacity ($FVC$) adjusted via exact BTPS thermodynamic correction to track pulmonary capacity and respiratory sinus arrhythmia limits.
+
+### S. Segmental Scalp Hair Metabolomics (LC-MS/MS & ICP-MS)
+*   **Collection Modality:** Active Harvest of a Passive Retrospective Biological Matrix.
+*   **Ingestion Pipeline:** Physical posterior vertex scalp clippings ($3\text{ cm}$ proximal segments) blind-shipped with unforgeable `PSID` holographic tamper seals. Raw instrument mass spectra (`.mzML`) retention times and precursor ion $m/z$ ratios ingested into `hair_metabolomics_stream`.
+*   **Biophysical Target:** The ultimate passive time capsule integrating systemic endocrine (cortisol/cortisone) and endocannabinoid (AEA/2-AG) exposure over the preceding 90-180 days, proving historical HPA-axis allostatic load.
+
 ---
 
 ## 3. Comprehensive Metric Mapping Across the 5 DOCAS Channels
