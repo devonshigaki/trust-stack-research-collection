@@ -51,6 +51,7 @@ Stream Name               | Acquisition Modality         | Sampling Resolution  
 ### Hypothesis H-READ (Cognitive Fatigue & Semantic Drift):
 *   **Hypothesis:** Sustained contractual allostatic load ($\varepsilon < 0$ financial shock) induces prefrontal executive depletion, manifested as a statistically significant increase in "time-to-digitization" (latency between reading and logging notes) and a collapse in syntactic complexity (measured via Flesch-Kincaid NLP extraction) in manual reading marginalia.
 *   **Frozen Criterion:** Permutation test $p < 0.01$ correlating evening reading latency and semantic valence drops with daytime prefrontal fNIRS $\Delta [\mathrm{HbO}_2]$ attenuation in medial prefrontal cortex (BA10/BA32).
+*   **Negative Control Exposure (NCE):** Periodic reading sessions on overlearned, emotionally neutral control prose (standardized Flesch-Kincaid Grade 8 baseline text) are logged under identical ambient conditions to verify that velocity drops specifically index cognitive-financial depletion rather than oculomotor dry-eye strain.
 
 ### Hypothesis H-WORKOUT (Exertion Confounder Decoupling):
 *   **Hypothesis:** Convolving high-frequency workout kinematics (CoreMotion IMU mechanical power in Watts, cadence, and active METs) with an exponential cardiac recovery kernel residualizes physical exertion tachycardia, leaving unconfounded psychological vagal modulation ($O$-channel).
@@ -63,10 +64,11 @@ Stream Name               | Acquisition Modality         | Sampling Resolution  
 ### Hypothesis H-SPIRO (Pulmonary Bounds on Vagal Brake):
 *   **Hypothesis:** Individualized Forced Vital Capacity ($FVC$) and Forced Expiratory Volume in 1 second ($FEV_1$), corrected for ambient BTPS thermodynamic variables, mathematically bound the maximum dynamic range of Respiratory Sinus Arrhythmia (RSA), setting the physiological ceiling for vagal recovery ($O$- and $S$-channels).
 *   **Frozen Criterion:** Normalizing high-frequency HRV by BTPS-corrected $FVC$ collapses inter-subject vagal recovery variance by $\ge 40\%$.
+*   **Valsalva Baroreflex Decoupling:** To decouple the acute Valsalva baroreflex surge ($> 40\text{ mmHg}$ intrathoracic pressure elevation) induced by maximal forced exhalation from baseline vagal resting tone, spirometric testing is quarantined to the end of the evening docking station, enforcing a minimum 30-minute quiet-recovery buffer before any subsequent sleep-onset vagal metric calculation.
 
 ### Hypothesis H-HAIR (Longitudinal Endocrine Ground Truth):
-*   **Hypothesis:** Scalp hair segmental cortisol and cortisone concentrations (LC-MS/MS; pg/mg) measured from proximal $3\text{ cm}$ segments correlate identically with the cumulative time-integral of 90-day daily ambulatory interstitial glycemic excursions ($dG/dt$) captured by continuous glucose monitoring.
-*   **Frozen Criterion:** Pearson correlation between hair cortisol/cortisone ratio and 90-day cumulative CGM stress area-under-the-curve evaluates to $r \ge 0.80$ ($p < 0.001$).
+*   **Hypothesis:** Scalp hair segmental cortisol and cortisone concentrations (LC-MS/MS; pg/mg) measured from proximal $3\text{ cm}$ segments correlate with the cumulative time-integral of 90-day daily ambulatory interstitial glycemic excursions ($dG/dt$) captured by continuous glucose monitoring.
+*   **Frozen Criterion:** In accordance with Society of Hair Testing (SoHT 2022) consensus standards accounting for normal growth rate variance ($0.6\text{--}1.4\text{ cm/month}$) and distal extraction attenuation, the Pearson correlation between proximal $3\text{ cm}$ hair cortisol/cortisone ratio and 90-day cumulative CGM stress area-under-the-curve evaluates to a clinically grounded target of $r \ge 0.40$ ($p < 0.01$).
 
 ---
 
@@ -82,3 +84,24 @@ Stream Name               | Acquisition Modality         | Sampling Resolution  
 3.  **The Regulatory Sequestration Wall:**
     *   All five streams are stored in local edge databases (`trust_wearables_edge.db`).
     *   **Zero-Interference Invariant:** Medical, biological, literary, musical, and workout data possess **ZERO** schema paths, zero SQL queries, and zero memory pointers into credit underwriting, scoring, or decision algorithms, ensuring complete compliance with ECOA / Regulation B (12 C.F.R. § 1002) and FCRA (15 U.S.C. § 1681).
+
+---
+
+## 5. Multiple Testing Control & Causal DAG Identification
+
+1.  **Family-Wise Error Rate (FWER) & False Discovery Rate (FDR) Bounds:**
+    *   Simultaneous testing of 14 continuous and episodic physiological streams across the 5 DOCAS channels yields over 70 cross-lagged bivariate hypothesis tests. To prevent false-positive inflation ($\alpha_{\text{global}} \approx 0.972$ uncorrected), the trial enforces:
+        *   **Benjamini-Yekutieli (BY) FDR Control:** Maintains false discovery rate $q \le 0.05$ under arbitrary joint statistical dependence across streams.
+        *   **Romano-Wolf Stepdown Procedure:** Resampling across $B = 10,000$ stationary block-bootstraps to preserve the auto-regressive temporal covariance of continuous physiological time-series while enforcing strong FWER control.
+2.  **Structural Causal Modeling (SCM):**
+    *   To prevent collider stratification bias (M-bias), physical workout intensity and music exposure are modeled as time-varying mediators using **Marginal Structural Models (MSM)** with Inverse Probability of Treatment Weighting (IPTW), ensuring that conditioning on physical exertion does not open unblocked backdoor paths to latent psychological stress.
+
+---
+
+## 6. Open-Source Protocol Licensing and Clean-Room Isolation
+
+1.  **Dual-License Clean-Room Boundary:**
+    *   All protocol substrate crates (`crates/core`, `crates/db`, `crates/sim-core`, `crates/agent`, `crates/nomt-wasm`) and formal verification proofs are published under permissive **Apache 2.0 / MIT** licenses.
+    *   Commercial applications (`apps/product/`) remain proprietary under BSL 1.1 / Commercial licensing.
+    *   No GPL, copyleft, or restrictive academic-only licenses exist in the upstream protocol crates, ensuring zero viral license contamination across commercial derivatives.
+

@@ -25,8 +25,8 @@
       "bytes": 124276
     },
     "SHA256_REPRODUCIBILITY_MANIFEST.json": {
-      "sha256": "8906de4ba5b62b024ac193b0d71bb95c4ffa328f492bbcc2c9e56fce305deae7",
-      "bytes": 385066
+      "sha256": "294764e75381a384ed78dc7c1da3bd6296881742f62ae32d4a009a4a655f91fb",
+      "bytes": 385372
     },
     "SIMULATION_ACCOUNTING.md": {
       "sha256": "c959b5114f25a5349de3cd2f9ac175ac55494369b9c00d4f90c03834a7f6828f",
@@ -4853,8 +4853,8 @@
       "bytes": 644594
     },
     "experiments/wearables_pipeline/harvest_expanded_telemetry.py": {
-      "sha256": "aeb279bc681471ef83cc028fce59008658ba75a2047d18b70eb0260d0ba5972c",
-      "bytes": 9902
+      "sha256": "defb3be19b898e7a1f524ff3d7de6f2309c668c27ca5edffd8d074d62816a04e",
+      "bytes": 10067
     },
     "experiments/wearables_pipeline/harvest_telemetry.py": {
       "sha256": "278b709ea9c6ea8e752f283e28c7d43ca9ba9d3683ed09db63b245eb9b4e83c2",
@@ -7021,8 +7021,8 @@
       "bytes": 43846
     },
     "preregistrations/DOCAS_PILOT_1_AMENDMENT_V4_5.md": {
-      "sha256": "411258be9e0f5388bdde5d545fd41a3e866fb3ee87b3c00f07c35afaf67fee0c",
-      "bytes": 8052
+      "sha256": "a76ae9e8aa4e2f71413ec88d0d337cb9785191a1fe9a99ce5fb3f42450cf0df7",
+      "bytes": 10846
     },
     "preregistrations/GTT-EMPIRICAL-PROGRAM.md": {
       "sha256": "54ebcbdedb43051972c8c10b02b7aa28b624b7f543a980671148a80fc0971b2c",
