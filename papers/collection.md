@@ -68,7 +68,7 @@ Since the original deposit, the collection has run a pre-registered connectome s
 
 - **Simulation H01 / Sim X-Series** (human cortex, Google H01 dataset): executed as frozen in the four-substrate Sim X-Series (Cell → Fly → Mouse → Human); confirms cross-substrate dynamical invariance with human Lyapunov contraction $\lambda_{\mathrm{Lyap}} = -1.000$ (within $[-1.10, -0.90]$ corridor) and throughput retention under permutation $R_{\mathrm{perm}} = 1.18 \ge 0.50$ (COMPOUND PASS 3/3; DOCAS §5.13).
 
-| Simulation | Substrate | Verdict | Reported in |
+| Simulation | Verification Target | Verdict | Reported in |
 |:---|:---|:---|:---|
 | F1 gate / F1a / F1a2 / F1b | FlyWire v783 | PASS / INDETERMINATE / FAIL / PASS | DOCAS §5.6 |
 | H1 (A1 / A2 / B2) | MICrONS v1822 | FAIL / MET / MET | DOCAS §5.7 |
@@ -130,9 +130,9 @@ Since the original deposit, the collection has run a pre-registered connectome s
 | Theorems E-1–E-4 | Tri-critical invariant & variational extremum SMT | PASS (4/4) | GTT §3.6 / DOCAS §5.33 |
 | Theorems MS-1–MS-4 | Multiscale SMT/CAS assembly manifold proofs | PASS (4/4) | GTT §3.1 / DOCAS §5.33 |
 | Theorems FR-1–FR-4 | SMT/CAS Fisher-Rao boundary proofs | PASS (4/4) | GTT §3.1 |
-| Sim WEARABLE-TRIAD (C1–C3) | Multi-rate biosensor fusion (Muse Athena, Watch S8, Stelo) | PASS (3/3) | DOCAS §5.37 |
+| Sim WEARABLE-TRIAD (C1–C3) | Multi-rate biosensor fusion (cw-fNIRS/EEG, Optical PPG, CGM) | PASS (3/3) | TDF §5.37 |
 | Sim PERSUADE-1 (C1–C3) | Lindquist-Watson agential convergence & mutual persuasion ODE | PASS (3/3) | DOCAS §5.38 |
-| Sim PILOT-1 (C1–C3) | End-to-end 30-day multimodal pre-flight mock trial runner | PASS (3/3) | DOCAS §5.37 / DOCAS-PILOT-1 |
+| Sim PILOT-1 (C1–C3) | End-to-end 30-day multimodal pre-flight mock trial runner | PASS (3/3) | TDF §5.37 / DOCAS-PILOT-1 |
 
 ## Perception-layer simulation — deposited
 
