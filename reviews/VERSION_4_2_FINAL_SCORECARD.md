@@ -1,6 +1,6 @@
 # END-TO-END SCIENTIFIC PARADIGM REVIEW & RESCORING
 **Target:** The Trust Stack Research Collection (Version 4.2)  
-**Papers Audited:** `docas.md`, `gtt.md`, `tfp.md`, `whitepaper.md`, `collection.md`  
+**Papers Audited:** `tdf.md`, `gtt.md`, `tfp.md`, `whitepaper.md`, `collection.md`  
 **Date of Review:** November 7, 2026  
 **Reviewer:** Automated Interdisciplinary Panel (Theoretical Physics, Computational Neuroscience, Behavioral Economics, Formal Methods)  
 **Epistemic Standard:** Nature / Science / Cell Tier (Open Science & Reproducibility)

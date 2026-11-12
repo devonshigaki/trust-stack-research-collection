@@ -2,7 +2,7 @@
 """
 Darrell Huff 5-Question Framework for Statistical Integrity:
 Deterministic Academic Audit & Rescoring Engine for The Trust Stack (Version 4.3)
-Audits: docas.md, gtt.md, tfp.md, whitepaper.md
+Audits: tdf.md, gtt.md, tfp.md, whitepaper.md
 """
 
 import os

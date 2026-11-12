@@ -1,7 +1,7 @@
 # SIM-R2 — Robustness Batteries 3–7: Results
 
 **Agent:** SIM-R2. **Environment:** numpy 2.2.5 / scipy 1.16.2 / matplotlib 3.10.3 / statsmodels 0.14.5, **seed 42** throughout.
-**Sources read first:** `work/math/math_repairs.md` (§M4 master law, §M6 stage-activity simplex, §M7 stereographic map), `work/sims/sim_results_B.md`, `revised/gtt.md` §3.1/§3.4, `revised/whitepaper.md` §4.7 (+§1.1–1.2, §2.1–2.3, §4.5), `figures/docas/numbers_docas.md`, `revised/docas.md` §2.9/§4.6/§5.2.
+**Sources read first:** `work/math/math_repairs.md` (§M4 master law, §M6 stage-activity simplex, §M7 stereographic map), `work/sims/sim_results_B.md`, `revised/gtt.md` §3.1/§3.4, `revised/whitepaper.md` §4.7 (+§1.1–1.2, §2.1–2.3, §4.5), `figures/docas/numbers_tdf.md`, `revised/tdf.md` §2.9/§4.6/§5.2.
 **Data:** CLICS 4.0 CLDF edge list (`colexifications.csv`, 51,562 edges / 1,725 concept nodes — matches the paper's re-run-verified counts exactly) + `languages.csv` (Glottolog macroarea/family metadata), fetched raw from github.com/clics/clics4 this session (full-repo clone blocked by a 100 MB download cap; the precomputed CLDF edge list and language metadata suffice and are the paper's own data source).
 
 ---
@@ -59,7 +59,7 @@
 
 ## BATTERY 5 — family-wise multiplicity analysis
 
-**Family assembled** from `numbers_docas.md` (SIM-D re-run values) and `docas.md` §4.6/§5.2: the stack's permutation-test results named in the battery spec. m = 24 tests with p-values. Excluded from the correction (listed for completeness): **N.4 CLICS4 overlap** (descriptive shortest-path matrix, no p-value reported) and the N.3/D12 negative controls (null-confirming checks, not hypothesis tests). D11's two arms are reported only as "p > 0.5" with negative r; they enter at the conservative bound p = 1.0. All p = 0.0005 values are resolution-limited (2,000 permutations; read as p ≤ 0.0005).
+**Family assembled** from `numbers_tdf.md` (SIM-D re-run values) and `tdf.md` §4.6/§5.2: the stack's permutation-test results named in the battery spec. m = 24 tests with p-values. Excluded from the correction (listed for completeness): **N.4 CLICS4 overlap** (descriptive shortest-path matrix, no p-value reported) and the N.3/D12 negative controls (null-confirming checks, not hypothesis tests). D11's two arms are reported only as "p > 0.5" with negative r; they enter at the conservative bound p = 1.0. All p = 0.0005 values are resolution-limited (2,000 permutations; read as p ≤ 0.0005).
 
 **Multiplicity table** (α = 0.05; Bonferroni threshold 0.05/24 = 0.00208):
 
@@ -130,7 +130,7 @@ Caveats carried from the paper: marginal-vs-marginal only (no comparison against
 
 ## BATTERY 7 — CLICS4 per-macroarea subgroups (Simpson check)
 
-**Method.** Real CLICS4 edge list (51,562 edges; 1,725 concept nodes — paper counts verified). Concept sets exactly as the paper/SIM-D used (gloss mappings: KNOW→KNOW (SOMETHING), CORRECT→CORRECT (RIGHT), FEAR→FEAR (BE AFRAID), CALM→CALM (OF SEA), SURPRISE→SURPRISED); A-channel set = the 7 printed concepts (printed list truncated — disclosed in numbers_docas.md). Per Glottolog macroarea (languages.csv metadata): an edge counts if supported by ≥ 1 language in the area; primary filter = **≥ 3 distinct families among the area's supporting languages** (the paper's ≥3-family filter applied within the subgroup — disclosed design choice); sensitivity panel = unfiltered (any-support) edges. Permutation tests: 2,000 random same-size concept sets from all 1,725 nodes, p = (1+k)/2001, seed 42. Aggregate reproduced **exactly** before subgrouping (C 11/21 = 0.5238; D 1/3; O 5/15; A 3/21; S 0/15; C+mismatch 12/45 — identical to SIM-D).
+**Method.** Real CLICS4 edge list (51,562 edges; 1,725 concept nodes — paper counts verified). Concept sets exactly as the paper/SIM-D used (gloss mappings: KNOW→KNOW (SOMETHING), CORRECT→CORRECT (RIGHT), FEAR→FEAR (BE AFRAID), CALM→CALM (OF SEA), SURPRISE→SURPRISED); A-channel set = the 7 printed concepts (printed list truncated — disclosed in numbers_tdf.md). Per Glottolog macroarea (languages.csv metadata): an edge counts if supported by ≥ 1 language in the area; primary filter = **≥ 3 distinct families among the area's supporting languages** (the paper's ≥3-family filter applied within the subgroup — disclosed design choice); sensitivity panel = unfiltered (any-support) edges. Permutation tests: 2,000 random same-size concept sets from all 1,725 nodes, p = (1+k)/2001, seed 42. Aggregate reproduced **exactly** before subgrouping (C 11/21 = 0.5238; D 1/3; O 5/15; A 3/21; S 0/15; C+mismatch 12/45 — identical to SIM-D).
 
 **Subgroup table (within-area fam≥3 density, hits/pairs, permutation p):**
 

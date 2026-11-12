@@ -128,7 +128,7 @@ def verify_local_ci_pass():
     print("✓ NeurIPS Criteria NEUR-10: Z3 SMT solver formal verification verified.")
 
     # 4. Check Cochrane RoB 2 Pre-Registered Trial
-    docas_path = os.path.join(PAPERS_DIR, "docas.md")
+    docas_path = os.path.join(PAPERS_DIR, "tdf.md")
     with open(docas_path, "r", encoding="utf-8") as f:
         docas_txt = f.read()
     assert "DOCAS-GATE-1" in docas_txt and "Williams-balanced" in docas_txt, "Missing Cochrane clinical trial spec"

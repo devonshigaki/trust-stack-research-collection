@@ -184,10 +184,10 @@ operates across neural and social networks to coordinate collective
 behavior. The brain did not invent trust; trust invented the brain. More
 fundamentally, \textbf{the brain is an impedance-matched biological
 amplifier of trust (\(10^6\times\) temporal gain \(G\))}, and
-\textbf{The Fresh Protocol (TFP) supplies its digital cellular wall} ---
-an edge database-per-tenant membrane with blockchain tamper-proof
-verification that buffers the individual against external noise and
-cascade collapse.
+\textbf{The Fresh Protocol (abstract cryptographic protocols) supplies
+its digital cellular wall} --- an edge database-per-tenant membrane with
+blockchain tamper-proof verification that buffers the individual against
+external noise and cascade collapse.
 
 The theory is offered as one component of a three-level stack. The GTT
 vector state and its update law are the formal objects; a companion
@@ -768,11 +768,11 @@ presets are: the \textbf{GTT physics layer}
 the \emph{Rescorla -- Wagner limit}, below); the \textbf{biological
 layer} (gating \(r_t,\) baseline-restoring leak
 \(\delta_S > 0, S_{base}\) the homeostatic prior; reduces to the GTT
-layer exactly as \(\delta_S \to 0, r \to 1);\) and the \textbf{TFP
-protocol layer} (\(r_t \equiv 1,\) \(\delta_S \geq 0\) ---
-baseline-restoring where \(\delta_S > 0\) --- and break/build asymmetry
-\(\lambda^{-} > \lambda^{+}\) as an explicitly labeled, separately
-estimable extension).
+layer exactly as \(\delta_S \to 0, r \to 1);\) and the
+\textbf{asymmetric protocol layer} (\(r_t \equiv 1,\)
+\(\delta_S \geq 0\) --- baseline-restoring where \(\delta_S > 0\) ---
+and break/build asymmetry \(\lambda^{-} > \lambda^{+}\) as an explicitly
+labeled, separately estimable extension).
 
 \textbf{x 1} (Axiom (Stability law --- the Rescorla--Wagner limit)).
 \emph{At the physics layer, stabilization updates in proportion to the
@@ -1412,8 +1412,8 @@ architecture, including ours.} \(\psi \to 0\) requires \(m \to 0;\) the
 four architectural responses of the companion protocol (local-first
 storage, consent-bearing queries, accountable access logs, minimized
 disclosure) drive salience toward \(m_{\min}\) --- but \(m_{\min} > 0,\)
-hence \(\psi \to \psi(m_{\min}) < 0,\) not 0. \textbf{TFP's own
-measurement still distorts:} at an illustrative residual salience
+hence \(\psi \to \psi(m_{\min}) < 0,\) not 0. \textbf{The measurement
+itself still distorts:} at an illustrative residual salience
 \(\psi = -0.05\mu,\) mismatch variance and memory remain inflated by
 \(\times1.05\) (Sim G9). The architecture minimizes observation-driven
 distortion; it does not eliminate it, and GTT's own axiom ---
@@ -1508,7 +1508,8 @@ occupies only half the circle; the stereographic map {θ = 2arctan (ε̃)}
 covers it. (b) Zero-coupling coherence: the half-circle map reports
 {R = 0.636 ± 0.014} (artifact); the stereographic map restores the
 finite-size floor at {0.041 ± 0.022}, matching raw uniform phases
-({0.042 ± 0.021}) and the TFP Sim P1 isolated control ({R = 0.032}).
+({0.042 ± 0.021}) and the benchmark Sim P1 isolated control
+({R = 0.032}).
 
 \textbf{Status of \(K_c:\) mean-field reference, not prediction.}
 Equation~{[}eq:kc{]} is valid under all-to-all coupling,
@@ -1815,9 +1816,9 @@ Document, §S) --- state-space geometry and temporal structure:
 \item
   \textbf{M3 --- External heavy-tail comparison {[}SUPPORTED at
   stylized-fact level{]}.} The protocol layer's heavy-tail stylized fact
-  (TFP T5b, excess kurtosis 1.9) was checked against a real dataset
-  external to the stack --- the UCI credit-card-default cohort (30,000
-  borrowers; Yeh \& Lien, 2009): month-to-month payment-amount
+  (benchmark T5b, excess kurtosis 1.9) was checked against a real
+  dataset external to the stack --- the UCI credit-card-default cohort
+  (30,000 borrowers; Yeh \& Lien, 2009): month-to-month payment-amount
   increments have excess kurtosis 575.4, and the credit-limit
   distribution is right-heavy-tailed (excess kurtosis 0.54). \textbf{The
   magnitudes disagree by roughly 2.5 orders (1.9 vs 575.4)}; the check
@@ -2723,32 +2724,33 @@ histories) raises \(S\) exactly as honest validation does. Verification
 quality is a variable the base law ignores (Zak \& Knack, 2001, model
 verification as a costly investment); countermeasures --- attestation,
 longer memory, payoff-asymmetry monitoring --- are protocol-layer
-obligations (TFP), not consequences of the theory, and the ZD
-exploitation result of §4.2 bounds what any reciprocal-feedback updater
-can be robust against. (iv) \emph{Equilibrium-tool limits.} The Lyapunov
-and Fokker -- Planck analyses describe asymptotics of a linear loop
-under constant parameters and stationary forcing; transient,
-regime-change, and non-stationary behavior are established only in
-simulation (Sims G6 -- G8), not proven. (v) \emph{Constant-\(\lambda\)
-limits --- now a measured failure mode.} Human social learning is better
-described by volatility-adaptive learning rates (Behrens et al., 2007,
-2008); fixed \(\lambda\) is a tractability restriction, and the
-pre-registered model comparison of §6 --- not citation --- is the
-confrontation. The confrontation has begun in silico (SIM-R1, §6): under
-a Behrens-style adaptive-\(\lambda\) truth the certified
-constant-\(\lambda\) estimator recovers the \(\varepsilon^{2}\)-weighted
-gain, not the time average (21.7\% of users outside the 0.15 corridor at
-coupling \(c = 1.5;\) population bias \(+0.117\)), an upward bias strong
-enough to place a \(\bar{\lambda} = 0.355\) population spuriously inside
-the H2 corridor --- the model comparison is load-bearing. (vi)
-\emph{Master-law restrictions.} The stability law~{[}eq:stability{]} is
-the symmetric member of a family: confirmation and betrayal
-sensitivities \((\lambda^{+}, \lambda^{-})\) can differ (the break/build
-asymmetry used at the protocol layer), recognition gates the update
-\((r_t < 1\) at the biological layer), and stabilization leaks toward
-baseline \((\delta_S >\) 0). All three extensions preserve global
-stability of alignment (each branch of the piecewise-linear flow is
-contracting), but the closed-form quantities of §3.2 --- in particular
+obligations (abstract cryptographic protocols), not consequences of the
+theory, and the ZD exploitation result of §4.2 bounds what any
+reciprocal-feedback updater can be robust against. (iv)
+\emph{Equilibrium-tool limits.} The Lyapunov and Fokker -- Planck
+analyses describe asymptotics of a linear loop under constant parameters
+and stationary forcing; transient, regime-change, and non-stationary
+behavior are established only in simulation (Sims G6 -- G8), not proven.
+(v) \emph{Constant-\(\lambda\) limits --- now a measured failure mode.}
+Human social learning is better described by volatility-adaptive
+learning rates (Behrens et al., 2007, 2008); fixed \(\lambda\) is a
+tractability restriction, and the pre-registered model comparison of §6
+--- not citation --- is the confrontation. The confrontation has begun
+in silico (SIM-R1, §6): under a Behrens-style adaptive-\(\lambda\) truth
+the certified constant-\(\lambda\) estimator recovers the
+\(\varepsilon^{2}\)-weighted gain, not the time average (21.7\% of users
+outside the 0.15 corridor at coupling \(c = 1.5;\) population bias
+\(+0.117\)), an upward bias strong enough to place a
+\(\bar{\lambda} = 0.355\) population spuriously inside the H2 corridor
+--- the model comparison is load-bearing. (vi) \emph{Master-law
+restrictions.} The stability law~{[}eq:stability{]} is the symmetric
+member of a family: confirmation and betrayal sensitivities
+\((\lambda^{+}, \lambda^{-})\) can differ (the break/build asymmetry
+used at the protocol layer), recognition gates the update \((r_t < 1\)
+at the biological layer), and stabilization leaks toward baseline
+\((\delta_S >\) 0). All three extensions preserve global stability of
+alignment (each branch of the piecewise-linear flow is contracting), but
+the closed-form quantities of §3.2 --- in particular
 \(S\infty = S_{0} + (\lambda/\mu)\varepsilon_{0}\) --- hold only in the
 symmetric, ungated, leak-free limit; the leak-free limit's own long-run
 pathologies (unbounded integration, permanent displacement) are
@@ -2828,9 +2830,9 @@ emergent property of network topology interacting with philosophical
 hyper-priors rather than an unconstrained speculation. The bond
 mechanism --- a public commitment that collapses an agent's future
 policy distribution --- is the conceptual bridge by which transient
-interpersonal trust converts into durable institutional trust; TFP's
-validation events are this primitive implemented as protocol, and that
-claim is engineering, not philosophy.
+interpersonal trust converts into durable institutional trust;
+Cryptographic validation events are this primitive implemented as
+protocol, and that claim is engineering, not philosophy.
 
 \textbf{Claims-to-evidence map.} Every load-bearing claim in this paper,
 its epistemic label, and where its support lives. The §1.1 hypotheses
@@ -3070,8 +3072,8 @@ G20 & Sim G9: \(\psi-model\) statistics match theory (variance ratio
 G21 & Phase-map control: the half-circle \(\arctan\) map inflates
 zero-coupling coherence to \(R = 0.635 \pm 0.014\) (200 seeds); the
 stereographic map restores the \(1/\sqrt{N}\) floor
-\((0.040 \pm 0.021),\) matching raw uniform phases and TFP Sim P1's
-isolated control & {[}SIMULATION{]} & §3.4; Technical Appendix,
+\((0.040 \pm 0.021),\) matching raw uniform phases and benchmark Sim
+P1's isolated control & {[}SIMULATION{]} & §3.4; Technical Appendix,
 Sim-Battery \(B,\) control battery & Verified \\
 G22 & Sim G22: expectation imagery intermixed with outcome perception
 corrupts trust-stage convergence in the G6-M1 model at the source
@@ -3195,8 +3197,8 @@ best-case user-owned measurement retains \(\times1.05\) distortion. (c)
 Phase-map control (200 seeds, K = 0): the half-circle \(\arctan\) map
 reports \(R = 0.635 \pm 0.014\) (artifact); the stereographic map
 restores the \(1/\sqrt{N}\) floor at 0.040 \(\pm 0.021,\) matching raw
-uniform phases \((0.039 \pm 0.020)\) and TFP Sim P1's isolated control
-(0.032).
+uniform phases \((0.039 \pm 0.020)\) and benchmark Sim P1's isolated
+control (0.032).
 
 \textbf{Figure SR1. \(\hat{a}_i\) reference-scale sensitivity of the
 §3.1 Fisher -- Rao simplex (SIM-R2 battery 3, seed 42).} Pairwise Fisher

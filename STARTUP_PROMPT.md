@@ -6,7 +6,7 @@ You are entering the **Trust Stack (Version 4.0 / 4.2)** research environment de
 ## 1. Ground-Truth Source Hierarchy (STRICT PRECEDENCE)
 1. **Canonical Living Manuscripts (`Desktop/Research/papers/*.md`):**
    - `whitepaper.md` (FreshCredit financial application, Version 4.0)
-   - `docas.md` / `tdf.pdf` (DOCAS neuromodulatory biological architecture, Version 4.0)
+   - `tdf.md` / `tdf.pdf` (DOCAS neuromodulatory biological architecture, Version 4.0)
    - `gtt.md` (General Theory of Trust mathematical foundations, Version 4.0)
    - `tfp.md` (The Fresh Protocol decentralized architecture, Version 4.0)
    - `the_value_of_trust.md` (Philosophical grounding)
@@ -24,8 +24,8 @@ You are entering the **Trust Stack (Version 4.0 / 4.2)** research environment de
 
 ## 2. Core Resolved Archival Landmarks
 - **The Sequestration Wall (`whitepaper.md` §3.2):** Credit scoring is strictly cash-flow only. Physiological data has zero schema path to credit decisions. Checked via on-chain hashed weight checkpoints.
-- **The Biophysical Eligibility Trace (`docas.md` §5.32, Sim S1):** MSN dendritic eligibility traces $c(t)$ ($\tau_c = 100\text{ms}$) integrated with phasic dopamine RPE bursts $D(t)$ recover the macroscopic Master Stability Law at $r = 1.0000$.
-- **PDE4B Status (`docas.md` §4.2, §4.4, §5.14):** PDE4B is NOT proven; it failed the UK Biobank replication gate ($p = .18$) and is a labeled hypothesis. The apparent schizophrenia downregulation contradiction is resolved via the **Arnsten inverted-U model of prefrontal cortical cAMP signaling** (excessive cAMP opens HCN1 channels, causing supercritical noise $\nu > 1$ that blocks sensory validation, forcing compensatory paranoid priors).
+- **The Biophysical Eligibility Trace (`tdf.md` §5.32, Sim S1):** MSN dendritic eligibility traces $c(t)$ ($\tau_c = 100\text{ms}$) integrated with phasic dopamine RPE bursts $D(t)$ recover the macroscopic Master Stability Law at $r = 1.0000$.
+- **PDE4B Status (`tdf.md` §4.2, §4.4, §5.14):** PDE4B is NOT proven; it failed the UK Biobank replication gate ($p = .18$) and is a labeled hypothesis. The apparent schizophrenia downregulation contradiction is resolved via the **Arnsten inverted-U model of prefrontal cortical cAMP signaling** (excessive cAMP opens HCN1 channels, causing supercritical noise $\nu > 1$ that blocks sensory validation, forcing compensatory paranoid priors).
 - **Anti-Collusion Entropy Gate (`tfp.md` §3.7, Sim P8c):** Parallel-provider collusion is defeated by scaling effective time accumulation with provider signature Shannon entropy: $\Delta t_{\mathrm{eff}} = \Delta t_{\mathrm{wall}} \cdot [1 - \exp(-H(\mathbf{w}))]$.
 - **Temporal SHAP Recourse (`whitepaper.md` §5, Sim W8):** ECOA/Reg B adverse action notices are generated with machine-precision Shapley efficiency ($1.39 \times 10^{-17}$) providing exact counterfactual edit targets.
 - **Fisher-Rao Regularity (`gtt.md` §3.1, Theorems FR-1–FR-4):** Epsilon regularization $\tilde{\theta}_i = (\theta_i + \epsilon)/(1+5\epsilon)$ strictly eliminates boundary metric singularities ($p_i \to 0$) and guarantees Lipschitz-bounded kinetic energy in Z3 and SymPy.

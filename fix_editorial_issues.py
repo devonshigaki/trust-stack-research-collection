@@ -44,13 +44,13 @@ fix_file(vot_tex, [
     ("~;", ";"),
 ])
 
-# 3. Fix cross-references in docas.md
-docas_md = os.path.join(base_dir, "papers/markdown/docas.md")
+# 3. Fix cross-references in tdf.md
+docas_md = os.path.join(base_dir, "papers/markdown/tdf.md")
 fix_file(docas_md, [
     ("Sim S-Series inverse trust drift law and betrayal entropy spikes, §5.15", "Sim S-Series inverse trust drift law and betrayal entropy spikes, §5.24"),
     ("Sim M-Series acoustic battery in §5.12", "Sim M-Series acoustic battery"),
 ])
-docas_tex = os.path.join(base_dir, "papers/source/docas.tex")
+docas_tex = os.path.join(base_dir, "papers/source/tdf.tex")
 fix_file(docas_tex, [
     ("Sim S-Series inverse trust drift law and betrayal entropy spikes, \\S{}5.15", "Sim S-Series inverse trust drift law and betrayal entropy spikes, \\S{}5.24"),
     ("Sim M-Series acoustic battery in \\S{}5.12", "Sim M-Series acoustic battery"),

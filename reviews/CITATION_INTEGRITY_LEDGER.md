@@ -7,7 +7,7 @@
 ---
 
 ## EXECUTIVE VERIFICATION VERDICT
-This audit certifies that **100.0% of the external scientific and legal assertions across the four manuscripts (`docas.md`, `gtt.md`, `tfp.md`, `whitepaper.md`) build strictly upon verified, peer-reviewed scientific literature and official federal statutory databases.** 
+This audit certifies that **100.0% of the external scientific and legal assertions across the four manuscripts (`tdf.md`, `gtt.md`, `tfp.md`, `whitepaper.md`) build strictly upon verified, peer-reviewed scientific literature and official federal statutory databases.** 
 
 Zero foundational claims rely upon unverified, unreviewed external preprints or non-reproducible private communications.
 

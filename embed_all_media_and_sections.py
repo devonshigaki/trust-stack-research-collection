@@ -4,9 +4,9 @@ import re
 base_dir = "/Users/devonshigaki/Developer/trust-stack-research-collection"
 
 # -------------------------------------------------------------
-# 1. Update docas.md and docas.tex with Section 5.35 and Figure 47 (Sim MEM)
+# 1. Update tdf.md and tdf.tex with Section 5.35 and Figure 47 (Sim MEM)
 # -------------------------------------------------------------
-docas_md = os.path.join(base_dir, "papers/markdown/docas.md")
+docas_md = os.path.join(base_dir, "papers/markdown/tdf.md")
 with open(docas_md, 'r') as f:
     dmd = f.read()
 
@@ -27,9 +27,9 @@ if "## 5.35 The Membrane as the Universal Physical Locus" not in dmd:
     dmd = dmd.replace("</figure>\n\n# 6 Discussion", f"</figure>\n\n{sim_mem_md}\n\n# 6 Discussion")
     with open(docas_md, 'w') as f:
         f.write(dmd)
-    print("Added Section 5.35 and Figure 47 to docas.md")
+    print("Added Section 5.35 and Figure 47 to tdf.md")
 
-docas_tex = os.path.join(base_dir, "papers/source/docas.tex")
+docas_tex = os.path.join(base_dir, "papers/source/tdf.tex")
 with open(docas_tex, 'r') as f:
     dtex = f.read()
 
@@ -52,7 +52,7 @@ if "The Membrane as the Universal Physical Locus" not in dtex:
     dtex = dtex.replace("\\end{figure}\n\n\\FloatBarrier\n\\section{Discussion}", f"\\end{{figure}}\n\n{sim_mem_tex}\n\n\\FloatBarrier\n\\section{{Discussion}}")
     with open(docas_tex, 'w') as f:
         f.write(dtex)
-    print("Added Section 5.35 and Figure 47 to docas.tex")
+    print("Added Section 5.35 and Figure 47 to tdf.tex")
 
 # -------------------------------------------------------------
 # 2. Update whitepaper.md and whitepaper.tex with Figure 12 (Sim MEM)

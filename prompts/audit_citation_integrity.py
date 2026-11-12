@@ -48,7 +48,7 @@ def run_audit():
     print("RUNNING AUTOMATED CITATION INTEGRITY & PROVENANCE AUDIT")
     print("=" * 80)
 
-    papers = ["docas.md", "gtt.md", "tfp.md", "whitepaper.md"]
+    papers = ["tdf.md", "gtt.md", "tfp.md", "whitepaper.md"]
     total_foundational = len(FOUNDATIONAL_CORPUS)
     peer_reviewed_count = sum(1 for c in FOUNDATIONAL_CORPUS if "PEER_REVIEWED" in c["status"])
     federal_count = sum(1 for c in FOUNDATIONAL_CORPUS if "FEDERAL" in c["status"] or "REGULATORY" in c["status"])
@@ -68,7 +68,7 @@ def run_audit():
 ---
 
 ## EXECUTIVE VERIFICATION VERDICT
-This audit certifies that **100.0% of the external scientific and legal assertions across the four manuscripts (`docas.md`, `gtt.md`, `tfp.md`, `whitepaper.md`) build strictly upon verified, peer-reviewed scientific literature and official federal statutory databases.** 
+This audit certifies that **100.0% of the external scientific and legal assertions across the four manuscripts (`tdf.md`, `gtt.md`, `tfp.md`, `whitepaper.md`) build strictly upon verified, peer-reviewed scientific literature and official federal statutory databases.** 
 
 Zero foundational claims rely upon unverified, unreviewed external preprints or non-reproducible private communications.
 

@@ -9,7 +9,7 @@ and SHA-256 manifest verification.
 import os
 
 PAPERS_DIR = "/Users/devonshigaki/Desktop/Research/papers"
-TARGET_FILES = ["docas.md", "gtt.md", "tfp.md", "whitepaper.md", "collection.md", "the_value_of_trust.md"]
+TARGET_FILES = ["tdf.md", "gtt.md", "tfp.md", "whitepaper.md", "collection.md", "the_value_of_trust.md"]
 
 def close_placeholders():
     print("=" * 80)

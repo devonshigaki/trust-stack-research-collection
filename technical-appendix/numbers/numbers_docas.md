@@ -1,7 +1,7 @@
 # DOCAS Simulation Battery — Re-run Numbers (SIM-D)
 
 **Re-run agent:** SIM-D. **Environment:** numpy 2.2.5 / scipy 1.16.2 / matplotlib 3.10.3, **seed 42** throughout.
-**Sources:** revised paper `/mnt/agents/output/revised/docas.md` (§2.9 operators, §5, Sims D1–D13);
+**Sources:** revised paper `/mnt/agents/output/revised/tdf.md` (§2.9 operators, §5, Sims D1–D13);
 master law preset `/mnt/agents/work/math/math_repairs.md` §M4; prior runs `/mnt/agents/work/sims/sim_results_A.md`.
 **Data:** CLICS 4.0 CLDF cloned from github.com/clics/clics4 (this session); 1,730 concepts, 51,562 colexification edges — counts match the paper exactly.
 **Honesty note:** the original Sim D1–D13 code is not in the workspace; all loops/decoders are faithful reconstructions from the printed §2.9/§5 specs. Where the original's internal settings (noise levels, episode shapes, full A-concept list) are not printed, reconstruction choices are disclosed. All deviations below are attributed to reconstruction details unless stated.

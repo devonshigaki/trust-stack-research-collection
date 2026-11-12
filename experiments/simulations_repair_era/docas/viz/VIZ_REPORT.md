@@ -18,7 +18,7 @@ reconstructed battery27). No recompute was needed; none was done.
 - **viz1a_category_mean_maps.png** — 6 rows × 4 views (LH lat/med, RH med/lat): per-category mean predicted
   TRIBE v2 cortical response (5 items/category; CONTROL n=2), shared symmetric color scale (±98th percentile,
   RdBu_r). *Provenance:* model predictions on reconstruction-from-spec stimuli; no measured neurophysiology.
-  Supports docas.md §5.2 ("every offer produces a distinct predicted cortical pattern").
+  Supports tdf.md §5.2 ("every offer produces a distinct predicted cortical pattern").
 - **viz1b_contrast_threat_minus_fair.png** — vertex-wise THREAT−FAIR category-mean contrast, 4 views,
   ±99th-percentile scale. *Provenance:* as above; explicitly labeled "descriptive contrast, not an inferential
   statistic" per the §5.2 effect-size correction.

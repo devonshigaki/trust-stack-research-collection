@@ -81,7 +81,7 @@ def main():
     print(f"Extracted Framework System Prompt ({len(system_prompt)} chars)")
 
     papers = [
-        ("DOCAS", os.path.join(PAPERS_DIR, "docas.md")),
+        ("DOCAS", os.path.join(PAPERS_DIR, "tdf.md")),
         ("GTT", os.path.join(PAPERS_DIR, "gtt.md")),
         ("TFP", os.path.join(PAPERS_DIR, "tfp.md")),
         ("Whitepaper", os.path.join(PAPERS_DIR, "whitepaper.md"))

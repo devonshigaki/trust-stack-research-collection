@@ -96,7 +96,7 @@ from the raw file in the analysis environment (verify_d14.py logic, read-only).
 ## Permitted actions taken (and only these)
 1. ONE labeled sentence added to DOCAS §4.2 (PASS branch; explicitly
    hypothesis-generating, no bearing on the replication gate). Mirrored in
-   docas.tex / docas.pdf / docx.
+   tdf.tex / tdf.pdf / docx.
 2. ONE claims-table entry (family table, flagged OUTSIDE the 24-test
    multiplicity family; no p-value exists for an annotation gate).
 No other text was changed. The two-gate verdict of §4.2 stands unchanged.

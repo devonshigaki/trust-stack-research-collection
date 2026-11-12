@@ -173,7 +173,7 @@ FreshCredit’s positioning against this record is explicit: the measured result
 ## 3.0 Applying The Fresh Protocol (TFP) to Commercial Finance, Commerce, and Insurance
 
 FreshCredit is not an isolated technology protocol; it is the **commercial instantiation of The Fresh Protocol (TFP)**. In the four-tier hierarchy of the Trust Stack:
-$$\text{General Theory of Trust (GTT)} \longrightarrow \text{DOCAS (Biological Model)} \longrightarrow \text{The Fresh Protocol (TFP Substrate)} \longrightarrow \text{FreshCredit (Commercial Application)}$$
+$$\text{General Theory of Trust (GTT)} \longrightarrow \text{TDF (Biological Model)} \longrightarrow \text{The Fresh Protocol (TFP Substrate)} \longrightarrow \text{FreshCredit (Commercial Application)}$$
 
 TFP (specified in the companion protocol preprint) supplies the domain-agnostic substrate: **Record Keeping Theory**, the **Digital Cellular Wall** (database-per-tenant edge isolation via encrypted `libSQL`), blockchain state verification (Substrate/Polkadot SDK with Smoldot light clients), and **Multiple-Trace Memory** (Hintzman, 1986). FreshCredit configures this substrate specifically for commercial obligations, lending, and insurance:
 

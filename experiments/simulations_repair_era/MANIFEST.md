@@ -35,7 +35,7 @@ Scripts: `simR1_battery1.py`, `simR1_battery1_figs.py`, `simR1_battery2.py`, `b3
 `numbers_gtt.md` + figures `figG1` (convergence), `figG6_M2/M3`, `figG7` (long-run), `figG8` (λ battery), `figG9` (ψ-OU battery), `fig_kuramoto_threshold`, `fig_phasemap_control`. The generating scripts are the author's originals; repair-era verification is the SIM-R1/R2 set above.
 
 ## docas/ — neural-pipeline figures + frozen values [RESULTS FROZEN / COMPLETE via neural-pipeline/]
-`numbers_docas.md`; figures `fig1`–`fig6`, `figD_*` (decoder self-consistency, λ recovery, lesions, operators, CLICS colexification); `pipeline/` (bridge a–d, category contrasts/separability, decode bars, CLICS heatmap); `viz/` (VIZ_REPORT.md, TRIBE surface maps, bridge geometry, CLICS channel network).
+`numbers_tdf.md`; figures `fig1`–`fig6`, `figD_*` (decoder self-consistency, λ recovery, lesions, operators, CLICS colexification); `pipeline/` (bridge a–d, category contrasts/separability, decode bars, CLICS heatmap); `viz/` (VIZ_REPORT.md, TRIBE surface maps, bridge geometry, CLICS channel network).
 
 ## neural-pipeline/ — TRIBE v2 / eng1000 / vec2vec / CLICS code [COMPLETE]
 Full repair-era code set (`run_pipeline.py`, `run_battery27.py`, `gallant_decode.py`, `vec2vec_demo.py`, `clics_offer_overlap.py`, `make_figs*.py`, `llama_stream.py`, `config.yaml`, `stimuli.json`) + run reports (`RUN_REPORT.md`, `RUN_REPORT_2.md`, `BRIDGE_REPORT.md`) + `battery27_reconstructed.{py,json}` — **reconstruction-from-spec, labeled; pending bit-identity vs the original `battery27_manifest.json`; do not report original headline numbers from it.**

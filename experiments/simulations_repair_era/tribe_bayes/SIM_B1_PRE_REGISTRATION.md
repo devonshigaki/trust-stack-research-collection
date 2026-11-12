@@ -6,7 +6,7 @@
 
 ## 1. Domain Hypothesis & Theoretical Motivation
 
-While `docas.tex` §5.2 proved that TRIBE v2 deterministically maps text offers to cortical predictions (notably separating predatory vs. fair offers in the Default Mode Network, DMN), this was tested as an open-loop, static forward encoder. In real-time multi-turn trust interactions, an agent's hidden trust sensitivity ($\lambda_t$) fluctuates. 
+While `tdf.tex` §5.2 proved that TRIBE v2 deterministically maps text offers to cortical predictions (notably separating predatory vs. fair offers in the Default Mode Network, DMN), this was tested as an open-loop, static forward encoder. In real-time multi-turn trust interactions, an agent's hidden trust sensitivity ($\lambda_t$) fluctuates. 
 **Hypothesis (B1):** Passing a live, 100-TR in-silico fsaverage5 cortical proxy (representing the DMN semantic threat activation) into a continuous Bayesian state-space tracker (Kalman/EM filter) during a 10-turn game will significantly improve the estimation accuracy (lower Mean Squared Error, MSE) of the agent's true hidden trust trajectory ($S_t$) compared to a behavioral-only (mismatch $\varepsilon_t$) baseline.
 
 ## 2. Frozen Quantitative Criteria
