@@ -48,12 +48,12 @@ def verify_local_ci_pass():
     assert os.path.exists(os.path.join(BASE_DIR, "formal/TFP_Edge_Protocol.cfg"))
     print("✓ NeurIPS Formal Methods: Z3 SMT, secp256k1 NIZK, Lean 4, and TLA+ artifacts verified.")
 
-    with open(os.path.join(PAPERS_DIR, "tdf.md"), "r", encoding="utf-8") as f:
+    with open(os.path.join(PAPERS_DIR, "tdf", "tdf.md"), "r", encoding="utf-8") as f:
         docas_txt = f.read()
     assert "DOCAS-GATE-1" in docas_txt and "Williams-balanced" in docas_txt
     print("✓ Cochrane RoB 2: Double-blind Williams-balanced crossover protocol verified.")
 
-    with open(os.path.join(PAPERS_DIR, "whitepaper.md"), "r", encoding="utf-8") as f:
+    with open(os.path.join(PAPERS_DIR, "whitepaper", "whitepaper.md"), "r", encoding="utf-8") as f:
         wp_txt = f.read()
     assert "statistical power" in wp_txt and "N = 412" in wp_txt
     assert "N = 85,000" not in wp_txt, "Retracted FinRegLab N=85,000 claim still in whitepaper.md!"

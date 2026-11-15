@@ -16,10 +16,10 @@ MANUSCRIPTS_DIR = os.path.join(BASE_DIR, "manuscripts")
 DOCS_DIR = os.path.join(BASE_DIR, "docs")
 
 PAIRS = [
-    ("gtt", "gtt.tex", "gtt.bib"),
-    ("tdf", "tdf.tex", "tdf.bib"),
-    ("tfp", "tfp.tex", "tfp.bib"),
-    ("whitepaper", "whitepaper.tex", "whitepaper.bib"),
+    ("gtt", "gtt/gtt.tex", "gtt/gtt.bib"),
+    ("tdf", "tdf/tdf.tex", "tdf/tdf.bib"),
+    ("tfp", "tfp/tfp.tex", "tfp/tfp.bib"),
+    ("whitepaper", "whitepaper/whitepaper.tex", "whitepaper/whitepaper.bib"),
 ]
 
 
@@ -84,7 +84,7 @@ def run_audit(dry_run: bool = False):
     out_path = os.path.join(DOCS_DIR, "CITATION_INTEGRITY_LEDGER.md")
     lines = [
         "# CITATION INTEGRITY & BIBTEX PROVENANCE LEDGER",
-        "**Scope:** Real AST/Regex audit of `manuscripts/*.tex` against `manuscripts/*.bib`",
+        "**Scope:** Real AST/Regex audit of `manuscripts/*/*.tex` against `manuscripts/*/*.bib`",
         "",
         "| Manuscript | Bib Entries | Cited Keys | Missing Keys | Journal/Book/Thesis | Explicit DOI | Working Paper / Preprint |",
         "| :--- | ---: | ---: | ---: | ---: | ---: | ---: |",

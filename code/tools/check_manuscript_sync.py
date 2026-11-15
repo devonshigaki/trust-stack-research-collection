@@ -16,9 +16,24 @@ import sys
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 MANUSCRIPTS_DIR = os.path.join(BASE_DIR, "manuscripts")
-TEX_FILES = ["collection.tex", "value_of_trust.tex", "gtt.tex", "tdf.tex", "tfp.tex", "whitepaper.tex"]
-BIBTEX_TEX = ["gtt.tex", "tdf.tex", "tfp.tex", "whitepaper.tex"]
-MD_HEADER_FILES = ["collection.md", "the_value_of_trust.md"]
+TEX_FILES = [
+    "collection/collection.tex",
+    "value_of_trust/value_of_trust.tex",
+    "gtt/gtt.tex",
+    "tdf/tdf.tex",
+    "tfp/tfp.tex",
+    "whitepaper/whitepaper.tex",
+]
+BIBTEX_TEX = [
+    "gtt/gtt.tex",
+    "tdf/tdf.tex",
+    "tfp/tfp.tex",
+    "whitepaper/whitepaper.tex",
+]
+MD_HEADER_FILES = [
+    "collection/collection.md",
+    "value_of_trust/value_of_trust.md",
+]
 
 
 def main():
@@ -27,6 +42,7 @@ def main():
     print("=" * 75)
     errors = []
     for fn in TEX_FILES:
+        base = os.path.basename(fn)
         path = os.path.join(MANUSCRIPTS_DIR, fn)
         with open(path, "r", encoding="utf-8") as f:
             txt = f.read()
@@ -34,15 +50,15 @@ def main():
             errors.append(f"{fn}: Missing 'Version 4.5 --- November 2026' marker")
         if "OSF.IO/TBD" in txt:
             errors.append(f"{fn}: Contains placeholder 'OSF.IO/TBD'")
-        if fn == "tdf.tex" and "0.7723" in txt:
+        if base == "tdf.tex" and "0.7723" in txt:
             errors.append(f"{fn}: Still contains withdrawn leaked Brain-IT metric 0.7723")
-        if fn in ("gtt.tex", "tdf.tex", "tfp.tex", "value_of_trust.tex") and "Supporting Document and Technical Appendix are in preparation" in txt:
+        if base in ("gtt.tex", "tdf.tex", "tfp.tex", "value_of_trust.tex") and "Supporting Document and Technical Appendix are in preparation" in txt:
             errors.append(f"{fn}: Contains stale 'Supporting Document and Technical Appendix are in preparation' disclaimer")
-        if fn == "gtt.tex" and ("v4.12.0" in txt or "32 theorems" not in txt):
+        if base == "gtt.tex" and ("v4.12.0" in txt or "32 theorems" not in txt):
             errors.append(f"{fn}: Lean formalization section out of sync with Lean 4.35.0 (32 theorems)")
-        if fn == "whitepaper.tex" and ("OpenML 42477" not in txt or "Sim W8" not in txt or "Sim W9" not in txt):
+        if base == "whitepaper.tex" and ("OpenML 42477" not in txt or "Sim W8" not in txt or "Sim W9" not in txt):
             errors.append(f"{fn}: Missing OpenML 42477 or Sim W8/W9 parity coverage")
-        if fn == "tfp.tex" and ("ZK-STP v8" not in txt or "308{,}261" not in txt):
+        if base == "tfp.tex" and ("ZK-STP v8" not in txt or "308{,}261" not in txt):
             errors.append(f"{fn}: Missing ZK-STP v8 or TLA+ 308,261-state verification coverage")
         if fn in BIBTEX_TEX and "\\nocite{*}" not in txt:
             errors.append(f"{fn}: Missing \\nocite{{*}} (silently drops plain-text .bib references)")
@@ -85,8 +101,8 @@ def main():
     if (root / "results").exists():
         errors.append("Repository root contains stray results/ directory (relative CWD write leak)")
 
-    col_tex = (root / "manuscripts" / "collection.tex").read_text(encoding="utf-8")
-    col_md = (root / "manuscripts" / "collection.md").read_text(encoding="utf-8")
+    col_tex = (root / "manuscripts" / "collection" / "collection.tex").read_text(encoding="utf-8")
+    col_md = (root / "manuscripts" / "collection" / "collection.md").read_text(encoding="utf-8")
 
     def _pf(b: bool) -> str:
         return "PASS" if b else "FAIL"

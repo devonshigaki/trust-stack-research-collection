@@ -17,9 +17,16 @@ citations:
 	$(PYTHON) code/tools/check_manuscript_sync.py
 
 pdfs:
-	@cd manuscripts && for f in collection.tex value_of_trust.tex gtt.tex tfp.tex whitepaper.tex tdf.tex; do \
-		echo "Compiling $$f..."; \
-		$(TECTONIC) "$$f"; \
+	@for pair in \
+		"collection:collection.tex" \
+		"value_of_trust:value_of_trust.tex" \
+		"gtt:gtt.tex" \
+		"tfp:tfp.tex" \
+		"whitepaper:whitepaper.tex" \
+		"tdf:tdf.tex"; do \
+		dir=$${pair%%:*}; tex=$${pair#*:}; \
+		echo "Compiling manuscripts/$$dir/$$tex..."; \
+		(cd "manuscripts/$$dir" && $(TECTONIC) "$$tex") || exit 1; \
 	done
 
 manifest:

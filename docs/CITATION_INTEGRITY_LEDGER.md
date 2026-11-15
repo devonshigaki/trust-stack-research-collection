@@ -1,5 +1,5 @@
 # CITATION INTEGRITY & BIBTEX PROVENANCE LEDGER
-**Scope:** Real AST/Regex audit of `manuscripts/*.tex` against `manuscripts/*.bib`
+**Scope:** Real AST/Regex audit of `manuscripts/*/*.tex` against `manuscripts/*/*.bib`
 
 | Manuscript | Bib Entries | Cited Keys | Missing Keys | Journal/Book/Thesis | Explicit DOI | Working Paper / Preprint |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: |
