@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-11-07",
+  "simulation_id": "Sim PILOT-1",
+  "dietary_confounder_r2": 0.9376418673122239,
+  "lambda_true": 0.228,
+  "lambda_hat": 0.22460927684839102,
+  "param_recovery_error": 0.0033907231516089875,
+  "tau_relax_recovered_days": 2.661942714804263,
+  "verdict": "COMPOUND PASS (3/3)",
+  "criteria": {
+    "C1_confounder_residualization": true,
+    "C2_parameter_recovery": true,
+    "C3_multi_day_tau_relax": true
+  }
+}

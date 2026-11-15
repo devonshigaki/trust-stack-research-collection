@@ -1,0 +1,23 @@
+{
+ "condition": "shuffled_connectivity",
+ "seed": 42,
+ "n_run": 4,
+ "mn9_spike_counts": [
+  0,
+  0,
+  0,
+  0
+ ],
+ "total_spikes": [
+  3927,
+  3761,
+  3742,
+  3897
+ ],
+ "run_seconds": [
+  8.6,
+  8.1,
+  8.2,
+  8.1
+ ]
+}

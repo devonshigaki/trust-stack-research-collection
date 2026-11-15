@@ -1,0 +1,72 @@
+{
+  "experiment": "Sim G26: Kant vs. Machiavelli in Individualist vs. Collectivist Topologies",
+  "n_agents": 500,
+  "seed": 42,
+  "criteria": {
+    "C1_collectivist_kantian_survival": {
+      "mean_survival_rate": 0.8646872248068995,
+      "frozen_threshold": ">= 0.850 (85.0%)",
+      "verdict": "PASS"
+    },
+    "C2_individualist_kantian_extinction": {
+      "mean_survival_rate": 0.398475161398813,
+      "frozen_threshold": "<= 0.200 (20.0%)",
+      "verdict": "FAIL"
+    },
+    "C3_sciv_societal_trust_bifurcation": {
+      "sciv_collectivist": 0.9369698343386544,
+      "sciv_individualist": 0.6415603125681884,
+      "delta_sciv": 0.2954095217704661,
+      "frozen_threshold": "delta >= 0.450",
+      "verdict": "FAIL"
+    },
+    "C4_permutation_topology_null": {
+      "p_value": 1.0,
+      "frozen_threshold": "<= 0.001",
+      "verdict": "FAIL"
+    }
+  },
+  "compound_verdict": "FAIL",
+  "data": {
+    "surv_coll": [
+      0.8323699421965318,
+      0.8948863636363636,
+      0.8904109589041096,
+      0.830028328611898,
+      0.7723076923076924,
+      0.9423076923076923,
+      0.8879551820728291,
+      0.867231638418079
+    ],
+    "surv_indiv": [
+      0.3208092485549133,
+      0.32670454545454547,
+      0.5150684931506849,
+      0.4475920679886686,
+      0.3046153846153846,
+      0.40934065934065933,
+      0.42016806722689076,
+      0.4435028248587571
+    ],
+    "sciv_coll": [
+      0.9459728510266515,
+      0.9518695655157384,
+      0.9494782611727715,
+      0.9157272731885314,
+      0.8728365392191335,
+      0.9717745304823171,
+      0.9448695655264284,
+      0.9432300885776634
+    ],
+    "sciv_indiv": [
+      0.568266130232763,
+      0.5624899603007548,
+      0.7512933758484077,
+      0.6665277791623441,
+      0.5311740888878401,
+      0.6732142868717866,
+      0.6678445233789012,
+      0.7116723558627095
+    ]
+  }
+}

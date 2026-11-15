@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-11-15",
+  "seed": 42,
+  "compound_verdict": "COMPOUND PASS (3/3)",
+  "compound_pass": true,
+  "S1_inverse_trust_drift": {
+    "pearson_r": 0.9992803573477693,
+    "p_value": 0.0,
+    "pass": true
+  },
+  "S2_betrayal_entropy_spike": {
+    "mean_entropy_pre": 1.0711409885121044,
+    "mean_entropy_post": 1.7551431262399808,
+    "cohens_d": 14.298573802737465,
+    "pass": true
+  },
+  "S3_lexical_turnover": {
+    "mean_turnover_high": 0.008012820512820512,
+    "mean_turnover_low": 25.090544871794872,
+    "turnover_ratio": 3131.3,
+    "pass": true
+  }
+}

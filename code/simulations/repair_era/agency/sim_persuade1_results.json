@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-11-07",
+  "simulation_id": "Sim PERSUADE-1",
+  "stress_overload_ratio": 3.979733047674216,
+  "dissip_ratio": 14.106601840996817,
+  "fe_reduction_pct": -24.724575526420043,
+  "p_val_fe": 3.0455949176062542e-115,
+  "verdict": "COMPOUND PASS (3/3)",
+  "criteria": {
+    "C1_allostatic_overload": true,
+    "C2_dissipation_ratio": true,
+    "C3_joint_free_energy": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "experiment": "Sim D17: Weather Gating & Weather-Shield",
+  "seed": 42,
+  "n_agents": 1000,
+  "criteria": {
+    "C1_heatwave_spike": {
+      "uptake_temperate": 0.723,
+      "uptake_heatwave": 0.754,
+      "relative_risk": 1.0428754593700424,
+      "delta_uptake": 0.031000000000000028,
+      "threshold_rr": 1.4,
+      "verdict": "FAIL"
+    },
+    "C2_winter_erosion": {
+      "norm_summer": 1.9620503214575906,
+      "norm_winter": 1.8859653189069974,
+      "erosion_pct": 0.03877831354196377,
+      "threshold_pct": 0.15,
+      "verdict": "FAIL"
+    },
+    "C3_weather_shield_reduction": {
+      "uptake_unshielded_heatwave": 0.754,
+      "uptake_shielded": 0.727,
+      "reduction_pct": 0.03580897107563521,
+      "threshold_pct": 0.5,
+      "verdict": "FAIL"
+    },
+    "C4_permutation_significance": {
+      "obs_diff": 0.031000000000000028,
+      "p_value": 0.127,
+      "verdict": "FAIL"
+    }
+  },
+  "compound_verdict": "FAIL"
+}

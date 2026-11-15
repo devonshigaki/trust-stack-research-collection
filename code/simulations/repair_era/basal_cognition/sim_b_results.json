@@ -1,0 +1,26 @@
+{
+  "timestamp": "2026-11-15",
+  "seed": 42,
+  "compound_verdict": "COMPOUND FAIL (1/3 PASS)",
+  "compound_pass": false,
+  "B1_barrier_circumvention": {
+    "coupled_reached": true,
+    "coupled_time": 47,
+    "insular_reached": false,
+    "insular_time": 300,
+    "insular_deflection_deg": 0.8953123006833383,
+    "pass": true
+  },
+  "B2_stress_steering": {
+    "deflection_angle_deg": 57.54858772920186,
+    "pass": false
+  },
+  "B3_trajectory_recall": {
+    "trial1_time": 47,
+    "trial2_time": 45,
+    "time_ratio": 0.9574468085106383,
+    "ablation_zero_memory_ratio": 0.9787234042553191,
+    "recall_accel_pct": 4.255319148936165,
+    "pass": false
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "rubric_id": "NEURIPS_COMPUTATIONAL_10",
+  "name": "NeurIPS & ICML Computational Science & Mathematical Proof Checklist",
+  "authority": "NeurIPS Paper Checklist / Association for Computing Machinery (ACM)",
+  "domain": "Machine Learning, Computational Math, Algorithms & SMT Verification",
+  "total_score": 100,
+  "scoring_type": "standard_10pt",
+  "criteria": [
+    {
+      "id": "NEUR-1",
+      "name": "Claims vs. Empirical/Formal Evidence",
+      "weight": 10,
+      "description": "All theoretical claims, master laws, and performance bounds are directly backed by complete mathematical proofs, simulation suites, or empirical datasets."
+    },
+    {
+      "id": "NEUR-2",
+      "name": "Limitations & Structural Failure Boundaries",
+      "weight": 10,
+      "description": "Explicitly discusses boundary conditions, failure modes, frozen criteria breaches, and theoretical regime limits where the model breaks down."
+    },
+    {
+      "id": "NEUR-3",
+      "name": "Theoretical Assumptions & Mathematical Rigor",
+      "weight": 10,
+      "description": "All mathematical assumptions (ergodicity, stationarity, Lipschitz continuity, contraction mappings) are explicitly stated with formal proofs."
+    },
+    {
+      "id": "NEUR-4",
+      "name": "Code Reproducibility & Environment Dependency",
+      "weight": 10,
+      "description": "Full source code, environment manifests (requirements/Pipfile/Conda), and execution entry points are provided for 100% bit-exact replication."
+    },
+    {
+      "id": "NEUR-5",
+      "name": "Data Documentation & Provenance Licensing",
+      "weight": 10,
+      "description": "All public datasets (e.g., connectomes, genomic eQTLs, CFPB registers) are documented with exact versioning, access dates, and open licenses."
+    },
+    {
+      "id": "NEUR-6",
+      "name": "Random Seeds, Permutations & Error Bars",
+      "weight": 10,
+      "description": "All stochastic simulations report results across multiple fixed random seeds (N >= 5) with variance bounds, confidence intervals, and shuffle controls."
+    },
+    {
+      "id": "NEUR-7",
+      "name": "Hyperparameter Specification & Sensitivity Analysis",
+      "weight": 10,
+      "description": "All parameters (learning rate lambda, coupling K, threshold eta) are explicitly listed with parameter recovery and sensitivity scans."
+    },
+    {
+      "id": "NEUR-8",
+      "name": "Compute Resources & Computational Complexity",
+      "weight": 10,
+      "description": "Reports asymptotic computational complexity (Big-O), memory footprint, execution times, and hardware requirements."
+    },
+    {
+      "id": "NEUR-9",
+      "name": "Competitive Incumbent Baseline Benchmarks",
+      "weight": 10,
+      "description": "Compares directly against competitive existing algorithms or baseline models (e.g., Rescorla-Wagner, DDM, HGF, standard credit scoring) under fair parity."
+    },
+    {
+      "id": "NEUR-10",
+      "name": "Formal Methods & SMT Machine Verification",
+      "weight": 10,
+      "description": "Employs automated theorem proving (Z3 SMT solver, Lean 4, or SymPy CAS) to certify mathematical invariants and boundary conditions."
+    }
+  ]
+}

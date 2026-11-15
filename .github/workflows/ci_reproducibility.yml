@@ -1,0 +1,65 @@
+name: Open Science Reproducibility & Formal Verification Suite
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify-trust-stack:
+    name: Run Lean 4, TLA+ TLC, Z3/SymPy/NIZK, Citations & 57-Task Verification Suite
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Set up Rust Stable Toolchain (UniFFI Parity Bridge)
+      uses: dtolnay/rust-toolchain@stable
+
+    - name: Set up Java 21 & Download TLA+ TLC Model Checker
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+
+    - name: Install TLA+ Tools & Python Dependencies
+      run: |
+        mkdir -p formal/.tools
+        curl -sL "https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar" -o formal/.tools/tla2tools.jar
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Replay Lean 4 Formal Proofs & Kernel Checker
+      uses: leanprover/lean-action@v1
+      with:
+        lake-package-directory: formal/lean
+
+    - name: Run Lean 4 Kernel Replay Checker
+      run: |
+        cd formal/lean && lake env leanchecker TrustStack.Tilt && lake env leanchecker TrustStack.MasterLaw
+
+    - name: Run Multi-Engine Formal Verification Suite (Z3, SymPy, TLC, secp256k1 NIZK)
+      run: |
+        python formal/run_all_formal_verifications.py
+
+    - name: Run Citation Integrity & LaTeX Sync Checks
+      run: |
+        python code/tools/audit_citation_integrity.py
+        python code/tools/check_manuscript_sync.py
+
+    - name: Run Tier 1 & Tier 2 Comprehensive Test Suite (57 Tasks)
+      run: |
+        python code/tools/run_tier1_tier2_suite.py
+
+    - name: Verify Immutable SHA-256 Reproducibility Manifest
+      run: |
+        python code/tools/build_osf_sha256_manifest.py --verify
+

@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-11-07",
+  "simulation_id": "Sim GEN-4",
+  "instruments_evaluated": 7,
+  "mean_f_statistic": 27.322317804039677,
+  "adcy8_beta_ivw": 0.20786598412879004,
+  "adcy8_se_ivw": 0.009033599710484667,
+  "adcy8_p_ivw": 0.0,
+  "adcy8_beta_median": 0.21106724996095946,
+  "egger_intercept_p": 0.4461806458283044,
+  "verdict": "COMPOUND PASS (3/3)",
+  "criteria": {
+    "C1_mean_f_stat": true,
+    "C2_causal_reversal_effect": true,
+    "C3_egger_pleiotropy": true
+  }
+}

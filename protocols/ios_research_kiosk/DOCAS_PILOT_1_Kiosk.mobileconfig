@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadDescription</key>
+			<string>Restricts supervised research device to allow-listed study and sensor companion apps for DOCAS-PILOT-1 (requires Apple Configurator / MDM Supervision).</string>
+			<key>PayloadDisplayName</key>
+			<string>Restrictions (DOCAS Research Kiosk)</string>
+			<key>PayloadIdentifier</key>
+			<string>xyz.freshcredit.kiosk.restrictions</string>
+			<key>PayloadType</key>
+			<string>com.apple.applicationaccess</string>
+			<key>PayloadUUID</key>
+			<string>7C9E6679-7425-40DE-944B-E07FC1F90AE7</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>allowAppRemoval</key>
+			<false/>
+			<key>allowCloudBackup</key>
+			<false/>
+			<key>allowDiagnosticSubmission</key>
+			<false/>
+			<key>allowListedAppBundleIDs</key>
+			<array>
+				<string>xyz.freshcredit.kiosk.docas</string>
+				<string>com.dexcom.Stelo</string>
+				<string>com.apple.Health</string>
+				<string>com.aktiia.app</string>
+				<string>com.choosemuse.muse</string>
+			</array>
+			<key>enforcedSoftwareUpdateDelay</key>
+			<integer>90</integer>
+			<key>forceDelayedSoftwareUpdates</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>PayloadDescription</key>
+			<string>Permits supervised Autonomous Single App Mode (ASAM) session locking for DOCAS-PILOT-1 experimental trials via UIAccessibility.requestGuidedAccessSession.</string>
+			<key>PayloadDisplayName</key>
+			<string>Autonomous Single App Mode (DOCAS Research Kiosk)</string>
+			<key>PayloadIdentifier</key>
+			<string>xyz.freshcredit.kiosk.asam</string>
+			<key>PayloadType</key>
+			<string>com.apple.asam</string>
+			<key>PayloadUUID</key>
+			<string>9A4E21B0-5D3C-48E1-B6F2-119D73C4A82E</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>AllowedApplications</key>
+			<array>
+				<dict>
+					<key>BundleIdentifier</key>
+					<string>xyz.freshcredit.kiosk.docas</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Supervised DOCAS-PILOT-1 Research Kiosk Profile. Must be deployed onto Supervised iOS devices via MDM/Apple Configurator 2 and CMS/PKCS#7 signed before field distribution.</string>
+	<key>PayloadDisplayName</key>
+	<string>DOCAS-PILOT-1 Supervised Research Kiosk Profile</string>
+	<key>PayloadIdentifier</key>
+	<string>xyz.freshcredit.kiosk.profile</string>
+	<key>PayloadOrganization</key>
+	<string>The FreshCredit Lab</string>
+	<key>PayloadRemovalDisallowed</key>
+	<true/>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>3B4A9F21-8C12-4D5E-9A01-6F8E2C4D1B39</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

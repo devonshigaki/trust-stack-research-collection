@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-11-06",
+  "sample_applicant_id": 1,
+  "score": 0.5299113557215078,
+  "threshold": 0.6,
+  "efficiency_error": 1.3877787807814457e-17,
+  "reconstructed_diff": 0.029911355721507812,
+  "true_diff": 0.029911355721507826,
+  "principal_reasons": [
+    {
+      "rank": 1,
+      "feature": "spend_volatility",
+      "shapley_value": -0.14752703362357447,
+      "disclosure_text": "High volatility in discretionary expenditure"
+    },
+    {
+      "rank": 2,
+      "feature": "cash_flow_buffer_ratio",
+      "shapley_value": -0.09147211454878956,
+      "disclosure_text": "Insufficient monthly cash flow buffer above obligations"
+    },
+    {
+      "rank": 3,
+      "feature": "income_timing_dispersion",
+      "shapley_value": -0.09117144481215847,
+      "disclosure_text": "Irregularity or unpredictability of income deposits"
+    },
+    {
+      "rank": 4,
+      "feature": "obligation_repayment_ratio",
+      "shapley_value": 0.020871646751296723,
+      "disclosure_text": "Delinquency or missed payments on recurring obligations"
+    }
+  ],
+  "counterfactual_target_achieved": true,
+  "c1_efficiency_pass": true,
+  "c2_recourse_pass": true
+}

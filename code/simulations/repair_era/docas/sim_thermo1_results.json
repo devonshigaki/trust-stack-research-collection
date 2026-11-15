@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-11-06",
+  "simulation_id": "Sim THERMO-1",
+  "physiological_temperature_k": 310.15,
+  "landauer_limit_joules": 2.9681136706905537e-21,
+  "synaptic_landauer_ratio": 170.17750901195393,
+  "synaptic_betrayal_heat_multiplier": 43.047987164087026,
+  "silicon_betrayal_heat_multiplier": 4.047619047619048,
+  "c1_landauer_compliance_pass": true,
+  "c2_quadratic_betrayal_dissipation_pass": true,
+  "c3_silicon_asymmetry_pass": true,
+  "verdict": "COMPOUND PASS (3/3 CRITERIA MET)"
+}

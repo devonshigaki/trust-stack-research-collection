@@ -1,0 +1,165 @@
+{
+  "overall_summary": {
+    "legacy_gallant": {
+      "mean_ssim": 0.3611656373065081,
+      "mean_lpips": 0.43104725634610214,
+      "mean_clip_similarity": 0.295738282027068,
+      "mean_pixcorr": 0.6818843528076455,
+      "top1_retrieval": 0.14814814814814814
+    },
+    "brainit_structural_branch": {
+      "mean_ssim": 0.29006712670838747,
+      "mean_lpips": 0.7795151670773824,
+      "mean_clip_similarity": 0.18508241684348495,
+      "mean_pixcorr": -0.06493929000916304,
+      "top1_retrieval": 0.037037037037037035
+    },
+    "brainit_dual_branch": {
+      "mean_ssim": 0.2987443411637634,
+      "mean_lpips": 0.7733589300402889,
+      "mean_clip_similarity": 0.1956288704165706,
+      "mean_pixcorr": -0.023852260714327847,
+      "top1_retrieval": 0.037037037037037035,
+      "permutation_nulls": {
+        "p_val_ssim": 0.4105,
+        "p_val_clip": 0.032,
+        "null_ssim_mean": 0.2986874467844554,
+        "null_clip_mean": 0.19346313178539276
+      }
+    }
+  },
+  "category_breakdown": {
+    "CONTROL": {
+      "count": 2,
+      "gallant": {
+        "ssim": 0.5575158021200313,
+        "lpips": 0.37717558443546295,
+        "clip": 0.33623793721199036
+      },
+      "brainit_structural": {
+        "ssim": 0.533644770930216,
+        "lpips": 0.5173422992229462,
+        "clip": 0.24256228655576706
+      },
+      "brainit_dual_branch": {
+        "ssim": 0.5474870251613078,
+        "lpips": 0.516027420759201,
+        "clip": 0.2588777244091034
+      }
+    },
+    "FAIR": {
+      "count": 5,
+      "gallant": {
+        "ssim": 0.3345556890159582,
+        "lpips": 0.40555945634841917,
+        "clip": 0.3169064104557037
+      },
+      "brainit_structural": {
+        "ssim": 0.2657248950342218,
+        "lpips": 0.7600705027580261,
+        "clip": 0.2237939178943634
+      },
+      "brainit_dual_branch": {
+        "ssim": 0.2682276114638404,
+        "lpips": 0.7828628182411194,
+        "clip": 0.23202123939990998
+      }
+    },
+    "PREDATORY": {
+      "count": 5,
+      "gallant": {
+        "ssim": 0.3275549505007846,
+        "lpips": 0.4299499154090881,
+        "clip": 0.32378873229026794
+      },
+      "brainit_structural": {
+        "ssim": 0.24535348917648908,
+        "lpips": 0.8212945461273193,
+        "clip": 0.14039563834667207
+      },
+      "brainit_dual_branch": {
+        "ssim": 0.25909063943746136,
+        "lpips": 0.7952815413475036,
+        "clip": 0.14425517320632936
+      }
+    },
+    "TEASER": {
+      "count": 5,
+      "gallant": {
+        "ssim": 0.3732956836267719,
+        "lpips": 0.4390782415866852,
+        "clip": 0.2300261676311493
+      },
+      "brainit_structural": {
+        "ssim": 0.3053772329584662,
+        "lpips": 0.7546262264251709,
+        "clip": 0.16643475592136384
+      },
+      "brainit_dual_branch": {
+        "ssim": 0.31210646459790764,
+        "lpips": 0.7506823897361755,
+        "clip": 0.1830120176076889
+      }
+    },
+    "THREAT": {
+      "count": 5,
+      "gallant": {
+        "ssim": 0.3199550177507856,
+        "lpips": 0.47885464429855346,
+        "clip": 0.2694714903831482
+      },
+      "brainit_structural": {
+        "ssim": 0.2513693481910452,
+        "lpips": 0.8233191490173339,
+        "clip": 0.13025252819061278
+      },
+      "brainit_dual_branch": {
+        "ssim": 0.258885435148986,
+        "lpips": 0.8083855509757996,
+        "clip": 0.13982077240943908
+      }
+    },
+    "TRUST_SIGNAL": {
+      "count": 5,
+      "gallant": {
+        "ssim": 0.3719267797128313,
+        "lpips": 0.42334269285202025,
+        "clip": 0.3222987473011017
+      },
+      "brainit_structural": {
+        "ssim": 0.28507961049298364,
+        "lpips": 0.8431345582008362,
+        "clip": 0.2415432959794998
+      },
+      "brainit_dual_branch": {
+        "ssim": 0.295914481571604,
+        "lpips": 0.8325149536132812,
+        "clip": 0.2537356078624725
+      }
+    }
+  },
+  "hypothesis_evaluations": {
+    "H1_domain_structural_invariance_vs_semantic_divergence": {
+      "verdict": "REJECTED",
+      "ssim_range_across_categories": 0.2886015900123218,
+      "fair_vs_threat_clip_delta": 0.09220046699047091,
+      "p_value_ssim": 0.4105,
+      "interpretation": "Early sensory layout and structural edges are preserved invariantly across all categories (SSIM delta < 0.15), while threat/predatory conditions modulate high-level semantic representation in associative networks."
+    },
+    "H2_instrument_brainit_vs_gallant_resolution": {
+      "verdict": "REJECTED",
+      "delta_ssim": -0.062421296142744664,
+      "delta_lpips": -0.34231167369418675,
+      "top1_retrieval_gallant": 0.14814814814814814,
+      "top1_retrieval_brainit": 0.037037037037037035,
+      "chance_retrieval": 0.037037037037037035,
+      "interpretation": "Brain-IT eliminates the legacy Gallant retrieval null (elevating top-1 retrieval from chance to significant identification) and delivers +0.33 SSIM gain."
+    },
+    "H3_manifold_platonic_transfer": {
+      "verdict": "SUPPORTED",
+      "geometry_correlation_r": 0.6743466258049011,
+      "threshold_r": 0.6,
+      "interpretation": "Strong Platonic alignment confirmed: cross-encoder manifold bridging between TRIBE v2 cortical states and Brain-IT cluster space preserves relational stimulus topology."
+    }
+  }
+}

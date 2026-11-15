@@ -1,0 +1,266 @@
+{
+ "per_arm": {
+  "D_abl": {
+   "B0": 76.66,
+   "rho": -0.071,
+   "R_final": 1.015,
+   "ext_final": 1.006,
+   "recover_probe": 1,
+   "acq_curve": [
+    1.009,
+    1.002,
+    1.022,
+    1.005,
+    0.999,
+    0.997,
+    1.007,
+    1.015
+   ],
+   "ext_curve": [
+    1.002,
+    1.008,
+    1.018,
+    1.011,
+    1.007,
+    1.001,
+    1.006,
+    1.006
+   ],
+   "R_final_runs": [
+    1.037,
+    1.01,
+    0.998,
+    1.013
+   ]
+  },
+  "OA_abl": {
+   "B0": 76.41,
+   "rho": -1.0,
+   "R_final": 0.399,
+   "ext_final": 0.739,
+   "recover_probe": null,
+   "acq_curve": [
+    0.887,
+    0.799,
+    0.702,
+    0.633,
+    0.539,
+    0.471,
+    0.426,
+    0.399
+   ],
+   "ext_curve": [
+    0.403,
+    0.485,
+    0.538,
+    0.587,
+    0.635,
+    0.664,
+    0.703,
+    0.739
+   ],
+   "R_final_runs": [
+    0.395,
+    0.399,
+    0.404,
+    0.399
+   ]
+  },
+  "S_abl": {
+   "B0": 76.93,
+   "rho": -1.0,
+   "R_final": 0.398,
+   "ext_final": 0.977,
+   "recover_probe": 5,
+   "acq_curve": [
+    0.891,
+    0.791,
+    0.693,
+    0.627,
+    0.535,
+    0.459,
+    0.427,
+    0.398
+   ],
+   "ext_curve": [
+    0.406,
+    0.66,
+    0.803,
+    0.864,
+    0.921,
+    0.935,
+    0.969,
+    0.977
+   ],
+   "R_final_runs": [
+    0.4,
+    0.387,
+    0.405,
+    0.401
+   ]
+  },
+  "appetitive": {
+   "B0": 76.45,
+   "rho": -1.0,
+   "R_final": 0.399,
+   "ext_final": 0.737,
+   "recover_probe": null,
+   "acq_curve": [
+    0.878,
+    0.791,
+    0.697,
+    0.64,
+    0.532,
+    0.474,
+    0.43,
+    0.399
+   ],
+   "ext_curve": [
+    0.407,
+    0.489,
+    0.535,
+    0.584,
+    0.643,
+    0.683,
+    0.709,
+    0.737
+   ],
+   "R_final_runs": [
+    0.404,
+    0.394,
+    0.408,
+    0.392
+   ]
+  },
+  "intact_av": {
+   "B0": 76.88,
+   "rho": -1.0,
+   "R_final": 0.401,
+   "ext_final": 0.741,
+   "recover_probe": null,
+   "acq_curve": [
+    0.893,
+    0.788,
+    0.699,
+    0.632,
+    0.534,
+    0.466,
+    0.427,
+    0.401
+   ],
+   "ext_curve": [
+    0.404,
+    0.481,
+    0.541,
+    0.584,
+    0.63,
+    0.672,
+    0.699,
+    0.741
+   ],
+   "R_final_runs": [
+    0.402,
+    0.401,
+    0.407,
+    0.393
+   ]
+  },
+  "shuffle": {
+   "B0": 141.06,
+   "rho": -0.976,
+   "R_final": 0.873,
+   "ext_final": 0.927,
+   "recover_probe": 4,
+   "acq_curve": [
+    0.969,
+    0.934,
+    0.919,
+    0.902,
+    0.889,
+    0.874,
+    0.871,
+    0.873
+   ],
+   "ext_curve": [
+    0.868,
+    0.882,
+    0.887,
+    0.902,
+    0.903,
+    0.914,
+    0.922,
+    0.927
+   ],
+   "R_final_runs": [
+    0.873,
+    0.878,
+    0.878,
+    0.864
+   ]
+  },
+  "shuffle_v2": {
+   "B0": 140.88,
+   "rho": -1.0,
+   "R_final": 0.68,
+   "ext_final": 0.86,
+   "recover_probe": null,
+   "acq_curve": [
+    0.94,
+    0.885,
+    0.843,
+    0.801,
+    0.749,
+    0.711,
+    0.688,
+    0.68
+   ],
+   "ext_curve": [
+    0.678,
+    0.716,
+    0.753,
+    0.777,
+    0.8,
+    0.826,
+    0.838,
+    0.86
+   ],
+   "R_final_runs": [
+    0.68,
+    0.678,
+    0.685,
+    0.677
+   ]
+  }
+ },
+ "criteria": {
+  "1_intact_aversive": [
+   "MET",
+   "rho=-1.0, R_final=0.401 (need rho<=-0.8 & R_final<=0.70)"
+  ],
+  "2_D_ablation": [
+   "MET",
+   "R_final=1.015 (need >0.95)"
+  ],
+  "3a_appetitive": [
+   "MET",
+   "rho=-1.0, R_final=0.399"
+  ],
+  "3b_OA_dissociation": [
+   "INDETERMINATE",
+   "instrument (frozen): PAM-direct US bypasses OA; OA_abl R_final=0.399 reported"
+  ],
+  "4_S_ablation": [
+   "MET",
+   "S_abl recovers R>=0.90 at probe 5; intact censored (ext_final=0.741)"
+  ],
+  "5_shuffle_position": [
+   "NOT MET",
+   "R_final=0.873 (need >0.95)"
+  ],
+  "5_shuffle_classfaithful": [
+   "NOT MET",
+   "R_final=0.68 (need >0.95)"
+  ]
+ },
+ "verdict": "FAIL on criterion (5) under both control readings; (1)(2)(3a)(4) MET; (3b) INDETERMINATE-instrument"
+}

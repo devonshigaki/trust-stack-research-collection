@@ -1,0 +1,16 @@
+{
+  "dataset_accession": "ds003020",
+  "dataset_title": "A natural language fMRI dataset for voxelwise encoding models",
+  "semantic_feature_model": "english1000",
+  "semantic_dimensions": 985,
+  "vocabulary_size": 10470,
+  "derivatives_file": "english1000sm.hf5",
+  "derivatives_file_size_bytes": 82673264,
+  "bids_modality": "bold",
+  "scanner_field_strength": "3T",
+  "repetition_time_tr_seconds": 2.0045,
+  "fsaverage_surface": "fsaverage5 (20,484 vertices)",
+  "ridge_encoding_vertex_r": 0.181,
+  "exact_retrieval_status": "NULL (top-1 0.037 = 1/27, p = 1.0)",
+  "blind_brainit_v45_status": "SSIM = 0.2987, CLIP = 0.1956 (H1/H2 REJECTED pending NSD-aligned weights; Correction Register #20)"
+}

@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-11-15",
+  "simulation_id": "Sim WEARABLE-TRIAD",
+  "tau_muse_ms": 320.0,
+  "tau_watch_sec": 22.0,
+  "tau_stelo_min": 18.0,
+  "causality_prefix_diff": 0.0,
+  "full_sensor_correlation_r": 0.9358324073007167,
+  "degraded_sensor_correlation_r": 0.5420262333347404,
+  "verdict": "PARTIAL PASS (2/3; C3 FAIL under Watch dropout)",
+  "criteria": {
+    "C1_cascade_latency_hierarchy": true,
+    "C2_multirate_state_recovery": true,
+    "C3_fault_tolerance": false
+  }
+}

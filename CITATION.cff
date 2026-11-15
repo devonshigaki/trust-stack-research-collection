@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this research collection, please cite it as below."
+title: "The Trust Stack: A Six-Work Trust-Measurement Research Collection (GTT / DOCAS-TDF / TFP / FreshCredit Whitepaper / Value of Trust / Collection Index)"
+version: "4.5.0"
+date-released: "2026-11-14"
+repository-code: "https://github.com/devonshigaki/trust-stack-research-collection"
+authors:
+  - family-names: Shigaki
+    given-names: Devon
+    orcid: "https://orcid.org/0009-0003-8977-8010"
+    affiliation: "The FreshCredit Lab — Independent Research"
+year: 2026
+license: CC-BY-4.0
+notes: "FlyWire-derived and AlphaGenome-derived materials are CC BY-NC 4.0 (research use only)."

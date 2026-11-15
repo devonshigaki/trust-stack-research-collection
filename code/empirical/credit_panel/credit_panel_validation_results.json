@@ -1,0 +1,116 @@
+{
+  "dataset": "OpenML 42477 / UCI Default of Credit Card Clients (N=30,000)",
+  "static_2d": {
+    "roc_auc": 0.6771178430023098,
+    "pr_auc": 0.46493220964275855,
+    "log_loss": 0.47553158979808136,
+    "brier": 0.14838647285481904,
+    "reliability": 0.0052949952948140675,
+    "resolution": 0.03091800069202488,
+    "uncertainty": 0.17227056,
+    "fitted_pairs": []
+  },
+  "ar6_linear_7d": {
+    "roc_auc": 0.6936649309731803,
+    "pr_auc": 0.4903475326437422,
+    "log_loss": 0.47173088418301257,
+    "brier": 0.1466768971046541,
+    "reliability": 0.004674791331775761,
+    "resolution": 0.030396149533413942,
+    "uncertainty": 0.17227056,
+    "fitted_pairs": []
+  },
+  "ar6_relu_7d": {
+    "roc_auc": 0.7345515714092736,
+    "pr_auc": 0.5146563698645519,
+    "log_loss": 0.45125763712264394,
+    "brier": 0.13998464181485593,
+    "reliability": 0.0012227747795230757,
+    "resolution": 0.03294436212820873,
+    "uncertainty": 0.17227056,
+    "fitted_pairs": []
+  },
+  "symmetric_ewma_2d": {
+    "roc_auc": 0.7191604557647252,
+    "pr_auc": 0.4747879157220344,
+    "log_loss": 0.4584336060585856,
+    "brier": 0.14469905037336048,
+    "reliability": 0.0010607077149028753,
+    "resolution": 0.02845025183793525,
+    "uncertainty": 0.17227056,
+    "fitted_pairs": [
+      [
+        0.5,
+        0.5
+      ],
+      [
+        0.5,
+        0.5
+      ],
+      [
+        0.5,
+        0.5
+      ],
+      [
+        0.5,
+        0.5
+      ],
+      [
+        0.5,
+        0.5
+      ]
+    ]
+  },
+  "gtt_asymmetric_2d": {
+    "roc_auc": 0.7274495453869516,
+    "pr_auc": 0.47336694026861487,
+    "log_loss": 0.45642834904458324,
+    "brier": 0.14445319794605038,
+    "reliability": 0.0010974656600691779,
+    "resolution": 0.028203635242738292,
+    "uncertainty": 0.17227056,
+    "fitted_pairs": [
+      [
+        0.02,
+        0.3
+      ],
+      [
+        0.02,
+        0.3
+      ],
+      [
+        0.02,
+        0.3
+      ],
+      [
+        0.02,
+        0.3
+      ],
+      [
+        0.02,
+        0.3
+      ]
+    ]
+  },
+  "hgbdt_ceiling_23d": {
+    "roc_auc": 0.781592200728384,
+    "pr_auc": 0.5535285789604697,
+    "log_loss": 0.4281500227770039,
+    "brier": 0.1342104095207772,
+    "reliability": 8.806539378963651e-05,
+    "resolution": 0.03754564882243159,
+    "uncertainty": 0.17227056,
+    "fitted_pairs": []
+  },
+  "vuong_oos_z_gtt_vs_sym": 5.540397478278628,
+  "vuong_oos_p_value": 3.0178587628881814e-08,
+  "oos_2dll_gtt_vs_sym": 120.31542084014058,
+  "endogenous_ln_gt_lp_folds": 5,
+  "delta_auc_gtt_vs_sym_2d": {
+    "mean": 0.008341891129396945,
+    "ci95_low": 0.005345451644371271,
+    "ci95_high": 0.011177152465846532
+  },
+  "ecoa_adverse_impact_ratio_sex": 0.9476909179345507,
+  "verdict": "PASS (Endogenously Fitted Asymmetric GTT Significantly Outperforms Static & Symmetric Baselines)"
+}

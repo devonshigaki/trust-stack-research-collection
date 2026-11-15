@@ -1,0 +1,9 @@
+{
+  "N_events": 1000,
+  "max_skew_hours": 12.0,
+  "naive_divergence": 0.24426523641872808,
+  "hlc_oplog_divergence": 0.0,
+  "non_commutativity_observed": true,
+  "consistency_achieved": true,
+  "conclusion": "Clamped Master Law updates are non-commutative (Lean 4 `masterStepClamped_not_comm`), causing naive arrival-order divergence; canonical HLC + SHA-256 G-Set op-log replay guarantees exact zero-divergence convergence across partitioned nodes."
+}

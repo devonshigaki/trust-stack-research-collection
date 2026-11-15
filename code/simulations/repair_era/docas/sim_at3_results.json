@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-11-15",
+  "simulation_id": "Sim AT-3",
+  "bond_type": "Bell-Kramers 100-bond Ensemble (Si-O Morse parameters + ms enzymatic repair)",
+  "ground_expectation_angstroms": 1.61,
+  "dissociation_energy_ev": 4.77,
+  "harmonic_k_eff_ev_per_A2": 42.0714,
+  "enzymatic_repair_rate_s_inv": 8.0,
+  "final_abiotic_intact_fraction": 0.0,
+  "final_biological_intact_fraction": 0.98,
+  "c1_linear_isomorphism_pass": true,
+  "c2_abiotic_fracture_pass": true,
+  "c3_active_biological_repair_pass": true,
+  "verdict": "COMPOUND PASS (3/3 CRITERIA MET)"
+}

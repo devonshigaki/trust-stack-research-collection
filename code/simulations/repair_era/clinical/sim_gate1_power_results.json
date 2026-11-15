@@ -1,0 +1,12 @@
+{
+  "trial_design": "DOCAS-GATE-1 (within-subject pharmacological crossover)",
+  "planned_N_completers": 48,
+  "nominal_alpha": 0.05,
+  "fwer_5channel_alpha": 0.01,
+  "sesoi_dz": 0.3,
+  "nominal_power_at_N48_dz03": 0.5302948505403162,
+  "fwer_5ch_power_at_N48_dz03": 0.28424631961241653,
+  "fwer_5ch_power_at_N48_dz05": 0.7779489776650663,
+  "N_required_80pct_fwer_power_at_dz03": 134,
+  "honest_audit": "At N=48, power to detect d_z=0.30 is 53.0% (nominal alpha=0.05) and 28.4% under 5-channel Holm-Bonferroni alpha=0.01. N=48 achieves >=80% FWER-controlled power only for medium effects (d_z>=0.50, power=77.8%); detecting d_z=0.30 at 80% FWER power requires N=134 completers."
+}

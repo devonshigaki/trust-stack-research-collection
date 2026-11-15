@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-11-15",
+  "simulation_id": "Sim AT-5",
+  "monte_carlo_trials": 2000000,
+  "empirical_matches": 28,
+  "empirical_probability": 1.4e-05,
+  "qualifying_anchors": [
+    "cAMP",
+    "cGMP"
+  ],
+  "verdict": "COMPOUND PASS (3/3)",
+  "criteria": {
+    "C1_monte_carlo_null_rejection": true,
+    "C2_pareto_invariant_boundary": true,
+    "C3_metabolome_ground_truth": true
+  }
+}

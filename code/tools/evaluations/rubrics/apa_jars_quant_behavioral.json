@@ -1,0 +1,70 @@
+{
+  "rubric_id": "APA_JARS_QUANT_10",
+  "name": "APA Journal Article Reporting Standards for Quantitative Research (JARS-Quant)",
+  "authority": "American Psychological Association / Appelbaum et al., American Psychologist (2018) 73(1):3-25",
+  "domain": "Behavioral Science, Cognitive Psychology & Psychometric Research",
+  "total_score": 100,
+  "scoring_type": "standard_10pt",
+  "standards": [
+    {
+      "id": "JARS-1",
+      "name": "Hypotheses & Structural Design Transparency",
+      "weight": 10,
+      "description": "Explicit statement of primary, secondary, and exploratory hypotheses; clear operationalization of independent and dependent variables."
+    },
+    {
+      "id": "JARS-2",
+      "name": "Participant Sampling & Demographic Profiling",
+      "weight": 10,
+      "description": "Eligibility criteria, recruitment settings, sample demographic profiling (age, gender, socioeconomic status), and sampling frame specified."
+    },
+    {
+      "id": "JARS-3",
+      "name": "A-Priori Power Analysis & Sample Size Determination",
+      "weight": 10,
+      "description": "A-priori statistical power calculations specifying alpha, intended power (1-beta >= 0.80), and expected minimum detectable effect size (MDES)."
+    },
+    {
+      "id": "JARS-4",
+      "name": "Experimental Manipulation, Masking & Control Conditions",
+      "weight": 10,
+      "description": "Complete description of stimuli, manipulation checks, counterbalancing, control conditions, and experimenter/subject masking."
+    },
+    {
+      "id": "JARS-5",
+      "name": "Psychometric Construct Validity & Reliability",
+      "weight": 10,
+      "description": "Demonstrates construct validity, convergent/discriminant validity, and psychometric reliability (Cronbach's alpha, test-retest r) of behavioral tasks."
+    },
+    {
+      "id": "JARS-6",
+      "name": "Data Diagnostics, Outliers & Missing Data Handling",
+      "weight": 10,
+      "description": "Pre-specified outlier trimming criteria, distribution checks, and missing data imputation procedures (FIML or multiple imputation)."
+    },
+    {
+      "id": "JARS-7",
+      "name": "Complete Statistical Reporting & Exact p-values",
+      "weight": 10,
+      "description": "Exact p-values, test statistics (F, t, Z, chi-square), degrees of freedom, and directionality reported for all tested contrasts."
+    },
+    {
+      "id": "JARS-8",
+      "name": "Standardized Effect Sizes & 95% Confidence Intervals",
+      "weight": 10,
+      "description": "Reports standardized effect sizes (Cohen's d, partial eta^2, standardized beta) accompanied by full 95% confidence intervals on all primary findings."
+    },
+    {
+      "id": "JARS-9",
+      "name": "Generalization Constraints & Boundary Conditions",
+      "weight": 10,
+      "description": "Discussion of sample constraints, cultural/demographic generalizability, ecological validity, and theoretical boundary conditions."
+    },
+    {
+      "id": "JARS-10",
+      "name": "Open Science & Preregistration Disclosures",
+      "weight": 10,
+      "description": "Transparent disclosure of study pre-registration, open data repositories, executable analysis scripts, and financial conflicts of interest."
+    }
+  ]
+}

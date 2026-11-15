@@ -1,0 +1,47 @@
+{
+  "Monopoly Colluder (P=1)": {
+    "num_providers": 1,
+    "shannon_entropy": -0.0,
+    "accumulation_efficiency": 0.0,
+    "effective_daily_rate": 0.0,
+    "calendar_days_required": 1004999999999.9999,
+    "years_required": 2751540041.0677614,
+    "gated_status": "LOCKED/REJECTED"
+  },
+  "Concentrated Ring (P=10, 90/10)": {
+    "num_providers": 10,
+    "shannon_entropy": 0.5448054311250701,
+    "accumulation_efficiency": 0.4200453865204711,
+    "effective_daily_rate": 2.1002269326023555,
+    "calendar_days_required": 478.5197182262212,
+    "years_required": 1.310115587203891,
+    "gated_status": "THROTTLED"
+  },
+  "Shallow Ring (P=3 Equal)": {
+    "num_providers": 3,
+    "shannon_entropy": 1.0986122886681096,
+    "accumulation_efficiency": 0.6666666666666666,
+    "effective_daily_rate": 3.333333333333333,
+    "calendar_days_required": 301.5,
+    "years_required": 0.8254620123203286,
+    "gated_status": "THROTTLED"
+  },
+  "Realistic Honest (P=8 Dirichlet)": {
+    "num_providers": 8,
+    "shannon_entropy": 1.7820102607471977,
+    "accumulation_efficiency": 0.8317005188616746,
+    "effective_daily_rate": 4.1585025943083735,
+    "calendar_days_required": 241.67352964394334,
+    "years_required": 0.6616660633646635,
+    "gated_status": "PASSED"
+  },
+  "Uniform Honest (P=10 Equal)": {
+    "num_providers": 10,
+    "shannon_entropy": 2.3025850929940455,
+    "accumulation_efficiency": 0.9,
+    "effective_daily_rate": 4.5,
+    "calendar_days_required": 223.33333333333334,
+    "years_required": 0.6114533424595027,
+    "gated_status": "PASSED"
+  }
+}

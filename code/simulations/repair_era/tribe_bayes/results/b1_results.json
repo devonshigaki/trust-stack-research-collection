@@ -1,0 +1,10 @@
+{
+  "mse_baseline": 0.04067829061493704,
+  "mse_augmented": 0.01738291233727157,
+  "mse_reduction_pct": 57.26734807561314,
+  "lambda_correlation": 0.81285683443248,
+  "hrf_peak_lag_s": 5.0,
+  "C1_pass": true,
+  "C2_pass": false,
+  "verdict": "COMPOUND FAIL (1/2)"
+}

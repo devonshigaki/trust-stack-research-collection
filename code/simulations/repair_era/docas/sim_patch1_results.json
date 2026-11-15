@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-11-15",
+  "simulation_id": "Sim PATCH-1",
+  "max_charge_conservation_error_nA": 2.0816681711721685e-17,
+  "results": [
+    {
+      "camp_concentration_uM": 0.05,
+      "regime": "0.05 uM",
+      "v_half_hcn": -82.66666666666667,
+      "v_rest_soma": -54.35621183233093,
+      "distal_epsp_amplitude_mV": 10.43821470175245,
+      "soma_epsp_amplitude_mV": 2.1175592776857854,
+      "transfer_ratio": 0.20286603966196182,
+      "status": "PARTIALLY SHUNTED"
+    },
+    {
+      "camp_concentration_uM": 0.15,
+      "regime": "0.15 uM",
+      "v_half_hcn": -79.75,
+      "v_rest_soma": -53.39610678795144,
+      "distal_epsp_amplitude_mV": 9.389302862546735,
+      "soma_epsp_amplitude_mV": 1.79226624733613,
+      "transfer_ratio": 0.1908838466043473,
+      "status": "PARTIALLY SHUNTED"
+    },
+    {
+      "camp_concentration_uM": 0.35,
+      "regime": "0.35 uM",
+      "v_half_hcn": -76.83333333333333,
+      "v_rest_soma": -52.47865121769761,
+      "distal_epsp_amplitude_mV": 8.310663590312394,
+      "soma_epsp_amplitude_mV": 1.4817356151793746,
+      "transfer_ratio": 0.17829329740968095,
+      "status": "PARTIALLY SHUNTED"
+    },
+    {
+      "camp_concentration_uM": 0.75,
+      "regime": "0.75 uM",
+      "v_half_hcn": -74.5,
+      "v_rest_soma": -51.780599617201446,
+      "distal_epsp_amplitude_mV": 7.437714639234052,
+      "soma_epsp_amplitude_mV": 1.2489016593295972,
+      "transfer_ratio": 0.1679147049742434,
+      "status": "PARTIALLY SHUNTED"
+    },
+    {
+      "camp_concentration_uM": 1.5,
+      "regime": "1.50 uM",
+      "v_half_hcn": -73.0,
+      "v_rest_soma": -51.35052301536031,
+      "distal_epsp_amplitude_mV": 6.87822987325783,
+      "soma_epsp_amplitude_mV": 1.1085318485360176,
+      "transfer_ratio": 0.16116528074264092,
+      "status": "PARTIALLY SHUNTED"
+    }
+  ],
+  "c1_charge_conservation_pass": true,
+  "c2_supercritical_attenuation_pass": true,
+  "c3_monotonic_shunting_pass": true,
+  "verdict": "COMPOUND PASS (3/3 CRITERIA MET)"
+}

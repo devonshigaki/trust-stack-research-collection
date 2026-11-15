@@ -1,0 +1,35 @@
+{
+  "experiment": "Sim G24: Perceptual Genomics, Bioelectric Gap-Junction Epistasis & Reality Threshold Collapse",
+  "n_agents": 1000,
+  "seed": 42,
+  "criteria": {
+    "C1_inverted_u_fidelity": {
+      "f_rm_wildtype": 0.6158139534883721,
+      "f_rm_null": 0.5099999999999999,
+      "delta_f_rm": 0.10581395348837219,
+      "frozen_threshold": ">= 0.400",
+      "verdict": "FAIL"
+    },
+    "C2_gja1_gap_junction_rescue": {
+      "p_open_syncytium": 0.9941622292976462,
+      "p_open_isolated": 0.9938175975382255,
+      "relative_reduction": 0.0003467756658038507,
+      "frozen_threshold": "<= -0.350 (-35.0%)",
+      "verdict": "FAIL"
+    },
+    "C3_double_hit_epistatic_catastrophe": {
+      "p_fail_double_hit": 0.0,
+      "p_fail_single_hit": 0.0,
+      "risk_ratio": 0.0,
+      "frozen_threshold": ">= 5.00x",
+      "verdict": "FAIL"
+    },
+    "C4_compensatory_paranoid_rigidity": {
+      "severe_shunt_count": 200,
+      "rigidity_rate": 0.63,
+      "frozen_threshold": ">= 0.800 (80.0%)",
+      "verdict": "FAIL"
+    }
+  },
+  "compound_verdict": "FAIL"
+}

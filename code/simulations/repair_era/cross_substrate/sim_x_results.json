@@ -1,0 +1,47 @@
+{
+  "timestamp": "2026-11-15",
+  "seed": 42,
+  "compound_verdict": "COMPOUND FAIL (2/3 PASS)",
+  "compound_pass": false,
+  "X1_lyapunov_invariance": {
+    "lyap_results": {
+      "Cell (Bioelectrics)": -1.1487073380672932,
+      "Fly (FlyWire Connectome)": -1.182701877519315,
+      "Mouse (MICrONS Cortex)": -1.1835062820184954,
+      "Human (H01 / Semantics)": -1.1890489224718772
+    },
+    "lyap_phys_per_s": {
+      "Cell (Bioelectrics)": -0.011487073380672933,
+      "Fly (FlyWire Connectome)": -0.0011827018775193148,
+      "Mouse (MICrONS Cortex)": -0.00011835062820184955,
+      "Human (H01 / Semantics)": -1.1890489224718778e-07
+    },
+    "corridor": [
+      -1.1,
+      -0.9
+    ],
+    "pass": false
+  },
+  "X2_permutation_recurrence": {
+    "r_perm_results": {
+      "Cell (Bioelectrics)": 1.2074173374616524,
+      "Fly (FlyWire Connectome)": 0.9096038227036884,
+      "Mouse (MICrONS Cortex)": 1.1808753368277018,
+      "Human (H01 / Semantics)": 1.1209944548772783
+    },
+    "threshold": 0.5,
+    "pass": true
+  },
+  "X3_buckingham_pi_scaling": {
+    "slope": 0.01124197933836127,
+    "p_value": 0.23148496301799368,
+    "collapse_r2": 0.9844951695148172,
+    "timescale_ratios": [
+      0.001,
+      0.0001,
+      0.0001,
+      1e-06
+    ],
+    "pass": true
+  }
+}

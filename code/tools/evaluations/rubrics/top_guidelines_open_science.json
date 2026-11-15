@@ -1,0 +1,58 @@
+{
+  "rubric_id": "TOP_GUIDELINES_8",
+  "name": "Transparency and Openness Promotion (TOP) Guidelines",
+  "authority": "Center for Open Science / Nosek et al., Science (2015)",
+  "domain": "Open Science, Archival Integrity & Reproducibility",
+  "total_score": 100,
+  "scoring_type": "level_scaled_12_5pt",
+  "standards": [
+    {
+      "id": "TOP-1",
+      "name": "Citation Standards",
+      "weight": 12.5,
+      "description": "All data, code, software packages, and materials are formally cited with persistent identifiers (DOIs, RRIDs, or accession numbers) in the reference list."
+    },
+    {
+      "id": "TOP-2",
+      "name": "Data Transparency",
+      "weight": 12.5,
+      "description": "Raw and processed data files are deposited in a trusted, public, permanent repository (e.g., OSF, Zenodo, Dataverse, GitHub Release) with verified open access."
+    },
+    {
+      "id": "TOP-3",
+      "name": "Analytic Methods (Code) Transparency",
+      "weight": 12.5,
+      "description": "Complete source code, scripts, and software environments required to reproduce all tables, figures, and statistical tests are deposited and documented."
+    },
+    {
+      "id": "TOP-4",
+      "name": "Research Materials Transparency",
+      "weight": 12.5,
+      "description": "Complete experimental materials (survey instruments, stimulus texts, hardware setups, formal verification files) are fully accessible."
+    },
+    {
+      "id": "TOP-5",
+      "name": "Design and Analysis Transparency",
+      "weight": 12.5,
+      "description": "Adheres to domain-specific reporting guidelines; explicitly documents participant exclusions, attrition, sample size determination, and randomization."
+    },
+    {
+      "id": "TOP-6",
+      "name": "Study Preregistration",
+      "weight": 12.5,
+      "description": "The study design, primary hypotheses, and experimental protocols were formally pre-registered in an independent public registry prior to data collection."
+    },
+    {
+      "id": "TOP-7",
+      "name": "Analysis Plan Preregistration",
+      "weight": 12.5,
+      "description": "The statistical analysis plan, primary endpoints, and data exclusion rules were pre-registered and frozen, distinguishing confirmatory from exploratory tests."
+    },
+    {
+      "id": "TOP-8",
+      "name": "Replication & Computational Verification",
+      "weight": 12.5,
+      "description": "The paper provides an independent empirical replication or automated continuous-integration verification suite verifying bit-exact reproduction."
+    }
+  ]
+}

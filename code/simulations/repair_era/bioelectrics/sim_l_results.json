@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-10-23",
+  "seed": 42,
+  "compound_verdict": "COMPOUND FAIL (2/3 PASS)",
+  "compound_pass": false,
+  "L1_criticality": {
+    "gamma_sweep": [
+      0.0,
+      0.1,
+      0.2,
+      0.30000000000000004,
+      0.4,
+      0.5,
+      0.6000000000000001,
+      0.7000000000000001,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "terminal_mses": [
+      0.0082151310802032,
+      0.009294616520168865,
+      0.010829822051643997,
+      0.013378769024784043,
+      0.018754850488622757,
+      0.03313638436920857,
+      0.07687852467880998,
+      0.2513555076798966,
+      2.050047201759844,
+      25.944586361301653,
+      313.0346707723644
+    ],
+    "suppression_ratio": 4.033579015614433,
+    "error_reduction_pct": -303.35790156144327,
+    "pass": false
+  },
+  "L2_tumor_normalization": {
+    "term_div_ctrl": 0.58490275279683,
+    "term_div_rescue": 0.11783089857938388,
+    "divergence_ratio": 0.20145382769101008,
+    "normalization_pct": 79.854617230899,
+    "pass": true
+  },
+  "L3_level_hacking": {
+    "t_bottom_up": 53,
+    "t_multiscale": 11,
+    "time_ratio": 0.20754716981132076,
+    "time_reduction_pct": 79.24528301886792,
+    "rate_ratio": 0.9871445741466435,
+    "pass": true
+  }
+}

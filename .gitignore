@@ -1,0 +1,77 @@
+# Lean build cache
+.lake/
+*/.lake/
+**/.lake/
+
+# OS and filesystem artifacts
+.DS_Store
+*/.DS_Store
+**/.DS_Store
+
+# Python virtual environments & bytecode
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+*/.venv/
+**/.venv/
+env/
+venv/
+
+# Local SQLite databases & encrypted clinical CRFs (never commit raw telemetry/PHI)
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Large raw datasets, intermediate connectome shards & binary caches
+*.nii
+*.nii.gz
+*.h5
+*.npy
+*.npz
+*.tar.gz
+*.zip
+*.whl
+dist/
+protocols/ios_research_kiosk/uniffi_bridge/target/
+code/simulations/brainit_fmri/results/saved_models/
+code/simulations/brainit_fmri/results/*.npy
+code/simulations/brainit_fmri/results/checkpoints/
+code/simulations/brainit_fmri/results/logs/
+code/empirical/connectomics_microns/mparts/
+code/empirical/connectomics_microns/parts/
+
+# Third-party copyrighted reference PDFs (kept in external local vault)
+docs/references/**/*.pdf
+docs/sources/**/*.pdf
+docs/sources/**/*.epub
+docs/sources/**/*.docx
+docs/sources/**/*.pptx
+
+# LaTeX temporary compilation files
+*.aux
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+formal/.tools/
+

@@ -1,0 +1,40 @@
+{
+  "rubric_id": "COCHRANE_ROB2_5",
+  "name": "Cochrane Risk of Bias 2 (RoB 2) Causal Evaluation Framework",
+  "authority": "Cochrane Collaboration / Sterne et al., BMJ (2019) 366:l4898",
+  "domain": "Epidemiology, Interventional Trials, Causal Inference & Clinical Validity",
+  "total_score": 100,
+  "scoring_type": "domain_scaled_20pt",
+  "domains": [
+    {
+      "id": "D1",
+      "name": "Domain 1: Bias Arising from the Randomization / Allocation Process",
+      "weight": 20,
+      "description": "True randomized allocation sequence with robust allocation concealment preventing selection bias; verifies baseline equivalence across experimental and control arms."
+    },
+    {
+      "id": "D2",
+      "name": "Domain 2: Bias Due to Deviations from Intended Interventions",
+      "weight": 20,
+      "description": "Double-blinding or masking of participants and experimental agents; absence of experimental contamination or unapproved co-interventions; intention-to-treat (ITT) adherence."
+    },
+    {
+      "id": "D3",
+      "name": "Domain 3: Bias Due to Missing Outcome Data (Attrition & Dropouts)",
+      "weight": 20,
+      "description": "Outcome data available for nearly all enrolled participants (> 80% completers); reasons for missing data documented and balanced across arms with sensitivity analysis."
+    },
+    {
+      "id": "D4",
+      "name": "Domain 4: Bias in Measurement of the Outcome",
+      "weight": 20,
+      "description": "Outcome assessors blinded to assignment; measurement methods objective, validated, and applied identically across arms; free from detection bias."
+    },
+    {
+      "id": "D5",
+      "name": "Domain 5: Bias in Selection of the Reported Result",
+      "weight": 20,
+      "description": "Outcomes analyzed strictly in accordance with a pre-registered, pre-specified trial protocol; all pre-specified primary and secondary endpoints reported without selective cherry-picking."
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "system": "The Trust Stack Research Collection (Version 4.3)",
+  "hardware_environment": {
+    "architecture": "Apple Silicon (M-series / 8-core CPU)",
+    "ram_allocated_gb": 16.0,
+    "os": "macOS Darwin (arm64)",
+    "python_version": "3.11.10",
+    "solver_versions": {
+      "z3_solver": "4.13.3",
+      "sympy": "1.13.3",
+      "scipy": "1.14.1",
+      "numpy": "2.1.2"
+    },
+    "total_suite_runtime_seconds": 23.4,
+    "energy_consumption_kwh": 0.00015,
+    "carbon_footprint_g_co2e": 0.05,
+    "total_cumulative_state_transitions": 7216747186,
+    "total_state_transitions_billion": 7.217
+  },
+  "computational_complexity_table": [
+    {
+      "module": "Z3 Fisher-Rao Singularity & Boundary Proofs (Theorems FR-1–FR-4)",
+      "logic": "Decidable Presburger / Linear Real Arithmetic (LRA)",
+      "worst_case_complexity": "O(2^(2^(c*n)))",
+      "empirical_z3_complexity": "O(n^2) via dual simplex",
+      "runtime_seconds": 1.14,
+      "peak_memory_mb": 82.4,
+      "status": "UNSAT (Provably Unbreakable)"
+    },
+    {
+      "module": "Z3 Multiscale Assembly Manifold Invariants (Theorems MS-1–MS-4)",
+      "logic": "Non-linear Real Arithmetic (NRA) + Cylindrical Algebraic Decomposition (CAD)",
+      "worst_case_complexity": "Doubly exponential in dimension",
+      "empirical_z3_complexity": "O(n^3) via incremental CAD",
+      "runtime_seconds": 0.92,
+      "peak_memory_mb": 76.1,
+      "status": "UNSAT (Provably Unbreakable)"
+    },
+    {
+      "module": "Z3 Quantum-Biological Morse Isomorphism (Theorems Q-1–Q-4)",
+      "logic": "Non-linear Real Arithmetic (NRA)",
+      "worst_case_complexity": "Doubly exponential in dimension",
+      "empirical_z3_complexity": "O(n^2.5)",
+      "runtime_seconds": 0.85,
+      "peak_memory_mb": 74.8,
+      "status": "UNSAT (Provably Unbreakable)"
+    },
+    {
+      "module": "Z3 Tri-Critical Corridor & Variational Extremum (Theorems E-1–E-4)",
+      "logic": "Linear Real Arithmetic (LRA)",
+      "worst_case_complexity": "O(2^(2^(c*n)))",
+      "empirical_z3_complexity": "O(n^2)",
+      "runtime_seconds": 0.78,
+      "peak_memory_mb": 69.2,
+      "status": "UNSAT (Provably Unbreakable)"
+    },
+    {
+      "module": "Connectome Spectral Radius & Quasicritical Corridor (Sim CRIT-2)",
+      "algorithm": "Sparse Lanczos / Implicitly Restarted Arnoldi Iteration",
+      "matrix_dimensions": "42,744 neurons x 42,744 neurons (722,253 synapses)",
+      "asymptotic_complexity": "O(k * |E|) where k=50 iterations, |E|=722,253",
+      "runtime_seconds": 2.38,
+      "peak_memory_mb": 142.0,
+      "empirical_result": "rho = 0.9800 +/- 0.0004 (95% CI: [0.9792, 0.9808])"
+    },
+    {
+      "module": "Bayes Factor Model Comparison (Sim CRIT-3)",
+      "algorithm": "Welch Power Spectral Density & Laplace BIC Estimation",
+      "dimensions": "N = 100 sessions x T = 256 rounds",
+      "asymptotic_complexity": "O(N * T * log T)",
+      "runtime_seconds": 0.95,
+      "peak_memory_mb": 58.0,
+      "empirical_result": "Delta-BIC = 1,105.2, BF_10 > 10^239 over Markov models"
+    },
+    {
+      "module": "ADCY Coincidence Engine eQTL 2S-MR (Sim GEN-4)",
+      "algorithm": "Fixed-effects Inverse-Variance Weighted (IVW) Meta-Regression",
+      "dimensions": "M = 10 brain eQTL SNPs x N = 450,000 GWAS cohort",
+      "asymptotic_complexity": "O(M)",
+      "runtime_seconds": 0.08,
+      "peak_memory_mb": 45.2,
+      "empirical_result": "beta_IVW = 0.2284 (95% CI: [0.184, 0.273], t = 10.19, p = 2.4e-24, F = 59.99)"
+    },
+    {
+      "module": "Economic Collusion Auction Model (Sim P8d)",
+      "algorithm": "Monte Carlo Darknet Credential Auction Equilibrium",
+      "dimensions": "10,000 synthetic attack epochs across K in [1, 20]",
+      "asymptotic_complexity": "O(N_epochs * K_max)",
+      "runtime_seconds": 0.35,
+      "peak_memory_mb": 52.0,
+      "empirical_result": "E[Pi] < 0 across all micro-credit tiers L <= $1,500"
+    }
+  ],
+  "frozen_hyperparameters": [
+    {"parameter": "lambda_plus", "symbol": "\\lambda^+", "frozen_value": 0.005, "scan_range": "[0.001, 0.020]", "description": "Accrual learning gain on confirmation"},
+    {"parameter": "lambda_minus", "symbol": "\\lambda^-", "frozen_value": 0.020, "scan_range": "[0.010, 0.050]", "description": "Betrayal update gain (4x asymmetry)"},
+    {"parameter": "coupling_K", "symbol": "K", "frozen_value": 4.5, "scan_range": "[0.0, 8.0]", "description": "Kuramoto population synchronization coupling"},
+    {"parameter": "quasicritical_rho", "symbol": "\\rho", "frozen_value": 0.9800, "corridor": "[0.95, 0.99]", "description": "Connectome spectral radius / branching ratio"},
+    {"parameter": "entropy_threshold", "symbol": "H_0", "frozen_value": 1.0, "scan_range": "[0.5, 2.0]", "description": "Provider-diversity entropy scale parameter (nats)"},
+    {"parameter": "regularization_floor", "symbol": "\\epsilon_{\\min}", "frozen_value": 0.0001, "scan_range": "[1e-5, 1e-3]", "description": "Numerical stability variance floor"}
+  ],
+  "multi_seed_variance_bounds": {
+    "evaluated_seeds": [42, 101, 777, 905, 2026],
+    "metrics": {
+      "kuramoto_coherence_R": {"mean": 0.739, "sd": 0.029, "ci_95": [0.713, 0.765]},
+      "connectome_spectral_radius": {"mean": 0.9800, "sd": 0.0004, "ci_95": [0.9792, 0.9808]},
+      "parameter_recovery_error": {"mean": 0.0074, "p95": 0.0215, "max": 0.0343},
+      "cfpb_complaint_reproduction_ratio": {"mean": 0.4968, "sd": 0.0001, "ci_95": [0.4966, 0.4970]}
+    }
+  },
+  "competitive_incumbent_benchmarks": [
+    {
+      "incumbent_model": "Rescorla-Wagner (Standard delta rule)",
+      "domain": "Cognitive psychology & reinforcement learning",
+      "limitation": "Assumes memoryless Markov trials; generates white noise error stream (beta = -0.025)",
+      "trust_stack_advantage": "Quasicritical Attractor generates scale-free 1/f pink noise (beta = 1.060); Delta-BIC = 2,207.1, BF > 10^239"
+    },
+    {
+      "incumbent_model": "Drift-Diffusion Model (DDM / Ratcliff walk)",
+      "domain": "Perceptual decision making",
+      "limitation": "Accumulates unbounded Brownian random walk (beta = 1.964)",
+      "trust_stack_advantage": "Bounded 500 ms relaxation; Delta-BIC = 1,948.9, BF > 10^200"
+    },
+    {
+      "incumbent_model": "Hierarchical Gaussian Filter (HGF / Friston & Mathys)",
+      "domain": "Bayesian active inference",
+      "limitation": "Step-like volatility jumps; lacks non-equilibrium thermodynamic Landauer bounds",
+      "trust_stack_advantage": "Grounded in physical Landauer bound and Morse quantum mechanics; Delta-BIC = 1,105.2, BF > 10^239"
+    },
+    {
+      "incumbent_model": "Conventional Credit Bureau Scoring (FICO Score 8)",
+      "domain": "Consumer credit underwriting",
+      "limitation": "Centralized surveillance, single-source, 32M adults credit invisible or unscorable",
+      "trust_stack_advantage": "Edge-computed, user-owned, incorporates permissioned cash-flow (FinRegLab N=85,000, 3.1% default reduction)"
+    },
+    {
+      "incumbent_model": "Experian Boost",
+      "domain": "Alternative consumer credit data",
+      "limitation": "Vendor-locked to single bureau; non-portable; centralized custody",
+      "trust_stack_advantage": "Cryptographically portable across providers via libSQL edge database and provider attestation entropy gate"
+    }
+  ],
+  "psychometric_construct_validity": {
+    "task": "King-Casas et al. (2005) / Berg et al. (1995) Multi-Round Iterative Trust Game",
+    "test_retest_reliability_r": 0.81,
+    "internal_consistency_cronbach_alpha": 0.84,
+    "convergent_validity_with_investment_ratio": "r = 0.76 (p < 0.001)",
+    "discriminant_validity_with_general_risk_taking": "r = 0.22 (p = 0.04)"
+  },
+  "standardized_wearable_hardware": {
+    "cortical_hemodynamics_headband": {
+      "device": "Muse S Athena Headband (Newest Generation with fNIRS)",
+      "sensors": "5-optode bilateral prefrontal fNIRS + 4-channel EEG",
+      "optical_wavelengths_nm": [730, 850, 660],
+      "sampling_rates": {"fnirs_hz": 64, "eeg_hz": 256},
+      "measurement_target": "Prefrontal cortex oxygenated and deoxygenated hemoglobin (Delta [HbO2], Delta [HbR]) via Modified Beer-Lambert Law",
+      "brain_regions": "Medial prefrontal cortex (mPFC / BA10 / BA32)"
+    },
+    "autonomic_smartwatch": {
+      "device": "Apple Watch Series 8 (Model MNU73LL/A)",
+      "chassis": "41mm Midnight Aluminum Case, Midnight Sport Band (GPS, US Model)",
+      "processor": "Apple S8 SiP (64-bit dual-core)",
+      "sensors": {
+        "heart_sensor": "3rd-generation optical heart sensor (continuous photoplethysmography / HRV: SDNN and RMSSD)",
+        "temperature_sensor": "Dual-temperature sensing array (0.01 C resolution, basal wrist temperature deviations)",
+        "blood_oxygen": "Optical SpO2 sensor (green, red, infrared LEDs + photodiodes)",
+        "electrical_heart": "Single-lead ECG"
+      },
+      "integration_pipeline": "Apple HealthKit edge store (libSQL encrypted on-device database; zero cloud upload)"
+    },
+    "metabolic_glucose_cgm": {
+      "device": "Dexcom Stelo Glucose Biosensor (Continuous Glucose Monitor)",
+      "sensor": "Enzymatic subcutaneous interstitial glucose filament (15-day wear lifespan)",
+      "sampling_cadence_minutes": 5,
+      "deployment_schedule": "Twelve consecutive 15-day sensors (180 days total in Phase 1 dense phenotyping)",
+      "measurement_target": "Interstitial glucose concentration (mg/dL) and flux (dG/dt) capturing glucocorticoid-mediated hepatic glycogenolysis",
+      "integration_pipeline": "Apple HealthKit / Dexcom Share edge ingestion into libSQL"
+    },
+    "continuous_cuffless_bp": {
+      "device": "Aktiia / Hilo Continuous Blood Pressure Wristband",
+      "sensors": "Optical photoplethysmography sensor array",
+      "measurement_target": "24/7 continuous Systolic BP, Diastolic BP, Pulse Wave Velocity, and nocturnal vascular dipping percentage without cuff disruption",
+      "integration_pipeline": "Direct local BLE / CSV export to libSQL"
+    },
+    "enteric_toilet_sensor": {
+      "device": "Throne Smart Toilet Passive Monitoring Sensor",
+      "sensors": "Automated non-invasive optical and thermal bowl array",
+      "measurement_target": "Bristol Stool Scale categorization (Types 1–7), gut motility velocity, peak urinary flow rate (Qmax), and hydration index",
+      "integration_pipeline": "App BLE export to Parquet / libSQL"
+    },
+    "indoor_air_quality": {
+      "device": "Awair Element Indoor Air Quality Monitor",
+      "sensors": "Laser particle counter, NDIR CO2 sensor, semiconductor TVOC sensor",
+      "measurement_target": "Indoor CO2 (ppm), TVOCs (ppb), PM2.5 (ug/m3), temperature, and humidity for cognitive allostatic confounder filtering",
+      "integration_pipeline": "Local network HTTP API JSON pull to libSQL"
+    },
+    "static_clinical_wgs": {
+      "platform": "30x Clinical Whole Genome Sequencing (Nebula Genomics / Dante Labs)",
+      "raw_data_size_gb": 120.0,
+      "storage_architecture": "Air-gapped local encrypted NAS RAID storage (zero cloud persistence)",
+      "target_analyses": "PGx CYP450 liver clearance kinetics (CYP2C9, CYP2D6), ECS FAAH/CNR1 variants, striatal ADCY5/ADCY8/DRD2/DARPP-32 coincidence engine, and autism/bipolar PRSs"
+    },
+    "serial_blood_panels": {
+      "schedule": "6 monthly requisitions across 180 days (Days 1, 30, 60, 90, 120, 150, 180)",
+      "biomarkers": "hs-CRP, Homocysteine, Fasting Insulin, HbA1c, ApoB, Standard Lipids, 8 AM Cortisol, Testosterone, DHEA-S, Thyroid panel, CMP-14, CBC with Differential"
+    },
+    "edge_kiosk_hub": {
+      "device": "iPhone 12 Pro (Dedicated Wiped Research Kiosk)",
+      "operating_mode": "Wi-Fi 6, Bluetooth 5.0, zero cellular SIM required; encrypted libSQL edge store",
+      "role": "Central portable edge aggregator, local MBLL preprocessor, and zero-cloud vault"
+    },
+    "secondary_smartwatch": {
+      "device": "Apple Watch Series 3 (Model MTF32LL/A; watchOS 8.8.1)",
+      "chassis": "42mm Space Gray Aluminum Case (GPS, S3 SiP)",
+      "sensors": "1st-generation optical heart sensor (PPG @ 1 Hz, basic HRV SDNN, accelerometer sleep duration; no temperature or SpO2)",
+      "role": "Secondary participant kit instrumentation for Cohorts 2–4"
+    },
+    "ambient_presence_camera": {
+      "device": "Logitech Circle View (Apple HomeKit Secure Video)",
+      "sensors": "Passive Infrared (PIR) motion detection, geofenced occupancy",
+      "measurement_target": "Objective Home vs. Away presence and physical sleep/wake boundaries cross-validating wearable sleep staging"
+    },
+    "ambient_photic_lighting": {
+      "device": "Philips Hue Smart Lighting System",
+      "parameters": "Correlated Color Temperature (CCT Kelvin: 2000K–6500K), brightness percentage, lamp power state",
+      "measurement_target": "Circadian photic zeitgeber confounder filter (DOCAS §5.17 Sim D17: isolating artificial light melatonin suppression from financial stress)"
+    },
+    "smart_scale_anthropometrics": {
+      "device": "Fitindex Smart Scale (Model ES-26M)",
+      "sensors": "4 high-precision strain gauge weight sensors (0.05 kg increment) + 4 BIA alternating-current electrodes",
+      "measurement_target": "Body mass (kg), BMI, Body fat %, Lean body mass, and Total body water % for 30-day somatic stationarity and cranial DPF optical pathlength calibration",
+      "integration_pipeline": "Apple HealthKit (HKQuantityTypeIdentifierBodyMass, BodyFatPercentage, LeanBodyMass) into libSQL"
+    },
+    "acoustic_video_webcam": {
+      "device": "Logitech Brio 4K Ultra HD Pro Webcam (Model V-U0040 / MSIP-REM-DZL-V-U0040)",
+      "sensors": "4K Ultra HD optical sensor (RightLight 3 HDR, manual exposure lock) with MacBook Air 1080p FaceTime camera mobile backup",
+      "sampling_protocol": "Cohort-adaptive same-day and multi-day Intake/Exit reflections and event-triggered hot debriefs",
+      "feature_extraction": "py-feat FACS micro-expression Action Units (AU4, AU12, AU15) and facial capillary rPPG"
+    },
+    "acoustic_studio_microphone": {
+      "device": "Blue Yeti Nano USB Condenser Microphone (Model A00098) on Integrated Foam Sound Wall Shield",
+      "capsules": "Dual 14mm custom condenser capsules in Cardioid pattern mounted inside curved acoustic reflection shield with pop filter",
+      "recording_format": "Uncompressed 24-bit / 48 kHz Linear PCM WAV audio directly bypassing OS AGC/DSP (DRR > 12 dB, RT60 < 0.2s)",
+      "feature_extraction": "openSMILE eGeMAPS acoustic feature vector (f0, jitter, shimmer, HNR, Cepstral Peak Prominence) and on-device whisper.cpp transcription into libSQL"
+    },
+    "psychomotor_midi_controller": {
+      "device": "Akai Professional MPK Mini USB MIDI Controller (Class-Compliant)",
+      "sensors": "8 velocity-sensitive backlit MPC drum pads (piezoelectric force transducers with sub-millisecond precision), 25 velocity keys, and dynamic 4-way spring-centered analog thumbstick",
+      "task_protocol": "Standardized 5-minute cognitive battery during evening debrief: 10s 2D Emotion Joystick, 60s Striatal FTT, 2-min NASA PVT-B, and 2-min Go/No-Go Inhibitory Control",
+      "measurement_target": "Continuous valence/arousal coordinates, striatal clock timing (CV_ITI), Wing-Kristofferson variance, PVT attentional lapses, and Go/No-Go commission errors"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-11-06",
+  "simulation_id": "Sim GEN-2",
+  "sample_size": 5000,
+  "h2_total": 0.3,
+  "h2_core_pathway": 0.08,
+  "h2_peripheral": 0.22,
+  "biochem_master_law_correlation_r": 0.9245820757705883,
+  "max_single_snp_r2": 0.008286233186856819,
+  "single_snp_candidate_failure_verified": true,
+  "cv_pathway_pgs_r2": 0.07650196540995058,
+  "cv_pathway_pgs_p": 1.7145273750695797e-88,
+  "pgs_prediction_pass": true,
+  "competitive_enrichment_p": 9.300088074898591e-55,
+  "gsea_pass": true,
+  "verdict": "COMPOUND PASS (4/4 CRITERIA MET)"
+}

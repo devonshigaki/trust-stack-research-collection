@@ -1,0 +1,35 @@
+{
+  "sim": "SIM-OBS",
+  "seed": 20260920,
+  "verdict": "FAIL",
+  "criteria": {
+    "C1": {
+      "pass": false,
+      "median_central_bias": 0.014311603766258174,
+      "threshold": 0.03
+    },
+    "C2": {
+      "pass": false,
+      "median_zk_absbias": 0.013511973761121121,
+      "threshold": 0.01
+    },
+    "C3": {
+      "pass": true,
+      "cohorts_gap_positive": 50,
+      "of": 50,
+      "note": "direction of the surveillance-distortion claim confirmed in every cohort (sign p\u22487e-15)"
+    },
+    "C4": {
+      "pass": false,
+      "lam_p95_zk": 0.18401949193304826,
+      "threshold": 0.15,
+      "note": "estimator at this operating point (leak \u03b4=0.01, T=800) is below Sim-W1 SNR; W1 tolerance not met"
+    }
+  },
+  "harness_amendments": [
+    "firstrun estimator hack archived (sim_obs_firstrun_bug.json)",
+    "v2: Sim-W1-spec Kalman/EM + RTS smoother, steady-state gain, vectorized",
+    "v3: regression-initialized EM (no improvement; v2 values retained as primary)"
+  ],
+  "reporting": "compound FAIL on frozen criteria; C3 (direction) PASS; instrument-calibration misses disclosed"
+}

@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+"""
+Cross-Repository Golden-Vector Parity Suite
+Verifies exact numerical parity across:
+  1. Pure-Python Master Stability Law reference (Lean 4 MasterLaw.lean spec)
+  2. Fixed-Point R1CS Prover (formal/zk_master_law_stp.py, F_p nanounit quantization)
+  3. iOS Kiosk Rust UniFFI Bridge (protocols/ios_research_kiosk/uniffi_bridge)
+  4. Production FreshCredit Rust Core (~/Developer/freshcredit/crates/sim-core, if present)
+"""
+
+import os
+import sys
+import subprocess
+
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+sys.path.insert(0, os.path.join(BASE_DIR, "formal"))
+from zk_master_law_stp import MasterLawZKProver, verify_zk_proof
+
+
+def ref_master_step(s_curr: float, v: float, e: float, lp: float, ln: float, delta: float, s_base: float, r_t: float = 1.0) -> float:
+    eps = v - e
+    lam = lp if eps >= 0.0 else ln
+    s_next = s_curr + lam * eps * r_t - delta * (s_curr - s_base)
+    return max(0.0, min(1.0, s_next))
+
+
+def main():
+    print("=" * 75)
+    print("CROSS-REPO GOLDEN-VECTOR PARITY TEST (PYTHON <-> R1CS <-> RUST UNIFFI)")
+    print("=" * 75)
+
+    # 1. Fixed-point NIZK parity against Lean/Python reference across asymmetric & boundary presets
+    prover = MasterLawZKProver(lambda_plus=0.228, lambda_minus=0.912, delta_param=0.010, s_base=0.500)
+    vectors = [
+        (0.500, 0.850, 0.500),  # Positive validation
+        (0.5798, 0.100, 0.750), # Negative asymmetric shock -> lower clamp
+        (0.430802, 0.500, 0.500), # Pure baseline leak
+        (0.950, 1.000, 0.000),  # Upper clamp boundary -> 1.0
+        (0.050, 0.000, 1.000),  # Lower clamp boundary -> 0.0
+    ]
+    for s0, v, e in vectors:
+        s_ref = ref_master_step(s0, v, e, 0.228, 0.912, 0.010, 0.500, 1.0)
+        proof, s_zk = prover.generate_proof(s0, v, e)
+        assert verify_zk_proof(proof, s_zk, expected_params=prover.expected_params()), f"NIZK proof failed for ({s0}, {v}, {e})"
+        err = abs(s_ref - s_zk)
+        assert err < 1e-8, f"Parity mismatch ref={s_ref} vs zk={s_zk} (err={err})"
+    print(f"✓ Python Reference <-> secp256k1 NIZK Parity: 5/5 asymmetric & clamped vectors matched (< 1e-8)")
+
+    # 2. Run iOS Kiosk Rust UniFFI Bridge unit tests & Swift FFI binding typecheck
+    uniffi_dir = os.path.join(BASE_DIR, "protocols/ios_research_kiosk/uniffi_bridge")
+    res_u = subprocess.run(["cargo", "test", "--quiet"], cwd=uniffi_dir, capture_output=True, text=True)
+    assert res_u.returncode == 0, f"UniFFI cargo test failed:\n{res_u.stderr}"
+    print("✓ iOS Kiosk Rust UniFFI Bridge (`cargo test`): PASS")
+
+    if sys.platform == "darwin" and os.path.exists("/usr/bin/swiftc"):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp_swift:
+            res_b = subprocess.run(["cargo", "build", "--release", "--quiet"], cwd=uniffi_dir, capture_output=True, text=True)
+            assert res_b.returncode == 0, res_b.stderr
+            res_g = subprocess.run(
+                ["cargo", "run", "--quiet", "--bin", "uniffi-bindgen", "generate",
+                 "--library", "target/release/libdocas_kiosk_bridge.dylib",
+                 "--language", "swift", "--out-dir", tmp_swift],
+                cwd=uniffi_dir, capture_output=True, text=True,
+            )
+            assert res_g.returncode == 0, res_g.stderr
+            res_s = subprocess.run(
+                ["xcrun", "swiftc", "-typecheck", "-I", tmp_swift,
+                 "-Xcc", f"-fmodule-map-file={tmp_swift}/docas_kiosk_bridgeFFI.modulemap",
+                 f"{tmp_swift}/docas_kiosk_bridge.swift"],
+                capture_output=True, text=True,
+            )
+            assert res_s.returncode == 0, f"swiftc -typecheck failed:\n{res_s.stderr}"
+        print("✓ Apple Swift 6 (`swiftc -typecheck`) over generated UniFFI bindings: PASS")
+
+    if sys.platform == "darwin" and os.path.exists("/usr/bin/plutil"):
+        mc_path = os.path.join(BASE_DIR, "protocols/ios_research_kiosk/DOCAS_PILOT_1_Kiosk.mobileconfig")
+        res_p = subprocess.run(["plutil", "-lint", mc_path], capture_output=True, text=True)
+        assert res_p.returncode == 0, f"plutil -lint failed:\n{res_p.stderr}"
+        print("✓ Apple MDM Kiosk Profile (`plutil -lint` with com.apple.asam): PASS")
+
+    # 3. Cross-repo formula parity check on sibling production FreshCredit Rust sim-core
+    fc_master = os.path.expanduser("~/Developer/freshcredit/crates/sim-core/src/master_law.rs")
+    if os.path.exists(fc_master):
+        with open(fc_master, "r", encoding="utf-8") as f:
+            rs_src = f.read()
+        for tok in [
+            "self.lambda_plus * eps.max(0.0) * self.recognition_gate",
+            "self.lambda_minus * eps.min(0.0) * self.recognition_gate",
+            "self.leak_delta * (current_s - self.s_base)",
+            "(validation - expectation) / s_d",
+        ]:
+            assert tok in rs_src, f"Production FreshCredit master_law.rs drifted from MasterLaw spec: missing {tok}"
+        print("✓ Production FreshCredit `master_law.rs` source-equation parity: PASS (notes unclamped vs kiosk clamped in MasterLaw.lean)")
+
+    print("\n✓ ALL CROSS-REPO GOLDEN-VECTOR PARITY CHECKS PASSED!")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
