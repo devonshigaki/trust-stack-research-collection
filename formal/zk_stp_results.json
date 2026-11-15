@@ -20,6 +20,7 @@
     "test17_tail_truncation_and_epoch_blocked": true,
     "test18_cross_verifier_unlinkable": true,
     "test19_three_party_role_isolation": true,
-    "proof_bytes_json": 200247,
+    "test20_clamp_branch0_overflow_blocked": true,
+    "proof_bytes_json": 225042,
     "status": "VERIFIED"
 }

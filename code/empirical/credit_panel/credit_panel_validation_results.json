@@ -104,6 +104,9 @@
   },
   "vuong_oos_z_gtt_vs_sym": 5.540397478278628,
   "vuong_oos_p_value": 3.0178587628881814e-08,
+  "nadeau_bengio_cv_t": 3.659074311592285,
+  "nadeau_bengio_cv_p": 0.021597918527829885,
+  "untuned_raw_spec_folds_beating_sym": 5,
   "oos_2dll_gtt_vs_sym": 120.31542084014058,
   "endogenous_ln_gt_lp_folds": 5,
   "delta_auc_gtt_vs_sym_2d": {

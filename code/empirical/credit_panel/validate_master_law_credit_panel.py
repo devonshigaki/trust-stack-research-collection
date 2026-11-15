@@ -195,7 +195,7 @@ def main():
     res_gtt = evaluate_cv_features(df, y, skf, "gtt_asym_2d")
     res_gbdt = evaluate_cv_features(df, y, skf, "gbdt_ceiling_23d")
 
-    # Vuong (1989, Econometrica) distribution-free OOS per-borrower log-likelihood ratio z-test
+    # Vuong (1989, Econometrica) OOS per-borrower LL ratio + Nadeau & Bengio (2003) correlated-CV t-test
     from scipy import stats as scipy_stats
     p_sym = np.clip(res_sym["oof_probs"], 1e-15, 1.0 - 1e-15)
     p_gtt = np.clip(res_gtt["oof_probs"], 1e-15, 1.0 - 1e-15)
@@ -205,6 +205,37 @@ def main():
     vuong_z = float(np.sqrt(len(y)) * np.mean(ll_diff) / max(float(np.std(ll_diff, ddof=1)), 1e-12))
     vuong_p = float(2.0 * (1.0 - scipy_stats.norm.cdf(abs(vuong_z))))
     lr_stat = float(2.0 * np.sum(ll_diff))
+
+    # Nadeau & Bengio (2003) corrected resampled t-statistic accounting for 5-fold overlap (rho = n_test / n_train = 1/4)
+    fold_aucs_gtt, fold_aucs_sym = [], []
+    for _, va_idx in skf.split(df, y):
+        fold_aucs_gtt.append(roc_auc_score(y[va_idx], p_gtt[va_idx]))
+        fold_aucs_sym.append(roc_auc_score(y[va_idx], p_sym[va_idx]))
+    fold_diffs = np.array(fold_aucs_gtt) - np.array(fold_aucs_sym)
+    k_folds = len(fold_diffs)
+    nb_var = (1.0 / k_folds + 0.25) * float(np.var(fold_diffs, ddof=1))
+    nb_t = float(np.mean(fold_diffs) / max(np.sqrt(nb_var), 1e-12))
+    nb_p = float(2.0 * (1.0 - scipy_stats.t.cdf(abs(nb_t), df=k_folds - 1)))
+
+    # Untuned specification check: raw payment/bill coverage ratio without -0.15/0.25 offsets
+    limit_bal_raw = np.maximum(df["x1"].astype(float).values, 1.0)
+    bills_raw = df[["x17", "x16", "x15", "x14", "x13", "x12"]].astype(float).values / limit_bal_raw[:, None]
+    pays_raw = df[["x23", "x22", "x21", "x20", "x19", "x18"]].astype(float).values / limit_bal_raw[:, None]
+    statuses_raw = df[["x11", "x10", "x9", "x8", "x7", "x6"]].astype(float).values
+    raw_eps = np.where(statuses_raw > 0, -np.clip(statuses_raw, 0.0, 3.0) / 3.0, np.clip(pays_raw / np.maximum(bills_raw, 0.05) - 0.1, -1.0, 1.0))
+    raw_asym_folds = 0
+    for tr_idx, va_idx in skf.split(df, y):
+        s_raw = np.full(len(df), 0.50)
+        for t_step in range(6):
+            e_t = raw_eps[:, t_step]
+            s_raw = np.clip(s_raw + np.where(e_t >= 0, 0.02, 0.08) * e_t - 0.01 * (s_raw - 0.50), 0.0, 1.0)
+        clf_raw = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
+        util_raw = df["x12"].astype(float).values / limit_bal_raw
+        X_raw = np.column_stack([util_raw, s_raw])
+        clf_raw.fit(X_raw[tr_idx], y[tr_idx])
+        if roc_auc_score(y[va_idx], clf_raw.predict_proba(X_raw[va_idx])[:, 1]) > roc_auc_score(y[va_idx], p_sym[va_idx]):
+            raw_asym_folds += 1
+
     d_auc, ci_lo, ci_hi = paired_bootstrap_delta_auc(y, res_sym["oof_probs"], res_gtt["oof_probs"])
     sex = df["x2"].astype(int).values
     approved = res_gtt["oof_probs"] < res_gtt["oof_cutoffs"]
@@ -221,6 +252,7 @@ def main():
     print(f"5. AR(6) ReLU Delinquency Lags (7D):    AUC={res_ar6_relu['roc_auc']:.4f} | Brier={res_ar6_relu['brier']:.4f}")
     print(f"6. Full-Panel HGBDT Ceiling (23D):      AUC={res_gbdt['roc_auc']:.4f} | Brier={res_gbdt['brier']:.4f}")
     print(f"Vuong (1989) OOS LL Ratio Test:         z={vuong_z:.2f} (p={vuong_p:.2e}) | 2*dLL={lr_stat:.1f} | Delta AUC={d_auc:+.4f} (95% CI [{ci_lo:+.4f}, {ci_hi:+.4f}])")
+    print(f"Nadeau-Bengio (2003) Correlated-CV:     t={nb_t:.2f} (df={k_folds-1}, p={nb_p:.4f}) | Untuned Raw Spec Folds Beating Sym: {raw_asym_folds}/5")
     print(f"ECOA Adverse Impact Ratio (Sex):        AIR={air_sex:.4f} [Threshold >= 0.80]")
 
     assert asymmetric_folds == 5 and res_gtt["roc_auc"] > res_sym["roc_auc"] and ci_lo > 0.0 and vuong_z > 3.29
@@ -267,6 +299,9 @@ def main():
                 "hgbdt_ceiling_23d": {k: v for k, v in res_gbdt.items() if k not in skip_keys},
                 "vuong_oos_z_gtt_vs_sym": vuong_z,
                 "vuong_oos_p_value": vuong_p,
+                "nadeau_bengio_cv_t": nb_t,
+                "nadeau_bengio_cv_p": nb_p,
+                "untuned_raw_spec_folds_beating_sym": raw_asym_folds,
                 "oos_2dll_gtt_vs_sym": lr_stat,
                 "endogenous_ln_gt_lp_folds": asymmetric_folds,
                 "delta_auc_gtt_vs_sym_2d": {"mean": d_auc, "ci95_low": ci_lo, "ci95_high": ci_hi},

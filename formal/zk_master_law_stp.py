@@ -127,7 +127,7 @@ class MasterLawZKProver:
             "s_c": s_c, "s_next": s_next, "v": v_f, "e": e_f, "eps_p": eps_p, "eps_n": eps_n,
             "q_d": q_d + Q_OFFSET, "r_d": r_d, "q_l": q_l + Q_OFFSET, "r_l": r_l,
             "u_low": u_low, "u_high": u_high,
-            "s_c_rem": SCALE - s_c, "v_rem": SCALE - v_f, "e_rem": SCALE - e_f,
+            "s_c_rem": SCALE - s_c, "s_next_rem": SCALE - s_next, "v_rem": SCALE - v_f, "e_rem": SCALE - e_f,
             "r_d_rem": SCALE - 1 - r_d, "r_l_rem": SCALE - 1 - r_l,
         }
         rs = {k: _r() for k in vals}
@@ -186,11 +186,12 @@ class MasterLawZKProver:
                 (rs[a] + rs[b]) % N_ORDER, f"BND:{name}", tr=tr,
             )
             for name, a, b, bound in [
-                ("s_c", "s_c", "s_c_rem", SCALE), ("v", "v", "v_rem", SCALE),
-                ("e", "e", "e_rem", SCALE), ("r_d", "r_d", "r_d_rem", SCALE - 1), ("r_l", "r_l", "r_l_rem", SCALE - 1),
+                ("s_c", "s_c", "s_c_rem", SCALE), ("s_next", "s_next", "s_next_rem", SCALE),
+                ("v", "v", "v_rem", SCALE), ("e", "e", "e_rem", SCALE),
+                ("r_d", "r_d", "r_d_rem", SCALE - 1), ("r_l", "r_l", "r_l_rem", SCALE - 1),
             ]
         }
-        range_keys = ["s_c", "s_c_rem", "v", "v_rem", "e", "e_rem", "eps_p", "eps_n", "q_d", "q_l", "r_d", "r_d_rem", "r_l", "r_l_rem", "u_low", "u_high"]
+        range_keys = ["s_c", "s_c_rem", "s_next", "s_next_rem", "v", "v_rem", "e", "e_rem", "eps_p", "eps_n", "q_d", "q_l", "r_d", "r_d_rem", "r_l", "r_l_rem", "u_low", "u_high"]
         range_proofs = {k: prove_nonneg(Cs[k], vals[k], rs[k], RANGE_BITS, f"RNG:{k}", tr=tr) for k in range_keys}
         eq_proofs = {
             "mismatch": prove_zero(P_mismatch, r_mismatch, "EQ:mismatch", tr=tr),
@@ -454,13 +455,14 @@ def verify_zk_proof(
             return False
 
         for name, a, b, bound in [
-            ("s_c", "s_c", "s_c_rem", scale), ("v", "v", "v_rem", scale),
-            ("e", "e", "e_rem", scale), ("r_d", "r_d", "r_d_rem", scale - 1), ("r_l", "r_l", "r_l_rem", scale - 1),
+            ("s_c", "s_c", "s_c_rem", scale), ("s_next", "s_next", "s_next_rem", scale),
+            ("v", "v", "v_rem", scale), ("e", "e", "e_rem", scale),
+            ("r_d", "r_d", "r_d_rem", scale - 1), ("r_l", "r_l", "r_l_rem", scale - 1),
         ]:
             if not verify_zero(pt_sub(pt_add(Cs[a], Cs[b]), pt_mul_fast(bound, G_PT)), proof["bounds"][name], f"BND:{name}", tr=tr):
                 return False
 
-        for k in ["s_c", "s_c_rem", "v", "v_rem", "e", "e_rem", "eps_p", "eps_n", "q_d", "q_l", "r_d", "r_d_rem", "r_l", "r_l_rem", "u_low", "u_high"]:
+        for k in ["s_c", "s_c_rem", "s_next", "s_next_rem", "v", "v_rem", "e", "e_rem", "eps_p", "eps_n", "q_d", "q_l", "r_d", "r_d_rem", "r_l", "r_l_rem", "u_low", "u_high"]:
             if not verify_nonneg(Cs[k], proof["ranges"][k], RANGE_BITS, f"RNG:{k}", tr=tr):
                 return False
         return True
@@ -734,12 +736,62 @@ def main():
     v19 = no_issuer_kp_in_prover and no_state_in_furnisher
     print(f"Test 19 (3-Party Isolation):    Zero sk_issuer in Prover & zero S_t in Furnisher | {'✓ VERIFIED (PASS)' if v19 else 'FAIL'}")
 
+    # Test 20: Clamp Branch 0 Overflow Exploit Guard (s_unclamped > SCALE forced onto Branch 0)
+    # Forge a genuine proof for (S_curr=0.95, V=1.00, E=0.00) with reveal_state=False where all
+    # algebraic equations (EQ:mismatch, EQ:div_d, EQ:div_l, OR:eps, OR:clamp Branch 0: s_next == s_unclamped)
+    # hold cryptographically for s_next = 1.0595 > SCALE, and prove BND:s_next / RNG:s_next_rem blocks it.
+    from zk_pedersen_ec import prove_zero, prove_or_zero, prove_or_zero_tuple, prove_nonneg
+    s20_c, v20, e20 = 950_000_000, 1_000_000_000, 0
+    eps20_p, eps20_n = 1_000_000_000, 0
+    num20_d = prover.lp_fixed * eps20_p
+    q20_d, r20_d = num20_d // SCALE, num20_d % SCALE
+    num20_l = prover.delta_fixed * (s20_c - prover.s_base_fixed)
+    q20_l, r20_l = num20_l // SCALE, num20_l % SCALE
+    s20_overflow = s20_c + q20_d - q20_l
+    assert s20_overflow > SCALE
+    vals20 = {
+        "s_c": s20_c, "s_next": s20_overflow, "v": v20, "e": e20, "eps_p": eps20_p, "eps_n": eps20_n,
+        "q_d": q20_d + Q_OFFSET, "r_d": r20_d, "q_l": q20_l + Q_OFFSET, "r_l": r20_l,
+        "u_low": 0, "u_high": 0, "s_c_rem": SCALE - s20_c, "s_next_rem": 0,
+        "v_rem": 0, "e_rem": SCALE, "r_d_rem": SCALE - 1 - r20_d, "r_l_rem": SCALE - 1 - r20_l,
+    }
+    rs20 = {k: _r() for k in vals20}
+    Cs20 = {k: pedersen_commit(vals20[k], rs20[k]) for k in vals20}
+    tr20 = build_statement_transcript(prover.expected_params(), 0, Cs20, reveal_state=False, account_id="adv-20", seq_t=0)
+    C20_unclamped = pt_add(Cs20["s_c"], pt_sub(Cs20["q_d"], Cs20["q_l"]))
+    r20_unclamped = (rs20["s_c"] + rs20["q_d"] - rs20["q_l"]) % N_ORDER
+    SCALE_G20 = pt_mul_fast(SCALE, G_PT)
+    clamp20_branches = [
+        [pt_sub(Cs20["s_next"], C20_unclamped)],
+        [Cs20["s_next"], pt_add(C20_unclamped, Cs20["u_low"])],
+        [pt_sub(Cs20["s_next"], SCALE_G20), pt_sub(pt_sub(C20_unclamped, Cs20["u_high"]), SCALE_G20)],
+    ]
+    forged20 = {
+        "scheme": SCHEME_ID, "account_id": "adv-20", "seq_t": 0, "genesis_anchored": False,
+        "reveal_state": False, "public_params": prover.expected_params(), "S_next_public": None,
+        "commitments": {k: pt_ser(v) for k, v in Cs20.items()},
+        "eq_proofs": {
+            "mismatch": prove_zero(pt_sub(pt_sub(Cs20["v"], Cs20["e"]), pt_sub(Cs20["eps_p"], Cs20["eps_n"])), (rs20["v"] - rs20["e"] - rs20["eps_p"] + rs20["eps_n"]) % N_ORDER, "EQ:mismatch", tr=tr20),
+            "div_d": prove_zero(pt_sub(pt_add(pt_mul_fast(SCALE, pt_sub(Cs20["q_d"], pt_mul_fast(Q_OFFSET, G_PT))), Cs20["r_d"]), pt_sub(pt_mul_fast(prover.lp_fixed, Cs20["eps_p"]), pt_mul_fast(prover.ln_fixed, Cs20["eps_n"]))), (SCALE * rs20["q_d"] + rs20["r_d"] - prover.lp_fixed * rs20["eps_p"] + prover.ln_fixed * rs20["eps_n"]) % N_ORDER, "EQ:div_d", tr=tr20),
+            "div_l": prove_zero(pt_sub(pt_add(pt_mul_fast(SCALE, pt_sub(Cs20["q_l"], pt_mul_fast(Q_OFFSET, G_PT))), Cs20["r_l"]), pt_mul_fast(prover.delta_fixed, pt_sub(Cs20["s_c"], pt_mul_fast(prover.s_base_fixed, G_PT)))), (SCALE * rs20["q_l"] + rs20["r_l"] - prover.delta_fixed * rs20["s_c"]) % N_ORDER, "EQ:div_l", tr=tr20),
+            "eps_branch_or": prove_or_zero([Cs20["eps_p"], Cs20["eps_n"]], 1, rs20["eps_n"], "OR:eps", tr=tr20),
+            "clamp_or": prove_or_zero_tuple(clamp20_branches, 0, [(rs20["s_next"] - r20_unclamped) % N_ORDER], "OR:clamp", tr=tr20),
+        },
+        "bounds": {
+            name: prove_zero(pt_sub(pt_add(Cs20[a], Cs20[b]), pt_mul_fast(bound, G_PT)), (rs20[a] + rs20[b]) % N_ORDER, f"BND:{name}", tr=tr20)
+            for name, a, b, bound in [("s_c", "s_c", "s_c_rem", SCALE), ("s_next", "s_next", "s_next_rem", SCALE), ("v", "v", "v_rem", SCALE), ("e", "e", "e_rem", SCALE), ("r_d", "r_d", "r_d_rem", SCALE - 1), ("r_l", "r_l", "r_l_rem", SCALE - 1)]
+        },
+        "ranges": {k: prove_nonneg(Cs20[k], vals20[k], rs20[k], RANGE_BITS, f"RNG:{k}", tr=tr20) for k in vals20},
+    }
+    v20_blocked = not verify_zk_proof(forged20, None, expected_params=prover.expected_params())
+    print(f"Test 20 (Branch 0 Overflow):    Blocks S_next > 1.0 Branch-0 bypass | {'✓ REJECTED (PASS)' if v20_blocked else 'FAIL'}")
+
     all_pass = (
         v1 and v2 and v3 and v4 and v5 and v6 and v7 and v8 and v9 and v10 and v11 and v12
-        and v13 and v14 and v15 and v16 and v17 and v18 and v19
+        and v13 and v14 and v15 and v16 and v17 and v18 and v19 and v20_blocked
     )
     print("=" * 75)
-    print(f"OVERALL ZK-STP NIZK VERDICT: {'ALL 19/19 CRITERIA VERIFIED' if all_pass else 'FAIL'}")
+    print(f"OVERALL ZK-STP NIZK VERDICT: {'ALL 20/20 CRITERIA VERIFIED' if all_pass else 'FAIL'}")
     print("=" * 75)
 
     out_file = os.path.join(os.path.dirname(__file__), "zk_stp_results.json")
@@ -752,6 +804,7 @@ def main():
                 "soundness_forgery_rejected": (
                     v5 and v7 and v8 and v9 and v10 and v11 and v12_thresh_reject
                     and v13 and v14 and v15 and v16 and v17_trunc_blocked and v17_stale_epoch_blocked
+                    and v20_blocked
                 ),
                 "test6_zero_knowledge_indistinguishable": v6,
                 "test7_clamping_sum_exploit_blocked": v7,
@@ -767,6 +820,7 @@ def main():
                 "test17_tail_truncation_and_epoch_blocked": v17,
                 "test18_cross_verifier_unlinkable": v18,
                 "test19_three_party_role_isolation": v19,
+                "test20_clamp_branch0_overflow_blocked": v20_blocked,
                 "proof_bytes_json": len(proof_json),
                 "status": "VERIFIED" if all_pass else "FAILED",
             },

@@ -11,27 +11,38 @@
       "rank": 1,
       "feature": "spend_volatility",
       "shapley_value": -0.14752703362357447,
+      "boundary_shapley_value": -0.1460937098136286,
       "disclosure_text": "High volatility in discretionary expenditure"
     },
     {
       "rank": 2,
       "feature": "cash_flow_buffer_ratio",
       "shapley_value": -0.09147211454878956,
+      "boundary_shapley_value": -0.09282403668401071,
       "disclosure_text": "Insufficient monthly cash flow buffer above obligations"
     },
     {
       "rank": 3,
       "feature": "income_timing_dispersion",
       "shapley_value": -0.09117144481215847,
+      "boundary_shapley_value": -0.11087828804375918,
       "disclosure_text": "Irregularity or unpredictability of income deposits"
     },
     {
       "rank": 4,
       "feature": "obligation_repayment_ratio",
       "shapley_value": 0.020871646751296723,
+      "boundary_shapley_value": -0.04638977362129182,
       "disclosure_text": "Delinquency or missed payments on recurring obligations"
     }
   ],
+  "boundary_cohort_top4": [
+    "spend_volatility",
+    "income_timing_dispersion",
+    "cash_flow_buffer_ratio",
+    "obligation_repayment_ratio"
+  ],
+  "top1_matches_boundary": true,
   "counterfactual_target_achieved": true,
   "c1_efficiency_pass": true,
   "c2_recourse_pass": true

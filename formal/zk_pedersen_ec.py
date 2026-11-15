@@ -2,7 +2,15 @@
 """
 secp256k1 Pedersen Commitments, Abe-Ohkubo-Suzuki 1-of-K Schnorr OR-Proofs,
 and 33-Bit Binary Bit-Decomposition Range Proofs (Zero Witness/Salt Leakage).
+
+SECURITY NOTICE (RESEARCH_REFERENCE_ONLY):
+This pure-Python secp256k1 implementation is an executable mathematical reference
+for formal soundness & completeness auditing. Because Python big-integer arithmetic
+and nibble-table indexing are not constant-time, production wallet/prover nodes MUST
+use constant-time field/group arithmetic (e.g., Rust `k256` or C `libsecp256k1`).
 """
+
+RESEARCH_REFERENCE_ONLY = True
 
 import secrets
 import hashlib

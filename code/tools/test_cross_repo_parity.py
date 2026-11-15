@@ -79,19 +79,31 @@ def main():
         assert res_p.returncode == 0, f"plutil -lint failed:\n{res_p.stderr}"
         print("✓ Apple MDM Kiosk Profile (`plutil -lint` with com.apple.asam): PASS")
 
-    # 3. Cross-repo formula parity check on sibling production FreshCredit Rust sim-core
-    fc_master = os.path.expanduser("~/Developer/freshcredit/crates/sim-core/src/master_law.rs")
-    if os.path.exists(fc_master):
-        with open(fc_master, "r", encoding="utf-8") as f:
-            rs_src = f.read()
-        for tok in [
-            "self.lambda_plus * eps.max(0.0) * self.recognition_gate",
-            "self.lambda_minus * eps.min(0.0) * self.recognition_gate",
-            "self.leak_delta * (current_s - self.s_base)",
-            "(validation - expectation) / s_d",
-        ]:
-            assert tok in rs_src, f"Production FreshCredit master_law.rs drifted from MasterLaw spec: missing {tok}"
-        print("✓ Production FreshCredit `master_law.rs` source-equation parity: PASS (notes unclamped vs kiosk clamped in MasterLaw.lean)")
+    # 3. Cross-repo formula & executable test parity check on sibling Rust sim-core workspaces
+    for repo_label, repo_root in [
+        ("Standalone Simulator", os.path.expanduser("~/Developer/simulator")),
+        ("FreshCredit Monorepo", os.path.expanduser("~/Developer/freshcredit")),
+    ]:
+        ml_path = os.path.join(repo_root, "crates/sim-core/src/master_law.rs")
+        if os.path.exists(ml_path):
+            with open(ml_path, "r", encoding="utf-8") as f:
+                rs_src = f.read()
+            for tok in [
+                "self.lambda_plus * eps.max(0.0) * self.recognition_gate",
+                "self.lambda_minus * eps.min(0.0) * self.recognition_gate",
+                "self.leak_delta * (current_s - self.s_base)",
+                "(validation - expectation) / s_d",
+            ]:
+                assert tok in rs_src, f"{repo_label} master_law.rs drifted from MasterLaw spec: missing {tok}"
+            print(f"✓ {repo_label} `master_law.rs` source-equation parity: PASS")
+            if repo_label == "Standalone Simulator":
+                assert "asymmetric_invariant_bounds" in rs_src, "Simulator master_law.rs missing Z3 asymmetric_invariant_bounds"
+                res_sim = subprocess.run(
+                    ["cargo", "test", "-p", "sim-core", "--lib", "--quiet", "--", "master_law::tests"],
+                    cwd=repo_root, capture_output=True, text=True,
+                )
+                assert res_sim.returncode == 0, f"Simulator master_law cargo test failed:\n{res_sim.stderr}"
+                print("✓ Standalone Simulator `cargo test -p sim-core --lib master_law::tests` (incl. Z3 BIBO bounds): PASS")
 
     print("\n✓ ALL CROSS-REPO GOLDEN-VECTOR PARITY CHECKS PASSED!")
     return 0

@@ -36,6 +36,15 @@ def main():
         print("[FAIL] Z3 Trust vs Selection Verification failed!")
         sys.exit(1)
 
+    # 1c. Run Z3 ZK-STP Verifier Soundness & Real-to-Fixed-Point Refinement
+    print(">>> 2b/5: Running Z3 SMT ZK-STP Verifier Soundness & Refinement Prover...")
+    z3_zk_script = os.path.join(root_dir, "z3_zk_stp_soundness.py")
+    res_z3_zk = subprocess.run([python_bin, z3_zk_script], capture_output=True, text=True)
+    print(res_z3_zk.stdout)
+    if res_z3_zk.returncode != 0:
+        print("[FAIL] Z3 ZK-STP Soundness Verification failed!")
+        sys.exit(1)
+
     # 2. Run SymPy CAS Suite
     print(">>> 3/4: Running SymPy Symbolic Computer Algebra Suite...")
     sympy_script = os.path.join(root_dir, "sympy_symbolic_dynamics.py")

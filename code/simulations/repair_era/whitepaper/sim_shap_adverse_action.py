@@ -133,16 +133,23 @@ def run_shap_battery():
     print(f"  True Score Diff from Baseline: {true_diff:+.6f}")
     print(f"  Efficiency Discrepancy: {efficiency_error:.2e} (Machine-precision PASS)\n")
 
-    # Principal Adverse Action Reasons (Reg B requires up to 4 principal reasons)
-    # Most negative Shapley contributions:
+    # Principal Adverse Action Reasons (Reg B 12 C.F.R. § 1002.9(b)(2) & CFPB Circulars 2022-03/2023-03)
+    # Audit both population-mean Shapley AND approval-boundary cohort Shapley (lowest-quartile approved)
+    # so reasons reflect what drives crossing the decision threshold rather than distance from super-prime mean.
+    approved_mask = scores >= threshold
+    boundary_cohort_mask = approved_mask & (scores <= threshold + 0.05)
+    boundary_baseline = np.mean(X_norm[boundary_cohort_mask], axis=0) if np.any(boundary_cohort_mask) else baseline_mean
+    shap_boundary = exact_shapley(sample_x, boundary_baseline, eval_fn)
+    boundary_top4 = [FEATURES[idx] for idx in np.argsort(shap_boundary)[:4]]
+
     ranked_reasons_order = np.argsort(shap_vals) # lowest (most negative) first
     top_4_reasons = [FEATURES[idx] for idx in ranked_reasons_order[:4]]
 
-    print("--- 12 C.F.R. § 1002.9 Disclosed Principal Reasons ---")
+    print("--- 12 C.F.R. § 1002.9 Disclosed Principal Reasons (Population & Approval-Boundary) ---")
     for r_rank, r_idx in enumerate(ranked_reasons_order[:4], 1):
         f_key = FEATURES[r_idx]
         print(f"Reason {r_rank}: {FEATURE_NAMES[f_key]}")
-        print(f"          (Shapley impact on score: {shap_vals[r_idx]:+.4f})")
+        print(f"          (Pop Shapley: {shap_vals[r_idx]:+.4f} | Boundary Shapley: {shap_boundary[r_idx]:+.4f})")
 
     # Coupled Structural Causal Recourse Calculation:
     # Perturbing cash_flow_buffer_ratio jointly improves coupled nsf_frequency_90d and obligation_repayment_ratio
@@ -213,9 +220,11 @@ def run_shap_battery():
         "reconstructed_diff": float(reconstructed_diff),
         "true_diff": float(true_diff),
         "principal_reasons": [
-            {"rank": i+1, "feature": FEATURES[idx], "shapley_value": float(shap_vals[idx]), "disclosure_text": FEATURE_NAMES[FEATURES[idx]]}
+            {"rank": i+1, "feature": FEATURES[idx], "shapley_value": float(shap_vals[idx]), "boundary_shapley_value": float(shap_boundary[idx]), "disclosure_text": FEATURE_NAMES[FEATURES[idx]]}
             for i, idx in enumerate(ranked_reasons_order[:4])
         ],
+        "boundary_cohort_top4": boundary_top4,
+        "top1_matches_boundary": bool(top_4_reasons[0] == boundary_top4[0]),
         "counterfactual_target_achieved": bool(recourse_found),
         "c1_efficiency_pass": bool(efficiency_error < 1e-10),
         "c2_recourse_pass": bool(recourse_found)
