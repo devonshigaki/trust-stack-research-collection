@@ -548,7 +548,7 @@ def verify_zk_trajectory(
 def main():
     print("=" * 75)
     print(" GENUINE PEDERSEN + SCHNORR + AOS-OR ZERO-KNOWLEDGE PROVER (ZK-STP v8)")
-    print(" Curve: secp256k1 | Strict 3-Party Separation | Event-Chain Head | 22/22")
+    print(" Curve: secp256k1 | Strict 3-Party Separation | Event-Chain Head | 23/23")
     print("=" * 75)
 
     prover = MasterLawZKProver(lambda_plus=0.228, lambda_minus=0.912, delta_param=0.010, s_base=0.500)
@@ -849,12 +849,29 @@ def main():
     v22 = (b22_a["account_id"] != naive_handle) and (b22_a["account_id"] != b22_other_furnisher["account_id"])
     print(f"Test 22 (High-Entropy Handle):  256-bit HMAC blinds low-entropy IDs | {'✓ VERIFIED (PASS)' if v22 else 'FAIL'}")
 
+    # Test 23: Sub-Proof Transcript Binding (blocks transplanting bit OR-proof across distinct commitments)
+    r23_a, r23_b = _r(), _r()
+    C23_a = pedersen_commit(42, r23_a)
+    C23_b = pedersen_commit(42, r23_b)
+    tr23 = Transcript("SUBPROOF-BINDING-TEST")
+    rp23_a = prove_nonneg(C23_a, 42, r23_a, 8, "RNG:23", tr=tr23)
+    rp23_b = prove_nonneg(C23_b, 42, r23_b, 8, "RNG:23", tr=tr23)
+    rp23_splice = json.loads(json.dumps(rp23_a))
+    rp23_splice["bit_or"][0] = rp23_b["bit_or"][0]
+    from zk_pedersen_ec import verify_nonneg as _verify_nonneg
+    v23 = (
+        _verify_nonneg(C23_a, rp23_a, 8, "RNG:23", tr=tr23)
+        and not _verify_nonneg(C23_a, rp23_splice, 8, "RNG:23", tr=tr23)
+        and not _verify_nonneg(C23_b, rp23_a, 8, "RNG:23", tr=tr23)
+    )
+    print(f"Test 23 (Bit-OR Binding):       Blocks bit-proof splice across commitments | {'✓ REJECTED (PASS)' if v23 else 'FAIL'}")
+
     all_pass = (
         v1 and v2 and v3 and v4 and v5 and v6 and v7 and v8 and v9 and v10 and v11 and v12
-        and v13 and v14 and v15 and v16 and v17 and v18 and v19 and v20_blocked and v21 and v22
+        and v13 and v14 and v15 and v16 and v17 and v18 and v19 and v20_blocked and v21 and v22 and v23
     )
     print("=" * 75)
-    print(f"OVERALL ZK-STP NIZK VERDICT: {'ALL 22/22 CRITERIA VERIFIED' if all_pass else 'FAIL'}")
+    print(f"OVERALL ZK-STP NIZK VERDICT: {'ALL 23/23 CRITERIA VERIFIED' if all_pass else 'FAIL'}")
     print("=" * 75)
 
     out_file = os.path.join(os.path.dirname(__file__), "zk_stp_results.json")
@@ -886,6 +903,7 @@ def main():
                 "test20_clamp_branch0_overflow_blocked": v20_blocked,
                 "test21_unanchored_threshold_blocked": v21,
                 "test22_high_entropy_handle_blinding": v22,
+                "test23_nonneg_transcript_binding_enforced": v23,
                 "proof_bytes_json": len(proof_json),
                 "status": "VERIFIED" if all_pass else "FAILED",
             },

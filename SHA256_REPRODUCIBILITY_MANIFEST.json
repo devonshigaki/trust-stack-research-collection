@@ -1,6 +1,6 @@
 {
   "release": "v4.5",
-  "timestamp": "2026-11-16T02:13:06Z",
+  "timestamp": "2026-11-16T02:49:26Z",
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.5",
@@ -117,12 +117,12 @@
       "bytes": 6513
     },
     "formal/TFP_Edge_Protocol.cfg": {
-      "sha256": "e7379b400baaa913c5c1bc76457f7b815ef2429054077da7da88ba0984c4398b",
-      "bytes": 323
+      "sha256": "a7bde0ce32b691d1ee7de48b690314b5d80f8bf297b07e4eebc38040022c8b2a",
+      "bytes": 362
     },
     "formal/TFP_Edge_Protocol.tla": {
-      "sha256": "78ae43c9006ef4a6568888b8b74f95be1c18cf9012fe75f016fa47b632efd434",
-      "bytes": 9451
+      "sha256": "d8abad685c631a1507af2ae4fccb4a4896e12a86c56891c217273b49a05b3c0e",
+      "bytes": 10099
     },
     "formal/run_all_formal_verifications.py": {
       "sha256": "63b8d4ff61d2189a056f8bfb84921a4d434beb415ee8ee3a4ebd03635baa9ccd",
@@ -165,16 +165,16 @@
       "bytes": 6577
     },
     "formal/zk_master_law_stp.py": {
-      "sha256": "47f2a4b3a917f72f0e2599474d862e452aba631a6dc22c4d71f996c98e4243ae",
-      "bytes": 44878
+      "sha256": "b2e28a13a19271d0f2593510f525837a2b09604edfccea9eff577ac85f0d6795",
+      "bytes": 45864
     },
     "formal/zk_pedersen_ec.py": {
-      "sha256": "e2365f1331de362820f9710b3a821de8768651ade54bf5f6d97ea53063f073f4",
-      "bytes": 19791
+      "sha256": "9f419504d9e9ce7561ff9b4c0a2d760ab8435069c8517e99e407c5f1706d1b86",
+      "bytes": 20387
     },
     "formal/zk_stp_results.json": {
-      "sha256": "bebfa592e9a2b24ed57d1da84e37f9a98b19bae9de7cec507e921db4910ebec7",
-      "bytes": 1189
+      "sha256": "2189eb28d5648895d86858631433ce3ca05792371514c369af94f0924b4cee3f",
+      "bytes": 1244
     },
     "formal/lean/Check.lean": {
       "sha256": "00d6e2df8300b3a2b8999bf449236e6bae7ae9ba165b00b902bac763b31f8361",
@@ -229,8 +229,8 @@
       "bytes": 17331
     },
     "code/tools/test_cross_repo_parity.py": {
-      "sha256": "83fd2a5052452a3b9eb4e24d0478de35615ebbce3f6836f9050a97f2bc34dd0b",
-      "bytes": 7048
+      "sha256": "4fff28ad4235754c6077cf81ec25d585c828fab0456cd415a1e75f753ddf83cb",
+      "bytes": 7155
     },
     "code/tools/autoresearch/candidate_estimator.py": {
       "sha256": "0e53fb4812cdc9a9ae909f52818a629253a9f74b18eeaf9d9d412e32245e30c2",
@@ -1489,8 +1489,8 @@
       "bytes": 16823
     },
     "code/simulations/wearables_pipeline/stream_muse_athena.py": {
-      "sha256": "c7e6b50cefa6fc9b38a6f29bc4da7faeaf41b8c0282933d6d8890e1020056f13",
-      "bytes": 32799
+      "sha256": "ee7addb1140dc48c016f1d328d03170f7004a4279fff86c218c6592fa632d30d",
+      "bytes": 35566
     },
     "code/simulations/repair_era/MANIFEST.md": {
       "sha256": "108f782a82b2e647ba3eee9b7b5133d3289987611ebfc1c014f40a28e1bfb194",
@@ -2577,8 +2577,8 @@
       "bytes": 698
     },
     "code/simulations/brainit_fmri/query_openneuro_ds003020.py": {
-      "sha256": "8014978f3aace807eb1e0845af2adc22ae04ecb29d1e4796eb3984e11bbf7519",
-      "bytes": 3617
+      "sha256": "d5455bbbd7c3a09910fcdf34aa7fa82912a01cd642fa40f7fc5366a78a682e89",
+      "bytes": 4133
     },
     "code/simulations/brainit_fmri/run_insilico_experiment.py": {
       "sha256": "b0252f41cb5dc39ea188021c4126ece0efdeab2fe06214080cc979e5e17e879e",

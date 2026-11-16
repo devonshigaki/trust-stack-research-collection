@@ -34,23 +34,33 @@ def verify_openneuro_ds003020(refresh_snapshot: bool = False):
     }
     """
 
+    live_snapshots = []
+    provenance_mode = "archived_offline_snapshot"
     try:
         r = requests.post("https://openneuro.org/crn/graphql", json={"query": query}, headers=headers, timeout=15)
         if r.status_code == 200:
             res_data = r.json()
             dataset_info = res_data.get("data", {}).get("dataset", {})
-            snapshots = dataset_info.get("snapshots", [])
+            live_snapshots = dataset_info.get("snapshots", [])
             print(f"Dataset ID: {dataset_info.get('id')}")
-            print(f"Snapshots Available: {len(snapshots)}")
-            for s in snapshots[-3:]:
+            print(f"Snapshots Available: {len(live_snapshots)}")
+            for s in live_snapshots[-3:]:
                 print(f"  Snapshot Tag: {s.get('tag')} (Created: {s.get('created')})")
+            if live_snapshots:
+                provenance_mode = "live_graphql_plus_archived_spec"
         else:
             print(f"OpenNeuro GraphQL returned HTTP {r.status_code}")
     except Exception as e:
         print(f"Notice: OpenNeuro API check ({e}); using verified local derivative specifications.")
 
-    # Canonical Specifications from Huth et al. (2016) / LeBel et al. (2023):
+    live_tags = [str(s.get("tag")) for s in live_snapshots if s.get("tag")]
+    if live_tags:
+        assert "4.0.0" in live_tags or "2.2.0" in live_tags, f"Unexpected OpenNeuro snapshot tags: {live_tags}"
+
+    # Canonical Specifications from Huth et al. (2016) / LeBel et al. (2023) (BIDS metadata check):
     spec = {
+        "provenance_mode": provenance_mode,
+        "live_snapshot_tags_observed": live_tags[-5:],
         "dataset_accession": "ds003020",
         "dataset_title": "A natural language fMRI dataset for voxelwise encoding models",
         "semantic_feature_model": "english1000",

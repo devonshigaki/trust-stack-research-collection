@@ -55,7 +55,8 @@ LocalTransaction(t) ==
                                         ![t].version = edgeVaults[t].version + 1]
     /\ networkMsgs' = networkMsgs \cup {[sender |-> t, tenant |-> t,
                                          ver |-> edgeVaults'[t].version,
-                                         stateHash |-> 1, sigValid |-> TRUE,
+                                         stateHash |-> edgeVaults'[t].version * 10 + 1,
+                                         sigValid |-> TRUE,
                                          furnisherAttested |-> TRUE]}
     /\ UNCHANGED << auditChain, compromised, clientViewA, clientViewB >>
     /\ timeStep' = timeStep + 1
@@ -124,6 +125,15 @@ Next ==
 
 Spec == Init /\ [][Next]_vars
 
+VerifierProcessAction == \E m \in networkMsgs : VerifierProcessMsg(m)
+LightClientSyncAction == \E t \in Tenants : LightClientSync(t)
+
+FairSpec ==
+    /\ Init
+    /\ [][Next]_vars
+    /\ WF_vars(VerifierProcessAction)
+    /\ WF_vars(LightClientSyncAction)
+
 -----------------------------------------------------------------------------
 (***************************************************************************)
 (* FORMAL SAFETY INVARIANTS                                                *)
@@ -151,7 +161,7 @@ AuditChainValid ==
     /\ \A i \in 1..Len(auditChain) :
         /\ auditChain[i].tenant \in Tenants
         /\ auditChain[i].ver \in 1..MaxSteps
-        /\ auditChain[i].stateHash \in {1, 2}
+        /\ auditChain[i].stateHash = auditChain[i].ver * 10 + 1
     /\ \A i, j \in 1..Len(auditChain) :
         (i < j /\ auditChain[i].tenant = auditChain[j].tenant) =>
             (auditChain[i].ver < auditChain[j].ver)
@@ -188,11 +198,17 @@ BoundedBlastRadius ==
     Cardinality(compromised) <= AdversaryPower
 
 AttestedAuditChain ==
-    \A i \in 1..Len(auditChain) : auditChain[i].attested = TRUE /\ auditChain[i].stateHash = 1
+    \A i \in 1..Len(auditChain) :
+        auditChain[i].attested = TRUE /\ auditChain[i].stateHash = auditChain[i].ver * 10 + 1
 
 ConsistentLightClientViews ==
     \A t \in Tenants :
         /\ clientViewA[t] <= MaxChainVer(t)
         /\ clientViewB[t] <= MaxChainVer(t)
+
+\* Temporal Liveness: under FairSpec, every committed audit entry eventually syncs to both light clients
+EventualLightClientConvergence ==
+    \A t \in Tenants :
+        []((MaxChainVer(t) > 0) => <>(clientViewA[t] = MaxChainVer(t) /\ clientViewB[t] = MaxChainVer(t)))
 
 =============================================================================

@@ -291,16 +291,26 @@ def prove_nonneg(C_val: Optional[Tuple[int, int]], val: int, r_val: int, n_bits:
     if not (0 <= val < (1 << n_bits)):
         raise ValueError(f"Value {val} out of [0, 2^{n_bits}) range")
     bits, bit_or = [], []
+    B_pts, bit_vals, r_js = [], [], []
     r_sum = 0
     for j in range(n_bits):
         b = (val >> j) & 1
         rj = secrets.randbelow(N_ORDER - 1) + 1
         Bj = pedersen_commit(b, rj)
         r_sum = (r_sum + (rj << j)) % N_ORDER
+        B_pts.append(Bj)
+        bit_vals.append(b)
+        r_js.append(rj)
         bits.append(pt_ser(Bj))
-        bit_or.append(prove_or_zero([Bj, pt_sub(Bj, G_PT)], b, rj, f"{tag}:b{j}", tr=tr))
+    sub_tr = tr.clone() if tr is not None else Transcript(f"NONNEG:{tag}")
+    sub_tr.absorb_point("C_val", C_val)
+    for j, Bj in enumerate(B_pts):
+        sub_tr.absorb_point(f"B_{j}", Bj)
+    for j in range(n_bits):
+        Bj = B_pts[j]
+        bit_or.append(prove_or_zero([Bj, pt_sub(Bj, G_PT)], bit_vals[j], r_js[j], f"{tag}:b{j}", tr=sub_tr))
     r_diff = (r_val - r_sum) % N_ORDER
-    return {"B": bits, "bit_or": bit_or, "sum_zero": prove_zero(pt_mul_fast(r_diff, H_PT), r_diff, f"{tag}:sum", tr=tr)}
+    return {"B": bits, "bit_or": bit_or, "sum_zero": prove_zero(pt_mul_fast(r_diff, H_PT), r_diff, f"{tag}:sum", tr=sub_tr)}
 
 
 def verify_nonneg(C_val: Optional[Tuple[int, int]], proof: Dict, n_bits: int, tag: str, tr: Optional[Transcript] = None) -> bool:
@@ -308,14 +318,18 @@ def verify_nonneg(C_val: Optional[Tuple[int, int]], proof: Dict, n_bits: int, ta
         if len(proof["B"]) != n_bits or len(proof["bit_or"]) != n_bits:
             return False
         B_pts = [pt_deser(b_hex) for b_hex in proof["B"]]
+        sub_tr = tr.clone() if tr is not None else Transcript(f"NONNEG:{tag}")
+        sub_tr.absorb_point("C_val", C_val)
+        for j, Bj in enumerate(B_pts):
+            sub_tr.absorb_point(f"B_{j}", Bj)
         for j in range(n_bits):
             Bj = B_pts[j]
-            if not verify_or_zero([Bj, pt_sub(Bj, G_PT)], proof["bit_or"][j], f"{tag}:b{j}", tr=tr):
+            if not verify_or_zero([Bj, pt_sub(Bj, G_PT)], proof["bit_or"][j], f"{tag}:b{j}", tr=sub_tr):
                 return False
         C_acc = None
         for Bj in reversed(B_pts):
             C_acc = pt_add(pt_add(C_acc, C_acc), Bj)
-        return verify_zero(pt_sub(C_val, C_acc), proof["sum_zero"], f"{tag}:sum", tr=tr)
+        return verify_zero(pt_sub(C_val, C_acc), proof["sum_zero"], f"{tag}:sum", tr=sub_tr)
     except Exception:
         return False
 

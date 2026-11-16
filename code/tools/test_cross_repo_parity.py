@@ -100,6 +100,7 @@ def main():
             print(f"✓ {repo_label} `master_law.rs` source-equation parity: PASS")
             if repo_label == "Standalone Simulator":
                 assert "asymmetric_invariant_bounds" in rs_src, "Simulator master_law.rs missing Z3 asymmetric_invariant_bounds"
+                assert "pub fn step_fixed_i64" in rs_src, "Simulator master_law.rs missing step_fixed_i64"
                 res_sim = subprocess.run(
                     ["cargo", "test", "-p", "sim-core", "--lib", "--quiet", "--", "master_law::tests"],
                     cwd=repo_root, capture_output=True, text=True,

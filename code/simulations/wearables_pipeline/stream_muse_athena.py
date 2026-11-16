@@ -9,6 +9,7 @@ Instruments:
 
 import argparse
 import hashlib
+import json
 import math
 import os
 import sqlite3
@@ -399,6 +400,9 @@ class MuseAthenaStreamer:
         cur.execute("SELECT COALESCE(MAX(sample_idx) + 1, 0) FROM muse_fnirs_raw WHERE session_id = ?", (session_id,))
         self.fnirs_sample_offset = cur.fetchone()[0]
 
+        cur.execute("SELECT COALESCE(MAX(sample_idx) + 1, 0) FROM muse_aux_imu WHERE session_id = ?", (session_id,))
+        self.imu_sample_offset = cur.fetchone()[0]
+
         self.lsl_outlet_eeg = None
         self.lsl_outlet_fnirs = None
         if HAS_LSL:
@@ -424,8 +428,12 @@ class MuseAthenaStreamer:
         )
         if HAS_CRYPTO:
             aad = f"{self.session_id}:subject_manifest".encode("utf-8")
+            manifest_json = json.dumps(
+                {"subject_id": self.subject_id, "cohort": self.cohort_stage, "day": self.day_index},
+                separators=(",", ":"),
+            )
             enc_meta = encrypt_sensitive_field(
-                f'{{"subject_id":"{self.subject_id}","cohort":{self.cohort_stage},"day":{self.day_index}}}',
+                manifest_json,
                 self.aes_key,
                 aad=aad,
             )
@@ -442,54 +450,74 @@ class MuseAthenaStreamer:
         eeg: np.ndarray,
         t_fnirs: np.ndarray,
         fnirs: np.ndarray,
+        active_optodes: int = NUM_FNIRS_OPTODES,
     ):
-        eeg_rows = []
-        for i in range(len(t_eeg)):
-            sample_time = t_start + t_eeg[i]
-            eeg_rows.append((
-                self.session_id, self.eeg_sample_offset + i, float(sample_time),
-                float(eeg[0, i]), float(eeg[1, i]), float(eeg[2, i]), float(eeg[3, i])
-            ))
-        self.conn.executemany("INSERT OR REPLACE INTO muse_eeg_raw VALUES (?, ?, ?, ?, ?, ?, ?)", eeg_rows)
-        self.eeg_sample_offset += len(t_eeg)
-
-        features = extract_eeg_band_powers(eeg, fs=FS_EEG)
-        feat_query = (
-            "INSERT INTO muse_eeg_features ("
-            "session_id, timestamp_epoch, window_sec, fm_theta_uv2, frontal_delta_uv2, sws_ratio, "
-            "alpha_af7_uv2, alpha_af8_uv2, beta_uv2, theta_beta_ratio, frontal_alpha_asymmetry"
-            ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-        )
-        self.conn.execute(
-            feat_query,
-            (
-                self.session_id, t_start + t_eeg[-1], float(t_eeg[-1] - t_eeg[0]),
-                features["fm_theta_uv2"], features["frontal_delta_uv2"], features["sws_ratio"],
-                features["alpha_af7_uv2"], features["alpha_af8_uv2"],
-                features["beta_uv2"], features["theta_beta_ratio"], features["frontal_alpha_asymmetry"]
-            )
-        )
-
-        fnirs_rows = []
-        for optode in range(NUM_FNIRS_OPTODES):
-            for i in range(len(t_fnirs)):
-                sample_time = t_start + t_fnirs[i]
-                fnirs_rows.append((
-                    self.session_id, self.fnirs_sample_offset + i, float(sample_time), optode + 1,
-                    float(fnirs[optode, 0, i]), float(fnirs[optode, 1, i]), float(fnirs[optode, 2, i])
+        if len(t_eeg) > 0:
+            eeg_rows = []
+            for i in range(len(t_eeg)):
+                sample_time = t_start + t_eeg[i]
+                eeg_rows.append((
+                    self.session_id, self.eeg_sample_offset + i, float(sample_time),
+                    float(eeg[0, i]), float(eeg[1, i]), float(eeg[2, i]), float(eeg[3, i])
                 ))
-        self.conn.executemany("INSERT OR REPLACE INTO muse_fnirs_raw VALUES (?, ?, ?, ?, ?, ?, ?)", fnirs_rows)
-        self.fnirs_sample_offset += len(t_fnirs)
+            self.conn.executemany("INSERT OR REPLACE INTO muse_eeg_raw VALUES (?, ?, ?, ?, ?, ?, ?)", eeg_rows)
+            self.eeg_sample_offset += len(t_eeg)
+
+            features = extract_eeg_band_powers(eeg, fs=FS_EEG)
+            feat_query = (
+                "INSERT INTO muse_eeg_features ("
+                "session_id, timestamp_epoch, window_sec, fm_theta_uv2, frontal_delta_uv2, sws_ratio, "
+                "alpha_af7_uv2, alpha_af8_uv2, beta_uv2, theta_beta_ratio, frontal_alpha_asymmetry"
+                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            )
+            self.conn.execute(
+                feat_query,
+                (
+                    self.session_id, t_start + t_eeg[-1], float(t_eeg[-1] - t_eeg[0]),
+                    features["fm_theta_uv2"], features["frontal_delta_uv2"], features["sws_ratio"],
+                    features["alpha_af7_uv2"], features["alpha_af8_uv2"],
+                    features["beta_uv2"], features["theta_beta_ratio"], features["frontal_alpha_asymmetry"]
+                )
+            )
+
+        n_active = max(0, min(NUM_FNIRS_OPTODES, int(active_optodes)))
+        if len(t_fnirs) > 0 and n_active > 0:
+            fnirs_rows = []
+            for optode in range(n_active):
+                for i in range(len(t_fnirs)):
+                    sample_time = t_start + t_fnirs[i]
+                    fnirs_rows.append((
+                        self.session_id, self.fnirs_sample_offset + i, float(sample_time), optode + 1,
+                        float(fnirs[optode, 0, i]), float(fnirs[optode, 1, i]), float(fnirs[optode, 2, i])
+                    ))
+            self.conn.executemany("INSERT OR REPLACE INTO muse_fnirs_raw VALUES (?, ?, ?, ?, ?, ?, ?)", fnirs_rows)
+            self.fnirs_sample_offset += len(t_fnirs)
         self.conn.commit()
 
-        if self.lsl_outlet_eeg:
+        if self.lsl_outlet_eeg and len(t_eeg) > 0:
             self.lsl_outlet_eeg.push_chunk(eeg.T.astype(np.float32).tolist())
-        if self.lsl_outlet_fnirs:
+        if self.lsl_outlet_fnirs and len(t_fnirs) > 0:
             fnirs_flattened = fnirs.reshape(15, -1).T
             self.lsl_outlet_fnirs.push_chunk(fnirs_flattened.astype(np.float32).tolist())
 
+    def persist_imu_chunk(self, t_start: float, acc: np.ndarray, gyr: np.ndarray):
+        n_imu = acc.shape[1] if acc.ndim == 2 else 0
+        if n_imu == 0:
+            return
+        imu_rows = []
+        for i in range(n_imu):
+            imu_rows.append((
+                self.session_id, self.imu_sample_offset + i, t_start + i / 52.0,
+                float(acc[0, i]), float(acc[1, i]), float(acc[2, i]),
+                float(gyr[0, i]), float(gyr[1, i]), float(gyr[2, i]),
+            ))
+        self.conn.executemany("INSERT OR REPLACE INTO muse_aux_imu VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", imu_rows)
+        self.imu_sample_offset += n_imu
+        self.conn.commit()
+
     def run_epoch(self, duration_sec: float = 10.0):
         t_start = time.time()
+        active_optodes = NUM_FNIRS_OPTODES
         if self.use_hardware and self.board is not None:
             self.board.start_stream()
             time.sleep(duration_sec)
@@ -501,27 +529,21 @@ class MuseAthenaStreamer:
             eeg = raw_eeg[self.channel_map["eeg_order"], :]
             t_eeg = np.arange(eeg.shape[1], dtype=np.float64) / FS_EEG
 
-            # Persist 52 Hz 6-axis IMU telemetry for systemic motion GLM regression
+            # Persist 52 Hz 6-axis IMU telemetry monotonically across epochs
             if raw_aux.shape[1] > 0:
-                imu_rows = []
                 acc = raw_aux[self.channel_map["accel_rows"], :]
                 gyr = raw_aux[self.channel_map["gyro_rows"], :]
-                for i in range(raw_aux.shape[1]):
-                    imu_rows.append((
-                        self.session_id, i, t_start + i / 52.0,
-                        float(acc[0, i]), float(acc[1, i]), float(acc[2, i]),
-                        float(gyr[0, i]), float(gyr[1, i]), float(gyr[2, i]),
-                    ))
-                self.conn.executemany("INSERT OR REPLACE INTO muse_aux_imu VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", imu_rows)
+                self.persist_imu_chunk(t_start, acc, gyr)
 
             # Unpack BrainFlow MuseAthena optical tensor (4-diode groups: 730/850/660/ambient_dark)
             opt_mat = raw_anc[self.channel_map["optical_rows"], :]
             n_fnirs = opt_mat.shape[1]
-            fnirs, _ = unpack_muse_athena_optical_matrix(opt_mat)
+            fnirs, n_groups = unpack_muse_athena_optical_matrix(opt_mat)
+            active_optodes = n_groups
             t_fnirs = np.arange(n_fnirs, dtype=np.float64) / FS_FNIRS
         else:
             t_eeg, eeg, t_fnirs, fnirs = self.synth.get_chunk(duration_sec)
-        self.persist_chunk(t_start, t_eeg, eeg, t_fnirs, fnirs)
+        self.persist_chunk(t_start, t_eeg, eeg, t_fnirs, fnirs, active_optodes=active_optodes)
         return t_eeg, eeg, t_fnirs, fnirs
 
     def close(self):
@@ -576,6 +598,33 @@ def run_self_test() -> bool:
     opt_34[0], opt_34[1], opt_34[2], opt_34[3] = 900.0, 1100.0, 800.0, 40.0
     unpacked_34, n_g34 = unpack_muse_athena_optical_matrix(opt_34)
     assert n_g34 == 1 and abs(unpacked_34[0, 1, 0] - 1060.0) < 1e-9, "0x34 4-ch unpack failed"
+
+    # 0d. Verify monotonic multi-epoch IMU appending, empty-poll resilience, and active_optodes=4 parity (no phantom optode 5)
+    hw_db = "test_hw_emulated_athena.db"
+    for f in (hw_db, f"{hw_db}-wal", f"{hw_db}-shm", f"{hw_db}.key"):
+        if os.path.exists(f):
+            os.remove(f)
+    s_hw = MuseAthenaStreamer("hw_emu_s1", "sub_hw", 1, 1, db_path=hw_db)
+    s_hw.persist_chunk(time.time(), np.array([]), np.zeros((4, 0)), np.array([]), np.zeros((5, 3, 0)), active_optodes=0)
+    t_eeg_e, eeg_e, t_fn_e, _ = s_hw.synth.get_chunk(2.0)
+    opt_36_full = np.zeros((16, len(t_fn_e)), dtype=np.float64)
+    for g in range(4):
+        opt_36_full[g * 4 + 0] = 120_000.0 + 1_800.0 * np.sin(2 * np.pi * 1.2 * t_fn_e)
+        opt_36_full[g * 4 + 1] = 135_000.0 + 2_100.0 * np.sin(2 * np.pi * 1.2 * t_fn_e)
+        opt_36_full[g * 4 + 2] = 110_000.0 + 1_400.0 * np.sin(2 * np.pi * 1.2 * t_fn_e)
+        opt_36_full[g * 4 + 3] = 200.0
+    fn_hw, n_g_hw = unpack_muse_athena_optical_matrix(opt_36_full)
+    s_hw.persist_chunk(time.time(), t_eeg_e, eeg_e, t_fn_e, fn_hw, active_optodes=n_g_hw)
+    s_hw.persist_imu_chunk(time.time(), np.zeros((3, 52)), np.zeros((3, 52)))
+    s_hw.persist_imu_chunk(time.time() + 1.0, np.ones((3, 52)), np.ones((3, 52)))
+    s_hw.close()
+    hw_conn = sqlite3.connect(hw_db)
+    assert hw_conn.execute("SELECT COUNT(*) FROM muse_aux_imu WHERE session_id = 'hw_emu_s1'").fetchone()[0] == 104
+    assert [r[0] for r in hw_conn.execute("SELECT DISTINCT optode_idx FROM muse_fnirs_raw WHERE session_id = 'hw_emu_s1' ORDER BY optode_idx").fetchall()] == [1, 2, 3, 4]
+    hw_conn.close()
+    for f in (hw_db, f"{hw_db}-wal", f"{hw_db}-shm", f"{hw_db}.key"):
+        if os.path.exists(f):
+            os.remove(f)
     if HAS_CRYPTO:
         k_test = os.urandom(32)
         tok = encrypt_sensitive_field("CONFIDENTIAL_CRF_TEXT", k_test)

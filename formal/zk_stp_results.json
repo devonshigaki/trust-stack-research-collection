@@ -23,6 +23,7 @@
     "test20_clamp_branch0_overflow_blocked": true,
     "test21_unanchored_threshold_blocked": true,
     "test22_high_entropy_handle_blinding": true,
-    "proof_bytes_json": 225043,
+    "test23_nonneg_transcript_binding_enforced": true,
+    "proof_bytes_json": 225044,
     "status": "VERIFIED"
 }
