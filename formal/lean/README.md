@@ -10,7 +10,7 @@ Lean `4.35.0` (`leanprover/lean4:v4.35.0`) with Mathlib4 pinned in
 `lake-manifest.json`; `lake build TrustStack` and kernel replay via
 `lake env leanchecker TrustStack.Tilt` and `lake env leanchecker TrustStack.MasterLaw`
 completed with zero errors. The sources contain **no `sorry` placeholders**,
-and `Check.lean` (`lake env lean Check.lean`) audits all **34 theorems**
+and `Check.lean` (`lake env lean Check.lean`) audits all **36 theorems**
 (recorded in `VERIFICATION_AXIOMS.txt`): every theorem depends solely on
 the standard classical axioms `[propext, Classical.choice, Quot.sound]`,
 including clamped `[0, 1]` invariance (`masterStepClamped_mem_unit`,

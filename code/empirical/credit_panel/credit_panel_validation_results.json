@@ -124,6 +124,14 @@
     "delong_z": -1.3032416697492044,
     "delong_p": 0.19249226812196873
   },
+  "param_free_contractual_ablation": {
+    "ln_gt_lp_folds": 5,
+    "delta_auc": 0.008976719205210926,
+    "delong_z": 5.283539942508906,
+    "delong_p": 1.2671122107121846e-07,
+    "autoresearch_huber_irls_lp": 0.14443362669632062,
+    "autoresearch_huber_irls_ln": 0.011756795184720016
+  },
   "cox_calibration": {
     "intercept": -0.0007678675879368934,
     "slope": 0.9992251556963928

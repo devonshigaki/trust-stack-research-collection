@@ -32,3 +32,5 @@
 'TrustStack.masterStepClamped_not_comm' depends on axioms: [propext, Classical.choice, Quot.sound]
 'TrustStack.trajClamped_contraction_zero_input' depends on axioms: [propext, Classical.choice, Quot.sound]
 'TrustStack.trajClamped_incremental_contraction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TrustStack.trajClampedNonAuto_mem_unit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'TrustStack.trajClampedNonAuto_incremental_contraction' depends on axioms: [propext, Classical.choice, Quot.sound]

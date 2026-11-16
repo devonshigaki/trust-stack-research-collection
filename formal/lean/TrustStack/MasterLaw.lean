@@ -797,4 +797,64 @@ theorem trajClamped_incremental_contraction
       _ ≤ (1 - δ) * ((1 - δ)^t * |S0 - S0'|) := h_mul
       _ = (1 - δ)^(t + 1) * |S0 - S0'| := by rw [pow_succ]; ring
 
+/-- Non-autonomous DOCAS-coupled clamped `[0, 1]` trajectory where learning rates
+    `(lp t, ln t)` and baseline leak `δ t` vary dynamically at each step `t`. -/
+noncomputable def trajClampedNonAuto
+    (lp ln δ : ℕ → ℝ) (Sbase : ℝ) (r ε : ℕ → ℝ) (S0 : ℝ) : ℕ → ℝ
+  | 0 => S0
+  | t + 1 => masterStepClamped (lp t) (ln t) (δ t) Sbase (r t) (trajClampedNonAuto lp ln δ Sbase r ε S0 t) (ε t)
+
+/-- **Non-Autonomous Clamped State-Space Invariance**:
+    If `S0 ∈ [0, 1]`, the time-varying DOCAS trajectory remains strictly in `[0, 1]` for all `t`. -/
+theorem trajClampedNonAuto_mem_unit
+    (lp ln δ : ℕ → ℝ) (Sbase : ℝ) (r ε : ℕ → ℝ) (S0 : ℝ)
+    (hS0 : S0 ∈ Set.Icc (0 : ℝ) 1) (t : ℕ) :
+    trajClampedNonAuto lp ln δ Sbase r ε S0 t ∈ Set.Icc (0 : ℝ) 1 := by
+  induction t with
+  | zero => exact hS0
+  | succ t _ => exact masterStepClamped_mem_unit _ _ _ _ _ _ _
+
+/-- **Non-Autonomous Clamped Incremental Contraction (DOCAS–GTT Bridge)**:
+    Whenever time-varying leak rates satisfy `0 ≤ δ_min ≤ δ t ≤ 1` for all `t`, any two
+    state-modulated clamped trajectories sharing active inputs `(r, ε)` synchronize at least
+    as fast as `(1 - δ_min)^t * |S0 - S0'|` regardless of arbitrary `(lp t, ln t)` modulation. -/
+theorem trajClampedNonAuto_incremental_contraction
+    (lp ln δ : ℕ → ℝ) (δmin Sbase S0 S0' : ℝ) (r ε : ℕ → ℝ)
+    (hδmin : 0 ≤ δmin) (hδ_lb : ∀ k, δmin ≤ δ k) (hδ_ub : ∀ k, δ k ≤ 1) (t : ℕ) :
+    |trajClampedNonAuto lp ln δ Sbase r ε S0 t - trajClampedNonAuto lp ln δ Sbase r ε S0' t|
+      ≤ (1 - δmin)^t * |S0 - S0'| := by
+  induction t with
+  | zero => simp [trajClampedNonAuto]
+  | succ t ih =>
+    have hq_min : 0 ≤ 1 - δmin := sub_nonneg.mpr (le_trans (hδ_lb t) (hδ_ub t))
+    have hq_t : 0 ≤ 1 - δ t := sub_nonneg.mpr (hδ_ub t)
+    have hq_le : 1 - δ t ≤ 1 - δmin := sub_le_sub_left (hδ_lb t) 1
+    set x := trajClampedNonAuto lp ln δ Sbase r ε S0 t
+    set y := trajClampedNonAuto lp ln δ Sbase r ε S0' t
+    have hstep_diff :
+        masterStep (lp t) (ln t) (δ t) Sbase (r t) x (ε t)
+          - masterStep (lp t) (ln t) (δ t) Sbase (r t) y (ε t)
+          = (1 - δ t) * (x - y) := by
+      unfold masterStep
+      ring
+    have h_lip := clamp_unit_lipschitz
+      (masterStep (lp t) (ln t) (δ t) Sbase (r t) x (ε t))
+      (masterStep (lp t) (ln t) (δ t) Sbase (r t) y (ε t))
+    have h_step_eq :
+        |trajClampedNonAuto lp ln δ Sbase r ε S0 (t + 1) - trajClampedNonAuto lp ln δ Sbase r ε S0' (t + 1)|
+          ≤ (1 - δ t) * |x - y| := by
+      have h_abs : |(1 - δ t) * (x - y)| = (1 - δ t) * |x - y| := by
+        rw [abs_mul, abs_of_nonneg hq_t]
+      simpa [trajClampedNonAuto, masterStepClamped, x, y, hstep_diff, h_abs] using h_lip
+    have h_mon : (1 - δ t) * |x - y| ≤ (1 - δmin) * |x - y| :=
+      mul_le_mul_of_nonneg_right hq_le (abs_nonneg _)
+    have h_mul : (1 - δmin) * |x - y| ≤ (1 - δmin) * ((1 - δmin)^t * |S0 - S0'|) :=
+      mul_le_mul_of_nonneg_left ih hq_min
+    have _ := hδmin
+    calc |trajClampedNonAuto lp ln δ Sbase r ε S0 (t + 1) - trajClampedNonAuto lp ln δ Sbase r ε S0' (t + 1)|
+        ≤ (1 - δ t) * |x - y| := h_step_eq
+      _ ≤ (1 - δmin) * |x - y| := h_mon
+      _ ≤ (1 - δmin) * ((1 - δmin)^t * |S0 - S0'|) := h_mul
+      _ = (1 - δmin)^(t + 1) * |S0 - S0'| := by rw [pow_succ]; ring
+
 end TrustStack

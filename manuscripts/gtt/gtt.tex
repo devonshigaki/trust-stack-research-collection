@@ -329,14 +329,17 @@ $|S_t - S_{\mathrm{base}}| \leq (1-\delta)^t|S_0 - S_{\mathrm{base}}| +
 \texttt{clamp\_unit\_lipschitz}, \texttt{masterStepClamped\_not\_comm},
 proving that clamped updates do not commute as a state-based CRDT, and
 \texttt{trajClamped\_incremental\_contraction}, proving exponential
-synchronization under arbitrary shared active inputs).
+synchronization under arbitrary shared active inputs, and the non-autonomous
+DOCAS--GTT bridge theorems \texttt{trajClampedNonAuto\_mem\_unit} and
+\texttt{trajClampedNonAuto\_incremental\_contraction}, proving uniform
+contraction under arbitrary time-varying $(\lambda^+_t, \lambda^-_t, \delta_t)$).
 
 \textbf{Verification status: green build.} The library compiles against the
 pinned toolchain --- Lean \texttt{4.35.0} with Mathlib pinned in
 \texttt{lake-manifest.json} --- \texttt{lake build} and kernel replay via
 \texttt{lake env leanchecker} complete with zero errors,
 and the axiom audit (\texttt{formal/lean/Check.lean}, output deposited as
-\texttt{formal/lean/VERIFICATION\_AXIOMS.txt}) reports that all \textbf{34 theorems}
+\texttt{formal/lean/VERIFICATION\_AXIOMS.txt}) reports that all \textbf{36 theorems}
 depend only on the standard classical axioms \texttt{[propext,
 Classical.choice, Quot.sound]}; no \texttt{sorryAx} appears anywhere. The Lean
 kernel has therefore checked each printed claim above end-to-end: the algebra

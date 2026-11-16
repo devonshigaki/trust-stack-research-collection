@@ -28,7 +28,7 @@ This repository contains the reproducible research base of **The Trust Stack**, 
 ```text
 manuscripts/    Per-manuscript directories ({collection,value_of_trust,gtt,tdf,tfp,whitepaper}/) with .md, .tex, .bib, compiled .pdf, and figures/ symlinks
 figures/        Single canonical figure store (symlinked cleanly into manuscripts/*/figures)
-formal/         Lean 4.35 + Mathlib (34 theorems, leanchecker), Z3 SMT, SymPy CAS, secp256k1 NIZK (ZK-STP v8), TLA+ TLC
+formal/         Lean 4.35 + Mathlib (36 theorems, leanchecker), Z3 SMT, SymPy CAS, secp256k1 NIZK (ZK-STP v8), TLA+ TLC
 protocols/      Pre-registrations, amendments, pilot protocols, IRB exemption, FCRA matrix
 code/
   ├── empirical/    Real external-data pipelines (OpenML 42477 30k credit, CLICS-3, simD14 AlphaGenome, simD15 GTEx, FlyWire, MICrONS)

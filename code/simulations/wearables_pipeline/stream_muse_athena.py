@@ -75,11 +75,16 @@ def resolve_muse_athena_channel_map(board_id: int) -> Dict[str, List[int]]:
     }
 
 
-def load_or_create_edge_key(db_path: str, conn: Optional[sqlite3.Connection] = None) -> bytes:
+def load_or_create_edge_key(
+    db_path: str,
+    conn: Optional[sqlite3.Connection] = None,
+    allow_ephemeral: bool = False,
+) -> bytes:
     """
     Derives 256-bit AES-GCM key via PBKDF2-HMAC-SHA256 (600,000 iterations) using a
     128-bit CSPRNG salt persisted inside `vault_kdf_metadata` (NIST SP 800-132; decoupled
     from file path so database relocation/renaming never breaks decryption).
+    Fails closed unless `allow_ephemeral=True` (for offline synthetic dry-runs only, using CSPRNG).
     """
     env_hex = os.environ.get("TRUST_EDGE_AES_KEY")
     if env_hex:
@@ -107,8 +112,12 @@ def load_or_create_edge_key(db_path: str, conn: Optional[sqlite3.Connection] = N
             salt = os.urandom(16)
         kdf = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=600_000)
         return kdf.derive(passphrase.encode("utf-8"))
-    # Ephemeral in-memory key when running offline synthetic self-tests (zero key material written to disk)
-    return hashlib.sha256(f"ephemeral_session:{os.path.abspath(db_path)}".encode("utf-8")).digest()
+    if allow_ephemeral:
+        # Unpredictable in-memory CSPRNG session key for synthetic tests only (never deterministic path hash)
+        return os.urandom(32)
+    raise RuntimeError(
+        "Refusing persistent Muse Athena DB without TRUST_EDGE_AES_KEY or TRUST_EDGE_PASSPHRASE"
+    )
 
 
 def pseudonymize_subject(subject_id: str, key: bytes) -> str:
@@ -382,7 +391,9 @@ class MuseAthenaStreamer:
         self.conn = init_edge_database(self.db_path)
         if os.path.exists(self.db_path):
             os.chmod(self.db_path, 0o600)
-        self.aes_key = load_or_create_edge_key(self.db_path, conn=self.conn)
+        self.aes_key = load_or_create_edge_key(
+            self.db_path, conn=self.conn, allow_ephemeral=not self.use_hardware
+        )
         self.subject_psid = pseudonymize_subject(subject_id, self.aes_key)
         self.board = None
         self.channel_map = resolve_muse_athena_channel_map(
@@ -412,10 +423,11 @@ class MuseAthenaStreamer:
 
         self.lsl_outlet_eeg = None
         self.lsl_outlet_fnirs = None
+        self._lsl_fnirs_optodes = 4 if self.use_hardware else NUM_FNIRS_OPTODES
         if HAS_LSL:
             info_eeg = StreamInfo("DOCAS_MuseAthena_EEG", "EEG", NUM_EEG_CHANNELS, FS_EEG, "float32", f"eeg_{session_id}")
             self.lsl_outlet_eeg = StreamOutlet(info_eeg)
-            info_fnirs = StreamInfo("DOCAS_MuseAthena_fNIRS", "NIRS", NUM_FNIRS_OPTODES * 3, FS_FNIRS, "float32", f"fnirs_{session_id}")
+            info_fnirs = StreamInfo("DOCAS_MuseAthena_fNIRS", "NIRS", self._lsl_fnirs_optodes * 3, FS_FNIRS, "float32", f"fnirs_{session_id}")
             self.lsl_outlet_fnirs = StreamOutlet(info_fnirs)
 
         self.synth = SyntheticBiophysicalMuseAthena(seed=1337)
@@ -503,8 +515,8 @@ class MuseAthenaStreamer:
 
         if self.lsl_outlet_eeg and len(t_eeg) > 0:
             self.lsl_outlet_eeg.push_chunk(eeg.T.astype(np.float32).tolist())
-        if self.lsl_outlet_fnirs and len(t_fnirs) > 0:
-            fnirs_flattened = fnirs.reshape(15, -1).T
+        if self.lsl_outlet_fnirs and len(t_fnirs) > 0 and n_active > 0:
+            fnirs_flattened = fnirs[:self._lsl_fnirs_optodes].reshape(self._lsl_fnirs_optodes * 3, -1).T
             self.lsl_outlet_fnirs.push_chunk(fnirs_flattened.astype(np.float32).tolist())
 
     def persist_imu_chunk(self, t_start: float, acc: np.ndarray, gyr: np.ndarray):
@@ -717,12 +729,18 @@ def run_self_test() -> bool:
         ct_hex = cur.fetchone()[0]
         assert "sub_01" not in ct_hex
         aad_c1 = b"test_sess_c1:subject_manifest"
-        assert '"subject_id":"sub_01"' in decrypt_sensitive_field(ct_hex, load_or_create_edge_key(test_db, conn=conn), aad=aad_c1)
+        assert '"subject_id":"sub_01"' in decrypt_sensitive_field(ct_hex, streamer_c1.aes_key, aad=aad_c1)
         # Cross-row AEAD context transplant rejection check
         try:
-            decrypt_sensitive_field(ct_hex, load_or_create_edge_key(test_db, conn=conn), aad=b"test_sess_c4:subject_manifest")
+            decrypt_sensitive_field(ct_hex, streamer_c1.aes_key, aad=b"test_sess_c4:subject_manifest")
             raise AssertionError("Cross-session AEAD transplant should have failed!")
         except Exception:
+            pass
+        # Fail-closed check: non-ephemeral key loading MUST raise RuntimeError without env key/passphrase
+        try:
+            load_or_create_edge_key(test_db, conn=conn, allow_ephemeral=False)
+            raise AssertionError("Fail-closed edge key check failed to reject missing key!")
+        except RuntimeError:
             pass
         # File-relocation + PBKDF2 persisted-salt survivability check
         os.environ["TRUST_EDGE_PASSPHRASE"] = "pilot-test-passphrase"

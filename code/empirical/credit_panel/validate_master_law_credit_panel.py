@@ -399,6 +399,69 @@ def main():
     _, _, zo_d_auc, zo_delong_z, zo_delong_p = fast_delong_paired_test(y, oof_zo_sym, oof_zo_asym)
     zo_ln_gt_lp_folds = sum(1 for lp_z, ln_z in zo_asym_pairs if ln_z > lp_z)
 
+    # Zero-Free-Parameter Contractual Boundary Ablation (PAY_t <= 0 compliance +Pay/Bill vs PAY_t >= 1 breach -PAY_t/3)
+    # ZERO arbitrary offsets (-0.15/+0.25/0.20 removed completely) under matched 36-point inner CV!
+    contract_cash = np.zeros((len(df), 6), dtype=np.float64)
+    contract_cash[:, 1:] = np.where(
+        prior_bills_raw > 0.0,
+        np.clip(curr_pays_raw / np.maximum(prior_bills_raw, 1e-4), 0.0, 1.0),
+        0.0,
+    )
+    contract_eps = np.where(statuses_raw > 0, -np.clip(statuses_raw / 3.0, 0.0, 1.0), contract_cash)
+    r_gate_contract = np.where((statuses_raw == -2) & (np.abs(df[["x17", "x16", "x15", "x14", "x13", "x12"]].astype(float).values) < 1e-6), 0.0, 1.0)
+
+    def _run_contract_traj(lp: float, ln: float) -> np.ndarray:
+        s_c = np.full(len(df), 0.50)
+        for t_step in range(6):
+            e_t = contract_eps[:, t_step]
+            r_t = r_gate_contract[:, t_step]
+            s_c = np.clip(s_c + np.where(e_t >= 0, lp, ln) * e_t * r_t - 0.01 * (s_c - 0.50), 0.0, 1.0)
+        return s_c
+
+    def _fit_contract_inner(tr_idx: np.ndarray, sym_only: bool):
+        from sklearn.metrics import log_loss as _sk_logloss
+        grid_a = [0.02, 0.05, 0.10, 0.20, 0.30, 0.50]
+        grid_s = [float(round(x, 6)) for x in np.geomspace(0.02, 0.50, 36)]
+        cands = [(l, l) for l in grid_s] if sym_only else [(a, b) for a in grid_a for b in grid_a]
+        iskf = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+        best_l, best_p = float("inf"), (0.05, 0.05 if sym_only else 0.20)
+        for lp_c, ln_c in cands:
+            s_c = _run_contract_traj(lp_c, ln_c)
+            ls = []
+            for itr, iva in iskf.split(tr_idx, y[tr_idx]):
+                clf_i = make_pipeline(StandardScaler(), LogisticRegression(max_iter=500))
+                clf_i.fit(np.column_stack([util_zo[tr_idx[itr]], s_c[tr_idx[itr]]]), y[tr_idx[itr]])
+                ls.append(_sk_logloss(y[tr_idx[iva]], clf_i.predict_proba(np.column_stack([util_zo[tr_idx[iva]], s_c[tr_idx[iva]]]))[:, 1]))
+            if float(np.mean(ls)) < best_l:
+                best_l, best_p = float(np.mean(ls)), (lp_c, ln_c)
+        return best_p
+
+    oof_pf_sym = np.zeros(len(df), dtype=np.float64)
+    oof_pf_asym = np.zeros(len(df), dtype=np.float64)
+    pf_asym_pairs = []
+    for tr_idx, va_idx in skf.split(df, y):
+        lp_ps, ln_ps = _fit_contract_inner(tr_idx, sym_only=True)
+        lp_pa, ln_pa = _fit_contract_inner(tr_idx, sym_only=False)
+        pf_asym_pairs.append((lp_pa, ln_pa))
+        s_ps = _run_contract_traj(lp_ps, ln_ps)
+        s_pa = _run_contract_traj(lp_pa, ln_pa)
+        clf_ps = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000)).fit(np.column_stack([util_zo[tr_idx], s_ps[tr_idx]]), y[tr_idx])
+        clf_pa = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000)).fit(np.column_stack([util_zo[tr_idx], s_pa[tr_idx]]), y[tr_idx])
+        oof_pf_sym[va_idx] = clf_ps.predict_proba(np.column_stack([util_zo[va_idx], s_ps[va_idx]]))[:, 1]
+        oof_pf_asym[va_idx] = clf_pa.predict_proba(np.column_stack([util_zo[va_idx], s_pa[va_idx]]))[:, 1]
+    _, _, pf_d_auc, pf_delong_z, pf_delong_p = fast_delong_paired_test(y, oof_pf_sym, oof_pf_asym)
+    pf_ln_gt_lp_folds = sum(1 for lp_p, ln_p in pf_asym_pairs if ln_p > lp_p)
+
+    # Cross-validate autoresearch Huber-IRLS estimator directly on empirical 30k panel transitions
+    import sys as _sys
+    _ar_dir = os.path.abspath(os.path.join(base_dir, "../../tools/autoresearch"))
+    _sys.path.insert(0, _ar_dir)
+    from candidate_estimator import estimate_user_gains
+    emp_lam, emp_lp, emp_ln = estimate_user_gains(
+        contract_eps[:, 1:].ravel(),
+        np.repeat((0.5 - y.astype(float)) * 0.25, 5),
+    )
+
     # Cox (1958) Logistic Calibration (intercept, slope) + Subgroup Brier Reliability (Sex)
     p_gtt_clip = np.clip(res_gtt["oof_probs"], 1e-6, 1.0 - 1e-6)
     logit_gtt = np.log(p_gtt_clip / (1.0 - p_gtt_clip)).reshape(-1, 1)
@@ -430,6 +493,7 @@ def main():
     print(f"5x5 Repeated Stratified CV (25 folds):  ln>lp in {rep_asym_wins}/{rep_total_folds} folds | Mean GTT AUC={np.mean(rep_aucs_gtt):.4f} vs Sym={np.mean(rep_aucs_sym):.4f}")
     print(f"Nadeau-Bengio (2003) Correlated-CV:     t_AUC={nb_t:.2f} (p={nb_p:.4f}) | t_LL={nb_ll_t:.2f} (p={nb_ll_p:.4f}) | Untuned/Zero-Offset Folds Beating Sym: {raw_asym_folds}/5, {zero_off_folds_beating_sym}/5")
     print(f"Zero-Offset Matched Inner-CV Ablation:  ln>lp in {zo_ln_gt_lp_folds}/5 folds | Delta AUC={zo_d_auc:+.4f} | DeLong z={zo_delong_z:.2f} (p={zo_delong_p:.2e})")
+    print(f"Param-Free Contractual Boundary Race:   ln>lp in {pf_ln_gt_lp_folds}/5 folds | Delta AUC={pf_d_auc:+.4f} | DeLong z={pf_delong_z:.2f} (p={pf_delong_p:.2e}) | Huber-IRLS ratio={emp_ln/max(emp_lp,1e-9):.2f}x")
     print(f"Cox (1958) Calibration & Subgroup Rel:  intercept={cox_intercept:+.4f}, slope={cox_slope:.4f} | Brier Rel sex1={subgroup_brier_rel['sex_1']:.5f}, sex2={subgroup_brier_rel['sex_2']:.5f}")
     print(f"ECOA Adverse Impact Ratio (Sex):        AIR={air_sex:.4f} [Threshold >= 0.80]")
 
@@ -488,6 +552,14 @@ def main():
                     "delta_auc": zo_d_auc,
                     "delong_z": zo_delong_z,
                     "delong_p": zo_delong_p,
+                },
+                "param_free_contractual_ablation": {
+                    "ln_gt_lp_folds": pf_ln_gt_lp_folds,
+                    "delta_auc": pf_d_auc,
+                    "delong_z": pf_delong_z,
+                    "delong_p": pf_delong_p,
+                    "autoresearch_huber_irls_lp": float(emp_lp),
+                    "autoresearch_huber_irls_ln": float(emp_ln),
                 },
                 "cox_calibration": {"intercept": cox_intercept, "slope": cox_slope},
                 "subgroup_brier_reliability": subgroup_brier_rel,
