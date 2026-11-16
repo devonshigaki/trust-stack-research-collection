@@ -42,6 +42,13 @@
     "cash_flow_buffer_ratio",
     "obligation_repayment_ratio"
   ],
+  "temporal_master_law_top4": [
+    "spend_volatility",
+    "income_timing_dispersion",
+    "cash_flow_buffer_ratio",
+    "obligation_repayment_ratio"
+  ],
+  "temporal_interventional_efficiency_error": 0.0,
   "top1_matches_boundary": true,
   "counterfactual_target_achieved": true,
   "c1_efficiency_pass": true,

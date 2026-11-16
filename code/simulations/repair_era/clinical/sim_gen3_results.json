@@ -6,11 +6,19 @@
   "ivw_causal_estimate": 0.40052934975381765,
   "ivw_standard_error": 0.021670029693024964,
   "ivw_p_value": 0.0,
+  "cochrans_q": 16.690227119431505,
+  "min_instrument_f_stat": 18.261784287868416,
+  "mr_egger_i2_gx": 0.920297051906519,
   "egger_intercept": 0.0018111648428668745,
   "egger_intercept_p_value": 0.940254156974905,
+  "weighted_median_estimate": 0.41104672422009497,
+  "weighted_median_se": 0.03113481215617532,
+  "weighted_median_p_value": 0.0,
+  "weighted_median_33pct_corrupt": 0.4373466203560352,
   "coloc_pp4_posterior": 0.9989816765732378,
   "c1_causal_ivw_pass": true,
   "c2_pleiotropy_free_pass": true,
   "c3_colocalization_pass": true,
-  "verdict": "COMPOUND PASS (3/3 CRITERIA MET)"
+  "c4_weighted_median_breakdown_pass": true,
+  "verdict": "COMPOUND PASS (4/4 CRITERIA MET)"
 }

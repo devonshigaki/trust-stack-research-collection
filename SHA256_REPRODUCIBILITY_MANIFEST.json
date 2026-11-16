@@ -1,11 +1,11 @@
 {
   "release": "v4.5",
-  "timestamp": "2026-11-16T03:26:17Z",
+  "timestamp": "2026-11-16T03:48:30Z",
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.5",
   "total_files_hashed": 1053,
-  "total_manifest_size_mb": 261.73,
+  "total_manifest_size_mb": 261.74,
   "automated_ci_tasks_verified": 57,
   "files": {
     "CITATION.cff": {
@@ -2061,12 +2061,12 @@
       "bytes": 8506
     },
     "code/simulations/repair_era/whitepaper/sim_shap_adverse_action.py": {
-      "sha256": "469e812cca5ba5837054f88e29b6c108a40b1ce4536fc36fa2e23024e3f35389",
-      "bytes": 11336
+      "sha256": "ed481afa678dc3f6560b0d3de8f6b022c3f7922c278bc5a93370c6f6ada716bb",
+      "bytes": 13882
     },
     "code/simulations/repair_era/whitepaper/sim_shap_results.json": {
-      "sha256": "e7d4b98e9c886825e45c37f18eb1fb537528efc667a1358c399174d9d81bcbb6",
-      "bytes": 1557
+      "sha256": "df8b8b791008c0dcb122c1b14aa6f5ed10e51dde40c5994379de456793ff7451",
+      "bytes": 1764
     },
     "code/simulations/repair_era/whitepaper/sim_w9_lemons_results.json": {
       "sha256": "88709a8a5d00129436db1b56ed9730f0eb7735f41cc35659921c471698b65739",
@@ -2185,8 +2185,8 @@
       "bytes": 4414
     },
     "code/simulations/repair_era/clinical/sim_2smr_phewas_protocol.py": {
-      "sha256": "79b13da3e0f240c66c4712c09644752913973e8230774fab0b4d95079c36884f",
-      "bytes": 9493
+      "sha256": "82d1af44b5afae5392db3fa70ac97c2a40e28d9c0039aa894013ca3b74ab8922",
+      "bytes": 12602
     },
     "code/simulations/repair_era/clinical/sim_adcy_coincidence_genomics.py": {
       "sha256": "3a8dcec51cd4ac3f9b08dd54567510a42c456109ca2bb5b7702266a5bd686147",
@@ -2213,8 +2213,8 @@
       "bytes": 553
     },
     "code/simulations/repair_era/clinical/sim_gen3_results.json": {
-      "sha256": "997c0adb1c0141c4a9783d7865afe1d27473d9483dacc76b02e57d7bc3dff50f",
-      "bytes": 544
+      "sha256": "a650b989e45fe58eb64659d5980a962a466f49eaa9ae73f530393523aea36d54",
+      "bytes": 896
     },
     "code/simulations/repair_era/clinical/sim_gen4_results.json": {
       "sha256": "70a8f14d8868a284dfdef19499ce6813981fd8f0c9443c46746ea878dc1c844f",

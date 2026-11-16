@@ -81,6 +81,41 @@ def subset_eval(x, baseline, active_indices):
         instance[idx] = x[idx]
     return scoring_function(instance)
 
+
+def exact_interventional_shapley(x, background_X, model_fn):
+    """Interventional Expected Shapley E_{X_~S}[f(x_S, X_~S)] (avoids Jensen bias on non-linear models)."""
+    n_features = len(x)
+    bg = np.asarray(background_X, dtype=np.float64)
+    shapley_values = np.zeros(n_features, dtype=np.float64)
+    all_indices = list(range(n_features))
+    for i in all_indices:
+        other_indices = [idx for idx in all_indices if idx != i]
+        phi_i = 0.0
+        for k in range(len(other_indices) + 1):
+            weight = (math.factorial(k) * math.factorial(n_features - k - 1)) / math.factorial(n_features)
+            for subset in itertools.combinations(other_indices, k):
+                x_with = bg.copy()
+                for idx in list(subset) + [i]:
+                    x_with[:, idx] = x[idx]
+                x_without = bg.copy()
+                for idx in subset:
+                    x_without[:, idx] = x[idx]
+                phi_i += weight * (float(np.mean(model_fn(x_with))) - float(np.mean(model_fn(x_without))))
+        shapley_values[i] = phi_i
+    return shapley_values
+
+
+def temporal_master_law_score(X):
+    """6-period asymmetric Master Stability Law recurrence over normalized cash-flow signals."""
+    X_arr = np.atleast_2d(np.asarray(X, dtype=np.float64))
+    s_curr = np.full(X_arr.shape[0], 0.50, dtype=np.float64)
+    lam_p, lam_n, delta_s, s_base = 0.08, 0.32, 0.05, 0.50
+    for step_idx in range(6):
+        eps = np.dot(X_arr, WEIGHTS) * (0.65 + 0.07 * step_idx)
+        lam = np.where(eps >= 0.0, lam_p, lam_n)
+        s_curr = np.clip(s_curr + lam * eps - delta_s * (s_curr - s_base), 0.0, 1.0)
+    return s_curr[0] if np.ndim(X) == 1 else s_curr
+
 def run_shap_battery():
     print("=" * 65)
     print("RUNNING SIMULATION W8: TEMPORAL SHAP ADVERSE-ACTION ENGINE")
@@ -122,16 +157,24 @@ def run_shap_battery():
     eval_fn = lambda x_inst, base, active: subset_eval(x_inst, base, active)
     shap_vals = exact_shapley(sample_x, baseline_mean, eval_fn)
 
-    # Verification: Efficiency Property
+    # Verification: Efficiency Property (Static Point-Baseline + Interventional Temporal Master Law)
     reconstructed_diff = np.sum(shap_vals)
     true_diff = sample_score - baseline_score
     efficiency_error = abs(reconstructed_diff - true_diff)
+
+    bg_sample = X_norm[:80]
+    shap_temporal_int = exact_interventional_shapley(sample_x, bg_sample, temporal_master_law_score)
+    temporal_expected_base = float(np.mean(temporal_master_law_score(bg_sample)))
+    temporal_sample_score = float(temporal_master_law_score(sample_x))
+    temporal_efficiency_error = abs(float(np.sum(shap_temporal_int)) - (temporal_sample_score - temporal_expected_base))
+    temporal_top4 = [FEATURES[idx] for idx in np.argsort(shap_temporal_int)[:4]]
 
     print(f"Sample Denied Applicant #{sample_denied_idx}:")
     print(f"  Assigned Trust Score: {sample_score:.4f} (Threshold: {threshold:.2f})")
     print(f"  Sum of Shapley Attributions: {reconstructed_diff:+.6f}")
     print(f"  True Score Diff from Baseline: {true_diff:+.6f}")
-    print(f"  Efficiency Discrepancy: {efficiency_error:.2e} (Machine-precision PASS)\n")
+    print(f"  Efficiency Discrepancy: {efficiency_error:.2e} (Machine-precision PASS)")
+    print(f"  Temporal Master-Law Interventional Shapley Efficiency Error: {temporal_efficiency_error:.2e} (Top-1: {temporal_top4[0]})\n")
 
     # Principal Adverse Action Reasons (Reg B 12 C.F.R. § 1002.9(b)(2) & CFPB Circulars 2022-03/2023-03)
     # Audit both population-mean Shapley AND approval-boundary cohort Shapley (lowest-quartile approved)
@@ -224,9 +267,11 @@ def run_shap_battery():
             for i, idx in enumerate(ranked_reasons_order[:4])
         ],
         "boundary_cohort_top4": boundary_top4,
+        "temporal_master_law_top4": temporal_top4,
+        "temporal_interventional_efficiency_error": float(temporal_efficiency_error),
         "top1_matches_boundary": bool(top_4_reasons[0] == boundary_top4[0]),
         "counterfactual_target_achieved": bool(recourse_found),
-        "c1_efficiency_pass": bool(efficiency_error < 1e-10),
+        "c1_efficiency_pass": bool(efficiency_error < 1e-10 and temporal_efficiency_error < 1e-10),
         "c2_recourse_pass": bool(recourse_found)
     }
 
