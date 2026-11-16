@@ -833,9 +833,19 @@ def evaluate_concordance(
             t_stat, p_val = compute_welch_ttest(active_hbo2, baseline_hbo2, adjust_autocorr=True)
             mean_active = float(np.mean(active_hbo2)) if active_hbo2 else 0.0
             mean_base = float(np.mean(baseline_hbo2)) if baseline_hbo2 else 0.0
-            cohens_d = (mean_active - mean_base) / (np.std(baseline_hbo2) + 1e-9) if len(baseline_hbo2) > 1 else 0.0
+            if len(active_hbo2) > 1 and len(baseline_hbo2) > 1:
+                s_pool = math.sqrt(
+                    ((len(active_hbo2) - 1) * float(np.var(active_hbo2, ddof=1))
+                     + (len(baseline_hbo2) - 1) * float(np.var(baseline_hbo2, ddof=1)))
+                    / max(1, len(active_hbo2) + len(baseline_hbo2) - 2)
+                )
+                hedges_j = 1.0 - 3.0 / max(1.0, 4.0 * (len(active_hbo2) + len(baseline_hbo2)) - 9.0)
+                cohens_d = ((mean_active - mean_base) / max(s_pool, 1e-9)) * hedges_j
+            else:
+                cohens_d = 0.0
 
-            h1_passed = bool(mean_sci >= 0.850 and (p_val < 0.01 or cohens_d >= 0.50))
+            # Strict pre-registered conjunctive gate (no effect-size OR bypass of statistical significance)
+            h1_passed = bool(mean_sci >= 0.850 and p_val < 0.01)
             p_values_for_fdr["PILOT-H1"] = float(p_val)
             results["hypotheses"]["PILOT-H1"] = {
                 "description": "Prefrontal fNIRS Signal Quality (SCI >= 0.85) & Medial Cortical Δ[HbO2] Activation",
@@ -901,16 +911,35 @@ def evaluate_concordance(
         hrv_rows = cur.fetchall()
 
         if len(hrv_rows) >= 4:
-            n_hrv = len(hrv_rows)
-            half = n_hrv // 2
-            pre_rmssd = [r[1] for r in hrv_rows[:half]]
-            post_rmssd = [r[1] for r in hrv_rows[half:]]
+            # Event-locked windowing around positive validation events (epsilon > 0: [t-120s, t) vs [t, t+120s])
+            # when validation_events exists; otherwise chronological split with autocorrelation-adjusted Welch t-test.
+            pre_rmssd: List[float] = []
+            post_rmssd: List[float] = []
+            cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='validation_events'")
+            if cur.fetchone():
+                ev_q = "SELECT timestamp_epoch FROM validation_events WHERE epsilon > 0"
+                ev_p: List[Any] = []
+                if session_id:
+                    ev_q += " AND session_id = ?"
+                    ev_p.append(session_id)
+                cur.execute(ev_q, ev_p)
+                ev_times = [float(r[0]) for r in cur.fetchall()]
+                if ev_times:
+                    for ts_val, rm_val in hrv_rows:
+                        if any((t_ev - 120.0) <= ts_val < t_ev for t_ev in ev_times):
+                            pre_rmssd.append(rm_val)
+                        elif any(t_ev <= ts_val <= (t_ev + 120.0) for t_ev in ev_times):
+                            post_rmssd.append(rm_val)
+            if len(pre_rmssd) < 2 or len(post_rmssd) < 2:
+                half = len(hrv_rows) // 2
+                pre_rmssd = [r[1] for r in hrv_rows[:half]]
+                post_rmssd = [r[1] for r in hrv_rows[half:]]
 
             mean_pre = float(np.mean(pre_rmssd))
             mean_post = float(np.mean(post_rmssd))
             surge_pct = ((mean_post - mean_pre) / (mean_pre + 1e-9)) * 100.0
 
-            t_stat_h2, p_val_h2 = compute_welch_ttest(post_rmssd, pre_rmssd)
+            t_stat_h2, p_val_h2 = compute_welch_ttest(post_rmssd, pre_rmssd, adjust_autocorr=True)
             h2_passed = bool(surge_pct >= 15.0 and p_val_h2 < 0.001)
             p_values_for_fdr["PILOT-H2"] = float(p_val_h2)
 
@@ -1758,6 +1787,31 @@ def run_self_test() -> bool:
     sci_parsed = parse_apple_health_xml(sci_xml, is_file=False)
     assert len(sci_parsed["state_of_mind"]) == 1 and abs(sci_parsed["state_of_mind"][0]["valence"] - 0.12) < 1e-9
     print("✓ XML Security & Scientific-Notation Oracle: Rejected <!DOCTYPE>/<!ENTITY> and parsed valence='1.2e-01'")
+
+    # Monte Carlo H0 Null-Calibration Oracle: 100 autocorrelated AR(1) + 0.1 Hz Mayer-wave null trials
+    # must NOT exhibit Type-I false-pass inflation on PILOT-H1 / PILOT-H2
+    null_rng = np.random.default_rng(12345)
+    false_h1, false_h2 = 0, 0
+    n_null_trials = 100
+    for _ in range(n_null_trials):
+        ar_f = np.zeros(120)
+        ar_h = np.zeros(40)
+        for k in range(1, 120):
+            ar_f[k] = 0.7 * ar_f[k - 1] + null_rng.normal(0.0, 0.3) + 0.1 * math.sin(2.0 * math.pi * 0.1 * k)
+        for k in range(1, 40):
+            ar_h[k] = 0.6 * ar_h[k - 1] + null_rng.normal(0.0, 3.0)
+        _, p_n1 = compute_welch_ttest(ar_f[30:90], ar_f[:30], adjust_autocorr=True)
+        if p_n1 < 0.01:
+            false_h1 += 1
+        m_pre = float(np.mean(45.0 + ar_h[:20]))
+        m_post = float(np.mean(45.0 + ar_h[20:]))
+        surge_n2 = ((m_post - m_pre) / max(m_pre, 1e-6)) * 100.0
+        _, p_n2 = compute_welch_ttest(45.0 + ar_h[20:], 45.0 + ar_h[:20], adjust_autocorr=True)
+        if surge_n2 >= 15.0 and p_n2 < 0.001:
+            false_h2 += 1
+    assert false_h1 <= 6, f"PILOT-H1 Type-I error inflated under AR(1) null: {false_h1}/{n_null_trials}"
+    assert false_h2 <= 2, f"PILOT-H2 Type-I error inflated under AR(1) null: {false_h2}/{n_null_trials}"
+    print(f"✓ Monte Carlo H0 Null-Calibration Oracle: Type-I false-pass rate H1={false_h1}/{n_null_trials}, H2={false_h2}/{n_null_trials}")
 
     print("\n" + "=" * 80)
     print("✅ SELF-TEST PASSED: ALL 13 TESTABLE PILOT & AMENDMENT HYPOTHESES & STOPPING GATES VALIDATED")

@@ -339,7 +339,9 @@ def main():
         rep_asym_wins += sum(1 for lp, ln in r_gtt["fitted_pairs"] if ln > lp)
         rep_total_folds += 5
 
-    # Zero-offset raw mismatch check (no -0.15 / +0.25 / /3.0 hand-tuned constants)
+    # Zero-offset parameter-free specification horse race: BOTH Symmetric EWMA and Asymmetric GTT
+    # are fitted endogenously via identical 36-point inner-CV on the exact same parameter-free eps_t
+    # (`clip(Pay_t / Bill_{t-1} - 1, -1, 1)` with zero -0.15/+0.25/3.0 hand-tuned constants).
     zero_off_cash = np.zeros((len(df), 6), dtype=np.float64)
     zero_off_cash[:, 1:] = np.where(
         prior_bills_raw > 0.0,
@@ -347,20 +349,68 @@ def main():
         0.0,
     )
     zero_off_eps = np.where(statuses_raw > 0, -1.0, zero_off_cash)
-    zero_off_folds_beating_sym = 0
-    for tr_idx, va_idx in skf.split(df, y):
+    util_zo = df["x12"].astype(float).values / limit_bal_raw
+
+    def _run_zo_trajectory(lp: float, ln: float) -> np.ndarray:
         s_zo = np.full(len(df), 0.50)
         for t_step in range(6):
             e_t = zero_off_eps[:, t_step]
-            s_zo = np.clip(s_zo + np.where(e_t >= 0, 0.05, 0.30) * e_t - 0.01 * (s_zo - 0.50), 0.0, 1.0)
-        clf_zo = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
-        util_zo = df["x12"].astype(float).values / limit_bal_raw
-        X_zo = np.column_stack([util_zo, s_zo])
-        clf_zo.fit(X_zo[tr_idx], y[tr_idx])
-        if roc_auc_score(y[va_idx], clf_zo.predict_proba(X_zo[va_idx])[:, 1]) > roc_auc_score(y[va_idx], p_sym[va_idx]):
+            s_zo = np.clip(s_zo + np.where(e_t >= 0, lp, ln) * e_t - 0.01 * (s_zo - 0.50), 0.0, 1.0)
+        return s_zo
+
+    def _fit_zo_inner(tr_idx: np.ndarray, sym_only: bool):
+        from sklearn.metrics import log_loss as _sk_logloss
+        grid_a = [0.02, 0.05, 0.10, 0.20, 0.30, 0.50]
+        grid_s = [float(round(x, 6)) for x in np.geomspace(0.02, 0.50, 36)]
+        cands = [(l, l) for l in grid_s] if sym_only else [(a, b) for a in grid_a for b in grid_a]
+        iskf = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+        best_l, best_p = float("inf"), (0.05, 0.05 if sym_only else 0.20)
+        for lp_c, ln_c in cands:
+            s_c = _run_zo_trajectory(lp_c, ln_c)
+            ls = []
+            for itr, iva in iskf.split(tr_idx, y[tr_idx]):
+                clf_i = make_pipeline(StandardScaler(), LogisticRegression(max_iter=500))
+                clf_i.fit(np.column_stack([util_zo[tr_idx[itr]], s_c[tr_idx[itr]]]), y[tr_idx[itr]])
+                ls.append(_sk_logloss(y[tr_idx[iva]], clf_i.predict_proba(np.column_stack([util_zo[tr_idx[iva]], s_c[tr_idx[iva]]]))[:, 1]))
+            if float(np.mean(ls)) < best_l:
+                best_l, best_p = float(np.mean(ls)), (lp_c, ln_c)
+        return best_p
+
+    oof_zo_sym = np.zeros(len(df), dtype=np.float64)
+    oof_zo_asym = np.zeros(len(df), dtype=np.float64)
+    zo_asym_pairs = []
+    zero_off_folds_beating_sym = 0
+    for tr_idx, va_idx in skf.split(df, y):
+        lp_zs, ln_zs = _fit_zo_inner(tr_idx, sym_only=True)
+        lp_za, ln_za = _fit_zo_inner(tr_idx, sym_only=False)
+        zo_asym_pairs.append((lp_za, ln_za))
+        s_zs = _run_zo_trajectory(lp_zs, ln_zs)
+        s_za = _run_zo_trajectory(lp_za, ln_za)
+        clf_zs = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
+        clf_za = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
+        X_zs = np.column_stack([util_zo, s_zs])
+        X_za = np.column_stack([util_zo, s_za])
+        clf_zs.fit(X_zs[tr_idx], y[tr_idx])
+        clf_za.fit(X_za[tr_idx], y[tr_idx])
+        oof_zo_sym[va_idx] = clf_zs.predict_proba(X_zs[va_idx])[:, 1]
+        oof_zo_asym[va_idx] = clf_za.predict_proba(X_za[va_idx])[:, 1]
+        if roc_auc_score(y[va_idx], oof_zo_asym[va_idx]) > roc_auc_score(y[va_idx], oof_zo_sym[va_idx]):
             zero_off_folds_beating_sym += 1
+    _, _, zo_d_auc, zo_delong_z, zo_delong_p = fast_delong_paired_test(y, oof_zo_sym, oof_zo_asym)
+    zo_ln_gt_lp_folds = sum(1 for lp_z, ln_z in zo_asym_pairs if ln_z > lp_z)
+
+    # Cox (1958) Logistic Calibration (intercept, slope) + Subgroup Brier Reliability (Sex)
+    p_gtt_clip = np.clip(res_gtt["oof_probs"], 1e-6, 1.0 - 1e-6)
+    logit_gtt = np.log(p_gtt_clip / (1.0 - p_gtt_clip)).reshape(-1, 1)
+    cox_lr = LogisticRegression(C=1e6, max_iter=1000).fit(logit_gtt, y)
+    cox_intercept = float(cox_lr.intercept_[0])
+    cox_slope = float(cox_lr.coef_[0][0])
 
     sex = df["x2"].astype(int).values
+    subgroup_brier_rel = {
+        "sex_1": murphy_brier_decomposition(y[sex == 1], res_gtt["oof_probs"][sex == 1])["reliability"],
+        "sex_2": murphy_brier_decomposition(y[sex == 2], res_gtt["oof_probs"][sex == 2])["reliability"],
+    }
     approved = res_gtt["oof_probs"] < res_gtt["oof_cutoffs"]
     air_sex = min(float(np.mean(approved[sex == 1])), float(np.mean(approved[sex == 2]))) / max(
         float(np.mean(approved[sex == 1])), float(np.mean(approved[sex == 2]))
@@ -379,10 +429,12 @@ def main():
     print(f"DeLong (1988) Exact Paired AUC Test:    Delta AUC={delong_diff:+.4f} | z={delong_z:.2f} (p={delong_p:.2e})")
     print(f"5x5 Repeated Stratified CV (25 folds):  ln>lp in {rep_asym_wins}/{rep_total_folds} folds | Mean GTT AUC={np.mean(rep_aucs_gtt):.4f} vs Sym={np.mean(rep_aucs_sym):.4f}")
     print(f"Nadeau-Bengio (2003) Correlated-CV:     t_AUC={nb_t:.2f} (p={nb_p:.4f}) | t_LL={nb_ll_t:.2f} (p={nb_ll_p:.4f}) | Untuned/Zero-Offset Folds Beating Sym: {raw_asym_folds}/5, {zero_off_folds_beating_sym}/5")
+    print(f"Zero-Offset Matched Inner-CV Ablation:  ln>lp in {zo_ln_gt_lp_folds}/5 folds | Delta AUC={zo_d_auc:+.4f} | DeLong z={zo_delong_z:.2f} (p={zo_delong_p:.2e})")
+    print(f"Cox (1958) Calibration & Subgroup Rel:  intercept={cox_intercept:+.4f}, slope={cox_slope:.4f} | Brier Rel sex1={subgroup_brier_rel['sex_1']:.5f}, sex2={subgroup_brier_rel['sex_2']:.5f}")
     print(f"ECOA Adverse Impact Ratio (Sex):        AIR={air_sex:.4f} [Threshold >= 0.80]")
 
     assert asymmetric_folds == 5 and res_gtt["roc_auc"] > res_sym["roc_auc"] and ci_lo > 0.0 and vuong_z > 2.58
-    assert delong_z > 2.58 and rep_asym_wins == rep_total_folds
+    assert delong_z > 2.58 and rep_asym_wins == rep_total_folds and zo_ln_gt_lp_folds == 5
     assert res_gtt["brier"] < res_sym["brier"] and air_sex >= 0.80
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 5), dpi=200)
@@ -431,6 +483,14 @@ def main():
                 "nadeau_bengio_cv_p": nb_p,
                 "untuned_raw_spec_folds_beating_sym": raw_asym_folds,
                 "zero_offset_spec_folds_beating_sym": zero_off_folds_beating_sym,
+                "zero_offset_matched_ablation": {
+                    "ln_gt_lp_folds": zo_ln_gt_lp_folds,
+                    "delta_auc": zo_d_auc,
+                    "delong_z": zo_delong_z,
+                    "delong_p": zo_delong_p,
+                },
+                "cox_calibration": {"intercept": cox_intercept, "slope": cox_slope},
+                "subgroup_brier_reliability": subgroup_brier_rel,
                 "delong_paired_auc_z": delong_z,
                 "delong_paired_auc_p": delong_p,
                 "repeated_5x5_cv_asym_wins": f"{rep_asym_wins}/{rep_total_folds}",

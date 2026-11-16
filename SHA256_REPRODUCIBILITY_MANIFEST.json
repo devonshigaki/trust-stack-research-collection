@@ -1,11 +1,11 @@
 {
   "release": "v4.5",
-  "timestamp": "2026-11-16T14:52:00Z",
+  "timestamp": "2026-11-16T17:30:18Z",
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.5",
   "total_files_hashed": 1053,
-  "total_manifest_size_mb": 261.77,
+  "total_manifest_size_mb": 261.78,
   "automated_ci_tasks_verified": 57,
   "files": {
     "CITATION.cff": {
@@ -125,8 +125,8 @@
       "bytes": 10412
     },
     "formal/run_all_formal_verifications.py": {
-      "sha256": "c01620f495a8ffe2c6b36518ad8b54d847641eb5954f8d50e2b8143a25570108",
-      "bytes": 14565
+      "sha256": "ec022b5bc8fe1d89e61de025ff358d2f34693400ffedadfd323d49cb9c60dc21",
+      "bytes": 14634
     },
     "formal/sympy_symbolic_dynamics.py": {
       "sha256": "0731b419fa07799b2fbd8e8bf71bae2339844bf515d5e804bbd372286dfe3eb7",
@@ -165,15 +165,15 @@
       "bytes": 6577
     },
     "formal/zk_master_law_stp.py": {
-      "sha256": "c92bf2fbd532afd4565ca3516aadb286a5c7e55d3c138d8fb337ee8ebd7181ff",
-      "bytes": 46326
+      "sha256": "3e48801101587a94fbf26d7d4fbdd70ebe07d4595cc049f55f803f69b28e348d",
+      "bytes": 47038
     },
     "formal/zk_pedersen_ec.py": {
       "sha256": "e075395754f6bcd6d977d521f2e31c31eb4a65c272ffe034d0630525f06864c1",
       "bytes": 20434
     },
     "formal/zk_stp_results.json": {
-      "sha256": "bcca425af87d7175b14000b69d1553a66826d7978a8dded89bf66f69768c057e",
+      "sha256": "51ab297a5cef8d86d1d7e44f9028d5836480ab8f2e3836b4121ed0e7e3cdeb25",
       "bytes": 1300
     },
     "formal/lean/Check.lean": {
@@ -229,8 +229,8 @@
       "bytes": 17331
     },
     "code/tools/test_cross_repo_parity.py": {
-      "sha256": "0c4795bee628b12b06be6e3ec40fe57c46aca7f540b6902d7ac984b5fb0e54c7",
-      "bytes": 7457
+      "sha256": "b266e9d7033f83dafbb09e2477f6524387a55490d5722093d0845024ed5ab4b0",
+      "bytes": 7722
     },
     "code/tools/autoresearch/candidate_estimator.py": {
       "sha256": "0e53fb4812cdc9a9ae909f52818a629253a9f74b18eeaf9d9d412e32245e30c2",
@@ -281,8 +281,8 @@
       "bytes": 2538
     },
     "code/empirical/credit_panel/credit_panel_validation_results.json": {
-      "sha256": "6849222575386616d54bd50fc11325a7e980b62bcc3ad1326855fc0798af9408",
-      "bytes": 3527
+      "sha256": "35ad735cb6b5f9e1baa9d3e828315d4ec5882c392cf3065f10fdd6fe3a791e82",
+      "bytes": 3919
     },
     "code/empirical/credit_panel/fig_empirical_credit_panel_validation.png": {
       "sha256": "cb4a1e30ccde80113cad293a918c9e6d5b675b5d8b922e8745a4a53d27deb82c",
@@ -293,8 +293,8 @@
       "bytes": 1568572
     },
     "code/empirical/credit_panel/validate_master_law_credit_panel.py": {
-      "sha256": "5ad90465a598bf24ccd5b1acea7b864530b31bfbb7f191e8f3fbdf3d3824de37",
-      "bytes": 24318
+      "sha256": "4a7485db6fd1da97fd78bd025f261fe353271ce3d719c8e7e66ea5cfbacd94a9",
+      "bytes": 28037
     },
     "code/empirical/connectomics_microns/SHA256_MANIFEST.json": {
       "sha256": "a8a44488e40d921399d5a97faa1d2b523622938ae24a7711c859fb19fa81b54c",
@@ -365,12 +365,12 @@
       "bytes": 3361
     },
     "code/empirical/connectomics_microns/h1a_evaluate_microns.py": {
-      "sha256": "4a7d3cf616cf18a0af3fa0e26c77f9f135e7d886220c64f4760e1ce8e39dc230",
-      "bytes": 4969
+      "sha256": "b1572de68c896f429f6008b85a6ece22f1b70ba7da09097634324d7da0d7cc5f",
+      "bytes": 6541
     },
     "code/empirical/connectomics_microns/h1a_results_microns.json": {
-      "sha256": "70c7aa1cbfb88549e8eab2258d22aa66dd892d8fe3de37673eef05e3cfa80f3b",
-      "bytes": 6956
+      "sha256": "c321f4c6505998f489849c13928ecee60c283cc2120294ed92b1a657b02a3e35",
+      "bytes": 7084
     },
     "code/empirical/connectomics_microns/h1b_results_microns.json": {
       "sha256": "5f279b484590b64a9d1cd6529fc79daffa73f7ed755af86eebf4581613371417",
@@ -1437,8 +1437,8 @@
       "bytes": 8577
     },
     "code/simulations/wearables_pipeline/evaluate_pilot1_concordance.py": {
-      "sha256": "237a91adca192c845a166aeba79571932287659446add042f8d6d01e8075f7bf",
-      "bytes": 86570
+      "sha256": "787c9045b58813b6614c44ac6766d5de2e5cc3ae31d3dbeff89acbd074800d3e",
+      "bytes": 89796
     },
     "code/simulations/wearables_pipeline/fig_pilot1_30day_mock_trajectory.png": {
       "sha256": "f176bb2a61e7ab500a4db21bdcc34e24c249dbe43f6454a088c50f7a08e4c02b",
@@ -1461,8 +1461,8 @@
       "bytes": 9143
     },
     "code/simulations/wearables_pipeline/process_fnirs_mbll.py": {
-      "sha256": "726a4899da325d4838add8ffc27139d340bb2f47f846ca496bf2aedf11791d00",
-      "bytes": 24886
+      "sha256": "40b5763cd576979d7d3069cebf9c093856c6b4e0fc9983e72a06235edb63c35d",
+      "bytes": 25484
     },
     "code/simulations/wearables_pipeline/sim_pilot1_results.json": {
       "sha256": "fb5b1c4ff4973c11e7a84fb5358b3372dda4f88486b932b77a7e04358326e2f5",

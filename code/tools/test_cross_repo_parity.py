@@ -117,12 +117,15 @@ def main():
             fp_src = f.read()
             assert "pub fn step_fixed_i64" in fp_src, "FreshProtocol missing fixed-point step_fixed_i64 parity method"
             assert "s_d_fixed" in fp_src, "FreshProtocol master_law.rs missing scale_s_d fixed-point normalization"
+        with open(os.path.join(fp_dir, "crates/fresh-protocol-spec/src/hlc_oplog.rs"), "r", encoding="utf-8") as f:
+            hlc_src = f.read()
+            assert "pub fn replay_gset_fixed_i64" in hlc_src, "FreshProtocol missing HLC G-Set op-log reducer"
         res_fp = subprocess.run(
             ["cargo", "test", "-p", "fresh-protocol-spec", "--lib", "--quiet"],
             cwd=fp_dir, capture_output=True, text=True,
         )
         assert res_fp.returncode == 0, f"FreshProtocol fresh-protocol-spec test failed:\n{res_fp.stderr}"
-        print("✓ FreshProtocol `fresh-protocol-spec::master_law` Golden-Vector + Fixed-Point s_d!=1.0 Parity: PASS")
+        print("✓ FreshProtocol `fresh-protocol-spec::{master_law, hlc_oplog}` Golden-Vector + HLC G-Set Convergence: PASS")
 
     print("\n✓ ALL CROSS-REPO GOLDEN-VECTOR PARITY CHECKS PASSED!")
     return 0

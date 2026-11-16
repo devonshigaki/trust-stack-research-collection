@@ -100,7 +100,7 @@ def main():
         for mod in ("TrustStack.Tilt", "TrustStack.MasterLaw"):
             res_lc = subprocess.run(["lake", "env", "leanchecker", *lc_flags, mod], cwd=lean_dir, capture_output=True, text=True)
             if res_lc.returncode != 0:
-                print(f"[FAIL] Lean 4 leanchecker --fresh verification failed on {mod}!")
+                print(f"[FAIL] Lean 4 leanchecker {' '.join(lc_flags)} verification failed on {mod}!")
                 print(res_lc.stdout, res_lc.stderr)
                 sys.exit(1)
         res_ax = subprocess.run(["lake", "env", "lean", "Check.lean"], cwd=lean_dir, capture_output=True, text=True)
@@ -121,7 +121,8 @@ def main():
                     sys.exit(1)
         with open(os.path.join(lean_dir, "VERIFICATION_AXIOMS.txt"), "w", encoding="utf-8") as _axf:
             _axf.write("\n".join(axiom_lines) + "\n")
-        print(f"[VERIFIED] Lean 4 `lake env leanchecker --fresh` + `#print axioms` whitelist PASSED on {len(axiom_lines)} theorems (0 sorryAx, only standard axioms).\n")
+        lc_label = " ".join(lc_flags) or "(default)"
+        print(f"[VERIFIED] Lean 4 `lake env leanchecker {lc_label}` + `#print axioms` whitelist PASSED on {len(axiom_lines)} theorems (0 sorryAx, only standard axioms).\n")
 
     # 3c. Run Genuine Pedersen/Schnorr NIZK Verifier (ZK-STP v8)
     print(">>> 5/5: Running Genuine secp256k1 Pedersen/Schnorr NIZK Verifier (ZK-STP v8)...")

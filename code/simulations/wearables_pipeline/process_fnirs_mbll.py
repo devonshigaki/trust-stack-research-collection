@@ -211,7 +211,7 @@ def apply_cbsi_neurovascular_filter(
 
 def solve_mbll_inversion(
     filtered_od: np.ndarray,
-    wavelengths: Tuple[int, ...] = (730, 850, 660),
+    wavelengths: Optional[Tuple[int, ...]] = None,
     inter_optode_distance_cm: float = INTER_OPTODE_DISTANCE_CM,
     age_years: float = 30.0,
     body_fat_pct: float = 20.0,
@@ -221,8 +221,12 @@ def solve_mbll_inversion(
       ΔOD(λ, t) = (ε_HbO2(λ) * Δ[HbO2](t) + ε_HbR(λ) * Δ[HbR](t)) * L(λ)
       Δc(t) = (E^T * E)^-1 * E^T * (ΔOD(t) / L)
     using wavelength-specific Scholkmann-Wolf (2013) DPF(λ, A) dynamically scaled by Fitindex Body Fat %.
+    Auto-selects Muse S Athena native 2-wavelength `(730, 850)` (strictly inside Prahl/Scholkmann
+    calibrations) or 3-wavelength `(730, 850, 660)` matching `filtered_od.shape[0]`.
     """
-    E = np.array([EXTINCTION_COEFFICIENTS[wl] for wl in wavelengths], dtype=np.float64)  # [3, 2] in mM^-1 cm^-1
+    if wavelengths is None:
+        wavelengths = (730, 850) if filtered_od.shape[0] == 2 else (730, 850, 660)
+    E = np.array([EXTINCTION_COEFFICIENTS[wl] for wl in wavelengths], dtype=np.float64)  # [N_wl, 2] in mM^-1 cm^-1
     pathlengths = np.array([
         inter_optode_distance_cm * compute_scholkmann_dpf(wl, age_years, body_fat_pct)
         for wl in wavelengths
@@ -393,7 +397,11 @@ def run_self_test() -> bool:
     conc_mne_umol = (np.linalg.pinv(EL_mne) @ sim_od_ln) * 1000.0
     assert np.max(np.abs(conc_mne_umol[0] - rec_hbo2)) < 1e-10
     assert np.max(np.abs(conc_mne_umol[1] - rec_hbr)) < 1e-10
-    print(f"✓ MBLL Molar Extinction Inversion Round-Trip Error: {err_hbo2:.2e} μM (Exact MNE-NIRS ln(10) Parity)")
+    # Verify native 2-wavelength Muse S Athena (730, 850) exact inversion
+    sim_od_2wl = sim_od[:2]
+    rec2_o2, rec2_r, _ = solve_mbll_inversion(sim_od_2wl, age_years=30.0)
+    assert np.max(np.abs(rec2_o2 - true_hbo2_umol)) < 1e-6 and np.max(np.abs(rec2_r - true_hbr_umol)) < 1e-6
+    print(f"✓ MBLL Molar Extinction Inversion Round-Trip Error: {err_hbo2:.2e} μM (Exact MNE-NIRS ln(10) + 2-λ (730,850) Parity)")
 
     # 1b. TDDR Motion Spike Repair Test (1.5s slow motion excursion + post-bandpass fast spike suppression)
     clean_wave = np.sin(2 * np.pi * 0.1 * np.linspace(0, 10, 640))

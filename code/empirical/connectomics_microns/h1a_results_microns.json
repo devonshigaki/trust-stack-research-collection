@@ -262,10 +262,18 @@
  },
  "H1A": {
   "A1_median_dominance": 0.3128530771663234,
+  "A1_ci95_cluster_boot": [
+   0.30386649464169446,
+   0.31995557726378027
+  ],
   "A1_rule": ">=0.50",
-  "A1_MET": false,
   "A2_classes_within_0.15": "8/11",
+  "A2_ci95_cluster_boot": [
+   8.0,
+   8.0
+  ],
   "A2_rule": "majority",
-  "A2_MET": true
+  "A2_MET": true,
+  "A1_MET": false
  }
 }

@@ -37,11 +37,16 @@ def build_statement_transcript(
     account_id: str = "default",
     seq_t: int = 0,
     genesis_anchored: bool = False,
+    issuer_pk_hex: str = "",
 ) -> Transcript:
+    from zk_pedersen_ec import H_PT
     tr = Transcript(SCHEME_ID)
+    tr.absorb_point("G_PT", G_PT)
+    tr.absorb_point("H_PT", H_PT)
     for k in ("lp_fixed", "ln_fixed", "delta_fixed", "s_base_fixed", "scale"):
         tr.absorb_int(k, int(p[k]))
     tr.absorb_bytes("account_id", account_id.encode("utf-8"))
+    tr.absorb_bytes("issuer_pk", str(issuer_pk_hex or "").encode("utf-8"))
     tr.absorb_int("seq_t", int(seq_t))
     tr.absorb_int("genesis_anchored", 1 if genesis_anchored else 0)
     tr.absorb_int("reveal_state", 1 if reveal_state else 0)
@@ -141,6 +146,7 @@ class MasterLawZKProver:
         Cs = {k: pedersen_commit(vals[k], rs[k]) for k in vals}
 
         p_dict = self.expected_params()
+        att_issuer_pk = str((pre_signed_attestation or {}).get("issuer_pk", ""))
         tr = build_statement_transcript(
             p_dict,
             s_next,
@@ -149,6 +155,7 @@ class MasterLawZKProver:
             account_id=account_id,
             seq_t=seq_t,
             genesis_anchored=anchor_genesis,
+            issuer_pk_hex=att_issuer_pk,
         )
 
         P_mismatch = pt_sub(pt_sub(Cs["v"], Cs["e"]), pt_sub(Cs["eps_p"], Cs["eps_n"]))
@@ -285,6 +292,7 @@ class MasterLawZKProver:
         if s_T_fixed < tau_fixed:
             raise ValueError(f"Terminal state {s_T:.6f} below threshold {threshold:.6f}")
         Cs = {k: pt_deser(v) for k, v in last_proof["commitments"].items()}
+        att_issuer_pk = str((last_proof.get("attestation") or {}).get("issuer_pk", ""))
         tr = build_statement_transcript(
             last_proof["public_params"],
             0,
@@ -293,6 +301,7 @@ class MasterLawZKProver:
             account_id=last_proof.get("account_id", "default"),
             seq_t=int(last_proof.get("seq_t", 0)),
             genesis_anchored=bool(last_proof.get("genesis_anchored", False)),
+            issuer_pk_hex=att_issuer_pk,
         )
         tr.absorb_int("threshold_fixed", tau_fixed)
         C_diff = pt_sub(Cs["s_next"], pt_mul_fast(tau_fixed, G_PT))
@@ -347,6 +356,7 @@ def verify_threshold(
             return False
         tau_fixed = float_to_fixed(threshold)
         Cs = {k: pt_deser(v) for k, v in last_proof["commitments"].items()}
+        att_issuer_pk = str((last_proof.get("attestation") or {}).get("issuer_pk", ""))
         tr = build_statement_transcript(
             last_proof["public_params"],
             0,
@@ -355,6 +365,7 @@ def verify_threshold(
             account_id=last_proof.get("account_id", "default"),
             seq_t=int(last_proof.get("seq_t", 0)),
             genesis_anchored=bool(last_proof.get("genesis_anchored", False)),
+            issuer_pk_hex=att_issuer_pk,
         )
         tr.absorb_int("threshold_fixed", tau_fixed)
         C_diff = pt_sub(Cs["s_next"], pt_mul_fast(tau_fixed, G_PT))
@@ -408,6 +419,7 @@ def verify_zk_proof(
             s_next = 0
 
         Cs = {k: pt_deser(v) for k, v in proof["commitments"].items()}
+        att_issuer_pk = str((proof.get("attestation") or {}).get("issuer_pk", ""))
         tr = build_statement_transcript(
             p,
             s_next,
@@ -416,6 +428,7 @@ def verify_zk_proof(
             account_id=account_id,
             seq_t=seq_t,
             genesis_anchored=genesis_anchored,
+            issuer_pk_hex=att_issuer_pk,
         )
         eq = proof["eq_proofs"]
         if genesis_anchored:

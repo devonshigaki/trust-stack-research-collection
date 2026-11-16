@@ -83,6 +83,41 @@ gaps_ok = sum(1 for d in dom.values() if d['gap'] <= 0.15)
 A1 = float(np.median(dom_vals)) >= 0.50
 A2 = gaps_ok > len(classes) / 2
 
+# --- Postsynaptic-neuron cluster-bootstrap 95% CIs (2,000 resamples) ---
+post_ids_by_cls = {B: np.array([r for r, c in post_cls.items() if c == B], dtype=np.int64) for B in classes}
+post_to_idx = collections.defaultdict(list)
+for idx_e, q_id in enumerate(post.tolist()):
+    post_to_idx[q_id].append(idx_e)
+rng_boot = np.random.default_rng(42)
+boot_a1, boot_a2 = [], []
+for _ in range(2000):
+    sampled_edges_idx = []
+    for B in classes:
+        pids = post_ids_by_cls[B]
+        draw = rng_boot.choice(pids, size=len(pids), replace=True)
+        for pid in draw:
+            sampled_edges_idx.extend(post_to_idx[int(pid)])
+    idx_arr = np.array(sampled_edges_idx, dtype=np.int64)
+    w_b, cp_b, cq_b = w[idx_arr], cp[idx_arr], cq[idx_arr]
+    tot_b = float(w_b.sum())
+    avail_b = {A: float(w_b[cp_b == A].sum()) / tot_b for A in classes}
+    dom_b_vals, gaps_b = [], 0
+    for B in classes:
+        mB_b = cq_b == B
+        totB_b = float(w_b[mB_b].sum())
+        if totB_b <= 0:
+            dom_b_vals.append(0.0)
+            continue
+        s_b = {A: float(w_b[mB_b & (cp_b == A)].sum()) / totB_b for A in classes}
+        A_d = max(s_b, key=s_b.get)
+        dom_b_vals.append(s_b[A_d])
+        if abs(s_b[A_d] - avail_b[A_d]) <= 0.15:
+            gaps_b += 1
+    boot_a1.append(float(np.median(dom_b_vals)))
+    boot_a2.append(gaps_b)
+a1_ci95 = [float(np.percentile(boot_a1, 2.5)), float(np.percentile(boot_a1, 97.5))]
+a2_ci95 = [float(np.percentile(boot_a2, 2.5)), float(np.percentile(boot_a2, 97.5))]
+
 out = {
   'substrate': {'datastack': 'minnie65_public', 'version': 1822,
                 'celltype_table': 'aibs_metamodel_celltypes_v661 (first-wins, Amendment 4)',
@@ -90,10 +125,9 @@ out = {
                 'posts_per_class': dict(collections.Counter(post_cls.values()))},
   'merge': {'typed_pairs_kept': len(acc), 'synapses_onto_sampled_posts': total},
   'availability': avail, 's_AB': s_AB, 'dominance': dom,
-  'H1A': {'A1_median_dominance': float(np.median(dom_vals)), 'A1_rule': '>=0.50',
-          'A1_MET': bool(A1),
-          'A2_classes_within_0.15': f'{gaps_ok}/{len(classes)}',
-          'A2_rule': 'majority', 'A2_MET': bool(A2)}}
+  'H1A': {'A1_median_dominance': float(np.median(dom_vals)), 'A1_ci95_cluster_boot': a1_ci95, 'A1_rule': '>=0.50',
+          'A2_classes_within_0.15': f'{gaps_ok}/{len(classes)}', 'A2_ci95_cluster_boot': a2_ci95,
+          'A2_rule': 'majority', 'A2_MET': bool(A2), 'A1_MET': bool(A1)}}
 json.dump(out, open(f'{S}/h1a_results_microns.json', 'w'), indent=1)
 
 # --- H1-B graph (Amendment 3 §4): nodes = sampled posts + their typed pres ---
