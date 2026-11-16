@@ -415,6 +415,10 @@ def parse_apple_health_xml(xml_content_or_path: str, is_file: bool = False) -> D
         "heart_rate": [],
         "wrist_temperature": [],
         "sleep_stages": [],
+        "mindful_sessions": [],
+        "audio_exposure_db": [],
+        "spo2": [],
+        "respiratory_rate": [],
         "blood_glucose": [],
         "carbohydrates": [],
         "dietary_calories": [],
@@ -508,13 +512,55 @@ def parse_apple_health_xml(xml_content_or_path: str, is_file: bool = False) -> D
                     "duration_mins": duration_mins,
                     "source_name": elem.attrib.get("sourceName", "Apple Watch"),
                 })
+            elif rec_type == "HKCategoryTypeIdentifierMindfulSession":
+                duration_mins = 0.0
+                if end_epoch is not None and end_epoch > start_epoch:
+                    duration_mins = round((end_epoch - start_epoch) / 60.0, 2)
+                extracted["mindful_sessions"].append({
+                    "start_epoch": start_epoch,
+                    "end_epoch": end_epoch or start_epoch,
+                    "duration_mins": duration_mins,
+                    "source_name": elem.attrib.get("sourceName", "Wearable"),
+                })
+
+            elif rec_type in (
+                "HKQuantityTypeIdentifierEnvironmentalAudioExposure",
+                "HKQuantityTypeIdentifierHeadphoneAudioExposure",
+            ):
+                val = _safe_finite_float(val_str)
+                if val is not None:
+                    extracted["audio_exposure_db"].append({
+                        "timestamp_epoch": start_epoch,
+                        "db_spl": val,
+                        "stream_type": "headphone" if "Headphone" in rec_type else "environmental",
+                        "source_name": elem.attrib.get("sourceName", "Apple Watch"),
+                    })
+
+            elif rec_type == "HKQuantityTypeIdentifierOxygenSaturation":
+                val = _safe_finite_float(val_str)
+                if val is not None:
+                    extracted["spo2"].append({
+                        "timestamp_epoch": start_epoch,
+                        "spo2_pct": val * 100.0 if val <= 1.0 else val,
+                        "source_name": elem.attrib.get("sourceName", "Apple Watch"),
+                    })
+
+            elif rec_type == "HKQuantityTypeIdentifierRespiratoryRate":
+                val = _safe_finite_float(val_str)
+                if val is not None:
+                    extracted["respiratory_rate"].append({
+                        "timestamp_epoch": start_epoch,
+                        "breaths_per_min": val,
+                        "source_name": elem.attrib.get("sourceName", "Apple Watch"),
+                    })
+
             elif rec_type == "HKQuantityTypeIdentifierBloodGlucose":
                 try:
                     val = float(val_str)
                     extracted["blood_glucose"].append({
                         "timestamp_epoch": start_epoch,
                         "glucose_mg_dl": val,
-                        "source_name": elem.attrib.get("sourceName", "Dexcom Stelo"),
+                        "source_name": elem.attrib.get("sourceName", "Dexcom CGM"),
                     })
                 except ValueError:
                     pass
@@ -1866,10 +1912,164 @@ def run_self_test() -> bool:
         c_lab.close()
     print("✓ N=1 6-Month Schema & Calibration Oracle: Monthly/Quarterly nullable labs, HOMA-IR, and MIDI-Audio sync verified")
 
+    # Hub-to-Spoke Transfer, HealthKit Master Clock Sidecar Join & Zero-PII NLP Oracles
+    hk_xml = (
+        '<HealthData>'
+        '<Record type="HKCategoryTypeIdentifierMindfulSession" sourceName="Muse" startDate="2026-12-01 21:00:00 +0000" endDate="2026-12-01 21:20:00 +0000" value="HKCategoryValueNotApplicable"/>'
+        '<Record type="HKQuantityTypeIdentifierEnvironmentalAudioExposure" sourceName="Apple Watch" value="68.5" startDate="2026-12-01 14:00:00 +0000"/>'
+        '<Record type="HKQuantityTypeIdentifierOxygenSaturation" sourceName="Apple Watch" value="0.98" startDate="2026-12-01 03:00:00 +0000"/>'
+        '</HealthData>'
+    )
+    hk_p = parse_apple_health_xml(hk_xml, is_file=False)
+    assert len(hk_p["mindful_sessions"]) == 1 and len(hk_p["audio_exposure_db"]) == 1
+    assert abs(hk_p["spo2"][0]["spo2_pct"] - 98.0) < 1e-6
+    join_res = match_sidecars_to_healthkit_clock(
+        hk_p["mindful_sessions"],
+        [{"timestamp_epoch": hk_p["mindful_sessions"][0]["start_epoch"] + 30.0, "metric": "fnirs_hbo2"}],
+    )
+    assert join_res["matched_count"] == 1 and "Muse" in join_res["detected_healthkit_sources"]
+    nlp_f = extract_deidentified_text_features(
+        "Felt calm and focused after contacting +1-555-555-0199 at test@example.com", is_from_me=True
+    )
+    assert nlp_f["valence_proxy"] > 0.0 and nlp_f["word_count"] > 0
+    try:
+        extract_deidentified_text_features("Third-party incoming msg", is_from_me=False)
+        raise AssertionError("Must reject is_from_me=False third-party message text")
+    except ValueError:
+        pass
+    rng_hs = np.random.default_rng(7)
+    X_sp = rng_hs.normal(0, 1, (120, 4))
+    y_hub = 0.8 * X_sp[:, 0] - 0.5 * X_sp[:, 1] + rng_hs.normal(0, 0.25, 120)
+    tr_res = fit_hub_to_spoke_transfer_function(X_sp, y_hub)
+    assert tr_res["r2_oos"] >= 0.70, f"Hub-to-Spoke Ridge transfer R2 too low: {tr_res}"
+    print(f"✓ Hub-to-Spoke, HealthKit Sidecar Join & Zero-PII NLP Oracles: R2_OOS={tr_res['r2_oos']} (PASS)")
+
     print("\n" + "=" * 80)
     print("✅ SELF-TEST PASSED: ALL 13 TESTABLE PILOT & AMENDMENT HYPOTHESES & STOPPING GATES VALIDATED")
     print("=" * 80)
     return True
+
+
+def extract_deidentified_text_features(text: str, is_from_me: bool = True) -> Dict[str, Any]:
+    """
+    Privacy-preserving local NLP extractor for journals, reading notes, and local messaging.
+    Enforces sender-only (`is_from_me == True`) gating, hard-strips emails/phones/handles/URLs,
+    and returns ONLY anonymized lexical/affective summary features (zero raw text retained).
+    """
+    if not is_from_me:
+        raise ValueError("Refusing non-subject message text: only is_from_me=True allowed")
+    import re as _re
+    scrubbed = _re.sub(r"\S+@\S+|https?://\S+|@\w+|\+?\d[\d\s\-()]{6,}\d", " ", text or "")
+    tokens = [t.lower() for t in _re.findall(r"[A-Za-z']+", scrubbed)]
+    n_tok = len(tokens)
+    if n_tok == 0:
+        return {"word_count": 0, "ttr": 0.0, "shannon_entropy": 0.0, "first_person_ratio": 0.0, "valence_proxy": 0.0}
+    counts: Dict[str, int] = {}
+    for tok in tokens:
+        counts[tok] = counts.get(tok, 0) + 1
+    entropy = -sum((c / n_tok) * math.log2(c / n_tok) for c in counts.values())
+    fp_pronouns = {"i", "me", "my", "mine", "myself"}
+    pos_lex = {"calm", "clear", "steady", "focus", "focused", "rested", "good", "grateful", "resolved"}
+    neg_lex = {"stress", "stressed", "tense", "anxious", "tired", "drain", "drained", "delay", "shock"}
+    fp_ratio = sum(1 for t in tokens if t in fp_pronouns) / n_tok
+    pos_hits = sum(1 for t in tokens if t in pos_lex)
+    neg_hits = sum(1 for t in tokens if t in neg_lex)
+    valence = (pos_hits - neg_hits) / max(1, pos_hits + neg_hits)
+    return {
+        "word_count": n_tok,
+        "ttr": round(len(counts) / n_tok, 4),
+        "shannon_entropy": round(entropy, 4),
+        "first_person_ratio": round(fp_ratio, 4),
+        "valence_proxy": round(float(valence), 4),
+    }
+
+
+def match_sidecars_to_healthkit_clock(
+    healthkit_sessions: List[Dict[str, Any]],
+    sidecar_records: List[Dict[str, Any]],
+    tolerance_sec: float = 120.0,
+) -> Dict[str, Any]:
+    """
+    Uses Apple HealthKit / Android Health Connect session UTC windows as the Master Clock
+    to recognize connected sensors (Muse S, Airofit, Throne) and join high-resolution
+    sidecar exports onto exact session timestamps within +/- tolerance_sec.
+    """
+    detected_sources = sorted({str(s.get("source_name", "unknown")) for s in healthkit_sessions})
+    matched = []
+    unmatched_sidecars = 0
+    for sc in sidecar_records:
+        sc_ts = float(sc.get("timestamp_epoch", 0.0))
+        hit = next(
+            (
+                hk for hk in healthkit_sessions
+                if (float(hk["start_epoch"]) - tolerance_sec) <= sc_ts <= (float(hk.get("end_epoch", hk["start_epoch"])) + tolerance_sec)
+            ),
+            None,
+        )
+        if hit is not None:
+            matched.append({"healthkit_source": hit.get("source_name"), "sidecar": sc, "clock_anchor_epoch": hit["start_epoch"]})
+        else:
+            unmatched_sidecars += 1
+    return {
+        "detected_healthkit_sources": detected_sources,
+        "matched_count": len(matched),
+        "unmatched_sidecars": unmatched_sidecars,
+        "joined_records": matched,
+    }
+
+
+def fit_hub_to_spoke_transfer_function(
+    spoke_features: np.ndarray,
+    hub_latent_target: np.ndarray,
+    n_blocks: int = 5,
+    l2_alpha: float = 1.0,
+) -> Dict[str, float]:
+    """
+    Fits a blocked time-series cross-validated Ridge regression compressing minimal Spoke
+    features (Apple Watch/Health Connect + Bank Ledger epsilon_t) -> 30-stream Hub factor.
+    """
+    X = np.asarray(spoke_features, dtype=np.float64)
+    y = np.asarray(hub_latent_target, dtype=np.float64)
+    n = len(y)
+    if n < 20 or X.shape[0] != n:
+        return {"r2_oos": 0.0, "rmse_oos": float("inf")}
+    preds = np.zeros(n, dtype=np.float64)
+    block_size = max(1, n // n_blocks)
+    for b in range(n_blocks):
+        lo = b * block_size
+        hi = n if b == n_blocks - 1 else min(n, (b + 1) * block_size)
+        mask = np.ones(n, dtype=bool)
+        mask[lo:hi] = False
+        X_tr, y_tr = X[mask], y[mask]
+        X_te = X[~mask]
+        mu_x, sd_x = np.mean(X_tr, axis=0), np.maximum(np.std(X_tr, axis=0), 1e-8)
+        mu_y = float(np.mean(y_tr))
+        Xs_tr = (X_tr - mu_x) / sd_x
+        Xs_te = (X_te - mu_x) / sd_x
+        XtX = Xs_tr.T @ Xs_tr + l2_alpha * np.eye(Xs_tr.shape[1])
+        w = np.linalg.solve(XtX, Xs_tr.T @ (y_tr - mu_y))
+        preds[~mask] = mu_y + Xs_te @ w
+    ss_res = float(np.sum((y - preds) ** 2))
+    ss_tot = max(float(np.sum((y - np.mean(y)) ** 2)), 1e-12)
+    return {
+        "r2_oos": round(1.0 - ss_res / ss_tot, 4),
+        "rmse_oos": round(float(np.sqrt(ss_res / n)), 4),
+    }
+
+
+def compute_interoceptive_blind_spot_and_masking(
+    physio_z: np.ndarray,
+    verbal_z: np.ndarray,
+    facial_z: np.ndarray,
+) -> Dict[str, float]:
+    """Quantifies conscious-unconscious divergence (blind spot) and outward masking index."""
+    p = np.asarray(physio_z, dtype=np.float64)
+    v = np.asarray(verbal_z, dtype=np.float64)
+    f = np.asarray(facial_z, dtype=np.float64)
+    return {
+        "interoceptive_blind_spot_mean": round(float(np.mean(np.abs(p - v))), 4),
+        "somatic_behavioral_masking_mean": round(float(np.mean(p - f)), 4),
+    }
 
 
 def main():

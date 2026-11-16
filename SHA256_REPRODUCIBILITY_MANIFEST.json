@@ -1,11 +1,11 @@
 {
   "release": "v4.5",
-  "timestamp": "2026-11-16T21:01:26Z",
+  "timestamp": "2026-11-16T23:09:16Z",
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.5",
-  "total_files_hashed": 1053,
-  "total_manifest_size_mb": 261.81,
+  "total_files_hashed": 1054,
+  "total_manifest_size_mb": 261.83,
   "automated_ci_tasks_verified": 57,
   "files": {
     "CITATION.cff": {
@@ -101,8 +101,8 @@
       "bytes": 56917
     },
     "manuscripts/tdf/tdf.md": {
-      "sha256": "30d332f263e814c4183d6d7185246646681faf7dd20a9255cde7cf78336bf02d",
-      "bytes": 321742
+      "sha256": "3ad98e2d38466917b8d87924f505d615e0b651137bc26eb4d9088a416f644af4",
+      "bytes": 320890
     },
     "manuscripts/tdf/tdf.pdf": {
       "sha256": "ecb074042b71e34cb7835f9fdc7a0de08680a624dbc19ab705ee49f50d9413b7",
@@ -1437,8 +1437,8 @@
       "bytes": 12756
     },
     "code/simulations/wearables_pipeline/evaluate_pilot1_concordance.py": {
-      "sha256": "732ed142e1dd84b53ab102f7d2225411e351f5606e77230dfc6d4008c32f3090",
-      "bytes": 92502
+      "sha256": "96135069f740de1976be03e733e16e60ac24727260566f3c15d076a3efec4d0b",
+      "bytes": 101910
     },
     "code/simulations/wearables_pipeline/fig_pilot1_30day_mock_trajectory.png": {
       "sha256": "f176bb2a61e7ab500a4db21bdcc34e24c249dbe43f6454a088c50f7a08e4c02b",
@@ -1453,8 +1453,8 @@
       "bytes": 695207
     },
     "code/simulations/wearables_pipeline/harvest_expanded_telemetry.py": {
-      "sha256": "12f12441e1144844745d1a25f60781c9ec6ee69c8e75ce0e4b013fff4e3686e8",
-      "bytes": 20211
+      "sha256": "828b9f04f45f4b0fe96652628d3e1d076291beb4af9d6a9a5057e5c8cb41fd6b",
+      "bytes": 23547
     },
     "code/simulations/wearables_pipeline/harvest_telemetry.py": {
       "sha256": "631e000279b2c7a27b947317c8a3d7d32ecd7aaae02decd54c0921c10ec837a9",
@@ -1469,8 +1469,8 @@
       "bytes": 441
     },
     "code/simulations/wearables_pipeline/sim_pilot2_results.json": {
-      "sha256": "f08dbc2c6fd8ead23ff76c75e403701eec360e735dde1e505311e5ab5292c87e",
-      "bytes": 1952
+      "sha256": "762ce8946d6ec10c1f5c6d722789ad5ec58aac2b5ce3801f9f1307e8449c54a8",
+      "bytes": 2043
     },
     "code/simulations/wearables_pipeline/sim_wearable_triad_results.json": {
       "sha256": "ec948655f7c6d97419fa07666e8c58ce37002b4081d6774ef50a9da138aa96a0",
@@ -1481,8 +1481,8 @@
       "bytes": 13499
     },
     "code/simulations/wearables_pipeline/simulate_180day_dense_pilot.py": {
-      "sha256": "91cb9e66aa7d2314847dd28d327878af90ef16af21cd3013ce4c1072107f6e18",
-      "bytes": 29459
+      "sha256": "5d3468c93ed71428c23034eb76c05dd1a695c13f9c7e36112944e998324f9f16",
+      "bytes": 30672
     },
     "code/simulations/wearables_pipeline/simulate_30day_dense_pilot.py": {
       "sha256": "524930e08579fa854ec7c2f1976fb4e479b4169f24a09920f848ebb97c14ffa5",
@@ -4093,8 +4093,8 @@
       "bytes": 11028
     },
     "protocols/DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
-      "sha256": "26ad197ee83f20357b4450f8a33914b95b5c2c0caf726f269dde0f9c1c7113e9",
-      "bytes": 61826
+      "sha256": "79f021043aa7d8720c7e0325f616c7766e0e73efb951160072908f3ed786e439",
+      "bytes": 66483
     },
     "protocols/DOCAS_PILOT_1_PROOF_OF_CONCEPT.md": {
       "sha256": "7fb6ec6b157bc76fe0834f61fde84fb82d73063ca699bf24c34908fab306e1ce",
@@ -4193,8 +4193,8 @@
       "bytes": 3307
     },
     "protocols/sim_preregistrations/SIM_PILOT_V4_6_PRE_REGISTRATION.md": {
-      "sha256": "2aa217442ff483c220f85818232a2104adc389899d84008c1567d422b7e31b3c",
-      "bytes": 5750
+      "sha256": "f74048567fb39027f0aebeea4a30701069e04fad292388a1ecd0c8918a1b6648",
+      "bytes": 7096
     },
     "protocols/sim_preregistrations/SIM_P_GAP_CLOSURE_PRE_REGISTRATION.md": {
       "sha256": "906240fa5ef9ee97f2e66c173d0fbec7c3d780f4c0b74b0d5269b70571a166b4",
@@ -4205,8 +4205,12 @@
       "bytes": 3681
     },
     "protocols/irb/IRB_NHSR_EXEMPTION_APPLICATION.md": {
-      "sha256": "5ac86933598ca09e4e4d9a3938321f3cb4bf58f0d01d443e9befdfbc16f9f0cf",
-      "bytes": 7555
+      "sha256": "2755f32ed9a1e737173cbc9ea3f3a40e1ed4804a181cdaeae88f5846f8892962",
+      "bytes": 7979
+    },
+    "protocols/irb/IRB_SOLUTIONS_PEARL_NHSR_SUBMISSION.md": {
+      "sha256": "d73b782f15df5f15754380a813ea06d9e5a7df30130f0e4558f2607cddb2e7f7",
+      "bytes": 7145
     },
     "protocols/ios_research_kiosk/uniffi_bridge/Cargo.toml": {
       "sha256": "8b64b0619f6a9762d3d4728ec3f8e65476181c2d8230f39051f31d5981253439",

@@ -40,5 +40,7 @@
     "criterion_c7_practice_detrending_pass": true,
     "criterion_c8_ar1_null_calibration_pass": true,
     "criterion_c9_blind_sbc_pass": true,
-    "compound_verdict": "COMPOUND PASS (9/9 CRITERIA SATISFIED)"
+    "hub_to_spoke_transfer_r2_oos": 0.9302,
+    "criterion_c10_hub_to_spoke_pass": true,
+    "compound_verdict": "COMPOUND PASS (10/10 CRITERIA SATISFIED)"
 }

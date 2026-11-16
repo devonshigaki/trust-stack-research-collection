@@ -431,7 +431,18 @@ def run_180day_pilot_simulation(output_dir=None):
     fpr_naive, fpr_prewhitened = fp_naive / 400.0, fp_prewhitened / 400.0
     c8_pass = bool((fpr_prewhitened <= 0.08) and (fpr_naive > 0.20))
 
-    compound_pass = c1_pass and c2_pass and c3_pass and c4_pass and c5_pass and c6_pass and c7_pass and c8_pass and c9_sbc_pass
+    # Criterion C10: Minimal-to-Deep Hub-to-Spoke Transfer Compression (Days 91-180 steady-state blocked CV)
+    from evaluate_pilot1_concordance import fit_hub_to_spoke_transfer_function
+    p2_slice = slice(90, N_DAYS)
+    daily_hrv = np.array([np.mean(rmssd_clean_full[d * EPOCHS_PER_DAY:(d + 1) * EPOCHS_PER_DAY]) for d in range(N_DAYS)])[p2_slice]
+    daily_temp = np.array([np.mean(wrist_temp_drift[d * EPOCHS_PER_DAY + 264:min(TOTAL_EPOCHS, d * EPOCHS_PER_DAY + 360)]) for d in range(N_DAYS)])[p2_slice]
+    daily_glc = np.array([np.mean(glucose_mgdl[d * EPOCHS_PER_DAY:(d + 1) * EPOCHS_PER_DAY]) for d in range(N_DAYS)])[p2_slice]
+    X_spoke_p2 = np.column_stack([daily_hrv, daily_temp, daily_sbp_dipping_pct[p2_slice]])
+    y_hub_p2 = daily_S_ev[p2_slice]
+    hub_spoke_res = fit_hub_to_spoke_transfer_function(X_spoke_p2, y_hub_p2, n_blocks=5, l2_alpha=1.0)
+    c10_transfer_pass = bool(hub_spoke_res["r2_oos"] >= 0.60)
+
+    compound_pass = c1_pass and c2_pass and c3_pass and c4_pass and c5_pass and c6_pass and c7_pass and c8_pass and c9_sbc_pass and c10_transfer_pass
 
     results = {
         "simulation": "Sim PILOT-2 (V4.6 180-Day Complete Multimodal Benchmark)",
@@ -475,7 +486,9 @@ def run_180day_pilot_simulation(output_dir=None):
         "criterion_c7_practice_detrending_pass": c7_pass,
         "criterion_c8_ar1_null_calibration_pass": c8_pass,
         "criterion_c9_blind_sbc_pass": c9_sbc_pass,
-        "compound_verdict": "COMPOUND PASS (9/9 CRITERIA SATISFIED)" if compound_pass else "FAIL"
+        "hub_to_spoke_transfer_r2_oos": float(hub_spoke_res["r2_oos"]),
+        "criterion_c10_hub_to_spoke_pass": c10_transfer_pass,
+        "compound_verdict": "COMPOUND PASS (10/10 CRITERIA SATISFIED)" if compound_pass else "FAIL"
     }
 
     out_json = os.path.join(output_dir, "sim_pilot2_results.json")
@@ -550,6 +563,7 @@ def run_180day_pilot_simulation(output_dir=None):
     print(f"  Practice-Detrended d:    {cohen_d_pvt:.4f} >= 0.50 ({'PASS' if c7_pass else 'FAIL'})")
     print(f"  AR(1) Null FPR (PW/Naiv):{fpr_prewhitened:.3f} <= 0.08 vs {fpr_naive:.3f} > 0.20 ({'PASS' if c8_pass else 'FAIL'})")
     print(f"  Blind 12-Draw SBC MAE:   λ={sbc_lam_mae:.5f}<=0.020, τ={sbc_tau_mae:.3f}d<=0.30 ({'PASS' if c9_sbc_pass else 'FAIL'})")
+    print(f"  Hub->Spoke Transfer R^2: {hub_spoke_res['r2_oos']:.4f} >= 0.60 ({'PASS' if c10_transfer_pass else 'FAIL'})")
     print("=" * 80)
 
     return results

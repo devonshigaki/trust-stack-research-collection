@@ -33,16 +33,19 @@ TOTAL ENROLLMENT: 44 Unique Human Subjects | EXACT VOLUME: 270 Person-Days | REU
 ========================================================================================================================
 ```
 
-### A. Stage 1: The 180-Day Longitudinal Dense Phenotype ($N = 1$)
-The dense phenotyping benchmark spans **180 Continuous Days ($T = 180\text{ days} = 259,200\text{ one-minute epochs}$)**, structured into three explicit statistical windows:
-*   **Phase 0 (Days 1–14): Habituation & Cognitive Practice-Curve Burn-In.**  
-    Acclimates the participant to evening hardware docking and fits the per-task exponential practice curve ($RT(d) = RT_\infty + a \cdot e^{-d/\tau_{\text{learn}}}$) across PVT-B, 2-Back, Go/No-Go, Stroop, and Akai MPK Mini tapping. Excluded from steady-state parameter estimation.
-*   **Phase 1 (Days 15–42; 4 Weeks): Observational Baseline, Washout & Pharmacokinetic Calibration.**  
-    Establishes clean passive/active baseline autonomic, sleep-architecture, enteric transit, respiratory (`Airofit`), circadian photic (`TimeInDaylight`), and thermoregulatory distributions alongside explicit Cannabis (THC/CBD) and Caffeine pharmacokinetic logging prior to ecological contrast modeling.
-*   **Phase 2 (Days 43–180): Longitudinal Dense Phenotyping & Ecological Contrasts.**  
-    Captures nearly five full steady-state metabolic and neural cycles, evaluating within-subject Dynamic Structural Equation Modeling (DSEM) / ARIMAX ($AR(1)/AR(2)$) coupling between real-world shocks, pharmacological covariates, and physiological recovery.
-*   **Participant & Household Privacy, Minor Exclusion & IRB Governance:**  
-    All participant demographic, clinical, neurodevelopmental, and family medical history records are strictly de-identified in public artifacts (tracked solely by pseudonymous participant ID `P-001`..`P-044`) and stored offline in an encrypted Case Report Form (CRF) governed by prospective IRB review (45 C.F.R. § 46) and local SQLCipher AES-256-GCM encryption at rest. **Minor & Household Exclusion:** The PI's minor son and any non-enrolled household members are strictly excluded from all video, audio, bedroom PIR, smart toilet, and wearable capture; an automated single-speaker/single-face gate (`speaker_count == 1`, non-PI face rejection) immediately purges any multi-person media before feature extraction. **Feature-Only Retention:** Raw 4K video, raw WAV audio, and raw `.FASTQ`/`.BAM` WGS files never enter the analytical Parquet/SQLite dataset or any public/OSF deposit—only anonymized acoustic eGeMAPS vectors, text embeddings, and pre-computed PGS/PGx covariates are retained for analysis.
+### A. Stage 1: The 180-Day (6-Month) Hub-to-Spoke Calibration Study ($N = 1$) & Three-Paper Cascade
+The dense phenotyping benchmark spans **180 Continuous Days (Dec 1, 2026 – May 30, 2027; $T = 180\text{ days} = 259,200\text{ one-minute epochs}$)**, testing the **Three-Paper Cascade**:
+1. **Paper 1 — GTT (Multiscale State-Space Recovery & Error Dynamics):** Quantifies phase-lagged state-space resynchronization ($\Delta S_t = \lambda^\pm \varepsilon_t - \delta_S (S_t - S_{\text{base}})$) across two consecutive **90-day physiological cycles** following autonomous cessation of chronic cannabis, plus retrospective 6-year hair/EHR validation.
+2. **Paper 2 — TDF / DOCAS (Allostatic Body-Budget Mediation & Masked Reactivity):** Tests how objective financial prediction errors ($\varepsilon_t < 0$) deplete peripheral reserves (BP, CGM, HRV, hydration/enteric) and alter prefrontal neurovascular coupling (NVC) and sub-ms neuromotor precision even when facial/vocal expression remain outwardly masked.
+3. **Paper 3 — TFP (Minimal-to-Deep Hub-to-Spoke Transfer Function):** Compresses the 30-stream Hub allostatic state into a validated minimal **Wrist + Ledger Spoke proxy** (Apple HealthKit / Android Health Connect + Ledger $\varepsilon_t$) for scaling to an external $N \ge 30$ cohort without centralizing raw private data.
+
+The 180-day window is structured cleanly into two primary biological cycles (with Days 1–14 practice burn-in nested inside Phase 1):
+*   **Phase 1 (Days 1–90; Dec 1, 2026 – Feb 28, 2027): Cessation & Network Reset (Cycle 1).**  
+    Captures Cycle 1 cannabinoid washout and physiological resynchronization across autonomic, sleep-architecture, respiratory, and endocrine axes. **Days 1–14** are nested as cognitive/motor burn-in ($RT(d) = RT_\infty + a \cdot e^{-d/\tau_{\text{learn}}}$, preceded by **3 practice runs prior to Day 0**) and excluded from steady-state cognitive parameter estimation.
+*   **Phase 2 (Days 91–180; Mar 1 – May 30, 2027): Clean Steady-State Financial Shock Baseline (Cycle 2).**  
+    Captures post-washout Cycle 2 steady-state trajectories, maximizing signal-to-noise ratio for real-time financial prediction errors ($\varepsilon_t$), Dynamic Structural Equation Modeling (DSEM / ARIMAX), and out-of-sample Hub-to-Spoke transfer-function calibration.
+*   **Participant & Third-Party Privacy Governance:**  
+    All records are stored strictly locally on encrypted storage (`FileVault` + `AES-256-GCM`) under pseudonymous ID `P-001` with zero personal hospital, city, or third-party identifiers retained. Local messaging (`chat.db`) runs deterministic sender-only (`is_from_me = 1`) metadata extraction (timestamps, latency, word counts, self-sentiment) with all third-party names, handles, and raw message text permanently stripped. Audio/video tasks execute strictly in a closed solo room (`speaker_count == 1`) with raw PCM/video purged immediately after feature extraction.
 
 ### B. Stage 2–4: Staged Multi-Subject Population Extension ($N = 43$)
 Following the completion and locking of the 180-day baseline, the standardized turnkey research kiosk hardware array rotates sequentially across $N = 43$ external participants across three stepped cohorts:
@@ -256,6 +259,20 @@ Ordered via Quest Diagnostics reseller (e.g., JustLabs / TestWell) and drawn at 
 *   **Ingestion Pipeline:** Physical posterior vertex scalp clippings ($3\text{ cm}$ proximal segments) blind-shipped with unforgeable `PSID` holographic tamper seals. Raw instrument mass spectra (`.mzML`) retention times and precursor ion $m/z$ ratios ingested into `hair_metabolomics_stream`.
 *   **Biophysical Target:** The ultimate passive time capsule integrating systemic endocrine (cortisol/cortisone) and endocannabinoid (AEA/2-AG) exposure over the preceding 90-180 days, proving historical HPA-axis allostatic load.
 
+### V. Complete 30-Stream Itemized Inventory & Master-Clock Adapter Architecture
+
+#### 1. Itemized 30-Stream Inventory (Zero Stream Lumping)
+*   **Group A — Exogenous Environment, Behavioral & Financial (11 Streams):** (1) *Financial Ledgers* ($E_t, V_t, \varepsilon_t$, 6-yr archive); (2) *Aranet4* (1-min $\mathrm{CO}_2$, temp, RH, $\text{hPa}$); (3) *Philips Hue* (Kelvin, melanopic lux, lights-off/wake); (4) *MyFitnessPal* (11 Saved Meals, Meal Timestamps ON, Write-Only HealthKit); (5) *Screen & App Telemetry*; (6) *Apple Music History*; (7) *Reading Logs* (UTC start/end, pages/min); (8) *Daily Journal Logs*; (9) *Multi-Year Music Repeat Archive*; (10) *Multi-Year Retail Order & Return History*; (11) *Messaging (`chat.db` sender-only `is_from_me=1`, zero third-party PII), Notes/Reminders/Calendar Metadata & Hourly Local Meteorological/Photoperiod Station*.
+*   **Group B — Peripheral Autonomic, Cardiopulmonary, Metabolic & Renal (6 Streams):** (12) *Apple Watch* (PPG HR, HRV, sleep, $\mathrm{SpO}_2$, resp rate, ambient/headphone dB, `TimeInDaylight`, 6-yr archive); (13) *Hilo/Aktiia BP* (blinded monthly cuff calibration; docked 5–7 AM & 5–7 PM); (14) *Dexcom G7/Stelo CGM* (5-min interstitial glucose); (15) *Airofit Pro* (weekly pre-yoga MIP/MEP/VLC); (16) *Throne Science* (passive Bristol/urine hydration); (17) *FITINDEX Smart Scale* (5:05 AM fasted mass, `TBW %`, impedance).
+*   **Group C — Central Neural, Neuromotor & Solo Audio-Visual (6 Streams):** (18) *Muse S Athena* (overnight 256 Hz EEG + 64 Hz fNIRS + weekly 5-min baseline; docked 5–7 AM & 5–7 PM); (19) *Logitech Circle IR* (overnight solo bedroom posture/restlessness); (20) *Akai MPK Mini* (CoreMIDI + 48 kHz onset sync, $\ge 30\text{–}45\text{ min}$ forearm rest); (21) *iPad Cognitive Battery* (Creyos/PsyToolkit; 3 pre-Day-0 runs); (22) *Blue Yeti 48 kHz* ($F_0$, jitter, shimmer, HNR; solo room, raw purged); (23) *Logitech Brio 4K* (facial micro-expression/blink features; solo room, raw purged).
+*   **Group D — Clinical Molecular, Cellular & Genomic Anchors (7 Streams):** (24) *Sequencing.com 30x WGS* (air-gapped local NAS); (25) *Day 0 Virgin Hair Lock* (root/tip foil-wrapped); (26) *CLIA Cellular Semen Panels* (Day 0, 90, 180; 48–72 h abstinence); (27) *Quest Monthly Core* (8:00–8:30 AM fasted, 72h Biotin hold: CMP, CBC, Lipids, hs-CRP, Fasting Insulin/HOMA-IR, Morning Cortisol); (28) *Quest Quarterly Add-Ons* (Day 0, M3, M6: HbA1c, Free/Total T + SHBG, Estradiol, TSH/FT3/FT4, ApoB, Ferritin, 25-OH-D, B12); (29) *De-Identified Historical Outpatient EHRs*; (30) *Hub-to-Spoke Transfer Model* (Wrist + Ledger Spoke compression).
+
+#### 2. Apple HealthKit / Health Connect Master Clock & Cross-Platform Discovery
+Apple HealthKit (iOS) and Health Connect (Android) act as the **Master UTC Clock & Connected-Sensor Index**, detecting active devices (`Muse MindfulSession/Sleep`, `Airofit MindfulSession/Workout`, `Throne` visit timestamps) and joining high-resolution sidecar files (CSV/LSL/BLE, plus LAN mDNS `NWBrowser`/`NsdManager` discovery for Hue/Aranet4) onto those exact UTC windows while sending **only encrypted opaque blobs** to an agnostic server.
+
+#### 3. Pre-Registered Cross-Stream Triangulations (14 Latent Signals)
+(1) BP-purged Cortical NVC (`Muse fNIRS` minus `Hilo BP`); (2) $\mathrm{CO}_2$/lux-purged Glymphatic SWS (`Muse` + `Aranet4` + `Hue`); (3) IR Micro-arousals vs. Postural Turns (`Circle` + `Muse` + `Hilo` + `Watch`); (4) Adrenergic Glucose vs. 11-Meal `MFP` Load (`CGM` + `MFP` + `Ledger ε_t`); (5) Osmotic `TBW %` vs. Sympathetic BP (`FITINDEX` + `Throne` + `Hilo`); (6) Pressure/Humidity-calibrated Vocal Vagal Index (`Yeti` + `Aranet4 hPa/RH` + `Airofit`); (7) Somatic-Behavioral Masking Score (`Watch/BP/CGM` vs. `Brio/Yeti` & `Watch dB`); (8) Allostatic Cost-of-Work (`Muse/BP/CGM` vs. `MIDI/iPad`); (9) 6-Yr Retro-Validation (`WGS` + `Hair` + `6-Yr Health/Ledgers/EHRs`); (10) Wearable Cellular/Endocrine Proxy (`CLIA` + `Quest` vs. wearables); (11) Conscious-Unconscious Interoceptive Blind Spot (`Journal/Notes` vs. `BP/CGM/HRV`); (12) Auditory Loop Regulation vs. Overload (`Music` + `Watch dB` + `Muse`); (13) Impulse Order Reactivity (`Retail orders` + `Ledger` + `BP/CGM`); (14) Social Load & Executive Drift (`Sender-only chat` + `Notes/Calendar` + `iPad/Muse`).
+
 ---
 
 ## 3. Comprehensive Metric Mapping Across the 5 DOCAS Channels
@@ -468,16 +485,10 @@ PILOT STUDY COMPOSITE SCORE: 92.4 / 100 (UNASSAILABLE INDUSTRIAL RIGOR)
 ┌───┬───────────────────────────────────────────────────────────────────────────┐
 │   │ PRE-FLIGHT TASK DESCRIPTION                                               │
 ├───┼───────────────────────────────────────────────────────────────────────────┤
-│[ ]│ Order 30x Clinical Whole Genome Sequencing (WGS) saliva collection kit.   │
-│[ ]│ Requisition Day 1 Baseline Blood Panel via Jason Health (Quest/Labcorp).  │
-│[ ]│ Mount Throne smart toilet sensor to porcelain bowl & calibrate flush.    │
-│[ ]│ Position Logitech Brio 4K & connect Blue Yeti Nano mic (Cardioid mode).   │
-│[ ]│ Mount Logitech Circle View camera in bedroom for presence/sleep boundary. │
-│[ ]│ Pair Hilo/Aktiia cuffless BP band & verify monthly cuff calibration.       │
-│[ ]│ Connect Akai MPK Mini via wired USB (1000 Hz) & verify CoreMIDI latency.  │
-│[ ]│ Pair Airofit Pro & Aranet4 via BLE; verify TimeInDaylight & Hue lux pull. │
-│[ ]│ Verify harvest_telemetry.py compiles daily Parquet matrix & libSQL row.   │
-│[ ]│ Enable minor/multi-speaker exclusion gate & verify zero raw media export. │
-│[ ]│ Confirm Day 1 Cannabis/Caffeine PK log start timestamp (T = 0).           │
+│[ ]│ Order Sequencing.com 30x Whole Genome Sequencing (WGS) saliva kit + clip Day 0 foil-wrapped virgin hair lock (ROOT/TIP marked). │
+│[ ]│ Submit Solutions / Pearl IRB NHSR (45 CFR 46.102(e)) request & save signed Determination Letter before Dec 1. │
+│[ ]│ Freeze immutable OSF Preregistration (embargoed) + run Day 0 fasted Quest draw (8:00–8:30 AM, 72h Biotin hold) & Day 0 CLIA cellular anchor (48–72h abstinence). │
+│[ ]│ Complete 3 cognitive/MPK practice runs prior to Day 0; verify 11 Saved Meals in MyFitnessPal (Write-Only HealthKit) & strict record-only blinding across all apps. │
+│[ ]│ Verify Hilo + Muse 5–7 AM & 5–7 PM charging windows, Throne wall wake button, Aranet4 1-min logging, and solo-room audio/video feature-only purge. │
 └───┴───────────────────────────────────────────────────────────────────────────┘
 ```

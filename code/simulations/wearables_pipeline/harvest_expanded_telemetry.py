@@ -270,6 +270,84 @@ def init_expanded_tables(db_path: str):
     );
     """)
 
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS retail_order_reactivity_stream (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp_posix REAL NOT NULL,
+        category TEXT NOT NULL,
+        amount_usd REAL NOT NULL,
+        is_late_night INTEGER NOT NULL DEFAULT 0,
+        was_returned INTEGER NOT NULL DEFAULT 0
+    );
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS messaging_sender_metadata_stream (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp_posix REAL NOT NULL,
+        is_from_me INTEGER NOT NULL DEFAULT 1 CHECK(is_from_me = 1),
+        third_party_pii_stripped INTEGER NOT NULL DEFAULT 1 CHECK(third_party_pii_stripped = 1),
+        word_count INTEGER NOT NULL,
+        response_latency_sec REAL NOT NULL,
+        lexical_ttr REAL NOT NULL,
+        self_sentiment REAL NOT NULL
+    );
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS executive_notes_calendar_stream (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp_posix REAL NOT NULL,
+        note_word_count INTEGER NOT NULL,
+        lexical_entropy REAL NOT NULL,
+        scheduled_blocks INTEGER NOT NULL,
+        tasks_completed INTEGER NOT NULL
+    );
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS screen_app_telemetry_stream (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        date_str TEXT NOT NULL,
+        screen_on_minutes REAL NOT NULL,
+        app_switches INTEGER NOT NULL
+    );
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS meteorological_photoperiod_stream (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp_posix REAL NOT NULL,
+        barometric_hpa REAL NOT NULL,
+        outdoor_temp_c REAL NOT NULL,
+        outdoor_rh_pct REAL NOT NULL,
+        photoperiod_hours REAL NOT NULL
+    );
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS clia_cellular_spermatogenesis_stream (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        cycle_day INTEGER NOT NULL CHECK(cycle_day IN (0, 90, 180)),
+        abstinence_hours REAL NOT NULL CHECK(abstinence_hours BETWEEN 48.0 AND 72.0),
+        concentration_m_ml REAL NOT NULL,
+        motility_pct REAL NOT NULL,
+        morphology_pct REAL NOT NULL
+    );
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS retrospective_ehr_summary_stream (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        record_year INTEGER NOT NULL,
+        panel_type TEXT NOT NULL,
+        systolic_bp REAL,
+        fasting_glucose_mgdl REAL,
+        hba1c_pct REAL,
+        deidentified_verified INTEGER NOT NULL DEFAULT 1 CHECK(deidentified_verified = 1)
+    );
+    """)
+
     conn.commit()
     conn.close()
 
@@ -423,6 +501,21 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None, blinded: boo
     (specimen_psid, harvest_date, segment_distance_from_scalp_cm, estimated_epoch_start_posix, estimated_epoch_end_posix, cortisol_pg_per_mg, cortisone_pg_per_mg, cortisol_cortisone_ratio, dhea_pg_per_mg, endocannabinoid_aea_pg_per_mg, lead_pb_ppm, mercury_hg_ppm, lcms_internal_std_recovery_pct)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, hair_rec)
+    cur.execute("""
+    INSERT INTO clia_cellular_spermatogenesis_stream
+    (cycle_day, abstinence_hours, concentration_m_ml, motility_pct, morphology_pct)
+    VALUES (0, 60.0, 52.0, 61.0, 8.0)
+    """)
+    cur.execute("""
+    INSERT INTO messaging_sender_metadata_stream
+    (timestamp_posix, is_from_me, third_party_pii_stripped, word_count, response_latency_sec, lexical_ttr, self_sentiment)
+    VALUES (?, 1, 1, 24, 180.0, 0.78, 0.25)
+    """, (base_posix + 14 * 3600,))
+    cur.execute("""
+    INSERT INTO meteorological_photoperiod_stream
+    (timestamp_posix, barometric_hpa, outdoor_temp_c, outdoor_rh_pct, photoperiod_hours)
+    VALUES (?, 1014.2, 9.5, 76.0, 9.3)
+    """, (base_posix + 12 * 3600,))
 
     conn.commit()
     conn.close()
