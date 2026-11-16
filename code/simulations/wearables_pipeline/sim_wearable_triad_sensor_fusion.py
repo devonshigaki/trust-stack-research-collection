@@ -89,16 +89,25 @@ def run_simulation():
     crit_c1 = (tau_eeg < tau_ppg < tau_cgm) and (tau_eeg <= 1.0) and (tau_ppg <= 60.0)
     print(f"Criterion C1 (Cascade Latency Hierarchy): {'PASS' if crit_c1 else 'FAIL'}")
 
-    # 4. Strictly Causal Asynchronous Multi-Rate 2-State Kalman Filter
+    # 4. Blind Pre-Study Burn-In Calibration & Strictly Causal Multi-Rate 2-State Kalman Filter
     # State x_t = [S_t (latent trust anomaly), C_t (glucocorticoid load)]^T
-    # Zero future interpolation (CGM updates ONLY on 300s arrivals); zero acausal smoothing; zero S_true[0] intercept.
-    t_cal = int(T_EVENT)
-    mu_faa0 = float(np.mean(faa_1hz[:t_cal]))
-    mu_hrv0 = float(np.mean(rmssd_stream[:t_cal]))
-    n_cgm_cal = max(1, int(T_EVENT // 300))
-    mu_glu0 = float(np.mean(glucose_stream[:n_cgm_cal]))
+    # Zero oracle T_EVENT slicing (fixed [0, 180]s burn-in); zero future interpolation; zero acausal smoothing.
+    BURN_IN_SEC = 180
 
-    def run_causal_kalman(n_ticks: int, use_watch: bool = True) -> np.ndarray:
+    def run_causal_kalman(
+        faa_sig: np.ndarray,
+        hrv_sig: np.ndarray,
+        glu_sig: np.ndarray,
+        n_ticks: int,
+        use_watch: bool = True,
+    ) -> np.ndarray:
+        m_f0 = float(np.mean(faa_sig[:BURN_IN_SEC]))
+        s_f0 = max(float(np.std(faa_sig[:BURN_IN_SEC])), 0.08)
+        m_h0 = float(np.mean(hrv_sig[:BURN_IN_SEC]))
+        s_h0 = max(float(np.std(hrv_sig[:BURN_IN_SEC])), 4.0)
+        m_g0 = float(glu_sig[0])
+        sd_g0 = 4.0
+
         x = np.array([0.50, 0.0], dtype=np.float64)
         P = np.diag([0.25, 0.25])
         F = np.array([[0.999, 0.0], [0.0, 0.996]], dtype=np.float64)
@@ -119,33 +128,47 @@ def run_simulation():
         for k in range(n_ticks):
             x = F @ x
             P = F @ P @ F.T + Q
-            z_eeg = 0.50 + 0.55 * (faa_1hz[k] - mu_faa0)
+            z_eeg = 0.50 + 0.05 * ((faa_sig[k] - m_f0) / s_f0)
             x, P = kf_update(x, P, z_eeg, H_eeg, R_var=0.045)
             if use_watch:
-                z_ppg = 0.50 + (rmssd_stream[k] - mu_hrv0) / 55.0
+                z_ppg = 0.50 + 0.07 * ((hrv_sig[k] - m_h0) / s_h0)
                 x, P = kf_update(x, P, z_ppg, H_ppg, R_var=0.025)
             if k % 300 == 0:
                 cgm_idx = k // 300
-                if cgm_idx < len(glucose_stream):
-                    z_cgm = (glucose_stream[cgm_idx] - mu_glu0) / 60.0 - 0.50
+                if cgm_idx < len(glu_sig):
+                    z_cgm = ((glu_sig[cgm_idx] - m_g0) / (15.0 * sd_g0)) - 0.50
                     x, P = kf_update(x, P, z_cgm, H_cgm, R_var=0.040)
             s_hat_out[k] = float(np.clip(x[0], 0.0, 1.0))
         return s_hat_out
 
-    S_hat = run_causal_kalman(len(t_ppg), use_watch=True)
-    S_hat_trunc = run_causal_kalman(1200, use_watch=True)
+    S_hat = run_causal_kalman(faa_1hz, rmssd_stream, glucose_stream, len(t_ppg), use_watch=True)
+    S_hat_trunc = run_causal_kalman(faa_1hz, rmssd_stream, glucose_stream, 1200, use_watch=True)
     causality_diff = float(np.max(np.abs(S_hat[:1200] - S_hat_trunc)))
     assert causality_diff < 1e-12, f"Causality violation! Future data leaked into prefix: {causality_diff}"
 
     corr_full = float(np.corrcoef(S_hat, S_true)[0, 1])
-    print(f"\n--- STRICTLY CAUSAL ASYNCHRONOUS MULTI-RATE KALMAN FILTER ---")
+    print(f"\n--- BLIND CAUSAL ASYNCHRONOUS MULTI-RATE KALMAN FILTER (180s Burn-In) ---")
     print(f"Prefix-Truncation Causality Diff:          {causality_diff:.2e} (< 1e-12 PASS)")
     print(f"Full Multi-Sensor Trust State Correlation: r = {corr_full:.4f}  [Target: >= 0.850]")
-    crit_c2 = (corr_full >= 0.850) and (causality_diff < 1e-12)
+
+    # Randomized unknown betrayal-onset Monte Carlo robustness check (20 draws in [240s, 900s])
+    rng_mc = np.random.default_rng(2026)
+    mc_corrs = []
+    for _ in range(20):
+        t_ev = float(rng_mc.uniform(240.0, 900.0))
+        s_mc = np.where(t_ppg < t_ev, 0.85, 0.30 + 0.55 * (1.0 - np.exp(-np.maximum(t_ppg - t_ev, 0.0) / 1200.0)))
+        faa_mc = np.where(t_ppg < t_ev + tau_eeg, rng_mc.normal(0.40, 0.08, len(t_ppg)), rng_mc.normal(-0.25, 0.08, len(t_ppg)))
+        hrv_mc = np.where(t_ppg < t_ev + tau_ppg, rng_mc.normal(55.0, 4.0, len(t_ppg)), 24.0 + 31.0 * (1.0 - np.exp(-np.maximum(t_ppg - t_ev - tau_ppg, 0.0) / 600.0)) + rng_mc.normal(0, 3.0, len(t_ppg)))
+        glu_mc = np.where(t_cgm < t_ev + tau_cgm, rng_mc.normal(92.0, 3.0, len(t_cgm)), 92.0 + 46.0 * (np.maximum(t_cgm - t_ev - tau_cgm, 0.0) / 900.0) * np.exp(-np.maximum(t_cgm - t_ev - tau_cgm, 0.0) / 900.0) + rng_mc.normal(0, 2.0, len(t_cgm)))
+        s_hat_mc = run_causal_kalman(faa_mc, hrv_mc, glu_mc, len(t_ppg), use_watch=True)
+        mc_corrs.append(float(np.corrcoef(s_hat_mc, s_mc)[0, 1]))
+    mc_min_r = float(np.min(mc_corrs))
+    print(f"Randomized Onset MC (20x T_event in [240,900]s): min r = {mc_min_r:.4f} [Target: >= 0.850]")
+    crit_c2 = (corr_full >= 0.850) and (causality_diff < 1e-12) and (mc_min_r >= 0.850)
     print(f"Criterion C2 (Multi-Rate State Recovery):  {'PASS' if crit_c2 else 'FAIL'}")
 
     # 5. Fault Tolerance & Sensor Dropout Test (Criterion C3)
-    S_hat_degraded = run_causal_kalman(len(t_ppg), use_watch=False)
+    S_hat_degraded = run_causal_kalman(faa_1hz, rmssd_stream, glucose_stream, len(t_ppg), use_watch=False)
 
     corr_degraded = float(np.corrcoef(S_hat_degraded, S_true)[0, 1])
     print(f"Degraded (Apple Watch Missing) Correlation:  r = {corr_degraded:.4f}  [Target: >= 0.750]")

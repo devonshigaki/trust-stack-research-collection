@@ -1,6 +1,6 @@
 {
   "release": "v4.5",
-  "timestamp": "2026-11-16T02:49:26Z",
+  "timestamp": "2026-11-16T03:26:17Z",
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.5",
@@ -113,8 +113,8 @@
       "bytes": 261913
     },
     "formal/FORMAL_VERIFICATION_REPORT.md": {
-      "sha256": "1a0925372b7b903aed3600b20d9fbde7b9b61cd601120772a47b31579caad8d2",
-      "bytes": 6513
+      "sha256": "1d84ed851582f9d40edd5ebd232965820946cd86685b78f794b837c79d6e94b0",
+      "bytes": 6609
     },
     "formal/TFP_Edge_Protocol.cfg": {
       "sha256": "a7bde0ce32b691d1ee7de48b690314b5d80f8bf297b07e4eebc38040022c8b2a",
@@ -125,8 +125,8 @@
       "bytes": 10099
     },
     "formal/run_all_formal_verifications.py": {
-      "sha256": "63b8d4ff61d2189a056f8bfb84921a4d434beb415ee8ee3a4ebd03635baa9ccd",
-      "bytes": 13505
+      "sha256": "19ddf0ab0411c73936c3b836443d837cc865122fc64d8c2d4deb608c25974835",
+      "bytes": 14584
     },
     "formal/sympy_symbolic_dynamics.py": {
       "sha256": "0731b419fa07799b2fbd8e8bf71bae2339844bf515d5e804bbd372286dfe3eb7",
@@ -173,7 +173,7 @@
       "bytes": 20387
     },
     "formal/zk_stp_results.json": {
-      "sha256": "2189eb28d5648895d86858631433ce3ca05792371514c369af94f0924b4cee3f",
+      "sha256": "99e939799bb073b74e476c705872f446c9fec2baaad3076e67030f288c9a8d53",
       "bytes": 1244
     },
     "formal/lean/Check.lean": {
@@ -257,8 +257,8 @@
       "bytes": 15293
     },
     "code/tools/evaluations/multi_rubric_evaluator.py": {
-      "sha256": "b80f43e57c7bb1f5eb3b01a2960e6989f66d7deaa063d24c1aaff1bd4416cb78",
-      "bytes": 4299
+      "sha256": "bcd37ada2e8fdca4dd39ce374e22f6cf0c72f3b27f7b5ff0d9b75a3e31a680ea",
+      "bytes": 4352
     },
     "code/tools/evaluations/rubrics/apa_jars_quant_behavioral.json": {
       "sha256": "df9e9aaba0ef9994877ae884b0c519081a6e8a5aae5a3b47559f4505ba67f562",
@@ -1449,8 +1449,8 @@
       "bytes": 704145
     },
     "code/simulations/wearables_pipeline/fig_wearable_triad_fusion.png": {
-      "sha256": "66a0b302a4123f22d88f32c36bf2a55e66e49067d72f125bb83f0e6e216eb1f1",
-      "bytes": 695535
+      "sha256": "bfddf992e5832245be3b9d52c51a212dd82390743f268cfe2a7a03ec74dbedb5",
+      "bytes": 695207
     },
     "code/simulations/wearables_pipeline/harvest_expanded_telemetry.py": {
       "sha256": "de7c1bd9d3832f3cd39a0c6f0063582ca5a9725e451e3a3893aef6437dcc35ab",
@@ -1473,12 +1473,12 @@
       "bytes": 1952
     },
     "code/simulations/wearables_pipeline/sim_wearable_triad_results.json": {
-      "sha256": "159406e4b89ffedf576c6244788d7a3af6003c00e9b820c5e2f98b282d9f48ad",
+      "sha256": "ec948655f7c6d97419fa07666e8c58ce37002b4081d6774ef50a9da138aa96a0",
       "bytes": 484
     },
     "code/simulations/wearables_pipeline/sim_wearable_triad_sensor_fusion.py": {
-      "sha256": "cee6e74f9582b2a29313b4bb322d2cd28d0e523539b91a310cdf8143a7f398fd",
-      "bytes": 11906
+      "sha256": "7052ba92072ed41cf8000fb72ae5cb62fb7ddb4f4b90aa8374f7e70dd5324b37",
+      "bytes": 13499
     },
     "code/simulations/wearables_pipeline/simulate_180day_dense_pilot.py": {
       "sha256": "4bff82e4c8f3f173412915a6b19872b13eb41224e3f5e9970121d31b187b7231",
@@ -3977,8 +3977,8 @@
       "bytes": 256168
     },
     "figures/fig_wearable_triad_fusion.png": {
-      "sha256": "66a0b302a4123f22d88f32c36bf2a55e66e49067d72f125bb83f0e6e216eb1f1",
-      "bytes": 695535
+      "sha256": "bfddf992e5832245be3b9d52c51a212dd82390743f268cfe2a7a03ec74dbedb5",
+      "bytes": 695207
     },
     "figures/flywire_drosophila_whole_brain.png": {
       "sha256": "be48af6e91972fdbbf504221a4df0f2189db3609d8ed87f5d80048629b8ee2a2",
