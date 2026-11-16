@@ -30,24 +30,31 @@ def simulate_clock_skew(N_events: int = 1000, max_skew_ms: int = 43_200_000):
     rng = np.random.default_rng(42)
     true_time_ms = 1_700_000_000_000
     events = []
-    # Two edge issuers (A and B) with independent skewed local clocks
-    hlc_wall = 0
-    hlc_logical = 0
+    # Two edge issuers (A and B) with completely independent, skewed local HLC clocks
+    clocks = {
+        "node_A": {"wall": 0, "logical": 0, "offset_ms": -18_500, "drift_ppm": -120.0},
+        "node_B": {"wall": 0, "logical": 0, "offset_ms": +24_300, "drift_ppm": +150.0},
+    }
+    t0 = true_time_ms
     for seq in range(N_events):
         true_time_ms += int(rng.exponential(60_000))
         eps = float(rng.normal(0.05, 0.85))  # Large enough to hit [0, 1] clamp boundaries frequently
         actor = "node_A" if seq % 2 == 0 else "node_B"
-        # Update Hybrid Logical Clock on issuer without global oracle
-        pt = true_time_ms + int(rng.integers(-60_000, 60_000))
-        if pt > hlc_wall:
-            hlc_wall = pt
-            hlc_logical = 0
+        clk = clocks[actor]
+        # Independent per-node physical clock with offset + drift + jitter (no shared HLC state!)
+        elapsed_ms = true_time_ms - t0
+        pt = true_time_ms + clk["offset_ms"] + int(elapsed_ms * clk["drift_ppm"] * 1e-6) + int(rng.integers(-5_000, 5_001))
+        if pt > clk["wall"]:
+            clk["wall"] = pt
+            clk["logical"] = 0
         else:
-            hlc_logical += 1
+            clk["logical"] += 1
+        # Enforce bounded HLC drift (wall cannot exceed local physical clock + max_skew_ms)
+        assert abs(clk["wall"] - true_time_ms) <= max_skew_ms, "HLC drift exceeded max_skew_ms bound"
         digest = _event_digest(actor, seq, eps)
         events.append({
             "actor": actor,
-            "hlc": (hlc_wall, hlc_logical, digest),
+            "hlc": (clk["wall"], clk["logical"], digest),
             "eps": eps,
             "true_time_ms": true_time_ms,
         })

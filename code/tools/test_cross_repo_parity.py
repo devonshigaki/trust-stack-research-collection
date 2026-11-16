@@ -48,6 +48,8 @@ def main():
 
     # 2. Run iOS Kiosk Rust UniFFI Bridge unit tests & Swift FFI binding typecheck
     uniffi_dir = os.path.join(BASE_DIR, "protocols/ios_research_kiosk/uniffi_bridge")
+    with open(os.path.join(uniffi_dir, "src/lib.rs"), "r", encoding="utf-8") as f:
+        assert "pub fn apply_validation_event_fixed_i64" in f.read(), "UniFFI bridge missing apply_validation_event_fixed_i64"
     res_u = subprocess.run(["cargo", "test", "--quiet"], cwd=uniffi_dir, capture_output=True, text=True)
     assert res_u.returncode == 0, f"UniFFI cargo test failed:\n{res_u.stderr}"
     print("✓ iOS Kiosk Rust UniFFI Bridge (`cargo test`): PASS")
@@ -104,6 +106,19 @@ def main():
                 )
                 assert res_sim.returncode == 0, f"Simulator master_law cargo test failed:\n{res_sim.stderr}"
                 print("✓ Standalone Simulator `cargo test -p sim-core --lib master_law::tests` (incl. Z3 BIBO bounds): PASS")
+
+    # 4. Cross-repo FreshProtocol Spec Kernel parity check
+    fp_dir = os.path.expanduser("~/Developer/freshprotocol")
+    fp_ml = os.path.join(fp_dir, "crates/fresh-protocol-spec/src/master_law.rs")
+    if os.path.exists(fp_ml):
+        with open(fp_ml, "r", encoding="utf-8") as f:
+            assert "pub fn step_fixed_i64" in f.read(), "FreshProtocol missing fixed-point step_fixed_i64 parity method"
+        res_fp = subprocess.run(
+            ["cargo", "test", "-p", "fresh-protocol-spec", "--lib", "--quiet"],
+            cwd=fp_dir, capture_output=True, text=True,
+        )
+        assert res_fp.returncode == 0, f"FreshProtocol fresh-protocol-spec test failed:\n{res_fp.stderr}"
+        print("✓ FreshProtocol `fresh-protocol-spec::master_law` Golden-Vector + Fixed-Point Parity: PASS")
 
     print("\n✓ ALL CROSS-REPO GOLDEN-VECTOR PARITY CHECKS PASSED!")
     return 0

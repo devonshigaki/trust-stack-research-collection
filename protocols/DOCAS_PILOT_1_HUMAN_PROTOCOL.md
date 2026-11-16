@@ -1,9 +1,9 @@
 # DOCAS-PILOT-1: MULTIMODAL IN-SITU NEURO-WEARABLE & MULTI-OMIC CONCORDANCE PROTOCOL
 **Document ID:** `DOCAS_PILOT_1_HUMAN_PROTOCOL.md`  
-**Protocol Version:** 4.4 (180-Day Longitudinal Dense Benchmark + Staged 43-Subject Population Extension)  
+**Protocol Version:** 4.6 (180-Day Longitudinal Dense Benchmark + Staged 43-Subject Population Extension)  
 **Principal Investigator:** Devon Shigaki (ORCID: 0009-0003-8977-8010)  
 **Standard Adherence:** CONSORT-EHEALTH / STROBE / IEEE-EMBS / Cochrane RoB 2 / APA JARS-Quant / TOP Guidelines  
-**Pre-Registration Repository:** Open Science Framework (OSF Pre-Registration Freeze)  
+**Pre-Registration Repository:** Open Science Framework (`SIM_PILOT_V4_6_PRE_REGISTRATION.md`)  
 
 ---
 
@@ -34,13 +34,15 @@ TOTAL ENROLLMENT: 44 Unique Human Subjects | EXACT VOLUME: 270 Person-Days | REU
 ```
 
 ### A. Stage 1: The 180-Day Longitudinal Dense Phenotype ($N = 1$)
-The dense phenotyping benchmark spans **180 Continuous Days ($T = 180\text{ days} = 259,200\text{ one-minute epochs}$)**:
-*   **Phase 1 (Days 1–30): Exogenous Confounder Washout & Receptor Recalibration.**  
-    Establishes baseline autonomic, sleep-architecture, enteric transit, and thermoregulatory calibration prior to steady-state modeling (held out from primary stationary parameter estimation to prevent washout-phase confounding).
-*   **Phase 2 (Days 31–180): Clean Baseline & Circadian Allostatic Stabilization.**  
-    Captures five full 30-day steady-state metabolic and neural cycles, establishing an unconfounded, high-resolution neuro-financial coupling baseline.
-*   **Participant Privacy, De-Identification & IRB Governance:**  
-    All participant demographic, clinical, neurodevelopmental, and family medical history records are strictly de-identified in public artifacts (tracked solely by pseudonymous participant ID `P-001`..`P-044`) and stored offline in an encrypted Case Report Form (CRF) governed by institutional ethics / IRB review (45 C.F.R. § 46) and local SQLCipher AES-256-GCM encryption at rest.
+The dense phenotyping benchmark spans **180 Continuous Days ($T = 180\text{ days} = 259,200\text{ one-minute epochs}$)**, structured into three explicit statistical windows:
+*   **Phase 0 (Days 1–14): Habituation & Cognitive Practice-Curve Burn-In.**  
+    Acclimates the participant to evening hardware docking and fits the per-task exponential practice curve ($RT(d) = RT_\infty + a \cdot e^{-d/\tau_{\text{learn}}}$) across PVT-B, 2-Back, Go/No-Go, Stroop, and Akai MPK Mini tapping. Excluded from steady-state parameter estimation.
+*   **Phase 1 (Days 15–42; 4 Weeks): Observational Baseline, Washout & Pharmacokinetic Calibration.**  
+    Establishes clean passive/active baseline autonomic, sleep-architecture, enteric transit, respiratory (`Airofit`), circadian photic (`TimeInDaylight`), and thermoregulatory distributions alongside explicit Cannabis (THC/CBD) and Caffeine pharmacokinetic logging prior to ecological contrast modeling.
+*   **Phase 2 (Days 43–180): Longitudinal Dense Phenotyping & Ecological Contrasts.**  
+    Captures nearly five full steady-state metabolic and neural cycles, evaluating within-subject Dynamic Structural Equation Modeling (DSEM) / ARIMAX ($AR(1)/AR(2)$) coupling between real-world shocks, pharmacological covariates, and physiological recovery.
+*   **Participant & Household Privacy, Minor Exclusion & IRB Governance:**  
+    All participant demographic, clinical, neurodevelopmental, and family medical history records are strictly de-identified in public artifacts (tracked solely by pseudonymous participant ID `P-001`..`P-044`) and stored offline in an encrypted Case Report Form (CRF) governed by prospective IRB review (45 C.F.R. § 46) and local SQLCipher AES-256-GCM encryption at rest. **Minor & Household Exclusion:** The PI's minor son and any non-enrolled household members are strictly excluded from all video, audio, bedroom PIR, smart toilet, and wearable capture; an automated single-speaker/single-face gate (`speaker_count == 1`, non-PI face rejection) immediately purges any multi-person media before feature extraction. **Feature-Only Retention:** Raw 4K video, raw WAV audio, and raw `.FASTQ`/`.BAM` WGS files never enter the analytical Parquet/SQLite dataset or any public/OSF deposit—only anonymized acoustic eGeMAPS vectors, text embeddings, and pre-computed PGS/PGx covariates are retained for analysis.
 
 ### B. Stage 2–4: Staged Multi-Subject Population Extension ($N = 43$)
 Following the completion and locking of the 180-day baseline, the standardized turnkey research kiosk hardware array rotates sequentially across $N = 43$ external participants across three stepped cohorts:
@@ -51,19 +53,20 @@ Executing an $N=1$ 180-day dense phenotyping protocol carries a profound risk of
 
 1. **ACTIVE (High-Effort / Intentional Cognitive or Physical Load):** Requires dedicated time blocks, conscious execution, and strict behavioral compliance.
    *   **Manual Reading Logs:** Daily reading of physical books, followed by hand-written or typed marginalia digested into the pipeline.
-   *   **Tyeingo Breathing Exercise Device:** Sustained Maximal Inspiration (SMI) ball-hold duration timed with a stopwatch; measures diaphragmatic endurance, inspiratory capacity, and Hering-Breuer vagal activation.
-   *   **Cognitive/Motor Battery (Akai MPK Mini):** Standardized psychomotor vigilance tests (PVT) and sequence replication.
+   *   **Airofit Pro Respiratory Muscle Trainer:** Quantitative Maximal Inspiratory Pressure ($\text{MIP}$, $\text{cmH}_2\text{O}$), Maximal Expiratory Pressure ($\text{MEP}$, $\text{cmH}_2\text{O}$), and Vital Capacity ($\text{VC}$, liters) via BLE / local CSV export; measures diaphragmatic reserve and vagal-autonomic engagement.
+   *   **Daily Objective Cognitive & Motor Battery (Wired USB Akai MPK Mini @ 1000 Hz polling / 1 ms timestamping):** Standardized 3-minute PVT-B, 2-Back working memory, Color-Word Stroop interference, Go/No-Go inhibitory control, 60-second Wing-Kristofferson pacing, and 2D circumplex (all practice-detrended against Days 1–14).
+   *   **Pharmacological & Lifestyle Intake Logs:** Timestamped Cannabis (THC/CBD mg, route) and Caffeine (mg, time-of-day) pharmacokinetic event logging alongside dietary carbohydrate meals.
 2. **SEMI-ACTIVE (Continuous Wear / Daily Logistics):** Sensors that collect data passively but require daily management (hygiene, charging, calibration).
    *   **Muse S (Athena) fNIRS/EEG Headband:** High burden (precise skin contact, impedance checks, daily charging).
-   *   **Apple Watch Series 8:** Moderate burden (daily charging, specific wrist placement).
-   *   **Aktiia 24/7 Blood Pressure:** Moderate burden (weekly charging, initial optical-to-cuff initialization).
+   *   **Apple Watch Series 8:** Moderate burden (daily charging, specific wrist placement; includes `HKQuantityTypeIdentifierTimeInDaylight`).
+   *   **Aktiia / Hilo 24/7 Cuffless Blood Pressure:** Moderate burden (weekly charging, monthly oscillometric cuff initialization).
 3. **SEMI-ACTIVE (Long-Duration Wear):** Continuous passive collection with episodic semi-monthly application.
    *   **Dexcom Stelo CGM:** Requires subcutaneous filament insertion and adhesive management every 15 days.
 4. **PASSIVE (Ambient / Zero-Interaction):** The participant lives normally; the environment extracts the data.
-   *   **Throne Smart Toilet:** Optical classification of Bristol scale/hydration.
-   *   **Awair Element:** Ambient indoor air quality (CO2, VOCs, PM2.5).
-   *   **Logitech Circle View:** Ambient optical sleep boundaries via Secure Video.
-   *   **Apple Music & Plaid API:** Zero-touch ingestion of listening history and financial transactional telemetry.
+   *   **Throne Smart Toilet:** Optical classification of Bristol scale/hydration (PI-only profile gating).
+   *   **Aranet4 Home/PRO + Optional Outdoor EPA/PurpleAir $\text{PM}_{2.5}$:** Ambient indoor $\mathrm{CO}_2$, temperature, relative humidity, barometric pressure (BLE) plus outdoor $\mathrm{PM}_{2.5}$ ($\mu\text{g/m}^3$) spatial covariate.
+   *   **Logitech Circle View & Philips Hue:** Ambient optical bed-entry boundaries (PI-only) and pre-bed lux / CCT Kelvin circadian exposure.
+   *   **Apple Music & Financial API:** Zero-touch ingestion of listening history and financial transactional telemetry.
 5. **EPISODIC / ONE-OFF (Clinical Interventions):** High-friction biological harvesting.
    *   **Monthly Venous Blood Draws:** Phlebotomy for longitudinal proteomics and inflammatory markers.
    *   **Hair Follicle Harvest:** Longitudinal retrospective endocrine chronometry (cortisol deposition).
@@ -84,11 +87,11 @@ Executing an $N=1$ 180-day dense phenotyping protocol carries a profound risk of
 │ • Enteric & Hydration (Throne Smart Toilet) ──► App BLE Export ───┘          │
 ├───────────────────────────────────────────────────────────────────┤          │
 │ AMBIENT, ENVIRONMENTAL & FINANCIAL LAYER                          │          │
-│ • Indoor Air Quality (Awair Element Monitor) ─► Local HTTP Pull ──┼─► Local  │
-│ • Circadian Photic (Philips Hue Smart Lamps) ─► HomeKit API ──────┤   libSQL │
-│ • Video & Acoustic Debriefs (Logitech Brio 4K)► openSMILE / Audio ┤   Store  │
-│ • Financial Execution (Plaid OAuth 2.0 Engine)► Automated Webhooks┤     &    │
-│ • Somatic Stationarity (Fitindex ES-26M Scale)► HealthKit Sync ───┤   Parquet│
+│ • Indoor Air Quality (Aranet4 + Out. PM2.5)   ─► Local BLE / API  ──┼─► Local  │
+│ • Circadian Photic (Hue + TimeInDaylight)     ─► HealthKit / Hue  ──┤   libSQL │
+│ • Acoustic/Video (Brio+Yeti; Feature-Only)    ─► openSMILE / Purged ┤   Store  │
+│ • Respiratory Strength (Airofit MIP/MEP/VC)   ─► Local BLE / CSV  ──┤     &    │
+│ • Cognitive Battery (MPK Mini 1kHz USB MIDI)  ─► CoreMIDI 1ms Log ──┤   Parquet│
 ├───────────────────────────────────────────────────────────────────┤   Matrix │
 │ AIR-GAPPED MULTI-OMICS LAYER                                      │          │
 │ • 30x Clinical Whole Genome Sequencing (WGS) ─► Encrypted NAS ────┤          │
@@ -135,15 +138,15 @@ Executing an $N=1$ 180-day dense phenotyping protocol carries a profound risk of
 *   **Biophysical Target:** Daily morning fasted Body Mass, BMI, Body Fat %, Lean Body Mass, and Body Water %.  
     *Primary Epistemic Role:* (a) Certifies somatic stationarity ($\Delta \text{BodyMass} \le \pm 2.0\%$); (b) Dynamically scales the individualized cranial Differential Pathlength Factor ($\text{DPF}_u$) in the Modified Beer-Lambert Law based on subcutaneous adipose tissue thickness.
 
-### G. Ambient Environmental Context (Air Quality Monitor)
-*   **Device:** **Awair Element Indoor Air Quality Monitor**.
-*   **Sensors:** Laser particle counter, non-dispersive infrared (NDIR) $\mathrm{CO}_2$ sensor, and semiconductor TVOC sensor.
-*   **Biophysical Target:** Continuous indoor $\mathrm{CO}_2$ (ppm), Total Volatile Organic Compounds (TVOCs), $\mathrm{PM}_{2.5}$ particulate density, ambient temperature, and relative humidity, controlling for stale-air cognitive fatigue.
+### G. Ambient Environmental Context (Aranet4 Home/PRO & Outdoor PM2.5)
+*   **Device:** **Aranet4 Home/PRO** (local Bluetooth Low Energy pull) + optional **EPA AirNow / PurpleAir Outdoor $\mathrm{PM}_{2.5}$**.
+*   **Sensors:** Non-dispersive infrared (NDIR) $\mathrm{CO}_2$ sensor (ppm), temperature ($^\circ\text{C}$), relative humidity (%), barometric pressure ($\text{hPa}$), and outdoor fine particulate density ($\mathrm{PM}_{2.5}\ \mu\text{g/m}^3$).
+*   **Biophysical Target:** Continuous indoor $\mathrm{CO}_2$ accumulation (controlling for hypercapnic prefrontal fatigue on PVT-B / 2-Back / Stroop) and outdoor $\mathrm{PM}_{2.5}$ autonomic inflammation load.
 
-### H. Circadian Photic Confounder Filter (Smart Lighting)
-*   **Device:** **Philips Hue Smart Lighting System**.
-*   **Parameters:** Ambient Correlated Color Temperature (CCT in Kelvin, 2000K–6500K), brightness percentage (0–100%), and lamp power state.
-*   **Biophysical Target:** Isolates artificial blue-light melatonin suppression from financial allostatic stress (DOCAS §5.17 Sim D17: *Photic and Thermal Gating*).
+### H. Circadian Photic Confounder Filter (Apple Health TimeInDaylight & Philips Hue)
+*   **Devices:** **Apple Watch S8 (`HKQuantityTypeIdentifierTimeInDaylight`)** + **Philips Hue Smart Lighting System** + **iPhone TrueDepth Lux**.
+*   **Parameters:** Daytime outdoor bright-light exposure minutes (`TimeInDaylight`), pre-bed (20:00–sleep) ambient lux (`pre_bed_lux`), and Correlated Color Temperature (CCT in Kelvin, 2000K–6500K).
+*   **Biophysical Target:** Isolates insufficient morning zeitgeber daylight and nocturnal blue-light melatonin suppression from financial allostatic stress (DOCAS §5.17 Sim D17: *Photic and Thermal Gating*).
 
 ### I. Multimodal Video & Studio Acoustic Debrief Station (Brio 4K & Blue Yeti Nano on Integrated Isolation Shield)
 *   **Optical Sensor (Primary):** **Logitech Brio 4K Ultra HD Pro Webcam (Model V-U0040 / MSIP-REM-DZL-V-U0040)** (Sony 1/2.8-inch 4K HDR optical sensor, RightLight 3, manual exposure lock at 30/60 fps) mounted at eye level.
@@ -161,7 +164,7 @@ Executing an $N=1$ 180-day dense phenotyping protocol carries a profound risk of
     *   *Cohort 4 ($N = 30$, 1-Day Trial):* **Same-Day Intake & Exit Schedule.** Morning 3-minute intake baseline (vocal pitch $f_0$ calibration) $\to$ Midday active financial task $\to$ Evening 3-minute exit reflection. Both completed on the same calendar day.
     *   *Cohorts 2–3 ($N = 3\times 10\text{d}, N = 10\times 3\text{d}$):* Day 1 Morning Intake $\to$ Event-triggered "Hot Debriefs" ($90\text{ s}$ if transaction occurs) $\to$ Final Day Evening Exit.
     *   *Cohort 1 ($N = 1$, 180-Day Trial):* Day 1 Intake $\to$ Event-triggered debriefs $\to$ Day 180 Final Longitudinal Synthesis.
-    *   *Processing:* `openSMILE` extracts standardized eGeMAPS acoustic feature vectors (88 parameters). On-device `whisper.cpp` transcribes text into local libSQL. Raw WAV and 4K video are preserved on encrypted local storage.
+    *   *Processing & Feature-Only Privacy Rule:* `openSMILE` extracts standardized eGeMAPS acoustic feature vectors (88 parameters) and on-device `whisper.cpp` computes anonymized semantic vectors into local libSQL. **Zero raw WAV audio or 4K video is retained in the analytical Parquet/SQLite dataset or exported; any multi-speaker / minor-presence frame is immediately discarded prior to extraction.**
 
 ### J. The Dedicated Edge Hub (Wiped iPhone 12 Pro Kiosk)
 *   **Device:** **iPhone 12 Pro** (A14 Bionic SiP, 6 GB RAM, Wi-Fi 6, Bluetooth 5.0, Ultra Wideband U1).
@@ -193,16 +196,13 @@ Drawn at Day 1 (Cessation Baseline), Day 30 (Post-Acute Withdrawal), Day 60, Day
 ### N. The Unified Executive Neuro-Battery (Akai MPK Mini Controller)
 *   **Device:** **Akai Professional MPK Mini USB MIDI Controller (Class-Compliant)**.
 *   **Sensors & Actuators:** 8 backlit, velocity-sensitive thick MPC drum pads (piezoelectric force transducers capturing arrival times at sub-millisecond precision and 7-bit strike velocity $v \in [1, 127]$), 25 velocity-sensitive mini keys, and a dynamic 4-way spring-centered analog thumbstick (14-bit Pitch Bend on X-axis and 7-bit CC#1 Modulation on Y-axis).
-*   **Integration Pipeline:** Direct USB connection to MacBook Air / Python listener using `mido` / `CoreMIDI` (zero audio drivers, sub-millisecond hardware interrupt latency).
-*   **Standardized 5-Minute Cognitive Battery (Executed Daily at 8:05 PM):**
-    1.  *Task 1 (10 Seconds): 2D Emotion Circumplex Joystick:* The participant nudges the 4-way analog thumbstick to physicalize their momentary Core Affect:
-        $$\text{Valence } (X) = \frac{\text{PitchBend} - 8192}{8192} \in [-1.0, +1.0] \quad (\text{Left: Loss/Displeasure} \longleftrightarrow \text{Right: Gain/Pleasure})$$
-        $$\text{Arousal } (Y) = \frac{\text{CC}_1 - 64}{64} \in [-1.0, +1.0] \quad (\text{Down: Exhaustion/Numbness} \longleftrightarrow \text{Up: Panic/Hyper-Arousal})$$
-    2.  *Task 2 (60 Seconds): Striatal Internal Pacemaker Test:* Spontaneous motor tempo on MPC Pad 1. Measures the **Inter-Tap Interval Coefficient of Variation ($\text{CV}_{\text{ITI}} = \sigma_{\text{ITI}} / \mu_{\text{ITI}}$)** and applies the **Wing-Kristofferson Timing Decomposition**:
-        $$\sigma^2_{\text{total}} = \sigma^2_{\text{clock}} + 2\sigma^2_{\text{motor}} - 2\text{Cov}(\Delta t_i, \Delta t_{i+1})$$
-        separating central striatal dopaminergic clock jitter ($\sigma^2_{\text{clock}}$) from peripheral neuromuscular execution delay ($\sigma^2_{\text{motor}}$), and tracking kinetic strike force decay ($\Delta v / \Delta t$).
-    3.  *Task 3 (2 Minutes): NASA Brief Psychomotor Vigilance Task (PVT-B):* Visual reaction-time counter flashes on screen at pseudo-random intervals ($1\text{--}4\text{ seconds}$ inter-stimulus interval / ISI). The participant slaps MPC Pad 1 instantly upon stimulus onset. Extracts Mean Reaction Time ($\text{RT}$ in ms), optimum motor speed (fastest 10% RT), and **Attentional Lapses ($\text{RT} > 500\text{ ms}$)**, providing the aerospace gold standard for allostatic cognitive exhaustion.
-    4.  *Task 4 (2 Minutes): Go / No-Go Prefrontal Executive Inhibitory Control Task:* Fast sequential visual cues ($80\%$ Green Go cues, $20\%$ Red No-Go cues; $400\text{ ms}$ presentation). Measures right inferior frontal cortical inhibitory gating: Commission Errors (impulsive failure to withhold response on Red No-Go cues), Omission Errors (attentional dropouts on Green Go cues), and **Signal Detection Theory Perceptual Sensitivity ($d' = Z(\text{Hit Rate}) - Z(\text{False Alarm Rate}))$**.
+*   **Integration Pipeline:** Direct wired USB connection to MacBook Air / Python listener using `mido` / `CoreMIDI` at **$1000\text{ Hz}$ polling / $1\text{ ms}$ hardware interrupt timestamping** (zero wireless BLE jitter, zero audio-driver delay).
+*   **Standardized Daily Objective Cognitive Battery (Executed Daily at 8:05 PM; Practice-Detrended via Days 1–14 Curve):**
+    1.  *Task 1 (10 Seconds): 2D Emotion Circumplex Joystick:* The participant nudges the 4-way analog thumbstick to physicalize their momentary Core Affect ($\text{Valence } X, \text{Arousal } Y \in [-1, +1]$).
+    2.  *Task 2 (60 Seconds): Striatal Internal Pacemaker Test:* Spontaneous motor tempo on MPC Pad 1 ($\text{CV}_{\text{ITI}}$ and Wing-Kristofferson $\sigma^2_{\text{clock}}, \sigma^2_{\text{motor}}$).
+    3.  *Task 3 (3 Minutes): NASA Brief Psychomotor Vigilance Task (PVT-B):* Visual reaction-time counter flashes at pseudo-random intervals ($1\text{--}4\text{ s}$ ISI). Captures median RT (ms), fastest 10% RT, false starts ($\text{RT} < 100\text{ ms}$), and **Attentional Lapses ($\text{RT} \ge 355\text{ ms}$ and $> 500\text{ ms}$)**.
+    4.  *Task 4 (2 Minutes): Go / No-Go Executive Inhibitory Control:* Fast sequential visual cues ($80\%$ Green Go, $20\%$ Red No-Go; $400\text{ ms}$). Measures commission errors, omission errors, and **Signal Detection $d'$**.
+    5.  *Task 5 (2 Minutes): 2-Back Working Memory & Color-Word Stroop Interference:* Sequential 2-Back updating ($d'$, target RT) paired with incongruent vs. congruent Color-Word Stroop trials ($\Delta \text{RT}_{\text{Stroop}} = \text{RT}_{\text{inc}} - \text{RT}_{\text{cong}}$), practice-detrended against Days 1–14 exponential learning curves.
 
 ### O. Manual Reading Logs & Marginalia NLP (Physical Books)
 *   **Collection Modality:** Strictly Active / Conscious Executive Logging.
@@ -220,12 +220,17 @@ Drawn at Day 1 (Cessation Baseline), Day 30 (Post-Acute Withdrawal), Day 60, Day
 *   **Ingestion Pipeline:** On-device CoreData SQLite interception (`MediaLibrary.sqlitedb`) logging exact Unix start/stop times and skip latencies into `music_telemetry_stream`. Offline DSP feature extraction (Essentia) computes MFCCs, spectral centroid, and tempo.
 *   **Biophysical Target:** Correlating late-night acoustic tempo and valence with nocturnal wrist temperature (Apple Watch) to isolate mental stimulation from circadian allostatic stress (cortisol C-channel).
 
-### R. Sustained Maximal Inspiration (Tyeingo Breathing Exercise Device & Stopwatch)
+### R. Quantitative Respiratory Strength & Vagal Reserve (Airofit Pro)
 *   **Collection Modality:** Strictly Active Respiratory Exercise.
-*   **Apparatus:** Tyeingo Incentive Breathing Exerciser (flow-oriented ball levitation column) + calibrated digital stopwatch.
-*   **Protocol:** During the 8:05 PM evening docking station, the participant sits upright ($90^\circ$ orthostatic posture), exhales normally, seals lips around the Tyeingo mouthpiece, and executes a slow, deep, Sustained Maximal Inspiration (SMI) to lift the target ball to the chamber ceiling and hold it suspended against gravity for as long as possible. The participant records the exact hold duration in seconds using a stopwatch across three repeated trials (60s rest interval; individual trials and best-of-three logged).
-*   **Ingestion Pipeline:** Logged directly via the terminal docking station into the `sustained_inhalation_stream` table in `trust_wearables_edge.db`.
-*   **Biophysical Target:** Measures **Sustained Inspiratory Hold Duration ($t_{\text{hold}}$ in seconds)**, diaphragmatic muscle endurance, and pulmonary stretch receptor activation. Slow diaphragmatic expansion triggers the **Hering-Breuer inspiratory-inhibitory reflex** via the vagus nerve, directly engaging the **vagal brake ($O$-channel)** and providing an active, non-invasive probe of autonomic parasympathetic reserve without inducing forced expiratory Valsalva spikes.
+*   **Apparatus:** **Airofit Pro** smart breathing trainer (differential pressure transducer via BLE / local CSV export).
+*   **Protocol:** During the 8:05 PM evening docking station (and optional morning check), the participant sits upright ($90^\circ$ orthostatic posture), seals lips around the Airofit mouthpiece, and executes three calibrated maneuvers across 3 trials (60s rest interval): Maximal Inspiratory Pressure ($\text{MIP}$, $\text{cmH}_2\text{O}$), Maximal Expiratory Pressure ($\text{MEP}$, $\text{cmH}_2\text{O}$), and Vital Capacity ($\text{VC}$, liters).
+*   **Ingestion Pipeline:** Logged directly via BLE/CSV into the `respiratory_strength_stream` (`airofit_mip_cmh2o`, `airofit_mep_cmh2o`, `airofit_vc_liters`) table in `trust_wearables_edge.db`.
+*   **Biophysical Target:** Replaces qualitative incentive spirometry with quantitative diaphragmatic force ($\text{MIP}/\text{MEP}$) and vital capacity ($\text{VC}$), probing parasympathetic vagal-brake reserve and respiratory fatigue under allostatic load.
+
+### T. Pharmacokinetic & Lifestyle Exposure Logging (Cannabis THC/CBD & Caffeine)
+*   **Collection Modality:** Timestamped Event Logging + Pharmacokinetic (PK) Kernel Deconvolution.
+*   **Parameters:** Every cannabis exposure (`cannabis_thc_mg`, `cannabis_cbd_mg`, route, timestamp) and caffeine intake (`caffeine_mg`, beverage type, timestamp) is logged in `pharmacological_exposure_stream`.
+*   **Biophysical Target:** Computes continuous circulating caffeine concentration ($t_{1/2} \approx 5.0\text{ h}$, adjusted by `CYP1A2` genotype) and biphasic cannabinoid exposure/washout ($\tau_{\mathrm{CB1}} \approx 48\text{ h}$, adjusted by `CYP2C9`/`CYP3A4`/`FAAH` PGx from WGS), preventing exogenous stimulants or endocannabinoid shifts from confounding HRV, REM sleep, or PVT-B reaction times.
 
 ### S. Segmental Scalp Hair Metabolomics (LC-MS/MS & ICP-MS)
 *   **Collection Modality:** Active Harvest of a Passive Retrospective Biological Matrix.
@@ -379,14 +384,22 @@ Continuous 1-minute resolution telemetry is processed by **`harvest_telemetry.py
     In Cohorts 1, 2, and 3 ($N = 14$ multi-day subjects), days with major negative financial events ($\varepsilon < 0$) correlate with nocturnal wrist temperature elevation ($\Delta T_{\text{wrist}} \ge +0.15^\circ\text{C}$, $p < 0.05$) and nocturnal vascular non-dipping on Aktiia BP, validating the chronic allostatic strain model.
 *   **Hypothesis PILOT-H4 (Multi-Day Test-Retest Reliability):**  
     In Cohort 3 ($N = 10, 3\text{ days}$), the estimated personal trust sensitivity parameter $\hat{\lambda}$ achieves test-retest reliability $r_{\text{test-retest}} \ge 0.75$ across consecutive testing days.
-*   **Hypothesis PILOT-H5 ($\mathrm{CB}_1\mathrm{R}$ Washout & REM Rebound in Stage 1):**  
-    During Phase 1 (Days 1–30), Apple Watch Series 8 and Muse S Athena record an average REM sleep proportion $\ge 25.0\%$ of total sleep time, normalizing to $18.0\text{--}22.0\%$ in Phase 2 (Days 31–180) as $\mathrm{CB}_1\mathrm{R}$ density recalibrates.
+*   **Hypothesis PILOT-H5 ($\mathrm{CB}_1\mathrm{R}$ Exposure/Washout & REM Rebound in Stage 1):**  
+    Adjusted for timestamped `cannabis_thc_mg`/`cannabis_cbd_mg` PK exposure and `FAAH`/`CYP2C9` PGx covariates, periods of $\mathrm{CB}_1\mathrm{R}$ washout (Days 15–42) exhibit REM rebound ($\ge 22\text{--}25\%$ of total sleep time) normalizing toward steady-state ($18\text{--}22\%$) in Phase 2, evaluated via AR(1)-corrected DSEM.
 *   **Hypothesis PILOT-H6 (Cuffless BP & Enteric Motility Coupling):**  
-    Days with elevated daily subjective financial distress correlate with reduced nocturnal SBP dipping ($< 10\%$ dip, $p < 0.01$) and altered enteric transit consistency (Throne Bristol scores shifting away from Type 4).
+    Days with elevated daily subjective financial distress or sympathetic strain correlate with reduced nocturnal SBP dipping ($< 10\%$ dip, $p < 0.01$, Hilo/Aktiia) and altered enteric transit consistency (Throne Bristol scores shifting away from Type 4).
 *   **Hypothesis PILOT-H7 (Striatal Motor Timing Washout & Psychomotor Allostasis):**  
-    During Phase 1 (Days 1–30), the 60-second Akai MPK Mini finger-tapping task observes an exponential decline in motor timing variability ($\text{CV}_{\text{ITI}}$ improving from $> 7.0\%$ to $< 4.5\%$, $p < 0.001$), reflecting $\mathrm{CB}_1\mathrm{R}$ cerebellar-striatal motor resensitization. Across Phase 2, acute contractual betrayal events ($\varepsilon < 0$) trigger transient motor timing jitter spikes ($\Delta \text{CV}_{\text{ITI}} \ge +20\%$, $p < 0.01$) directly cross-correlating with Apple Watch vagal HRV collapse.
-*   **Hypothesis PILOT-H8 (Prefrontal Inhibitory Control & Vigilance Degradation under Financial Stress):**  
-    Across Phase 2, acute contractual betrayal events ($\varepsilon < 0$) elicit a statistically significant degradation in executive control on the evening battery: Go/No-Go commission errors increase by $\ge 2.0\times$ ($p < 0.01$) and PVT attentional lapses ($\text{RT} > 500\text{ ms}$) increase by $\ge 40\%$ ($p < 0.001$), cross-correlating with prefrontal deoxygenation ($\Delta [\mathrm{HbR}] \uparrow$) on the Muse S Athena.
+    After subtracting the Days 1–14 exponential motor practice curve, acute contractual betrayal events ($\varepsilon < 0$) trigger transient motor timing jitter spikes on the wired $1000\text{ Hz}$ Akai MPK Mini ($\Delta \text{CV}_{\text{ITI}} \ge +20\%$, $p < 0.01$, ARIMAX-adjusted) cross-correlating with Apple Watch vagal HRV collapse.
+*   **Hypothesis PILOT-H8 (Daily Objective Cognitive Battery: PVT-B, Go/No-Go, 2-Back & Stroop):**  
+    On practice-detrended Days 15–180 series, acute allostatic strain ($\varepsilon < 0$) and elevated sleep debt degrade executive control: PVT-B lapses ($\ge 355\text{ ms}$) increase $\ge +40\%$, Go/No-Go commission errors increase $\ge 2.0\times$, 2-Back sensitivity $d'$ drops ($\Delta d' \le -0.35$), and Stroop interference latency widens ($\Delta \text{RT}_{\text{Stroop}} \ge +25\text{ ms}$; $q_{\mathrm{BY}} \le 0.05$), cross-correlating with prefrontal $\Delta [\mathrm{HbR}] \uparrow$ on Muse S Athena.
+*   **Hypothesis PILOT-H9 (Airofit Respiratory Muscle Strength & Vagal Reserve):**  
+    Evening Airofit $\text{MIP}$ ($\text{cmH}_2\text{O}$), $\text{MEP}$ ($\text{cmH}_2\text{O}$), and $\text{VC}$ ($\text{L}$) negatively covary with acute sympathetic strain ($r \le -0.25$ with nocturnal HR / non-dipping) and positively covary with next-night vagal RMSSD ($r \ge 0.25$, AR(1)-adjusted).
+*   **Hypothesis PILOT-H10 (Aranet4 Indoor $\mathrm{CO}_2$/Outdoor $\mathrm{PM}_{2.5}$ & Photic TimeInDaylight Confounder Coupling):**  
+    Aranet4 indoor $\mathrm{CO}_2 > 1{,}000\text{ ppm}$ and outdoor $\mathrm{PM}_{2.5}$ predict acute PVT-B / 2-Back latency slowing independently of psychological stress, while higher Apple Health `TimeInDaylight` ($\ge 30\text{ min}$) and lower pre-bed Hue lux ($\le 30\text{ lux}$) predict stronger nocturnal melatonin/wrist-temperature circadian amplitude ($\Delta T_{\text{dip}}$).
+*   **Hypothesis PILOT-H11 (Caffeine PK, Reading Latency, Workout Exertion & Music DSP Coupling):**  
+    Time-decaying Caffeine PK covariates ($t_{1/2} = 5\text{ h}$) explain acute afternoon HR/RMSSD and sleep-onset variance prior to trust-state inference; CoreMotion mechanical power residualizes exercise tachycardia ($R^2_{\text{resid}} \le 0.02$); reading time-to-digitization latency and acoustic `eGeMAPS` jitter/shimmer track cognitive depletion under negative $\varepsilon$.
+*   **Hypothesis PILOT-H12 (Monthly Blood Panels, WGS PGS/PGx, Fitindex Stationarity & Bedroom PIR Ground Truth):**  
+    Six monthly venous blood panels ($hs\text{-CRP}$, morning cortisol, $\text{HbA1c}$, ApoB) validate long-timescale inflammatory/HPA integration against cumulative CGM/BP/cortisol allostatic AUC ($r \ge 0.40$); WGS PGx (`CYP2C9`, `CYP1A2`, `FAAH`, `COMT`) modulates individual clearance/sensitivity slopes; Fitindex confirms somatic stationarity ($\Delta \text{mass} \le \pm 2\%$); Circle View PIR verifies objective bed-entry/exit boundaries.
 *   **Frozen Stopping & Falsification Rules:**  
     If prefrontal fNIRS motion artifacts exceed $40.0\%$ of task time in Stage 1, or if Apple Watch nocturnal temperature measurements fail to record for $\ge 3$ consecutive nights, the study enters a mandatory hardware calibration gate before cohort rotation.
 
@@ -395,9 +408,9 @@ Continuous 1-minute resolution telemetry is processed by **`harvest_telemetry.py
 ## 7. Statistical Power, Econometrics & Regulatory Sequestration
 
 ### A. Econometric Time-Series Pipeline ($N = 259,200\text{ Minutes}$)
-1.  **Stationarity Testing:** All high-frequency time-series undergo Augmented Dickey-Fuller (ADF) and Kwiatkowski-Phillips-Schmidt-Shin (KPSS) tests; non-stationary series are integrated to order $d=1$.
-2.  **Johansen Cointegration:** Tests whether a cointegrating vector exists between sustained autonomic strain (Aktiia BP + Apple Watch HRV) and cumulative financial capital reserve depletion.
-3.  **Missing Data:** In accordance with Cochrane Domain 3 and APA JARS-Quant, missing data is handled via Full Information Maximum Likelihood (FIML) under missing-at-random (MAR) assumptions.
+1.  **DSEM & ARIMAX Autocorrelation Control:** Because continuous $N=1$ longitudinal streams exhibit strong serial dependence ($\rho_1 > 0.5$), all within-subject hypothesis tests fit **Dynamic Structural Equation Models (DSEM) / ARIMAX($p,d,q$)** with explicit $AR(1)/AR(2)$ residual covariance and **Days 1–14 practice-curve detrending**—prohibiting naive i.i.d. $t$-tests on un-prewhitened lags—combined with Benjamini-Yekutieli FDR ($q \le 0.05$) and Romano-Wolf block bootstraps.
+2.  **Stationarity Testing:** High-frequency time-series undergo Augmented Dickey-Fuller (ADF) and Kwiatkowski-Phillips-Schmidt-Shin (KPSS) tests; non-stationary series are integrated to order $d=1$.
+3.  **Johansen Cointegration & Missing Data:** Tests cointegration between sustained autonomic strain and reserve depletion; missing data handled via Full Information Maximum Likelihood (FIML) under MAR assumptions.
 
 ### B. Regulatory Sequestration Wall (SEQUESTRATION-WALL-001)
 *   **Statutory Mandate:** Strict compliance with Fair Credit Reporting Act (FCRA) §604(g) and Equal Credit Opportunity Act (ECOA) Regulation B (12 C.F.R. § 1002.5(a)(4)).
@@ -441,9 +454,11 @@ PILOT STUDY COMPOSITE SCORE: 92.4 / 100 (UNASSAILABLE INDUSTRIAL RIGOR)
 │[ ]│ Mount Throne smart toilet sensor to porcelain bowl & calibrate flush.    │
 │[ ]│ Position Logitech Brio 4K & connect Blue Yeti Nano mic (Cardioid mode).   │
 │[ ]│ Mount Logitech Circle View camera in bedroom for presence/sleep boundary. │
-│[ ]│ Pair Aktiia / Hilo continuous cuffless BP band & complete baseline init. │
-│[ ]│ Connect Akai MPK Mini via USB & verify 60-second mido tapping script.    │
+│[ ]│ Pair Hilo/Aktiia cuffless BP band & verify monthly cuff calibration.       │
+│[ ]│ Connect Akai MPK Mini via wired USB (1000 Hz) & verify CoreMIDI latency.  │
+│[ ]│ Pair Airofit Pro & Aranet4 via BLE; verify TimeInDaylight & Hue lux pull. │
 │[ ]│ Verify harvest_telemetry.py compiles daily Parquet matrix & libSQL row.   │
-│[ ]│ Confirm Day 1 Cannabis Cessation start timestamp (T = 0).                 │
+│[ ]│ Enable minor/multi-speaker exclusion gate & verify zero raw media export. │
+│[ ]│ Confirm Day 1 Cannabis/Caffeine PK log start timestamp (T = 0).           │
 └───┴───────────────────────────────────────────────────────────────────────────┘
 ```

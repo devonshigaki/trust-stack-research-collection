@@ -77,6 +77,7 @@ else:
         say("\nVERDICT: PASS (nominal p<1e-4 branch, frozen a priori)")
     else:
         say("\nVERDICT on nominal branch: FAIL (min p across all brain tissues >= 1e-4)")
+    assert len(pde) > 0 and len(hits) == 0, "Sim D15 raw slice drifted from frozen FAIL verdict!"
 
 with open(os.path.join(HERE, "SIM_D15_results.txt"), "w") as f:
     f.write("\n".join(out) + "\n")

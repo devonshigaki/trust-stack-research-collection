@@ -142,6 +142,55 @@ impl TrustEngine {
         Ok(TrustState { current_s: next_s })
     }
 
+    /// Exact fixed-point integer Master Stability Law step (`FIXED_SCALE = 10^9`, `div_euclid`),
+    /// matching `fresh-protocol-spec::MasterLawParams::step_fixed_i64` and `zk_master_law_stp.py` bit-for-bit.
+    pub fn apply_validation_event_fixed_i64(
+        &self,
+        current_s_fixed: i64,
+        v_fixed: i64,
+        e_fixed: i64,
+        r_fixed: i64,
+    ) -> Result<i64, TrustError> {
+        const FIXED_SCALE: i128 = 1_000_000_000;
+        let cfg = &self.config;
+        if !cfg.lambda_plus.is_finite()
+            || !cfg.lambda_minus.is_finite()
+            || !cfg.delta.is_finite()
+            || !cfg.s_base.is_finite()
+        {
+            return Err(TrustError::NonFiniteInput);
+        }
+        if cfg.lambda_plus < 0.0
+            || cfg.lambda_minus < 0.0
+            || cfg.delta <= 0.0
+            || cfg.delta > 1.0
+            || !(0.0..=1.0).contains(&cfg.s_base)
+        {
+            return Err(TrustError::InvalidParameterDomain);
+        }
+        let s = i128::from(current_s_fixed);
+        let v = i128::from(v_fixed);
+        let e = i128::from(e_fixed);
+        let r = i128::from(r_fixed);
+        if !(0..=FIXED_SCALE).contains(&s)
+            || !(0..=FIXED_SCALE).contains(&v)
+            || !(0..=FIXED_SCALE).contains(&e)
+            || !(0..=FIXED_SCALE).contains(&r)
+        {
+            return Err(TrustError::InvalidParameterDomain);
+        }
+        let lp = (cfg.lambda_plus * (FIXED_SCALE as f64)).round() as i128;
+        let ln = (cfg.lambda_minus * (FIXED_SCALE as f64)).round() as i128;
+        let delta = (cfg.delta * (FIXED_SCALE as f64)).round() as i128;
+        let s_base = (cfg.s_base * (FIXED_SCALE as f64)).round() as i128;
+        let eps = v - e;
+        let (eps_p, eps_n) = if eps >= 0 { (eps, 0) } else { (0, -eps) };
+        let q_d = ((lp * eps_p - ln * eps_n) * r).div_euclid(FIXED_SCALE * FIXED_SCALE);
+        let q_l = (delta * (s - s_base)).div_euclid(FIXED_SCALE);
+        let clamped = (s + q_d - q_l).clamp(0, FIXED_SCALE);
+        i64::try_from(clamped).map_err(|_| TrustError::InvalidParameterDomain)
+    }
+
     /// Computes domain-separated SHA-256 entry hash for append-only audit chain anchoring.
     pub fn build_audit_entry(&self, prev: Option<AuditChainEntry>, next_s: f64) -> Result<AuditChainEntry, TrustError> {
         if !next_s.is_finite() || !(0.0..=1.0).contains(&next_s) {
@@ -223,6 +272,14 @@ mod tests {
         let mut e_oob = eng.build_audit_entry(None, 0.5).unwrap();
         e_oob.state_s = 1.5;
         assert_eq!(eng.verify_audit_chain(vec![e_oob]), Err(TrustError::AuditChainBroken));
+
+        // Exact fixed-point integer parity with fresh-protocol-spec & ZK-STP v8
+        let fx1 = eng.apply_validation_event_fixed_i64(500_000_000, 850_000_000, 500_000_000, 1_000_000_000).unwrap();
+        assert_eq!(fx1, 579_800_000);
+        let fx2 = eng.apply_validation_event_fixed_i64(fx1, 100_000_000, 750_000_000, 1_000_000_000).unwrap();
+        assert_eq!(fx2, 0);
+        let fx3 = eng.apply_validation_event_fixed_i64(430_802_000, 500_000_000, 500_000_000, 1_000_000_000).unwrap();
+        assert_eq!(fx3, 431_493_980);
     }
 }
 

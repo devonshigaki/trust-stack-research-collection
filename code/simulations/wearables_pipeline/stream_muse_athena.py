@@ -322,6 +322,35 @@ class SyntheticBiophysicalMuseAthena:
 
         return t_eeg, eeg, t_fnirs, fnirs
 
+def unpack_muse_athena_optical_matrix(opt_mat: np.ndarray) -> Tuple[np.ndarray, int]:
+    """
+    Unpacks BrainFlow MuseAthena (board 67) ANCILLARY_PRESET 16-row optical tensor
+    into `(NUM_FNIRS_OPTODES, 3, n_samples)` for `(730 nm, 850 nm, 660 nm)`.
+
+    Per upstream `muse_athena.cpp`, optical subpackets encode:
+      - `0x36`: 16 channels = 4 spatial sites x 4 diodes `[730nm, 850nm, 660nm, ambient_dark]`
+      - `0x35`:  8 channels = 2 spatial sites x 4 diodes (rows 8..15 zero-padded)
+      - `0x34`:  4 channels = 1 spatial site  x 4 diodes (rows 4..15 zero-padded)
+    Subtracts per-group ambient dark counts (clamped >= 1.0) instead of slicing `[:15]`.
+    """
+    n_rows, n_samples = opt_mat.shape
+    fnirs = np.zeros((NUM_FNIRS_OPTODES, 3, n_samples), dtype=np.float64)
+    if n_samples == 0 or n_rows == 0:
+        return fnirs, 0
+
+    active_mask = np.any(np.abs(opt_mat) > 1e-12, axis=1)
+    active_count = int(np.sum(active_mask))
+    n_groups = max(1, min(4, (active_count + 3) // 4)) if active_count > 0 else 0
+    for g in range(n_groups):
+        base = g * 4
+        if base + 3 < n_rows:
+            dark = opt_mat[base + 3]
+            fnirs[g, 0] = np.maximum(opt_mat[base + 0] - dark, 1.0)
+            fnirs[g, 1] = np.maximum(opt_mat[base + 1] - dark, 1.0)
+            fnirs[g, 2] = np.maximum(opt_mat[base + 2] - dark, 1.0)
+    return fnirs, n_groups
+
+
 class MuseAthenaStreamer:
     def __init__(
         self,
@@ -373,9 +402,9 @@ class MuseAthenaStreamer:
         self.lsl_outlet_eeg = None
         self.lsl_outlet_fnirs = None
         if HAS_LSL:
-            info_eeg = StreamInfo("FreshCredit_MuseAthena_EEG", "EEG", NUM_EEG_CHANNELS, FS_EEG, "float32", f"eeg_{session_id}")
+            info_eeg = StreamInfo("DOCAS_MuseAthena_EEG", "EEG", NUM_EEG_CHANNELS, FS_EEG, "float32", f"eeg_{session_id}")
             self.lsl_outlet_eeg = StreamOutlet(info_eeg)
-            info_fnirs = StreamInfo("FreshCredit_MuseAthena_fNIRS", "NIRS", NUM_FNIRS_OPTODES * 3, FS_FNIRS, "float32", f"fnirs_{session_id}")
+            info_fnirs = StreamInfo("DOCAS_MuseAthena_fNIRS", "NIRS", NUM_FNIRS_OPTODES * 3, FS_FNIRS, "float32", f"fnirs_{session_id}")
             self.lsl_outlet_fnirs = StreamOutlet(info_fnirs)
 
         self.synth = SyntheticBiophysicalMuseAthena(seed=1337)
@@ -485,14 +514,10 @@ class MuseAthenaStreamer:
                     ))
                 self.conn.executemany("INSERT OR REPLACE INTO muse_aux_imu VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", imu_rows)
 
-            # Unpack active optical channels dynamically (supports tag 0x34=4ch, 0x35=8ch, 0x36=16ch)
+            # Unpack BrainFlow MuseAthena optical tensor (4-diode groups: 730/850/660/ambient_dark)
             opt_mat = raw_anc[self.channel_map["optical_rows"], :]
             n_fnirs = opt_mat.shape[1]
-            fnirs = np.zeros((NUM_FNIRS_OPTODES, 3, n_fnirs), dtype=np.float64)
-            active_opt = opt_mat[:15, :]
-            n_pairs = min(NUM_FNIRS_OPTODES, active_opt.shape[0] // 3)
-            if n_pairs > 0:
-                fnirs[:n_pairs] = active_opt[: n_pairs * 3].reshape(n_pairs, 3, n_fnirs)
+            fnirs, _ = unpack_muse_athena_optical_matrix(opt_mat)
             t_fnirs = np.arange(n_fnirs, dtype=np.float64) / FS_FNIRS
         else:
             t_eeg, eeg, t_fnirs, fnirs = self.synth.get_chunk(duration_sec)
@@ -537,6 +562,20 @@ def run_self_test() -> bool:
         assert cmap["eeg_names"] == ["TP9", "AF7", "AF8", "TP10"], f"Unexpected BrainFlow MuseAthena names: {cmap['eeg_names']}"
         assert cmap["eeg_order"] == [2, 3, 1, 4], f"AF7/AF8/TP9/TP10 remapping failed: {cmap['eeg_order']}"
         assert len(cmap["optical_rows"]) == 16, f"Expected 16 optical channels, got {len(cmap['optical_rows'])}"
+
+    # 0c. Verify MuseAthena 0x34/0x35/0x36 4-diode-per-group dark-subtracted unpacking
+    opt_36 = np.zeros((16, 16), dtype=np.float64)
+    for g in range(4):
+        opt_36[g * 4 + 0] = 1000.0 + g * 10.0
+        opt_36[g * 4 + 1] = 2000.0 + g * 10.0
+        opt_36[g * 4 + 2] = 1500.0 + g * 10.0
+        opt_36[g * 4 + 3] = 50.0  # ambient dark
+    unpacked_36, n_g36 = unpack_muse_athena_optical_matrix(opt_36)
+    assert n_g36 == 4 and abs(unpacked_36[1, 0, 0] - 960.0) < 1e-9, "0x36 4x4 dark subtraction failed"
+    opt_34 = np.zeros((16, 16), dtype=np.float64)
+    opt_34[0], opt_34[1], opt_34[2], opt_34[3] = 900.0, 1100.0, 800.0, 40.0
+    unpacked_34, n_g34 = unpack_muse_athena_optical_matrix(opt_34)
+    assert n_g34 == 1 and abs(unpacked_34[0, 1, 0] - 1060.0) < 1e-9, "0x34 4-ch unpack failed"
     if HAS_CRYPTO:
         k_test = os.urandom(32)
         tok = encrypt_sensitive_field("CONFIDENTIAL_CRF_TEXT", k_test)

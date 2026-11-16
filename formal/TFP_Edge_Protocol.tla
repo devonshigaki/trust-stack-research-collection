@@ -17,15 +17,19 @@ VARIABLES
     auditChain,     \* Sequence of globally verified block header records
     networkMsgs,    \* Untrusted network packet pool (honest + Byzantine packets)
     compromised,    \* Set of compromised tenant keys (subset of Tenants)
+    clientViewA,    \* Light Client A observed prefix length per tenant
+    clientViewB,    \* Light Client B observed prefix length per tenant
     timeStep        \* Monotonic global step counter
 
-vars == << edgeVaults, auditChain, networkMsgs, compromised, timeStep >>
+vars == << edgeVaults, auditChain, networkMsgs, compromised, clientViewA, clientViewB, timeStep >>
 
 Init ==
     /\ edgeVaults = [t \in Tenants |-> [trustState |-> 1, version |-> 0, valid |-> TRUE]]
     /\ auditChain = << >>
     /\ networkMsgs = {}
     /\ compromised = {}
+    /\ clientViewA = [t \in Tenants |-> 0]
+    /\ clientViewB = [t \in Tenants |-> 0]
     /\ timeStep = 0
 
 MaxChainVer(t) ==
@@ -51,15 +55,16 @@ LocalTransaction(t) ==
                                         ![t].version = edgeVaults[t].version + 1]
     /\ networkMsgs' = networkMsgs \cup {[sender |-> t, tenant |-> t,
                                          ver |-> edgeVaults'[t].version,
-                                         stateHash |-> 1, sigValid |-> TRUE]}
-    /\ UNCHANGED << auditChain, compromised >>
+                                         stateHash |-> 1, sigValid |-> TRUE,
+                                         furnisherAttested |-> TRUE]}
+    /\ UNCHANGED << auditChain, compromised, clientViewA, clientViewB >>
     /\ timeStep' = timeStep + 1
 
 (***************************************************************************)
 (* AdversaryBreach & Active Byzantine Equivocation / Replay                *)
 (* Compromised nodes can inject:                                           *)
 (*   (1) Forged cross-tenant packets (claimedTenant # t => sigValid=FALSE) *)
-(*   (2) Equivocating same-version packets (stateHash \in {1, 2})          *)
+(*   (2) Unattested stateHash=2 packets (furnisherAttested=FALSE)          *)
 (*   (3) Persistent packet replay (networkMsgs is never deleted).          *)
 (***************************************************************************)
 AdversaryBreach(t) ==
@@ -68,7 +73,7 @@ AdversaryBreach(t) ==
     /\ timeStep < MaxSteps
     /\ compromised' = compromised \cup {t}
     /\ edgeVaults' = [edgeVaults EXCEPT ![t].valid = FALSE]
-    /\ UNCHANGED << auditChain, networkMsgs >>
+    /\ UNCHANGED << auditChain, networkMsgs, clientViewA, clientViewB >>
     /\ timeStep' = timeStep + 1
 
 ByzantineInjectMsg(t) ==
@@ -77,30 +82,44 @@ ByzantineInjectMsg(t) ==
     /\ \E target \in Tenants, v \in 1..MaxSteps, sh \in {1, 2} :
         /\ networkMsgs' = networkMsgs \cup {[sender |-> t, tenant |-> target,
                                              ver |-> v, stateHash |-> sh,
-                                             sigValid |-> (target = t)]}
-        /\ UNCHANGED << edgeVaults, auditChain, compromised >>
+                                             sigValid |-> (target = t),
+                                             furnisherAttested |-> FALSE]}
+        /\ UNCHANGED << edgeVaults, auditChain, compromised, clientViewA, clientViewB >>
     /\ timeStep' = timeStep + 1
 
 (***************************************************************************)
 (* VerifierProcessMsg: Audit chain gate accepts ONLY packets with valid    *)
-(* signature, matching uncompromised/non-forged sender, and strictly       *)
-(* monotonic next version (ver = MaxChainVer(tenant) + 1).                 *)
+(* signature, Furnisher attestation, matching sender, and monotonic ver.   *)
 (***************************************************************************)
 VerifierProcessMsg(m) ==
     /\ m \in networkMsgs
     /\ m.sigValid = TRUE
+    /\ m.furnisherAttested = TRUE
     /\ m.sender = m.tenant
     /\ m.ver = MaxChainVer(m.tenant) + 1
     /\ auditChain' = Append(auditChain, [tenant |-> m.tenant, ver |-> m.ver,
                                         prevHash |-> LastHash(m.tenant),
-                                        stateHash |-> m.stateHash])
-    /\ UNCHANGED << edgeVaults, networkMsgs, compromised, timeStep >>
+                                        stateHash |-> m.stateHash,
+                                        attested |-> m.furnisherAttested])
+    /\ UNCHANGED << edgeVaults, networkMsgs, compromised, clientViewA, clientViewB, timeStep >>
+
+LightClientSync(t) ==
+    /\ \E c \in {"A", "B"} :
+        IF c = "A"
+        THEN /\ clientViewA[t] < MaxChainVer(t)
+             /\ clientViewA' = [clientViewA EXCEPT ![t] = MaxChainVer(t)]
+             /\ UNCHANGED clientViewB
+        ELSE /\ clientViewB[t] < MaxChainVer(t)
+             /\ clientViewB' = [clientViewB EXCEPT ![t] = MaxChainVer(t)]
+             /\ UNCHANGED clientViewA
+    /\ UNCHANGED << edgeVaults, auditChain, networkMsgs, compromised, timeStep >>
 
 Next ==
     \/ \E t \in Tenants : LocalTransaction(t)
     \/ \E t \in Tenants : AdversaryBreach(t)
     \/ \E t \in Tenants : ByzantineInjectMsg(t)
     \/ \E m \in networkMsgs : VerifierProcessMsg(m)
+    \/ \E t \in Tenants : LightClientSync(t)
     \/ (timeStep >= MaxSteps /\ UNCHANGED vars)
 
 Spec == Init /\ [][Next]_vars
@@ -115,6 +134,8 @@ TypeOK ==
     /\ \A t \in Tenants : edgeVaults[t].trustState \in Nat
     /\ \A t \in Tenants : edgeVaults[t].version \in Nat
     /\ \A t \in Tenants : edgeVaults[t].valid \in BOOLEAN
+    /\ \A t \in Tenants : clientViewA[t] \in 0..MaxSteps
+    /\ \A t \in Tenants : clientViewB[t] \in 0..MaxSteps
     /\ compromised \subseteq Tenants
     /\ timeStep \in Nat
 
@@ -165,5 +186,13 @@ AuditChainMonotonic ==
 \* The number of corrupted tenant stores is strictly bounded by AdversaryPower.
 BoundedBlastRadius ==
     Cardinality(compromised) <= AdversaryPower
+
+AttestedAuditChain ==
+    \A i \in 1..Len(auditChain) : auditChain[i].attested = TRUE /\ auditChain[i].stateHash = 1
+
+ConsistentLightClientViews ==
+    \A t \in Tenants :
+        /\ clientViewA[t] <= MaxChainVer(t)
+        /\ clientViewB[t] <= MaxChainVer(t)
 
 =============================================================================

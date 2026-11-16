@@ -134,12 +134,9 @@ def compute_one_sample_ttest(
     df = float(n - 1)
 
     t_eval = -t_stat if alternative == "less" else t_stat
-    if t_eval <= 0.0:
-        return float(t_stat), 0.50
-
     x = df / (df + t_eval * t_eval)
     two_tailed = regularized_incomplete_beta(x, 0.5 * df, 0.5)
-    one_tailed = 0.5 * two_tailed
+    one_tailed = (0.5 * two_tailed) if t_eval > 0.0 else (1.0 - 0.5 * two_tailed)
     return float(t_stat), float(np.clip(one_tailed, 0.0, 1.0))
 
 
@@ -372,6 +369,29 @@ def parse_date_to_epoch(date_str: str) -> Optional[float]:
     except Exception:
         return None
 
+
+def compute_rmssd_from_heartbeat_series(beat_times_sec: List[float]) -> Optional[float]:
+    """
+    Computes true beat-to-beat RMSSD (ms) from Apple HealthKit `HKHeartbeatSeriesSample`
+    timestamps, applying an ectopic-beat quotient filter (|RR_i - RR_{i-1}| / RR_{i-1} <= 0.20)
+    and physiological R-R bounds [300 ms, 2000 ms].
+    """
+    if len(beat_times_sec) < 4:
+        return None
+    times = sorted(beat_times_sec)
+    rr_ms = [(times[i + 1] - times[i]) * 1000.0 for i in range(len(times) - 1)]
+    rr_phys = [r for r in rr_ms if 300.0 <= r <= 2000.0]
+    if len(rr_phys) < 3:
+        return None
+    clean_diffs = []
+    for i in range(1, len(rr_phys)):
+        if abs(rr_phys[i] - rr_phys[i - 1]) / rr_phys[i - 1] <= 0.20:
+            clean_diffs.append(rr_phys[i] - rr_phys[i - 1])
+    if len(clean_diffs) < 2:
+        return None
+    return float(math.sqrt(sum(d * d for d in clean_diffs) / len(clean_diffs)))
+
+
 def parse_apple_health_xml(xml_content_or_path: str, is_file: bool = False) -> Dict[str, List[Dict[str, Any]]]:
     """
     Parses Apple Health XML content or file, extracting all 8 multimodal streams:
@@ -553,6 +573,32 @@ def parse_apple_health_xml(xml_content_or_path: str, is_file: bool = False) -> D
                     "workout_mets": round(mets, 2),
                     "source_name": elem.attrib.get("sourceName", "Apple Watch"),
                 })
+            elem.clear()
+
+        elif elem.tag == "HeartbeatSeries":
+            start_epoch = parse_date_to_epoch(elem.attrib.get("startDate", ""))
+            if start_epoch is not None:
+                beat_times = []
+                for child in elem:
+                    if child.tag == "InstantaneousBeatsPerMinute":
+                        t_str = child.attrib.get("time", "")
+                        t_ep = parse_date_to_epoch(t_str)
+                        if t_ep is not None:
+                            beat_times.append(t_ep)
+                        else:
+                            try:
+                                beat_times.append(float(t_str))
+                            except ValueError:
+                                pass
+                rmssd_val = compute_rmssd_from_heartbeat_series(beat_times)
+                if rmssd_val is not None:
+                    extracted["hrv"].append({
+                        "timestamp_epoch": start_epoch,
+                        "sdnn_ms": None,
+                        "rmssd_ms": round(rmssd_val, 3),
+                        "source_name": elem.attrib.get("sourceName", "Apple Watch"),
+                        "rmssd_source": "rmssd_heartbeat_series",
+                    })
             elem.clear()
 
         elif elem.tag == "StateOfMind":
@@ -1185,9 +1231,36 @@ def evaluate_concordance(
         elif read_rows:
             results["hypotheses"]["H-READ"] = {"verdict": "SKIPPED_INSUFFICIENT_DATA", "samples": len(read_rows)}
 
-    # 10. H-SMI: Sustained Maximal Inspiration & Vagal Reserve
-    cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='sustained_inhalation_stream'")
+    # 10. H-RESP (Airofit Pro Respiratory Strength) / Legacy H-SMI fallback
+    cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='respiratory_strength_stream'")
     if cur.fetchone():
+        resp_cols = [c[1] for c in cur.execute("PRAGMA table_info(respiratory_strength_stream)").fetchall()]
+        query_resp = "SELECT mip_cmh2o FROM respiratory_strength_stream"
+        params_resp = []
+        if session_id and "session_id" in resp_cols:
+            query_resp += " WHERE session_id = ?"
+            params_resp.append(session_id)
+        cur.execute(query_resp, params_resp)
+        resp_rows = [r[0] for r in cur.fetchall()]
+        if len(resp_rows) >= 2:
+            mean_mip = float(np.mean(resp_rows))
+            t_resp, p_val_resp = compute_one_sample_ttest(resp_rows, 90.0, alternative="greater")
+            h_resp_passed = bool(mean_mip >= 90.0 and p_val_resp < 0.05)
+            p_values_for_fdr["H-RESP"] = round(p_val_resp, 6)
+            results["hypotheses"]["H-RESP"] = {
+                "description": "Airofit Pro Respiratory Muscle Strength Reserve (MIP >= 90.0 cmH2O, p < 0.05)",
+                "mean_mip_cmh2o": round(mean_mip, 2),
+                "t_statistic": round(t_resp, 3),
+                "p_value": round(p_val_resp, 6),
+                "verdict": "PASS" if h_resp_passed else "FAIL",
+            }
+            if not h_resp_passed:
+                results["all_passed"] = False
+        elif resp_rows:
+            results["hypotheses"]["H-RESP"] = {"verdict": "SKIPPED_INSUFFICIENT_DATA", "samples": len(resp_rows)}
+
+    cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='sustained_inhalation_stream'")
+    if cur.fetchone() and "H-RESP" not in results["hypotheses"]:
         smi_cols = [c[1] for c in cur.execute("PRAGMA table_info(sustained_inhalation_stream)").fetchall()]
         query_smi = "SELECT best_hold_sec FROM sustained_inhalation_stream"
         params_smi = []
@@ -1212,6 +1285,34 @@ def evaluate_concordance(
                 results["all_passed"] = False
         elif smi_rows:
             results["hypotheses"]["H-SMI"] = {"verdict": "SKIPPED_INSUFFICIENT_DATA", "samples": len(smi_rows)}
+
+    # 10B. PILOT-H10 / H-COG: Cognitive Executive Battery (2-Back d' & Stroop) after burn-in
+    cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='cognitive_executive_battery_stream'")
+    if cur.fetchone():
+        cog_cols = [c[1] for c in cur.execute("PRAGMA table_info(cognitive_executive_battery_stream)").fetchall()]
+        query_cog = "SELECT nback_d_prime FROM cognitive_executive_battery_stream WHERE is_burnin_phase = 0"
+        params_cog = []
+        if session_id and "session_id" in cog_cols:
+            query_cog += " AND session_id = ?"
+            params_cog.append(session_id)
+        cur.execute(query_cog, params_cog)
+        nb_rows = [r[0] for r in cur.fetchall()]
+        if len(nb_rows) >= 2:
+            mean_nb = float(np.mean(nb_rows))
+            t_nb, p_val_nb = compute_one_sample_ttest(nb_rows, 1.80, alternative="greater")
+            h_cog_passed = bool(mean_nb >= 1.80 and p_val_nb < 0.05)
+            p_values_for_fdr["H-COG"] = round(p_val_nb, 6)
+            results["hypotheses"]["H-COG"] = {
+                "description": "Post-Burn-In Executive Working Memory (2-Back d' >= 1.80, p < 0.05)",
+                "mean_nback_d_prime": round(mean_nb, 3),
+                "t_statistic": round(t_nb, 3),
+                "p_value": round(p_val_nb, 6),
+                "verdict": "PASS" if h_cog_passed else "FAIL",
+            }
+            if not h_cog_passed:
+                results["all_passed"] = False
+        elif nb_rows:
+            results["hypotheses"]["H-COG"] = {"verdict": "SKIPPED_INSUFFICIENT_DATA", "samples": len(nb_rows)}
 
     # 11. H-HAIR: Longitudinal Endocrine Ground Truth (LC-MS/MS)
     cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='hair_metabolomics_stream'")
@@ -1494,10 +1595,15 @@ def run_self_test() -> bool:
         conn.execute("INSERT INTO manual_reading_log_stream VALUES (?, ?, ?);", (session_id, fk, lat))
     conn.execute("INSERT INTO manual_reading_log_stream VALUES ('rogue-session-99', 1.0, 120.0);")
 
-    conn.execute("CREATE TABLE sustained_inhalation_stream (session_id TEXT, best_hold_sec REAL);")
-    for smi in (15.1, 15.8, 15.4, 16.0):
-        conn.execute("INSERT INTO sustained_inhalation_stream VALUES (?, ?);", (session_id, smi))
-    conn.execute("INSERT INTO sustained_inhalation_stream VALUES ('rogue-session-99', 2.0);")
+    conn.execute("CREATE TABLE respiratory_strength_stream (session_id TEXT, mip_cmh2o REAL, mep_cmh2o REAL, vc_liters REAL);")
+    for mip, mep, vc in ((104.2, 129.0, 4.82), (108.5, 133.4, 4.88), (106.1, 131.0, 4.85), (110.0, 135.2, 4.91)):
+        conn.execute("INSERT INTO respiratory_strength_stream VALUES (?, ?, ?, ?);", (session_id, mip, mep, vc))
+    conn.execute("INSERT INTO respiratory_strength_stream VALUES ('rogue-session-99', 45.0, 55.0, 2.5);")
+
+    conn.execute("CREATE TABLE cognitive_executive_battery_stream (session_id TEXT, nback_d_prime REAL, stroop_interference_ms REAL, is_burnin_phase INTEGER);")
+    for nb, st in ((2.42, 46.0), (2.51, 44.0), (2.38, 48.5), (2.47, 45.0)):
+        conn.execute("INSERT INTO cognitive_executive_battery_stream VALUES (?, ?, ?, 0);", (session_id, nb, st))
+    conn.execute("INSERT INTO cognitive_executive_battery_stream VALUES ('rogue-session-99', 0.5, 180.0, 0);")
 
     conn.execute("CREATE TABLE hair_metabolomics_stream (session_id TEXT, cortisol_cortisone_ratio REAL);")
     for hc in (1.38, 1.44, 1.41, 1.46):
@@ -1549,7 +1655,8 @@ def run_self_test() -> bool:
     assert res["hypotheses"]["PILOT-H7"]["verdict"] == "PASS", f"H7 failed: {res['hypotheses']['PILOT-H7']}"
     assert res["hypotheses"]["PILOT-H8"]["verdict"] == "PASS", f"H8 failed: {res['hypotheses']['PILOT-H8']}"
     assert res["hypotheses"]["H-READ"]["verdict"] == "PASS", f"H-READ failed: {res['hypotheses']['H-READ']}"
-    assert res["hypotheses"]["H-SMI"]["verdict"] == "PASS", f"H-SMI failed: {res['hypotheses']['H-SMI']}"
+    assert res["hypotheses"]["H-RESP"]["verdict"] == "PASS", f"H-RESP failed: {res['hypotheses']['H-RESP']}"
+    assert res["hypotheses"]["H-COG"]["verdict"] == "PASS", f"H-COG failed: {res['hypotheses']['H-COG']}"
     assert res["hypotheses"]["H-HAIR"]["verdict"] == "PASS", f"H-HAIR failed: {res['hypotheses']['H-HAIR']}"
     assert res["hypotheses"]["H-WORKOUT"]["verdict"] == "PASS", f"H-WORKOUT failed: {res['hypotheses']['H-WORKOUT']}"
     assert res["hypotheses"]["H-MUSIC"]["verdict"] == "PASS", f"H-MUSIC failed: {res['hypotheses']['H-MUSIC']}"
@@ -1578,6 +1685,23 @@ def run_self_test() -> bool:
     p_underpowered, _, _ = compute_tost_correlation_equivalence(r_val=0.08, n=5, bound_r=0.14142)
     assert p_underpowered > 0.10, f"TOST must reject underpowered equivalence on n=5, got {p_underpowered}"
     print(f"✓ TOST Equivalence Oracle: Confirmed underpowered N=5 rejects false equivalence (p_TOST={p_underpowered:.3f} > 0.05)")
+
+    # Mathematical Oracle 3: Apple HealthKit HeartbeatSeries beat-to-beat RMSSD + ectopic beat rejection
+    hb_xml = """<HealthData>
+      <HeartbeatSeries startDate="2026-11-15 08:00:00 +0000" sourceName="Apple Watch">
+        <InstantaneousBeatsPerMinute time="0.000" bpm="60"/>
+        <InstantaneousBeatsPerMinute time="1.000" bpm="60"/>
+        <InstantaneousBeatsPerMinute time="2.030" bpm="58"/>
+        <InstantaneousBeatsPerMinute time="3.000" bpm="62"/>
+        <InstantaneousBeatsPerMinute time="3.350" bpm="171"/>
+        <InstantaneousBeatsPerMinute time="4.350" bpm="60"/>
+        <InstantaneousBeatsPerMinute time="5.380" bpm="58"/>
+      </HeartbeatSeries>
+    </HealthData>"""
+    hb_parsed = parse_apple_health_xml(hb_xml, is_file=False)
+    assert len(hb_parsed["hrv"]) == 1 and hb_parsed["hrv"][0]["rmssd_source"] == "rmssd_heartbeat_series"
+    assert 20.0 <= hb_parsed["hrv"][0]["rmssd_ms"] <= 60.0, f"Ectopic-filtered RMSSD out of bounds: {hb_parsed['hrv'][0]['rmssd_ms']}"
+    print(f"✓ HealthKit HeartbeatSeries RMSSD Oracle: RMSSD={hb_parsed['hrv'][0]['rmssd_ms']}ms (ectopic beat filtered)")
 
     # Empty-DB Zero-False-Pass Oracle: Empty SQLite DB must return ZERO 'PASS' verdicts
     empty_conn = sqlite3.connect(":memory:")

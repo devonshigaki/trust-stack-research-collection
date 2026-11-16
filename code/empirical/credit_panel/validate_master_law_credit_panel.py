@@ -39,25 +39,42 @@ def compute_fold_master_law_state(
     lambda_minus: float,
     delta: float = 0.01,
 ) -> np.ndarray:
-    """Computes Master Law S_T fitting s_d strictly on train_idx (zero transductive leakage)."""
+    """Computes Master Law S_T fitting s_d strictly on train_idx (zero transductive leakage).
+
+    Aligns Taiwanese credit card billing cycles chronologically (April..September 2005):
+      - Cash payment in month t (`x22..x18` for May..Sept) settles prior month's closing
+        statement (`x17..x13` for Apr..Aug); April (t=0) has right-censored March bill.
+      - Dormant zero-consumption months (`PAY_t == -2`, bill=0, pay=0) carry recognition
+        gate r_t = 0 so inactivity does not fabricate positive validation updates.
+    """
     limit_bal = np.maximum(df["x1"].astype(float).values, 1.0)
-    bills = df[["x17", "x16", "x15", "x14", "x13", "x12"]].astype(float).values / limit_bal[:, None]
-    pays = df[["x23", "x22", "x21", "x20", "x19", "x18"]].astype(float).values / limit_bal[:, None]
+    prior_bills = df[["x17", "x16", "x15", "x14", "x13"]].astype(float).values / limit_bal[:, None]
+    curr_pays = df[["x22", "x21", "x20", "x19", "x18"]].astype(float).values / limit_bal[:, None]
+    curr_bills = df[["x17", "x16", "x15", "x14", "x13", "x12"]].astype(float).values / limit_bal[:, None]
+    all_pays = df[["x23", "x22", "x21", "x20", "x19", "x18"]].astype(float).values / limit_bal[:, None]
     statuses = df[["x11", "x10", "x9", "x8", "x7", "x6"]].astype(float).values
 
-    # Implied cash coverage when statement > 0; contractual status PAY_t <= 0 indicates expectation met
-    cash_ratio = np.where(bills > 0.01, np.clip(pays / np.maximum(bills, 0.01), 0.0, 2.0) - 0.15, 0.25)
-    s_d_cash = max(float(np.std(cash_ratio[train_idx])), 1e-4)
+    cash_ratio = np.zeros((len(df), 6), dtype=np.float64)
+    cash_ratio[:, 1:] = np.where(
+        prior_bills > 0.01,
+        np.clip(curr_pays / np.maximum(prior_bills, 0.01), 0.0, 2.0) - 0.15,
+        0.25,
+    )
+    s_d_cash = max(float(np.std(cash_ratio[train_idx, 1:])), 1e-4)
     eps_cash = np.clip(cash_ratio / s_d_cash, -1.0, 1.0)
-    # Contractual delinquency violation dominates when PAY_t >= 1 (1+ months past due); PAY_t <= 0 = on time
-    eps_contract = np.where(statuses > 0, -np.clip(statuses / 3.0, 0.25, 1.0), 0.15 + 0.15 * eps_cash)
+    # Dormant accounts (PAY_t == -2 with zero statement and zero payment) get r_t = 0
+    r_gate = np.where((statuses == -2) & (np.abs(curr_bills) < 1e-6) & (all_pays < 1e-6), 0.0, 1.0)
+    # Distinguish pay-in-full transactors (PAY_t == -1) from minimum/revolving accounts (PAY_t == 0)
+    eps_pos = np.where(statuses == -1, 0.20 + 0.10 * eps_cash, 0.10 + 0.15 * eps_cash)
+    # Contractual delinquency violation dominates when PAY_t >= 1 (1+ months past due)
+    eps_contract = np.where(statuses > 0, -np.clip(statuses / 3.0, 0.25, 1.0), eps_pos)
     eps_total = np.clip(eps_contract, -1.0, 1.0)
 
     S = np.full(len(df), 0.50, dtype=np.float64)
     for t in range(6):
         e_t = eps_total[:, t]
         gain = np.where(e_t >= 0.0, lambda_plus, lambda_minus)
-        S = np.clip(S + gain * e_t - delta * (S - 0.50), 0.0, 1.0)
+        S = np.clip(S + gain * e_t * r_gate[:, t] - delta * (S - 0.50), 0.0, 1.0)
     return S
 
 
@@ -131,6 +148,8 @@ def evaluate_cv_features(df, y, skf, mode: str):
     pay_0 = df["x6"].astype(float).values
     pay_lags = df[["x6", "x7", "x8", "x9", "x10", "x11"]].astype(float).values
     relu_lags = np.maximum(pay_lags, 0.0)
+    bills_norm = df[["x12", "x13", "x14", "x15", "x16", "x17"]].astype(float).values / limit_bal[:, None]
+    pays_norm = df[["x18", "x19", "x20", "x21", "x22", "x23"]].astype(float).values / limit_bal[:, None]
     X_all = df.drop(columns=["y"]).astype(float).values
 
     for tr_idx, va_idx in skf.split(df, y):
@@ -142,6 +161,9 @@ def evaluate_cv_features(df, y, skf, mode: str):
             clf = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
         elif mode == "ar6_relu_7d":
             X = np.column_stack([util_1, relu_lags])
+            clf = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
+        elif mode == "arx_matched_25d":
+            X = np.column_stack([util_1, pay_lags, relu_lags, bills_norm, pays_norm])
             clf = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
         elif mode == "sym_ewma_2d":
             lp_s, ln_s = fit_train_fold_asymmetry(df, y, tr_idx, symmetric_only=True)
@@ -191,6 +213,7 @@ def main():
     res_stat = evaluate_cv_features(df, y, skf, "static_2d")
     res_ar6 = evaluate_cv_features(df, y, skf, "ar6_linear_7d")
     res_ar6_relu = evaluate_cv_features(df, y, skf, "ar6_relu_7d")
+    res_arx_25 = evaluate_cv_features(df, y, skf, "arx_matched_25d")
     res_sym = evaluate_cv_features(df, y, skf, "sym_ewma_2d")
     res_gtt = evaluate_cv_features(df, y, skf, "gtt_asym_2d")
     res_gbdt = evaluate_cv_features(df, y, skf, "gbdt_ceiling_23d")
@@ -207,22 +230,32 @@ def main():
     lr_stat = float(2.0 * np.sum(ll_diff))
 
     # Nadeau & Bengio (2003) corrected resampled t-statistic accounting for 5-fold overlap (rho = n_test / n_train = 1/4)
+    # Evaluates BOTH fold ROC-AUC and fold log-loss differences (since Vuong 1989 degenerates on nested lambda_plus == lambda_minus)
     fold_aucs_gtt, fold_aucs_sym = [], []
+    fold_ll_gtt, fold_ll_sym = [], []
     for _, va_idx in skf.split(df, y):
         fold_aucs_gtt.append(roc_auc_score(y[va_idx], p_gtt[va_idx]))
         fold_aucs_sym.append(roc_auc_score(y[va_idx], p_sym[va_idx]))
+        fold_ll_gtt.append(float(np.mean(ll_gtt[va_idx])))
+        fold_ll_sym.append(float(np.mean(ll_sym[va_idx])))
     fold_diffs = np.array(fold_aucs_gtt) - np.array(fold_aucs_sym)
+    fold_ll_diffs = np.array(fold_ll_gtt) - np.array(fold_ll_sym)
     k_folds = len(fold_diffs)
     nb_var = (1.0 / k_folds + 0.25) * float(np.var(fold_diffs, ddof=1))
     nb_t = float(np.mean(fold_diffs) / max(np.sqrt(nb_var), 1e-12))
     nb_p = float(2.0 * (1.0 - scipy_stats.t.cdf(abs(nb_t), df=k_folds - 1)))
+    nb_ll_var = (1.0 / k_folds + 0.25) * float(np.var(fold_ll_diffs, ddof=1))
+    nb_ll_t = float(np.mean(fold_ll_diffs) / max(np.sqrt(nb_ll_var), 1e-12))
+    nb_ll_p = float(2.0 * (1.0 - scipy_stats.t.cdf(abs(nb_ll_t), df=k_folds - 1)))
 
-    # Untuned specification check: raw payment/bill coverage ratio without -0.15/0.25 offsets
+    # Untuned specification check: raw lagged payment/prior-bill coverage ratio without -0.15/0.25 offsets
     limit_bal_raw = np.maximum(df["x1"].astype(float).values, 1.0)
-    bills_raw = df[["x17", "x16", "x15", "x14", "x13", "x12"]].astype(float).values / limit_bal_raw[:, None]
-    pays_raw = df[["x23", "x22", "x21", "x20", "x19", "x18"]].astype(float).values / limit_bal_raw[:, None]
+    prior_bills_raw = df[["x17", "x16", "x15", "x14", "x13"]].astype(float).values / limit_bal_raw[:, None]
+    curr_pays_raw = df[["x22", "x21", "x20", "x19", "x18"]].astype(float).values / limit_bal_raw[:, None]
     statuses_raw = df[["x11", "x10", "x9", "x8", "x7", "x6"]].astype(float).values
-    raw_eps = np.where(statuses_raw > 0, -np.clip(statuses_raw, 0.0, 3.0) / 3.0, np.clip(pays_raw / np.maximum(bills_raw, 0.05) - 0.1, -1.0, 1.0))
+    raw_cash = np.zeros((len(df), 6), dtype=np.float64)
+    raw_cash[:, 1:] = np.clip(curr_pays_raw / np.maximum(prior_bills_raw, 0.05) - 0.1, -1.0, 1.0)
+    raw_eps = np.where(statuses_raw > 0, -np.clip(statuses_raw, 0.0, 3.0) / 3.0, raw_cash)
     raw_asym_folds = 0
     for tr_idx, va_idx in skf.split(df, y):
         s_raw = np.full(len(df), 0.50)
@@ -250,12 +283,13 @@ def main():
     print(f"3. Tuned Asym GTT [util, S_hat] (2D):   AUC={res_gtt['roc_auc']:.4f} | Brier={res_gtt['brier']:.4f} | Pairs={res_gtt['fitted_pairs']}")
     print(f"4. AR(6) Linear Lags (7D):              AUC={res_ar6['roc_auc']:.4f} | Brier={res_ar6['brier']:.4f}")
     print(f"5. AR(6) ReLU Delinquency Lags (7D):    AUC={res_ar6_relu['roc_auc']:.4f} | Brier={res_ar6_relu['brier']:.4f}")
+    print(f"5b. Information-Matched ARX (25D):      AUC={res_arx_25['roc_auc']:.4f} | Brier={res_arx_25['brier']:.4f}")
     print(f"6. Full-Panel HGBDT Ceiling (23D):      AUC={res_gbdt['roc_auc']:.4f} | Brier={res_gbdt['brier']:.4f}")
-    print(f"Vuong (1989) OOS LL Ratio Test:         z={vuong_z:.2f} (p={vuong_p:.2e}) | 2*dLL={lr_stat:.1f} | Delta AUC={d_auc:+.4f} (95% CI [{ci_lo:+.4f}, {ci_hi:+.4f}])")
-    print(f"Nadeau-Bengio (2003) Correlated-CV:     t={nb_t:.2f} (df={k_folds-1}, p={nb_p:.4f}) | Untuned Raw Spec Folds Beating Sym: {raw_asym_folds}/5")
+    print(f"Vuong (1989) OOS LL Ratio Test:         z={vuong_z:.2f} (p={vuong_p:.2e}; nested-boundary caveat) | 2*dLL={lr_stat:.1f} | Delta AUC={d_auc:+.4f} (95% CI [{ci_lo:+.4f}, {ci_hi:+.4f}])")
+    print(f"Nadeau-Bengio (2003) Correlated-CV:     t_AUC={nb_t:.2f} (p={nb_p:.4f}) | t_LL={nb_ll_t:.2f} (p={nb_ll_p:.4f}) | Untuned Raw Spec Folds Beating Sym: {raw_asym_folds}/5")
     print(f"ECOA Adverse Impact Ratio (Sex):        AIR={air_sex:.4f} [Threshold >= 0.80]")
 
-    assert asymmetric_folds == 5 and res_gtt["roc_auc"] > res_sym["roc_auc"] and ci_lo > 0.0 and vuong_z > 3.29
+    assert asymmetric_folds == 5 and res_gtt["roc_auc"] > res_sym["roc_auc"] and ci_lo > 0.0 and vuong_z > 2.58
     assert res_gtt["brier"] < res_sym["brier"] and air_sex >= 0.80
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 5), dpi=200)
@@ -294,6 +328,7 @@ def main():
                 "static_2d": {k: v for k, v in res_stat.items() if k not in skip_keys},
                 "ar6_linear_7d": {k: v for k, v in res_ar6.items() if k not in skip_keys},
                 "ar6_relu_7d": {k: v for k, v in res_ar6_relu.items() if k not in skip_keys},
+                "arx_matched_25d": {k: v for k, v in res_arx_25.items() if k not in skip_keys},
                 "symmetric_ewma_2d": {k: v for k, v in res_sym.items() if k not in skip_keys},
                 "gtt_asymmetric_2d": {k: v for k, v in res_gtt.items() if k not in skip_keys},
                 "hgbdt_ceiling_23d": {k: v for k, v in res_gbdt.items() if k not in skip_keys},

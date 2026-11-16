@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-Telemetry Ingestion & Daily Master Parquet Aggregator (DOCAS-PILOT-1: 180-Day Multi-Omic Protocol)
+Telemetry Ingestion & Daily Master Parquet Aggregator (DOCAS-PILOT-1 V4.6: 180-Day Multi-Omic Protocol)
 Author: Devon Shigaki (ORCID: 0009-0003-8977-8010)
 
 Aggregates multi-modal telemetry streams for a single study day into a unified
-Parquet format and encrypted local libSQL database, with phase labeling:
-- Phase 1 (Days 1–30): Acute Cannabis Withdrawal & Receptor Recalibration
-- Phase 2 (Days 31–180): Clean Baseline & Circadian Allostatic Stabilization
+Parquet format and encrypted local libSQL database, with strict phase & privacy gating:
+- Phase 0 (Days 1–14):  Habituation & Cognitive Practice-Curve Burn-In
+- Phase 1 (Days 15–42): Observational Baseline, Washout & Pharmacokinetic Calibration
+- Phase 2 (Days 43–180): Longitudinal Dense Phenotyping & Ecological Contrasts
+- Privacy: Feature-only media retention; strict minor/household exclusion gate
 """
 
 import os
@@ -35,7 +37,12 @@ def aggregate_daily_telemetry(date_str: str, out_dir: str = None) -> str:
     day_number = (current_date - study_start).days + 1
     
     df["study_day"] = day_number
-    df["phase_label"] = "phase_1_washout_calibration" if day_number <= 30 else "phase_2_clean_baseline"
+    if day_number <= 14:
+        df["phase_label"] = "phase_0_habituation_burnin"
+    elif day_number <= 42:
+        df["phase_label"] = "phase_1_observational_baseline"
+    else:
+        df["phase_label"] = "phase_2_ecological_contrasts"
 
     # 3. Simulate Multi-Sensor Stream Ingestion (Reflecting Real Biophysical Distributions)
     np.random.seed(42 + day_number)
@@ -56,10 +63,18 @@ def aggregate_daily_telemetry(date_str: str, out_dir: str = None) -> str:
     # (C) Metabolic: Dexcom Stelo Interstitial Glucose (5-min cadence interpolated to 1-min)
     df["interstitial_glucose"] = np.random.normal(loc=94.5, scale=7.2, size=N)
 
-    # (D) Ambient: Awair Room CO2, VOCs & Temp
+    # (D) Ambient: Aranet4 Indoor CO2, Temp, RH, Pressure + Optional Outdoor PM2.5
     df["ambient_co2_ppm"] = np.random.normal(loc=620, scale=40, size=N)
-    df["ambient_voc_ppb"] = np.random.normal(loc=180, scale=25, size=N)
     df["ambient_temp_c"] = np.random.normal(loc=20.5, scale=0.8, size=N)
+    df["ambient_rh_pct"] = np.random.normal(loc=46.0, scale=3.0, size=N)
+    df["ambient_pressure_hpa"] = np.random.normal(loc=1013.2, scale=1.5, size=N)
+    df["ambient_pm25_outdoor_ugm3"] = np.random.normal(loc=7.5, scale=2.0, size=N)
+
+    # (D2) Photic Exposure: Apple Health TimeInDaylight & Philips Hue Pre-Bed Lux
+    df["time_in_daylight_min"] = 0.0
+    df.loc[12 * 60:12 * 60 + 40, "time_in_daylight_min"] = 1.0  # 40 min outdoor daylight
+    df["pre_bed_lux"] = np.where(df.index >= 21 * 60, 22.0, 180.0)
+    df["pre_bed_cct_k"] = np.where(df.index >= 21 * 60, 2200.0, 4800.0)
 
     # (E) Enteric & Hydration: Throne Smart Toilet Passive Monitoring
     df["bristol_stool_score"] = np.nan
@@ -89,6 +104,34 @@ def aggregate_daily_telemetry(date_str: str, out_dir: str = None) -> str:
     for sip_hour in [9, 11, 13, 15, 17, 19]:
         sip_idx = sip_hour * 60 + int(np.random.uniform(5, 45))
         df.loc[sip_idx, "water_intake_ml"] = float(np.random.normal(220, 25))
+
+    # (I) Respiratory Strength: Airofit Pro (MIP, MEP, VC) @ 8:05 PM Evening Station
+    df["airofit_mip_cmh2o"] = np.nan
+    df["airofit_mep_cmh2o"] = np.nan
+    df["airofit_vc_liters"] = np.nan
+    ev_idx = 20 * 60 + 5
+    df.loc[ev_idx, "airofit_mip_cmh2o"] = float(np.random.normal(108.0, 4.0))
+    df.loc[ev_idx, "airofit_mep_cmh2o"] = float(np.random.normal(132.0, 5.0))
+    df.loc[ev_idx, "airofit_vc_liters"] = float(np.random.normal(4.85, 0.12))
+
+    # (J) Objective Cognitive Battery (Wired 1000Hz USB MIDI: PVT-B, 2-Back, Stroop)
+    df["pvt_median_rt_ms"] = np.nan
+    df["nback_d_prime"] = np.nan
+    df["stroop_interference_ms"] = np.nan
+    df.loc[ev_idx, "pvt_median_rt_ms"] = float(235.0 + 45.0 * np.exp(-max(day_number, 1) / 4.5) + np.random.normal(0, 6.0))
+    df.loc[ev_idx, "nback_d_prime"] = float(2.6 - 0.8 * np.exp(-max(day_number, 1) / 4.5) + np.random.normal(0, 0.12))
+    df.loc[ev_idx, "stroop_interference_ms"] = float(48.0 + 20.0 * np.exp(-max(day_number, 1) / 4.5) + np.random.normal(0, 5.0))
+
+    # (K) Pharmacological Exposure Logs (Cannabis THC/CBD & Caffeine PK)
+    df["cannabis_thc_mg"] = 0.0
+    df["cannabis_cbd_mg"] = 0.0
+    df["caffeine_mg"] = 0.0
+    df.loc[8 * 60 + 15, "caffeine_mg"] = 140.0
+
+    # (L) Bedroom PIR & Privacy Enforcement Flags (Zero Raw Audio/Video, Minor Excluded)
+    df["bedroom_pir_motion"] = np.where((df.index >= 23 * 60) | (df.index < 7 * 60), 0, 1)
+    df["minor_exclusion_verified"] = 1
+    df["raw_media_purged"] = 1
 
     # 4. Save to Master Parquet Store
     parquet_filename = os.path.join(out_dir, f"master_telemetry_day_{day_number:03d}_{date_str}.parquet")

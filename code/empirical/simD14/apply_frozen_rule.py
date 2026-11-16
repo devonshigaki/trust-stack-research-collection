@@ -61,6 +61,7 @@ for (rsid, alt), q in per_var.items():
 
 verdict = "PASS (regulatory-plausible)" if hits > 0 else "FAIL (regulatory-null)"
 print(f"\nFROZEN VERDICT: {verdict}")
+assert hits > 0 and brain["rsid"].nunique() >= 20, "Sim D14 raw CSV corruption or unexpected FAIL!"
 print("Permitted paper action: exactly ONE labeled sentence in DOCAS §4.2,")
 print("per the pre-registration branch for this verdict. The two-gate verdict")
 print("(GWAS significance + independent replication) is unchanged either way.")

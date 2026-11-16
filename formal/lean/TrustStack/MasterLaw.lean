@@ -721,4 +721,42 @@ theorem masterStepClamped_not_comm :
   unfold masterStepClamped masterStep
   norm_num
 
+/-- **Clamped Zero-Input Contraction**: for any `lp, ln`, `δ ∈ (0, 1]`, `Sbase ∈ [0, 1]`,
+    and `S0 ∈ [0, 1]`, under zero mismatch `ε_t = 0` the clamped update never hits the
+    `[0, 1]` boundary and contracts geometrically to `Sbase` at rate `(1 - δ)^t`. -/
+theorem trajClamped_contraction_zero_input
+    (lp ln δ Sbase S0 : ℝ) (r : ℕ → ℝ)
+    (hδ0 : 0 ≤ δ) (hδ1 : δ ≤ 1)
+    (hb0 : 0 ≤ Sbase) (hb1 : Sbase ≤ 1)
+    (h0 : 0 ≤ S0) (h1 : S0 ≤ 1) (t : ℕ) :
+    trajClamped lp ln δ Sbase r (fun _ => 0) S0 t - Sbase = (1 - δ)^t * (S0 - Sbase) := by
+  induction t with
+  | zero => simp [trajClamped]
+  | succ t ih =>
+    have hm := trajClamped_mem_unit lp ln δ Sbase r (fun _ => 0) h0 h1 t
+    have hq : 0 ≤ 1 - δ := sub_nonneg.mpr hδ1
+    have hstep_val :
+        masterStep lp ln δ Sbase (r t) (trajClamped lp ln δ Sbase r (fun _ => 0) S0 t) 0
+          = (1 - δ) * trajClamped lp ln δ Sbase r (fun _ => 0) S0 t + δ * Sbase := by
+      unfold masterStep
+      simp
+      ring
+    have h_ge0 : 0 ≤ masterStep lp ln δ Sbase (r t) (trajClamped lp ln δ Sbase r (fun _ => 0) S0 t) 0 := by
+      rw [hstep_val]
+      nlinarith [hm.1, hb0, hq, hδ0]
+    have h_le1 : masterStep lp ln δ Sbase (r t) (trajClamped lp ln δ Sbase r (fun _ => 0) S0 t) 0 ≤ 1 := by
+      rw [hstep_val]
+      nlinarith [hm.2, hb1, hq, hδ0]
+    have h_unclamped :
+        trajClamped lp ln δ Sbase r (fun _ => 0) S0 (t + 1)
+          = (1 - δ) * trajClamped lp ln δ Sbase r (fun _ => 0) S0 t + δ * Sbase := by
+      show masterStepClamped lp ln δ Sbase (r t) (trajClamped lp ln δ Sbase r (fun _ => 0) S0 t) 0 = _
+      unfold masterStepClamped
+      rw [min_eq_right h_le1, max_eq_right h_ge0, hstep_val]
+    have e : trajClamped lp ln δ Sbase r (fun _ => 0) S0 (t + 1) - Sbase
+        = (1 - δ) * (trajClamped lp ln δ Sbase r (fun _ => 0) S0 t - Sbase) := by
+      linarith [h_unclamped]
+    rw [e, ih, pow_succ]
+    ring
+
 end TrustStack

@@ -36,8 +36,8 @@ Stream Name               | Acquisition Modality         | Sampling Resolution  
 3. Apple Music Telemetry  | Passive Ambient Background   | Discrete per-track   | Acoustic arousal, tempo/valence,
    (Playback / DSP)       | Event Logging                | (ISRC / skips / DSP) | isolating insomnia from allostasis
 --------------------------+------------------------------+----------------------+---------------------------------------
-4. Sustained Inhalation   | Strictly Active Physical     | Manual stopwatch     | Diaphragmatic endurance,
-   (Tyeingo Exerciser)    | Inhalation Exercise          | seconds (3-trial log) | Hering-Breuer vagal brake, RSA reserve
+4. Quantitative Respiratory | Strictly Active Physical     | Airofit Pro BLE/CSV  | Diaphragmatic MIP/MEP (cmH2O), VC (L),
+   (Airofit Pro)          | Inspiratory/Expiratory Load  | (3-trial log)        | Hering-Breuer vagal brake, RSA reserve
 --------------------------+------------------------------+----------------------+---------------------------------------
 5. Hair Metabolomics      | Active Scalp Harvest of a    | Longitudinal 90–180d | Chronic HPA-axis allostatic load,
    (LC-MS/MS & ICP-MS)    | Passive Historical Matrix    | retrospective segment| baseline cortisol/cortisone time-capsule
@@ -61,9 +61,9 @@ Stream Name               | Acquisition Modality         | Sampling Resolution  
 *   **Hypothesis:** Late-night acoustic music feature vectors (tempo $> 120\text{ BPM}$, valence $< 0.35$, high spectral centroid) predict nocturnal sleeping wrist temperature elevation ($\Delta T_{\text{wrist}} \ge 0.15^\circ\text{C}$), allowing the circadian filter to isolate acute cognitive arousal from systemic allostatic cortisol elevation ($C$-channel).
 *   **Frozen Criterion:** Multi-modal GLM demonstrates that acoustic tempo explains $\ge 30\%$ of nocturnal temperature variance independently of daytime financial prediction errors.
 
-### Hypothesis H-SMI (Sustained Maximal Inspiration & Vagal Reserve):
-*   **Hypothesis:** Daily Sustained Maximal Inspiration (SMI) ball-hold duration ($t_{\text{hold}}$ in seconds) measured via the Tyeingo breathing exercise device and digital stopwatch provides an active behavioral probe of diaphragmatic muscle endurance and pulmonary stretch receptor sensitivity. Under financial allostatic stress ($\varepsilon < 0$), diaphragmatic exhaustion and sympathetic dominance reduce evening SMI hold duration by $\ge 20\%$.
-*   **Frozen Criterion:** Daily SMI hold time ($t_{\text{hold}}$) exhibits a statistically significant positive correlation ($r \ge 0.35, p < 0.01$) with subsequent nocturnal sleep-onset RMSSD (Apple Watch) and a negative correlation with daytime subjective allostatic distress, proving that sustained inhalation actively probes parasympathetic vagal reserve without triggering forced expiratory Valsalva artifacts.
+### Hypothesis H-RESP (Airofit Pro Respiratory Strength & Vagal Reserve):
+*   **Hypothesis:** Daily Maximal Inspiratory Pressure ($\text{MIP}$, $\text{cmH}_2\text{O}$), Maximal Expiratory Pressure ($\text{MEP}$, $\text{cmH}_2\text{O}$), and Vital Capacity ($\text{VC}$, liters) captured via the **Airofit Pro** smart breathing trainer provide a quantitative behavioral/physiological probe of diaphragmatic muscle endurance and parasympathetic reserve. Under financial allostatic stress ($\varepsilon < 0$), diaphragmatic exhaustion and sympathetic dominance reduce evening $\text{MIP}$ and $\text{MEP}$ ($\ge 10\text{--}15\%$ drop or $r \le -0.25$ against nocturnal HR strain, AR(1)-adjusted).
+*   **Frozen Criterion:** AR(1)-prewhitened Airofit $\text{MIP}$ exhibits a statistically significant positive correlation ($r \ge 0.25, p < 0.01$) with subsequent nocturnal sleep-onset RMSSD (Apple Watch) and a negative correlation with daytime allostatic distress, proving that inspiratory/expiratory strength actively probes parasympathetic vagal reserve.
 
 ### Hypothesis H-HAIR (Longitudinal Endocrine Ground Truth):
 *   **Hypothesis:** Scalp hair segmental cortisol and cortisone concentrations (LC-MS/MS; pg/mg) measured from proximal $3\text{ cm}$ segments correlate with the cumulative time-integral of 90-day daily ambulatory interstitial glycemic excursions ($dG/dt$) captured by continuous glucose monitoring.

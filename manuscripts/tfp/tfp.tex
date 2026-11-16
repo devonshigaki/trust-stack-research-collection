@@ -14,8 +14,8 @@
 
 \title{The Fresh Protocol: A Decentralized Architecture for Trust Measurement and Validation}
 \author{Devon Shigaki~(ORCID: 0009-0003-8977-8010)\\
-\small The FreshCredit Lab --- Independent Research\\
-\small Correspondence: freshcredit.xyz}
+\small Independent Research\\
+\small Correspondence: ORCID 0009-0003-8977-8010}
 \date{\small Version 4.5 --- November 2026}
 
 % --- Float-page layout tuning: reduce white bands on float-dense pages ---
@@ -53,7 +53,7 @@ production), a Substrate settlement and audit layer (143,343 batch
 transactions per second measured on 23 of 100 Kusama cores in the
 December 2024 ``Spammening'' stress test; ordinary peer-to-peer
 transfers peaked at 10,920 TPS), light-client verification (Smoldot),
-and x402 micropayment rails (Coinbase-incubated, May 2025; 169M payments
+and x402 micropayment rails (May 2025; 169M payments
 in year one (memecoin-inflated; sub-cent settlement is the claim); zero
 protocol fees; sub-cent settlement). TFP contains no
 domain logic: an application is constructed by configuring the
@@ -71,7 +71,7 @@ advantage is conditional on endpoint hygiene and client integrity,
 quantified in §3.9. All performance figures are measurements of existing
 external systems cited to source, or clearly labeled simulations; cost,
 speed, and security figures are printed as frozen snapshots, with the
-live versioned calculator at freshcredit.xyz/cost maintained as a
+supplementary versioned cost script in the repository maintained as a
 supplementary tool, not a reference.
 \end{abstract}
 \noindent{\small\textbf{Keywords:} trust measurement; decentralized identity; verifiable credentials;
@@ -342,8 +342,8 @@ as a deployed result.
 All quantitative figures in this paper are (a) measurements of existing
 external systems, cited to source; (b) labeled simulations over
 synthetic data; or (c) frozen benchmark snapshots printed in §5.2, with
-the live, versioned calculator at freshcredit.xyz/cost maintained as a
-supplementary tool --- the print figures, not the live page, are the
+the supplementary versioned cost script in the repository maintained as a
+supplementary tool --- the print figures, not a live page, are the
 canonical reference for this paper's claims. No achieved end-to-end
 performance is claimed for deployed applications of the protocol. Claims
 carry the stack's epistemic labels: \textbf{{[}DERIVED{]}} (follows from
@@ -505,22 +505,22 @@ disclosure is no longer a research construct; it is the direction
 regulation is pulling.
 
 Data live in a database-per-tenant topology (libSQL;
-\citealp{turso2026}): each participant's trust record is an independent
+an open-source fork of SQLite): each participant's trust record is an independent
 encrypted edge database whose durability is provided by cloud backups or
 offline backups under the participant's control. One engine fact is
 stated precisely because the ecosystem's naming invites confusion: the
-production libSQL engine (the C fork of SQLite that powers Turso Cloud
-today) inherits SQLite's \textbf{single-writer} model; MVCC concurrent
-writes are a feature of Turso's ground-up Rust rewrite of SQLite,
+production libSQL engine (the C fork of SQLite)
+inherits SQLite's \textbf{single-writer} model; MVCC concurrent
+writes are a feature of a ground-up Rust rewrite of SQLite,
 currently in beta, not of the production engine. Nothing in this
 architecture requires concurrent writers per tenant --- each database
 has exactly one owner-writer --- so the production engine suffices; the
 beta rewrite is noted for trajectory only. The topology yields
-local-latency I/O (vendor benchmarks report \(\sim 3\times\) improvement
+local-latency I/O (published benchmarks report \(\sim 3\times\) improvement
 over centralized round-trips) and, more importantly, ownership locality:
 the record is the participant's, licensed to queries, rather than a
-custodian's asset. Aggregation APIs that permission data at the source
-(Plaid, Stripe, and equivalents) demonstrate the consent-bearing query
+custodian's asset. Open-banking and payment aggregation APIs that permission data at the source
+demonstrate the consent-bearing query
 pattern at production scale --- the protocol generalizes it beyond
 finance.
 
@@ -660,7 +660,7 @@ full node or RPC server} --- so any participant can audit their own
 record's integrity without trusting an intermediary, the architectural
 form of verifiable feedback. (No per-verification latency benchmark for Smoldot is published; no such figure is claimed here.)
 
-\textbf{Component evidence, by evidence class.} The settlement layer's throughput figures are measured on a live network (above). The remaining layer components are cited from official documentation and vendor benchmarks, and are labeled as such: storage-layer local queries run at $\approx$200 ns with prepared statements (Turso libSQL micro-benchmark [VENDOR BENCHMARK]); the reference state-trie implementation (NOMT) commits and proves an update of 50{,}000 accounts in 1.151 s --- $\approx$43{,}000 updates/s on commodity NVMe (rob.tech benchmark [VENDOR BENCHMARK]); identity and credential components (W3C DIDs, SD-JWT, KILT-class production flows) are specified from official documentation [DOCS]. No component figure beyond these classes is claimed.
+\textbf{Component evidence, by evidence class.} The settlement layer's throughput figures are measured on a live network (above). The remaining layer components are cited from official open-source documentation and published benchmarks, and are labeled as such: storage-layer local queries run at $\approx$200 ns with prepared statements (libSQL micro-benchmark [BENCHMARK]); the reference state-trie implementation (NOMT) commits and proves an update of 50{,}000 accounts in 1.151 s --- $\approx$43{,}000 updates/s on commodity NVMe (rob.tech benchmark [BENCHMARK]); identity and credential components (W3C DIDs, SD-JWT, decentralized DID methods) are specified from official documentation [DOCS]. No component figure beyond these classes is claimed.
 
 \textbf{The edge-capacity bet, stated as an estimate.} The industry's compute trajectory is concentrated --- $\approx$1{,}360 operational hyperscale data centers at end-2025 (Synergy Research) within $\approx$12{,}000 facilities worldwide (Cloudscene), with capex projected beyond \$3T by 2030 (Dell'Oro) --- while the already-deployed edge is $\approx$7 billion smartphones (GSMA, 2025) and $\approx$19.8 billion IoT devices (IoT Analytics, 2025) [ESTIMATE]. Aggregate device FLOPS figures are theoretical-peak and are not claimed as usable capacity; the load-bearing fact is narrower and architectural: the per-user verification workload this protocol requires --- hash checks, header and finality verification, local queries at the 200 ns--millisecond scale --- fits inside hardware the user already owns, so the measurement layer does not ride the datacenter capex curve.
 
@@ -691,9 +691,9 @@ EIP-7702 --- are account-layer design patterns adopted by reference;
 their origin in the Ethereum ecosystem does not imply dependence on a
 monolithic settlement layer, and they are portable to Substrate account
 pallets.) Settlement of per-validation micro-fees runs on x402 rails:
-x402, incubated and launched by Coinbase in May 2025, processed over 100
+x402, launched in May 2025, processed over 100
 million payments by December 2025 and 169 million payments in its first
-year (590,000 buyers, 100,000 sellers; \citealp{coinbase2025};
+year (590,000 buyers, 100,000 sellers; \citealp{x402foundation2026};
 independently corroborated by \citealp{chainalysis2026} on Base), with
 zero protocol fees and sub-cent Layer-2 gas, making per-event settlement
 economically feasible. Governance of the standard moved to the Linux
@@ -751,8 +751,7 @@ ride the same infrastructure and inherit the same curve. The incumbent
 pattern re-purchases identity on every query --- each verification is a
 fresh pull from a custodian, priced per pull. The protocol pattern
 builds identity once and lets it accumulate: a DID anchored at issuance
-(KILT on Substrate; enterprise verified-ID deployments such as Microsoft
-Entra), credentials disclosed selectively, and every validation event
+(W3C DID methods and enterprise verifiable-credential deployments), credentials disclosed selectively, and every validation event
 appended to the participant's own record --- so each subsequent
 verification is a local read against an existing historical identity, at
 marginal cost approaching the storage-read floor, rather than a new
@@ -1893,12 +1892,12 @@ supplementary}
 
 Point-in-time infrastructure comparisons degrade on contact with print
 (cloud pricing, chain fees, and vendor pricing all move). An earlier
-version of this paper designated the live calculator at
-freshcredit.xyz/cost as the canonical reference ``superseding'' static
-figures; that assignment is reversed, because a mutable page on the
-author's domain is not an auditable reference. \textbf{The figures
+version of this paper designated a live web calculator
+as the canonical reference ``superseding'' static
+figures; that assignment is reversed, because a mutable web page
+is not an auditable reference. \textbf{The figures
 printed here are the canonical record of this paper's claims; the
-calculator is a supplementary, versioned tool.} Frozen print figures
+repository cost script is a supplementary, versioned tool.} Frozen print figures
 (all protocol-side quantities; incumbent comparators cited to source
 where published):
 
@@ -2116,7 +2115,7 @@ stack that reports only its successes cannot be audited.
 \FloatBarrier
 \subsection*{6.1 v4.5 Formal Verification, Anti-Collusion Entropy Gate (Sim P8c/P8d), and Clock-Skew Op-Log}
 
-In the v4.5 release, the protocol's cryptographic, distributed-state, and collusion-resistance guarantees were discharged end-to-end in \texttt{formal/} and \texttt{code/simulations/repair\_era/}: (i) \textbf{ZK-STP v8} (\texttt{zk\_master\_law\_stp.py}, \texttt{zk\_pedersen\_ec.py}, \texttt{z3\_zk\_stp\_soundness.py}) provides a witness-hiding secp256k1 Pedersen + Schnorr + Tuple-OR + 33-bit range-proof NIZK with strict 3-party role separation (\texttt{FurnisherAuthority} vs.\ borrower-side \texttt{MasterLawZKProver}), Day-0 genesis anchoring ($S_0 = S_{\text{base}}$), $[0, 1]$ output range soundness preventing Branch-0 overflow bypass, Z3 real-to-fixed-point quantization refinement ($|S_t^{\mathbb{R}} - S_t^{\text{ZK}}| \le 2\times 10^{-9}/\delta_S$), issuer-signed \texttt{TFP-HEAD-v2} event-commitment chain tips blocking right-tail truncation, and cross-verifier unlinkable re-blinding ($20/20$ verification and exploit-rejection criteria pass; the Python reference is marked non-constant-time and production wallets require constant-time \texttt{k256}/\texttt{libsecp256k1} plus future offline re-randomizable credentials such as BBS+ to eliminate furnisher-side presentation correlation); (ii) \textbf{TLA+ Model Checking} (\texttt{TFP\_Edge\_Protocol.tla}) exhaustively verified \texttt{NonEquivocation}, \texttt{HashChainIntegrity}, and persistent packet replay across $1{,}421{,}068$ generated / $308{,}261$ distinct states with $0$ errors via \texttt{tlc2.TLC}; (iii) because Lean~4 theorem \texttt{masterStepClamped\_not\_comm} proves clamped $[0,1]$ updates cannot merge as a state-based CRDT, \texttt{sim\_tfp\_clock\_skew.py} verifies canonical Hybrid Logical Clock + SHA-256 \texttt{G-Set} operation-log convergence across multi-device skew ($0.0$ divergence); and (iv) \textbf{Sim P8c / P8d} (\texttt{sim\_p8\_collusion.py}, \texttt{sim\_collusion\_economic\_auction.py}) replace prefix-based Sybil screening with a cryptographic-bond and cluster-collapsed Shannon entropy gate ($0/200$ red-team bypasses; $P=1$ colluder $\eta = 0\%$, concentrated 90/10 ring throttled to $1.31\text{ yr}$).
+In the v4.5 release, the protocol's cryptographic, distributed-state, and collusion-resistance guarantees were discharged end-to-end in \texttt{formal/} and \texttt{code/simulations/repair\_era/}: (i) \textbf{ZK-STP v8} (\texttt{zk\_master\_law\_stp.py}, \texttt{zk\_pedersen\_ec.py}, \texttt{z3\_zk\_stp\_soundness.py}) provides a witness-hiding secp256k1 Pedersen + Schnorr + Tuple-OR + 33-bit range-proof NIZK with strict 3-party role separation (\texttt{FurnisherAuthority} vs.\ borrower-side \texttt{MasterLawZKProver}), Day-0 genesis anchoring ($S_0 = S_{\text{base}}$), $[0, 1]$ output range soundness preventing Branch-0 overflow bypass, Z3 real-to-fixed-point quantization refinement ($|S_t^{\mathbb{R}} - S_t^{\text{ZK}}| \le 2\times 10^{-9}/\delta_S$), issuer-signed \texttt{TFP-HEAD-v2} event-commitment chain tips blocking right-tail truncation, and cross-verifier unlinkable re-blinding ($22/22$ verification and exploit-rejection criteria pass, including Branch-0 overflow guard, anchored trajectory verification in \texttt{verify\_threshold}, and 256-bit HMAC blinding of pseudonymous handles; the Python reference is marked non-constant-time and production wallets require constant-time \texttt{k256}/\texttt{libsecp256k1} plus future offline re-randomizable credentials such as BBS+ to eliminate furnisher-side presentation correlation); (ii) \textbf{TLA+ Model Checking} (\texttt{TFP\_Edge\_Protocol.tla}) exhaustively verified \texttt{NonEquivocation}, \texttt{HashChainIntegrity}, \texttt{AttestedAuditChain}, \texttt{ConsistentLightClientViews}, and persistent packet replay across $4{,}255{,}162$ generated / $864{,}815$ distinct states with $0$ errors via \texttt{tlc2.TLC}; (iii) because Lean~4 theorem \texttt{masterStepClamped\_not\_comm} proves clamped $[0,1]$ updates cannot merge as a state-based CRDT, \texttt{sim\_tfp\_clock\_skew.py} verifies canonical Hybrid Logical Clock + SHA-256 \texttt{G-Set} operation-log convergence across multi-device skew ($0.0$ divergence); and (iv) \textbf{Sim P8c / P8d} (\texttt{sim\_p8\_collusion.py}, \texttt{sim\_collusion\_economic\_auction.py}) replace prefix-based Sybil screening with a cryptographic-bond and cluster-collapsed Shannon entropy gate ($0/200$ red-team bypasses; $P=1$ colluder $\eta = 0\%$, concentrated 90/10 ring throttled to $1.31\text{ yr}$).
 
 \FloatBarrier
 \section*{7. Conclusion}
@@ -2150,7 +2149,7 @@ it could not be traced to any primary report, methodology, or date
 replaced by the Federal Reserve white-paper series.
 
 Live benchmarks:
-freshcredit.xyz/cost (versioned cost/speed/security comparisons ---
+the supplementary versioned cost script in the repository (versioned cost/speed/security comparisons ---
 supplementary tool; the print figures of §5.2 are canonical for this
 paper's claims). Simulated results are labeled as such wherever they
 appear; no production performance is claimed.
@@ -2160,16 +2159,7 @@ from stated assumptions), {[}STANDARD{]} (textbook results derived for
 self-containment), {[}ANALOGY{]}, {[}HOMOLOGY{]}, {[}EMPIRICAL{]},
 {[}HYPOTHESIS{]}, {[}SIMULATION{]}.
 
-\textbf{Competing interests:} D.S. is the founder and a beneficiary of FreshCredit Inc. and the
-founder of The FreshCredit Lab.~FreshCredit Inc holds granted US utility
-patents covering methods in three commercial verticals (finance,
-commerce, and insurance): US 12,236,480 B2; US 12,293,410 B2; US
-12,307,515 B2; US 12,293,411 B2 (grant statuses per public records;
-recorded assignment to FreshCredit, April 4, 2025); the
-underlying protocol is otherwise open. The patents list Devon Shigaki as
-inventor/applicant. The theoretical results and the
-patented methods overlap in composition; the author discloses this
-overlap explicitly.
+\textbf{Competing interests:} The author is the sole inventor on granted US utility patents covering trust-state measurement methods across financial, commercial, and insurance domains (US 12,236,480 B2; US 12,293,410 B2; US 12,307,515 B2; US 12,293,411 B2; assigned to a private commercial entity); the underlying scientific theory and open protocol reported here are published openly. The theoretical results and the patented methods overlap in composition; the author discloses this overlap explicitly.
 
 \textbf{Acknowledgments:} AI assistants (Kimi K3, Moonshot AI; Claude
 Fable 5, Anthropic) contributed to validation, adversarial
@@ -2177,7 +2167,7 @@ review, and simulation code. All original ideas, claims, and conclusions are
 the author's own.
 
 \textbf{Data availability:} Simulation code, seeds, figures, formal proofs (\texttt{formal/}), and pre-registration documents (\texttt{protocols/}) are deposited in the v4.5 repository and OSF release archive (OSF accession pending deposit; Git Release v4.5, verified against \texttt{SHA256\_REPRODUCIBILITY\_MANIFEST.json}). Benchmark figures cited in print are frozen snapshots; the
-live calculator at freshcredit.xyz/cost is a supplementary tool, not a
+supplementary versioned cost script in the repository is a supplementary tool, not a
 reference. 
 
 \textbf{Funding:} none received; independent research. \textbf{Author

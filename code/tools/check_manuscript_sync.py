@@ -34,6 +34,14 @@ MD_HEADER_FILES = [
     "collection/collection.md",
     "value_of_trust/value_of_trust.md",
 ]
+ALL_MD_FILES = [
+    "collection/collection.md",
+    "value_of_trust/value_of_trust.md",
+    "gtt/gtt.md",
+    "tdf/tdf.md",
+    "tfp/tfp.md",
+    "whitepaper/whitepaper.md",
+]
 
 
 def main():
@@ -54,22 +62,35 @@ def main():
             errors.append(f"{fn}: Still contains withdrawn leaked Brain-IT metric 0.7723")
         if base in ("gtt.tex", "tdf.tex", "tfp.tex", "value_of_trust.tex") and "Supporting Document and Technical Appendix are in preparation" in txt:
             errors.append(f"{fn}: Contains stale 'Supporting Document and Technical Appendix are in preparation' disclaimer")
+        if base in ("gtt.tex", "tdf.tex", "tfp.tex", "value_of_trust.tex"):
+            brand_re = re.compile(r"\b(?:freshcredit|turso|plaid|stripe|entra|coinbase)\b", re.IGNORECASE)
+            m_brand = brand_re.search(txt)
+            if m_brand:
+                errors.append(f"{fn}: Academic clean-room violation — commercial brand '{m_brand.group(0)}' is forbidden outside whitepaper")
         if base == "gtt.tex" and ("v4.12.0" in txt or "32 theorems" not in txt):
             errors.append(f"{fn}: Lean formalization section out of sync with Lean 4.35.0 (32 theorems)")
         if base == "whitepaper.tex" and ("OpenML 42477" not in txt or "Sim W8" not in txt or "Sim W9" not in txt):
             errors.append(f"{fn}: Missing OpenML 42477 or Sim W8/W9 parity coverage")
-        if base == "tfp.tex" and ("ZK-STP v8" not in txt or "308{,}261" not in txt):
-            errors.append(f"{fn}: Missing ZK-STP v8 or TLA+ 308,261-state verification coverage")
+        if base == "tfp.tex" and ("ZK-STP v8" not in txt or "864{,}815" not in txt or "22/22" not in txt):
+            errors.append(f"{fn}: Missing ZK-STP v8 (22/22) or TLA+ 864,815-state verification coverage")
         if fn in BIBTEX_TEX and "\\nocite{*}" not in txt:
             errors.append(f"{fn}: Missing \\nocite{{*}} (silently drops plain-text .bib references)")
         print(f"  ✓ Checked {fn}")
 
-    for fn in MD_HEADER_FILES:
+    for fn in ALL_MD_FILES:
         path = os.path.join(MANUSCRIPTS_DIR, fn)
         with open(path, "r", encoding="utf-8") as f:
             txt = f.read()
-        if "Version 4.5 — November 2026" not in txt:
+        if fn in MD_HEADER_FILES and "Version 4.5 — November 2026" not in txt:
             errors.append(f"{fn}: Missing 'Version 4.5 — November 2026' header")
+        for stale in ("Release v4.3", "releases/tag/v4.3", "1,343 verified assets", "26-task", "24-task"):
+            if stale in txt:
+                errors.append(f"{fn}: Contains stale v4.3/1,343/26-task marker '{stale}'")
+        if fn in ("gtt/gtt.md", "tdf/tdf.md", "tfp/tfp.md", "value_of_trust/value_of_trust.md"):
+            brand_re = re.compile(r"\b(?:freshcredit|turso|plaid|stripe|entra|coinbase)\b", re.IGNORECASE)
+            m_brand = brand_re.search(txt)
+            if m_brand:
+                errors.append(f"{fn}: Academic clean-room violation — commercial brand '{m_brand.group(0)}' is forbidden outside whitepaper")
         print(f"  ✓ Checked {fn}")
 
     root = pathlib.Path(BASE_DIR)

@@ -39,12 +39,14 @@ def _numpy_bandpass(data: np.ndarray, fs: float, low: float, high: float) -> np.
     fft_vals[~mask] = 0.0
     return np.fft.irfft(fft_vals, n=n)
 
-# Molar extinction coefficients [HbO2, HbR] in mM^-1 cm^-1
-# Sources: Wray et al. (1988), Matcher et al. (1995), Cope (1991)
+# Molar extinction coefficients [HbO2, HbR] in mM^-1 cm^-1 for base-10 log10(I0/I) OD.
+# Standardized on a SINGLE unmixed source: Scott Prahl (OMLC, 1998; compiled from Gratzer & Kollias)
+# so HbO2 and HbR across all wavelengths share identical spectrophotometer calibration.
 EXTINCTION_COEFFICIENTS = {
-    730: (0.4328, 1.3008),
-    850: (1.0577, 0.7818),
-    660: (0.3196, 3.2265),
+    730: (0.3900, 1.1022),
+    850: (1.0580, 0.6913),
+    660: (0.3196, 3.2266),
+    760: (0.5860, 1.5485),
 }
 
 DPF_ADULT_PREFRONTAL = 6.0
@@ -125,8 +127,9 @@ def compute_scholkmann_dpf(wavelength_nm: float, age_years: float = 30.0, body_f
     according to Scholkmann & Wolf (2013, J. Biomed. Opt. 18(10), 105004, Eq. 7), dynamically scaled
     by Fitindex BIA subcutaneous adipose thickness per DOCAS_PILOT_1_HUMAN_PROTOCOL.md:286:
       DPF_u(λ) = DPF_Scholkmann(λ, Age) * [1.0 + γ_BIA * (BodyFat% - 20.0)]
+    Clamps λ to Scholkmann & Wolf's fitted validity interval [690, 832] nm to avoid cubic extrapolation.
     """
-    wl = float(wavelength_nm)
+    wl = float(max(690.0, min(832.0, wavelength_nm)))
     age = float(max(18.0, min(80.0, age_years)))
     dpf_base = 223.3 + 0.05624 * (age ** 0.8493) - 5.723e-7 * (wl ** 3) + 0.001245 * (wl ** 2) - 0.9025 * wl
     gamma_bia = 0.012
@@ -218,9 +221,11 @@ def solve_mbll_inversion(
         for wl in wavelengths
     ], dtype=np.float64)[:, None]
 
-    od_over_l = filtered_od / pathlengths  # [3, N_samples] in mM
-    pinv_E = np.linalg.pinv(E)  # [2, 3] in mM cm
-    concentrations_mM = pinv_E @ od_over_l  # [2, N_samples] in mM
+    # MNE-Python exact linear formulation: ΔOD(λ, t) = (E(λ) * L(λ)) · Δc(t) => Δc = pinv(E * L) @ ΔOD
+    # For N_λ = 2 this equals pinv(E) @ (ΔOD / L); for N_λ >= 3 pinv(E * L) avoids unequal pathlength distortion.
+    EL = E * pathlengths  # [N_wl, 2] in mM^-1
+    pinv_EL = np.linalg.pinv(EL)  # [2, N_wl] in mM
+    concentrations_mM = pinv_EL @ filtered_od  # [2, N_samples] in mM
 
     # Convert mM -> μM (x 1000)
     delta_hbo2_umol = concentrations_mM[0] * 1000.0
@@ -373,7 +378,15 @@ def run_self_test() -> bool:
     err_hbr = np.max(np.abs(rec_hbr - true_hbr_umol))
     assert err_hbo2 < 1e-6, f"HbO2 round-trip error too large: {err_hbo2}"
     assert err_hbr < 1e-6, f"HbR round-trip error too large: {err_hbr}"
-    print(f"✓ MBLL Molar Extinction Inversion Round-Trip Error: {err_hbo2:.2e} μM (Exact Recovery with Scholkmann-Wolf DPF)")
+
+    # Verify MNE-Python natural-log OD * abs_coef (ln(10)*E) exact algebraic parity
+    sim_od_ln = sim_od * math.log(10.0)
+    abs_coef_mne = E * math.log(10.0)
+    EL_mne = abs_coef_mne * pathlengths
+    conc_mne_umol = (np.linalg.pinv(EL_mne) @ sim_od_ln) * 1000.0
+    assert np.max(np.abs(conc_mne_umol[0] - rec_hbo2)) < 1e-10
+    assert np.max(np.abs(conc_mne_umol[1] - rec_hbr)) < 1e-10
+    print(f"✓ MBLL Molar Extinction Inversion Round-Trip Error: {err_hbo2:.2e} μM (Exact MNE-NIRS ln(10) Parity)")
 
     # 1b. TDDR Motion Spike Repair Test
     clean_wave = np.sin(2 * np.pi * 0.1 * np.linspace(0, 10, 640))

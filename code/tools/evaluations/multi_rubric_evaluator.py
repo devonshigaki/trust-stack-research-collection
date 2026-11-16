@@ -44,20 +44,39 @@ def verify_local_ci_pass():
     with open(os.path.join(BASE_DIR, "formal/zk_stp_results.json"), "r", encoding="utf-8") as zf:
         zk_data = json.load(zf)
     assert zk_data.get("status") == "VERIFIED" and zk_data.get("soundness_forgery_rejected") is True
+    for zk_key in (
+        "test20_clamp_branch0_overflow_blocked",
+        "test21_unanchored_threshold_blocked",
+        "test22_high_entropy_handle_blinding",
+    ):
+        assert zk_data.get(zk_key) is True, f"Missing ZK-STP check: {zk_key}"
     assert os.path.exists(os.path.join(BASE_DIR, "formal/z3_fisher_rao_singularity.py"))
+    assert os.path.exists(os.path.join(BASE_DIR, "formal/z3_zk_stp_soundness.py"))
     assert os.path.exists(os.path.join(BASE_DIR, "formal/TFP_Edge_Protocol.cfg"))
-    print("✓ NeurIPS Formal Methods: Z3 SMT, secp256k1 NIZK, Lean 4, and TLA+ artifacts verified.")
+    print("✓ NeurIPS Formal Methods: Z3 SMT, 22/22 secp256k1 NIZK, Lean 4, and TLA+ artifacts verified.")
+
+    cp_path = os.path.join(BASE_DIR, "code/empirical/credit_panel/credit_panel_validation_results.json")
+    assert os.path.exists(cp_path), f"Missing {cp_path}"
+    with open(cp_path, "r", encoding="utf-8") as cpf:
+        cp_data = json.load(cpf)
+    gtt_auc = cp_data["gtt_asymmetric_2d"]["roc_auc"]
+    sym_auc = cp_data["symmetric_ewma_2d"]["roc_auc"]
+    assert gtt_auc > sym_auc and cp_data["endogenous_ln_gt_lp_folds"] == 5
+    assert cp_data["nadeau_bengio_cv_p"] < 0.01 and cp_data["ecoa_adverse_impact_ratio_sex"] >= 0.80
 
     with open(os.path.join(PAPERS_DIR, "tdf", "tdf.md"), "r", encoding="utf-8") as f:
         docas_txt = f.read()
     assert "DOCAS-GATE-1" in docas_txt and "Williams-balanced" in docas_txt
     print("✓ Cochrane RoB 2: Double-blind Williams-balanced crossover protocol verified.")
 
+    with open(os.path.join(PAPERS_DIR, "whitepaper", "whitepaper.tex"), "r", encoding="utf-8") as f:
+        wp_tex = f.read()
+    assert f"{gtt_auc:.4f}" in wp_tex, f"whitepaper.tex out of sync with credit_panel AUC {gtt_auc:.4f}"
     with open(os.path.join(PAPERS_DIR, "whitepaper", "whitepaper.md"), "r", encoding="utf-8") as f:
         wp_txt = f.read()
     assert "statistical power" in wp_txt and "N = 412" in wp_txt
     assert "N = 85,000" not in wp_txt, "Retracted FinRegLab N=85,000 claim still in whitepaper.md!"
-    print("✓ APA JARS & Epistemic Audit: Power calculation verified; zero fabricated N=85,000 claims.")
+    print(f"✓ APA JARS & Quantitative Parity Audit: Credit Panel AUC {gtt_auc:.4f} > {sym_auc:.4f} synced; zero fabricated claims.")
     return True
 
 

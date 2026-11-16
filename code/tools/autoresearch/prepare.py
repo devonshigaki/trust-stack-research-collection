@@ -19,7 +19,7 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CANDIDATE = os.path.join(HERE, "candidate_estimator.py")
-BUDGET_LEDGER = os.path.join(tempfile.gettempdir(), "trust_stack_thresholdout_budget.json")
+BUDGET_LEDGER = os.path.join(HERE, ".thresholdout_budget.json")
 MAX_VAL_QUERIES = 50
 
 BETA = 0.10
@@ -146,16 +146,21 @@ def main():
     train_metrics = _score_cohort(train_users, _run_candidate_sandboxed(train_users))
     val_metrics = _score_cohort(val_users, _run_candidate_sandboxed(val_users))
 
-    # Cryptographic OS entropy for Dwork Thresholdout (never deterministic in AST/train_loss)
+    # Dwork et al. (2015) Thresholdout Algorithm 1 with cryptographic OS entropy:
+    # randomize threshold tau_tilde = tau + Lap(2*sigma), noisy gap check + Lap(4*sigma),
+    # and debit privacy budget on every holdout query (reset requires ALLOW_BUDGET_RESET=1).
     rng_th = np.random.default_rng(secrets.randbits(128))
+    sigma = 0.003
     tau = 0.008
-    if abs(val_metrics["loss"] - train_metrics["loss"]) <= tau:
+    tau_tilde = tau + float(rng_th.laplace(0.0, 2.0 * sigma))
+    noisy_gap = abs(val_metrics["loss"] - train_metrics["loss"]) + float(rng_th.laplace(0.0, 4.0 * sigma))
+    can_reset = reset_budget and os.environ.get("ALLOW_BUDGET_RESET") == "1"
+    queries_used = _check_and_increment_budget(reset=can_reset) if not unlock_vault else 0
+    if noisy_gap <= tau_tilde:
         reported_val_loss = train_metrics["loss"]
         th_branch = "TRAIN_GENERALIZED"
-        queries_used = 0
     else:
-        queries_used = _check_and_increment_budget(reset=reset_budget) if not unlock_vault else 0
-        reported_val_loss = val_metrics["loss"] + float(rng_th.laplace(0.0, 0.003))
+        reported_val_loss = val_metrics["loss"] + float(rng_th.laplace(0.0, sigma))
         th_branch = "THRESHOLD_TRIGGERED"
 
     # Zero raw holdout leakage: only train metrics and Thresholdout-protected val_score are emitted

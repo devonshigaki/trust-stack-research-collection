@@ -21,6 +21,8 @@
     "test18_cross_verifier_unlinkable": true,
     "test19_three_party_role_isolation": true,
     "test20_clamp_branch0_overflow_blocked": true,
-    "proof_bytes_json": 225042,
+    "test21_unanchored_threshold_blocked": true,
+    "test22_high_entropy_handle_blinding": true,
+    "proof_bytes_json": 225043,
     "status": "VERIFIED"
 }

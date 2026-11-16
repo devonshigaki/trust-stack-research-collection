@@ -12,6 +12,7 @@ use constant-time field/group arithmetic (e.g., Rust `k256` or C `libsecp256k1`)
 
 RESEARCH_REFERENCE_ONLY = True
 
+import hmac
 import secrets
 import hashlib
 from typing import Dict, List, Optional, Tuple
@@ -498,8 +499,11 @@ class FurnisherAuthority:
     event-commitment chain tip `TFP-HEAD-v2`, and NEVER sees or computes `S_t`.
     """
 
-    def __init__(self, keypair: Optional[IssuerKeypair] = None):
+    def __init__(self, keypair: Optional[IssuerKeypair] = None, handle_blinding_key: Optional[bytes] = None):
         self._kp = keypair if keypair is not None else IssuerKeypair.generate()
+        self._handle_key = handle_blinding_key if handle_blinding_key is not None else secrets.token_bytes(32)
+        if len(self._handle_key) < 32:
+            raise ValueError("Handle blinding key must be >= 256 bits (32 bytes)")
 
     @property
     def pk_hex(self) -> str:
@@ -513,8 +517,11 @@ class FurnisherAuthority:
         events_ve: List[Tuple[float, float]],
         scale: int = 1_000_000_000,
     ) -> Dict[str, object]:
-        acct_handle = hashlib.sha256(
-            f"TFP-PSEUDO-v1:{verifier_id}:{epoch_id}:{account_secret}".encode("utf-8")
+        # High-entropy 256-bit HMAC blinding prevents offline dictionary/rainbow-table handle correlation
+        acct_handle = hmac.new(
+            self._handle_key,
+            f"TFP-PSEUDO-v2:{verifier_id}:{epoch_id}:{account_secret}".encode("utf-8"),
+            hashlib.sha256,
         ).hexdigest()[:32]
         opened_events = []
         attestations = []

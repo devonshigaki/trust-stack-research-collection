@@ -58,12 +58,13 @@ def verify_clics():
     print(f"Background Density (Unfiltered): {bg_unfiltered:.4f}")
     print(f"Background Density (Family>=3):   {bg_fam3:.4f}")
 
-    # DOCAS Core Channel Concept Sets
+    # DOCAS 5-Channel Concept Sets (C, O, D, A, S)
     channels = {
         "Recognition (C)": ["KNOW", "UNDERSTAND", "SEE", "HEAR", "LEARN", "FIND", "SEEM"],
         "Validation (O)": ["TRUE", "TRUTH", "BELIEVE", "ANSWER", "RIGHT", "CORRECT"],
         "Expectation (D)": ["HOPE", "WANT", "WAIT (FOR)"],
-        "Stabilization (S)": ["REST", "SLEEP", "CALM", "PEACE", "QUIET", "STABLE"]
+        "Arousal/Action (A)": ["FEAR", "ANGER", "RUN", "FAST", "ENERGY", "MOVE"],
+        "Stabilization (S)": ["REST", "SLEEP", "CALM", "PEACE", "QUIET", "STABLE"],
     }
 
     results = {}
@@ -71,12 +72,12 @@ def verify_clics():
     n_perms = 2000
     all_nodes_f3 = list(G_fam3.nodes())
     node_degrees = np.array([G_fam3.degree(u) for u in all_nodes_f3])
-    decile_edges = np.quantile(node_degrees, np.linspace(0.0, 1.0, 11))
-    node_bins = np.clip(np.digitize(node_degrees, decile_edges[1:-1]), 0, 9)
-    bin_to_nodes = {b: [all_nodes_f3[i] for i in range(len(all_nodes_f3)) if node_bins[i] == b] for b in range(10)}
-    node_to_bin = {all_nodes_f3[i]: int(node_bins[i]) for i in range(len(all_nodes_f3))}
+    ranked_idx = np.argsort(node_degrees, kind="mergesort")
+    decile_chunks = np.array_split(ranked_idx, 10)
+    bin_to_nodes = {b: [all_nodes_f3[i] for i in decile_chunks[b]] for b in range(10)}
+    node_to_bin = {all_nodes_f3[i]: b for b in range(10) for i in decile_chunks[b]}
 
-    print("\n--- Within-Channel Density & 2,000-Permutation Tests (Uniform + Degree-Stratified, Family>=3) ---")
+    print("\n--- Within-Channel Density & 2,000-Permutation Tests (Uniform + Degree-Stratified + Holm-FWER, Family>=3) ---")
 
     for ch_name, concepts in channels.items():
         present_nodes = [c for c in concepts if c in G_fam3]
@@ -120,13 +121,23 @@ def verify_clics():
             "fold_enrichment": float(actual_density / bg_fam3) if bg_fam3 > 0 else 0,
             "permutation_p": float(p_val),
             "degree_stratified_p": float(p_deg),
-            "status": "PASS (p <= 0.05)" if p_val <= 0.05 else "NULL"
         }
 
-        print(f"[{results[ch_name]['status']}] {ch_name}:")
-        print(f"  Concepts: {present_nodes}")
-        print(f"  Edges: {actual_edges}/{max_edges} | Density: {actual_density:.3f} ({results[ch_name]['fold_enrichment']:.1f}x bg)")
-        print(f"  Uniform p: {p_val:.4f} | Degree-Stratified p: {p_deg:.4f}\n")
+    # Holm-Bonferroni step-down FWER adjustment across all tested channels (degree-stratified null)
+    m_ch = len(results)
+    sorted_chs = sorted(results.items(), key=lambda kv: kv[1]["degree_stratified_p"])
+    running_max = 0.0
+    for rank_idx, (ch_name, ch_res) in enumerate(sorted_chs):
+        p_holm = min(1.0, ch_res["degree_stratified_p"] * (m_ch - rank_idx))
+        running_max = max(running_max, p_holm)
+        ch_res["degree_stratified_p_holm"] = float(running_max)
+        ch_res["status"] = "PASS (Holm p_deg <= 0.05)" if running_max <= 0.05 else "NULL"
+
+    for ch_name, ch_res in results.items():
+        print(f"[{ch_res['status']}] {ch_name}:")
+        print(f"  Concepts: {ch_res['concepts_tested']}")
+        print(f"  Edges: {ch_res['actual_edges']}/{ch_res['max_possible_edges']} | Density: {ch_res['density']:.3f} ({ch_res['fold_enrichment']:.1f}x bg)")
+        print(f"  Uniform p: {ch_res['permutation_p']:.4f} | Degree-Stratified p: {ch_res['degree_stratified_p']:.4f} | Holm FWER p: {ch_res['degree_stratified_p_holm']:.4f}\n")
 
     out_json = os.path.join(os.path.dirname(__file__), "clics_permutation_verified.json")
     with open(out_json, "w") as f:
@@ -134,13 +145,13 @@ def verify_clics():
     print(f"Saved results to: {out_json}")
 
     # Confirm key empirical landmarks:
-    # 1. Recognition is statistically significant (p < 0.01)
-    assert results["Recognition (C)"]["permutation_p"] < 0.01, "FAIL: Recognition channel not significant!"
-    # 2. Validation is statistically significant (p < 0.01)
-    assert results["Validation (O)"]["permutation_p"] < 0.01, "FAIL: Validation channel not significant!"
+    # 1. Recognition is statistically significant (Holm-adjusted degree-stratified p < 0.01)
+    assert results["Recognition (C)"]["degree_stratified_p_holm"] < 0.01, "FAIL: Recognition channel not significant!"
+    # 2. Validation is statistically significant (Holm-adjusted degree-stratified p < 0.01)
+    assert results["Validation (O)"]["degree_stratified_p_holm"] < 0.01, "FAIL: Validation channel not significant!"
     # 3. Stabilization is confirmed as a null (p > 0.05) under Family>=3 as reported in Table 3
     assert results["Stabilization (S)"]["status"] == "NULL", "FAIL: Stabilization channel null was not confirmed!"
-    print("✓ ALL CLICS 4.0 CROSS-LINGUISTIC LANDMARKS VERIFIED (PASS)!")
+    print("✓ ALL CLICS 4.0 5-CHANNEL CROSS-LINGUISTIC LANDMARKS & HOLM-FWER VERIFIED (PASS)!")
 
 if __name__ == "__main__":
     verify_clics()

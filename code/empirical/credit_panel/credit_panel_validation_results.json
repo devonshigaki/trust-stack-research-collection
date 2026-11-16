@@ -30,13 +30,23 @@
     "uncertainty": 0.17227056,
     "fitted_pairs": []
   },
+  "arx_matched_25d": {
+    "roc_auc": 0.7506363762263784,
+    "pr_auc": 0.5204239321451596,
+    "log_loss": 0.4494309883947718,
+    "brier": 0.13937908107545185,
+    "reliability": 0.0013353204688044292,
+    "resolution": 0.033317992263786886,
+    "uncertainty": 0.17227056,
+    "fitted_pairs": []
+  },
   "symmetric_ewma_2d": {
-    "roc_auc": 0.7191604557647252,
-    "pr_auc": 0.4747879157220344,
-    "log_loss": 0.4584336060585856,
-    "brier": 0.14469905037336048,
-    "reliability": 0.0010607077149028753,
-    "resolution": 0.02845025183793525,
+    "roc_auc": 0.7231787247274802,
+    "pr_auc": 0.4777923607412128,
+    "log_loss": 0.45782362818635725,
+    "brier": 0.1443170322339767,
+    "reliability": 0.0016762113536767764,
+    "resolution": 0.029553698436480754,
     "uncertainty": 0.17227056,
     "fitted_pairs": [
       [
@@ -62,32 +72,32 @@
     ]
   },
   "gtt_asymmetric_2d": {
-    "roc_auc": 0.7274495453869516,
-    "pr_auc": 0.47336694026861487,
-    "log_loss": 0.45642834904458324,
-    "brier": 0.14445319794605038,
-    "reliability": 0.0010974656600691779,
-    "resolution": 0.028203635242738292,
+    "roc_auc": 0.731721575384416,
+    "pr_auc": 0.4792499560722256,
+    "log_loss": 0.4556045752693721,
+    "brier": 0.1441455706582461,
+    "reliability": 0.0018251994530107804,
+    "resolution": 0.029804251808150037,
     "uncertainty": 0.17227056,
     "fitted_pairs": [
       [
-        0.02,
+        0.05,
         0.3
       ],
       [
-        0.02,
+        0.05,
         0.3
       ],
       [
-        0.02,
+        0.05,
         0.3
       ],
       [
-        0.02,
+        0.05,
         0.3
       ],
       [
-        0.02,
+        0.05,
         0.3
       ]
     ]
@@ -102,18 +112,18 @@
     "uncertainty": 0.17227056,
     "fitted_pairs": []
   },
-  "vuong_oos_z_gtt_vs_sym": 5.540397478278628,
-  "vuong_oos_p_value": 3.0178587628881814e-08,
-  "nadeau_bengio_cv_t": 3.659074311592285,
-  "nadeau_bengio_cv_p": 0.021597918527829885,
+  "vuong_oos_z_gtt_vs_sym": 3.2291177475233614,
+  "vuong_oos_p_value": 0.0012417275766667402,
+  "nadeau_bengio_cv_t": 12.188859045064014,
+  "nadeau_bengio_cv_p": 0.0002600507542720454,
   "untuned_raw_spec_folds_beating_sym": 5,
-  "oos_2dll_gtt_vs_sym": 120.31542084014058,
+  "oos_2dll_gtt_vs_sym": 133.14317501910912,
   "endogenous_ln_gt_lp_folds": 5,
   "delta_auc_gtt_vs_sym_2d": {
-    "mean": 0.008341891129396945,
-    "ci95_low": 0.005345451644371271,
-    "ci95_high": 0.011177152465846532
+    "mean": 0.008554153807717098,
+    "ci95_low": 0.006016745237530541,
+    "ci95_high": 0.011179209867638786
   },
-  "ecoa_adverse_impact_ratio_sex": 0.9476909179345507,
+  "ecoa_adverse_impact_ratio_sex": 0.9499258878862359,
   "verdict": "PASS (Endogenously Fitted Asymmetric GTT Significantly Outperforms Static & Symmetric Baselines)"
 }

@@ -12,6 +12,7 @@ witnesses and ZERO blinding scalars.
 import os
 import sys
 import json
+import hashlib
 import inspect
 import secrets
 from typing import Dict
@@ -309,11 +310,33 @@ def verify_threshold(
     expected_issuer_pk: str = None,
     expected_account_id: str = None,
     require_attestation: bool = False,
+    trajectory: list = None,
+    stream_head: dict = None,
+    expected_min_epoch: int = 0,
+    require_full_trajectory: bool = True,
 ) -> bool:
     try:
         if abs(float(thresh_proof["threshold"]) - float(threshold)) > 1e-9:
             return False
-        if not verify_zk_proof(
+        if require_full_trajectory:
+            if not trajectory or stream_head is None or expected_issuer_pk is None:
+                return False
+            if not verify_zk_trajectory(
+                trajectory,
+                expected_params=expected_params,
+                require_hidden=bool(last_proof.get("reveal_state") is False),
+                expected_issuer_pk=expected_issuer_pk,
+                expected_account_id=expected_account_id,
+                require_genesis=True,
+                require_attestation=require_attestation,
+                stream_head=stream_head,
+                expected_min_epoch=expected_min_epoch,
+                require_head=True,
+            ):
+                return False
+            if trajectory[-1] != last_proof:
+                return False
+        elif not verify_zk_proof(
             last_proof,
             last_proof.get("S_next_public"),
             expected_params=expected_params,
@@ -525,7 +548,7 @@ def verify_zk_trajectory(
 def main():
     print("=" * 75)
     print(" GENUINE PEDERSEN + SCHNORR + AOS-OR ZERO-KNOWLEDGE PROVER (ZK-STP v8)")
-    print(" Curve: secp256k1 | Strict 3-Party Separation | Event-Chain Head | 19/19")
+    print(" Curve: secp256k1 | Strict 3-Party Separation | Event-Chain Head | 22/22")
     print("=" * 75)
 
     prover = MasterLawZKProver(lambda_plus=0.228, lambda_minus=0.912, delta_param=0.010, s_base=0.500)
@@ -624,6 +647,9 @@ def main():
         expected_issuer_pk=furnisher.pk_hex,
         expected_account_id=h12,
         require_attestation=True,
+        trajectory=priv_chain,
+        stream_head=head12,
+        expected_min_epoch=1,
     )
     v12_thresh_reject = not verify_threshold(
         priv_chain[-1],
@@ -633,6 +659,9 @@ def main():
         expected_issuer_pk=furnisher.pk_hex,
         expected_account_id=h12,
         require_attestation=True,
+        trajectory=priv_chain,
+        stream_head=head12,
+        expected_min_epoch=1,
     )
     v12 = v12_hidden and v12_thresh_pass and v12_thresh_reject
     print(f"Test 12 (Private Rollup/Thresh): Genesis+Attested+Hidden+S_T>=0.50 | {'✓ VERIFIED (PASS)' if v12 else 'FAIL'}")
@@ -786,12 +815,46 @@ def main():
     v20_blocked = not verify_zk_proof(forged20, None, expected_params=prover.expected_params())
     print(f"Test 20 (Branch 0 Overflow):    Blocks S_next > 1.0 Branch-0 bypass | {'✓ REJECTED (PASS)' if v20_blocked else 'FAIL'}")
 
+    # Test 21: Unanchored Single-Step Threshold Forgery Guard
+    # Proves verify_threshold rejects an unanchored single-step proof (or omitted trajectory/stream_head)
+    # even when the final step claims S_next >= threshold starting from inflated s0=0.95.
+    b21 = furnisher.issue_signed_event_bundle("alice-unanchored", "v21", epoch_id=1, events_ve=[(0.50, 0.50)])
+    unanchored_chain, s_T_unanch, r_s_unanch = prover.generate_chained_trajectory(
+        0.95,
+        [(ev["v"], ev["e"]) for ev in b21["opened_events"]],
+        reveal_state=False,
+        account_id=b21["account_id"],
+        pre_signed_attestations=b21["attestations"],
+        r_v_overrides=[ev["r_v"] for ev in b21["opened_events"]],
+        r_e_overrides=[ev["r_e"] for ev in b21["opened_events"]],
+        anchor_genesis=False,
+    )
+    thresh21 = prover.prove_threshold(unanchored_chain[-1], s_T_unanch, r_s_unanch, threshold=0.80)
+    v21_missing_traj = not verify_threshold(
+        unanchored_chain[-1], thresh21, threshold=0.80, expected_params=prover.expected_params(),
+        expected_issuer_pk=furnisher.pk_hex, expected_account_id=b21["account_id"], require_attestation=True,
+    )
+    v21_unanchored_traj = not verify_threshold(
+        unanchored_chain[-1], thresh21, threshold=0.80, expected_params=prover.expected_params(),
+        expected_issuer_pk=furnisher.pk_hex, expected_account_id=b21["account_id"], require_attestation=True,
+        trajectory=unanchored_chain, stream_head=b21["stream_head"], expected_min_epoch=1,
+    )
+    v21 = v21_missing_traj and v21_unanchored_traj
+    print(f"Test 21 (Anchored Threshold):   Blocks unanchored single-step threshold | {'✓ REJECTED (PASS)' if v21 else 'FAIL'}")
+
+    # Test 22: RFC 9901 256-bit Handle Blinding (blocks naive SHA-256 dictionary correlation of low-entropy IDs)
+    b22_a = furnisher.issue_signed_event_bundle("alice", "verifier-demo", epoch_id=1, events_ve=[(0.6, 0.5)])
+    naive_handle = hashlib.sha256(b"TFP-PSEUDO-v1:verifier-demo:1:alice").hexdigest()[:32]
+    b22_other_furnisher = FurnisherAuthority().issue_signed_event_bundle("alice", "verifier-demo", epoch_id=1, events_ve=[(0.6, 0.5)])
+    v22 = (b22_a["account_id"] != naive_handle) and (b22_a["account_id"] != b22_other_furnisher["account_id"])
+    print(f"Test 22 (High-Entropy Handle):  256-bit HMAC blinds low-entropy IDs | {'✓ VERIFIED (PASS)' if v22 else 'FAIL'}")
+
     all_pass = (
         v1 and v2 and v3 and v4 and v5 and v6 and v7 and v8 and v9 and v10 and v11 and v12
-        and v13 and v14 and v15 and v16 and v17 and v18 and v19 and v20_blocked
+        and v13 and v14 and v15 and v16 and v17 and v18 and v19 and v20_blocked and v21 and v22
     )
     print("=" * 75)
-    print(f"OVERALL ZK-STP NIZK VERDICT: {'ALL 20/20 CRITERIA VERIFIED' if all_pass else 'FAIL'}")
+    print(f"OVERALL ZK-STP NIZK VERDICT: {'ALL 22/22 CRITERIA VERIFIED' if all_pass else 'FAIL'}")
     print("=" * 75)
 
     out_file = os.path.join(os.path.dirname(__file__), "zk_stp_results.json")
@@ -804,7 +867,7 @@ def main():
                 "soundness_forgery_rejected": (
                     v5 and v7 and v8 and v9 and v10 and v11 and v12_thresh_reject
                     and v13 and v14 and v15 and v16 and v17_trunc_blocked and v17_stale_epoch_blocked
-                    and v20_blocked
+                    and v20_blocked and v21
                 ),
                 "test6_zero_knowledge_indistinguishable": v6,
                 "test7_clamping_sum_exploit_blocked": v7,
@@ -821,6 +884,8 @@ def main():
                 "test18_cross_verifier_unlinkable": v18,
                 "test19_three_party_role_isolation": v19,
                 "test20_clamp_branch0_overflow_blocked": v20_blocked,
+                "test21_unanchored_threshold_blocked": v21,
+                "test22_high_entropy_handle_blinding": v22,
                 "proof_bytes_json": len(proof_json),
                 "status": "VERIFIED" if all_pass else "FAILED",
             },
