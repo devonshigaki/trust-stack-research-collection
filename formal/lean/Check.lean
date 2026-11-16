@@ -33,6 +33,7 @@ open TrustStack
 #print axioms clamp_unit_lipschitz
 #print axioms masterStepClamped_not_comm
 #print axioms trajClamped_contraction_zero_input
+#print axioms trajClamped_incremental_contraction
 
 
 

@@ -106,6 +106,58 @@ def paired_bootstrap_delta_auc(y: np.ndarray, p_a: np.ndarray, p_b: np.ndarray, 
     return float(np.mean(diffs)), float(np.percentile(diffs, 2.5)), float(np.percentile(diffs, 97.5))
 
 
+def _compute_midrank(x: np.ndarray) -> np.ndarray:
+    """Exact tie-aware midrank in O(N log N) for Sun & Xu (2014) fast DeLong."""
+    order = np.argsort(x, kind="mergesort")
+    z = x[order]
+    n = len(z)
+    ranks = np.empty(n, dtype=np.float64)
+    i = 0
+    while i < n:
+        j = i
+        while j < n and z[j] == z[i]:
+            j += 1
+        mid = 0.5 * (i + j - 1) + 1.0
+        ranks[i:j] = mid
+        i = j
+    out = np.empty(n, dtype=np.float64)
+    out[order] = ranks
+    return out
+
+
+def fast_delong_paired_test(y_true: np.ndarray, p_a: np.ndarray, p_b: np.ndarray):
+    """Exact non-parametric DeLong (1988) / Sun-Xu (2014) paired ROC-AUC z-test."""
+    from scipy import stats as scipy_stats
+
+    pos = y_true == 1
+    neg = y_true == 0
+    m = int(np.sum(pos))
+    n = int(np.sum(neg))
+    preds = np.vstack([p_a, p_b])
+    k = preds.shape[0]
+    tx = np.zeros((k, m), dtype=np.float64)
+    ty = np.zeros((k, n), dtype=np.float64)
+    tz = np.zeros((k, m + n), dtype=np.float64)
+    pos_preds = preds[:, pos]
+    neg_preds = preds[:, neg]
+    all_preds = np.hstack([pos_preds, neg_preds])
+    for r in range(k):
+        tx[r] = _compute_midrank(pos_preds[r])
+        ty[r] = _compute_midrank(neg_preds[r])
+        tz[r] = _compute_midrank(all_preds[r])
+    aucs = (tz[:, :m].sum(axis=1) / m - (m + 1.0) / 2.0) / n
+    v01 = (tz[:, :m] - tx) / n
+    v10 = 1.0 - (tz[:, m:] - ty) / m
+    sx = np.cov(v01)
+    sy = np.cov(v10)
+    cov = sx / m + sy / n
+    diff = float(aucs[1] - aucs[0])
+    var_diff = max(float(cov[0, 0] + cov[1, 1] - 2.0 * cov[0, 1]), 1e-18)
+    z_stat = diff / np.sqrt(var_diff)
+    p_val = float(2.0 * (1.0 - scipy_stats.norm.cdf(abs(z_stat))))
+    return float(aucs[0]), float(aucs[1]), diff, float(z_stat), p_val
+
+
 
 def fit_train_fold_asymmetry(df: pd.DataFrame, y: np.ndarray, tr_idx: np.ndarray, symmetric_only: bool = False):
     """
@@ -270,6 +322,44 @@ def main():
             raw_asym_folds += 1
 
     d_auc, ci_lo, ci_hi = paired_bootstrap_delta_auc(y, res_sym["oof_probs"], res_gtt["oof_probs"])
+    delong_a, delong_b, delong_diff, delong_z, delong_p = fast_delong_paired_test(
+        y, res_sym["oof_probs"], res_gtt["oof_probs"]
+    )
+    assert abs(delong_a - res_sym["roc_auc"]) < 1e-12 and abs(delong_b - res_gtt["roc_auc"]) < 1e-12
+
+    # 5x5 Repeated Stratified CV (25 folds across 5 independent partition seeds) for seed replicability
+    rep_aucs_gtt, rep_aucs_sym = [], []
+    rep_asym_wins, rep_total_folds = 0, 0
+    for cv_seed in [42, 101, 202, 303, 404]:
+        rskf = StratifiedKFold(n_splits=5, shuffle=True, random_state=cv_seed)
+        r_sym = evaluate_cv_features(df, y, rskf, "sym_ewma_2d")
+        r_gtt = evaluate_cv_features(df, y, rskf, "gtt_asym_2d")
+        rep_aucs_sym.append(r_sym["roc_auc"])
+        rep_aucs_gtt.append(r_gtt["roc_auc"])
+        rep_asym_wins += sum(1 for lp, ln in r_gtt["fitted_pairs"] if ln > lp)
+        rep_total_folds += 5
+
+    # Zero-offset raw mismatch check (no -0.15 / +0.25 / /3.0 hand-tuned constants)
+    zero_off_cash = np.zeros((len(df), 6), dtype=np.float64)
+    zero_off_cash[:, 1:] = np.where(
+        prior_bills_raw > 0.0,
+        np.clip(curr_pays_raw / np.maximum(prior_bills_raw, 1e-4) - 1.0, -1.0, 1.0),
+        0.0,
+    )
+    zero_off_eps = np.where(statuses_raw > 0, -1.0, zero_off_cash)
+    zero_off_folds_beating_sym = 0
+    for tr_idx, va_idx in skf.split(df, y):
+        s_zo = np.full(len(df), 0.50)
+        for t_step in range(6):
+            e_t = zero_off_eps[:, t_step]
+            s_zo = np.clip(s_zo + np.where(e_t >= 0, 0.05, 0.30) * e_t - 0.01 * (s_zo - 0.50), 0.0, 1.0)
+        clf_zo = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
+        util_zo = df["x12"].astype(float).values / limit_bal_raw
+        X_zo = np.column_stack([util_zo, s_zo])
+        clf_zo.fit(X_zo[tr_idx], y[tr_idx])
+        if roc_auc_score(y[va_idx], clf_zo.predict_proba(X_zo[va_idx])[:, 1]) > roc_auc_score(y[va_idx], p_sym[va_idx]):
+            zero_off_folds_beating_sym += 1
+
     sex = df["x2"].astype(int).values
     approved = res_gtt["oof_probs"] < res_gtt["oof_cutoffs"]
     air_sex = min(float(np.mean(approved[sex == 1])), float(np.mean(approved[sex == 2]))) / max(
@@ -286,10 +376,13 @@ def main():
     print(f"5b. Information-Matched ARX (25D):      AUC={res_arx_25['roc_auc']:.4f} | Brier={res_arx_25['brier']:.4f}")
     print(f"6. Full-Panel HGBDT Ceiling (23D):      AUC={res_gbdt['roc_auc']:.4f} | Brier={res_gbdt['brier']:.4f}")
     print(f"Vuong (1989) OOS LL Ratio Test:         z={vuong_z:.2f} (p={vuong_p:.2e}; nested-boundary caveat) | 2*dLL={lr_stat:.1f} | Delta AUC={d_auc:+.4f} (95% CI [{ci_lo:+.4f}, {ci_hi:+.4f}])")
-    print(f"Nadeau-Bengio (2003) Correlated-CV:     t_AUC={nb_t:.2f} (p={nb_p:.4f}) | t_LL={nb_ll_t:.2f} (p={nb_ll_p:.4f}) | Untuned Raw Spec Folds Beating Sym: {raw_asym_folds}/5")
+    print(f"DeLong (1988) Exact Paired AUC Test:    Delta AUC={delong_diff:+.4f} | z={delong_z:.2f} (p={delong_p:.2e})")
+    print(f"5x5 Repeated Stratified CV (25 folds):  ln>lp in {rep_asym_wins}/{rep_total_folds} folds | Mean GTT AUC={np.mean(rep_aucs_gtt):.4f} vs Sym={np.mean(rep_aucs_sym):.4f}")
+    print(f"Nadeau-Bengio (2003) Correlated-CV:     t_AUC={nb_t:.2f} (p={nb_p:.4f}) | t_LL={nb_ll_t:.2f} (p={nb_ll_p:.4f}) | Untuned/Zero-Offset Folds Beating Sym: {raw_asym_folds}/5, {zero_off_folds_beating_sym}/5")
     print(f"ECOA Adverse Impact Ratio (Sex):        AIR={air_sex:.4f} [Threshold >= 0.80]")
 
     assert asymmetric_folds == 5 and res_gtt["roc_auc"] > res_sym["roc_auc"] and ci_lo > 0.0 and vuong_z > 2.58
+    assert delong_z > 2.58 and rep_asym_wins == rep_total_folds
     assert res_gtt["brier"] < res_sym["brier"] and air_sex >= 0.80
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 5), dpi=200)
@@ -337,6 +430,12 @@ def main():
                 "nadeau_bengio_cv_t": nb_t,
                 "nadeau_bengio_cv_p": nb_p,
                 "untuned_raw_spec_folds_beating_sym": raw_asym_folds,
+                "zero_offset_spec_folds_beating_sym": zero_off_folds_beating_sym,
+                "delong_paired_auc_z": delong_z,
+                "delong_paired_auc_p": delong_p,
+                "repeated_5x5_cv_asym_wins": f"{rep_asym_wins}/{rep_total_folds}",
+                "repeated_5x5_cv_mean_auc_gtt": float(np.mean(rep_aucs_gtt)),
+                "repeated_5x5_cv_mean_auc_sym": float(np.mean(rep_aucs_sym)),
                 "oos_2dll_gtt_vs_sym": lr_stat,
                 "endogenous_ln_gt_lp_folds": asymmetric_folds,
                 "delta_auc_gtt_vs_sym_2d": {"mean": d_auc, "ci95_low": ci_lo, "ci95_high": ci_hi},

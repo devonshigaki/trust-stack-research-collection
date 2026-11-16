@@ -1,11 +1,11 @@
 {
   "release": "v4.5",
-  "timestamp": "2026-11-16T04:43:27Z",
+  "timestamp": "2026-11-16T05:14:24Z",
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.5",
   "total_files_hashed": 1053,
-  "total_manifest_size_mb": 261.75,
+  "total_manifest_size_mb": 261.76,
   "automated_ci_tasks_verified": 57,
   "files": {
     "CITATION.cff": {
@@ -113,16 +113,16 @@
       "bytes": 261913
     },
     "formal/FORMAL_VERIFICATION_REPORT.md": {
-      "sha256": "1d84ed851582f9d40edd5ebd232965820946cd86685b78f794b837c79d6e94b0",
-      "bytes": 6609
+      "sha256": "db570e97aa24e605d5038b16097a50f3b077dfd47a3eefc9da0d0d49cbda3b56",
+      "bytes": 6612
     },
     "formal/TFP_Edge_Protocol.cfg": {
       "sha256": "a7bde0ce32b691d1ee7de48b690314b5d80f8bf297b07e4eebc38040022c8b2a",
       "bytes": 362
     },
     "formal/TFP_Edge_Protocol.tla": {
-      "sha256": "d8abad685c631a1507af2ae4fccb4a4896e12a86c56891c217273b49a05b3c0e",
-      "bytes": 10099
+      "sha256": "74bf41b5dce7b7d5d2bd61b178dc1fd2e8b0f829cc41c371bedbfb7b31020833",
+      "bytes": 10412
     },
     "formal/run_all_formal_verifications.py": {
       "sha256": "19ddf0ab0411c73936c3b836443d837cc865122fc64d8c2d4deb608c25974835",
@@ -173,12 +173,12 @@
       "bytes": 20387
     },
     "formal/zk_stp_results.json": {
-      "sha256": "cabd3db5a39db7677363e36db5a385b88f65303124f61464b52cab02e5f767d7",
+      "sha256": "98daab24298a46c54fa738046c2943c15c63c578a957790b9e8553efff326221",
       "bytes": 1244
     },
     "formal/lean/Check.lean": {
-      "sha256": "00d6e2df8300b3a2b8999bf449236e6bae7ae9ba165b00b902bac763b31f8361",
-      "bytes": 1356
+      "sha256": "762300ba560bc5bf7039323889021e71c64373aef9a7346ec3d029fac19d3207",
+      "bytes": 1406
     },
     "formal/lean/README.md": {
       "sha256": "e40795e1a44e3a542f8b6fd9be158d0094f66522e7925d23e59731bb58980ca3",
@@ -197,8 +197,8 @@
       "bytes": 175
     },
     "formal/lean/TrustStack/MasterLaw.lean": {
-      "sha256": "7ac156f0742422810242830afba6546064bd973409c3cbcfe99d11e2cced7393",
-      "bytes": 39350
+      "sha256": "73b1df2cae8e2afbd797e22b46971e3fd87a2a1b0df52fbad0c208acc99af229",
+      "bytes": 41314
     },
     "formal/lean/TrustStack/Tilt.lean": {
       "sha256": "077dde6ac82aa7c3912271ca879fd1c6d9ecd1aa83d6ca1e8dbf6dc355222aa6",
@@ -281,8 +281,8 @@
       "bytes": 2538
     },
     "code/empirical/credit_panel/credit_panel_validation_results.json": {
-      "sha256": "6a6745d161ba942d2eecc1c99892b2398ad5bfdf962f783cc44bef0629050a60",
-      "bytes": 3243
+      "sha256": "6849222575386616d54bd50fc11325a7e980b62bcc3ad1326855fc0798af9408",
+      "bytes": 3527
     },
     "code/empirical/credit_panel/fig_empirical_credit_panel_validation.png": {
       "sha256": "cb4a1e30ccde80113cad293a918c9e6d5b675b5d8b922e8745a4a53d27deb82c",
@@ -293,8 +293,8 @@
       "bytes": 1568572
     },
     "code/empirical/credit_panel/validate_master_law_credit_panel.py": {
-      "sha256": "29163faf87f0f038e7ce34691f2430c9fe73355771f40903a369ec3d70301be8",
-      "bytes": 19764
+      "sha256": "5ad90465a598bf24ccd5b1acea7b864530b31bfbb7f191e8f3fbdf3d3824de37",
+      "bytes": 24318
     },
     "code/empirical/connectomics_microns/SHA256_MANIFEST.json": {
       "sha256": "a8a44488e40d921399d5a97faa1d2b523622938ae24a7711c859fb19fa81b54c",

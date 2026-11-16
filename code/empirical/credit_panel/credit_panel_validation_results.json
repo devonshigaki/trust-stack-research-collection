@@ -117,6 +117,12 @@
   "nadeau_bengio_cv_t": 12.188859045064014,
   "nadeau_bengio_cv_p": 0.0002600507542720454,
   "untuned_raw_spec_folds_beating_sym": 5,
+  "zero_offset_spec_folds_beating_sym": 0,
+  "delong_paired_auc_z": 6.677874365492444,
+  "delong_paired_auc_p": 2.4243274054924768e-11,
+  "repeated_5x5_cv_asym_wins": "25/25",
+  "repeated_5x5_cv_mean_auc_gtt": 0.7320903002811391,
+  "repeated_5x5_cv_mean_auc_sym": 0.7236291750733395,
   "oos_2dll_gtt_vs_sym": 133.14317501910912,
   "endogenous_ln_gt_lp_folds": 5,
   "delta_auc_gtt_vs_sym_2d": {

@@ -759,4 +759,42 @@ theorem trajClamped_contraction_zero_input
     rw [e, ih, pow_succ]
     ring
 
+/-- **Clamped Incremental Contraction under Arbitrary Shared Inputs**:
+    For any leak `δ ∈ [0, 1]`, arbitrary learning rates `lp, ln`, and arbitrary shared
+    active input streams `(r, ε)`, two clamped trajectories starting at `S0, S0'` contract
+    exponentially toward each other at rate `(1 - δ)^t`:
+    `|trajClamped ... S0 t - trajClamped ... S0' t| ≤ (1 - δ)^t * |S0 - S0'|`. -/
+theorem trajClamped_incremental_contraction
+    (lp ln δ Sbase S0 S0' : ℝ) (r ε : ℕ → ℝ)
+    (hδ0 : 0 ≤ δ) (hδ1 : δ ≤ 1) (t : ℕ) :
+    |trajClamped lp ln δ Sbase r ε S0 t - trajClamped lp ln δ Sbase r ε S0' t|
+      ≤ (1 - δ)^t * |S0 - S0'| := by
+  induction t with
+  | zero => simp [trajClamped]
+  | succ t ih =>
+    have hq : 0 ≤ 1 - δ := sub_nonneg.mpr hδ1
+    set x := trajClamped lp ln δ Sbase r ε S0 t
+    set y := trajClamped lp ln δ Sbase r ε S0' t
+    have hstep_diff :
+        masterStep lp ln δ Sbase (r t) x (ε t) - masterStep lp ln δ Sbase (r t) y (ε t)
+          = (1 - δ) * (x - y) := by
+      unfold masterStep
+      ring
+    have h_lip := clamp_unit_lipschitz
+      (masterStep lp ln δ Sbase (r t) x (ε t))
+      (masterStep lp ln δ Sbase (r t) y (ε t))
+    have h_step_eq :
+        |trajClamped lp ln δ Sbase r ε S0 (t + 1) - trajClamped lp ln δ Sbase r ε S0' (t + 1)|
+          ≤ |(1 - δ) * (x - y)| := by
+      simpa [trajClamped, masterStepClamped, x, y, hstep_diff] using h_lip
+    have h_abs : |(1 - δ) * (x - y)| = (1 - δ) * |x - y| := by
+      rw [abs_mul, abs_of_nonneg hq]
+    rw [h_abs] at h_step_eq
+    have h_mul : (1 - δ) * |x - y| ≤ (1 - δ) * ((1 - δ)^t * |S0 - S0'|) :=
+      mul_le_mul_of_nonneg_left ih hq
+    calc |trajClamped lp ln δ Sbase r ε S0 (t + 1) - trajClamped lp ln δ Sbase r ε S0' (t + 1)|
+        ≤ (1 - δ) * |x - y| := h_step_eq
+      _ ≤ (1 - δ) * ((1 - δ)^t * |S0 - S0'|) := h_mul
+      _ = (1 - δ)^(t + 1) * |S0 - S0'| := by rw [pow_succ]; ring
+
 end TrustStack

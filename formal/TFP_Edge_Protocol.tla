@@ -53,20 +53,23 @@ LocalTransaction(t) ==
     /\ timeStep < MaxSteps
     /\ edgeVaults' = [edgeVaults EXCEPT ![t].trustState = edgeVaults[t].trustState + 1,
                                         ![t].version = edgeVaults[t].version + 1]
-    /\ networkMsgs' = networkMsgs \cup {[sender |-> t, tenant |-> t,
-                                         ver |-> edgeVaults'[t].version,
-                                         stateHash |-> edgeVaults'[t].version * 10 + 1,
-                                         sigValid |-> TRUE,
-                                         furnisherAttested |-> TRUE]}
+    /\ LET prevH == IF edgeVaults[t].version = 0 THEN 0 ELSE edgeVaults[t].version * 10 + 1
+       IN networkMsgs' = networkMsgs \cup {[sender |-> t, tenant |-> t,
+                                            ver |-> edgeVaults'[t].version,
+                                            prevHash |-> prevH,
+                                            stateHash |-> edgeVaults'[t].version * 10 + 1,
+                                            sigValid |-> TRUE,
+                                            furnisherAttested |-> TRUE]}
     /\ UNCHANGED << auditChain, compromised, clientViewA, clientViewB >>
     /\ timeStep' = timeStep + 1
 
 (***************************************************************************)
-(* AdversaryBreach & Active Byzantine Equivocation / Replay                *)
+(* AdversaryBreach & Active Byzantine Equivocation / Replay / Fork         *)
 (* Compromised nodes can inject:                                           *)
 (*   (1) Forged cross-tenant packets (claimedTenant # t => sigValid=FALSE) *)
 (*   (2) Unattested stateHash=2 packets (furnisherAttested=FALSE)          *)
-(*   (3) Persistent packet replay (networkMsgs is never deleted).          *)
+(*   (3) Arbitrary prevHash fork/replay packets                            *)
+(*   (4) Persistent packet replay (networkMsgs is never deleted).          *)
 (***************************************************************************)
 AdversaryBreach(t) ==
     /\ Cardinality(compromised) < AdversaryPower
@@ -80,9 +83,9 @@ AdversaryBreach(t) ==
 ByzantineInjectMsg(t) ==
     /\ t \in compromised
     /\ timeStep < MaxSteps
-    /\ \E target \in Tenants, v \in 1..MaxSteps, sh \in {1, 2} :
+    /\ \E target \in Tenants, v \in 1..MaxSteps, ph \in {0, 11}, sh \in {1, 2} :
         /\ networkMsgs' = networkMsgs \cup {[sender |-> t, tenant |-> target,
-                                             ver |-> v, stateHash |-> sh,
+                                             ver |-> v, prevHash |-> ph, stateHash |-> sh,
                                              sigValid |-> (target = t),
                                              furnisherAttested |-> FALSE]}
         /\ UNCHANGED << edgeVaults, auditChain, compromised, clientViewA, clientViewB >>
@@ -90,7 +93,7 @@ ByzantineInjectMsg(t) ==
 
 (***************************************************************************)
 (* VerifierProcessMsg: Audit chain gate accepts ONLY packets with valid    *)
-(* signature, Furnisher attestation, matching sender, and monotonic ver.   *)
+(* signature, Furnisher attestation, matching sender, prevHash, & ver.     *)
 (***************************************************************************)
 VerifierProcessMsg(m) ==
     /\ m \in networkMsgs
@@ -98,8 +101,9 @@ VerifierProcessMsg(m) ==
     /\ m.furnisherAttested = TRUE
     /\ m.sender = m.tenant
     /\ m.ver = MaxChainVer(m.tenant) + 1
+    /\ m.prevHash = LastHash(m.tenant)
     /\ auditChain' = Append(auditChain, [tenant |-> m.tenant, ver |-> m.ver,
-                                        prevHash |-> LastHash(m.tenant),
+                                        prevHash |-> m.prevHash,
                                         stateHash |-> m.stateHash,
                                         attested |-> m.furnisherAttested])
     /\ UNCHANGED << edgeVaults, networkMsgs, compromised, clientViewA, clientViewB, timeStep >>

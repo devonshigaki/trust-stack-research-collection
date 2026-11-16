@@ -12,11 +12,11 @@ To provide complete epistemic closure beyond numerical Python simulation, the ma
 
 | Engine | Verification Type | Scope / Target Claims | Verdict |
 | :--- | :--- | :--- | :--- |
-| **Lean 4 (v4.35.0)** | Interactive Theorem Prover (ITP) | Probability tilt normalization, monotone optimism, Lipschitz distortion bounds, Rescorla-Wagner isomorphism, BIBO bounds, clamped `[0, 1]` invariance, contraction & non-commutativity (`37` theorems) | **VERIFIED (Zero `sorryAx`)** |
+| **Lean 4 (v4.35.0)** | Interactive Theorem Prover (ITP) | Probability tilt normalization, monotone optimism, Lipschitz distortion bounds, Rescorla-Wagner isomorphism, BIBO bounds, clamped `[0, 1]` invariance, contraction & non-commutativity (`38` theorems) | **VERIFIED (Zero `sorryAx`)** |
 | **Z3 SMT Solver (v5.3.3)** | Automated SMT (`QF_NRA` / `QF_LIA`) | Inductive invariance of BIBO state set, strict geometric contraction under zero input, 2D Jury stability conditions, capability-isolated vault guards, lattice non-interference (`prove_nonvacuous`) | **VERIFIED (All UNSAT)** |
 | **SymPy (v1.14.0)** | Computer Algebra System (CAS) | Continuous Lyapunov derivative (\dot{V} \le 0), Ornstein-Uhlenbeck observation drift tradeoff (d\Sigma/dm < 0), Kuramoto Jacobian spectrum (-K < 0), tilted utility gradient | **VERIFIED (4/4 Symbolic Identities)** |
 | **secp256k1 NIZK (`ZK-STP v8`)** | Pedersen + Schnorr + Tuple-OR + 33-bit Range Proofs | Master Law fixed-point transition constraints, strict 3-party isolation (`FurnisherAuthority` vs `MasterLawZKProver`), genesis-anchored (`S_0 = S_base`), issuer-attested (`TFP-ATT-v1`), event-chain head (`TFP-HEAD-v2`), cross-verifier unlinkable presentations, private-state rollup + ZK threshold (`S_T >= 0.50`), commitment-chaining, parameter pinning, sub-proof transcript binding (`23/23` tests) | **VERIFIED (23/23 Tests)** |
-| **TLA+ (`TFP_Edge_Protocol`)** | Temporal Logic of Actions (`tlc2.TLC`) | Sovereign tenant edge databases + collision-distinct hash chain + Byzantine equivocation + weak-fairness temporal liveness `EventualLightClientConvergence` (`4,255,162` states generated, `864,815` distinct states, `0` errors) | **MODEL-CHECKED (0 Errors)** |
+| **TLA+ (`TFP_Edge_Protocol`)** | Temporal Logic of Actions (`tlc2.TLC`) | Sovereign tenant edge databases + collision-distinct hash chain + Byzantine equivocation + weak-fairness temporal liveness `EventualLightClientConvergence` (`23,751,412` states generated, `4,748,555` distinct states, `0` errors) | **MODEL-CHECKED (0 Errors)** |
 
 ---
 
