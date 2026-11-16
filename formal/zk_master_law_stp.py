@@ -548,7 +548,7 @@ def verify_zk_trajectory(
 def main():
     print("=" * 75)
     print(" GENUINE PEDERSEN + SCHNORR + AOS-OR ZERO-KNOWLEDGE PROVER (ZK-STP v8)")
-    print(" Curve: secp256k1 | Strict 3-Party Separation | Event-Chain Head | 23/23")
+    print(" Curve: secp256k1 | Strict 3-Party Separation | Event-Chain Head | 24/24")
     print("=" * 75)
 
     prover = MasterLawZKProver(lambda_plus=0.228, lambda_minus=0.912, delta_param=0.010, s_base=0.500)
@@ -866,12 +866,17 @@ def main():
     )
     print(f"Test 23 (Bit-OR Binding):       Blocks bit-proof splice across commitments | {'✓ REJECTED (PASS)' if v23 else 'FAIL'}")
 
+    # Test 24: Point-at-Infinity Nonce Malleability Guard (blocks A=00*33, s=0x0 in verify_zero)
+    from zk_pedersen_ec import verify_zero as _verify_zero
+    v24 = not _verify_zero(None, {"A": "00" * 33, "s": "0x0"}, "EQ:inf", tr=Transcript("INF-TEST"))
+    print(f"Test 24 (Infinity Guard):       Blocks point-at-infinity Schnorr nonce | {'✓ REJECTED (PASS)' if v24 else 'FAIL'}")
+
     all_pass = (
         v1 and v2 and v3 and v4 and v5 and v6 and v7 and v8 and v9 and v10 and v11 and v12
-        and v13 and v14 and v15 and v16 and v17 and v18 and v19 and v20_blocked and v21 and v22 and v23
+        and v13 and v14 and v15 and v16 and v17 and v18 and v19 and v20_blocked and v21 and v22 and v23 and v24
     )
     print("=" * 75)
-    print(f"OVERALL ZK-STP NIZK VERDICT: {'ALL 23/23 CRITERIA VERIFIED' if all_pass else 'FAIL'}")
+    print(f"OVERALL ZK-STP NIZK VERDICT: {'ALL 24/24 CRITERIA VERIFIED' if all_pass else 'FAIL'}")
     print("=" * 75)
 
     out_file = os.path.join(os.path.dirname(__file__), "zk_stp_results.json")
@@ -904,6 +909,7 @@ def main():
                 "test21_unanchored_threshold_blocked": v21,
                 "test22_high_entropy_handle_blinding": v22,
                 "test23_nonneg_transcript_binding_enforced": v23,
+                "test24_infinity_nonce_malleability_blocked": v24,
                 "proof_bytes_json": len(proof_json),
                 "status": "VERIFIED" if all_pass else "FAILED",
             },

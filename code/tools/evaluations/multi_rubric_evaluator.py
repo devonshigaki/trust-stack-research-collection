@@ -54,7 +54,7 @@ def verify_local_ci_pass():
     assert os.path.exists(os.path.join(BASE_DIR, "formal/z3_fisher_rao_singularity.py"))
     assert os.path.exists(os.path.join(BASE_DIR, "formal/z3_zk_stp_soundness.py"))
     assert os.path.exists(os.path.join(BASE_DIR, "formal/TFP_Edge_Protocol.cfg"))
-    print("✓ NeurIPS Formal Methods: Z3 SMT, 23/23 secp256k1 NIZK, Lean 4, and TLA+ artifacts verified.")
+    print("✓ NeurIPS Formal Methods: Z3 SMT, 24/24 secp256k1 NIZK, Lean 4, and TLA+ artifacts verified.")
 
     cp_path = os.path.join(BASE_DIR, "code/empirical/credit_panel/credit_panel_validation_results.json")
     assert os.path.exists(cp_path), f"Missing {cp_path}"

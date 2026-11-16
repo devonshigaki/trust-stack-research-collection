@@ -83,7 +83,10 @@ def load_or_create_edge_key(db_path: str, conn: Optional[sqlite3.Connection] = N
     """
     env_hex = os.environ.get("TRUST_EDGE_AES_KEY")
     if env_hex:
-        return bytes.fromhex(env_hex)
+        key_bytes = bytes.fromhex(env_hex)
+        if len(key_bytes) != 32:
+            raise ValueError(f"TRUST_EDGE_AES_KEY must decode to 32 bytes (AES-256), got {len(key_bytes)}")
+        return key_bytes
     passphrase = os.environ.get("TRUST_EDGE_PASSPHRASE")
     if passphrase and HAS_CRYPTO:
         from cryptography.hazmat.primitives import hashes
@@ -125,7 +128,11 @@ def encrypt_sensitive_field(plaintext: str, key: bytes, aad: Optional[bytes] = N
 
 def decrypt_sensitive_field(token_hex: str, key: bytes, aad: Optional[bytes] = None) -> str:
     """Decrypts AES-256-GCM authenticated local field, enforcing matching context AAD."""
+    if len(key) != 32:
+        raise ValueError(f"AES-256-GCM requires a 32-byte key, got {len(key)}")
     raw = bytes.fromhex(token_hex)
+    if len(raw) < 28:  # 12-byte nonce + >=16-byte GCM auth tag
+        raise ValueError(f"Truncated AES-GCM ciphertext: expected >= 28 bytes, got {len(raw)}")
     return AESGCM(key).decrypt(raw[:12], raw[12:], aad).decode("utf-8")
 
 SCHEMA_SQL = """
@@ -629,6 +636,24 @@ def run_self_test() -> bool:
         k_test = os.urandom(32)
         tok = encrypt_sensitive_field("CONFIDENTIAL_CRF_TEXT", k_test)
         assert "CONFIDENTIAL" not in tok and decrypt_sensitive_field(tok, k_test) == "CONFIDENTIAL_CRF_TEXT"
+        # Reject truncated ciphertext & non-256-bit key downgrade
+        try:
+            decrypt_sensitive_field("00" * 16, k_test)
+            raise AssertionError("Must reject truncated <28B ciphertext")
+        except ValueError:
+            pass
+        prev_aes_env = os.environ.get("TRUST_EDGE_AES_KEY")
+        os.environ["TRUST_EDGE_AES_KEY"] = "00" * 16
+        try:
+            load_or_create_edge_key(test_db)
+            raise AssertionError("Must reject 128-bit TRUST_EDGE_AES_KEY downgrade")
+        except ValueError:
+            pass
+        finally:
+            if prev_aes_env is None:
+                os.environ.pop("TRUST_EDGE_AES_KEY", None)
+            else:
+                os.environ["TRUST_EDGE_AES_KEY"] = prev_aes_env
 
     # 1. Cohort 1 Multi-Day Registration & Multi-Epoch Monotonic Appending
     streamer_c1 = MuseAthenaStreamer(

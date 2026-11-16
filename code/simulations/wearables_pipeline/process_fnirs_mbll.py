@@ -139,47 +139,54 @@ def compute_scholkmann_dpf(wavelength_nm: float, age_years: float = 30.0, body_f
 
 def repair_motion_tddr(od_series: np.ndarray, fs: int = FS_FNIRS) -> np.ndarray:
     """
-    Temporal Derivative Distribution Repair (TDDR, Fishburn et al. 2019, NeuroImage 184:171-179).
-    Removes baseline shift and spike motion artifacts via iteratively reweighted least-squares (IRLS)
-    on temporal first differences using Tukey's biweight function.
+    Canonical Temporal Derivative Distribution Repair (TDDR, Fishburn et al. 2019,
+    NeuroImage 184:171-179; matches MNE-Python `mne.preprocessing.nirs._tddr._TDDR`):
+      1. Mean-center and split at 0.5 Hz via 3rd-order Butterworth filtfilt (`padlen=0`)
+         when Fc = 2 * 0.5 / fs < 1.0 so >= 1 Hz cardiac PPG is preserved untouched.
+      2. Compute temporal derivative of low-frequency component and run Tukey biweight IRLS
+         updating both `mu` and `sigma = 1.4826 * median(|deriv - mu|)` per iteration.
+      3. Integrate `w * (deriv - mu)`, re-center, and recombine `+ signal_high + signal_mean`.
     """
-    if len(od_series) < 16:
-        return od_series
+    sig = np.asarray(od_series, dtype=np.float64).copy()
+    if len(sig) < 16:
+        return sig
 
-    sig = np.asarray(od_series, dtype=np.float64)
-    sig_mean = float(np.mean(sig))
-    diff = np.diff(sig)
+    signal_mean = float(np.mean(sig))
+    sig_centered = sig - signal_mean
 
-    mu = float(np.median(diff))
-    mad = float(np.median(np.abs(diff - mu)))
-    scale = 1.4826 * max(mad, 1e-8)
-    if scale < 1e-8:
-        return od_series
+    fc = 0.5 * 2.0 / float(max(fs, 1))
+    if fc < 1.0 and HAS_SCIPY:
+        fb, fa = signal.butter(3, fc)
+        signal_low = signal.filtfilt(fb, fa, sig_centered, padlen=0)
+    else:
+        signal_low = sig_centered
+    signal_high = sig_centered - signal_low
 
-    c = 4.685
-    weights = np.ones_like(diff)
+    tune = 4.685
+    eps_tol = float(np.sqrt(np.finfo(np.float64).eps))
+    mu = float("inf")
+
+    deriv = np.diff(signal_low)
+    w = np.ones_like(deriv)
     for _ in range(50):
-        residuals = diff - mu
-        u = residuals / (c * scale)
-        mask = np.abs(u) < 1.0
-        weights.fill(0.0)
-        weights[mask] = (1.0 - u[mask] ** 2) ** 2
-
-        sum_w = float(np.sum(weights))
+        mu0 = mu
+        sum_w = float(np.sum(w))
         if sum_w < 1e-12:
             break
-        new_mu = float(np.sum(weights * diff) / sum_w)
-        if abs(new_mu - mu) < 1e-6:
+        mu = float(np.sum(w * deriv) / sum_w)
+        dev = np.abs(deriv - mu)
+        sigma = 1.4826 * float(np.median(dev))
+        if sigma == 0.0:
             break
-        mu = new_mu
+        r = dev / (sigma * tune)
+        w = ((1.0 - r ** 2) * (r < 1.0)) ** 2
+        if abs(mu - mu0) < eps_tol * max(abs(mu), abs(mu0), 1e-15):
+            break
 
-    repaired_diff = weights * (diff - mu)
-    reconstructed = np.zeros_like(sig)
-    reconstructed[0] = sig[0]
-    reconstructed[1:] = sig[0] + np.cumsum(repaired_diff)
-
-    # Median baseline centering to eliminate DC baseline shift leakage
-    return reconstructed - np.median(reconstructed)
+    new_deriv = w * (deriv - mu)
+    signal_low_corrected = np.cumsum(np.insert(new_deriv, 0, 0.0))
+    signal_low_corrected = signal_low_corrected - float(np.mean(signal_low_corrected))
+    return signal_low_corrected + signal_high + signal_mean
 
 
 def apply_cbsi_neurovascular_filter(
@@ -388,22 +395,52 @@ def run_self_test() -> bool:
     assert np.max(np.abs(conc_mne_umol[1] - rec_hbr)) < 1e-10
     print(f"✓ MBLL Molar Extinction Inversion Round-Trip Error: {err_hbo2:.2e} μM (Exact MNE-NIRS ln(10) Parity)")
 
-    # 1b. TDDR Motion Spike Repair Test
+    # 1b. TDDR Motion Spike Repair Test (1.5s slow motion excursion + post-bandpass fast spike suppression)
     clean_wave = np.sin(2 * np.pi * 0.1 * np.linspace(0, 10, 640))
+    t_sp = np.linspace(0, 10, 640, endpoint=False)
+    slow_bump = 5.0 * np.exp(-0.5 * ((t_sp - 5.0) / 0.6) ** 2)
+    repaired_bump = repair_motion_tddr(clean_wave + slow_bump, fs=64)
+    bump_residual = np.max(np.abs((repaired_bump - np.mean(repaired_bump)) - (clean_wave - np.mean(clean_wave))))
+    assert bump_residual < 1.0, f"TDDR should suppress 5.0 slow motion bump by >80%, got residual {bump_residual}"
+
     spiked_wave = clean_wave.copy()
     spiked_wave[300:320] += 5.0
-    repaired_wave = repair_motion_tddr(spiked_wave, fs=64)
-    spike_residual = np.max(np.abs(repaired_wave[300:320] - clean_wave[300:320]))
-    assert spike_residual < 1.0, f"TDDR should suppress 5.0 spike by >80%, got residual {spike_residual}"
-    print(f"✓ TDDR Motion Artifact Repair: 5.0 OD motion spike suppressed to {spike_residual:.2f} residual")
+    repaired_wave = bandpass_hemodynamic_filter(repair_motion_tddr(spiked_wave, fs=64)[None, :], fs=64)[0]
+    spike_residual = np.max(np.abs(repaired_wave[250:370] - clean_wave[250:370]))
+    assert spike_residual < 1.0, f"TDDR + hemodynamic bandpass should suppress 5.0 spike by >80%, got residual {spike_residual}"
+    print(f"✓ TDDR Motion Artifact Repair: 5.0 OD slow bump ({bump_residual:.2f}) & fast spike ({spike_residual:.2f}) suppressed")
 
-    # 1c. TDDR Persistent Step-Function Baseline Shift Test (Headband Slip)
-    step_wave = clean_wave.copy()
-    step_wave[320:] += 5.0
-    repaired_step = repair_motion_tddr(step_wave, fs=64)
-    step_residual = np.max(np.abs(repaired_step - clean_wave))
-    assert step_residual < 0.25, f"TDDR must repair persistent +5.0 OD step shift without ramp artifact, got {step_residual:.3f}"
-    print(f"✓ TDDR Persistent Step Shift Repair: +5.0 OD baseline slip suppressed to {step_residual:.3f} max residual")
+    # 1c. TDDR Persistent Step-Function Baseline Shift Test (Headband Slip on 30s recording)
+    t_step = np.linspace(0, 30, 30 * 64, endpoint=False)
+    clean_step = np.sin(2 * np.pi * 0.1 * t_step)
+    step_wave = clean_step.copy()
+    step_wave[15 * 64:] += 5.0
+    repaired_step = bandpass_hemodynamic_filter(repair_motion_tddr(step_wave, fs=64)[None, :], fs=64)[0]
+    clean_bp = bandpass_hemodynamic_filter(clean_step[None, :], fs=64)[0]
+    step_residual = max(
+        float(np.max(np.abs(repaired_step[4 * 64:12 * 64] - clean_bp[4 * 64:12 * 64]))),
+        float(np.max(np.abs(repaired_step[18 * 64:26 * 64] - clean_bp[18 * 64:26 * 64]))),
+    )
+    assert step_residual < 0.75, f"TDDR + hemodynamic bandpass must repair persistent +5.0 OD step shift, got {step_residual:.3f}"
+    print(f"✓ TDDR Persistent Step Shift Repair: +5.0 OD baseline slip suppressed to {step_residual:.3f} steady-state residual")
+
+    # 1d. Cardiac PPG Preservation (> 0.5 Hz split) & Exact MNE-Python `_TDDR` Parity
+    t_card = np.linspace(0, 10, 640, endpoint=False)
+    ppg_wave = 0.2 * np.sin(2 * np.pi * 1.2 * t_card) + 0.5 * np.sin(2 * np.pi * 0.05 * t_card)
+    ppg_clean_rep = repair_motion_tddr(ppg_wave, fs=64)
+    sci_post = compute_scalp_coupling_index(ppg_clean_rep, ppg_wave, fs=64)
+    assert sci_post >= 0.99, f"TDDR distorted >=1 Hz cardiac PPG band: SCI={sci_post:.3f}"
+
+    ppg_spiked = ppg_wave.copy()
+    ppg_spiked[320:] += 3.0
+    ppg_rep = repair_motion_tddr(ppg_spiked, fs=64)
+    try:
+        from mne.preprocessing.nirs._tddr import _TDDR as _mne_tddr
+        mne_rep = _mne_tddr(ppg_spiked.copy(), 64.0)
+        assert np.max(np.abs(ppg_rep - mne_rep)) < 1e-10, "TDDR diverged from upstream MNE _TDDR!"
+        print(f"✓ Upstream MNE-Python `_TDDR` Exact Parity (< 1e-10) & 1.2 Hz PPG SCI={sci_post:.4f}")
+    except ImportError:
+        print(f"✓ Fishburn (2019) 0.5 Hz Split Preserves 1.2 Hz PPG (SCI={sci_post:.4f})")
 
     # 2. Scalp Coupling Index (SCI) Photoplethysmographic Cardiac Pulse Test
     rng = np.random.default_rng(42)

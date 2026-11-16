@@ -267,6 +267,8 @@ def prove_zero(P: Optional[Tuple[int, int]], r: int, tag: str, tr: Optional[Tran
 def verify_zero(P: Optional[Tuple[int, int]], proof: Dict[str, str], tag: str, tr: Optional[Transcript] = None) -> bool:
     try:
         A = pt_deser(proof["A"])
+        if A is None:
+            return False
         s = _parse_canonical_scalar(proof["s"])
         c = tr.challenge_scalar(tag, [P, A]) if tr is not None else hash_challenge(tag, [P, A])
         return pt_mul_fast(s, H_PT) == pt_add(A, pt_mul_fast(c, P))

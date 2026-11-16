@@ -1,11 +1,11 @@
 {
   "release": "v4.5",
-  "timestamp": "2026-11-16T05:33:54Z",
+  "timestamp": "2026-11-16T13:23:46Z",
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.5",
   "total_files_hashed": 1053,
-  "total_manifest_size_mb": 261.76,
+  "total_manifest_size_mb": 261.77,
   "automated_ci_tasks_verified": 57,
   "files": {
     "CITATION.cff": {
@@ -113,8 +113,8 @@
       "bytes": 261913
     },
     "formal/FORMAL_VERIFICATION_REPORT.md": {
-      "sha256": "db570e97aa24e605d5038b16097a50f3b077dfd47a3eefc9da0d0d49cbda3b56",
-      "bytes": 6612
+      "sha256": "001909dffb7424baf1c23a8794672150a811f9000d7e2152f6a5f3842af6abef",
+      "bytes": 6637
     },
     "formal/TFP_Edge_Protocol.cfg": {
       "sha256": "a7bde0ce32b691d1ee7de48b690314b5d80f8bf297b07e4eebc38040022c8b2a",
@@ -165,16 +165,16 @@
       "bytes": 6577
     },
     "formal/zk_master_law_stp.py": {
-      "sha256": "b2e28a13a19271d0f2593510f525837a2b09604edfccea9eff577ac85f0d6795",
-      "bytes": 45864
+      "sha256": "c92bf2fbd532afd4565ca3516aadb286a5c7e55d3c138d8fb337ee8ebd7181ff",
+      "bytes": 46326
     },
     "formal/zk_pedersen_ec.py": {
-      "sha256": "9f419504d9e9ce7561ff9b4c0a2d760ab8435069c8517e99e407c5f1706d1b86",
-      "bytes": 20387
+      "sha256": "e075395754f6bcd6d977d521f2e31c31eb4a65c272ffe034d0630525f06864c1",
+      "bytes": 20434
     },
     "formal/zk_stp_results.json": {
-      "sha256": "98daab24298a46c54fa738046c2943c15c63c578a957790b9e8553efff326221",
-      "bytes": 1244
+      "sha256": "7b21d224e9eeb59f5bbe09eef01281a6b07a2f24f2c69ee9e8ddd1d278ecc9cf",
+      "bytes": 1300
     },
     "formal/lean/Check.lean": {
       "sha256": "762300ba560bc5bf7039323889021e71c64373aef9a7346ec3d029fac19d3207",
@@ -225,7 +225,7 @@
       "bytes": 4316
     },
     "code/tools/run_tier1_tier2_suite.py": {
-      "sha256": "f93af5fd986e872dd88167c2fc02a2ce70d678ac7911eebf10fb95cbba4a27b8",
+      "sha256": "b881957f98a021c784a811a03e2de0375982e1ad2f7c20d114879436484e7cae",
       "bytes": 17331
     },
     "code/tools/test_cross_repo_parity.py": {
@@ -257,7 +257,7 @@
       "bytes": 15293
     },
     "code/tools/evaluations/multi_rubric_evaluator.py": {
-      "sha256": "bcd37ada2e8fdca4dd39ce374e22f6cf0c72f3b27f7b5ff0d9b75a3e31a680ea",
+      "sha256": "a54f127dbc8dab9a95ed5547bc3440a5a40a0b9a1426819576e09a49e0b542cb",
       "bytes": 4352
     },
     "code/tools/evaluations/rubrics/apa_jars_quant_behavioral.json": {
@@ -1461,8 +1461,8 @@
       "bytes": 9143
     },
     "code/simulations/wearables_pipeline/process_fnirs_mbll.py": {
-      "sha256": "8900d6ad0586816c2f418f03024b8ec2b25b06267d6a937a4eb0d3885fa8d774",
-      "bytes": 22309
+      "sha256": "726a4899da325d4838add8ffc27139d340bb2f47f846ca496bf2aedf11791d00",
+      "bytes": 24886
     },
     "code/simulations/wearables_pipeline/sim_pilot1_results.json": {
       "sha256": "fb5b1c4ff4973c11e7a84fb5358b3372dda4f88486b932b77a7e04358326e2f5",
@@ -1489,8 +1489,8 @@
       "bytes": 16823
     },
     "code/simulations/wearables_pipeline/stream_muse_athena.py": {
-      "sha256": "ee7addb1140dc48c016f1d328d03170f7004a4279fff86c218c6592fa632d30d",
-      "bytes": 35566
+      "sha256": "330f9c8076f837668923558daf8c9ac21cedc89337fc9e4c00eb17c0bc3f404b",
+      "bytes": 36747
     },
     "code/simulations/repair_era/MANIFEST.md": {
       "sha256": "108f782a82b2e647ba3eee9b7b5133d3289987611ebfc1c014f40a28e1bfb194",
