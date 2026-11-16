@@ -3,12 +3,12 @@
   "horizon_months": 36,
   "initial_entrants_theta": 0.32369350792331825,
   "terminal_entrants_theta": 0.5696603700123928,
-  "peak_default_rate": 0.01536314638616338,
-  "terminal_default_rate": 0.009557423940888135,
+  "peak_default_rate": 0.015365000423268028,
+  "terminal_default_rate": 0.009552420808178325,
   "initial_reserve": 500000.0,
   "min_reserve_balance": 500000.0,
   "min_reserve_month": 0.0,
-  "terminal_reserve_balance": 18930428.024122417,
+  "terminal_reserve_balance": 18988072.81496257,
   "required_capital_buffer": 50000.0,
   "pool_solvency_preserved": true
 }

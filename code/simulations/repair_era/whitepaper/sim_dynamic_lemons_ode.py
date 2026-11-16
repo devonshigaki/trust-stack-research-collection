@@ -20,9 +20,9 @@ def run_lemons_market_battery():
     print("=" * 65)
 
     np.random.seed(42)
-    T_months = 36 # 3-year migration horizon
-    dt = 0.1 # Monthly time step
-    steps = int(T_months / dt)
+    T_months = 36  # 3-year migration horizon
+    dt = 0.005  # Fine time step so Euler and RK4 agree within <1%
+    steps = int(round(T_months / dt)) + 1
     t = np.linspace(0, T_months, steps)
 
     # Market Population Parameters
@@ -56,8 +56,6 @@ def run_lemons_market_battery():
     # Initial condition
     borrower_count[0] = 200
     active_quality[0] = theta_entrants[0]
-    initial_reserve = 250000.0 # $250k initial liquidity buffer
-    reserve_fund[0] = initial_reserve
     # Calibrated Micro-Credit Portfolio Parameters:
     # Loan facility: $1,500 amortized over 12 months
     # Interest + Risk Provision APR: 28% (~2.33% monthly interest)
@@ -66,9 +64,9 @@ def run_lemons_market_battery():
     loan_size = 1500.0
     interest_rate_monthly = 0.0233
     origination_reserve_cut = 0.06
-    protocol_fee_per_month = 4.0 # $4/mo active account fee
+    protocol_fee_per_month = 4.0  # $4/mo active account fee
 
-    initial_reserve = 500000.0 # $500k initial anchor capital pool
+    initial_reserve = 500000.0  # $500k initial anchor capital pool
     reserve_fund[0] = initial_reserve
 
     for i in range(1, steps):
@@ -118,6 +116,40 @@ def run_lemons_market_battery():
     min_reserve = np.min(reserve_fund)
     min_reserve_month = t[np.argmin(reserve_fund)]
     terminal_reserve = reserve_fund[-1]
+
+    # RK4 convergence cross-check against Euler trajectory
+    def _ode_rhs(t_val, y_vec):
+        b_v, th_v, _r_v = y_vec
+        lam_in = 500.0 * (1.0 + 0.08 * t_val)
+        th_in = 0.32 + 0.25 * (1.0 / (1.0 + np.exp(-0.3 * (t_val - 14.0))))
+        p_def = 0.025 * (1.0 - th_v) ** 1.8 + 0.003
+        p_grad = 0.04 * th_v
+        exits = (p_def + p_grad) * b_v
+        db = lam_in - exits
+        dth = (lam_in * (th_in - th_v) - exits * (th_v - 0.5) * 0.15) / max(b_v, 1.0)
+        dr = (
+            lam_in * loan_size * origination_reserve_cut
+            + b_v * loan_size * (1.0 - p_def) * interest_rate_monthly
+            + b_v * protocol_fee_per_month
+            - b_v * p_def * loan_size * 0.50
+        )
+        return np.array([db, dth, dr], dtype=np.float64)
+
+    y_rk = np.array([borrower_count[0], active_quality[0], initial_reserve], dtype=np.float64)
+    rk_reserves = np.zeros(steps)
+    rk_reserves[0] = y_rk[2]
+    for i in range(1, steps):
+        ti = t[i - 1]
+        k1 = _ode_rhs(ti, y_rk)
+        k2 = _ode_rhs(ti + 0.5 * dt, y_rk + 0.5 * dt * k1)
+        k3 = _ode_rhs(ti + 0.5 * dt, y_rk + 0.5 * dt * k2)
+        k4 = _ode_rhs(ti + dt, y_rk + dt * k3)
+        y_rk = y_rk + (dt / 6.0) * (k1 + 2 * k2 + 2 * k3 + k4)
+        y_rk[1] = np.clip(y_rk[1], 0.15, 0.85)
+        rk_reserves[i] = y_rk[2]
+    rk4_max_rel_diff = float(np.max(np.abs(reserve_fund - rk_reserves)) / initial_reserve)
+    assert rk4_max_rel_diff < 0.01, f"Euler vs RK4 ODE divergence too high: {rk4_max_rel_diff}"
+    print(f"Euler vs RK4 Integration Max Relative Diff: {rk4_max_rel_diff:.4%}")
 
     print(f"Simulation Horizon: {T_months} Months")
     print(f"Initial Entrant Quality: theta = {theta_entrants[0]:.2f} (Severe Lemons Selection)")

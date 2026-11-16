@@ -11,7 +11,7 @@
 | Hypothesis | Test Description | Frozen Criterion | Observed Metric | Verdict |
 | :--- | :--- | :--- | :--- | :--- |
 | **CRIT-1: Dynamic Range** | Peak dynamic range in $[0.95, 1.05]$ | Peak in window $\wedge$ excess $\ge 15.0\text{ dB}$ | **$\sigma^* = 1.10$** (Excess: 25.0 dB) | **PASS** |
-| **CRIT-2: Avalanche Power Law** | Scaling exponent $\alpha$ at $\sigma = 1.0$ | $\alpha \in [1.40, 1.60], R^2 \ge 0.95$ | **$\alpha = 1.520, R^2 = 0.9911$** | **PASS** |
+| **CRIT-2: Avalanche Power Law** | Scaling exponent $\alpha$ at $\sigma = 1.0$ | $\alpha \in [1.40, 1.60], R^2 \ge 0.95$ | **$\alpha = 1.471, R^2 = 0.9911$** | **PASS** |
 | **CRIT-3: Info Transmission** | Off-criticality information collapse | Ratio $\le 0.65$ | **Ratio = 0.81** | **PASS** |
 
 ---

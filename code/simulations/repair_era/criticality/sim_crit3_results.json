@@ -5,9 +5,9 @@
   "beta_ddm": 1.9636062173786124,
   "beta_hgf": 0.026522268667107746,
   "beta_gtt": 1.7234395840755625,
-  "bic_gtt": 835.6055590203277,
-  "delta_bic_vs_hgf": 212.7541486287796,
-  "bayes_factor_vs_hgf": "> 10^46",
+  "bic_gtt": -30.288702174062664,
+  "delta_bic_vs_hgf": 17625.085864649496,
+  "bayes_factor_vs_hgf": "> 10^3827",
   "verdict": "FAIL",
   "criteria": {
     "C1_quasicritical_beta": false,

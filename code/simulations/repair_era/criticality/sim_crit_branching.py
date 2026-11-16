@@ -54,14 +54,46 @@ def _simulate_gw_avalanches(rng, sigma=1.0, n_av=20000, max_size=500):
 
 
 def _csn_mle_vuong(sizes, x_min=1, x_max=200):
-    x = sizes[(sizes >= x_min) & (sizes <= x_max)].astype(np.float64)
+    """
+    Exact discrete doubly-truncated Clauset-Shalizi-Newman (2009) MLE & Vuong test
+    over integer support [x_min, x_max] (avoids the x_min < 6 continuous bias).
+    """
+    from scipy.optimize import minimize_scalar
+
+    x = sizes[(sizes >= x_min) & (sizes <= x_max)].astype(np.int64)
     n = len(x)
-    alpha_hat = 1.0 + n / float(np.sum(np.log(x / (x_min - 0.5))))
     support = np.arange(x_min, x_max + 1, dtype=np.float64)
-    p_pl = support ** (-alpha_hat); p_pl /= np.sum(p_pl)
-    lam_exp = 1.0 / float(np.mean(x - x_min) + 1e-6)
-    p_exp = np.exp(-lam_exp * (support - x_min)); p_exp /= np.sum(p_exp)
-    idx = x.astype(int) - x_min
+    log_support = np.log(support)
+    sum_log_x = float(np.sum(np.log(x.astype(np.float64))))
+
+    def neg_ll_pl(alpha: float) -> float:
+        log_weights = -alpha * log_support
+        m = float(np.max(log_weights))
+        log_z = m + float(np.log(np.sum(np.exp(log_weights - m))))
+        return alpha * sum_log_x + n * log_z
+
+    opt_pl = minimize_scalar(neg_ll_pl, bounds=(1.01, 4.0), method="bounded")
+    alpha_hat = float(opt_pl.x)
+
+    p_pl = support ** (-alpha_hat)
+    p_pl /= np.sum(p_pl)
+
+    # Exact discrete doubly-truncated exponential MLE
+    mean_x_shift = float(np.mean(x.astype(np.float64) - x_min))
+    shift_sup = support - float(x_min)
+
+    def neg_ll_exp(lam: float) -> float:
+        log_w = -lam * shift_sup
+        m = float(np.max(log_w))
+        log_z = m + float(np.log(np.sum(np.exp(log_w - m))))
+        return n * (lam * mean_x_shift + log_z)
+
+    opt_exp = minimize_scalar(neg_ll_exp, bounds=(1e-4, 5.0), method="bounded")
+    lam_exp = float(opt_exp.x)
+    p_exp = np.exp(-lam_exp * shift_sup)
+    p_exp /= np.sum(p_exp)
+
+    idx = x - x_min
     ll = np.log(p_pl[idx] + 1e-15) - np.log(p_exp[idx] + 1e-15)
     vuong_z = float(np.mean(ll) / (np.std(ll, ddof=1) / np.sqrt(n) + 1e-12))
     uniq, cnts = np.unique(x, return_counts=True)

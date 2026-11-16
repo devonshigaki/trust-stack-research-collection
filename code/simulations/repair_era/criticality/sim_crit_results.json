@@ -36,9 +36,9 @@
     "pass": true
   },
   "CRIT2_avalanche_power_law": {
-    "fitted_alpha": 1.520478618153804,
+    "fitted_alpha": 1.4708050394412397,
     "slope_loglog": 1.4735389593820423,
-    "vuong_z_vs_exponential": 58.114903542049255,
+    "vuong_z_vs_exponential": 60.84734532939171,
     "r2_powerlaw": 0.9911476443607733,
     "pass": true
   },

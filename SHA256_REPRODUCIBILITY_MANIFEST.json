@@ -1,11 +1,11 @@
 {
   "release": "v4.5",
-  "timestamp": "2026-11-16T03:48:30Z",
+  "timestamp": "2026-11-16T04:43:27Z",
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.5",
   "total_files_hashed": 1053,
-  "total_manifest_size_mb": 261.74,
+  "total_manifest_size_mb": 261.75,
   "automated_ci_tasks_verified": 57,
   "files": {
     "CITATION.cff": {
@@ -173,7 +173,7 @@
       "bytes": 20387
     },
     "formal/zk_stp_results.json": {
-      "sha256": "99e939799bb073b74e476c705872f446c9fec2baaad3076e67030f288c9a8d53",
+      "sha256": "cabd3db5a39db7677363e36db5a385b88f65303124f61464b52cab02e5f767d7",
       "bytes": 1244
     },
     "formal/lean/Check.lean": {
@@ -225,7 +225,7 @@
       "bytes": 4316
     },
     "code/tools/run_tier1_tier2_suite.py": {
-      "sha256": "b80197ee29d201abba7fd104772f96434e145053a5f57e7cd6d3395f01d523e9",
+      "sha256": "f93af5fd986e872dd88167c2fc02a2ce70d678ac7911eebf10fb95cbba4a27b8",
       "bytes": 17331
     },
     "code/tools/test_cross_repo_parity.py": {
@@ -2041,8 +2041,8 @@
       "bytes": 160030
     },
     "code/simulations/repair_era/whitepaper/fig_w9_lemons_reserve_ode.png": {
-      "sha256": "08e37cf1e1cd108cf7daa0f2c11efeac5f4ff796978844f7b91ffcee9fa385fb",
-      "bytes": 256168
+      "sha256": "0af4223c3154c8fa8c7b4b0db12a3173ab37dc30003485e558383a6e3a702076",
+      "bytes": 256431
     },
     "code/simulations/repair_era/whitepaper/make_figW4.py": {
       "sha256": "bea0e56c3a52ccef6ac5f920813b997b88c1ba3b9932b53bc0a3af6d2c0475ef",
@@ -2057,8 +2057,8 @@
       "bytes": 4389
     },
     "code/simulations/repair_era/whitepaper/sim_dynamic_lemons_ode.py": {
-      "sha256": "5b7fdda65edeac993401bdbe86474313014a2c4952d0c3de03eff89ee08e74eb",
-      "bytes": 8506
+      "sha256": "61fa7f12a6925d3aeb907ec65d26862d219509ac51c54fb31e5a3161b7bf1a65",
+      "bytes": 10048
     },
     "code/simulations/repair_era/whitepaper/sim_shap_adverse_action.py": {
       "sha256": "ed481afa678dc3f6560b0d3de8f6b022c3f7922c278bc5a93370c6f6ada716bb",
@@ -2069,7 +2069,7 @@
       "bytes": 1764
     },
     "code/simulations/repair_era/whitepaper/sim_w9_lemons_results.json": {
-      "sha256": "88709a8a5d00129436db1b56ed9730f0eb7735f41cc35659921c471698b65739",
+      "sha256": "a9fe29d8a23700eac509eca687855cf0a793ee4348e57a08fbd6aa2938ad5c0b",
       "bytes": 463
     },
     "code/simulations/repair_era/music_tdf/CODING_AGENT_INTEGRATION_PROMPT.md": {
@@ -2089,7 +2089,7 @@
       "bytes": 37853
     },
     "code/simulations/repair_era/criticality/CRIT_SERIES_RUN_REPORT.md": {
-      "sha256": "786852cb0d22c6255df4c0bb8f9d60018ba9c7b1e75fa1235ed2cc29331de27c",
+      "sha256": "4284157f78f729d3cb4dd05f59fa6deb5d393b8ea3a6b4e9e58d3c409b23273f",
       "bytes": 1310
     },
     "code/simulations/repair_era/criticality/SIM_CRIT2_PRE_REGISTRATION.md": {
@@ -2109,35 +2109,35 @@
       "bytes": 320270
     },
     "code/simulations/repair_era/criticality/fig_crit3_bayes_factors.png": {
-      "sha256": "26cc2576f8ad1bd4826cfbe2d44a035e4df5bef89639912d4f3e6c2462d8542f",
-      "bytes": 318116
+      "sha256": "160b1cfa106f0e88d19a7f83af9b6b10da108ee7d0d15c49656d7b7f288dd001",
+      "bytes": 323037
     },
     "code/simulations/repair_era/criticality/fig_sim_crit.png": {
-      "sha256": "b6fc50a5740d3bc7823976faeb3e3a4fa2ce5cb4d9b8f5237dd16678488e34e3",
-      "bytes": 211551
+      "sha256": "94feb0435cb5e727a5bff3ca5942a415c394cd876b9e6aca8974df8e987ffc74",
+      "bytes": 210850
     },
     "code/simulations/repair_era/criticality/sim_crit2_connectome_spectral_radius.py": {
       "sha256": "5c424a78bbb678d0d0e682f3389746d1f68592622c1499ab41aaf3a11ed73bb8",
       "bytes": 11184
     },
     "code/simulations/repair_era/criticality/sim_crit2_results.json": {
-      "sha256": "d2ba15bfcc1376f33597b9ec33e426e17686553d0af64942ef7089c86df67989",
-      "bytes": 464
+      "sha256": "502e0a04b1d5f646dbe7137252fe9785ef61571a84043e2a6c159ac50e8b9408",
+      "bytes": 463
     },
     "code/simulations/repair_era/criticality/sim_crit3_bayes_factor_comparison.py": {
-      "sha256": "a7b863c2beaa7a026248bedc074b4a45fe860635566170db0260ead9b04979d9",
-      "bytes": 9899
+      "sha256": "efca4913a9cbd64ffee5d4f7bd9ccecaafb264444a124db12dbb562af06bf853",
+      "bytes": 11068
     },
     "code/simulations/repair_era/criticality/sim_crit3_results.json": {
-      "sha256": "942c3e9aa437a12ac05d8d692413192d94e0e1f6c00f2e08905b2b65b064e5f7",
-      "bytes": 465
+      "sha256": "4afe197e1b821f1566d69830cccf6b782c6284e4bf76bb45f96fc15382a32fbb",
+      "bytes": 470
     },
     "code/simulations/repair_era/criticality/sim_crit_branching.py": {
-      "sha256": "1c24febbb93e6954baea83473d92190e665188762a520c6ecc77a982805a2cb0",
-      "bytes": 10974
+      "sha256": "0dfcbf009314a2f1ed9d8da8dd0c0edcd1a84d962830a83ea960572a1ac25a11",
+      "bytes": 11996
     },
     "code/simulations/repair_era/criticality/sim_crit_results.json": {
-      "sha256": "f73f828b09293fc65f481c557471481e316b577bc58f5b27b9faa02219f1f74f",
+      "sha256": "fc6dbcc1f6902e92f7296087cf6bc7f5b745c3fd2ce11cb60f8c6294b20217b0",
       "bytes": 1449
     },
     "code/simulations/repair_era/clinical/SIM_EVOL1_PRE_REGISTRATION.md": {
@@ -3317,8 +3317,8 @@
       "bytes": 6561
     },
     "docs/SIMULATION_ACCOUNTING.md": {
-      "sha256": "9f1777256d8cd1289befc87fa0abe23ccfcfda6a1b054427ef0ae7d1f91d7704",
-      "bytes": 83472
+      "sha256": "99a262863862999afc109b03292e5143292d5ad9627908036b3306b46017c858",
+      "bytes": 83571
     },
     "docs/STARTUP_PROMPT.md": {
       "sha256": "f3d7f6ce3eda22b6da7f14e9c236bd1083d9df0035474e8fda82ffe1cc7120e4",
@@ -3753,8 +3753,8 @@
       "bytes": 320270
     },
     "figures/fig_crit3_bayes_factors.png": {
-      "sha256": "26cc2576f8ad1bd4826cfbe2d44a035e4df5bef89639912d4f3e6c2462d8542f",
-      "bytes": 318116
+      "sha256": "160b1cfa106f0e88d19a7f83af9b6b10da108ee7d0d15c49656d7b7f288dd001",
+      "bytes": 323037
     },
     "figures/fig_empirical_credit_panel_validation.png": {
       "sha256": "cb4a1e30ccde80113cad293a918c9e6d5b675b5d8b922e8745a4a53d27deb82c",

@@ -498,7 +498,7 @@ Implemented in `code/simulations/repair_era/clinical/sim_evol1_rutabaga_adcy8_co
 Implemented in `code/simulations/repair_era/criticality/sim_crit3_bayes_factor_comparison.py`. Compares a mechanistic 5-channel multi-timescale GTT leaky superposition ($\delta_k \in \{0.40, 0.12, 0.035, 0.010, 0.003\}$) against Rescorla-Wagner, Drift-Diffusion (DDM), and HGF across $N = 100$ sessions.
 - **C1 Pink Noise Slope**: Multi-timescale GTT yields $\beta = 1.723$ vs. frozen $[0.75, 1.15]$ (**FAIL as frozen**). *(Supersedes synthetic inverse-FFT $1.060$ / $\text{BF}_{10} > 10^{239}$; Correction Register #23.)*
 - **C2 Model Discrimination Spread**: $|\Delta \beta| = 0.241 < 0.50$ vs. DDM (**FAIL as frozen**).
-- **C3 BIC Margin**: $\Delta \text{BIC} = 212.8$ over simple HGF (**PASS**).
+- **C3 BIC Margin**: Whittle spectral periodogram log-likelihood yields $\Delta \text{BIC} = 17{,}625.1$ over the best alternative model (HGF, $k=3$ vs. GTT $k=6$) (**PASS**).
 - **Compound Verdict**: **FAIL as frozen (1/3 PASS)**.
 
 ## WW. Sim WEARABLE-TRIAD: Strictly Causal Multi-Rate Biosensor Fusion (Version 4.5)

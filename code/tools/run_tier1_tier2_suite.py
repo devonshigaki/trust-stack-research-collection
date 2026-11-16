@@ -213,7 +213,7 @@ TASKS = [
     },
     {
         "tier": "Tier 1: Formal Math",
-        "name": "ZK-STP v8 secp256k1 3-Party Unlinkable Tail-Complete Verifier (19/19)",
+        "name": "ZK-STP v8 secp256k1 3-Party Unlinkable Tail-Complete Verifier (23/23)",
         "script": "formal/zk_master_law_stp.py",
         "workdir": "formal"
     },
