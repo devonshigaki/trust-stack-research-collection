@@ -326,15 +326,17 @@ Rescorla--Wagner axiom \eqref{eq:stability}), \texttt{contraction}
 $|S_t - S_{\mathrm{base}}| \leq (1-\delta)^t|S_0 - S_{\mathrm{base}}| +
 (\lambda^{+}+\lambda^{-})E/\delta$), and the v4.5 clamped $[0,1]$ invariants
 (\texttt{masterStepClamped\_mem\_unit}, \texttt{trajClamped\_mem\_unit},
-\texttt{clamp\_unit\_lipschitz}, and \texttt{masterStepClamped\_not\_comm},
-proving that clamped updates do not commute as a state-based CRDT).
+\texttt{clamp\_unit\_lipschitz}, \texttt{masterStepClamped\_not\_comm},
+proving that clamped updates do not commute as a state-based CRDT, and
+\texttt{trajClamped\_incremental\_contraction}, proving exponential
+synchronization under arbitrary shared active inputs).
 
 \textbf{Verification status: green build.} The library compiles against the
 pinned toolchain --- Lean \texttt{4.35.0} with Mathlib pinned in
 \texttt{lake-manifest.json} --- \texttt{lake build} and kernel replay via
 \texttt{lake env leanchecker} complete with zero errors,
 and the axiom audit (\texttt{formal/lean/Check.lean}, output deposited as
-\texttt{formal/lean/VERIFICATION\_AXIOMS.txt}) reports that all \textbf{32 theorems}
+\texttt{formal/lean/VERIFICATION\_AXIOMS.txt}) reports that all \textbf{34 theorems}
 depend only on the standard classical axioms \texttt{[propext,
 Classical.choice, Quot.sound]}; no \texttt{sorryAx} appears anywhere. The Lean
 kernel has therefore checked each printed claim above end-to-end: the algebra

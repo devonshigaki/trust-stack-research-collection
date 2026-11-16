@@ -1,6 +1,6 @@
 {
   "release": "v4.5",
-  "timestamp": "2026-11-16T13:23:46Z",
+  "timestamp": "2026-11-16T14:52:00Z",
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.5",
@@ -13,7 +13,7 @@
       "bytes": 680
     },
     "README.md": {
-      "sha256": "d3f57afd50ebddc456eef4f3067745ca8c9541684c4930284fed4de8793d7037",
+      "sha256": "5f29aa0f9cd964cd85afd8bb1c0ff0c6bf674d5296be109f4d02526a32c3f4d2",
       "bytes": 4265
     },
     "pyproject.toml": {
@@ -29,47 +29,47 @@
       "bytes": 152516
     },
     "manuscripts/tfp/tfp.pdf": {
-      "sha256": "b93da0e852e9725fb2086c0ad8e13233fc1f2a075c40738c3e428dced8e860c7",
-      "bytes": 4487201
+      "sha256": "4f0a9d4c9b2b64e17924d1faa20e35d83648fc337ad681b55277b086f73b9100",
+      "bytes": 4487416
     },
     "manuscripts/tfp/tfp.tex": {
-      "sha256": "7913962ca3d2a050d1897595fd78537fa1bef82ba75cefa6042c346c3ff24fc9",
-      "bytes": 149021
+      "sha256": "59b571e7453978275b0ec6e8ce0e2225612efce6c439b3dbb4be0ffd959fb0bd",
+      "bytes": 149149
     },
     "manuscripts/collection/collection.md": {
-      "sha256": "325d527d799a1ac0db8643ce714845300000a1d82caeaf40f24f72cee3564ea6",
-      "bytes": 38288
+      "sha256": "a62615b573abcc85478040e7411fd1ae07d6d02cab439d568327f32891049189",
+      "bytes": 38324
     },
     "manuscripts/collection/collection.pdf": {
-      "sha256": "a327b67d3f9f4e27740f9e3d061d7bb8658222789a4e6c5d139650481c981f75",
-      "bytes": 118861
+      "sha256": "8b675895896c82c76c965038bc88be175daa622c176d75f23fff962ba0bd9bb6",
+      "bytes": 118872
     },
     "manuscripts/collection/collection.tex": {
-      "sha256": "2779debad8ad059d8016220fafae6481edd0a4a09f8d673f028c2c0a7c39bbbb",
-      "bytes": 37426
+      "sha256": "2192d75eaf99250097f894b13887d1dc460aa057c7ae241ab844ee007b4e7587",
+      "bytes": 37468
     },
     "manuscripts/gtt/gtt.bib": {
       "sha256": "f61899e070612216e90d50bd9855d277eb471bb5378c99132ff051d46cc2f228",
       "bytes": 31614
     },
     "manuscripts/gtt/gtt.md": {
-      "sha256": "739d1b6c0fab9749412af5a08e2a56a884dc478e8e2e54ec1e347772451935a9",
-      "bytes": 185137
+      "sha256": "adf90a0c63e25a89976c4942f726d3036207fcab2f532ae2ef1d6fedc5c2abe4",
+      "bytes": 185176
     },
     "manuscripts/gtt/gtt.pdf": {
-      "sha256": "641a733c18e2b6427c33f550ae6f8e445c394c81a8b2be5da2b37efa2fc20a30",
-      "bytes": 3299653
+      "sha256": "633efe7c7788ad26f03a4ef572fdf154cddbf592e4ffe1a25f501eea1493ca6c",
+      "bytes": 3299727
     },
     "manuscripts/gtt/gtt.tex": {
-      "sha256": "66dea1294d1985ed1c35c307d73b9ba49be4c67e008a7592bb471bd39b1567ab",
-      "bytes": 179023
+      "sha256": "cad066ce1f21d6ca6d12d5b39a2dbf162373dabb49cb5400eb251bd35d60fa91",
+      "bytes": 179145
     },
     "manuscripts/value_of_trust/value_of_trust.md": {
       "sha256": "95479695cbae950acd3ca79ad984003fca4535d9daf18ecf40ff960eaa5cae39",
       "bytes": 17192
     },
     "manuscripts/value_of_trust/value_of_trust.pdf": {
-      "sha256": "5145349a93a335d04ea854aa526b6540f77e081e505817ac3e3b6f7233a08455",
+      "sha256": "be66cf84eae407aec6deae0c35577e17f6972d492c6c338bc491fae8836228cb",
       "bytes": 44978
     },
     "manuscripts/value_of_trust/value_of_trust.tex": {
@@ -89,8 +89,8 @@
       "bytes": 170945
     },
     "manuscripts/whitepaper/whitepaper.pdf": {
-      "sha256": "26914da24ef5122f1a33ab3823dfd7e0e6952658f356db89cc389ccd0ef8dad5",
-      "bytes": 3329820
+      "sha256": "86878ec433515f8f097ccec5da72192b01a258d77d7a1f767cb13ccde5bda9b8",
+      "bytes": 3329817
     },
     "manuscripts/whitepaper/whitepaper.tex": {
       "sha256": "9260bc7550e328b8e263cac8a63b01454fc018cc8859709cf2eb3320fccc7830",
@@ -105,16 +105,16 @@
       "bytes": 321742
     },
     "manuscripts/tdf/tdf.pdf": {
-      "sha256": "ff61206ea4d21f8a5f2ccbedd09725419e0b1f6386d43fe990299c633e8f1884",
-      "bytes": 24401633
+      "sha256": "dc59cd09cbaa01b160472d3f6f55442d01427da5ef1ca74f4464d85fefe203b5",
+      "bytes": 24401637
     },
     "manuscripts/tdf/tdf.tex": {
       "sha256": "9ebc4aa6e422fd3eafd3071cd0894af8e3713083e83792aa452de422eb8f6fb4",
       "bytes": 261913
     },
     "formal/FORMAL_VERIFICATION_REPORT.md": {
-      "sha256": "001909dffb7424baf1c23a8794672150a811f9000d7e2152f6a5f3842af6abef",
-      "bytes": 6637
+      "sha256": "e178fccb3227ea4833cd15950ec22d60e227aecf2b0df59774e8a949c7443863",
+      "bytes": 6612
     },
     "formal/TFP_Edge_Protocol.cfg": {
       "sha256": "a7bde0ce32b691d1ee7de48b690314b5d80f8bf297b07e4eebc38040022c8b2a",
@@ -125,8 +125,8 @@
       "bytes": 10412
     },
     "formal/run_all_formal_verifications.py": {
-      "sha256": "19ddf0ab0411c73936c3b836443d837cc865122fc64d8c2d4deb608c25974835",
-      "bytes": 14584
+      "sha256": "c01620f495a8ffe2c6b36518ad8b54d847641eb5954f8d50e2b8143a25570108",
+      "bytes": 14565
     },
     "formal/sympy_symbolic_dynamics.py": {
       "sha256": "0731b419fa07799b2fbd8e8bf71bae2339844bf515d5e804bbd372286dfe3eb7",
@@ -173,7 +173,7 @@
       "bytes": 20434
     },
     "formal/zk_stp_results.json": {
-      "sha256": "7b21d224e9eeb59f5bbe09eef01281a6b07a2f24f2c69ee9e8ddd1d278ecc9cf",
+      "sha256": "bcca425af87d7175b14000b69d1553a66826d7978a8dded89bf66f69768c057e",
       "bytes": 1300
     },
     "formal/lean/Check.lean": {
@@ -181,7 +181,7 @@
       "bytes": 1406
     },
     "formal/lean/README.md": {
-      "sha256": "e40795e1a44e3a542f8b6fd9be158d0094f66522e7925d23e59731bb58980ca3",
+      "sha256": "45d4500e48ba288f69ef27309ec9dfed9397a98fc46ce6ba0d42745ccc114453",
       "bytes": 3434
     },
     "formal/lean/TrustStack.lean": {
@@ -217,8 +217,8 @@
       "bytes": 3618
     },
     "code/tools/check_manuscript_sync.py": {
-      "sha256": "8271a21e473c26e61e67a8da8a9626fcac4a4be0d12741f4099eed94aaa5313f",
-      "bytes": 8601
+      "sha256": "bc486923c50b9eef2fae092b7bd1f09650630b4bd261dcc69cc97283cf987907",
+      "bytes": 9207
     },
     "code/tools/run_all_sims_local.py": {
       "sha256": "343ec8cea30de78641839847c4be2554b76f8c4e88adee708c82dac73fe040b9",
@@ -1437,8 +1437,8 @@
       "bytes": 8577
     },
     "code/simulations/wearables_pipeline/evaluate_pilot1_concordance.py": {
-      "sha256": "531bf5e03115adc4eb8630c8eebb3b1024467226665cc98b3207b4178b8ed404",
-      "bytes": 84932
+      "sha256": "237a91adca192c845a166aeba79571932287659446add042f8d6d01e8075f7bf",
+      "bytes": 86570
     },
     "code/simulations/wearables_pipeline/fig_pilot1_30day_mock_trajectory.png": {
       "sha256": "f176bb2a61e7ab500a4db21bdcc34e24c249dbe43f6454a088c50f7a08e4c02b",

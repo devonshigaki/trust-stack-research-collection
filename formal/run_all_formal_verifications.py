@@ -91,6 +91,11 @@ def main():
             for fn in ("Tilt.lean", "MasterLaw.lean")
         )
     if os.path.exists(os.path.join(lean_dir, ".lake", "build")):
+        res_lb = subprocess.run(["lake", "build"], cwd=lean_dir, capture_output=True, text=True)
+        if res_lb.returncode != 0:
+            print("[FAIL] Lean 4 `lake build` failed!")
+            print(res_lb.stdout, res_lb.stderr)
+            sys.exit(1)
         lc_flags = ["--fresh"] if os.environ.get("LEAN_FRESH") == "1" else []
         for mod in ("TrustStack.Tilt", "TrustStack.MasterLaw"):
             res_lc = subprocess.run(["lake", "env", "leanchecker", *lc_flags, mod], cwd=lean_dir, capture_output=True, text=True)
@@ -98,31 +103,25 @@ def main():
                 print(f"[FAIL] Lean 4 leanchecker --fresh verification failed on {mod}!")
                 print(res_lc.stdout, res_lc.stderr)
                 sys.exit(1)
-        axiom_probe = (
-            "import TrustStack.Tilt\n"
-            "import TrustStack.MasterLaw\n"
-            "#print axioms TrustStack.EU_mono\n"
-            "#print axioms TrustStack.bibo_of_eps_bound\n"
-            "#print axioms TrustStack.trajClamped_mem_unit\n"
-            "#print axioms TrustStack.clamp_unit_lipschitz\n"
-            "#print axioms TrustStack.masterStepClamped_not_comm\n"
-            "#print axioms TrustStack.trajClamped_contraction_zero_input\n"
-        )
-        res_ax = subprocess.run(["lake", "env", "lean", "--stdin"], cwd=lean_dir, input=axiom_probe, capture_output=True, text=True)
+        res_ax = subprocess.run(["lake", "env", "lean", "Check.lean"], cwd=lean_dir, capture_output=True, text=True)
         if res_ax.returncode != 0 or "sorryAx" in res_ax.stdout or "sorryAx" in res_ax.stderr:
             print("[FAIL] Lean 4 axiom audit failed or detected sorryAx!")
             print(res_ax.stdout, res_ax.stderr)
             sys.exit(1)
         allowed_axioms = {"propext", "Classical.choice", "Quot.sound"}
+        axiom_lines = []
         for line in res_ax.stdout.splitlines():
             if "depends on axioms:" in line:
+                axiom_lines.append(line.strip())
                 ax_part = line.split("[", 1)[-1].rsplit("]", 1)[0]
                 used = {a.strip() for a in ax_part.split(",") if a.strip()}
                 extra = used - allowed_axioms
                 if extra:
                     print(f"[FAIL] Unexpected Lean axioms detected: {extra}")
                     sys.exit(1)
-        print("[VERIFIED] Lean 4 `lake env leanchecker --fresh` + `#print axioms` whitelist PASSED on TrustStack.{Tilt,MasterLaw} (0 sorryAx, only standard axioms).\n")
+        with open(os.path.join(lean_dir, "VERIFICATION_AXIOMS.txt"), "w", encoding="utf-8") as _axf:
+            _axf.write("\n".join(axiom_lines) + "\n")
+        print(f"[VERIFIED] Lean 4 `lake env leanchecker --fresh` + `#print axioms` whitelist PASSED on {len(axiom_lines)} theorems (0 sorryAx, only standard axioms).\n")
 
     # 3c. Run Genuine Pedersen/Schnorr NIZK Verifier (ZK-STP v8)
     print(">>> 5/5: Running Genuine secp256k1 Pedersen/Schnorr NIZK Verifier (ZK-STP v8)...")

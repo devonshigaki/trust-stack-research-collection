@@ -67,12 +67,12 @@ def main():
             m_brand = brand_re.search(txt)
             if m_brand:
                 errors.append(f"{fn}: Academic clean-room violation — commercial brand '{m_brand.group(0)}' is forbidden outside whitepaper")
-        if base == "gtt.tex" and ("v4.12.0" in txt or "32 theorems" not in txt):
-            errors.append(f"{fn}: Lean formalization section out of sync with Lean 4.35.0 (32 theorems)")
+        if base == "gtt.tex" and ("v4.12.0" in txt or "34 theorems" not in txt):
+            errors.append(f"{fn}: Lean formalization section out of sync with Lean 4.35.0 (34 theorems)")
         if base == "whitepaper.tex" and ("OpenML 42477" not in txt or "Sim W8" not in txt or "Sim W9" not in txt):
             errors.append(f"{fn}: Missing OpenML 42477 or Sim W8/W9 parity coverage")
-        if base == "tfp.tex" and ("ZK-STP v8" not in txt or "864{,}815" not in txt or "22/22" not in txt):
-            errors.append(f"{fn}: Missing ZK-STP v8 (22/22) or TLA+ 864,815-state verification coverage")
+        if base == "tfp.tex" and ("ZK-STP v8" not in txt or "4{,}748{,}555" not in txt or "24/24" not in txt):
+            errors.append(f"{fn}: Missing ZK-STP v8 (24/24) or TLA+ 4,748,555-distinct-state verification coverage")
         if fn in BIBTEX_TEX and "\\nocite{*}" not in txt:
             errors.append(f"{fn}: Missing \\nocite{{*}} (silently drops plain-text .bib references)")
         print(f"  ✓ Checked {fn}")
@@ -154,6 +154,14 @@ def main():
             if expected_v not in row:
                 errors.append(f"{fname}: '{lbl}' row '{row.strip()}' does not match JSON verdict '{expected_v}'")
     print("  ✓ Checked JSON-to-manuscript verdict parity across Sim META, K, B, X, DMN, B1")
+
+    # 6. Verify VERIFICATION_AXIOMS.txt matches Check.lean theorem count (no stale axiom deposit)
+    ax_txt = (root / "formal" / "lean" / "VERIFICATION_AXIOMS.txt").read_text(encoding="utf-8")
+    chk_txt = (root / "formal" / "lean" / "Check.lean").read_text(encoding="utf-8")
+    n_check = sum(1 for ln in chk_txt.splitlines() if ln.strip().startswith("#print axioms"))
+    n_ax = sum(1 for ln in ax_txt.splitlines() if "depends on axioms:" in ln)
+    if n_check != n_ax or n_check < 34:
+        errors.append(f"VERIFICATION_AXIOMS.txt out of sync with Check.lean ({n_ax} vs {n_check})")
 
     if errors:
         for e in errors:

@@ -392,6 +392,14 @@ def compute_rmssd_from_heartbeat_series(beat_times_sec: List[float]) -> Optional
     return float(math.sqrt(sum(d * d for d in clean_diffs) / len(clean_diffs)))
 
 
+def _safe_finite_float(raw: str, default: Optional[float] = None) -> Optional[float]:
+    try:
+        val = float(raw)
+        return val if math.isfinite(val) else default
+    except (TypeError, ValueError):
+        return default
+
+
 def parse_apple_health_xml(xml_content_or_path: str, is_file: bool = False) -> Dict[str, List[Dict[str, Any]]]:
     """
     Parses Apple Health XML content or file, extracting all 8 multimodal streams:
@@ -399,6 +407,8 @@ def parse_apple_health_xml(xml_content_or_path: str, is_file: bool = False) -> D
       - Dexcom Stelo CGM Blood Glucose
       - Confounder Filters: Carbohydrates, Calories, Workouts, Body Mass
       - Apple Journal / State of Mind Valence
+    Rejects XML ENTITY declarations (Billion Laughs / XXE defense) while allowing
+    standard Apple HealthKit <!DOCTYPE HealthData> declarations.
     """
     extracted: Dict[str, List[Dict[str, Any]]] = {
         "hrv": [],
@@ -414,8 +424,15 @@ def parse_apple_health_xml(xml_content_or_path: str, is_file: bool = False) -> D
     }
 
     if is_file:
+        with open(xml_content_or_path, "rb") as _hdr_f:
+            head_bytes = _hdr_f.read(65_536).upper()
+        if b"<!ENTITY" in head_bytes:
+            raise ValueError("Rejected XML containing ENTITY declaration")
         context = ET.iterparse(xml_content_or_path, events=("end",))
     else:
+        head_str = xml_content_or_path[:65_536].upper()
+        if "<!ENTITY" in head_str:
+            raise ValueError("Rejected XML containing ENTITY declaration")
         context = ET.iterparse(io.StringIO(xml_content_or_path), events=("end",))
 
     for _, elem in context:
@@ -557,13 +574,13 @@ def parse_apple_health_xml(xml_content_or_path: str, is_file: bool = False) -> D
             if start_epoch is not None:
                 dur_str = elem.attrib.get("duration", "0")
                 dur_unit = elem.attrib.get("durationUnit", "min")
-                raw_dur = float(dur_str) if dur_str.replace('.', '', 1).isdigit() else 0.0
+                raw_dur = _safe_finite_float(dur_str, 0.0) or 0.0
                 if str(dur_unit).lower() in ("s", "sec", "second", "seconds") or (not dur_unit and raw_dur > 300.0):
                     dur_mins = raw_dur / 60.0
                 else:
                     dur_mins = raw_dur
                 energy_str = elem.attrib.get("totalEnergyBurned", "0")
-                energy_kcal = float(energy_str) if energy_str.replace('.', '', 1).isdigit() else 0.0
+                energy_kcal = _safe_finite_float(energy_str, 0.0) or 0.0
                 mets = ((energy_kcal / max(1.0, dur_mins)) * 0.95) if dur_mins > 0 else 1.0
                 extracted["workouts"].append({
                     "timestamp_epoch": start_epoch,
@@ -586,10 +603,9 @@ def parse_apple_health_xml(xml_content_or_path: str, is_file: bool = False) -> D
                         if t_ep is not None:
                             beat_times.append(t_ep)
                         else:
-                            try:
-                                beat_times.append(float(t_str))
-                            except ValueError:
-                                pass
+                            t_f = _safe_finite_float(t_str)
+                            if t_f is not None:
+                                beat_times.append(t_f)
                 rmssd_val = compute_rmssd_from_heartbeat_series(beat_times)
                 if rmssd_val is not None:
                     extracted["hrv"].append({
@@ -606,14 +622,16 @@ def parse_apple_health_xml(xml_content_or_path: str, is_file: bool = False) -> D
             start_epoch = parse_date_to_epoch(start_str)
             if start_epoch is not None:
                 val_str = elem.attrib.get("valence", "0.0")
+                valence_val = _safe_finite_float(val_str, 0.0) or 0.0
                 extracted["state_of_mind"].append({
                     "timestamp_epoch": start_epoch,
-                    "valence": float(val_str) if val_str.replace('-', '', 1).replace('.', '', 1).isdigit() else 0.0,
+                    "valence": valence_val,
                     "journal_text": elem.attrib.get("associations", "Valence log"),
                     "source_name": elem.attrib.get("sourceName", "Apple Journal"),
                 })
             elem.clear()
 
+        elif elem.tag in ("Correlation", "ActivitySummary", "ClinicalRecord"):
             elem.clear()
 
     return extracted
@@ -1722,6 +1740,24 @@ def run_self_test() -> bool:
         t_ref = scipy_stats.ttest_1samp(sample_vec, 8.0, alternative="greater")
         assert abs(t_loc - float(t_ref.statistic)) < 1e-9 and abs(p_loc - float(t_ref.pvalue)) < 1e-9
         print("✓ SciPy Reference Parity Oracle: Exact match against scipy.stats.false_discovery_control(method='by') & ttest_1samp")
+
+    # XML Security & Scientific-Notation Oracle: DOCTYPE/ENTITY rejected & 1.2e-05 parsed accurately
+    try:
+        parse_apple_health_xml(
+            '<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe "boom">]><HealthData/>',
+            is_file=False,
+        )
+        raise AssertionError("parse_apple_health_xml failed to reject <!DOCTYPE>/<!ENTITY>")
+    except ValueError:
+        pass
+    sci_xml = (
+        '<HealthData>'
+        '<StateOfMind startDate="2026-11-01 08:00:00 +0000" valence="1.2e-01" associations="calm"/>'
+        '</HealthData>'
+    )
+    sci_parsed = parse_apple_health_xml(sci_xml, is_file=False)
+    assert len(sci_parsed["state_of_mind"]) == 1 and abs(sci_parsed["state_of_mind"][0]["valence"] - 0.12) < 1e-9
+    print("✓ XML Security & Scientific-Notation Oracle: Rejected <!DOCTYPE>/<!ENTITY> and parsed valence='1.2e-01'")
 
     print("\n" + "=" * 80)
     print("✅ SELF-TEST PASSED: ALL 13 TESTABLE PILOT & AMENDMENT HYPOTHESES & STOPPING GATES VALIDATED")
