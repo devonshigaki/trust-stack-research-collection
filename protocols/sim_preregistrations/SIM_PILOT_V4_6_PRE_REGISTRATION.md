@@ -22,7 +22,9 @@ Every physical device and active log in Stage 1 maps 1-to-1 to a simulated synth
 - Airofit Pro (`MIP`, `MEP`, `VC`; `PILOT-H9`)
 - Aranet4 ($\mathrm{CO}_2$, Temp, RH) + Outdoor $\mathrm{PM}_{2.5}$ + Philips Hue Pre-Bed Lux (`PILOT-H10`)
 - Cannabis & Caffeine PK logs, Manual Reading OCR/NLP, CoreMotion Workout Power, Apple Music DSP, Studio Acoustic eGeMAPS (`PILOT-H5`, `PILOT-H11`)
-- 6 Monthly Venous Blood Panels (`hs-CRP`, Cortisol, $\text{HbA1c}$, ApoB), 1x 30x WGS PGS/PGx (`CYP2C9`, `CYP1A2`, `FAAH`, `COMT`), Fitindex Smart Scale, Circle View PIR (`PILOT-H12`)
+- **Monthly Core Labs (Every 30d, 8:00–8:30 AM Fasted, 72h Biotin Hold):** CMP, CBC w/ Differential, Lipid Panel, hs-CRP, Fasting Insulin (HOMA-IR), Morning Serum Cortisol (`PILOT-H12`)
+- **Quarterly Add-Ons (Day 0, M3, M6 Only) & Day 0 Anchors:** HbA1c, Free/Total Testosterone + SHBG, Estradiol, TSH/Free T3/Free T4, ApoB, Ferritin, 25-OH Vitamin D, Vitamin B12; Day 0 root/tip-labeled hair lock + Sequencing.com 30x WGS (`PILOT-H12`)
+- **Behavioral, Nutrition & Blinding Standardization:** 11 MyFitnessPal Saved Meals (Meal Timestamps ON, Write-Only HealthKit), 5–7 AM & 5–7 PM Hilo/Muse charging blocks, weekly pre-yoga Airofit, 400-rep GTG + MWF PPL + M–F Yoga, pre-Day-0 melatonin cessation, no GLP-1 RA, 3 pre-Day-0 cognitive practice runs, >= 30–45 min forearm rest before MPK Mini, and strict record-only self-blinding through Month 6 (`PILOT-H1..H12`)
 
 ## 3. Frozen Falsification Criteria (C1–C9)
 - **C1 (Exertion & Pharmacological Confounder Residualization):** After subtracting CoreMotion mechanical power and Caffeine/Cannabis PK kernels, residual variance explained by workout wattage is $R^2_{\text{resid}} \le 0.0200$.

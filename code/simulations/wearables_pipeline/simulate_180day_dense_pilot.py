@@ -185,7 +185,7 @@ def run_180day_pilot_simulation(output_dir=None):
     # Stream 16: Hilo/Aktiia Cuffless BP, Throne Bristol, Fitindex Mass, Circle View PIR, Acoustic eGeMAPS
     daily_sbp_dipping_pct = np.clip(12.5 - 8.5 * allostatic_load + np.random.normal(0, 1.2, N_DAYS), 1.0, 22.0)
     daily_bristol_score = np.clip(4.0 + 1.6 * (daily_S_ev - 0.5) + np.random.normal(0, 0.4, N_DAYS), 1.0, 7.0)
-    daily_fitindex_mass_kg = 74.2 + np.random.normal(0, 0.25, N_DAYS)
+    daily_fitindex_mass_kg = 83.9 + np.random.normal(0, 0.25, N_DAYS)  # 185 lb baseline
     daily_acoustic_jitter_pct = np.clip(0.55 + 0.50 * allostatic_load + np.random.normal(0, 0.06, N_DAYS), 0.2, 2.5)
 
     # Stream 17: 6 Monthly Venous Blood Panels (Days 1, 30, 60, 90, 120, 150, 180) + Endocrine AUC

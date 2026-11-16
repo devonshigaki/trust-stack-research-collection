@@ -30,6 +30,9 @@
 				<string>com.apple.Health</string>
 				<string>com.aktiia.app</string>
 				<string>com.choosemuse.muse</string>
+				<string>com.airofit.app</string>
+				<string>com.myfitnesspal.mfp</string>
+				<string>com.apple.mobilesafari</string>
 			</array>
 			<key>enforcedSoftwareUpdateDelay</key>
 			<integer>90</integer>

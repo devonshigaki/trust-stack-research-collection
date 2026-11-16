@@ -100,7 +100,8 @@ Executing an $N=1$ 180-day dense phenotyping protocol carries a profound risk of
 ```
 
 ### A. Prefrontal Cortical Hemodynamics & Neural Synchrony (Headband)
-*   **Device:** **Muse S Athena Headband** (Newest Generation with integrated fNIRS).
+    *   **Device:** **Muse S Athena Headband** (Newest Generation with integrated fNIRS).
+    *   **Wear Mode & Charging Cadence:** Worn **overnight** for continuous sleep EEG/fNIRS plus a **weekly 5-minute resting baseline** (avoiding sweat and muscle EMG artifacts during daily calisthenics, PPL lifting, and yoga). Docked during the two daily **5:00–7:00 AM and 5:00–7:00 PM** charging windows (including weekends).
 *   **Sensors:** 5-optode bilateral prefrontal functional Near-Infrared Spectroscopy (fNIRS) array + 4-channel gold/silver-thread EEG (AF7, AF8, TP9, TP10) + reference/ground (Fpz).
 *   **Optical Wavelengths:** Triple-wavelength near-infrared LEDs: $\lambda_1 = 730\text{ nm}$, $\lambda_2 = 850\text{ nm}$, and $\lambda_3 = 660\text{ nm}$.
 *   **Sampling Frequencies:** fNIRS sampled at $64\text{ Hz}$; EEG sampled at $256\text{ Hz}$.
@@ -176,27 +177,33 @@ Executing an $N=1$ 180-day dense phenotyping protocol carries a profound risk of
 *   **Sensors:** High-precision Passive Infrared (PIR) motion detection and geofenced occupancy tracking.
 *   **Biophysical Target:** Establishes objective physical bed entry and morning bed exit ground truth, cross-validating Apple Watch accelerometer sleep staging with zero wearable contact artifacts.
 
-### L. Static Clinical Genomics (30x Whole Genome Sequencing)
-*   **Platform:** 30x Clinical Whole Genome Sequencing (WGS; Nebula Genomics / Dante Labs).
-*   **Data Footprint:** 100–120 GB uncompressed `.FASTQ`, `.BAM`, and `.VCF` files preserved on air-gapped local encrypted storage.
+### L. Static Clinical Genomics (30x Whole Genome Sequencing) & Day 0 Baseline Hair Lock
+*   **Platform:** **Sequencing.com 30x Clinical Whole Genome Sequencing (WGS)** kit ordered at Day 0 (pseudonymous kit registration + local encrypted NAS archive; cloud raw genomic files purged post-download).
+*   **Day 0 Baseline Hair Lock:** Single baseline posterior-vertex hair lock clipped at Day 0, foil-wrapped with explicit **root** and **tip** end labels, stored sealed as the retrospective pre-study HPA endocrine anchor.
+*   **Data Footprint:** 100–120 GB uncompressed `.FASTQ`/`.CRAM`, `.BAM`, and `.VCF` files preserved on air-gapped local encrypted storage.
 *   **Key Genomic Targets:**
-    1.  *Pharmacogenomics (PGx):* Hepatic CYP450 enzymes (`CYP2C9`, `CYP2C19`, `CYP3A4`, `CYP2D6`) governing cannabinoid clearance kinetics and stress hormone breakdown.
+    1.  *Pharmacogenomics (PGx):* Hepatic CYP450 enzymes (`CYP2C9`, `CYP2C19`, `CYP3A4`, `CYP2D6`, `CYP1A2` caffeine clearance) governing endogenous/dietary kinetics and stress hormone breakdown.
     2.  *Endocannabinoid System (ECS):* Fatty acid amide hydrolase (`FAAH` rs324420 C/A) and cannabinoid receptor 1 (`CNR1` rs1049353).
     3.  *Striatal Coincidence Engines:* `ADCY5`, `ADCY8`, `DRD2` (Taq1A rs1800497), `COMT` (Val158Met rs4680), and `DARPP-32` (`PPP1R1B`).
-    4.  *Polygenic Risk Scores (PRS):* Cross-referenced against Autism Spectrum Traits (iPSYCH/PGC), Bipolar Disorder, and Substance Vulnerability.
+    4.  *Polygenic Risk Scores (PRS):* Cross-referenced against Autism Spectrum Traits (iPSYCH/PGC), Bipolar Disorder, and metabolic/cardiovascular priors.
 
-### M. Serial Dynamic Blood Panels (6 Monthly Draws)
-Drawn at Day 1 (Cessation Baseline), Day 30 (Post-Acute Withdrawal), Day 60, Day 90 (Mid-Point), Day 120, Day 150, and Day 180 (Final Steady-State):
-*   *Inflammation & Vascular Strain:* High-sensitivity C-Reactive Protein ($hs\text{-CRP}$), Homocysteine, Fibrinogen.
-*   *Metabolic & Glycemic Homeostasis:* Fasting Insulin, $\text{HbA1c}$, Fasting Glucose, Uric Acid.
-*   *Cardiovascular & Lipid Architecture:* Apolipoprotein B (ApoB), Standard Lipid Panel (Total Cholesterol, Triglycerides, HDL-C, LDL-C).
-*   *Endocrine & Allostatic Axis:* Morning Cortisol (8:00 AM standardized), Free & Total Testosterone, DHEA-Sulfate, Thyroid Panel (TSH, Free T3, Free T4).
-*   *Organ Function & Cytology:* Comprehensive Metabolic Panel (CMP-14), Complete Blood Count (CBC with Differential).
+### M. Serial Dynamic Blood Panels (Quest Monthly Core + Quarterly Add-Ons)
+Ordered via Quest Diagnostics reseller (e.g., JustLabs / TestWell) and drawn at a strict **8:00–8:30 AM fasted window** every 30 days (plain water/sea salt only; **7:00 AM espresso/oat milk/honey held until post-draw**, and **72-hour Biotin / multi-vitamin washout** prior to each draw to prevent streptavidin-biotin immunoassay interference):
+*   **Monthly Core Panel (Day 0, M1, M2, M3, M4, M5, M6 — Every 30 Days):**
+    1.  *Comprehensive Metabolic Panel (CMP):* Glucose, electrolytes, hepatic transaminases (AST/ALT), and renal creatinine.
+    2.  *Complete Blood Count (CBC with Differential):* Neutrophil-to-lymphocyte ratio (NLR), hematocrit, platelets.
+    3.  *Standard Lipid Panel:* Total Cholesterol, Triglycerides, HDL-C, LDL-C.
+    4.  *High-Sensitivity CRP ($hs\text{-CRP}$):* Systemic inflammatory load.
+    5.  *Fasting Insulin:* Paired with CMP fasting glucose for **HOMA-IR** $= (\text{Insulin} \times \text{Glucose}) / 405$.
+    6.  *Morning Serum Cortisol:* 8:00–8:30 AM standardized HPA-axis output (with post-draw caffeine delay recorded as an explicit covariate).
+    *   *Pre-Registered Clinical Interpretation Rule:* Mild, non-pathological elevations in **serum creatinine** (from `5 g/day` creatine monohydrate) and **AST/ALT** (from daily `400`-rep calisthenics + MWF PPL muscle turnover) are expected and disambiguated via Cystatin C (`eGFR_cys`) / GGT / CK when indicated.
+*   **Quarterly Add-On Panel (Day 0, Month 3, and Month 6 Only):**
+    Hemoglobin A1c ($\text{HbA1c}$), Free & Total Testosterone + SHBG, Estradiol, Thyroid Panel (TSH, Free T3, Free T4), Apolipoprotein B (ApoB), Ferritin, 25-OH Vitamin D, and Vitamin B12.
 
-### N. The Unified Executive Neuro-Battery (Akai MPK Mini Controller)
-*   **Device:** **Akai Professional MPK Mini USB MIDI Controller (Class-Compliant)**.
-*   **Sensors & Actuators:** 8 backlit, velocity-sensitive thick MPC drum pads (piezoelectric force transducers capturing arrival times at sub-millisecond precision and 7-bit strike velocity $v \in [1, 127]$), 25 velocity-sensitive mini keys, and a dynamic 4-way spring-centered analog thumbstick (14-bit Pitch Bend on X-axis and 7-bit CC#1 Modulation on Y-axis).
-*   **Integration Pipeline:** Direct wired USB connection to MacBook Air / Python listener using `mido` / `CoreMIDI` at **$1000\text{ Hz}$ polling / $1\text{ ms}$ hardware interrupt timestamping** (zero wireless BLE jitter, zero audio-driver delay).
+### N. The Unified Executive Neuro-Battery (iPad Creyos/PsyToolkit + Wired USB Akai MPK Mini)
+*   **Apparatus:** **iPad** running **Creyos / PsyToolkit** executive & working-memory tasks paired with a **wired USB Akai Professional MPK Mini** controller capturing **both CoreMIDI (`MIDITimeStamp`) events and 48 kHz raw acoustic strike audio (`AVAudioTime.hostTime`)** on a shared `mach_absolute_time` clock (allowing post-hoc velocity-latency calibration $\Delta t(v) = t_{\text{midi}} - t_{\text{audio}}$ before purging raw PCM audio).
+*   **Pre-Study Practice & Forearm Rest Gate:** Complete **3 practice runs prior to Day 0**, execute standardized evening sessions **60–90 minutes before bed**, and enforce a mandatory **$\ge 30\text{–}45\text{ minute}$ forearm rest window after pull-ups/dips** so local grip fatigue does not confound striatal motor timing (`CV_ITI`).
+*   **Sensors & Actuators:** 8 backlit, velocity-sensitive thick MPC drum pads (piezoelectric force transducers capturing arrival times at sub-millisecond precision and 7-bit strike velocity $v \in [1, 127]$), 25 velocity-sensitive mini keys, and a dynamic 4-way spring-centered analog thumbstick.
 *   **Standardized Daily Objective Cognitive Battery (Executed Daily at 8:05 PM; Practice-Detrended via Days 1–14 Curve):**
     1.  *Task 1 (10 Seconds): 2D Emotion Circumplex Joystick:* The participant nudges the 4-way analog thumbstick to physicalize their momentary Core Affect ($\text{Valence } X, \text{Arousal } Y \in [-1, +1]$).
     2.  *Task 2 (60 Seconds): Striatal Internal Pacemaker Test:* Spontaneous motor tempo on MPC Pad 1 ($\text{CV}_{\text{ITI}}$ and Wing-Kristofferson $\sigma^2_{\text{clock}}, \sigma^2_{\text{motor}}$).
@@ -221,16 +228,28 @@ Drawn at Day 1 (Cessation Baseline), Day 30 (Post-Acute Withdrawal), Day 60, Day
 *   **Biophysical Target:** Correlating late-night acoustic tempo and valence with nocturnal wrist temperature (Apple Watch) to isolate mental stimulation from circadian allostatic stress (cortisol C-channel).
 
 ### R. Quantitative Respiratory Strength & Vagal Reserve (Airofit Pro)
-*   **Collection Modality:** Strictly Active Respiratory Exercise.
+*   **Collection Modality:** Strictly Active Respiratory Exercise (**Weekly Protocol**).
 *   **Apparatus:** **Airofit Pro** smart breathing trainer (differential pressure transducer via BLE / local CSV export).
-*   **Protocol:** During the 8:05 PM evening docking station (and optional morning check), the participant sits upright ($90^\circ$ orthostatic posture), seals lips around the Airofit mouthpiece, and executes three calibrated maneuvers across 3 trials (60s rest interval): Maximal Inspiratory Pressure ($\text{MIP}$, $\text{cmH}_2\text{O}$), Maximal Expiratory Pressure ($\text{MEP}$, $\text{cmH}_2\text{O}$), and Vital Capacity ($\text{VC}$, liters).
+*   **Protocol:** Executed **weekly prior to morning yoga** in an upright ($90^\circ$ orthostatic) posture: three calibrated maneuvers across 3 trials (60s rest interval): Vital Lung Capacity ($\text{VLC}/\text{VC}$, liters), Maximal Inspiratory Pressure ($\text{MIP}$, $\text{cmH}_2\text{O}$), and Maximal Expiratory Pressure ($\text{MEP}$, $\text{cmH}_2\text{O}$), with post-test display feedback minimized/masked during blinded Stage 1.
 *   **Ingestion Pipeline:** Logged directly via BLE/CSV into the `respiratory_strength_stream` (`airofit_mip_cmh2o`, `airofit_mep_cmh2o`, `airofit_vc_liters`) table in `trust_wearables_edge.db`.
-*   **Biophysical Target:** Replaces qualitative incentive spirometry with quantitative diaphragmatic force ($\text{MIP}/\text{MEP}$) and vital capacity ($\text{VC}$), probing parasympathetic vagal-brake reserve and respiratory fatigue under allostatic load.
+*   **Biophysical Target:** Replaces qualitative incentive spirometry with quantitative diaphragmatic force ($\text{MIP}/\text{MEP}$) and vital capacity ($\text{VLC}/\text{VC}$), probing parasympathetic vagal-brake reserve and respiratory fatigue under allostatic load.
 
-### T. Pharmacokinetic & Lifestyle Exposure Logging (Cannabis THC/CBD & Caffeine)
-*   **Collection Modality:** Timestamped Event Logging + Pharmacokinetic (PK) Kernel Deconvolution.
-*   **Parameters:** Every cannabis exposure (`cannabis_thc_mg`, `cannabis_cbd_mg`, route, timestamp) and caffeine intake (`caffeine_mg`, beverage type, timestamp) is logged in `pharmacological_exposure_stream`.
-*   **Biophysical Target:** Computes continuous circulating caffeine concentration ($t_{1/2} \approx 5.0\text{ h}$, adjusted by `CYP1A2` genotype) and biphasic cannabinoid exposure/washout ($\tau_{\mathrm{CB1}} \approx 48\text{ h}$, adjusted by `CYP2C9`/`CYP3A4`/`FAAH` PGx from WGS), preventing exogenous stimulants or endocannabinoid shifts from confounding HRV, REM sleep, or PVT-B reaction times.
+### T. Behavioral Consistency, Nutrition & Pharmacological Standardization ($N = 1$ Unmedicated Baseline)
+*   **Subject Profile & Ergonomics:** `6'0"`, `185 lb` (`83.9 kg`) male at `10–20%` body fat, working at a standing desk with logged **Bosu ball** and **saddle chair** posture transitions.
+*   **Standardized Training Protocol:**
+    1.  *Daily Grease-the-Groove (GTG):* `100` pull-ups, `100` push-ups, `100` dips, and `100` squats daily in sets of `10` reps (each set logged with timestamp so sub-`50 kcal` autonomic and forearm effects are modeled explicitly).
+    2.  *Mon / Wed / Fri:* Push–Pull–Legs (PPL) resistance training (Apple Watch worn for active HR zones and recovery).
+    3.  *Mon – Fri:* Daily morning yoga (Muse S Athena & Hilo Band docked).
+*   **Daily Nutrition & Supplement Stack (`11` MyFitnessPal Saved Meals, Write-Only HealthKit):**
+    1.  *5:00 AM:* Wake; lemon and sea-salt water.
+    2.  *7:00 AM (Meal Event #1):* Two shots of espresso (`~140–150 mg` caffeine) with `100 ml` oat milk and `10 g` honey (explicitly modeled as an enzymatic oat-maltose + honey glycemic event and timed caffeine PK input).
+    3.  *10:00 AM ("Break-Fast", Meal Event #2):* Garden of Life Raw Organic Meal shake blended with `300 ml` oat milk, `100 ml` kefir, and half a bag of spinach, taken with the standardized 5-supplement stack: Sports Research Micronized Creatine Monohydrate (`5 g`), Doctor's Best Magnesium Lysinate Glycinate (`200–400 mg`), Sports Research Plant-Based D3 (`5,000 IU`) + K2 (`100 mcg` MK-7), Sports Research Omega-3 Krill Oil (`1,000 mg`; `196 mg` combined EPA/DHA), and Garden of Life mykind Organics Once Daily Multi (`1,000 IU` D3 + B-complex/vitamins; **held 72h pre-Quest draw** to prevent biotin assay interference).
+    4.  *Afternoon / Evening Meals (Meals #3–#11):* Fixed 9-item repeatable library (wings, tacos, chicken noodle soup, chicken/shrimp parmesan, fish/rice, chicken/pork/potatoes, fruit/yogurt, banana bread, cookie/ice cream) pre-built as Saved Meals in MyFitnessPal with **Meal Timestamps ON**, calorie/macro alerts **OFF**, and Apple Health sync set strictly to **Write-Only**.
+*   **Excluded Pharmacological Confounders:** Dropped `12 mg` exogenous melatonin prior to Day 0 to preserve endogenous sleep EEG/circadian rhythms, and deferred GLP-1 receptor agonists so the 6-month trajectory reflects a clean, unmedicated physiological baseline.
+
+### U. Strict Record-Only Self-Blinding & Cryptographic Seal-on-Ingest
+*   **Record-Only Rule:** Push notifications, home-screen widgets, and summary trend charts are disabled across **Apple Health, Dexcom Stelo, Hilo, Muse, Airofit, MyFitnessPal, and Quest portals** until Month 6 completion; daily operator checks are restricted solely to **hardware battery %, electrode contact (`SCI >= 0.80`), and non-zero ingestion row counts** (zero metric values exposed).
+*   **Blinded Calibration & Safety Gate:** Monthly mandatory Hilo brachial cuff calibration and 15-day Stelo pairing follow an opaque-screen pairing SOP; Watch HRV-triggered EMA unblinding prompts are suppressed during blinded Stage 1; Quest panic alerts route exclusively to the independent clinical monitor rather than breaking subject blinding.
 
 ### S. Segmental Scalp Hair Metabolomics (LC-MS/MS & ICP-MS)
 *   **Collection Modality:** Active Harvest of a Passive Retrospective Biological Matrix.
@@ -294,38 +313,38 @@ To ensure that physiological shifts are driven by psychological and financial tr
     Quantifies ambient artificial light exposure to control for nocturnal melatonin suppression:
     $$\text{Zeitgeber}(t) = \ln(1 + \text{Lux}) \cdot \left(\frac{\text{CCT}}{5500\text{ K}}\right)$$
 
-### B. Daily Operational Schedule & The 8-Minute Evening Sequence
-To ensure 180 days of continuous compliance without skin breakdown or battery depletion, operations follow two daily maintenance windows with a standardized 8-minute evening cognitive docking sequence:
+### B. Daily Operational Schedule, Charging Windows & Evening Battery
+To ensure 180 days of continuous compliance without skin breakdown, motion artifacts, or battery depletion, operations follow two fixed daily charging blocks (including weekends):
 
 ```
-                      DAILY SENSOR & MAINTENANCE TIMELINE
+                      DAILY SENSOR, TRAINING & CHARGING TIMELINE (N = 1)
 ┌───────────────────────────────────────────────────────────────────────────────┐
-│ 08:00 AM – 10:00 AM | CHARGING & MAINTENANCE BLOCK #1                         │
-│ • Headband off: Muse S Athena pod placed on USB charging cradle.              │
-│ • Morning Weigh-in: Fasted weigh-in on Fitindex ES-26M (Weight, Fat %, Water) │
-│ • Physical Exercise / Hygiene: Apple Watch + Stelo track cardiac/glucose load.│
-│ • Skin Hygiene: Shower, clean forehead with gentle micellar water/alcohol.    │
+│ 05:00 AM – 07:00 AM | WAKE, HYDRATION & CHARGING WINDOW #1                    │
+│ • 05:00 AM: Wake; lemon & sea-salt water; fasted Fitindex weigh-in (185 lb).  │
+│ • Hardware Docked: Hilo Band + Muse S Athena on chargers (avoids motion/EMG). │
+│ • Weekly (Pre-Yoga): Standardized Airofit Pro test (VLC, MIP, MEP).           │
+│ • Mon–Fri: Morning yoga; Mon/Wed/Fri: PPL training (Apple Watch worn).        │
 ├───────────────────────────────────────────────────────────────────────────────┤
-│ 10:00 AM – 08:00 PM | ACTIVE EXECUTIVE MONITORING BLOCK #1 (10 HOURS)         │
-│ • Strap Muse Athena: fNIRS + EEG active during legal, business, and trading.  │
-│ • Plaid API tracks transaction execution timestamps and trade sizing.         │
-│ • Throne passively logs enteric motility (Bristol score) and hydration index. │
+│ 07:00 AM – 05:00 PM | ACTIVE DAYTIME WINDOW (GREASE-THE-GROOVE + DESK)        │
+│ • 07:00 AM: 2x espresso + 100ml oat milk + 10g honey (held until post-draw on │
+│   monthly 8:00–8:30 AM Quest blood-draw mornings).                            │
+│ • 10:00 AM: Raw Organic Meal shake + 300ml oat milk + 100ml kefir + spinach   │
+│   + 5-supplement stack (Creatine 5g, Mg 200–400mg, D3/K2, Krill, Multi).      │
+│ • Daylong: Standing desk (Bosu/saddle posture logged); 100 each pull-up/push- │
+│   up/dip/squat in sets of 10; 24/7 Dexcom Stelo CGM + Apple Watch + Hilo Band.│
 ├───────────────────────────────────────────────────────────────────────────────┤
-│ 08:00 PM – 10:00 PM | CHARGING & MAINTENANCE BLOCK #2 (THE 8-MINUTE STATION)  │
-│ • 08:00 PM: Headband off; place Muse pod on charger; swap fabric strap.       │
-│ • 08:05 PM: Run ./run_evening_station.py (THE UNIFIED 8-MINUTE DOCKING RIG):  │
-│   - Task 1 (10s): 2D Emotion Circumplex Joystick (MPK Mini 4-Way Thumbstick)  │
-│   - Task 2 (60s): Striatal Internal Pacemaker Test (FTT on MPC Drum Pad 1)    │
-│   - Task 3 (2m):  NASA Brief Psychomotor Vigilance Task (PVT-B on Pad 1)      │
-│   - Task 4 (2m):  Go / No-Go Executive Inhibitory Control (Pad 1 vs Pad 2)    │
-│   - Task 5 (3m):  Spoken Video Reflection (Brio 4K + Blue Yeti Nano on foam)  │
-│ • 08:13 PM: Docking complete. Remaining 107 minutes are 100% free time.       │
+│ 05:00 PM – 07:00 PM | CHARGING WINDOW #2 & EVENING MEALS                      │
+│ • Hardware Docked: Hilo Band + Muse S Athena on chargers (including weekends).│
+│ • Rotating repeatable evening meal & dessert from fixed 9-meal MFP library.   │
 ├───────────────────────────────────────────────────────────────────────────────┤
-│ 10:00 PM – 08:00 AM | NOCTURNAL SLEEP MONITORING BLOCK #2 (10 HOURS)          │
-│ • Re-strap Dry Muse Athena: Sleep staging, frontal delta SWS, and REM rebound.│
-│ • Dual-Layer Sleep Tracking: Apple Watch S8 (sleep stages/wrist temp) +       │
-│   Logitech Circle View (PIR bedroom presence and bed exit/entry ground truth).│
-│ • Aktiia tracks nocturnal blood pressure dipping percentage.                  │
+│ 07:30 PM – 08:30 PM | EVENING COGNITIVE & MOTOR BATTERY (60–90 MIN PRE-BED)   │
+│ • Forearm Rest Gate: >= 30–45 min after last pull-up/dip GTG set.             │
+│ • iPad (Creyos / PsyToolkit executive + working memory) & wired USB Akai MPK  │
+│   Mini tapping (CoreMIDI + 48 kHz raw audio synced; raw PCM purged after).    │
+├───────────────────────────────────────────────────────────────────────────────┤
+│ 09:00 PM – 05:00 AM | NOCTURNAL SLEEP MONITORING (8 HOURS, BLINDED)           │
+│ • Overnight Muse S Athena (sleep EEG/fNIRS + weekly 5-min resting baseline) + │
+│   Apple Watch S8 + Hilo Band (nocturnal BP dipping) + Dexcom Stelo CGM 24/7.  │
 └───────────────────────────────────────────────────────────────────────────────┘
 ```
 

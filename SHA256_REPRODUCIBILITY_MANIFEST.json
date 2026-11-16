@@ -1,11 +1,11 @@
 {
   "release": "v4.5",
-  "timestamp": "2026-11-16T17:30:18Z",
+  "timestamp": "2026-11-16T17:45:10Z",
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.5",
   "total_files_hashed": 1053,
-  "total_manifest_size_mb": 261.78,
+  "total_manifest_size_mb": 261.8,
   "automated_ci_tasks_verified": 57,
   "files": {
     "CITATION.cff": {
@@ -1433,12 +1433,12 @@
       "bytes": 3185
     },
     "code/simulations/wearables_pipeline/daily_expanded_telemetry_2026-11-10.parquet": {
-      "sha256": "259b35455818a4ab7e0151b5006be1b878ebbf9203b336cf5c3911b2c02b1b72",
-      "bytes": 8577
+      "sha256": "56d85972d37bb94062d2094a8937f77162fbbb98e93b425b482c82d370c9ff2a",
+      "bytes": 12756
     },
     "code/simulations/wearables_pipeline/evaluate_pilot1_concordance.py": {
-      "sha256": "787c9045b58813b6614c44ac6766d5de2e5cc3ae31d3dbeff89acbd074800d3e",
-      "bytes": 89796
+      "sha256": "732ed142e1dd84b53ab102f7d2225411e351f5606e77230dfc6d4008c32f3090",
+      "bytes": 92502
     },
     "code/simulations/wearables_pipeline/fig_pilot1_30day_mock_trajectory.png": {
       "sha256": "f176bb2a61e7ab500a4db21bdcc34e24c249dbe43f6454a088c50f7a08e4c02b",
@@ -1453,12 +1453,12 @@
       "bytes": 695207
     },
     "code/simulations/wearables_pipeline/harvest_expanded_telemetry.py": {
-      "sha256": "de7c1bd9d3832f3cd39a0c6f0063582ca5a9725e451e3a3893aef6437dcc35ab",
-      "bytes": 13837
+      "sha256": "12f12441e1144844745d1a25f60781c9ec6ee69c8e75ce0e4b013fff4e3686e8",
+      "bytes": 20211
     },
     "code/simulations/wearables_pipeline/harvest_telemetry.py": {
-      "sha256": "4e2498f8db149b62831a831b29a2307d8f31ed70cdc6b8f8cfc796db585f7535",
-      "bytes": 9143
+      "sha256": "631e000279b2c7a27b947317c8a3d7d32ecd7aaae02decd54c0921c10ec837a9",
+      "bytes": 9763
     },
     "code/simulations/wearables_pipeline/process_fnirs_mbll.py": {
       "sha256": "40b5763cd576979d7d3069cebf9c093856c6b4e0fc9983e72a06235edb63c35d",
@@ -1481,8 +1481,8 @@
       "bytes": 13499
     },
     "code/simulations/wearables_pipeline/simulate_180day_dense_pilot.py": {
-      "sha256": "4bff82e4c8f3f173412915a6b19872b13eb41224e3f5e9970121d31b187b7231",
-      "bytes": 29440
+      "sha256": "91cb9e66aa7d2314847dd28d327878af90ef16af21cd3013ce4c1072107f6e18",
+      "bytes": 29459
     },
     "code/simulations/wearables_pipeline/simulate_30day_dense_pilot.py": {
       "sha256": "524930e08579fa854ec7c2f1976fb4e479b4169f24a09920f848ebb97c14ffa5",
@@ -4093,8 +4093,8 @@
       "bytes": 11028
     },
     "protocols/DOCAS_PILOT_1_HUMAN_PROTOCOL.md": {
-      "sha256": "8295d430880823d8635b07d1885b0cbfca5f33359ccba3339cb538bdd47944f5",
-      "bytes": 57143
+      "sha256": "26ad197ee83f20357b4450f8a33914b95b5c2c0caf726f269dde0f9c1c7113e9",
+      "bytes": 61826
     },
     "protocols/DOCAS_PILOT_1_PROOF_OF_CONCEPT.md": {
       "sha256": "7fb6ec6b157bc76fe0834f61fde84fb82d73063ca699bf24c34908fab306e1ce",
@@ -4193,8 +4193,8 @@
       "bytes": 3307
     },
     "protocols/sim_preregistrations/SIM_PILOT_V4_6_PRE_REGISTRATION.md": {
-      "sha256": "687992b844f0b08fe35a3314cc470909ebcbb07b380ebdc1839429d423308848",
-      "bytes": 5063
+      "sha256": "2aa217442ff483c220f85818232a2104adc389899d84008c1567d422b7e31b3c",
+      "bytes": 5750
     },
     "protocols/sim_preregistrations/SIM_P_GAP_CLOSURE_PRE_REGISTRATION.md": {
       "sha256": "906240fa5ef9ee97f2e66c173d0fbec7c3d780f4c0b74b0d5269b70571a166b4",
@@ -4205,8 +4205,8 @@
       "bytes": 3681
     },
     "protocols/irb/IRB_NHSR_EXEMPTION_APPLICATION.md": {
-      "sha256": "3ca5043118d23eb8f886a14efc457edeab2e7f881b4075288c8acfc3f930850c",
-      "bytes": 6923
+      "sha256": "5ac86933598ca09e4e4d9a3938321f3cb4bf58f0d01d443e9befdfbc16f9f0cf",
+      "bytes": 7555
     },
     "protocols/ios_research_kiosk/uniffi_bridge/Cargo.toml": {
       "sha256": "8b64b0619f6a9762d3d4728ec3f8e65476181c2d8230f39051f31d5981253439",

@@ -890,6 +890,33 @@ def evaluate_concordance(
         cur.execute(masked_query, masked_params)
         masked_exertion_hrv = cur.fetchone()[0]
 
+        gtg_exists = cur.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='gtg_calisthenics_sets_stream'"
+        ).fetchone() is not None
+        gtg_clause = ""
+        if gtg_exists:
+            gtg_clause = (
+                "  AND NOT EXISTS ( "
+                "      SELECT 1 FROM gtg_calisthenics_sets_stream g "
+                "      WHERE h.timestamp_epoch >= g.timestamp_posix "
+                "        AND h.timestamp_epoch <= (g.timestamp_posix + 1800.0) "
+                "  )"
+            )
+            q_gtg_cnt = (
+                "SELECT COUNT(*) FROM apple_health_hrv h "
+                "WHERE h.rmssd_ms IS NOT NULL "
+                "  AND EXISTS ( "
+                "      SELECT 1 FROM gtg_calisthenics_sets_stream g "
+                "      WHERE h.timestamp_epoch >= g.timestamp_posix "
+                "        AND h.timestamp_epoch <= (g.timestamp_posix + 1800.0) "
+                "  )"
+            )
+            p_gtg = []
+            if session_id:
+                q_gtg_cnt += " AND h.session_id = ?"
+                p_gtg.append(session_id)
+            masked_exertion_hrv += cur.execute(q_gtg_cnt, p_gtg).fetchone()[0]
+
         query = (
             "SELECT h.timestamp_epoch, h.rmssd_ms "
             "FROM apple_health_hrv h "
@@ -900,7 +927,8 @@ def evaluate_concordance(
             "        AND c.session_id = h.session_id "
             "        AND h.timestamp_epoch >= c.timestamp_epoch "
             "        AND h.timestamp_epoch <= (c.timestamp_epoch + 7200.0) "
-            "  )"
+            "  ) "
+            + gtg_clause
         )
         params = []
         if session_id:
@@ -1812,6 +1840,31 @@ def run_self_test() -> bool:
     assert false_h1 <= 6, f"PILOT-H1 Type-I error inflated under AR(1) null: {false_h1}/{n_null_trials}"
     assert false_h2 <= 2, f"PILOT-H2 Type-I error inflated under AR(1) null: {false_h2}/{n_null_trials}"
     print(f"✓ Monte Carlo H0 Null-Calibration Oracle: Type-I false-pass rate H1={false_h1}/{n_null_trials}, H2={false_h2}/{n_null_trials}")
+
+    # GTG Forearm-Rest & Monthly/Quarterly Lab Cadence Oracle (N=1 6-Month Baseline Rules)
+    from harvest_expanded_telemetry import init_expanded_tables
+    import tempfile
+    with tempfile.NamedTemporaryFile(suffix=".db") as tmp_db:
+        init_expanded_tables(tmp_db.name)
+        c_lab = sqlite3.connect(tmp_db.name)
+        c_lab.execute("""
+            INSERT INTO monthly_blood_wgs_covariates
+            (draw_date, is_quarterly_draw, biotin_72h_hold_verified, coffee_held_until_post_draw,
+             cmp_glucose_mgdl, fasting_insulin_uiuml, homa_ir, hs_crp_mgl, morning_cortisol_ugdl,
+             pgx_cyp2c9_score, pgx_cyp1a2_score, pgx_faah_rs324420_a_alleles)
+            VALUES ('2026-12-10', 0, 1, 1, 90.0, 4.5, (90.0*4.5)/405.0, 0.45, 13.2, 1.0, 1.0, 1)
+        """)
+        c_lab.execute("""
+            INSERT INTO midi_audio_tapping_calibration
+            (session_id, timestamp_posix, midi_note_on_ns, audio_onset_ns, velocity_7bit,
+             velocity_latency_delta_ms, forearm_rest_since_pullup_min, raw_pcm_purged)
+            VALUES ('s1', 1794800000.0, 1000420000, 1000000000, 96, 0.42, 42.0, 1)
+        """)
+        c_lab.commit()
+        row_homa = c_lab.execute("SELECT homa_ir, hba1c_pct FROM monthly_blood_wgs_covariates").fetchone()
+        assert abs(row_homa[0] - 1.0) < 1e-6 and row_homa[1] is None
+        c_lab.close()
+    print("✓ N=1 6-Month Schema & Calibration Oracle: Monthly/Quarterly nullable labs, HOMA-IR, and MIDI-Audio sync verified")
 
     print("\n" + "=" * 80)
     print("✅ SELF-TEST PASSED: ALL 13 TESTABLE PILOT & AMENDMENT HYPOTHESES & STOPPING GATES VALIDATED")

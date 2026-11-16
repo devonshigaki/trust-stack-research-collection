@@ -44,21 +44,24 @@ def aggregate_daily_telemetry(date_str: str, out_dir: str = None) -> str:
     else:
         df["phase_label"] = "phase_2_ecological_contrasts"
 
-    # 3. Simulate Multi-Sensor Stream Ingestion (Reflecting Real Biophysical Distributions)
+    # 3. Simulate Multi-Sensor Stream Ingestion (Reflecting Real N=1 6-Month Baseline Schedule)
     np.random.seed(42 + day_number)
     N = len(df)
+    hours = df["timestamp"].dt.hour
+    charging_mask = ((hours >= 5) & (hours < 7)) | ((hours >= 17) & (hours < 19))
+    df["is_scheduled_charging_window"] = charging_mask.astype(int)
 
-    # (A) Autonomic: Aktiia Continuous BP & Apple Watch S8 HRV
-    df["systolic_bp"] = np.random.normal(loc=121.5, scale=4.5, size=N)
-    df["diastolic_bp"] = np.random.normal(loc=78.2, scale=3.8, size=N)
+    # (A) Autonomic: Hilo/Aktiia Continuous BP (docked 5-7 AM & 5-7 PM) & Apple Watch S8 HRV
+    df["systolic_bp"] = np.where(charging_mask, np.nan, np.random.normal(loc=121.5, scale=4.5, size=N))
+    df["diastolic_bp"] = np.where(charging_mask, np.nan, np.random.normal(loc=78.2, scale=3.8, size=N))
     df["hrv_rmssd"] = np.random.normal(loc=48.5, scale=8.0, size=N)
     df["resting_hr"] = np.random.normal(loc=62.0, scale=4.0, size=N)
     df["wrist_temp_dev"] = np.random.normal(loc=0.02, scale=0.05, size=N)
 
-    # (B) Neuro: Muse S Athena Prefrontal fNIRS (HbO2) & EEG
-    df["fnirs_hbo2_prefrontal"] = np.random.normal(loc=98.2, scale=1.1, size=N)
-    df["fnirs_hbr_prefrontal"] = np.random.normal(loc=42.1, scale=0.8, size=N)
-    df["eeg_theta_beta_ratio"] = np.random.normal(loc=2.1, scale=0.25, size=N)
+    # (B) Neuro: Muse S Athena Overnight Sleep EEG/fNIRS + Weekly 5-min Resting (docked 5-7 AM & 5-7 PM)
+    df["fnirs_hbo2_prefrontal"] = np.where(charging_mask, np.nan, np.random.normal(loc=98.2, scale=1.1, size=N))
+    df["fnirs_hbr_prefrontal"] = np.where(charging_mask, np.nan, np.random.normal(loc=42.1, scale=0.8, size=N))
+    df["eeg_theta_beta_ratio"] = np.where(charging_mask, np.nan, np.random.normal(loc=2.1, scale=0.25, size=N))
 
     # (C) Metabolic: Dexcom Stelo Interstitial Glucose (5-min cadence interpolated to 1-min)
     df["interstitial_glucose"] = np.random.normal(loc=94.5, scale=7.2, size=N)
@@ -85,11 +88,11 @@ def aggregate_daily_telemetry(date_str: str, out_dir: str = None) -> str:
         df.loc[v_idx, "bristol_stool_score"] = 4.0 # Normal smooth type
         df.loc[v_idx, "hydration_index"] = 92.0
 
-    # (F) Somatic Stationarity: Fitindex Smart Scale ES-26M (Morning fasted @ 07:15)
-    df["smart_scale_weight_kg"] = 74.2 + np.random.normal(0, 0.2)
-    df["smart_scale_bmi"] = 22.8
-    df["smart_scale_body_fat_pct"] = 14.8
-    df["smart_scale_lean_mass_kg"] = 63.2
+    # (F) Somatic Stationarity: Fitindex Smart Scale (6'0", 185 lb = 83.9 kg, 10-20% BF @ 5:05 AM fasted)
+    df["smart_scale_weight_kg"] = 83.9 + np.random.normal(0, 0.25)
+    df["smart_scale_bmi"] = 25.1
+    df["smart_scale_body_fat_pct"] = 15.2
+    df["smart_scale_lean_mass_kg"] = 71.1
 
     # (G) Financial Execution: Plaid API Stream
     df["plaid_transaction_flag"] = 0
@@ -105,16 +108,18 @@ def aggregate_daily_telemetry(date_str: str, out_dir: str = None) -> str:
         sip_idx = sip_hour * 60 + int(np.random.uniform(5, 45))
         df.loc[sip_idx, "water_intake_ml"] = float(np.random.normal(220, 25))
 
-    # (I) Respiratory Strength: Airofit Pro (MIP, MEP, VC) @ 8:05 PM Evening Station
+    # (I) Respiratory Strength: Weekly Pre-Yoga Airofit Pro (6:45 AM) & Evening iPad/MPK (7:45 PM)
     df["airofit_mip_cmh2o"] = np.nan
     df["airofit_mep_cmh2o"] = np.nan
     df["airofit_vc_liters"] = np.nan
-    ev_idx = 20 * 60 + 5
-    df.loc[ev_idx, "airofit_mip_cmh2o"] = float(np.random.normal(108.0, 4.0))
-    df.loc[ev_idx, "airofit_mep_cmh2o"] = float(np.random.normal(132.0, 5.0))
-    df.loc[ev_idx, "airofit_vc_liters"] = float(np.random.normal(4.85, 0.12))
+    if day_number % 7 == 1:
+        am_idx = 6 * 60 + 45
+        df.loc[am_idx, "airofit_mip_cmh2o"] = float(np.random.normal(108.0, 4.0))
+        df.loc[am_idx, "airofit_mep_cmh2o"] = float(np.random.normal(132.0, 5.0))
+        df.loc[am_idx, "airofit_vc_liters"] = float(np.random.normal(4.85, 0.12))
 
-    # (J) Objective Cognitive Battery (Wired 1000Hz USB MIDI: PVT-B, 2-Back, Stroop)
+    # (J) Objective Cognitive Battery (60-90 min pre-bed @ 7:45 PM: iPad Creyos/PsyToolkit + wired Akai MPK Mini)
+    ev_idx = 19 * 60 + 45
     df["pvt_median_rt_ms"] = np.nan
     df["nback_d_prime"] = np.nan
     df["stroop_interference_ms"] = np.nan
@@ -122,14 +127,14 @@ def aggregate_daily_telemetry(date_str: str, out_dir: str = None) -> str:
     df.loc[ev_idx, "nback_d_prime"] = float(2.6 - 0.8 * np.exp(-max(day_number, 1) / 4.5) + np.random.normal(0, 0.12))
     df.loc[ev_idx, "stroop_interference_ms"] = float(48.0 + 20.0 * np.exp(-max(day_number, 1) / 4.5) + np.random.normal(0, 5.0))
 
-    # (K) Pharmacological Exposure Logs (Cannabis THC/CBD & Caffeine PK)
+    # (K) Pharmacological Exposure Logs (7:00 AM Espresso + Oat Milk + Honey; Unmedicated: 0 melatonin/GLP-1)
     df["cannabis_thc_mg"] = 0.0
     df["cannabis_cbd_mg"] = 0.0
     df["caffeine_mg"] = 0.0
-    df.loc[8 * 60 + 15, "caffeine_mg"] = 140.0
+    df.loc[7 * 60, "caffeine_mg"] = 145.0
 
-    # (L) Bedroom PIR & Privacy Enforcement Flags (Zero Raw Audio/Video, Minor Excluded)
-    df["bedroom_pir_motion"] = np.where((df.index >= 23 * 60) | (df.index < 7 * 60), 0, 1)
+    # (L) Bedroom PIR & Privacy Enforcement Flags (9:00 PM - 5:00 AM sleep, Zero Raw Audio/Video, Minor Excluded)
+    df["bedroom_pir_motion"] = np.where((df.index >= 21 * 60) | (df.index < 5 * 60), 0, 1)
     df["minor_exclusion_verified"] = 1
     df["raw_media_purged"] = 1
 

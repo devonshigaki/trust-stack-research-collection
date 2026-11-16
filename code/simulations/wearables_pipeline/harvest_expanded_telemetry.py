@@ -132,15 +132,122 @@ def init_expanded_tables(db_path: str):
     CREATE TABLE IF NOT EXISTS monthly_blood_wgs_covariates (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         draw_date TEXT NOT NULL,
+        is_quarterly_draw INTEGER NOT NULL DEFAULT 0,
+        biotin_72h_hold_verified INTEGER NOT NULL DEFAULT 1,
+        coffee_held_until_post_draw INTEGER NOT NULL DEFAULT 1,
+        cmp_glucose_mgdl REAL,
+        cmp_creatinine_mgdl REAL,
+        cmp_ast_ul REAL,
+        cmp_alt_ul REAL,
+        cmp_calcium_mgdl REAL,
+        cbc_wbc REAL,
+        ldl_mgdl REAL,
+        hdl_mgdl REAL,
+        triglycerides_mgdl REAL,
+        fasting_insulin_uiuml REAL,
+        homa_ir REAL,
         hs_crp_mgl REAL NOT NULL,
         morning_cortisol_ugdl REAL NOT NULL,
-        hba1c_pct REAL NOT NULL,
-        apob_mgdl REAL NOT NULL,
+        hba1c_pct REAL,
+        apob_mgdl REAL,
+        total_testosterone_ngdl REAL,
+        free_testosterone_pgml REAL,
+        shbg_nmoll REAL,
+        estradiol_pgml REAL,
+        tsh_miu_l REAL,
+        free_t3_pgml REAL,
+        free_t4_ngdl REAL,
+        ferritin_ngml REAL,
+        vitamin_d_25oh_ngml REAL,
+        vitamin_b12_pgml REAL,
+        wgs_provider TEXT NOT NULL DEFAULT 'Sequencing.com',
         pgx_cyp2c9_score REAL NOT NULL,
         pgx_cyp1a2_score REAL NOT NULL,
         pgx_faah_rs324420_a_alleles INTEGER NOT NULL,
         minor_exclusion_verified INTEGER NOT NULL DEFAULT 1,
         raw_media_purged INTEGER NOT NULL DEFAULT 1
+    );
+    """)
+    # Migrate legacy monthly_blood_wgs_covariates table if pre-existing NOT NULL schema lacks nullable quarterly support
+    existing_blood_cols = {c[1]: c[3] for c in cur.execute("PRAGMA table_info(monthly_blood_wgs_covariates)").fetchall()}
+    if "is_quarterly_draw" not in existing_blood_cols or existing_blood_cols.get("hba1c_pct", 0) == 1:
+        cur.execute("DROP TABLE IF EXISTS monthly_blood_wgs_covariates")
+        cur.execute("""
+        CREATE TABLE monthly_blood_wgs_covariates (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            draw_date TEXT NOT NULL,
+            is_quarterly_draw INTEGER NOT NULL DEFAULT 0,
+            biotin_72h_hold_verified INTEGER NOT NULL DEFAULT 1,
+            coffee_held_until_post_draw INTEGER NOT NULL DEFAULT 1,
+            cmp_glucose_mgdl REAL,
+            cmp_creatinine_mgdl REAL,
+            cmp_ast_ul REAL,
+            cmp_alt_ul REAL,
+            cmp_calcium_mgdl REAL,
+            cbc_wbc REAL,
+            ldl_mgdl REAL,
+            hdl_mgdl REAL,
+            triglycerides_mgdl REAL,
+            fasting_insulin_uiuml REAL,
+            homa_ir REAL,
+            hs_crp_mgl REAL NOT NULL,
+            morning_cortisol_ugdl REAL NOT NULL,
+            hba1c_pct REAL,
+            apob_mgdl REAL,
+            total_testosterone_ngdl REAL,
+            free_testosterone_pgml REAL,
+            shbg_nmoll REAL,
+            estradiol_pgml REAL,
+            tsh_miu_l REAL,
+            free_t3_pgml REAL,
+            free_t4_ngdl REAL,
+            ferritin_ngml REAL,
+            vitamin_d_25oh_ngml REAL,
+            vitamin_b12_pgml REAL,
+            wgs_provider TEXT NOT NULL DEFAULT 'Sequencing.com',
+            pgx_cyp2c9_score REAL NOT NULL,
+            pgx_cyp1a2_score REAL NOT NULL,
+            pgx_faah_rs324420_a_alleles INTEGER NOT NULL,
+            minor_exclusion_verified INTEGER NOT NULL DEFAULT 1,
+            raw_media_purged INTEGER NOT NULL DEFAULT 1
+        );
+        """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS nutrition_saved_meals_stream (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        meal_id INTEGER NOT NULL CHECK(meal_id BETWEEN 1 AND 11),
+        meal_label TEXT NOT NULL,
+        timestamp_posix REAL NOT NULL,
+        caffeine_mg REAL DEFAULT 0.0,
+        oat_milk_ml REAL DEFAULT 0.0,
+        honey_g REAL DEFAULT 0.0,
+        supplement_stack_taken INTEGER NOT NULL DEFAULT 0,
+        mfp_write_only_healthkit INTEGER NOT NULL DEFAULT 1
+    );
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS gtg_calisthenics_sets_stream (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp_posix REAL NOT NULL,
+        exercise TEXT NOT NULL,
+        reps INTEGER NOT NULL,
+        desk_posture TEXT DEFAULT 'standing'
+    );
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS midi_audio_tapping_calibration (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        session_id TEXT NOT NULL,
+        timestamp_posix REAL NOT NULL,
+        midi_note_on_ns INTEGER NOT NULL,
+        audio_onset_ns INTEGER NOT NULL,
+        velocity_7bit INTEGER NOT NULL CHECK(velocity_7bit BETWEEN 1 AND 127),
+        velocity_latency_delta_ms REAL NOT NULL,
+        forearm_rest_since_pullup_min REAL NOT NULL,
+        raw_pcm_purged INTEGER NOT NULL DEFAULT 1
     );
     """)
 
@@ -166,7 +273,7 @@ def init_expanded_tables(db_path: str):
     conn.commit()
     conn.close()
 
-def harvest_expanded_daily_data(date_str: str, out_dir: str = None) -> dict:
+def harvest_expanded_daily_data(date_str: str, out_dir: str = None, blinded: bool = False) -> dict:
     if out_dir is None:
         out_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -237,8 +344,9 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None) -> dict:
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, music_recs)
 
-    # 4. Harvest Airofit Pro Quantitative Respiratory Strength (MIP, MEP, VC)
-    t_resp = base_posix + 20 * 3600 + 5 * 60 # 8:05 PM Evening Station
+    # 4. Harvest Weekly Pre-Yoga Airofit Pro (MIP, MEP, VLC/VC) & Evening iPad/MPK Station (60-90m pre-bed)
+    t_airofit = base_posix + 6 * 3600 + 45 * 60  # Pre-yoga morning check
+    t_resp = base_posix + 19 * 3600 + 45 * 60    # 7:45 PM (75 min pre-9:00 PM bed)
     mip_trials = [
         float(np.random.normal(104.0, 3.5)),
         float(np.random.normal(109.0, 3.5)),
@@ -250,8 +358,8 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None) -> dict:
     mip_mean = float(np.mean(mip_trials))
     resp_recs = []
     for idx in range(3):
-        t_trial = t_resp + idx * 60
-        resp_recs.append(("SESS_DAILY_EVENING_01", t_trial, idx + 1, "airofit_pro", mip_trials[idx], mep_trials[idx], vc_trials[idx], mip_best, 3))
+        t_trial = t_airofit + idx * 60
+        resp_recs.append(("SESS_WEEKLY_AIROFIT_01", t_trial, idx + 1, "airofit_pro", mip_trials[idx], mep_trials[idx], vc_trials[idx], mip_best, 3))
     cur.executemany("""
     INSERT INTO respiratory_strength_stream
     (session_id, timestamp_posix, trial_index, device_model, mip_cmh2o, mep_cmh2o, vc_liters, best_mip_cmh2o, borg_effort_rating)
@@ -265,22 +373,45 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None) -> dict:
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (t_resp, 645.0, 20.6, 46.5, 1013.4, 7.8, 42.0, 21.0, 2200.0))
 
-    # 4C. Daily Objective Cognitive Battery (1000 Hz USB Akai MPK Mini)
+    # 4C. Daily Objective Cognitive Battery (iPad Creyos/PsyToolkit + Wired USB Akai MPK Mini w/ 45m forearm rest)
     cur.execute("""
     INSERT INTO cognitive_executive_battery_stream
     (session_id, timestamp_posix, study_day, midi_polling_hz, pvt_median_rt_ms, pvt_lapses_355ms, nback_d_prime, stroop_interference_ms, gonogo_d_prime, is_burnin_phase)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, ("SESS_DAILY_EVENING_01", t_resp, 2, 1000, 248.0, 1, 2.35, 52.0, 2.55, 1))
+    cur.execute("""
+    INSERT INTO midi_audio_tapping_calibration
+    (session_id, timestamp_posix, midi_note_on_ns, audio_onset_ns, velocity_7bit, velocity_latency_delta_ms, forearm_rest_since_pullup_min, raw_pcm_purged)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """, ("SESS_DAILY_EVENING_01", t_resp, 1_000_420_000, 1_000_000_000, 96, 0.42, 48.0, 1))
 
-    # 4D. Pharmacological PK Logs & Monthly Blood / WGS Covariates
+    # 4D. 11-Meal Standardized Nutrition, Supplement Stack, GTG Sets & Monthly Quest Labs
+    cur.execute("""
+    INSERT INTO nutrition_saved_meals_stream
+    (meal_id, meal_label, timestamp_posix, caffeine_mg, oat_milk_ml, honey_g, supplement_stack_taken, mfp_write_only_healthkit)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """, (1, "7am_espresso_oat_honey", base_posix + 7 * 3600, 145.0, 100.0, 10.0, 0, 1))
+    cur.execute("""
+    INSERT INTO nutrition_saved_meals_stream
+    (meal_id, meal_label, timestamp_posix, caffeine_mg, oat_milk_ml, honey_g, supplement_stack_taken, mfp_write_only_healthkit)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """, (2, "10am_breakfast_shake_5stack", base_posix + 10 * 3600, 0.0, 300.0, 0.0, 1, 1))
+    cur.execute("""
+    INSERT INTO gtg_calisthenics_sets_stream (timestamp_posix, exercise, reps, desk_posture)
+    VALUES (?, 'pull_up', 10, 'standing')
+    """, (base_posix + 18 * 3600 + 57 * 60,))  # 48 min before 7:45 PM MPK battery
     cur.execute("""
     INSERT INTO pharmacological_exposure_stream (timestamp_posix, substance, dose_mg, cbd_mg, route)
-    VALUES (?, 'caffeine', 140.0, 0.0, 'oral')
-    """, (base_posix + 8 * 3600 + 900,))
+    VALUES (?, 'caffeine', 145.0, 0.0, 'oral')
+    """, (base_posix + 7 * 3600,))
     cur.execute("""
     INSERT INTO monthly_blood_wgs_covariates
-    (draw_date, hs_crp_mgl, morning_cortisol_ugdl, hba1c_pct, apob_mgdl, pgx_cyp2c9_score, pgx_cyp1a2_score, pgx_faah_rs324420_a_alleles, minor_exclusion_verified, raw_media_purged)
-    VALUES (?, 0.48, 13.8, 5.1, 74.0, 1.0, 1.0, 1, 1, 1)
+    (draw_date, is_quarterly_draw, biotin_72h_hold_verified, coffee_held_until_post_draw,
+     cmp_glucose_mgdl, cmp_creatinine_mgdl, cmp_ast_ul, cmp_alt_ul, cmp_calcium_mgdl,
+     cbc_wbc, ldl_mgdl, hdl_mgdl, triglycerides_mgdl, fasting_insulin_uiuml, homa_ir,
+     hs_crp_mgl, morning_cortisol_ugdl, hba1c_pct, apob_mgdl,
+     pgx_cyp2c9_score, pgx_cyp1a2_score, pgx_faah_rs324420_a_alleles, minor_exclusion_verified, raw_media_purged)
+    VALUES (?, 1, 1, 1, 88.0, 1.18, 36.0, 32.0, 9.4, 5.8, 72.0, 62.0, 68.0, 4.2, 0.91, 0.48, 13.8, 5.1, 74.0, 1.0, 1.0, 1, 1, 1)
     """, (date_str,))
 
     # 5. Harvest Hair Metabolomics (Monthly segment log)
@@ -320,7 +451,12 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None) -> dict:
         "sequestration_wall_verified": True
     }])
     summary_df.to_parquet(out_parquet, index=False)
-    print(f"✓ Harvested expanded multi-modal telemetry to libSQL & Parquet: {out_parquet}")
+    if blinded:
+        import hashlib
+        seal = hashlib.sha256(open(out_parquet, "rb").read()).hexdigest()[:16]
+        print(f"[BLINDED INGEST OK] date={date_str} rows_ok=1 raw_media_purged=1 seal={seal}")
+    else:
+        print(f"✓ Harvested expanded multi-modal telemetry to libSQL & Parquet: {out_parquet}")
     
     return {
         "date": date_str,
@@ -333,4 +469,9 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None) -> dict:
     }
 
 if __name__ == "__main__":
-    harvest_expanded_daily_data("2026-11-10")
+    import argparse
+    p = argparse.ArgumentParser()
+    p.add_argument("--date", default="2026-11-10")
+    p.add_argument("--blinded", action="store_true", help="Emit technical-only status (zero metric values)")
+    args = p.parse_args()
+    harvest_expanded_daily_data(args.date, blinded=args.blinded)
