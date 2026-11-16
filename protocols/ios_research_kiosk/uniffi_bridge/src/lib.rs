@@ -157,6 +157,7 @@ impl TrustEngine {
             || !cfg.lambda_minus.is_finite()
             || !cfg.delta.is_finite()
             || !cfg.s_base.is_finite()
+            || !cfg.s_d.is_finite()
         {
             return Err(TrustError::NonFiniteInput);
         }
@@ -165,6 +166,7 @@ impl TrustEngine {
             || cfg.delta <= 0.0
             || cfg.delta > 1.0
             || !(0.0..=1.0).contains(&cfg.s_base)
+            || cfg.s_d <= 0.0
         {
             return Err(TrustError::InvalidParameterDomain);
         }
@@ -183,7 +185,12 @@ impl TrustEngine {
         let ln = (cfg.lambda_minus * (FIXED_SCALE as f64)).round() as i128;
         let delta = (cfg.delta * (FIXED_SCALE as f64)).round() as i128;
         let s_base = (cfg.s_base * (FIXED_SCALE as f64)).round() as i128;
-        let eps = v - e;
+        let s_d_fixed = (cfg.s_d.max(1e-4) * (FIXED_SCALE as f64)).round().max(1.0) as i128;
+        let eps = if s_d_fixed == FIXED_SCALE {
+            v - e
+        } else {
+            ((v - e) * FIXED_SCALE).div_euclid(s_d_fixed)
+        };
         let (eps_p, eps_n) = if eps >= 0 { (eps, 0) } else { (0, -eps) };
         let q_d = ((lp * eps_p - ln * eps_n) * r).div_euclid(FIXED_SCALE * FIXED_SCALE);
         let q_l = (delta * (s - s_base)).div_euclid(FIXED_SCALE);
@@ -280,6 +287,23 @@ mod tests {
         assert_eq!(fx2, 0);
         let fx3 = eng.apply_validation_event_fixed_i64(430_802_000, 500_000_000, 500_000_000, 1_000_000_000).unwrap();
         assert_eq!(fx3, 431_493_980);
+
+        // Non-unit s_d = 2.0 fixed-point parity and NaN/<=0 domain rejection
+        let eng_sd2 = TrustEngine::new(MasterLawConfig {
+            lambda_plus: 0.228,
+            lambda_minus: 0.912,
+            delta: 0.010,
+            s_base: 0.500,
+            s_d: 2.0,
+        });
+        let s_sd2_float = eng_sd2.apply_validation_event(TrustState { current_s: 0.500 }, 0.850, 0.500, 1.0).unwrap().current_s;
+        let s_sd2_fixed = eng_sd2.apply_validation_event_fixed_i64(500_000_000, 850_000_000, 500_000_000, 1_000_000_000).unwrap();
+        assert!((s_sd2_float - (s_sd2_fixed as f64) / 1_000_000_000.0).abs() < 1e-8);
+
+        let eng_nan_sd = TrustEngine::new(MasterLawConfig { lambda_plus: 0.228, lambda_minus: 0.912, delta: 0.010, s_base: 0.500, s_d: f64::NAN });
+        assert_eq!(eng_nan_sd.apply_validation_event_fixed_i64(500_000_000, 850_000_000, 500_000_000, 1_000_000_000), Err(TrustError::NonFiniteInput));
+        let eng_neg_sd = TrustEngine::new(MasterLawConfig { lambda_plus: 0.228, lambda_minus: 0.912, delta: 0.010, s_base: 0.500, s_d: -1.0 });
+        assert_eq!(eng_neg_sd.apply_validation_event_fixed_i64(500_000_000, 850_000_000, 500_000_000, 1_000_000_000), Err(TrustError::InvalidParameterDomain));
     }
 }
 

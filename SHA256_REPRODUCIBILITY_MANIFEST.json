@@ -1,6 +1,6 @@
 {
   "release": "v4.5",
-  "timestamp": "2026-11-16T05:14:24Z",
+  "timestamp": "2026-11-16T05:33:54Z",
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.5",
@@ -137,8 +137,8 @@
       "bytes": 3915
     },
     "formal/z3_information_token_extremum.py": {
-      "sha256": "346490897825a4b4a5e032d8421865a6a6613cddef998f9f48ad906882189fcb",
-      "bytes": 5500
+      "sha256": "45740bedc7c31f9e8722c477cbfb9c32062854909a2ffd4caca6e554f0ddf6bd",
+      "bytes": 6140
     },
     "formal/z3_master_law_invariants.py": {
       "sha256": "c32986aab193e1eec76f69ca09a0a98fd1073b29fa469a4a3aa577fc591e6480",
@@ -149,8 +149,8 @@
       "bytes": 3914
     },
     "formal/z3_nonvacuity.py": {
-      "sha256": "9def4fcfc01d6025f107ff493eaa52a441b9491e3c5e33ead4f44699d1eaf61f",
-      "bytes": 1386
+      "sha256": "f50f3bca98c6f08c9e90d31c0933eb101cc8c900048d78b362dc69ae76e5df0f",
+      "bytes": 1799
     },
     "formal/z3_quantum_molecular_isomorphism.py": {
       "sha256": "9fcadd64220c1fc19d838421753f6f3b86be57089edad29bedc671438ff58d27",
@@ -229,8 +229,8 @@
       "bytes": 17331
     },
     "code/tools/test_cross_repo_parity.py": {
-      "sha256": "4fff28ad4235754c6077cf81ec25d585c828fab0456cd415a1e75f753ddf83cb",
-      "bytes": 7155
+      "sha256": "0c4795bee628b12b06be6e3ec40fe57c46aca7f540b6902d7ac984b5fb0e54c7",
+      "bytes": 7457
     },
     "code/tools/autoresearch/candidate_estimator.py": {
       "sha256": "0e53fb4812cdc9a9ae909f52818a629253a9f74b18eeaf9d9d412e32245e30c2",
@@ -4213,8 +4213,8 @@
       "bytes": 303
     },
     "protocols/ios_research_kiosk/uniffi_bridge/src/lib.rs": {
-      "sha256": "0c40fb01c3f604d9bd5d46dc7557554cfc3506ace0dda74eee1e1d381fd72326",
-      "bytes": 12532
+      "sha256": "d0de6728d6b1f3b0902302c64c7a4cdd925f2ffa42760eb1d8ce851c0088f4ef",
+      "bytes": 14057
     },
     "protocols/ios_research_kiosk/uniffi_bridge/src/bin/uniffi-bindgen.rs": {
       "sha256": "55a5501b6239f6f219489db85de7ead6d2bf0c927f4fa1cfd674779e33d59c31",

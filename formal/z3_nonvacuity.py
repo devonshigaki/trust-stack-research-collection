@@ -9,7 +9,7 @@ Ensures every SMT theorem P => Q satisfies two formal preconditions:
 import z3
 
 
-def prove_nonvacuous(premises, negated_goal, label: str = "Theorem") -> bool:
+def prove_nonvacuous(premises, negated_goal, label: str = "Theorem", required_indices=None) -> bool:
     """Checks premise consistency (SAT) and negated-goal necessity (UNSAT + optional unsat_core)."""
     s_prem = z3.Solver()
     s_prem.add(*premises)
@@ -23,13 +23,24 @@ def prove_nonvacuous(premises, negated_goal, label: str = "Theorem") -> bool:
     if res_full != z3.unsat:
         return False
 
-    # Verify negated_goal is in unsat_core where tractable (3s bound for QF_NRA)
+    # Verify negated_goal (and any explicitly required domain hypotheses) are in unsat_core
     s_core = z3.Solver()
     s_core.set(unsat_core=True, timeout=3000)
+    prem_tags = []
     for i, p in enumerate(premises):
-        s_core.assert_and_track(p, z3.Bool(f"prem_{i}"))
+        t = z3.Bool(f"prem_{i}")
+        prem_tags.append(t)
+        s_core.assert_and_track(p, t)
     g_tag = z3.Bool("negated_goal")
     s_core.assert_and_track(negated_goal, g_tag)
-    if s_core.check() == z3.unsat and g_tag not in set(s_core.unsat_core()):
-        raise AssertionError(f"[VACUOUS UNSAT] {label}: negated_goal absent from unsat_core")
+    if s_core.check() == z3.unsat:
+        core = set(s_core.unsat_core())
+        if g_tag not in core:
+            raise AssertionError(f"[VACUOUS UNSAT] {label}: negated_goal absent from unsat_core")
+        if required_indices:
+            for idx in required_indices:
+                if prem_tags[idx] not in core:
+                    raise AssertionError(
+                        f"[VACUOUS PREMISE] {label}: required premise prem_{idx} absent from unsat_core"
+                    )
     return True

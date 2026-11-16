@@ -101,25 +101,28 @@ def main():
             if repo_label == "Standalone Simulator":
                 assert "asymmetric_invariant_bounds" in rs_src, "Simulator master_law.rs missing Z3 asymmetric_invariant_bounds"
                 assert "pub fn step_fixed_i64" in rs_src, "Simulator master_law.rs missing step_fixed_i64"
+                assert "scale_s_d" in rs_src and "s_d_fixed" in rs_src, "Simulator master_law.rs step_fixed_i64 missing scale_s_d normalization"
                 res_sim = subprocess.run(
                     ["cargo", "test", "-p", "sim-core", "--lib", "--quiet", "--", "master_law::tests"],
                     cwd=repo_root, capture_output=True, text=True,
                 )
                 assert res_sim.returncode == 0, f"Simulator master_law cargo test failed:\n{res_sim.stderr}"
-                print("✓ Standalone Simulator `cargo test -p sim-core --lib master_law::tests` (incl. Z3 BIBO bounds): PASS")
+                print("✓ Standalone Simulator `cargo test -p sim-core --lib master_law::tests` (incl. Z3 BIBO + s_d!=1.0): PASS")
 
     # 4. Cross-repo FreshProtocol Spec Kernel parity check
     fp_dir = os.path.expanduser("~/Developer/freshprotocol")
     fp_ml = os.path.join(fp_dir, "crates/fresh-protocol-spec/src/master_law.rs")
     if os.path.exists(fp_ml):
         with open(fp_ml, "r", encoding="utf-8") as f:
-            assert "pub fn step_fixed_i64" in f.read(), "FreshProtocol missing fixed-point step_fixed_i64 parity method"
+            fp_src = f.read()
+            assert "pub fn step_fixed_i64" in fp_src, "FreshProtocol missing fixed-point step_fixed_i64 parity method"
+            assert "s_d_fixed" in fp_src, "FreshProtocol master_law.rs missing scale_s_d fixed-point normalization"
         res_fp = subprocess.run(
             ["cargo", "test", "-p", "fresh-protocol-spec", "--lib", "--quiet"],
             cwd=fp_dir, capture_output=True, text=True,
         )
         assert res_fp.returncode == 0, f"FreshProtocol fresh-protocol-spec test failed:\n{res_fp.stderr}"
-        print("✓ FreshProtocol `fresh-protocol-spec::master_law` Golden-Vector + Fixed-Point Parity: PASS")
+        print("✓ FreshProtocol `fresh-protocol-spec::master_law` Golden-Vector + Fixed-Point s_d!=1.0 Parity: PASS")
 
     print("\n✓ ALL CROSS-REPO GOLDEN-VECTOR PARITY CHECKS PASSED!")
     return 0
