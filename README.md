@@ -33,7 +33,7 @@ protocols/      Pre-registrations, amendments, pilot protocols, IRB exemption, F
 code/
   ├── empirical/    Real external-data pipelines (OpenML 42477 30k credit, CLICS-3, simD14 AlphaGenome, simD15 GTEx, FlyWire, MICrONS)
   ├── simulations/  In-silico dynamical, neural, wearable, and protocol models
-  └── tools/        57-task CI suite runner, Thresholdout autoresearch, SHA-256 manifest (--verify)
+  └── tools/        58-task CI suite runner, Thresholdout autoresearch, SHA-256 manifest (--verify)
 docs/           RUNBOOK.md, PATTERNS.md, SIMULATION_ACCOUNTING.md, VERSIONS.md, notes & indexes
 ```
 
@@ -42,12 +42,12 @@ docs/           RUNBOOK.md, PATTERNS.md, SIMULATION_ACCOUNTING.md, VERSIONS.md, 
 ## Reproducing Verifications & Simulations
 
 ```bash
-# Run formal proofs (Lean 4.35, TLC, Z3, SymPy, secp256k1 NIZK), citation/sync checks, 45-task suite, and seal SHA-256 manifest
+# Run formal proofs (Lean 4.35, TLC, Z3, SymPy, secp256k1 NIZK), citation/sync checks, 58-task suite, and verify SHA-256 manifest
 make check
 
 # Or run targets individually:
 make formal      # Z3 SMT, SymPy CAS, TLA+ TLC model checker, Lean 4 leanchecker, secp256k1 Pedersen/Schnorr/Tuple-OR NIZK
-make test        # 57-task Tier 1 & Tier 2 suite
+make test        # 58-task Tier 1 & Tier 2 suite
 make sims        # Core local simulation reproduction suite
 make osf-deposit # Build reproducible OSF zip bundle in dist/
 ```

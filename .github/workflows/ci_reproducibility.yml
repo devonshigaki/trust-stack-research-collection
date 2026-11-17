@@ -15,11 +15,13 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v4
 
-    - name: Set up Python 3.12
+    - name: Verify Immutable SHA-256 Reproducibility Manifest (Clean Checkout)
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
         cache: 'pip'
+
+    - run: python code/tools/build_osf_sha256_manifest.py --verify
 
     - name: Set up Rust Stable Toolchain (UniFFI Parity Bridge)
       uses: dtolnay/rust-toolchain@stable
@@ -36,30 +38,32 @@ jobs:
         curl -sL "https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar" -o formal/.tools/tla2tools.jar
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip check
 
     - name: Replay Lean 4 Formal Proofs & Kernel Checker
       uses: leanprover/lean-action@v1
       with:
         lake-package-directory: formal/lean
 
-    - name: Run Lean 4 Kernel Replay Checker
+    - name: Run Lean 4 Fresh Kernel Replay Checker
       run: |
-        cd formal/lean && lake env leanchecker TrustStack.Tilt && lake env leanchecker TrustStack.MasterLaw
+        cd formal/lean && lake env leanchecker --fresh TrustStack.Tilt && lake env leanchecker --fresh TrustStack.MasterLaw
 
-    - name: Run Multi-Engine Formal Verification Suite (Z3, SymPy, TLC, secp256k1 NIZK)
+    - name: Run Multi-Engine Formal Verification Suite (Z3, SymPy, TLC, secp256k1 NIZK; Read-Only)
       run: |
-        python formal/run_all_formal_verifications.py
+        LEAN_FRESH=1 python formal/run_all_formal_verifications.py --check
 
     - name: Run Citation Integrity & LaTeX Sync Checks
       run: |
-        python code/tools/audit_citation_integrity.py
+        python code/tools/audit_citation_integrity.py --dry-run
         python code/tools/check_manuscript_sync.py
 
-    - name: Run Tier 1 & Tier 2 Comprehensive Test Suite (57 Tasks)
+    - name: Run Tier 1 & Tier 2 Comprehensive Test Suite (58 Tasks; Read-Only)
       run: |
-        python code/tools/run_tier1_tier2_suite.py
+        python code/tools/run_tier1_tier2_suite.py --check
 
-    - name: Verify Immutable SHA-256 Reproducibility Manifest
+    - name: Verify Manifest & Clean Working Tree After CI Suite
       run: |
         python code/tools/build_osf_sha256_manifest.py --verify
+        git diff --exit-code
 

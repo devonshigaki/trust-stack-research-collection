@@ -54,18 +54,74 @@ def pt_sub(p1: Optional[Tuple[int, int]], p2: Optional[Tuple[int, int]]) -> Opti
     return pt_add(p1, pt_neg(p2))
 
 
+def _j_double(p: Optional[Tuple[int, int, int]]) -> Optional[Tuple[int, int, int]]:
+    if p is None:
+        return None
+    x1, y1, z1 = p
+    if y1 == 0 or z1 == 0:
+        return None
+    y1_sq = (y1 * y1) % P_CURVE
+    s = (4 * x1 * y1_sq) % P_CURVE
+    m = (3 * x1 * x1) % P_CURVE
+    x3 = (m * m - 2 * s) % P_CURVE
+    y1_4 = (y1_sq * y1_sq) % P_CURVE
+    y3 = (m * (s - x3) - 8 * y1_4) % P_CURVE
+    z3 = (2 * y1 * z1) % P_CURVE
+    return None if z3 == 0 else (x3, y3, z3)
+
+
+def _j_add(
+    p: Optional[Tuple[int, int, int]], q: Optional[Tuple[int, int, int]]
+) -> Optional[Tuple[int, int, int]]:
+    if p is None:
+        return q
+    if q is None:
+        return p
+    x1, y1, z1 = p
+    x2, y2, z2 = q
+    z1z1 = (z1 * z1) % P_CURVE
+    z2z2 = (z2 * z2) % P_CURVE
+    u1 = (x1 * z2z2) % P_CURVE
+    u2 = (x2 * z1z1) % P_CURVE
+    s1 = (y1 * z2 * z2z2) % P_CURVE
+    s2 = (y2 * z1 * z1z1) % P_CURVE
+    h = (u2 - u1) % P_CURVE
+    r = (s2 - s1) % P_CURVE
+    if h == 0:
+        return _j_double(p) if r == 0 else None
+    h2 = (h * h) % P_CURVE
+    h3 = (h * h2) % P_CURVE
+    u1h2 = (u1 * h2) % P_CURVE
+    x3 = (r * r - h3 - 2 * u1h2) % P_CURVE
+    y3 = (r * (u1h2 - x3) - s1 * h3) % P_CURVE
+    z3 = (h * z1 * z2) % P_CURVE
+    return None if z3 == 0 else (x3, y3, z3)
+
+
+def _j_to_affine(p: Optional[Tuple[int, int, int]]) -> Optional[Tuple[int, int]]:
+    if p is None:
+        return None
+    x, y, z = p
+    if z == 0:
+        return None
+    z_inv = _modinv(z, P_CURVE)
+    z_inv2 = (z_inv * z_inv) % P_CURVE
+    z_inv3 = (z_inv2 * z_inv) % P_CURVE
+    return ((x * z_inv2) % P_CURVE, (y * z_inv3) % P_CURVE)
+
+
 def pt_mul(k: int, p: Optional[Tuple[int, int]]) -> Optional[Tuple[int, int]]:
     k %= N_ORDER
     if k == 0 or p is None:
         return None
     res = None
-    cur = p
+    cur: Optional[Tuple[int, int, int]] = (p[0], p[1], 1)
     while k:
         if k & 1:
-            res = pt_add(res, cur)
-        cur = pt_add(cur, cur)
+            res = _j_add(res, cur)
+        cur = _j_double(cur)
         k >>= 1
-    return res
+    return _j_to_affine(res)
 
 
 def pt_ser(p: Optional[Tuple[int, int]]) -> str:
@@ -125,6 +181,31 @@ _G_TBL = _build_radix16_table(G_PT)
 _H_TBL = _build_radix16_table(H_PT)
 
 
+def _j_add_affine(
+    p: Optional[Tuple[int, int, int]], q_aff: Optional[Tuple[int, int]]
+) -> Optional[Tuple[int, int, int]]:
+    if q_aff is None:
+        return p
+    if p is None:
+        return (q_aff[0], q_aff[1], 1)
+    x1, y1, z1 = p
+    x2, y2 = q_aff
+    z1z1 = (z1 * z1) % P_CURVE
+    u2 = (x2 * z1z1) % P_CURVE
+    s2 = (y2 * z1 * z1z1) % P_CURVE
+    h = (u2 - x1) % P_CURVE
+    r = (s2 - y1) % P_CURVE
+    if h == 0:
+        return _j_double(p) if r == 0 else None
+    h2 = (h * h) % P_CURVE
+    h3 = (h * h2) % P_CURVE
+    u1h2 = (x1 * h2) % P_CURVE
+    x3 = (r * r - h3 - 2 * u1h2) % P_CURVE
+    y3 = (r * (u1h2 - x3) - y1 * h3) % P_CURVE
+    z3 = (h * z1) % P_CURVE
+    return None if z3 == 0 else (x3, y3, z3)
+
+
 def pt_mul_fast(k: int, p: Optional[Tuple[int, int]]) -> Optional[Tuple[int, int]]:
     k %= N_ORDER
     if k == 0 or p is None:
@@ -135,16 +216,9 @@ def pt_mul_fast(k: int, p: Optional[Tuple[int, int]]) -> Optional[Tuple[int, int
         for i in range(64):
             nib = (k >> (4 * i)) & 0xF
             if nib:
-                res = pt_add(res, tbl[i][nib])
-        return res
-    res = None
-    cur = p
-    while k:
-        if k & 1:
-            res = pt_add(res, cur)
-        cur = pt_add(cur, cur)
-        k >>= 1
-    return res
+                res = _j_add_affine(res, tbl[i][nib])
+        return _j_to_affine(res)
+    return pt_mul(k, p)
 
 
 def pedersen_commit(val: int, r: int) -> Optional[Tuple[int, int]]:

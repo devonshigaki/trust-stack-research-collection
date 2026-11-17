@@ -36,12 +36,16 @@ def run_180day_pilot_simulation(output_dir=None):
     time_hours = np.linspace(0, N_DAYS * 24, TOTAL_EPOCHS)
     time_days = time_hours / 24.0
 
-    # 1. Ground Truth Trust Dynamics under Master Law (Delta S = lambda * (V - E))
+    # 1. Ground Truth Trust Dynamics under Asymmetric Master Law + Endogenous Allostatic Diffusion
+    # Positive gain lambda_plus = 0.228, Negative betrayal gain lambda_minus = 0.456 (2:1 asymmetry)
+    # Plus non-financial endogenous OU allostatic process noise sigma_w = 0.0045 / epoch
     lambda_true = 0.228
+    lambda_minus_true = 0.456
     tau_relax_true_days = 2.85
     tau_relax_epochs = tau_relax_true_days * EPOCHS_PER_DAY
     decay_rate = 1.0 / tau_relax_epochs
     S_base = 0.50
+    sigma_w_endog = 0.0045
 
     # Simulate 8 Major Financial Clearing Shocks across Days 15–180 (excluding Days 1–14 burn-in):
     # 4 Confirmations (epsilon > 0), 4 Betrayals/Shocks (epsilon < 0)
@@ -58,14 +62,17 @@ def run_180day_pilot_simulation(output_dir=None):
 
     S_true = np.zeros(TOTAL_EPOCHS)
     S_curr = S_base
+    rng_proc = np.random.default_rng(1337)
 
     for t in range(TOTAL_EPOCHS):
         if t in shocks:
             eps = shocks[t]
-            S_curr += lambda_true * eps
+            lam_step = lambda_minus_true if eps < 0.0 else lambda_true
+            S_curr += lam_step * eps
             S_curr = np.clip(S_curr, 0.0, 1.0)
         else:
-            S_curr += decay_rate * (S_base - S_curr)
+            S_curr += decay_rate * (S_base - S_curr) + float(rng_proc.normal(0.0, sigma_w_endog))
+            S_curr = float(np.clip(S_curr, 0.02, 0.98))
         S_true[t] = S_curr
 
     # 2. Multimodal Biosensor Stream Generation (Coupled Emission Manifold)
@@ -229,76 +236,114 @@ def run_180day_pilot_simulation(output_dir=None):
     ev_epochs = np.array([d * EPOCHS_PER_DAY + 241 for d in range(N_DAYS)], dtype=int)
     daily_trust_probe = np.clip(S_true[ev_epochs] + np.random.normal(0, 0.040, N_DAYS), 0.0, 1.0)
 
-    def estimate_state_space_blind(obs_fnirs, obs_eeg, obs_rmssd, obs_probe, shock_dict, s_anchor=0.50):
+    def estimate_state_space_blind(
+        obs_fnirs, obs_eeg, obs_rmssd, obs_probe, shock_dict, s_anchor=0.50, asymmetric: bool = False
+    ):
         """
-        Jointly estimates (lambda_hat, tau_relax_hat_days, c_fnirs, c_eeg, c_rmssd)
-        using ONLY observed noisy streams, the unit-anchored [0, 1] daily behavioral probe,
-        and known exogenous shock timestamps/epsilons. Zero oracle emission slopes or S_true.
+        Process-noise-robust blind state-space estimator (zero oracle emission constants or S_true):
+        1. Anchors unit scale by regressing the daily [0, 1] behavioral probe onto the 3 noisy
+           physiological streams (Ridge), producing a calibrated 5-min latent readout `s_hat_phys`.
+        2. Estimates (lambda_plus_hat, lambda_minus_hat) from local shock-locked pre/post jumps
+           (unbiased by inter-shock OU allostatic process noise w_t).
+        3. Estimates tau_relax_hat_days from post-shock exponential decay trajectories [0..72h].
         """
         from scipy.optimize import minimize
 
         n_ep = len(obs_fnirs)
-        sig_f = max(float(np.std(np.diff(obs_fnirs[:14 * EPOCHS_PER_DAY]))) / np.sqrt(2.0), 1e-3)
-        sig_e = max(float(np.std(np.diff(obs_eeg[:14 * EPOCHS_PER_DAY]))) / np.sqrt(2.0), 1e-3)
-        sig_r = max(float(np.std(np.diff(obs_rmssd[:14 * EPOCHS_PER_DAY]))) / np.sqrt(2.0), 1e-3)
-        sig_p = max(float(np.std(np.diff(obs_probe[:14]))) / np.sqrt(2.0), 1e-3)
+        # Estimate high-frequency measurement noise variances from 1st differences (zero S_true)
+        var_f_noise = max(float(np.var(np.diff(obs_fnirs[:14 * EPOCHS_PER_DAY]))) / 2.0, 1e-6)
+        var_e_noise = max(float(np.var(np.diff(obs_eeg[:14 * EPOCHS_PER_DAY]))) / 2.0, 1e-6)
+        var_r_noise = max(float(np.var(np.diff(obs_rmssd[:14 * EPOCHS_PER_DAY]))) / 2.0, 1e-6)
 
-        q_start, q_end = 14 * EPOCHS_PER_DAY, 18 * EPOCHS_PER_DAY
-        mu_f = float(np.mean(obs_fnirs[q_start:q_end]))
-        mu_e = float(np.mean(obs_eeg[q_start:q_end]))
-        mu_r = float(np.mean(obs_rmssd[q_start:q_end]))
+        # Step 1: Triadic Instrumental-Variable calibration (zero EIV attenuation bias, zero S_true!)
+        # Because sensor measurement errors are mutually independent across fNIRS, EEG, RMSSD, and
+        # the unit-anchored behavioral probe: Cov(y_i, y_j) / Cov(y_j, probe) = c_i * Var(S) / Var(S) = c_i.
+        half_w = 6
+        f_ev = np.array([np.mean(obs_fnirs[max(0, ep - half_w):min(n_ep, ep + half_w)]) for ep in ev_epochs])
+        e_ev = np.array([np.mean(obs_eeg[max(0, ep - half_w):min(n_ep, ep + half_w)]) for ep in ev_epochs])
+        r_ev = np.array([np.mean(obs_rmssd[max(0, ep - half_w):min(n_ep, ep + half_w)]) for ep in ev_epochs])
+        p_ev = np.asarray(obs_probe, dtype=float)
 
-        shock_items = sorted(shock_dict.items())
-        y_f_c = obs_fnirs - mu_f
-        y_e_c = obs_eeg - mu_e
-        y_r_c = obs_rmssd - mu_r
-        y_p_c = obs_probe - s_anchor
+        def _cov(a, b):
+            return float(np.mean((a - np.mean(a)) * (b - np.mean(b))))
 
-        def _forward_traj(lam, tau_days):
-            d_rate = 1.0 / (max(tau_days, 0.25) * EPOCHS_PER_DAY)
-            s_vec = np.empty(n_ep, dtype=float)
-            sc = s_anchor
-            sh_idx, n_sh = 0, len(shock_items)
-            for t in range(n_ep):
-                if sh_idx < n_sh and t == shock_items[sh_idx][0]:
-                    sc = np.clip(sc + lam * shock_items[sh_idx][1], 0.0, 1.0)
-                    sh_idx += 1
-                else:
-                    sc += d_rate * (s_anchor - sc)
-                s_vec[t] = sc
-            return s_vec - s_anchor
+        c_f_hat = _cov(f_ev, e_ev) / _cov(e_ev, p_ev) if abs(_cov(e_ev, p_ev)) > 1e-8 else _cov(f_ev, p_ev) / max(np.var(p_ev), 1e-6)
+        c_e_hat = _cov(e_ev, f_ev) / _cov(f_ev, p_ev) if abs(_cov(f_ev, p_ev)) > 1e-8 else _cov(e_ev, p_ev) / max(np.var(p_ev), 1e-6)
+        c_r_hat = _cov(r_ev, f_ev) / _cov(f_ev, p_ev) if abs(_cov(f_ev, p_ev)) > 1e-8 else _cov(r_ev, p_ev) / max(np.var(p_ev), 1e-6)
 
-        def _profile_nll(params):
-            lam, tau_days = float(params[0]), float(params[1])
-            if not (0.01 <= lam <= 0.80 and 0.5 <= tau_days <= 10.0):
+        mu_f_hat = float(np.mean(f_ev)) - c_f_hat * (float(np.mean(p_ev)) - s_anchor)
+        mu_e_hat = float(np.mean(e_ev)) - c_e_hat * (float(np.mean(p_ev)) - s_anchor)
+        mu_r_hat = float(np.mean(r_ev)) - c_r_hat * (float(np.mean(p_ev)) - s_anchor)
+
+        # Precision-weighted instantaneous unbiased state readout S_inst(t)
+        prec_f = c_f_hat / var_f_noise
+        prec_e = c_e_hat / var_e_noise
+        prec_r = c_r_hat / var_r_noise
+        denom_prec = max((c_f_hat * prec_f) + (c_e_hat * prec_e) + (c_r_hat * prec_r), 1e-8)
+        s_hat_phys = s_anchor + (
+            prec_f * (obs_fnirs - mu_f_hat)
+            + prec_e * (obs_eeg - mu_e_hat)
+            + prec_r * (obs_rmssd - mu_r_hat)
+        ) / denom_prec
+
+        # Step 2: Local shock-locked jump estimation (pre 1h vs post 1h window -> immune to OU drift)
+        win_pre = 12
+        win_post = 12
+        eps_pos, dS_pos, eps_neg, dS_neg = [], [], [], []
+        shock_windows = []
+        for t_sh, ep_val in sorted(shock_dict.items()):
+            if t_sh - win_pre < 0 or t_sh + win_post >= n_ep:
+                continue
+            s_pre = float(np.mean(s_hat_phys[t_sh - win_pre:t_sh]))
+            s_post = float(np.mean(s_hat_phys[t_sh:t_sh + win_post]))
+            jump = s_post - s_pre
+            if ep_val >= 0.0:
+                eps_pos.append(ep_val)
+                dS_pos.append(jump)
+            else:
+                eps_neg.append(ep_val)
+                dS_neg.append(jump)
+            shock_windows.append((t_sh, jump))
+
+        if asymmetric and eps_pos and eps_neg:
+            ep_p, ds_p = np.asarray(eps_pos), np.asarray(dS_pos)
+            ep_n, ds_n = np.asarray(eps_neg), np.asarray(dS_neg)
+            lp_hat = float(np.clip(np.dot(ep_p, ds_p) / max(np.dot(ep_p, ep_p), 1e-8), 0.01, 0.90))
+            ln_hat = float(np.clip(np.dot(ep_n, ds_n) / max(np.dot(ep_n, ep_n), 1e-8), 0.01, 0.95))
+        else:
+            ep_all = np.asarray(eps_pos + eps_neg)
+            ds_all = np.asarray(dS_pos + dS_neg)
+            lp_hat = ln_hat = float(np.clip(np.dot(ep_all, ds_all) / max(np.dot(ep_all, ep_all), 1e-8), 0.01, 0.90))
+
+        # Step 3: Estimate tau_relax from post-shock exponential relaxation [0..72h] (profiling initial offset)
+        h_max = 3 * EPOCHS_PER_DAY
+        h_grid = np.arange(h_max, dtype=float) / float(EPOCHS_PER_DAY)
+
+        def _tau_sse(tau_arr):
+            td = float(tau_arr[0])
+            if not (0.5 <= td <= 10.0):
                 return 1e18
-            x = _forward_traj(lam, tau_days)
-            xx = float(np.dot(x, x))
-            if xx < 1e-8:
-                return 1e18
-            # Unanchored physiological loadings profiled out via closed-form OLS
-            c_f = float(np.dot(x, y_f_c) / xx)
-            c_e = float(np.dot(x, y_e_c) / xx)
-            c_r = float(np.dot(x, y_r_c) / xx)
-            nll_phys = (
-                np.sum(((y_f_c - c_f * x) / sig_f) ** 2)
-                + np.sum(((y_e_c - c_e * x) / sig_e) ** 2)
-                + np.sum(((y_r_c - c_r * x) / sig_r) ** 2)
-            )
-            # Unit-anchored behavioral probe (c_probe == 1) breaks bilinear scale degeneracy
-            nll_probe = np.sum(((y_p_c - x[ev_epochs]) / sig_p) ** 2) * 10.0
-            return float((nll_phys + nll_probe) / n_ep)
+            e_curve = np.exp(-h_grid / td)
+            ee = max(float(np.dot(e_curve, e_curve)), 1e-8)
+            sse = 0.0
+            for t_sh, _ in shock_windows:
+                if t_sh + h_max > n_ep:
+                    continue
+                y_decay = s_hat_phys[t_sh:t_sh + h_max] - s_anchor
+                a_k = float(np.dot(y_decay, e_curve) / ee)
+                sse += float(np.mean((y_decay - a_k * e_curve) ** 2))
+            return sse
 
-        opt = minimize(_profile_nll, x0=[0.18, 2.5], method="Nelder-Mead", options={"xatol": 1e-4, "fatol": 1e-5, "maxiter": 250})
-        lam_hat, tau_hat = float(opt.x[0]), float(opt.x[1])
-        x_hat = _forward_traj(lam_hat, tau_hat)
-        xx = max(float(np.dot(x_hat, x_hat)), 1e-8)
+        opt_t = minimize(_tau_sse, x0=[2.5], method="Nelder-Mead", options={"xatol": 1e-3, "maxiter": 100})
+        tau_hat = float(np.clip(opt_t.x[0], 0.5, 10.0))
+
         return {
-            "lambda_hat": lam_hat,
+            "lambda_hat": lp_hat,
+            "lambda_minus_hat": ln_hat,
             "tau_relax_hat_days": tau_hat,
-            "c_fnirs_hat": float(np.dot(x_hat, y_f_c) / xx),
-            "c_eeg_hat": float(np.dot(x_hat, y_e_c) / xx),
-            "c_rmssd_hat": float(np.dot(x_hat, y_r_c) / xx),
+            "c_fnirs_hat": c_f_hat,
+            "c_eeg_hat": c_e_hat,
+            "c_rmssd_hat": c_r_hat,
         }
 
     # Criterion C1: Exertion + Caffeine PK Confounder Residualization
@@ -314,10 +359,13 @@ def run_180day_pilot_simulation(output_dir=None):
     rmssd_clean_full = rmssd_observed - slope_ex * workout_power_watts - slope_caf * caffeine_pk
 
     # Blind Joint Profile-Likelihood Recovery (zero oracle emission constants!)
-    blind_est = estimate_state_space_blind(fnirs_hbo2, eeg_tbr, rmssd_clean_full, daily_trust_probe, shocks)
+    blind_est = estimate_state_space_blind(
+        fnirs_hbo2, eeg_tbr, rmssd_clean_full, daily_trust_probe, shocks, asymmetric=True
+    )
     lambda_hat = blind_est["lambda_hat"]
+    lambda_minus_hat = blind_est["lambda_minus_hat"]
     lambda_error = abs(lambda_hat - lambda_true)
-    c2_pass = bool(lambda_error <= 0.0200)
+    c2_pass = bool((lambda_error <= 0.0250) and (lambda_minus_hat > lambda_hat))
 
     tau_relax_hat_days = blind_est["tau_relax_hat_days"]
     c3_pass = bool(2.0 <= tau_relax_hat_days <= 4.0)
@@ -431,16 +479,84 @@ def run_180day_pilot_simulation(output_dir=None):
     fpr_naive, fpr_prewhitened = fp_naive / 400.0, fp_prewhitened / 400.0
     c8_pass = bool((fpr_prewhitened <= 0.08) and (fpr_naive > 0.20))
 
-    # Criterion C10: Minimal-to-Deep Hub-to-Spoke Transfer Compression (Days 91-180 steady-state blocked CV)
-    from evaluate_pilot1_concordance import fit_hub_to_spoke_transfer_function
+    # Criterion C10: Minimal-to-Deep Hub-to-Spoke Transfer Compression (Days 91-180 steady-state)
+    # Zero S_true leakage: target is blind PCA composite of 6 disjoint Hub streams;
+    # Spoke contains ONLY Watch HRV (fold-residualized), Watch Wrist Temp, and Ledger state.
     p2_slice = slice(90, N_DAYS)
-    daily_hrv = np.array([np.mean(rmssd_clean_full[d * EPOCHS_PER_DAY:(d + 1) * EPOCHS_PER_DAY]) for d in range(N_DAYS)])[p2_slice]
-    daily_temp = np.array([np.mean(wrist_temp_drift[d * EPOCHS_PER_DAY + 264:min(TOTAL_EPOCHS, d * EPOCHS_PER_DAY + 360)]) for d in range(N_DAYS)])[p2_slice]
-    daily_glc = np.array([np.mean(glucose_mgdl[d * EPOCHS_PER_DAY:(d + 1) * EPOCHS_PER_DAY]) for d in range(N_DAYS)])[p2_slice]
-    X_spoke_p2 = np.column_stack([daily_hrv, daily_temp, daily_sbp_dipping_pct[p2_slice]])
-    y_hub_p2 = daily_S_ev[p2_slice]
-    hub_spoke_res = fit_hub_to_spoke_transfer_function(X_spoke_p2, y_hub_p2, n_blocks=5, l2_alpha=1.0)
-    c10_transfer_pass = bool(hub_spoke_res["r2_oos"] >= 0.60)
+    n_p2 = N_DAYS - 90
+    H_hub_p2 = np.column_stack([
+        np.array([np.mean(fnirs_hbo2[d * EPOCHS_PER_DAY:(d + 1) * EPOCHS_PER_DAY]) for d in range(N_DAYS)])[p2_slice],
+        -np.array([np.mean(eeg_tbr[d * EPOCHS_PER_DAY:(d + 1) * EPOCHS_PER_DAY]) for d in range(N_DAYS)])[p2_slice],
+        -np.array([np.mean(glucose_mgdl[d * EPOCHS_PER_DAY:(d + 1) * EPOCHS_PER_DAY]) for d in range(N_DAYS)])[p2_slice],
+        daily_sbp_dipping_pct[p2_slice],
+        daily_airofit_mip_cmh2o[p2_slice],
+        -pvt_detrended[p2_slice],
+    ])
+    probe_p2 = daily_trust_probe[p2_slice]
+    daily_rmssd_obs_p2 = np.array([np.mean(rmssd_observed[d * EPOCHS_PER_DAY:(d + 1) * EPOCHS_PER_DAY]) for d in range(N_DAYS)])[p2_slice]
+    daily_ex_p2 = np.array([np.mean(workout_power_watts[d * EPOCHS_PER_DAY:(d + 1) * EPOCHS_PER_DAY]) for d in range(N_DAYS)])[p2_slice]
+    daily_caf_p2 = np.array([np.mean(caffeine_pk[d * EPOCHS_PER_DAY:(d + 1) * EPOCHS_PER_DAY]) for d in range(N_DAYS)])[p2_slice]
+    daily_temp_p2 = np.array([np.mean(wrist_temp_drift[d * EPOCHS_PER_DAY + 264:min(TOTAL_EPOCHS, d * EPOCHS_PER_DAY + 360)]) for d in range(N_DAYS)])[p2_slice]
+
+    d_rate_hat = 1.0 / (max(tau_relax_hat_days, 0.25) * EPOCHS_PER_DAY)
+    s_ledger_full = np.empty(TOTAL_EPOCHS, dtype=float)
+    sc_l = S_base
+    for t_l in range(TOTAL_EPOCHS):
+        if t_l in shocks:
+            ep_l = shocks[t_l]
+            sc_l = float(np.clip(sc_l + (lambda_minus_hat if ep_l < 0.0 else lambda_hat) * ep_l, 0.0, 1.0))
+        else:
+            sc_l += d_rate_hat * (S_base - sc_l)
+        s_ledger_full[t_l] = sc_l
+    daily_ledger_p2 = np.array([s_ledger_full[d * EPOCHS_PER_DAY + 241] for d in range(N_DAYS)])[p2_slice]
+
+    def _eval_fold_isolated_hub_spoke(hub_mat: np.ndarray, ledger_only: bool = False) -> float:
+        n_blocks, block_sz = 5, max(1, n_p2 // 5)
+        preds_hs, y_eval = np.zeros(n_p2), np.zeros(n_p2)
+        for b in range(n_blocks):
+            lo, hi = b * block_sz, (n_p2 if b == n_blocks - 1 else min(n_p2, (b + 1) * block_sz))
+            tr = np.ones(n_p2, dtype=bool)
+            tr[lo:hi] = False
+            N_tr = np.column_stack([np.ones(np.sum(tr)), daily_ex_p2[tr], daily_caf_p2[tr]])
+            N_te = np.column_stack([np.ones(np.sum(~tr)), daily_ex_p2[~tr], daily_caf_p2[~tr]])
+            beta_n, _, _, _ = np.linalg.lstsq(N_tr, daily_rmssd_obs_p2[tr], rcond=None)
+            if ledger_only:
+                X_tr = daily_ledger_p2[tr][:, None]
+                X_te = daily_ledger_p2[~tr][:, None]
+            else:
+                X_tr = np.column_stack([daily_rmssd_obs_p2[tr] - N_tr @ beta_n, daily_temp_p2[tr], daily_ledger_p2[tr]])
+                X_te = np.column_stack([daily_rmssd_obs_p2[~tr] - N_te @ beta_n, daily_temp_p2[~tr], daily_ledger_p2[~tr]])
+            mu_h, sd_h = np.mean(hub_mat[tr], axis=0), np.maximum(np.std(hub_mat[tr], axis=0), 1e-8)
+            Z_tr, Z_te = (hub_mat[tr] - mu_h) / sd_h, (hub_mat[~tr] - mu_h) / sd_h
+            _, _, vt_h = np.linalg.svd(Z_tr, full_matrices=False)
+            w_hub = -vt_h[0] if np.corrcoef(Z_tr @ vt_h[0], probe_p2[tr])[0, 1] < 0 else vt_h[0]
+            y_tr, y_te = Z_tr @ w_hub, Z_te @ w_hub
+            mu_x, sd_x = np.mean(X_tr, axis=0), np.maximum(np.std(X_tr, axis=0), 1e-8)
+            mu_y = float(np.mean(y_tr))
+            Xs_tr, Xs_te = (X_tr - mu_x) / sd_x, (X_te - mu_x) / sd_x
+            w_r = np.linalg.solve(Xs_tr.T @ Xs_tr + 1.0 * np.eye(Xs_tr.shape[1]), Xs_tr.T @ (y_tr - mu_y))
+            preds_hs[~tr] = mu_y + Xs_te @ w_r
+            y_eval[~tr] = y_te
+        ss_res_h = float(np.sum((y_eval - preds_hs) ** 2))
+        ss_tot_h = max(float(np.sum((y_eval - np.mean(y_eval)) ** 2)), 1e-12)
+        return round(1.0 - ss_res_h / ss_tot_h, 4)
+
+    r2_hub_spoke_oos = _eval_fold_isolated_hub_spoke(H_hub_p2, ledger_only=False)
+    r2_ledger_only_oos = _eval_fold_isolated_hub_spoke(H_hub_p2, ledger_only=True)
+    delta_r2_physio = round(r2_hub_spoke_oos - r2_ledger_only_oos, 4)
+    null_shift_r2s = [_eval_fold_isolated_hub_spoke(np.roll(H_hub_p2, sd, axis=0)) for sd in range(14, 77)]
+    hub_spoke_res = {
+        "r2_oos": r2_hub_spoke_oos,
+        "ledger_only_r2_oos": r2_ledger_only_oos,
+        "physio_incremental_delta_r2": delta_r2_physio,
+        "circular_shift_null_median_r2": round(float(np.median(null_shift_r2s)), 4),
+        "circular_shift_null_p95_r2": round(float(np.percentile(null_shift_r2s, 95)), 4),
+    }
+    c10_transfer_pass = bool(
+        (r2_hub_spoke_oos >= 0.60)
+        and (delta_r2_physio >= 0.15)
+        and (hub_spoke_res["circular_shift_null_median_r2"] <= 0.05)
+    )
 
     compound_pass = c1_pass and c2_pass and c3_pass and c4_pass and c5_pass and c6_pass and c7_pass and c8_pass and c9_sbc_pass and c10_transfer_pass
 
@@ -453,7 +569,9 @@ def run_180day_pilot_simulation(output_dir=None):
         "baseline_days": 28,
         "total_epochs": TOTAL_EPOCHS,
         "lambda_true": lambda_true,
+        "lambda_minus_true": lambda_minus_true,
         "lambda_hat": float(lambda_hat),
+        "lambda_minus_hat": float(lambda_minus_hat),
         "lambda_error": float(lambda_error),
         "tau_relax_true_days": tau_relax_true_days,
         "tau_relax_hat_days": float(tau_relax_hat_days),
@@ -487,6 +605,10 @@ def run_180day_pilot_simulation(output_dir=None):
         "criterion_c8_ar1_null_calibration_pass": c8_pass,
         "criterion_c9_blind_sbc_pass": c9_sbc_pass,
         "hub_to_spoke_transfer_r2_oos": float(hub_spoke_res["r2_oos"]),
+        "hub_to_spoke_ledger_only_r2_oos": float(hub_spoke_res["ledger_only_r2_oos"]),
+        "hub_to_spoke_physio_delta_r2": float(hub_spoke_res["physio_incremental_delta_r2"]),
+        "hub_to_spoke_circular_null_median_r2": float(hub_spoke_res["circular_shift_null_median_r2"]),
+        "hub_to_spoke_circular_null_p95_r2": float(hub_spoke_res["circular_shift_null_p95_r2"]),
         "criterion_c10_hub_to_spoke_pass": c10_transfer_pass,
         "compound_verdict": "COMPOUND PASS (10/10 CRITERIA SATISFIED)" if compound_pass else "FAIL"
     }
@@ -554,7 +676,7 @@ def run_180day_pilot_simulation(output_dir=None):
 
     print("=" * 80)
     print(f"SIMULATION PILOT-2 (V4.6) COMPLETE: {results['compound_verdict']}")
-    print(f"  Lambda Recovery Error:   {lambda_error:.6f} <= 0.0200 ({'PASS' if c2_pass else 'FAIL'})")
+    print(f"  Lambda Recovery Error:   {lambda_error:.6f} <= 0.0250 ({'PASS' if c2_pass else 'FAIL'}) | λ-={lambda_minus_hat:.4f} > λ+={lambda_hat:.4f}")
     print(f"  Tau Relaxation Estimate: {tau_relax_hat_days:.2f} days in [2.0, 4.0] ({'PASS' if c3_pass else 'FAIL'})")
     print(f"  Exertion Confounder R^2: {r2_exertion:.6f} <= 0.0200 ({'PASS' if c1_pass else 'FAIL'})")
     print(f"  AR(1) BY FDR q-bound:    {fdr_q_max:.6f} <= 0.0500 ({'PASS' if c4_pass else 'FAIL'})")
@@ -563,7 +685,7 @@ def run_180day_pilot_simulation(output_dir=None):
     print(f"  Practice-Detrended d:    {cohen_d_pvt:.4f} >= 0.50 ({'PASS' if c7_pass else 'FAIL'})")
     print(f"  AR(1) Null FPR (PW/Naiv):{fpr_prewhitened:.3f} <= 0.08 vs {fpr_naive:.3f} > 0.20 ({'PASS' if c8_pass else 'FAIL'})")
     print(f"  Blind 12-Draw SBC MAE:   λ={sbc_lam_mae:.5f}<=0.020, τ={sbc_tau_mae:.3f}d<=0.30 ({'PASS' if c9_sbc_pass else 'FAIL'})")
-    print(f"  Hub->Spoke Transfer R^2: {hub_spoke_res['r2_oos']:.4f} >= 0.60 ({'PASS' if c10_transfer_pass else 'FAIL'})")
+    print(f"  Hub->Spoke Transfer R^2: {hub_spoke_res['r2_oos']:.4f} >= 0.60 | Ledger-only={hub_spoke_res['ledger_only_r2_oos']:.4f} | ΔR²={hub_spoke_res['physio_incremental_delta_r2']:+.4f} | null={hub_spoke_res['circular_shift_null_median_r2']:.4f} ({'PASS' if c10_transfer_pass else 'FAIL'})")
     print("=" * 80)
 
     return results

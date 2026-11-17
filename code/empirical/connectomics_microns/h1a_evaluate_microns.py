@@ -131,6 +131,14 @@ out = {
 json.dump(out, open(f'{S}/h1a_results_microns.json', 'w'), indent=1)
 
 # --- H1-B graph (Amendment 3 §4): nodes = sampled posts + their typed pres ---
+df_h1b = pd.DataFrame({
+    'pre': pre,
+    'post': post,
+    'w': w.astype(np.int32),
+    'cls_pre': pd.Categorical(cp),
+    'cls_post': pd.Categorical(cq),
+})
+df_h1b.to_parquet(f'{S}/graph_h1b_microns.parquet', compression='zstd', index=False)
 np.savez(f'{S}/graph_h1b_microns.npz', pre=pre, post=post, w=w,
          cls_pre=cp, cls_post=cq)
 json.dump({'nodes': int(len(set(pre.tolist()) | set(post.tolist()))),

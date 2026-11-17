@@ -217,6 +217,29 @@ def evaluate_cv_features(df, y, skf, mode: str):
         elif mode == "arx_matched_25d":
             X = np.column_stack([util_1, pay_lags, relu_lags, bills_norm, pays_norm])
             clf = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
+        elif mode == "relu_ewma_2d":
+            # Matched-2D ablation: [util_1, EWMA(max(PAY_t, 0))] tuned over identical 36-pt grid
+            grid_rew = [float(round(x, 6)) for x in np.geomspace(0.02, 0.80, 36)]
+            inner_skf = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+            from sklearn.metrics import log_loss as _ll_rw
+            best_l_rw, best_a_rw = float("inf"), 0.30
+            for a_rw in grid_rew:
+                s_rw = np.zeros(len(df), dtype=np.float64)
+                for t_r in range(6):
+                    s_rw = (1.0 - a_rw) * s_rw + a_rw * relu_lags[:, t_r]
+                ls_rw = []
+                for itr, iva in inner_skf.split(tr_idx, y[tr_idx]):
+                    c_i = make_pipeline(StandardScaler(), LogisticRegression(max_iter=500))
+                    c_i.fit(np.column_stack([util_1[tr_idx[itr]], s_rw[tr_idx[itr]]]), y[tr_idx[itr]])
+                    ls_rw.append(_ll_rw(y[tr_idx[iva]], c_i.predict_proba(np.column_stack([util_1[tr_idx[iva]], s_rw[tr_idx[iva]]]))[:, 1]))
+                if float(np.mean(ls_rw)) < best_l_rw:
+                    best_l_rw, best_a_rw = float(np.mean(ls_rw)), a_rw
+            fitted_pairs.append((best_a_rw, best_a_rw))
+            s_rw_f = np.zeros(len(df), dtype=np.float64)
+            for t_r in range(6):
+                s_rw_f = (1.0 - best_a_rw) * s_rw_f + best_a_rw * relu_lags[:, t_r]
+            X = np.column_stack([util_1, s_rw_f])
+            clf = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
         elif mode == "sym_ewma_2d":
             lp_s, ln_s = fit_train_fold_asymmetry(df, y, tr_idx, symmetric_only=True)
             fitted_pairs.append((lp_s, ln_s))
@@ -266,6 +289,7 @@ def main():
     res_ar6 = evaluate_cv_features(df, y, skf, "ar6_linear_7d")
     res_ar6_relu = evaluate_cv_features(df, y, skf, "ar6_relu_7d")
     res_arx_25 = evaluate_cv_features(df, y, skf, "arx_matched_25d")
+    res_relu_ewma = evaluate_cv_features(df, y, skf, "relu_ewma_2d")
     res_sym = evaluate_cv_features(df, y, skf, "sym_ewma_2d")
     res_gtt = evaluate_cv_features(df, y, skf, "gtt_asym_2d")
     res_gbdt = evaluate_cv_features(df, y, skf, "gbdt_ceiling_23d")
@@ -453,14 +477,17 @@ def main():
     pf_ln_gt_lp_folds = sum(1 for lp_p, ln_p in pf_asym_pairs if ln_p > lp_p)
 
     # Cross-validate autoresearch Huber-IRLS estimator directly on empirical 30k panel transitions
+    # Center terminal risk innovation around empirical base rate y_bar (fixes 0.5-y offset inversion)
     import sys as _sys
     _ar_dir = os.path.abspath(os.path.join(base_dir, "../../tools/autoresearch"))
     _sys.path.insert(0, _ar_dir)
     from candidate_estimator import estimate_user_gains
+    y_bar = float(np.mean(y))
     emp_lam, emp_lp, emp_ln = estimate_user_gains(
         contract_eps[:, 1:].ravel(),
-        np.repeat((0.5 - y.astype(float)) * 0.25, 5),
+        np.repeat((y_bar - y.astype(float)) * 0.25, 5),
     )
+    _, _, rew_d_auc, rew_delong_z, rew_delong_p = fast_delong_paired_test(y, res_relu_ewma["oof_probs"], res_gtt["oof_probs"])
 
     # Cox (1958) Logistic Calibration (intercept, slope) + Subgroup Brier Reliability (Sex)
     p_gtt_clip = np.clip(res_gtt["oof_probs"], 1e-6, 1.0 - 1e-6)
@@ -486,6 +513,7 @@ def main():
     print(f"3. Tuned Asym GTT [util, S_hat] (2D):   AUC={res_gtt['roc_auc']:.4f} | Brier={res_gtt['brier']:.4f} | Pairs={res_gtt['fitted_pairs']}")
     print(f"4. AR(6) Linear Lags (7D):              AUC={res_ar6['roc_auc']:.4f} | Brier={res_ar6['brier']:.4f}")
     print(f"5. AR(6) ReLU Delinquency Lags (7D):    AUC={res_ar6_relu['roc_auc']:.4f} | Brier={res_ar6_relu['brier']:.4f}")
+    print(f"5a. Matched ReLU-EWMA (2D):             AUC={res_relu_ewma['roc_auc']:.4f} | Brier={res_relu_ewma['brier']:.4f} | GTT vs ReLU-EWMA DeLong z={rew_delong_z:.2f} (p={rew_delong_p:.2e})")
     print(f"5b. Information-Matched ARX (25D):      AUC={res_arx_25['roc_auc']:.4f} | Brier={res_arx_25['brier']:.4f}")
     print(f"6. Full-Panel HGBDT Ceiling (23D):      AUC={res_gbdt['roc_auc']:.4f} | Brier={res_gbdt['brier']:.4f}")
     print(f"Vuong (1989) OOS LL Ratio Test:         z={vuong_z:.2f} (p={vuong_p:.2e}; nested-boundary caveat) | 2*dLL={lr_stat:.1f} | Delta AUC={d_auc:+.4f} (95% CI [{ci_lo:+.4f}, {ci_hi:+.4f}])")
@@ -538,6 +566,8 @@ def main():
                 "ar6_linear_7d": {k: v for k, v in res_ar6.items() if k not in skip_keys},
                 "ar6_relu_7d": {k: v for k, v in res_ar6_relu.items() if k not in skip_keys},
                 "arx_matched_25d": {k: v for k, v in res_arx_25.items() if k not in skip_keys},
+                "relu_ewma_2d": {k: v for k, v in res_relu_ewma.items() if k not in skip_keys},
+                "gtt_vs_relu_ewma_2d_delong": {"delta_auc": rew_d_auc, "delong_z": rew_delong_z, "delong_p": rew_delong_p},
                 "symmetric_ewma_2d": {k: v for k, v in res_sym.items() if k not in skip_keys},
                 "gtt_asymmetric_2d": {k: v for k, v in res_gtt.items() if k not in skip_keys},
                 "hgbdt_ceiling_23d": {k: v for k, v in res_gbdt.items() if k not in skip_keys},

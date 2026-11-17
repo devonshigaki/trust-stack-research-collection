@@ -16,7 +16,11 @@ TARGET_EXTENSIONS = {
     ".py", ".json", ".md", ".png", ".tex", ".bib", ".pdf",
     ".lean", ".tla", ".cfg", ".cff", ".rs", ".toml", ".fasta", ".parquet", ".csv",
 }
-IGNORE_DIRS = {".git", ".lake", ".venv", ".tools", "__pycache__", "results", ".pytest_cache", "target"}
+IGNORE_DIRS = {
+    ".git", ".lake", ".venv", ".tools", "__pycache__", "results",
+    ".pytest_cache", "target", "mparts", "parts", "saved_models",
+    "checkpoints", "logs", "dist",
+}
 
 
 def hash_file(path):
@@ -54,19 +58,37 @@ def build_manifest():
     manifest_entries = {}
     total_bytes = 0
 
-    for root, dirs, files in os.walk(REPO_ROOT):
-        dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
-        for f in sorted(files):
-            if f == "SHA256_REPRODUCIBILITY_MANIFEST.json":
+    import subprocess
+    git_ignored = set()
+    if os.path.isdir(os.path.join(REPO_ROOT, ".git")):
+        # Collect git-tracked + non-ignored paths so manifest matches clean clones & OSF zip 1-to-1
+        ls_out = subprocess.check_output(
+            ["git", "-C", REPO_ROOT, "ls-files", "--cached", "--others", "--exclude-standard"],
+            text=True,
+        )
+        candidate_rel_paths = sorted({line.strip() for line in ls_out.splitlines() if line.strip()})
+    else:
+        candidate_rel_paths = []
+        for root, dirs, files in os.walk(REPO_ROOT):
+            dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
+            for f in sorted(files):
+                candidate_rel_paths.append(os.path.relpath(os.path.join(root, f), REPO_ROOT))
+
+    for rel_path in candidate_rel_paths:
+        f = os.path.basename(rel_path)
+        if f == "SHA256_REPRODUCIBILITY_MANIFEST.json":
+            continue
+        if any(part in IGNORE_DIRS for part in rel_path.split(os.sep)):
+            continue
+        ext = os.path.splitext(f)[1].lower()
+        if ext in TARGET_EXTENSIONS:
+            full_path = os.path.join(REPO_ROOT, rel_path)
+            if not os.path.isfile(full_path):
                 continue
-            ext = os.path.splitext(f)[1].lower()
-            if ext in TARGET_EXTENSIONS:
-                full_path = os.path.join(root, f)
-                rel_path = os.path.relpath(full_path, REPO_ROOT)
-                file_size = os.path.getsize(full_path)
-                if file_size < 50 * 1024 * 1024:
-                    manifest_entries[rel_path] = {"sha256": hash_file(full_path), "bytes": file_size}
-                    total_bytes += file_size
+            file_size = os.path.getsize(full_path)
+            if file_size < 50 * 1024 * 1024:
+                manifest_entries[rel_path] = {"sha256": hash_file(full_path), "bytes": file_size}
+                total_bytes += file_size
 
     manifest = {
         "release": "v4.5",
@@ -76,7 +98,7 @@ def build_manifest():
         "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.5",
         "total_files_hashed": len(manifest_entries),
         "total_manifest_size_mb": round(total_bytes / (1024 * 1024), 2),
-        "automated_ci_tasks_verified": 57,
+        "automated_ci_tasks_verified": 58,
         "files": manifest_entries,
     }
 

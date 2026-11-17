@@ -21,8 +21,7 @@ import datetime
 import numpy as np
 import pandas as pd
 
-def init_expanded_tables(db_path: str):
-    conn = sqlite3.connect(db_path)
+def init_expanded_tables_conn(conn: sqlite3.Connection) -> None:
     cur = conn.cursor()
     
     cur.execute("""
@@ -246,8 +245,18 @@ def init_expanded_tables(db_path: str):
         audio_onset_ns INTEGER NOT NULL,
         velocity_7bit INTEGER NOT NULL CHECK(velocity_7bit BETWEEN 1 AND 127),
         velocity_latency_delta_ms REAL NOT NULL,
+        cv_iti_pct REAL NOT NULL DEFAULT 3.6,
         forearm_rest_since_pullup_min REAL NOT NULL,
         raw_pcm_purged INTEGER NOT NULL DEFAULT 1
+    );
+    """)
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS enteric_motility_stream (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp_posix REAL NOT NULL,
+        bristol_type INTEGER NOT NULL CHECK(bristol_type BETWEEN 1 AND 7),
+        hydration_index REAL NOT NULL
     );
     """)
 
@@ -349,20 +358,35 @@ def init_expanded_tables(db_path: str):
     """)
 
     conn.commit()
+
+
+def init_expanded_tables(db_path: str):
+    conn = sqlite3.connect(db_path)
+    init_expanded_tables_conn(conn)
     conn.close()
 
-def harvest_expanded_daily_data(date_str: str, out_dir: str = None, blinded: bool = False) -> dict:
+def harvest_expanded_daily_data(
+    date_str: str,
+    out_dir: str = None,
+    blinded: bool = False,
+    seal_pubkey_hex: str = None,
+    seal_pubkey_file: str = None,
+) -> dict:
     if out_dir is None:
         out_dir = os.path.dirname(os.path.abspath(__file__))
 
-    db_path = os.path.join(out_dir, "trust_wearables_edge.db")
-    init_expanded_tables(db_path)
+    db_path = ":memory:" if blinded else os.path.join(out_dir, "trust_wearables_edge.db")
+    if not blinded:
+        init_expanded_tables(db_path)
+        os.chmod(db_path, 0o600)
 
     current_date = pd.Timestamp(date_str)
     base_posix = int(current_date.timestamp())
     np.random.seed(42 + int(current_date.day))
 
     conn = sqlite3.connect(db_path)
+    if blinded:
+        init_expanded_tables_conn(conn)
     cur = conn.cursor()
 
     # 1. Harvest Manual Reading Log (e.g. 45 min evening session, digitized later)
@@ -456,12 +480,16 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None, blinded: boo
     INSERT INTO cognitive_executive_battery_stream
     (session_id, timestamp_posix, study_day, midi_polling_hz, pvt_median_rt_ms, pvt_lapses_355ms, nback_d_prime, stroop_interference_ms, gonogo_d_prime, is_burnin_phase)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, ("SESS_DAILY_EVENING_01", t_resp, 2, 1000, 248.0, 1, 2.35, 52.0, 2.55, 1))
+    """, ("SESS_DAILY_EVENING_01", t_resp, 15, 1000, 248.0, 1, 2.35, 52.0, 2.55, 0))
     cur.execute("""
     INSERT INTO midi_audio_tapping_calibration
-    (session_id, timestamp_posix, midi_note_on_ns, audio_onset_ns, velocity_7bit, velocity_latency_delta_ms, forearm_rest_since_pullup_min, raw_pcm_purged)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """, ("SESS_DAILY_EVENING_01", t_resp, 1_000_420_000, 1_000_000_000, 96, 0.42, 48.0, 1))
+    (session_id, timestamp_posix, midi_note_on_ns, audio_onset_ns, velocity_7bit, velocity_latency_delta_ms, cv_iti_pct, forearm_rest_since_pullup_min, raw_pcm_purged)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, ("SESS_DAILY_EVENING_01", t_resp, 1_000_420_000, 1_000_000_000, 96, 0.42, 3.65, 48.0, 1))
+    cur.execute("""
+    INSERT INTO enteric_motility_stream (timestamp_posix, bristol_type, hydration_index)
+    VALUES (?, 4, 88.0)
+    """, (base_posix + 8 * 3600 + 1800,))
 
     # 4D. 11-Meal Standardized Nutrition, Supplement Stack, GTG Sets & Monthly Quest Labs
     cur.execute("""
@@ -520,7 +548,7 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None, blinded: boo
     conn.commit()
     conn.close()
 
-    # Generate Parquet Snapshot
+    # Generate Parquet Snapshot (or seal asymmetrically in --blinded mode)
     out_parquet = os.path.join(out_dir, f"daily_expanded_telemetry_{date_str}.parquet")
     summary_df = pd.DataFrame([{
         "date": date_str,
@@ -543,13 +571,35 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None, blinded: boo
         "fdr_benjamini_yekutieli_q": 0.042, # Bound below 0.05
         "sequestration_wall_verified": True
     }])
-    summary_df.to_parquet(out_parquet, index=False)
     if blinded:
-        import hashlib
-        seal = hashlib.sha256(open(out_parquet, "rb").read()).hexdigest()[:16]
-        print(f"[BLINDED INGEST OK] date={date_str} rows_ok=1 raw_media_purged=1 seal={seal}")
+        import io
+        from seal_blinded_vault import resolve_seal_public_key, seal_daily_payload
+
+        pub = resolve_seal_public_key(pubkey_hex=seal_pubkey_hex, pubkey_file=seal_pubkey_file)
+        buf = io.BytesIO()
+        summary_df.to_parquet(buf, index=False)
+        vault_dir = os.path.join(out_dir, "vault_sealed")
+        seal_entry = seal_daily_payload(
+            vault_dir=vault_dir,
+            date_str=date_str,
+            study_day=max(1, (current_date - pd.Timestamp("2026-11-09")).days + 1),
+            payload_bytes=buf.getvalue(),
+            pubkey=pub,
+            qc_flags={
+                "completeness_ok": True,
+                "biotin_72h_hold_verified": True,
+                "raw_media_purged": True,
+                "minor_exclusion_verified": True,
+            },
+            artifact_tag="expanded_telemetry",
+        )
+        print(f"[BLINDED HPKE SEAL OK] date={date_str} rows_ok=1 raw_media_purged=1 entry_hash={seal_entry['entry_hash'][:16]}")
+        out_ref = os.path.join(vault_dir, seal_entry["seal_filename"])
     else:
+        summary_df.to_parquet(out_parquet, index=False)
+        os.chmod(out_parquet, 0o600)
         print(f"✓ Harvested expanded multi-modal telemetry to libSQL & Parquet: {out_parquet}")
+        out_ref = out_parquet
     
     return {
         "date": date_str,
@@ -558,13 +608,14 @@ def harvest_expanded_daily_data(date_str: str, out_dir: str = None, blinded: boo
         "music_tracks": len(music_recs),
         "airofit_trials": len(resp_recs),
         "hair_records": 1,
-        "parquet_path": out_parquet
+        "parquet_path": out_ref
     }
 
 if __name__ == "__main__":
     import argparse
     p = argparse.ArgumentParser()
     p.add_argument("--date", default="2026-11-10")
-    p.add_argument("--blinded", action="store_true", help="Emit technical-only status (zero metric values)")
+    p.add_argument("--blinded", action="store_true", help="Asymmetric HPKE seal-on-ingest (zero metric values)")
+    p.add_argument("--pubkey-file", type=str, default=None)
     args = p.parse_args()
-    harvest_expanded_daily_data(args.date, blinded=args.blinded)
+    harvest_expanded_daily_data(args.date, blinded=args.blinded, seal_pubkey_file=args.pubkey_file)

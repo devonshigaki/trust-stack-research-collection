@@ -40,6 +40,42 @@
     "uncertainty": 0.17227056,
     "fitted_pairs": []
   },
+  "relu_ewma_2d": {
+    "roc_auc": 0.7277560013091551,
+    "pr_auc": 0.48837777145139916,
+    "log_loss": 0.4666839480107501,
+    "brier": 0.14695878909104498,
+    "reliability": 0.003117662781710881,
+    "resolution": 0.02813107023278827,
+    "uncertainty": 0.17227056,
+    "fitted_pairs": [
+      [
+        0.02,
+        0.02
+      ],
+      [
+        0.02,
+        0.02
+      ],
+      [
+        0.02,
+        0.02
+      ],
+      [
+        0.02,
+        0.02
+      ],
+      [
+        0.02,
+        0.02
+      ]
+    ]
+  },
+  "gtt_vs_relu_ewma_2d_delong": {
+    "delta_auc": 0.003965574075260769,
+    "delong_z": 2.5391583795942965,
+    "delong_p": 0.011111950707213047
+  },
   "symmetric_ewma_2d": {
     "roc_auc": 0.7231787247274802,
     "pr_auc": 0.4777923607412128,
@@ -129,8 +165,8 @@
     "delta_auc": 0.008976719205210926,
     "delong_z": 5.283539942508906,
     "delong_p": 1.2671122107121846e-07,
-    "autoresearch_huber_irls_lp": 0.14443362669632062,
-    "autoresearch_huber_irls_ln": 0.011756795184720016
+    "autoresearch_huber_irls_lp": 0.04812399446059925,
+    "autoresearch_huber_irls_ln": 0.11921337076619934
   },
   "cox_calibration": {
     "intercept": -0.0007678675879368934,

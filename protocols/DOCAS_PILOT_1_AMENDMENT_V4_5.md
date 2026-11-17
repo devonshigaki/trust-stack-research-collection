@@ -1,3 +1,5 @@
+> **ARCHIVAL SUPERSESSION NOTICE (v4.6):** This v4.5 amendment is **superseded** by [`DOCAS_PILOT_1_HUMAN_PROTOCOL.md`](DOCAS_PILOT_1_HUMAN_PROTOCOL.md) (v4.6) and [`IRB_SOLUTIONS_PEARL_NHSR_SUBMISSION.md`](irb/IRB_SOLUTIONS_PEARL_NHSR_SUBMISSION.md). In particular, Stage 1 ($N=1$) collects only a Day 0 baseline virgin hair anchor (retrospective archival hair metabolomics/elements are Stage 2–4 IRB-gated only).
+
 # DOCAS-PILOT-1: OSF FORMAL PROTOCOL AMENDMENT (VERSION 4.5)
 **Document ID:** `DOCAS_PILOT_1_AMENDMENT_V4_5.md`  
 **Registration Target:** Open Science Framework (OSF Pre-Registration Freeze)  

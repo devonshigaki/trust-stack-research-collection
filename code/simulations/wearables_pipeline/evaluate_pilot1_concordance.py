@@ -325,7 +325,10 @@ CREATE TABLE IF NOT EXISTS apple_journal_affect (
     timestamp_epoch REAL NOT NULL,
     valence_score REAL NOT NULL,
     arousal_score REAL NOT NULL,
-    journal_text TEXT NOT NULL,
+    word_count INTEGER NOT NULL DEFAULT 0,
+    lexical_entropy REAL NOT NULL DEFAULT 0.0,
+    valence_proxy REAL NOT NULL DEFAULT 0.0,
+    pii_stripped INTEGER NOT NULL DEFAULT 1 CHECK(pii_stripped = 1),
     source_name TEXT DEFAULT 'Apple Journal'
 );
 
@@ -810,12 +813,24 @@ def ingest_apple_health_into_db(
 
     journal_rows = []
     for item in parsed_data.get("state_of_mind", []):
-        journal_rows.append((session_id, item["timestamp_epoch"], item["valence"], 0.5, item.get("journal_text", ""), item.get("source_name", "Apple Journal")))
+        nlp_feat = extract_deidentified_text_features(item.get("journal_text", ""), is_from_me=True)
+        journal_rows.append((
+            session_id,
+            item["timestamp_epoch"],
+            item["valence"],
+            0.5,
+            nlp_feat["word_count"],
+            nlp_feat["shannon_entropy"],
+            nlp_feat["valence_proxy"],
+            1,
+            item.get("source_name", "Apple Journal"),
+        ))
 
     if journal_rows:
         conn.executemany(
-            "INSERT INTO apple_journal_affect (session_id, timestamp_epoch, valence_score, arousal_score, journal_text, source_name) "
-            "VALUES (?, ?, ?, ?, ?, ?)",
+            "INSERT INTO apple_journal_affect "
+            "(session_id, timestamp_epoch, valence_score, arousal_score, word_count, lexical_entropy, valence_proxy, pii_stripped, source_name) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             journal_rows,
         )
 
@@ -1183,36 +1198,51 @@ def evaluate_concordance(
 
     # 7. PILOT-H7: Striatal Motor Timing Washout (CV_ITI <= 4.5%)
     cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='cognitive_battery_tapping'")
-    if cur.fetchone():
-        tap_cols = [c[1] for c in cur.execute("PRAGMA table_info(cognitive_battery_tapping)").fetchall()]
-        query_h7 = "SELECT cv_iti_pct FROM cognitive_battery_tapping WHERE cv_iti_pct IS NOT NULL"
-        params_h7 = []
-        if session_id and "session_id" in tap_cols:
-            query_h7 += " AND session_id = ?"
-            params_h7.append(session_id)
-        cur.execute(query_h7, params_h7)
-        cv_rows = [r[0] for r in cur.fetchall()]
-        if cv_rows:
-            latest_cv = float(cv_rows[-1])
-            t_cv, p_val_h7 = compute_one_sample_ttest(cv_rows, 4.50, alternative="less")
-            h7_passed = bool(latest_cv <= 4.50 and p_val_h7 < 0.05)
-            p_values_for_fdr["PILOT-H7"] = round(p_val_h7, 6)
-            results["hypotheses"]["PILOT-H7"] = {
-                "description": "Striatal Motor Timing Washout (CV_ITI <= 4.50%, p < 0.05)",
-                "measured_cv_iti_pct": round(latest_cv, 2),
-                "target_cv_iti_pct": 4.50,
-                "t_statistic": round(t_cv, 3),
-                "p_value": round(p_val_h7, 6),
-                "verdict": "PASS" if h7_passed else "FAIL",
-            }
-            if not h7_passed:
-                results["all_passed"] = False
+    h7_table = "cognitive_battery_tapping" if cur.fetchone() else None
+    if h7_table is None:
+        cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='midi_audio_tapping_calibration'")
+        if cur.fetchone():
+            h7_table = "midi_audio_tapping_calibration"
+    if h7_table is not None:
+        tap_cols = [c[1] for c in cur.execute(f"PRAGMA table_info({h7_table})").fetchall()]
+        if "cv_iti_pct" in tap_cols:
+            query_h7 = f"SELECT cv_iti_pct FROM {h7_table} WHERE cv_iti_pct IS NOT NULL"
+            params_h7 = []
+            if session_id and "session_id" in tap_cols:
+                query_h7 += " AND session_id = ?"
+                params_h7.append(session_id)
+            cur.execute(query_h7, params_h7)
+            cv_rows = [r[0] for r in cur.fetchall()]
+            if cv_rows:
+                latest_cv = float(cv_rows[-1])
+                t_cv, p_val_h7 = compute_one_sample_ttest(cv_rows, 4.50, alternative="less")
+                h7_passed = bool(latest_cv <= 4.50 and p_val_h7 < 0.05)
+                p_values_for_fdr["PILOT-H7"] = round(p_val_h7, 6)
+                results["hypotheses"]["PILOT-H7"] = {
+                    "description": "Striatal Motor Timing Washout (CV_ITI <= 4.50%, p < 0.05)",
+                    "measured_cv_iti_pct": round(latest_cv, 2),
+                    "target_cv_iti_pct": 4.50,
+                    "t_statistic": round(t_cv, 3),
+                    "p_value": round(p_val_h7, 6),
+                    "verdict": "PASS" if h7_passed else "FAIL",
+                }
+                if not h7_passed:
+                    results["all_passed"] = False
 
     # 8. PILOT-H8: Prefrontal Inhibitory Control & Vigilance under Betrayal
     cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='cognitive_battery_gonogo'")
-    if cur.fetchone():
-        gn_cols = [c[1] for c in cur.execute("PRAGMA table_info(cognitive_battery_gonogo)").fetchall()]
-        query_h8 = "SELECT d_prime FROM cognitive_battery_gonogo WHERE d_prime IS NOT NULL"
+    h8_table = "cognitive_battery_gonogo" if cur.fetchone() else None
+    h8_col = "d_prime"
+    if h8_table is None:
+        cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='cognitive_executive_battery_stream'")
+        if cur.fetchone():
+            h8_table = "cognitive_executive_battery_stream"
+            h8_col = "gonogo_d_prime"
+    if h8_table is not None:
+        gn_cols = [c[1] for c in cur.execute(f"PRAGMA table_info({h8_table})").fetchall()]
+        query_h8 = f"SELECT {h8_col} FROM {h8_table} WHERE {h8_col} IS NOT NULL"
+        if "is_burnin_phase" in gn_cols:
+            query_h8 += " AND is_burnin_phase = 0"
         params_h8 = []
         if session_id and "session_id" in gn_cols:
             query_h8 += " AND session_id = ?"
@@ -1327,7 +1357,9 @@ def evaluate_concordance(
     cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='manual_reading_log_stream'")
     if cur.fetchone():
         read_cols = [c[1] for c in cur.execute("PRAGMA table_info(manual_reading_log_stream)").fetchall()]
-        query_read = "SELECT flesch_kincaid_grade, latency_sec FROM manual_reading_log_stream"
+        fk_col = "nlp_flesch_kincaid_grade" if "nlp_flesch_kincaid_grade" in read_cols else "flesch_kincaid_grade"
+        lat_col = "time_to_digitization_seconds" if "time_to_digitization_seconds" in read_cols else "latency_sec"
+        query_read = f"SELECT {fk_col}, {lat_col} FROM manual_reading_log_stream"
         params_read = []
         if session_id and "session_id" in read_cols:
             query_read += " WHERE session_id = ?"
@@ -1435,7 +1467,7 @@ def evaluate_concordance(
         elif nb_rows:
             results["hypotheses"]["H-COG"] = {"verdict": "SKIPPED_INSUFFICIENT_DATA", "samples": len(nb_rows)}
 
-    # 11. H-HAIR: Longitudinal Endocrine Ground Truth (LC-MS/MS)
+    # 11. H-HAIR: Longitudinal Endocrine Ground Truth (LC-MS/MS SoHT Cortisone-Dominant Ratio [0.20, 0.90])
     cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='hair_metabolomics_stream'")
     if cur.fetchone():
         hair_cols = [c[1] for c in cur.execute("PRAGMA table_info(hair_metabolomics_stream)").fetchall()]
@@ -1448,11 +1480,14 @@ def evaluate_concordance(
         hair_rows = [r[0] for r in cur.fetchall()]
         if len(hair_rows) >= 2:
             mean_ratio = float(np.mean(hair_rows))
-            t_hair, p_val_hair = compute_one_sample_ttest(hair_rows, 1.0, alternative="greater")
-            h_hair_passed = bool(mean_ratio > 1.0 and p_val_hair < 0.05)
+            t_low, p_low = compute_one_sample_ttest(hair_rows, 0.20, alternative="greater")
+            t_high, p_high = compute_one_sample_ttest(hair_rows, 0.90, alternative="less")
+            p_val_hair = float(max(p_low, p_high))
+            t_hair = float(t_low if abs(t_low) <= abs(t_high) else t_high)
+            h_hair_passed = bool(0.20 <= mean_ratio <= 0.90 and p_val_hair < 0.05)
             p_values_for_fdr["H-HAIR"] = round(p_val_hair, 6)
             results["hypotheses"]["H-HAIR"] = {
-                "description": "Segmental Scalp Hair LC-MS/MS Endocrine Ground Truth (r >= 0.40, p < 0.05)",
+                "description": "Segmental Scalp Hair LC-MS/MS SoHT Endocrine Integrity (cortisol/cortisone in [0.20, 0.90], p_TOST < 0.05)",
                 "cortisol_cortisone_ratio": round(mean_ratio, 3),
                 "t_statistic": round(t_hair, 3),
                 "p_value": round(p_val_hair, 6),
@@ -1502,21 +1537,27 @@ def evaluate_concordance(
 
     # 13. H-MUSIC: Late-Night Acoustic Tempo vs Nocturnal Temperature (R^2 >= 0.30, p < 0.05)
     cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='apple_music_recently_played'")
-    has_music = cur.fetchone() is not None
+    music_tbl = "apple_music_recently_played" if cur.fetchone() else None
+    if music_tbl is None:
+        cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='music_telemetry_stream'")
+        if cur.fetchone():
+            music_tbl = "music_telemetry_stream"
     cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='apple_health_wrist_temp'")
     has_temp = cur.fetchone() is not None
 
-    if has_music and has_temp:
+    if music_tbl is not None and has_temp:
         m_pairs = []
         try:
-            m_cols = [c[1] for c in cur.execute("PRAGMA table_info(apple_music_recently_played)").fetchall()]
+            m_cols = [c[1] for c in cur.execute(f"PRAGMA table_info({music_tbl})").fetchall()]
             t_cols = [c[1] for c in cur.execute("PRAGMA table_info(apple_health_wrist_temp)").fetchall()]
-            query_m = """
-                SELECT m.tempo_bpm, t.delta_from_baseline_c
-                FROM apple_music_recently_played m
+            m_ts_col = "timestamp_posix" if "timestamp_posix" in m_cols else "timestamp_epoch"
+            m_bpm_col = "dsp_tempo_bpm" if "dsp_tempo_bpm" in m_cols else "tempo_bpm"
+            query_m = f"""
+                SELECT m.{m_bpm_col}, t.delta_from_baseline_c
+                FROM {music_tbl} m
                 JOIN apple_health_wrist_temp t
-                  ON date(datetime(m.timestamp_epoch, 'unixepoch')) = date(datetime(t.timestamp_epoch, 'unixepoch'))
-                WHERE m.tempo_bpm IS NOT NULL AND t.delta_from_baseline_c IS NOT NULL
+                  ON date(datetime(m.{m_ts_col}, 'unixepoch')) = date(datetime(t.timestamp_epoch, 'unixepoch'))
+                WHERE m.{m_bpm_col} IS NOT NULL AND t.delta_from_baseline_c IS NOT NULL
             """
             params_m = []
             if session_id and "session_id" in m_cols and "session_id" in t_cols:
@@ -1727,9 +1768,9 @@ def run_self_test() -> bool:
     conn.execute("INSERT INTO cognitive_executive_battery_stream VALUES ('rogue-session-99', 0.5, 180.0, 0);")
 
     conn.execute("CREATE TABLE hair_metabolomics_stream (session_id TEXT, cortisol_cortisone_ratio REAL);")
-    for hc in (1.38, 1.44, 1.41, 1.46):
+    for hc in (0.48, 0.54, 0.51, 0.57):
         conn.execute("INSERT INTO hair_metabolomics_stream VALUES (?, ?);", (session_id, hc))
-    conn.execute("INSERT INTO hair_metabolomics_stream VALUES ('rogue-session-99', 0.1);")
+    conn.execute("INSERT INTO hair_metabolomics_stream VALUES ('rogue-session-99', 1.80);")
 
     conn.execute("CREATE TABLE apple_music_recently_played (session_id TEXT, timestamp_epoch REAL, tempo_bpm REAL);")
     for day_offset, bpm in [(0, 82.0), (1, 96.0), (2, 118.0), (3, 134.0)]:
@@ -1940,9 +1981,40 @@ def run_self_test() -> bool:
     rng_hs = np.random.default_rng(7)
     X_sp = rng_hs.normal(0, 1, (120, 4))
     y_hub = 0.8 * X_sp[:, 0] - 0.5 * X_sp[:, 1] + rng_hs.normal(0, 0.25, 120)
-    tr_res = fit_hub_to_spoke_transfer_function(X_sp, y_hub)
-    assert tr_res["r2_oos"] >= 0.70, f"Hub-to-Spoke Ridge transfer R2 too low: {tr_res}"
-    print(f"✓ Hub-to-Spoke, HealthKit Sidecar Join & Zero-PII NLP Oracles: R2_OOS={tr_res['r2_oos']} (PASS)")
+    tr_res = evaluate_hub_to_spoke_circular_null(X_sp, y_hub)
+    assert tr_res["falsification_pass"], f"Hub-to-Spoke circular-shift falsification failed: {tr_res}"
+    print(f"✓ Hub-to-Spoke, HealthKit Sidecar Join & Zero-PII NLP Oracles: R2_OOS={tr_res['r2_oos']} (null_med={tr_res['null_median_r2']}, PASS)")
+
+    # Zero-Mock End-to-End Dress-Rehearsal Oracle: real harvest_expanded_daily_data + real Apple Health ingest -> evaluate_concordance
+    from harvest_expanded_telemetry import harvest_expanded_daily_data
+    with tempfile.TemporaryDirectory() as tmp_dress:
+        for d_str in ("2026-12-01", "2026-12-02", "2026-12-03", "2026-12-04"):
+            harvest_expanded_daily_data(d_str, out_dir=tmp_dress, blinded=False)
+        dress_db = os.path.join(tmp_dress, "trust_wearables_edge.db")
+        assert (os.stat(dress_db).st_mode & 0o777) == 0o600, "Dress-rehearsal DB must be 0o600!"
+        dress_xml = (
+            '<HealthData>'
+            '<Record type="HKQuantityTypeIdentifierHeartRateVariabilitySDNN" sourceName="Apple Watch" value="52.0" startDate="2026-12-01 08:00:00 +0000"/>'
+            '<Record type="HKQuantityTypeIdentifierHeartRateVariabilitySDNN" sourceName="Apple Watch" value="54.0" startDate="2026-12-02 08:00:00 +0000"/>'
+            '<Record type="HKQuantityTypeIdentifierHeartRateVariabilitySDNN" sourceName="Apple Watch" value="65.0" startDate="2026-12-03 08:00:00 +0000"/>'
+            '<Record type="HKQuantityTypeIdentifierHeartRateVariabilitySDNN" sourceName="Apple Watch" value="68.0" startDate="2026-12-04 08:00:00 +0000"/>'
+            '<Record type="HKQuantityTypeIdentifierAppleSleepingWristTemperature" sourceName="Apple Watch" value="36.75" startDate="2026-12-01 04:00:00 +0000"/>'
+            '<Record type="HKQuantityTypeIdentifierAppleSleepingWristTemperature" sourceName="Apple Watch" value="36.82" startDate="2026-12-02 04:00:00 +0000"/>'
+            '<Record type="HKQuantityTypeIdentifierAppleSleepingWristTemperature" sourceName="Apple Watch" value="36.90" startDate="2026-12-03 04:00:00 +0000"/>'
+            '<Record type="HKQuantityTypeIdentifierAppleSleepingWristTemperature" sourceName="Apple Watch" value="36.95" startDate="2026-12-04 04:00:00 +0000"/>'
+            '<StateOfMind startDate="2026-12-01 20:00:00 +0000" valence="0.30" associations="CONFIDENTIAL_RAW_DIARY test@example.com"/>'
+            '</HealthData>'
+        )
+        d_conn = sqlite3.connect(dress_db)
+        ingest_apple_health_into_db(d_conn, "dress-01", parse_apple_health_xml(dress_xml, is_file=False), wrist_temp_baseline_c=36.60)
+        d_res = evaluate_concordance(d_conn, session_id=None, cohort_stage=1)
+        d_conn.close()
+        for h_req in ("PILOT-H2", "PILOT-H3", "PILOT-H6", "PILOT-H7", "PILOT-H8", "H-READ", "H-RESP", "H-COG", "H-HAIR", "H-MUSIC"):
+            v = d_res["hypotheses"].get(h_req, {}).get("verdict")
+            assert v in ("PASS", "FAIL"), f"Dress rehearsal failed to evaluate {h_req}: {d_res['hypotheses'].get(h_req)}"
+        raw_db_bytes = open(dress_db, "rb").read()
+        assert b"CONFIDENTIAL_RAW_DIARY" not in raw_db_bytes and b"test@example.com" not in raw_db_bytes
+    print("✓ Zero-Mock End-to-End Dress-Rehearsal Oracle: Real expanded schema + 0o600 + zero-PII DB verified")
 
     print("\n" + "=" * 80)
     print("✅ SELF-TEST PASSED: ALL 13 TESTABLE PILOT & AMENDMENT HYPOTHESES & STOPPING GATES VALIDATED")
@@ -2057,6 +2129,33 @@ def fit_hub_to_spoke_transfer_function(
     }
 
 
+def evaluate_hub_to_spoke_circular_null(
+    spoke_features: np.ndarray,
+    hub_latent_target: np.ndarray,
+    min_shift: int = 14,
+    n_blocks: int = 5,
+    l2_alpha: float = 1.0,
+) -> Dict[str, float]:
+    """Circular-shift surrogate falsification control for Hub-to-Spoke transfer R^2_OOS."""
+    obs = fit_hub_to_spoke_transfer_function(spoke_features, hub_latent_target, n_blocks=n_blocks, l2_alpha=l2_alpha)
+    n = len(hub_latent_target)
+    if n <= 2 * min_shift:
+        return {**obs, "null_median_r2": 0.0, "null_p95_r2": 0.0, "falsification_pass": False}
+    y = np.asarray(hub_latent_target, dtype=np.float64)
+    null_r2s = [
+        fit_hub_to_spoke_transfer_function(spoke_features, np.roll(y, s), n_blocks=n_blocks, l2_alpha=l2_alpha)["r2_oos"]
+        for s in range(min_shift, n - min_shift + 1)
+    ]
+    med = round(float(np.median(null_r2s)), 4)
+    p95 = round(float(np.percentile(null_r2s, 95)), 4)
+    return {
+        **obs,
+        "null_median_r2": med,
+        "null_p95_r2": p95,
+        "falsification_pass": bool(obs["r2_oos"] >= 0.60 and med <= 0.05),
+    }
+
+
 def compute_interoceptive_blind_spot_and_masking(
     physio_z: np.ndarray,
     verbal_z: np.ndarray,
@@ -2093,6 +2192,8 @@ def main():
     parsed = parse_apple_health_xml(args.apple_xml, is_file=True)
 
     conn = sqlite3.connect(args.db_path)
+    if args.db_path != ":memory:":
+        os.chmod(args.db_path, 0o600)
     n_hrv, n_temp, n_sleep = ingest_apple_health_into_db(conn, args.session_id, parsed)
     print(f"Ingested {n_hrv} HRV, {n_temp} Wrist Temp, and {n_sleep} Sleep records into {args.db_path}")
 

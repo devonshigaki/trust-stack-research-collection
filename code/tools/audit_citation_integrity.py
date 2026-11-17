@@ -74,23 +74,24 @@ def run_audit(dry_run: bool = False):
 
         n_cited = len(cited_keys)
         n_bib = len(bib_entries)
+        n_uncited = len(set(bib_entries.keys()) - cited_keys)
         n_journal_book = sum(1 for e in bib_entries.values() if e["type"] in ("article", "book", "inproceedings", "incollection", "phdthesis"))
         n_doi = sum(1 for e in bib_entries.values() if e["has_doi"])
         n_preprint = sum(1 for e in bib_entries.values() if e["is_preprint_or_wp"])
 
-        summary_rows.append((name, n_bib, n_cited, len(missing), n_journal_book, n_doi, n_preprint))
-        print(f"  {name:<11s} | bib={n_bib:3d} | cited={n_cited:3d} | missing={len(missing):2d} | journal/book={n_journal_book:3d} | doi_field={n_doi:3d} | preprint/wp={n_preprint:2d}")
+        summary_rows.append((name, n_bib, n_cited, n_uncited, len(missing), n_journal_book, n_doi, n_preprint))
+        print(f"  {name:<11s} | bib={n_bib:3d} | inline_cited={n_cited:3d} | uncited_nocite={n_uncited:3d} | missing={len(missing):2d} | journal/book={n_journal_book:3d} | doi_field={n_doi:3d} | preprint/wp={n_preprint:2d}")
 
     out_path = os.path.join(DOCS_DIR, "CITATION_INTEGRITY_LEDGER.md")
     lines = [
         "# CITATION INTEGRITY & BIBTEX PROVENANCE LEDGER",
         "**Scope:** Real AST/Regex audit of `manuscripts/*/*.tex` against `manuscripts/*/*.bib`",
         "",
-        "| Manuscript | Bib Entries | Cited Keys | Missing Keys | Journal/Book/Thesis | Explicit DOI | Working Paper / Preprint |",
-        "| :--- | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| Manuscript | Bib Entries | Inline Cited Keys | Uncited (`\\nocite{*}`) | Missing Keys | Journal/Book/Thesis | Explicit DOI | Working Paper / Preprint |",
+        "| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
     for row in summary_rows:
-        lines.append(f"| `{row[0]}` | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]} |")
+        lines.append(f"| `{row[0]}` | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]} | {row[7]} |")
 
     if all_missing:
         lines.append("\n## Missing BibTeX Keys Detected")

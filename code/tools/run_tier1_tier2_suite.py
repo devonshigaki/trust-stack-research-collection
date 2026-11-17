@@ -239,6 +239,13 @@ TASKS = [
         "args": ["--self-test"]
     },
     {
+        "tier": "Tier 1: Blinding Security",
+        "name": "RFC 9180 HPKE Asymmetric Seal-on-Ingest Blinding Vault Self-Test",
+        "script": "code/simulations/wearables_pipeline/seal_blinded_vault.py",
+        "workdir": "code/simulations/wearables_pipeline",
+        "args": ["--self-test"]
+    },
+    {
         "tier": "Tier 1: Empirical Data",
         "name": "Real 30,000-Borrower Longitudinal Credit Panel Benchmark (OpenML 42477)",
         "script": "code/empirical/credit_panel/validate_master_law_credit_panel.py",
@@ -360,34 +367,72 @@ TASKS = [
     }
 ]
 
+def _snapshot_artifacts() -> dict:
+    """Snapshot tracked artifact bytes so `--check` CI runs never mutate manifest-sealed files."""
+    exts = {".json", ".png", ".csv", ".md"}
+    snap = {}
+    for sub in ("code", "formal", "figures"):
+        root = os.path.join(BASE_DIR, sub)
+        if not os.path.exists(root):
+            continue
+        for dirpath, dirnames, filenames in os.walk(root):
+            dirnames[:] = [d for d in dirnames if d not in {".lake", "__pycache__", ".pytest_cache", "target", ".tools"}]
+            for fn in filenames:
+                if os.path.splitext(fn)[1].lower() in exts:
+                    fp = os.path.join(dirpath, fn)
+                    if os.path.getsize(fp) < 20 * 1024 * 1024:
+                        with open(fp, "rb") as f:
+                            snap[fp] = f.read()
+    return snap
+
+
+def _restore_artifacts(snap: dict) -> None:
+    for fp, data in snap.items():
+        with open(fp, "wb") as f:
+            f.write(data)
+
+
 def main():
+    readonly = ("--check" in sys.argv) or (os.environ.get("TRUST_STACK_CI_READONLY") == "1")
+    snap = _snapshot_artifacts() if readonly else None
+    run_env = os.environ.copy()
+    if readonly:
+        run_env["TRUST_STACK_CI_READONLY"] = "1"
+
     print("=" * 75)
     print("🚀 TRUST STACK - COMPREHENSIVE TIER 1 & TIER 2 EXECUTION SUITE")
+    if readonly:
+        print("   [READ-ONLY CI MODE: restoring manifest-sealed artifact snapshots post-run]")
     print("=" * 75)
 
     passed = 0
     failed = 0
 
-    for i, task in enumerate(TASKS, 1):
-        print(f"\n[{i}/{len(TASKS)}] Running [{task['tier']}]: {task['name']}...")
-        script_path = os.path.join(BASE_DIR, task['script'])
-        work_dir = os.path.join(BASE_DIR, task['workdir'])
-        cmd = [PYTHON, script_path] + task.get("args", [])
+    try:
+        for i, task in enumerate(TASKS, 1):
+            print(f"\n[{i}/{len(TASKS)}] Running [{task['tier']}]: {task['name']}...")
+            script_path = os.path.join(BASE_DIR, task['script'])
+            work_dir = os.path.join(BASE_DIR, task['workdir'])
+            cmd = [PYTHON, script_path] + task.get("args", [])
 
-        try:
-            res = subprocess.run(
-                cmd,
-                cwd=work_dir,
-                capture_output=True,
-                text=True,
-                check=True
-            )
-            print("✓ PASS!")
-            passed += 1
-        except subprocess.CalledProcessError as e:
-            print(f"✗ FAIL! (Exit Code {e.returncode})")
-            print("Error Output:\n", e.stderr)
-            failed += 1
+            try:
+                res = subprocess.run(
+                    cmd,
+                    cwd=work_dir,
+                    env=run_env,
+                    capture_output=True,
+                    text=True,
+                    check=True
+                )
+                print("✓ PASS!")
+                passed += 1
+            except subprocess.CalledProcessError as e:
+                print(f"✗ FAIL! (Exit Code {e.returncode})")
+                print("Error Output:\n", e.stderr)
+                failed += 1
+    finally:
+        if snap is not None:
+            _restore_artifacts(snap)
 
     print("\n" + "=" * 75)
     print(f"SUMMARY: {passed}/{len(TASKS)} Tasks Succeeded | {failed} Failed")

@@ -305,8 +305,16 @@ def process_optode_signal(
     return hbo2, hbr, hbt, sci, is_motion_artifact
 
 
-def process_session_fnirs(db_path: str, session_id: str, body_fat_pct: float = 20.0) -> Dict[str, float]:
+def process_session_fnirs(
+    db_path: str,
+    session_id: str,
+    body_fat_pct: float = 20.0,
+    use_imu_glm: bool = True,
+) -> Dict[str, float]:
     conn = sqlite3.connect(db_path)
+    conn.execute("PRAGMA foreign_keys=ON;")
+    if db_path != ":memory:" and os.path.exists(db_path):
+        os.chmod(db_path, 0o600)
     conn.executescript(SCHEMA_MBLL_SQL)
     cur = conn.cursor()
 
@@ -319,10 +327,30 @@ def process_session_fnirs(db_path: str, session_id: str, body_fat_pct: float = 2
         conn.close()
         return {"processed_optodes": 0, "mean_sci": 0.0, "artifact_ratio": 1.0}
 
+    imu_ts = np.array([], dtype=np.float64)
+    imu_acc_mag = np.array([], dtype=np.float64)
+    imu_gyr_mag = np.array([], dtype=np.float64)
+    if use_imu_glm:
+        has_imu = cur.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='muse_aux_imu'"
+        ).fetchone()
+        if has_imu:
+            imu_rows = cur.execute(
+                "SELECT timestamp_epoch, acc_x, acc_y, acc_z, gyro_x, gyro_y, gyro_z "
+                "FROM muse_aux_imu WHERE session_id = ? ORDER BY timestamp_epoch",
+                (session_id,),
+            ).fetchall()
+            if len(imu_rows) >= 4:
+                imu_arr = np.asarray(imu_rows, dtype=np.float64)
+                imu_ts = imu_arr[:, 0]
+                imu_acc_mag = np.linalg.norm(imu_arr[:, 1:4], axis=1)
+                imu_gyr_mag = np.linalg.norm(imu_arr[:, 4:7], axis=1)
+
     all_sci = []
     total_samples = 0
     artifact_samples = 0
     all_mbll_rows = []
+    imu_regressed = False
 
     for optode in optodes:
         cur.execute(
@@ -337,10 +365,23 @@ def process_session_fnirs(db_path: str, session_id: str, body_fat_pct: float = 2
             continue
 
         sample_indices = [r[0] for r in rows]
-        timestamps = [r[1] for r in rows]
-        intensities = np.array([[r[2], r[3], r[4]] for r in rows], dtype=np.float64).T
+        timestamps = np.array([r[1] for r in rows], dtype=np.float64)
+        col_660 = np.array([r[4] for r in rows], dtype=np.float64)
+        if np.all(np.isfinite(col_660)) and np.any(col_660 > 0.0):
+            intensities = np.array([[r[2], r[3], r[4]] for r in rows], dtype=np.float64).T
+        else:
+            intensities = np.array([[r[2], r[3]] for r in rows], dtype=np.float64).T
 
-        hbo2, hbr, hbt, sci, is_artifact = process_optode_signal(intensities, body_fat_pct=body_fat_pct)
+        nuis = None
+        if len(imu_ts) >= 4:
+            acc_interp = np.interp(timestamps, imu_ts, imu_acc_mag)
+            gyr_interp = np.interp(timestamps, imu_ts, imu_gyr_mag)
+            nuis = np.column_stack([acc_interp, gyr_interp])
+            imu_regressed = True
+
+        hbo2, hbr, hbt, sci, is_artifact = process_optode_signal(
+            intensities, body_fat_pct=body_fat_pct, nuisance_regressors=nuis
+        )
         all_sci.append(sci)
 
         for i in range(len(sample_indices)):
@@ -363,6 +404,7 @@ def process_session_fnirs(db_path: str, session_id: str, body_fat_pct: float = 2
         "processed_optodes": len(optodes),
         "mean_sci": mean_sci,
         "artifact_ratio": artifact_ratio,
+        "imu_glm_applied": imu_regressed,
         "stopping_rule_triggered": artifact_ratio > 0.40,
     }
 
@@ -513,9 +555,17 @@ def run_self_test() -> bool:
         db_path=test_db,
     )
     streamer.run_epoch(duration_sec=6.0)
+    t_now = time.time() if "time" in globals() else 1_796_000_000.0
+    # Inject synthetic 6-axis IMU motion bursts + verify 0o600 & IMU-GLM path
+    t_imu = np.linspace(t_now, t_now + 6.0, 6 * 52, endpoint=False)
+    acc_m = np.zeros((3, len(t_imu)), dtype=np.float64)
+    acc_m[0] = 0.5 * np.sin(2 * np.pi * 0.15 * (t_imu - t_now))
+    streamer.persist_imu_chunk(t_now, acc_m, np.zeros_like(acc_m), t_imu=t_imu)
     streamer.close()
 
-    summary = process_session_fnirs(test_db, "mbll_test_sess")
+    summary = process_session_fnirs(test_db, "mbll_test_sess", use_imu_glm=True)
+    assert (os.stat(test_db).st_mode & 0o777) == 0o600, "fNIRS edge DB must be 0o600!"
+    assert summary["imu_glm_applied"] is True, "Expected IMU-GLM nuisance regression to run!"
     assert summary["processed_optodes"] == 5, f"Expected 5 optodes, got {summary['processed_optodes']}"
     assert summary["mean_sci"] >= 0.85, f"Expected clean synthetic SCI >= 0.85, got {summary['mean_sci']:.3f}"
     assert not summary["stopping_rule_triggered"], "Stopping rule should not trigger on clean data"

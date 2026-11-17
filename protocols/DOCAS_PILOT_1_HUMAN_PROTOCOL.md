@@ -488,7 +488,7 @@ PILOT STUDY COMPOSITE SCORE: 92.4 / 100 (UNASSAILABLE INDUSTRIAL RIGOR)
 │[ ]│ Order Sequencing.com 30x Whole Genome Sequencing (WGS) saliva kit + clip Day 0 foil-wrapped virgin hair lock (ROOT/TIP marked). │
 │[ ]│ Submit Solutions / Pearl IRB NHSR (45 CFR 46.102(e)) request & save signed Determination Letter before Dec 1. │
 │[ ]│ Freeze immutable OSF Preregistration (embargoed) + run Day 0 fasted Quest draw (8:00–8:30 AM, 72h Biotin hold) & Day 0 CLIA cellular anchor (48–72h abstinence). │
-│[ ]│ Complete 3 cognitive/MPK practice runs prior to Day 0; verify 11 Saved Meals in MyFitnessPal (Write-Only HealthKit) & strict record-only blinding across all apps. │
+│[ ]│ Complete 3 cognitive/MPK practice runs prior to Day 0; verify 11 Saved Meals in MyFitnessPal (Write-Only HealthKit), run `seal_blinded_vault.py --keygen-dir` to generate X25519 keys (moving `study_unseal_privkey.hex` offline before Dec 1), and enable `--blinded` HPKE Seal-on-Ingest across all daily ingests. │
 │[ ]│ Verify Hilo + Muse 5–7 AM & 5–7 PM charging windows, Throne wall wake button, Aranet4 1-min logging, and solo-room audio/video feature-only purge. │
 └───┴───────────────────────────────────────────────────────────────────────────┘
 ```

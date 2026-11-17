@@ -12,6 +12,7 @@ witnesses and ZERO blinding scalars.
 import os
 import sys
 import json
+import math
 import hashlib
 import inspect
 import secrets
@@ -407,8 +408,18 @@ def verify_zk_proof(
                 if int(p[k]) != int(expected_params[k]):
                     return False
         scale = int(p["scale"])
+        if scale != SCALE:
+            return False
+        for k in ("lp_fixed", "ln_fixed", "delta_fixed", "s_base_fixed"):
+            v_param = int(p[k])
+            if not (0 <= v_param <= scale):
+                return False
+        if int(p["delta_fixed"]) <= 0:
+            return False
         if reveal_state:
             if S_next_claimed is None or proof["S_next_public"] is None:
+                return False
+            if not (math.isfinite(float(S_next_claimed)) and math.isfinite(float(proof["S_next_public"]))):
                 return False
             s_next = float_to_fixed(S_next_claimed)
             if abs(proof["S_next_public"] - S_next_claimed) > 1e-9 or not (0 <= s_next <= scale):
@@ -884,51 +895,66 @@ def main():
     v24 = not _verify_zero(None, {"A": "00" * 33, "s": "0x0"}, "EQ:inf", tr=Transcript("INF-TEST"))
     print(f"Test 24 (Infinity Guard):       Blocks point-at-infinity Schnorr nonce | {'✓ REJECTED (PASS)' if v24 else 'FAIL'}")
 
+    # Test 25: Unpinned-Parameter Domain & NaN Guard (even when expected_params=None)
+    p25_bad_scale = json.loads(json.dumps(proof1))
+    p25_bad_scale["public_params"]["scale"] = 1 << 40
+    p25_bad_delta = json.loads(json.dumps(proof1))
+    p25_bad_delta["public_params"]["delta_fixed"] = 0
+    v25 = (
+        not verify_zk_proof(p25_bad_scale, s_next1, expected_params=None)
+        and not verify_zk_proof(p25_bad_delta, s_next1, expected_params=None)
+        and not verify_zk_proof(proof1, float("nan"), expected_params=None)
+    )
+    print(f"Test 25 (Unpinned Param Guard): Rejects unpinned scale/delta=0/NaN | {'✓ REJECTED (PASS)' if v25 else 'FAIL'}")
+
     all_pass = (
         v1 and v2 and v3 and v4 and v5 and v6 and v7 and v8 and v9 and v10 and v11 and v12
-        and v13 and v14 and v15 and v16 and v17 and v18 and v19 and v20_blocked and v21 and v22 and v23 and v24
+        and v13 and v14 and v15 and v16 and v17 and v18 and v19 and v20_blocked and v21 and v22 and v23 and v24 and v25
     )
     print("=" * 75)
-    print(f"OVERALL ZK-STP NIZK VERDICT: {'ALL 24/24 CRITERIA VERIFIED' if all_pass else 'FAIL'}")
+    print(f"OVERALL ZK-STP NIZK VERDICT: {'ALL 25/25 CRITERIA VERIFIED' if all_pass else 'FAIL'}")
     print("=" * 75)
 
+    readonly = ("--check" in sys.argv) or (os.environ.get("TRUST_STACK_CI_READONLY") == "1")
     out_file = os.path.join(os.path.dirname(__file__), "zk_stp_results.json")
-    with open(out_file, "w") as f:
-        json.dump(
-            {
-                "scheme": proof1["scheme"],
-                "test1_positive": v1, "test2_asymmetric_shock": v2, "test3_clamp_boundary": v3,
-                "test4_tamper_rejected": v4, "test5_forgery_rejected": v5,
-                "soundness_forgery_rejected": (
-                    v5 and v7 and v8 and v9 and v10 and v11 and v12_thresh_reject
-                    and v13 and v14 and v15 and v16 and v17_trunc_blocked and v17_stale_epoch_blocked
-                    and v20_blocked and v21
-                ),
-                "test6_zero_knowledge_indistinguishable": v6,
-                "test7_clamping_sum_exploit_blocked": v7,
-                "test8_frozen_heart_splice_blocked": v8,
-                "test9_state_teleportation_blocked": v9,
-                "test10_param_substitution_blocked": v10,
-                "test11_scalar_malleability_blocked": v11,
-                "test12_private_rollup_threshold_verified": v12,
-                "test13_sybil_genesis_forgery_blocked": v13,
-                "test14_self_minted_event_blocked": v14,
-                "test15_selective_default_omission_blocked": v15,
-                "test16_clamped_event_reordering_blocked": v16,
-                "test17_tail_truncation_and_epoch_blocked": v17,
-                "test18_cross_verifier_unlinkable": v18,
-                "test19_three_party_role_isolation": v19,
-                "test20_clamp_branch0_overflow_blocked": v20_blocked,
-                "test21_unanchored_threshold_blocked": v21,
-                "test22_high_entropy_handle_blinding": v22,
-                "test23_nonneg_transcript_binding_enforced": v23,
-                "test24_infinity_nonce_malleability_blocked": v24,
-                "proof_bytes_json": len(proof_json),
-                "status": "VERIFIED" if all_pass else "FAILED",
-            },
-            f,
-            indent=4,
-        )
+    if not readonly:
+        with open(out_file, "w") as f:
+            json.dump(
+                {
+                    "scheme": proof1["scheme"],
+                    "test1_positive": v1, "test2_asymmetric_shock": v2, "test3_clamp_boundary": v3,
+                    "test4_tamper_rejected": v4, "test5_forgery_rejected": v5,
+                    "soundness_forgery_rejected": (
+                        v5 and v7 and v8 and v9 and v10 and v11 and v12_thresh_reject
+                        and v13 and v14 and v15 and v16 and v17_trunc_blocked and v17_stale_epoch_blocked
+                        and v20_blocked and v21
+                    ),
+                    "test6_zero_knowledge_indistinguishable": v6,
+                    "test7_clamping_sum_exploit_blocked": v7,
+                    "test8_frozen_heart_splice_blocked": v8,
+                    "test9_state_teleportation_blocked": v9,
+                    "test10_param_substitution_blocked": v10,
+                    "test11_scalar_malleability_blocked": v11,
+                    "test12_private_rollup_threshold_verified": v12,
+                    "test13_sybil_genesis_forgery_blocked": v13,
+                    "test14_self_minted_event_blocked": v14,
+                    "test15_selective_default_omission_blocked": v15,
+                    "test16_clamped_event_reordering_blocked": v16,
+                    "test17_tail_truncation_and_epoch_blocked": v17,
+                    "test18_cross_verifier_unlinkable": v18,
+                    "test19_three_party_role_isolation": v19,
+                    "test20_clamp_branch0_overflow_blocked": v20_blocked,
+                    "test21_unanchored_threshold_blocked": v21,
+                    "test22_high_entropy_handle_blinding": v22,
+                    "test23_nonneg_transcript_binding_enforced": v23,
+                    "test24_infinity_nonce_malleability_blocked": v24,
+                    "test25_unpinned_param_guard": v25,
+                    "proof_bytes_json": len(proof_json),
+                    "status": "VERIFIED" if all_pass else "FAILED",
+                },
+                f,
+                indent=4,
+            )
     sys.exit(0 if all_pass else 1)
 
 

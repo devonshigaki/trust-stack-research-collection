@@ -25,6 +25,7 @@
     "test22_high_entropy_handle_blinding": true,
     "test23_nonneg_transcript_binding_enforced": true,
     "test24_infinity_nonce_malleability_blocked": true,
-    "proof_bytes_json": 225044,
+    "test25_unpinned_param_guard": true,
+    "proof_bytes_json": 225051,
     "status": "VERIFIED"
 }

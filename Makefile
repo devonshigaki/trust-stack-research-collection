@@ -37,10 +37,15 @@ osf-deposit: manifest
 	zip -r -q dist/trust_stack_v4_5_osf_bundle.zip \
 		README.md CITATION.cff LICENSE LICENSE-NC requirements.txt pyproject.toml SHA256_REPRODUCIBILITY_MANIFEST.json \
 		manuscripts/ figures/ formal/ protocols/ docs/ code/ \
-		-x "*.venv/*" "*/__pycache__/*" "*/.lake/*" "*.DS_Store" "*/saved_models/*" "*.npy" "*.npz" "*.db" "*.whl" "*/mparts/*" "*/parts/*" "*/target/*"
+		-x "*.venv/*" "*/__pycache__/*" "*/.lake/*" "*.DS_Store" "*/saved_models/*" "*/checkpoints/*" "*/logs/*" "*/results/*" "*/.tools/*" "*.npy" "*.npz" "*.db" "*.db-shm" "*.db-wal" "*.whl" "*/mparts/*" "*/parts/*" "*/target/*"
 	@echo "Built dist/trust_stack_v4_5_osf_bundle.zip"
 
-check: formal citations test manifest
+check:
+	$(PYTHON) formal/run_all_formal_verifications.py --check
+	$(PYTHON) code/tools/audit_citation_integrity.py --dry-run
+	$(PYTHON) code/tools/check_manuscript_sync.py
+	$(PYTHON) code/tools/run_tier1_tier2_suite.py --check
+	$(PYTHON) code/tools/build_osf_sha256_manifest.py --verify
 	@echo "ALL FORMAL PROOFS, CITATION AUDIT, TIER 1/2 SUITES, AND SHA-256 MANIFEST VERIFIED."
 
 clean:

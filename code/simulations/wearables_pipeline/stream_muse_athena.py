@@ -64,6 +64,7 @@ def resolve_muse_athena_channel_map(board_id: int) -> Dict[str, List[int]]:
         name_to_row.get("TP9", eeg_channels[0]),
         name_to_row.get("TP10", eeg_channels[3]),
     ]
+    def_descr = BoardShim.get_board_descr(board_id, BrainFlowPresets.DEFAULT_PRESET.value)
     anc_descr = BoardShim.get_board_descr(board_id, BrainFlowPresets.ANCILLARY_PRESET.value)
     aux_descr = BoardShim.get_board_descr(board_id, BrainFlowPresets.AUXILIARY_PRESET.value)
     optical_rows = list(anc_descr.get("optical_channels", list(range(1, 17))))
@@ -72,7 +73,32 @@ def resolve_muse_athena_channel_map(board_id: int) -> Dict[str, List[int]]:
     return {
         "eeg_order": ordered_rows, "eeg_names": eeg_names,
         "optical_rows": optical_rows, "accel_rows": accel_rows, "gyro_rows": gyro_rows,
+        "eeg_ts_ch": int(def_descr.get("timestamp_channel", 9)),
+        "eeg_pkg_ch": int(def_descr.get("package_num_channel", 0)),
+        "anc_ts_ch": int(anc_descr.get("timestamp_channel", 18)),
+        "anc_pkg_ch": int(anc_descr.get("package_num_channel", 0)),
+        "battery_ch": int(anc_descr.get("battery_channel", 17)),
+        "aux_ts_ch": int(aux_descr.get("timestamp_channel", 7)),
+        "aux_pkg_ch": int(aux_descr.get("package_num_channel", 0)),
     }
+
+
+def count_packet_drops(pkg_nums: np.ndarray, last_pkg: Optional[int] = None) -> Tuple[int, Optional[int]]:
+    """Counts missed BLE packets from BrainFlow `package_num_channel` (handles modulo wrap-around)."""
+    if pkg_nums is None or len(pkg_nums) == 0:
+        return 0, last_pkg
+    drops = 0
+    prev = last_pkg
+    for raw_p in pkg_nums:
+        p = int(round(float(raw_p)))
+        if prev is not None:
+            diff = p - prev
+            if diff > 1:
+                drops += (diff - 1)
+            elif diff < 0 and (p + 256 - prev) > 1 and (prev - p) > 128:
+                drops += (p + 256 - prev - 1)
+        prev = p
+    return drops, prev
 
 
 def load_or_create_edge_key(
@@ -159,6 +185,9 @@ CREATE TABLE IF NOT EXISTS pilot_sessions (
     sampling_rate_fnirs_hz INTEGER NOT NULL DEFAULT 64,
     started_at TEXT NOT NULL,
     ended_at TEXT,
+    dropped_packets_eeg INTEGER NOT NULL DEFAULT 0,
+    dropped_packets_fnirs INTEGER NOT NULL DEFAULT 0,
+    last_battery_pct REAL,
     research_telemetry_only INTEGER NOT NULL DEFAULT 1 CHECK(research_telemetry_only = 1),
     credit_decisioning_prohibited INTEGER NOT NULL DEFAULT 1 CHECK(credit_decisioning_prohibited = 1)
 );
@@ -396,6 +425,12 @@ class MuseAthenaStreamer:
         )
         self.subject_psid = pseudonymize_subject(subject_id, self.aes_key)
         self.board = None
+        self._stream_started = False
+        self._last_eeg_pkg: Optional[int] = None
+        self._last_anc_pkg: Optional[int] = None
+        self.dropped_packets_eeg = 0
+        self.dropped_packets_fnirs = 0
+        self.last_battery_pct: Optional[float] = None
         self.channel_map = resolve_muse_athena_channel_map(
             BoardIds.MUSE_S_ATHENA_BOARD.value if HAS_BRAINFLOW else 67
         )
@@ -434,16 +469,29 @@ class MuseAthenaStreamer:
 
     def init_session_metadata(self):
         now_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        cols = {c[1] for c in self.conn.execute("PRAGMA table_info(pilot_sessions)").fetchall()}
+        for col_name, col_def in (
+            ("dropped_packets_eeg", "INTEGER NOT NULL DEFAULT 0"),
+            ("dropped_packets_fnirs", "INTEGER NOT NULL DEFAULT 0"),
+            ("last_battery_pct", "REAL"),
+        ):
+            if col_name not in cols:
+                self.conn.execute(f"ALTER TABLE pilot_sessions ADD COLUMN {col_name} {col_def}")
         query = (
             "INSERT OR REPLACE INTO pilot_sessions ("
             "session_id, subject_id, cohort_stage, day_index, s_channel_eligible, "
             "device_model, sampling_rate_eeg_hz, sampling_rate_fnirs_hz, started_at, "
+            "dropped_packets_eeg, dropped_packets_fnirs, last_battery_pct, "
             "research_telemetry_only, credit_decisioning_prohibited"
-            ") VALUES (?, ?, ?, ?, ?, 'Muse S Athena', 256, 64, ?, 1, 1)"
+            ") VALUES (?, ?, ?, ?, ?, 'Muse S Athena', 256, 64, ?, ?, ?, ?, 1, 1)"
         )
         self.conn.execute(
             query,
-            (self.session_id, self.subject_psid, self.cohort_stage, self.day_index, self.s_channel_eligible, now_iso),
+            (
+                self.session_id, self.subject_psid, self.cohort_stage, self.day_index,
+                self.s_channel_eligible, now_iso,
+                self.dropped_packets_eeg, self.dropped_packets_fnirs, self.last_battery_pct,
+            ),
         )
         if HAS_CRYPTO:
             aad = f"{self.session_id}:subject_manifest".encode("utf-8")
@@ -470,13 +518,14 @@ class MuseAthenaStreamer:
         t_fnirs: np.ndarray,
         fnirs: np.ndarray,
         active_optodes: int = NUM_FNIRS_OPTODES,
+        absolute_timestamps: bool = False,
     ):
         if len(t_eeg) > 0:
             eeg_rows = []
             for i in range(len(t_eeg)):
-                sample_time = t_start + t_eeg[i]
+                sample_time = float(t_eeg[i]) if absolute_timestamps else (t_start + float(t_eeg[i]))
                 eeg_rows.append((
-                    self.session_id, self.eeg_sample_offset + i, float(sample_time),
+                    self.session_id, self.eeg_sample_offset + i, sample_time,
                     float(eeg[0, i]), float(eeg[1, i]), float(eeg[2, i]), float(eeg[3, i])
                 ))
             self.conn.executemany("INSERT OR REPLACE INTO muse_eeg_raw VALUES (?, ?, ?, ?, ?, ?, ?)", eeg_rows)
@@ -489,10 +538,11 @@ class MuseAthenaStreamer:
                 "alpha_af7_uv2, alpha_af8_uv2, beta_uv2, theta_beta_ratio, frontal_alpha_asymmetry"
                 ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             )
+            feat_ts = float(t_eeg[-1]) if absolute_timestamps else (t_start + float(t_eeg[-1]))
             self.conn.execute(
                 feat_query,
                 (
-                    self.session_id, t_start + t_eeg[-1], float(t_eeg[-1] - t_eeg[0]),
+                    self.session_id, feat_ts, max(float(t_eeg[-1] - t_eeg[0]), 1.0 / FS_EEG),
                     features["fm_theta_uv2"], features["frontal_delta_uv2"], features["sws_ratio"],
                     features["alpha_af7_uv2"], features["alpha_af8_uv2"],
                     features["beta_uv2"], features["theta_beta_ratio"], features["frontal_alpha_asymmetry"]
@@ -504,9 +554,9 @@ class MuseAthenaStreamer:
             fnirs_rows = []
             for optode in range(n_active):
                 for i in range(len(t_fnirs)):
-                    sample_time = t_start + t_fnirs[i]
+                    sample_time = float(t_fnirs[i]) if absolute_timestamps else (t_start + float(t_fnirs[i]))
                     fnirs_rows.append((
-                        self.session_id, self.fnirs_sample_offset + i, float(sample_time), optode + 1,
+                        self.session_id, self.fnirs_sample_offset + i, sample_time, optode + 1,
                         float(fnirs[optode, 0, i]), float(fnirs[optode, 1, i]), float(fnirs[optode, 2, i])
                     ))
             self.conn.executemany("INSERT OR REPLACE INTO muse_fnirs_raw VALUES (?, ?, ?, ?, ?, ?, ?)", fnirs_rows)
@@ -519,14 +569,15 @@ class MuseAthenaStreamer:
             fnirs_flattened = fnirs[:self._lsl_fnirs_optodes].reshape(self._lsl_fnirs_optodes * 3, -1).T
             self.lsl_outlet_fnirs.push_chunk(fnirs_flattened.astype(np.float32).tolist())
 
-    def persist_imu_chunk(self, t_start: float, acc: np.ndarray, gyr: np.ndarray):
+    def persist_imu_chunk(self, t_start: float, acc: np.ndarray, gyr: np.ndarray, t_imu: Optional[np.ndarray] = None):
         n_imu = acc.shape[1] if acc.ndim == 2 else 0
         if n_imu == 0:
             return
         imu_rows = []
         for i in range(n_imu):
+            ts = float(t_imu[i]) if (t_imu is not None and len(t_imu) == n_imu) else (t_start + i / 52.0)
             imu_rows.append((
-                self.session_id, self.imu_sample_offset + i, t_start + i / 52.0,
+                self.session_id, self.imu_sample_offset + i, ts,
                 float(acc[0, i]), float(acc[1, i]), float(acc[2, i]),
                 float(gyr[0, i]), float(gyr[1, i]), float(gyr[2, i]),
             ))
@@ -534,45 +585,86 @@ class MuseAthenaStreamer:
         self.imu_sample_offset += n_imu
         self.conn.commit()
 
+    def ingest_hardware_buffers(
+        self,
+        t_fallback: float,
+        raw_eeg: np.ndarray,
+        raw_anc: np.ndarray,
+        raw_aux: np.ndarray,
+    ):
+        """Processes raw BrainFlow DEFAULT/ANCILLARY/AUXILIARY buffers with real timestamps & drop tracking."""
+        eeg = raw_eeg[self.channel_map["eeg_order"], :] if raw_eeg.shape[1] > 0 else np.zeros((4, 0))
+        eeg_ts_ch = self.channel_map.get("eeg_ts_ch", 9)
+        if raw_eeg.shape[1] > 0 and raw_eeg.shape[0] > eeg_ts_ch and np.all(raw_eeg[eeg_ts_ch, :] > 1e8):
+            t_eeg = raw_eeg[eeg_ts_ch, :].astype(np.float64)
+            abs_ts = True
+        else:
+            t_eeg = t_fallback + np.arange(eeg.shape[1], dtype=np.float64) / FS_EEG
+            abs_ts = True
+        eeg_pkg_ch = self.channel_map.get("eeg_pkg_ch", 0)
+        if raw_eeg.shape[1] > 0 and raw_eeg.shape[0] > eeg_pkg_ch:
+            d_eeg, self._last_eeg_pkg = count_packet_drops(raw_eeg[eeg_pkg_ch, :], self._last_eeg_pkg)
+            self.dropped_packets_eeg += d_eeg
+
+        if raw_aux.shape[1] > 0:
+            acc = raw_aux[self.channel_map["accel_rows"], :]
+            gyr = raw_aux[self.channel_map["gyro_rows"], :]
+            aux_ts_ch = self.channel_map.get("aux_ts_ch", 7)
+            t_aux = (
+                raw_aux[aux_ts_ch, :].astype(np.float64)
+                if raw_aux.shape[0] > aux_ts_ch and np.all(raw_aux[aux_ts_ch, :] > 1e8)
+                else None
+            )
+            self.persist_imu_chunk(t_fallback, acc, gyr, t_imu=t_aux)
+
+        opt_mat = raw_anc[self.channel_map["optical_rows"], :] if raw_anc.shape[1] > 0 else np.zeros((16, 0))
+        fnirs, active_optodes = unpack_muse_athena_optical_matrix(opt_mat)
+        anc_ts_ch = self.channel_map.get("anc_ts_ch", 18)
+        if raw_anc.shape[1] > 0 and raw_anc.shape[0] > anc_ts_ch and np.all(raw_anc[anc_ts_ch, :] > 1e8):
+            t_fnirs = raw_anc[anc_ts_ch, :].astype(np.float64)
+        else:
+            t_fnirs = t_fallback + np.arange(opt_mat.shape[1], dtype=np.float64) / FS_FNIRS
+        anc_pkg_ch = self.channel_map.get("anc_pkg_ch", 0)
+        if raw_anc.shape[1] > 0 and raw_anc.shape[0] > anc_pkg_ch:
+            d_anc, self._last_anc_pkg = count_packet_drops(raw_anc[anc_pkg_ch, :], self._last_anc_pkg)
+            self.dropped_packets_fnirs += d_anc
+        bat_ch = self.channel_map.get("battery_ch", 17)
+        if raw_anc.shape[1] > 0 and raw_anc.shape[0] > bat_ch:
+            bat_val = float(raw_anc[bat_ch, -1])
+            if 0.0 <= bat_val <= 100.0:
+                self.last_battery_pct = bat_val
+        self.persist_chunk(t_fallback, t_eeg, eeg, t_fnirs, fnirs, active_optodes=active_optodes, absolute_timestamps=abs_ts)
+        return t_eeg, eeg, t_fnirs, fnirs
+
     def run_epoch(self, duration_sec: float = 10.0):
         t_start = time.time()
-        active_optodes = NUM_FNIRS_OPTODES
         if self.use_hardware and self.board is not None:
-            self.board.start_stream()
+            if not self._stream_started:
+                self.board.start_stream()
+                self._stream_started = True
             time.sleep(duration_sec)
             raw_eeg = self.board.get_board_data(preset=BrainFlowPresets.DEFAULT_PRESET.value)
             raw_aux = self.board.get_board_data(preset=BrainFlowPresets.AUXILIARY_PRESET.value)
             raw_anc = self.board.get_board_data(preset=BrainFlowPresets.ANCILLARY_PRESET.value)
-            self.board.stop_stream()
-
-            eeg = raw_eeg[self.channel_map["eeg_order"], :]
-            t_eeg = np.arange(eeg.shape[1], dtype=np.float64) / FS_EEG
-
-            # Persist 52 Hz 6-axis IMU telemetry monotonically across epochs
-            if raw_aux.shape[1] > 0:
-                acc = raw_aux[self.channel_map["accel_rows"], :]
-                gyr = raw_aux[self.channel_map["gyro_rows"], :]
-                self.persist_imu_chunk(t_start, acc, gyr)
-
-            # Unpack BrainFlow MuseAthena optical tensor (4-diode groups: 730/850/660/ambient_dark)
-            opt_mat = raw_anc[self.channel_map["optical_rows"], :]
-            n_fnirs = opt_mat.shape[1]
-            fnirs, n_groups = unpack_muse_athena_optical_matrix(opt_mat)
-            active_optodes = n_groups
-            t_fnirs = np.arange(n_fnirs, dtype=np.float64) / FS_FNIRS
-        else:
-            t_eeg, eeg, t_fnirs, fnirs = self.synth.get_chunk(duration_sec)
-        self.persist_chunk(t_start, t_eeg, eeg, t_fnirs, fnirs, active_optodes=active_optodes)
+            return self.ingest_hardware_buffers(t_start, raw_eeg, raw_anc, raw_aux)
+        t_eeg, eeg, t_fnirs, fnirs = self.synth.get_chunk(duration_sec)
+        self.persist_chunk(t_start, t_eeg, eeg, t_fnirs, fnirs, active_optodes=NUM_FNIRS_OPTODES)
         return t_eeg, eeg, t_fnirs, fnirs
 
     def close(self):
         if self.board is not None:
             try:
+                if self._stream_started:
+                    self.board.stop_stream()
+                    self._stream_started = False
                 self.board.release_session()
             except Exception:
                 pass
         now_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-        self.conn.execute("UPDATE pilot_sessions SET ended_at = ? WHERE session_id = ?", (now_iso, self.session_id))
+        self.conn.execute(
+            "UPDATE pilot_sessions SET ended_at = ?, dropped_packets_eeg = ?, dropped_packets_fnirs = ?, last_battery_pct = ? WHERE session_id = ?",
+            (now_iso, self.dropped_packets_eeg, self.dropped_packets_fnirs, self.last_battery_pct, self.session_id),
+        )
         self.conn.commit()
         self.conn.close()
 
@@ -636,10 +728,29 @@ def run_self_test() -> bool:
     s_hw.persist_chunk(time.time(), t_eeg_e, eeg_e, t_fn_e, fn_hw, active_optodes=n_g_hw)
     s_hw.persist_imu_chunk(time.time(), np.zeros((3, 52)), np.zeros((3, 52)))
     s_hw.persist_imu_chunk(time.time() + 1.0, np.ones((3, 52)), np.ones((3, 52)))
+    # Verify real BrainFlow timestamp_channel + packet-drop counting + battery_channel via ingest_hardware_buffers
+    n_hw_eeg, n_hw_anc, n_hw_aux = 64, 16, 13
+    raw_eeg_buf = np.zeros((11, n_hw_eeg), dtype=np.float64)
+    raw_eeg_buf[0, :] = np.array([0, 1, 2, 5] + list(range(6, n_hw_eeg + 2)))[:n_hw_eeg]  # 2 dropped packets (3,4)
+    raw_eeg_buf[1:5, :] = 10.0
+    raw_eeg_buf[9, :] = 1_796_000_000.0 + np.arange(n_hw_eeg) / FS_EEG
+    raw_anc_buf = np.zeros((20, n_hw_anc), dtype=np.float64)
+    raw_anc_buf[0, :] = np.array([10, 11, 14] + list(range(15, 10 + n_hw_anc + 2)))[:n_hw_anc]  # 2 dropped packets (12,13)
+    raw_anc_buf[1:17, :] = 5000.0
+    raw_anc_buf[4:17:4, :] = 50.0  # dark
+    raw_anc_buf[17, :] = 84.5  # battery_channel
+    raw_anc_buf[18, :] = 1_796_000_000.0 + np.arange(n_hw_anc) / FS_FNIRS
+    raw_aux_buf = np.zeros((9, n_hw_aux), dtype=np.float64)
+    raw_aux_buf[7, :] = 1_796_000_000.0 + np.arange(n_hw_aux) / 52.0
+    s_hw.ingest_hardware_buffers(1_796_000_000.0, raw_eeg_buf, raw_anc_buf, raw_aux_buf)
+    assert s_hw.dropped_packets_eeg == 2 and s_hw.dropped_packets_fnirs == 2
+    assert abs((s_hw.last_battery_pct or 0.0) - 84.5) < 1e-6
     s_hw.close()
     hw_conn = sqlite3.connect(hw_db)
-    assert hw_conn.execute("SELECT COUNT(*) FROM muse_aux_imu WHERE session_id = 'hw_emu_s1'").fetchone()[0] == 104
+    assert hw_conn.execute("SELECT COUNT(*) FROM muse_aux_imu WHERE session_id = 'hw_emu_s1'").fetchone()[0] == 104 + n_hw_aux
     assert [r[0] for r in hw_conn.execute("SELECT DISTINCT optode_idx FROM muse_fnirs_raw WHERE session_id = 'hw_emu_s1' ORDER BY optode_idx").fetchall()] == [1, 2, 3, 4]
+    drop_row = hw_conn.execute("SELECT dropped_packets_eeg, dropped_packets_fnirs, last_battery_pct FROM pilot_sessions WHERE session_id = 'hw_emu_s1'").fetchone()
+    assert drop_row == (2, 2, 84.5), f"Unexpected packet-drop/battery row: {drop_row}"
     hw_conn.close()
     for f in (hw_db, f"{hw_db}-wal", f"{hw_db}-shm", f"{hw_db}.key"):
         if os.path.exists(f):

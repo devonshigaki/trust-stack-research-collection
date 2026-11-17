@@ -37,17 +37,13 @@ instructions, dependency tiers, expected outputs, and runtimes.
 ## Repository layout
 
 ```
-papers/               the five works + collection index (PDF + LaTeX source)
-figures/              every figure PNG, organized by paper, plus rendering code
-preregistrations/     OSF registration documents
-technical-appendix/   simulation code, pre-computed results, logs,
-                      pre-registrations/amendments/closures per simulation,
-                      verification reports, and the numbers ledger
-lean/                 TrustStack Lean 4 formal-verification project
-                      (VERIFIED — green build; audit in lean/VERIFICATION_AXIOMS.txt;
-                      build instructions in lean/README.md)
-docs/                 RUNBOOK.md (reproduce everything), PATTERNS.md
-                      (cross-simulation meta-analysis), deposit README/guide
+manuscripts/          the five works + collection index (PDF, LaTeX, Markdown)
+figures/              canonical figure store (symlinked into manuscripts/*/figures)
+protocols/            OSF pre-registrations, DOCAS-PILOT-1 v4.6, NHSR IRB package, iOS kiosk/UniFFI
+code/                 simulations, empirical OpenML/CLICS/connectomics pipelines, CI & sync tools
+formal/               Lean 4.35 + Mathlib (36 theorems, leanchecker), Z3 SMT, SymPy CAS,
+                      secp256k1 NIZK (ZK-STP v8, 24/24), TLA+ TLC (TFP_Edge_Protocol + TFP_HLC_GSet)
+docs/                 RUNBOOK.md, PATTERNS.md, SIMULATION_ACCOUNTING.md, CITATION_INTEGRITY_LEDGER.md
 ```
 
 ## Research discipline (read this first)

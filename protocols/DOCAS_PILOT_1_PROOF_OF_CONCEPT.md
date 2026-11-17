@@ -1,3 +1,5 @@
+> **ARCHIVAL SUPERSESSION NOTICE (v4.6):** This v4.3 30-day proof-of-concept record is preserved for reproducibility of `simulate_30day_dense_pilot.py` and is **superseded** for prospective human execution by [`DOCAS_PILOT_1_HUMAN_PROTOCOL.md`](DOCAS_PILOT_1_HUMAN_PROTOCOL.md) (v4.6, 180-day 30-stream Hub-to-Spoke protocol), [`SIM_PILOT_V4_6_PRE_REGISTRATION.md`](sim_preregistrations/SIM_PILOT_V4_6_PRE_REGISTRATION.md), and [`IRB_SOLUTIONS_PEARL_NHSR_SUBMISSION.md`](irb/IRB_SOLUTIONS_PEARL_NHSR_SUBMISSION.md).
+
 # DOCAS-PILOT-1: 30-DAY IN-SILICO PROOF OF CONCEPT & PRE-FLIGHT VALIDATION
 **Document ID:** `DOCAS_PILOT_1_PROOF_OF_CONCEPT.md`  
 **Execution Date:** November 2026 (Version 4.3 Pre-Flight Freeze)  

@@ -148,9 +148,58 @@ def prove_quantization_refinement():
     assert res == z3.unsat, f"Refinement counterexample: {s.model()}"
 
 
+def prove_nonautonomous_sd_refinement():
+    print("\n" + "=" * 72)
+    print(" Z3-ZK-3: Non-Autonomous (lp_t, ln_t, delta_t >= delta_min, s_d) Refinement")
+    print("=" * 72)
+    from z3_nonvacuity import prove_nonvacuous
+
+    SCALE = 1_000_000_000
+    inv_scale = z3.RealVal(1) / z3.RealVal(SCALE)
+
+    # Part A: Single-step truncation remainder bound under general s_d >= 10^-4
+    lam_t, r_t, s_d, rem_eps, rem_d, rem_l, eta_step, step_err_cap = z3.Reals(
+        "lam_t r_t s_d rem_eps rem_d rem_l eta_step step_err_cap"
+    )
+    prem_step = [
+        lam_t >= 0, lam_t <= 1, r_t >= 0, r_t <= 1,
+        s_d >= z3.RealVal(1) / z3.RealVal(10_000), s_d <= 1,
+        rem_eps >= 0, s_d * rem_eps <= inv_scale,
+        rem_d >= -inv_scale, rem_d <= inv_scale,
+        rem_l >= 0, rem_l <= inv_scale,
+        eta_step == lam_t * r_t * rem_eps + rem_d - rem_l,
+        s_d * step_err_cap == (z3.RealVal(2) * s_d + z3.RealVal(1)) * inv_scale,
+    ]
+    assert prove_nonvacuous(prem_step, z3.Abs(eta_step) > step_err_cap, "Z3-ZK-3a Step Truncation")
+
+    # Part B: Inductive clamped non-autonomous preservation under time-varying delta_t >= delta_min > 0
+    S_real, S_fp_curr, drift, delta_t, delta_min, S_base, eta, cap = z3.Reals(
+        "S_real S_fp_curr drift delta_t delta_min S_base eta cap"
+    )
+    def clamp01(x):
+        return z3.If(x < 0, z3.RealVal(0), z3.If(x > 1, z3.RealVal(1), x))
+
+    S_real_next = clamp01(S_real + drift - delta_t * (S_real - S_base))
+    S_fp_next = clamp01(S_fp_curr + drift - delta_t * (S_fp_curr - S_base) - eta)
+    prem_ind = [
+        delta_min > 0, delta_min <= 1, delta_t >= delta_min, delta_t <= 1,
+        S_base >= 0, S_base <= 1,
+        S_real >= 0, S_real <= 1, S_fp_curr >= 0, S_fp_curr <= 1,
+        cap > 0, z3.Abs(eta) <= cap,
+        delta_min * z3.Abs(S_real - S_fp_curr) <= cap,
+    ]
+    assert prove_nonvacuous(
+        prem_ind,
+        delta_min * z3.Abs(S_real_next - S_fp_next) > cap,
+        "Z3-ZK-3b Non-Autonomous Contraction Preservation",
+    )
+    print("[VERIFIED - NON-VACUOUS UNSAT] Non-autonomous |S_t^R - S_t^ZK| <= (2 + 1/s_d)/(SCALE*delta_min) preserved.")
+
+
 if __name__ == "__main__":
     prove_verifier_soundness()
     prove_quantization_refinement()
-    print("\nVERDICT: ZK-STP SOUNDNESS & REAL-TO-FIXED-POINT REFINEMENT PROVEN.")
+    prove_nonautonomous_sd_refinement()
+    print("\nVERDICT: ZK-STP SOUNDNESS & NON-AUTONOMOUS REAL-TO-FIXED-POINT REFINEMENT PROVEN.")
     sys.exit(0)
 

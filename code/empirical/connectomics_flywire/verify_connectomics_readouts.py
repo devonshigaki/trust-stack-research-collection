@@ -51,8 +51,18 @@ def main():
     assert shuf_pos < 0.95 and shuf_cls < 0.95
 
     # 3. MICrONS H1a (722,253 synapses onto 8,256 typed neuronal posts -> median class dominance < 0.50 FAIL)
-    g = np.load(os.path.join(MIC_DIR, "graph_h1b_microns.npz"))
-    w, cq, cp = g["w"], g["cls_post"], g["cls_pre"]
+    pq_path = os.path.join(MIC_DIR, "graph_h1b_microns.parquet")
+    npz_path = os.path.join(MIC_DIR, "graph_h1b_microns.npz")
+    if os.path.exists(pq_path):
+        df_g = pd.read_parquet(pq_path)
+        w = df_g["w"].to_numpy()
+        cq = df_g["cls_post"].astype(str).to_numpy()
+        cp = df_g["cls_pre"].astype(str).to_numpy()
+    elif os.path.exists(npz_path):
+        g = np.load(npz_path)
+        w, cq, cp = g["w"], g["cls_post"], g["cls_pre"]
+    else:
+        raise FileNotFoundError(f"Missing MICrONS connectome artifact: {pq_path}")
     classes = np.unique(cq)
     dom_vals = []
     for c_post in classes:

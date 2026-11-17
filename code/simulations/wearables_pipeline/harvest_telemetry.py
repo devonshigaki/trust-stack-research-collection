@@ -18,10 +18,19 @@ import datetime
 import numpy as np
 import pandas as pd
 
-def aggregate_daily_telemetry(date_str: str, out_dir: str = None) -> str:
+def aggregate_daily_telemetry(
+    date_str: str,
+    out_dir: str = None,
+    blinded: bool = False,
+    seal_pubkey_hex: str = None,
+    seal_pubkey_file: str = None,
+) -> str:
     """
-    Combines multi-modal telemetry streams for a single study day into a unified 
+    Combines multi-modal telemetry streams for a single study day into a unified
     Parquet format and logs to local libSQL with phase and event metadata.
+    When `blinded=True`, seals the daily Parquet payload under the recipient X25519
+    public key via RFC 9180 HPKE (`vault_sealed/`), removes plaintext Parquet, and
+    sets 0o600 permissions (failing closed if no public key is supplied).
     """
     if out_dir is None:
         out_dir = os.path.dirname(os.path.abspath(__file__))
@@ -138,15 +147,42 @@ def aggregate_daily_telemetry(date_str: str, out_dir: str = None) -> str:
     df["minor_exclusion_verified"] = 1
     df["raw_media_purged"] = 1
 
-    # 4. Save to Master Parquet Store
+    # 4. Save to Master Parquet Store (or seal asymmetrically in --blinded mode)
     parquet_filename = os.path.join(out_dir, f"master_telemetry_day_{day_number:03d}_{date_str}.parquet")
+    if blinded:
+        import io
+        from seal_blinded_vault import resolve_seal_public_key, seal_daily_payload
+
+        pub = resolve_seal_public_key(pubkey_hex=seal_pubkey_hex, pubkey_file=seal_pubkey_file)
+        buf = io.BytesIO()
+        df.to_parquet(buf, compression="snappy", index=False)
+        vault_dir = os.path.join(out_dir, "vault_sealed")
+        seal_entry = seal_daily_payload(
+            vault_dir=vault_dir,
+            date_str=date_str,
+            study_day=int(day_number),
+            payload_bytes=buf.getvalue(),
+            pubkey=pub,
+            qc_flags={
+                "completeness_ok": bool(df["hrv_rmssd"].notna().mean() >= 0.85),
+                "raw_media_purged": bool(df["raw_media_purged"].iloc[0] == 1),
+                "minor_exclusion_verified": bool(df["minor_exclusion_verified"].iloc[0] == 1),
+            },
+            artifact_tag="master_telemetry",
+        )
+        sealed_ref = os.path.join(vault_dir, seal_entry["seal_filename"])
+        print(f"[BLINDED HPKE SEAL OK] day={day_number:03d} date={date_str} entry_hash={seal_entry['entry_hash'][:16]}")
+        return sealed_ref
+
     df.to_parquet(parquet_filename, compression="snappy", index=False)
+    os.chmod(parquet_filename, 0o600)
     print(f"✓ Successfully compiled Day {day_number:03d} ({date_str}) master dataset into:")
     print(f"  {parquet_filename}")
 
     # 5. Insert Daily Summary into local libSQL (trust_wearables_edge.db)
     db_path = os.path.join(out_dir, "trust_wearables_edge.db")
     conn = sqlite3.connect(db_path)
+    os.chmod(db_path, 0o600)
     with conn:
         conn.execute("""
         CREATE TABLE IF NOT EXISTS daily_telemetry_ledger (
@@ -195,5 +231,10 @@ def aggregate_daily_telemetry(date_str: str, out_dir: str = None) -> str:
     return parquet_filename
 
 if __name__ == "__main__":
-    test_date = sys.argv[1] if len(sys.argv) > 1 else "2026-11-09"
-    aggregate_daily_telemetry(test_date)
+    import argparse
+    p = argparse.ArgumentParser()
+    p.add_argument("date", nargs="?", default="2026-11-09")
+    p.add_argument("--blinded", action="store_true", help="Asymmetric HPKE seal-on-ingest (zero plaintext/outcomes)")
+    p.add_argument("--pubkey-file", type=str, default=None)
+    args = p.parse_args()
+    aggregate_daily_telemetry(args.date, blinded=args.blinded, seal_pubkey_file=args.pubkey_file)

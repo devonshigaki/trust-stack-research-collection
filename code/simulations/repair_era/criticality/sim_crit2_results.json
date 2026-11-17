@@ -3,13 +3,18 @@
   "simulation_id": "Sim CRIT-2",
   "connectome_dataset": "MICrONS Mouse Visual Cortex & FlyWire",
   "evaluated_nodes": 5000,
-  "spectral_radius_quasicritical": 0.980000000000007,
-  "spectral_radius_void": 0.7500000000000003,
-  "spectral_radius_chaos": 1.2500000000000042,
+  "normalization_axis": "postsynaptic_dendritic_row_axis1",
+  "spectral_radius_quasicritical": 0.968982990371559,
+  "spectral_radius_axonal_col_norm_ref": 0.9800000000000014,
+  "spectral_radius_null_mean": 0.13403100515376756,
+  "spectral_radius_motif_z": 151.12444602253566,
+  "spectral_radius_void": 0.7415686150802762,
+  "spectral_radius_chaos": 1.2359476918004557,
   "verdict": "COMPOUND PASS (3/3)",
   "criteria": {
     "C1_quasicritical_corridor": true,
     "C2_void_separation": true,
-    "C3_chaos_separation": true
+    "C3_chaos_separation": true,
+    "motif_shift_beyond_null": true
   }
 }

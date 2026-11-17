@@ -67,6 +67,8 @@ def main():
             m_brand = brand_re.search(txt)
             if m_brand:
                 errors.append(f"{fn}: Academic clean-room violation — commercial brand '{m_brand.group(0)}' is forbidden outside whitepaper")
+        if base == "tdf.tex" and ("DOCAS-PILOT-1" not in txt or "Hub-to-Spoke" not in txt or "NHSR" not in txt):
+            errors.append(f"{fn}: Out of sync with tdf.md v4.6 Hub-to-Spoke / NHSR summary")
         if base == "gtt.tex" and ("v4.12.0" in txt or "36 theorems" not in txt):
             errors.append(f"{fn}: Lean formalization section out of sync with Lean 4.35.0 (36 theorems)")
         if base == "whitepaper.tex" and ("OpenML 42477" not in txt or "Sim W8" not in txt or "Sim W9" not in txt):
@@ -162,6 +164,13 @@ def main():
     n_ax = sum(1 for ln in ax_txt.splitlines() if "depends on axioms:" in ln)
     if n_check != n_ax or n_check < 36:
         errors.append(f"VERIFICATION_AXIOMS.txt out of sync with Check.lean ({n_ax} vs {n_check})")
+
+    # 7. Verify OpenML 42477 JSON <-> docs/SIMULATION_ACCOUNTING.md parity
+    cp_json = json.loads((root / "code/empirical/credit_panel/credit_panel_validation_results.json").read_text(encoding="utf-8"))
+    sim_acc = (root / "docs/SIMULATION_ACCOUNTING.md").read_text(encoding="utf-8")
+    gtt_auc_str = f"{cp_json['gtt_asymmetric_2d']['roc_auc']:.4f}"
+    if gtt_auc_str not in sim_acc:
+        errors.append(f"docs/SIMULATION_ACCOUNTING.md out of sync with credit_panel AUC {gtt_auc_str}")
 
     if errors:
         for e in errors:
