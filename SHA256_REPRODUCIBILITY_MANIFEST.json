@@ -1,6 +1,6 @@
 {
   "release": "v4.5",
-  "timestamp": "2026-11-17T06:22:58Z",
+  "timestamp": "2026-11-17T06:45:04Z",
   "author": "Devon Shigaki (ORCID: 0009-0003-8977-8010)",
   "repository": "https://github.com/devonshigaki/trust-stack-research-collection",
   "archive_accession": "https://github.com/devonshigaki/trust-stack-research-collection/releases/tag/v4.5",
@@ -2481,8 +2481,8 @@
       "bytes": 4316
     },
     "code/tools/run_tier1_tier2_suite.py": {
-      "sha256": "1cfbad40f63fcc609b9deba97a95869675927f3aab9bc35cf8ffd0941699ba64",
-      "bytes": 19181
+      "sha256": "1ac5968a4bb135f90c16ac95151a824e25a824a0e47f90eeb7fb967cc3068669",
+      "bytes": 19201
     },
     "code/tools/test_cross_repo_parity.py": {
       "sha256": "b266e9d7033f83dafbb09e2477f6524387a55490d5722093d0845024ed5ab4b0",

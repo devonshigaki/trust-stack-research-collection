@@ -369,7 +369,7 @@ TASKS = [
 
 def _snapshot_artifacts() -> dict:
     """Snapshot tracked artifact bytes so `--check` CI runs never mutate manifest-sealed files."""
-    exts = {".json", ".png", ".csv", ".md"}
+    exts = {".json", ".png", ".csv", ".md", ".txt", ".parquet"}
     snap = {}
     for sub in ("code", "formal", "figures"):
         root = os.path.join(BASE_DIR, sub)
