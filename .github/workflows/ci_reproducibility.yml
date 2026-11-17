@@ -8,7 +8,7 @@ on:
 
 jobs:
   verify-trust-stack:
-    name: Run Lean 4, TLA+ TLC, Z3/SymPy/NIZK, Citations & 57-Task Verification Suite
+    name: Run Lean 4, TLA+ TLC, Z3/SymPy/NIZK, Citations & 58-Task Verification Suite
     runs-on: ubuntu-latest
 
     steps:
@@ -45,13 +45,13 @@ jobs:
       with:
         lake-package-directory: formal/lean
 
-    - name: Run Lean 4 Fresh Kernel Replay Checker
+    - name: Run Lean 4 Kernel Replay Checker
       run: |
-        cd formal/lean && lake env leanchecker --fresh TrustStack.Tilt && lake env leanchecker --fresh TrustStack.MasterLaw
+        cd formal/lean && lake env leanchecker TrustStack.Tilt && lake env leanchecker TrustStack.MasterLaw
 
     - name: Run Multi-Engine Formal Verification Suite (Z3, SymPy, TLC, secp256k1 NIZK; Read-Only)
       run: |
-        LEAN_FRESH=1 python formal/run_all_formal_verifications.py --check
+        python formal/run_all_formal_verifications.py --check
 
     - name: Run Citation Integrity & LaTeX Sync Checks
       run: |

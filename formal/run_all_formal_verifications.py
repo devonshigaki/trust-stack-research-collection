@@ -57,7 +57,7 @@ def main():
     java_bin = "/opt/homebrew/opt/openjdk@21/bin/java" if os.path.exists("/opt/homebrew/opt/openjdk@21/bin/java") else "java"
     if os.path.exists(tla_jar):
         res_tlc = subprocess.run(
-            [java_bin, "-XX:+UseParallelGC", "-cp", tla_jar, "tlc2.TLC", "-workers", "auto", "-cleanup", "-config", "TFP_Edge_Protocol.cfg", "TFP_Edge_Protocol.tla"],
+            [java_bin, "-Xmx4g", "-XX:+UseParallelGC", "-cp", tla_jar, "tlc2.TLC", "-workers", "auto", "-cleanup", "-config", "TFP_Edge_Protocol.cfg", "TFP_Edge_Protocol.tla"],
             cwd=root_dir, capture_output=True, text=True,
         )
         print(res_tlc.stdout)
@@ -73,7 +73,7 @@ def main():
         # 3a2. Run TLC on concurrent HLC G-Set SEC specification
         if os.path.exists(os.path.join(root_dir, "TFP_HLC_GSet.tla")) and os.path.exists(os.path.join(root_dir, "TFP_HLC_GSet.cfg")):
             res_hlc = subprocess.run(
-                [java_bin, "-XX:+UseParallelGC", "-cp", tla_jar, "tlc2.TLC", "-workers", "auto", "-cleanup", "-config", "TFP_HLC_GSet.cfg", "TFP_HLC_GSet.tla"],
+                [java_bin, "-Xmx2g", "-XX:+UseParallelGC", "-cp", tla_jar, "tlc2.TLC", "-workers", "auto", "-cleanup", "-config", "TFP_HLC_GSet.cfg", "TFP_HLC_GSet.tla"],
                 cwd=root_dir, capture_output=True, text=True,
             )
             print(res_hlc.stdout)
