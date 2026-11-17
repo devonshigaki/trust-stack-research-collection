@@ -139,7 +139,8 @@ def main():
     # 3c. Run Genuine Pedersen/Schnorr NIZK Verifier (ZK-STP v8)
     print(">>> 5/5: Running Genuine secp256k1 Pedersen/Schnorr NIZK Verifier (ZK-STP v8)...")
     zk_script = os.path.join(root_dir, "zk_master_law_stp.py")
-    res_zk = subprocess.run([python_bin, zk_script], capture_output=True, text=True)
+    zk_args = ["--check"] if not write_report else []
+    res_zk = subprocess.run([python_bin, zk_script, *zk_args], capture_output=True, text=True)
     print(res_zk.stdout)
     if res_zk.returncode != 0:
         print("[FAIL] ZK-STP NIZK Verification failed!")
